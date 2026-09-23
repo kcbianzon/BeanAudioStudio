@@ -402,18 +402,7 @@ function home() {
     )
     .map(productCard)
     .join("")}</div></section>
-  <section class="section"><div class="section-head"><div><span class="eyebrow">EVENT BUNDLES</span><h2>Start with<br>the occasion.</h2></div><a class="btn btn-light" href="#bundles">View all bundles →</a></div><div class="bundle-grid">${bundles
-    .slice(0, 3)
-    .map(
-      (b) =>
-        `<article class="bundle-card reveal"><div class="bundle-top ${b.tone}"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items
-          .slice(0, 3)
-          .map((i) => `<li>${i}</li>`)
-          .join(
-            "",
-          )}</ul><div class="bundle-foot"><span class="bundle-price">${money(b.price)}</span><a class="btn btn-dark btn-small" href="#bundles">View bundle →</a></div></div></article>`,
-    )
-    .join("")}</div></section>
+  <section class="section"><div class="section-head"><div><span class="eyebrow">EVENT BUNDLES</span><h2>Start with<br>the occasion.</h2></div><a class="btn btn-light" href="#bundles">View all bundles →</a></div><div class="bundle-grid">${bundles.slice(0, 3).map((b) => `<article class="bundle-card reveal"><div class="bundle-top ${b.tone}"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items.slice(0, 3).map((i) => `<li>${i}</li>`).join("")}</ul><div class="bundle-foot"><span class="bundle-price">${money(b.price)}</span><a class="btn btn-dark btn-small" href="#bundles">View bundle →</a></div></div></article>`).join("")}</div></section>
   <section class="section"><div class="split"><div class="feature-panel dark"><div><span class="eyebrow">THE NEW WAY TO RENT AV</span><h3>Build it<br>before you book it.</h3><p>Give clients a visual, interactive way to configure their event. Fixed-price products can calculate instantly while custom production items stay quote-based.</p></div><div class="stat-row"><div class="stat"><strong>24/7</strong><span>CONFIGURE ANYTIME</span></div><div class="stat"><strong>01</strong><span>EVENT BUILDER</span></div><div class="stat"><strong>∞</strong><span>COMBINATIONS</span></div></div></div><div class="feature-panel orange"><div><span class="eyebrow">EVENT BUNDLES</span><h3>Don’t know what to rent?<br>Start from the occasion.</h3><p>Prebuilt bundles give customers a fast path, then let them customize the exact pieces.</p></div><a class="btn btn-dark" href="#bundles">Browse event bundles →</a></div></div></section>
   <section class="section"><div class="section-head"><div><span class="eyebrow">HOW IT WORKS</span><h2>From “what do I need?”<br>to “send me the quote.”</h2></div></div><div class="service-grid"><div class="service-card"><div class="service-icon">01</div><h3>Choose the occasion</h3><p>Wedding, corporate, school, concert, party or outdoor movie — start from context, not equipment jargon.</p></div><div class="service-card"><div class="service-icon">02</div><h3>Customize the setup</h3><p>Add quantities, remove extras, compare fixed-price packages and flag quote-only equipment.</p></div><div class="service-card"><div class="service-icon">03</div><h3>Request the quote</h3><p>Submit the event date, venue, guest count and your complete equipment configuration in one request.</p></div></div></section>
  </div>`;

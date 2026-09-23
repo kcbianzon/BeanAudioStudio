@@ -255,7 +255,6 @@ const bundles = [
   {
     id: "wedding",
     title: "Wedding + Reception",
-    price: 1800,
     tone: "bundle-wedding",
     label: "WEDDING",
     desc: "Ceremony clarity and reception energy, built around your guest count.",
@@ -271,7 +270,6 @@ const bundles = [
   {
     id: "corporate",
     title: "Corporate Event",
-    price: 1200,
     tone: "bundle-corporate",
     label: "CORPORATE",
     desc: "Presentation-ready audio, video and streaming support for meetings and launches.",
@@ -287,7 +285,6 @@ const bundles = [
   {
     id: "school",
     title: "School Event",
-    price: 900,
     tone: "bundle-school",
     label: "SCHOOL",
     desc: "Flexible AV for ceremonies, recognition programs, dances and outdoor activities.",
@@ -303,7 +300,6 @@ const bundles = [
   {
     id: "concert",
     title: "Concert + Live Performance",
-    price: 2500,
     tone: "bundle-concert",
     label: "CONCERT",
     desc: "Production-focused setup for stage audio, performers and visual systems.",
@@ -319,7 +315,6 @@ const bundles = [
   {
     id: "party",
     title: "Private Party",
-    price: 650,
     tone: "bundle-party",
     label: "PARTY",
     desc: "A compact entertainment setup for birthdays, celebrations and social events.",
@@ -335,7 +330,6 @@ const bundles = [
   {
     id: "movie",
     title: "Outdoor Movie Night",
-    price: 549,
     tone: "bundle-movie",
     label: "MOVIE NIGHT",
     desc: "Pick the screen size and turn a backyard, school or community field into a cinema.",
@@ -402,18 +396,6 @@ function home() {
     )
     .map(productCard)
     .join("")}</div></section>
-  <section class="section"><div class="section-head"><div><span class="eyebrow">EVENT BUNDLES</span><h2>Start with<br>the occasion.</h2></div><a class="btn btn-light" href="#bundles">View all bundles →</a></div><div class="bundle-grid">${bundles
-    .slice(0, 3)
-    .map(
-      (b) =>
-        `<article class="bundle-card reveal"><div class="bundle-top ${b.tone}"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items
-          .slice(0, 3)
-          .map((i) => `<li>${i}</li>`)
-          .join(
-            "",
-          )}</ul><div class="bundle-foot"><span class="bundle-price">${money(b.price)}</span><a class="btn btn-dark btn-small" href="#bundles">View bundle →</a></div></div></article>`,
-    )
-    .join("")}</div></section>
   <section class="section"><div class="split"><div class="feature-panel dark"><div><span class="eyebrow">THE NEW WAY TO RENT AV</span><h3>Build it<br>before you book it.</h3><p>Give clients a visual, interactive way to configure their event. Fixed-price products can calculate instantly while custom production items stay quote-based.</p></div><div class="stat-row"><div class="stat"><strong>24/7</strong><span>CONFIGURE ANYTIME</span></div><div class="stat"><strong>01</strong><span>EVENT BUILDER</span></div><div class="stat"><strong>∞</strong><span>COMBINATIONS</span></div></div></div><div class="feature-panel orange"><div><span class="eyebrow">EVENT BUNDLES</span><h3>Don’t know what to rent?<br>Start from the occasion.</h3><p>Prebuilt bundles give customers a fast path, then let them customize the exact pieces.</p></div><a class="btn btn-dark" href="#bundles">Browse event bundles →</a></div></div></section>
   <section class="section"><div class="section-head"><div><span class="eyebrow">HOW IT WORKS</span><h2>From “what do I need?”<br>to “send me the quote.”</h2></div></div><div class="service-grid"><div class="service-card"><div class="service-icon">01</div><h3>Choose the occasion</h3><p>Wedding, corporate, school, concert, party or outdoor movie — start from context, not equipment jargon.</p></div><div class="service-card"><div class="service-icon">02</div><h3>Customize the setup</h3><p>Add quantities, remove extras, compare fixed-price packages and flag quote-only equipment.</p></div><div class="service-card"><div class="service-icon">03</div><h3>Request the quote</h3><p>Submit the event date, venue, guest count and your complete equipment configuration in one request.</p></div></div></section>
  </div>`;
@@ -436,7 +418,7 @@ function rentals() {
 }
 
 function bundlesPage() {
-  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">EVENT BUNDLES</span><h1>Start with<br>the occasion.</h1></div><p>Choose a fixed package built around a familiar event format. Every bundle is a complete starting point with clear inclusions and no hidden customization step.</p></div><section class="bundle-customize"><div><span class="eyebrow">NEED SOMETHING MORE SPECIFIC?</span><h2>Customize your experience.</h2><p>Build an event from the ground up with recommendations for your occasion and access to the full equipment catalog.</p></div><a class="btn btn-dark" href="#builder">Build my setup →</a></section><div class="bundle-grid">${bundles.map((b) => `<article class="bundle-card reveal"><div class="bundle-top ${b.tone}"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items.map((i) => `<li>${i}</li>`).join("")}</ul><div class="bundle-foot"><span class="bundle-price">${money(b.price)}</span><a class="btn btn-dark btn-small" href="#quote">Request this bundle →</a></div></div></article>`).join("")}</div></div>`;
+  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">EVENT BUNDLES</span><h1>Start with<br>the occasion.</h1></div><p>These bundle concepts are a front-end prototype: each starts with a sensible baseline, then hands the customer to the custom builder.</p></div><div class="bundle-grid">${bundles.map((b) => `<article class="bundle-card reveal"><div class="bundle-top ${b.tone}"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items.map((i) => `<li>${i}</li>`).join("")}</ul><div class="bundle-foot"><span class="bundle-price">Custom pricing</span><button class="btn btn-dark btn-small" data-bundle="${b.id}">${b.cta} →</button></div></div></article>`).join("")}</div></div>`;
 }
 
 function builder() {
@@ -450,22 +432,19 @@ function builder() {
   const quoteOnly = items.some(
     ({ p }) => p.priceType === "quote" || p.priceType === "starting",
   );
-  const recommendations = {
-    Wedding: ["medium-audio", "lapel-mic", "tv-65", "photo-360"],
-    "Corporate Event": ["medium-audio", "lapel-mic", "tv-65", "stream-basic"],
-    "School Event": ["medium-audio", "wired-mic", "movie-16", "silent-100"],
-    Concert: ["large-audio", "iem", "wired-mic", "led-16"],
-    "Private Party": ["small-audio", "wired-mic", "photo-360", "silent-100"],
-    "Outdoor Movie": ["movie-16", "medium-audio", "wired-mic", "silent-100"],
-  };
-  const recommendedIds =
-    recommendations[state.eventType] || recommendations.Wedding;
-  const recommendedProducts = recommendedIds
-    .map((id) => products.find((p) => p.id === id))
-    .filter(Boolean);
-  const otherProducts = products.filter((p) => !recommendedIds.includes(p.id));
-  const miniProduct = (p, recommended = false) =>
-    `<div class="mini-product ${recommended ? "is-recommended" : ""}"><div class="mini-product-heading"><h4>${p.name}</h4>${recommended ? '<span class="recommendation-tag">Recommended</span>' : ""}</div><p>${productPriceText(p)}</p><div class="mini-product-row"><span style="font-size:11px;color:var(--muted)">${p.category}</span><div class="qty-controls"><button class="qty-btn" data-minus="${p.id}">−</button><span class="qty">${state.selected[p.id] || 0}</span><button class="qty-btn" data-plus="${p.id}">+</button></div></div></div>`;
+  const suggested =
+    state.eventType === "Wedding"
+      ? ["medium-audio", "wired-mic", "lapel-mic", "tv-65"]
+      : state.eventType === "Concert"
+        ? ["large-audio", "iem", "wired-mic", "led-16"]
+        : state.eventType === "School Event"
+          ? ["medium-audio", "wired-mic", "movie-16", "silent-100"]
+          : ["small-audio", "wired-mic", "tv-65", "stream-basic"];
+  const builderProducts = products.filter(
+    (p) =>
+      suggested.includes(p.id) ||
+      ["movie-12", "movie-16", "silent-100", "photo-360"].includes(p.id),
+  );
   return `<div class="page"><div class="page-hero"><div><span class="eyebrow">CUSTOM EVENT BUILDER</span><h1>Build your<br>exact setup.</h1></div><p>Prototype a guided experience for clients. This is intentionally quote-friendly: it estimates what is known without pretending custom production has a fixed retail price.</p></div><div class="builder-wrap"><section class="builder-main"><div class="steps">${["Event", "Details", "Equipment", "Review"].map((s, i) => `<div class="step ${state.builderStep === i + 1 ? "active" : ""}">${String(i + 1).padStart(2, "0")} · ${s}</div>`).join("")}</div>${builderStepContent()}<div class="builder-actions"><button class="btn btn-light" data-builder-prev ${state.builderStep === 1 ? "disabled" : ""}>← Back</button>${state.builderStep < 4 ? `<button class="btn btn-dark" data-builder-next>Continue →</button>` : `<a class="btn btn-accent" href="#quote">Request this quote →</a>`}</div></section><aside class="builder-side"><span class="eyebrow">YOUR SETUP</span><div class="summary-total"><div><span class="eyebrow">ESTIMATED TOTAL</span><div style="font-size:11px;color:var(--muted)">${quoteOnly ? "Includes quote-only selections" : ""}</div></div><strong>${money(known)}</strong></div><div class="selection-list">${items.length ? items.map(({ p, qty }) => `<div class="selection-chip"><span>${qty} × ${p.name.replace(" — 50 Headphones", "").replace(" — 100 Headphones", "").replace(" — 150 Headphones", "").replace(" — 200 Headphones", "").replace(" — 300 Headphones", "")}</span><button data-remove="${p.id}" aria-label="Remove">×</button></div>`).join("") : `<div class="empty" style="padding:24px">Nothing selected yet.</div>`}</div>${quoteOnly ? `<div class="quote-tag">Some selections require a final quote confirmation.</div>` : ""}<a class="btn btn-dark" style="width:100%;margin-top:12px" href="#quote">Send my setup →</a></aside></div></div>`;
   function builderStepContent() {
     if (state.builderStep === 1)
@@ -473,7 +452,7 @@ function builder() {
     if (state.builderStep === 2)
       return `<div class="reveal"><span class="eyebrow">STEP 02</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Tell us about the room.</h2><p style="color:var(--muted);margin-top:0">These details help the eventual quote request size the system properly.</p><div class="form-grid"><div class="field"><label>Guest count</label><input class="input" id="guestInput" type="number" min="1" value="${state.guests}"></div><div class="field"><label>Venue</label><select class="select" id="venueInput"><option ${state.venue === "Indoor" ? "selected" : ""}>Indoor</option><option ${state.venue === "Outdoor" ? "selected" : ""}>Outdoor</option><option ${state.venue === "Hybrid" ? "selected" : ""}>Hybrid</option></select></div><div class="field full"><label>Event date</label><input class="input" id="dateInput" type="date" value="${state.date}"></div></div></div>`;
     if (state.builderStep === 3)
-      return `<div class="reveal"><span class="eyebrow">STEP 03</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Pick the pieces.</h2><p style="color:var(--muted);margin-top:0">Start with recommendations for your ${state.eventType.toLowerCase()}, then browse the full equipment catalog. Quantities update the estimate in real time.</p><div class="equipment-group"><div class="equipment-group-head"><span class="eyebrow">FOR YOUR EVENT</span><span class="equipment-count">${recommendedProducts.length} recommendations</span></div><div class="builder-product-grid">${recommendedProducts.map((p) => miniProduct(p, true)).join("")}</div></div><div class="equipment-group all-equipment"><div class="equipment-group-head"><span class="eyebrow">ALL EQUIPMENT</span><span class="equipment-count">${products.length} products</span></div><div class="builder-product-grid">${otherProducts.map((p) => miniProduct(p)).join("")}</div></div></div>`;
+      return `<div class="reveal"><span class="eyebrow">STEP 03</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Pick the pieces.</h2><p style="color:var(--muted);margin-top:0">Start with suggested equipment, then add extras. Quantities update the estimate in real time.</p><div class="builder-product-grid">${builderProducts.map((p) => `<div class="mini-product"><h4>${p.name}</h4><p>${productPriceText(p)}</p><div class="mini-product-row"><span style="font-size:11px;color:var(--muted)">${p.category}</span><div class="qty-controls"><button class="qty-btn" data-minus="${p.id}">−</button><span class="qty">${state.selected[p.id] || 0}</span><button class="qty-btn" data-plus="${p.id}">+</button></div></div></div>`).join("")}</div></div>`;
     return `<div class="reveal"><span class="eyebrow">STEP 04</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Review your build.</h2><p style="color:var(--muted);margin-top:0">Everything the client has configured is summarized here before sending the request.</p><div class="selection-list">${items.length ? items.map(({ p, qty }) => `<div class="selection-chip"><span><strong>${qty} ×</strong> ${p.name}</span><span>${p.priceType === "quote" ? "Quote" : productPriceText(p)}</span></div>`).join("") : `<div class="empty">Add at least one product to your setup.</div>`}</div><div style="padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff"><div class="summary-line"><span>Event</span><strong>${state.eventType}</strong></div><div class="summary-line"><span>Guests</span><strong>${state.guests}</strong></div><div class="summary-line"><span>Venue</span><strong>${state.venue}</strong></div><div class="summary-line"><span>Date</span><strong>${state.date || "Not selected"}</strong></div></div></div>`;
   }
 }
@@ -486,8 +465,7 @@ function quote() {
   return `<div class="page"><section class="quote-page"><div class="quote-copy"><span class="eyebrow orange">REQUEST A QUOTE</span><h1>Let’s build<br>the right setup.</h1><p>Send the details below and the production team can confirm availability, final pricing and any setup or delivery requirements.</p><div class="hero-note"><span class="dot"></span> Your current builder selections can be attached automatically in the production version.</div></div><div class="quote-card" id="quoteCard"><div class="quote-form"><span class="eyebrow">YOUR EVENT</span><form id="quoteForm"><div class="form-grid"><div class="field"><label>Full name</label><input class="input" required placeholder="Alex Morgan"></div><div class="field"><label>Email</label><input class="input" type="email" required placeholder="alex@example.com"></div><div class="field"><label>Phone</label><input class="input" placeholder="617 555 0198"></div><div class="field"><label>Event type</label><select class="select"><option>Wedding</option><option>Corporate Event</option><option>School Event</option><option>Concert</option><option>Private Party</option><option>Outdoor Movie</option></select></div><div class="field"><label>Event date</label><input class="input" type="date"></div><div class="field"><label>Estimated guests</label><input class="input" type="number" min="1" placeholder="150"></div><div class="field full"><label>Venue / location</label><input class="input" placeholder="Venue name or address"></div><div class="field full"><label>What do you need?</label><textarea class="textarea" placeholder="Tell us about the event, room, gear, production support, timing, and anything unusual."></textarea></div></div><button class="btn btn-dark" style="width:100%;margin-top:18px">Send quote request →</button></form></div><div class="quote-success"><div class="success-mark">✓</div><span class="eyebrow">REQUEST RECEIVED</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:10px 0">Your brief is in.</h2><p style="color:var(--muted)">This mockup would send the configured event to the CRM / Firebase backend.</p><a href="#home" class="btn btn-dark">Back to home</a></div></div></section></div>`;
 }
 
-function render(options = {}) {
-  const previousScroll = window.scrollY;
+function render() {
   const hash = getHash();
   state.category = hash === "rentals" ? state.category : state.category;
   let view = home();
@@ -498,11 +476,7 @@ function render(options = {}) {
   if (hash === "quote") view = quote();
   app.innerHTML = view;
   bind();
-  if (options.preserveScroll) {
-    window.scrollTo({ top: previousScroll, behavior: "instant" });
-  } else {
-    window.scrollTo({ top: 0, behavior: "instant" });
-  }
+  window.scrollTo({ top: 0, behavior: "instant" });
 }
 
 function showToast(msg) {
@@ -514,7 +488,7 @@ function showToast(msg) {
 function addProduct(id, delta = 1) {
   state.selected[id] = (state.selected[id] || 0) + delta;
   if (state.selected[id] <= 0) delete state.selected[id];
-  render({ preserveScroll: getHash() === "builder" });
+  render();
   showToast(delta > 0 ? "Added to your setup" : "Removed from your setup");
 }
 
@@ -552,14 +526,14 @@ function bind() {
   document.querySelectorAll("[data-remove]").forEach((b) =>
     b.addEventListener("click", () => {
       delete state.selected[b.dataset.remove];
-      render({ preserveScroll: getHash() === "builder" });
+      render();
       showToast("Removed from your setup");
     }),
   );
   document.querySelectorAll("[data-event]").forEach((b) =>
     b.addEventListener("click", () => {
       state.eventType = b.dataset.event;
-      render({ preserveScroll: getHash() === "builder" });
+      render();
     }),
   );
   document.querySelectorAll("[data-bundle]").forEach((b) =>

@@ -255,7 +255,6 @@ const bundles = [
   {
     id: "wedding",
     title: "Wedding + Reception",
-    price: 1800,
     tone: "bundle-wedding",
     label: "WEDDING",
     desc: "Ceremony clarity and reception energy, built around your guest count.",
@@ -271,7 +270,6 @@ const bundles = [
   {
     id: "corporate",
     title: "Corporate Event",
-    price: 1200,
     tone: "bundle-corporate",
     label: "CORPORATE",
     desc: "Presentation-ready audio, video and streaming support for meetings and launches.",
@@ -287,7 +285,6 @@ const bundles = [
   {
     id: "school",
     title: "School Event",
-    price: 900,
     tone: "bundle-school",
     label: "SCHOOL",
     desc: "Flexible AV for ceremonies, recognition programs, dances and outdoor activities.",
@@ -303,7 +300,6 @@ const bundles = [
   {
     id: "concert",
     title: "Concert + Live Performance",
-    price: 2500,
     tone: "bundle-concert",
     label: "CONCERT",
     desc: "Production-focused setup for stage audio, performers and visual systems.",
@@ -319,7 +315,6 @@ const bundles = [
   {
     id: "party",
     title: "Private Party",
-    price: 650,
     tone: "bundle-party",
     label: "PARTY",
     desc: "A compact entertainment setup for birthdays, celebrations and social events.",
@@ -335,7 +330,6 @@ const bundles = [
   {
     id: "movie",
     title: "Outdoor Movie Night",
-    price: 549,
     tone: "bundle-movie",
     label: "MOVIE NIGHT",
     desc: "Pick the screen size and turn a backyard, school or community field into a cinema.",
@@ -402,18 +396,6 @@ function home() {
     )
     .map(productCard)
     .join("")}</div></section>
-  <section class="section"><div class="section-head"><div><span class="eyebrow">EVENT BUNDLES</span><h2>Start with<br>the occasion.</h2></div><a class="btn btn-light" href="#bundles">View all bundles →</a></div><div class="bundle-grid">${bundles
-    .slice(0, 3)
-    .map(
-      (b) =>
-        `<article class="bundle-card reveal"><div class="bundle-top ${b.tone}"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items
-          .slice(0, 3)
-          .map((i) => `<li>${i}</li>`)
-          .join(
-            "",
-          )}</ul><div class="bundle-foot"><span class="bundle-price">${money(b.price)}</span><a class="btn btn-dark btn-small" href="#bundles">View bundle →</a></div></div></article>`,
-    )
-    .join("")}</div></section>
   <section class="section"><div class="split"><div class="feature-panel dark"><div><span class="eyebrow">THE NEW WAY TO RENT AV</span><h3>Build it<br>before you book it.</h3><p>Give clients a visual, interactive way to configure their event. Fixed-price products can calculate instantly while custom production items stay quote-based.</p></div><div class="stat-row"><div class="stat"><strong>24/7</strong><span>CONFIGURE ANYTIME</span></div><div class="stat"><strong>01</strong><span>EVENT BUILDER</span></div><div class="stat"><strong>∞</strong><span>COMBINATIONS</span></div></div></div><div class="feature-panel orange"><div><span class="eyebrow">EVENT BUNDLES</span><h3>Don’t know what to rent?<br>Start from the occasion.</h3><p>Prebuilt bundles give customers a fast path, then let them customize the exact pieces.</p></div><a class="btn btn-dark" href="#bundles">Browse event bundles →</a></div></div></section>
   <section class="section"><div class="section-head"><div><span class="eyebrow">HOW IT WORKS</span><h2>From “what do I need?”<br>to “send me the quote.”</h2></div></div><div class="service-grid"><div class="service-card"><div class="service-icon">01</div><h3>Choose the occasion</h3><p>Wedding, corporate, school, concert, party or outdoor movie — start from context, not equipment jargon.</p></div><div class="service-card"><div class="service-icon">02</div><h3>Customize the setup</h3><p>Add quantities, remove extras, compare fixed-price packages and flag quote-only equipment.</p></div><div class="service-card"><div class="service-icon">03</div><h3>Request the quote</h3><p>Submit the event date, venue, guest count and your complete equipment configuration in one request.</p></div></div></section>
  </div>`;
@@ -436,7 +418,7 @@ function rentals() {
 }
 
 function bundlesPage() {
-  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">EVENT BUNDLES</span><h1>Start with<br>the occasion.</h1></div><p>Choose a fixed package built around a familiar event format. Every bundle is a complete starting point with clear inclusions and no hidden customization step.</p></div><section class="bundle-customize"><div><span class="eyebrow">NEED SOMETHING MORE SPECIFIC?</span><h2>Customize your experience.</h2><p>Build an event from the ground up with recommendations for your occasion and access to the full equipment catalog.</p></div><a class="btn btn-dark" href="#builder">Build my setup →</a></section><div class="bundle-grid">${bundles.map((b) => `<article class="bundle-card reveal"><div class="bundle-top ${b.tone}"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items.map((i) => `<li>${i}</li>`).join("")}</ul><div class="bundle-foot"><span class="bundle-price">${money(b.price)}</span><a class="btn btn-dark btn-small" href="#quote">Request this bundle →</a></div></div></article>`).join("")}</div></div>`;
+  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">EVENT BUNDLES</span><h1>Start with<br>the occasion.</h1></div><p>Choose a fixed package built around a familiar event format. Every bundle is a complete starting point with clear inclusions and no hidden customization step.</p></div><section class="bundle-customize"><div><span class="eyebrow">NEED SOMETHING MORE SPECIFIC?</span><h2>Customize your experience.</h2><p>Build an event from the ground up with recommendations for your occasion and access to the full equipment catalog.</p></div><a class="btn btn-dark" href="#builder">Build my setup →</a></section><div class="bundle-grid">${bundles.map((b) => `<article class="bundle-card reveal"><div class="bundle-top ${b.tone}"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items.map((i) => `<li>${i}</li>`).join("")}</ul><div class="bundle-foot"><span class="bundle-price">Fixed package</span><a class="btn btn-dark btn-small" href="#quote">Request this bundle →</a></div></div></article>`).join("")}</div></div>`;
 }
 
 function builder() {
