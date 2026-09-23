@@ -254,12 +254,12 @@ const products = [
 const bundles = [
   {
     id: "wedding",
-    title: "Wedding Event",
+    title: "Wedding + Reception",
     price: 1800,
     included: { "medium-audio": 1, "lapel-mic": 2, "photo-360": 1 },
     tone: "bundle-wedding",
     label: "WEDDING",
-    desc: "Clear audio and visual support for ceremonies, dinners, and celebrations.",
+    desc: "Ceremony clarity and reception energy, built around your guest count.",
     items: [
       "Main speaker package",
       "2–4 wireless microphones",
@@ -514,7 +514,7 @@ function builder() {
   return `<div class="page"><div class="page-hero"><div><span class="eyebrow">CUSTOM EVENT BUILDER</span><h1>Build your<br>exact setup.</h1></div><p>Prototype a guided experience for clients. This is intentionally quote-friendly: it estimates what is known without pretending custom production has a fixed retail price.</p></div><div class="builder-wrap"><section class="builder-main"><div class="steps">${["Event", "Details", "Equipment", "Review"].map((s, i) => `<div class="step ${state.builderStep === i + 1 ? "active" : ""}">${String(i + 1).padStart(2, "0")} · ${s}</div>`).join("")}</div>${builderStepContent()}<div class="builder-actions"><button class="btn btn-light" data-builder-prev ${state.builderStep === 1 ? "disabled" : ""}>← Back</button>${state.builderStep < 4 ? `<button class="btn btn-dark" data-builder-next>Continue →</button>` : `<a class="btn btn-accent" href="#quote">Request this quote →</a>`}</div></section><aside class="builder-side"><span class="eyebrow">YOUR SETUP</span><div class="summary-total"><div><span class="eyebrow">ESTIMATED TOTAL</span><div style="font-size:11px;color:var(--muted)">${quoteOnly ? "Includes quote-only selections" : ""}</div></div><strong>${money(known)}</strong></div><div class="selection-list">${items.length ? items.map(({ p, qty }) => `<div class="selection-chip"><span>${qty} × ${p.name.replace(" — 50 Headphones", "").replace(" — 100 Headphones", "").replace(" — 150 Headphones", "").replace(" — 200 Headphones", "").replace(" — 300 Headphones", "")}</span><button data-remove="${p.id}" aria-label="Remove">×</button></div>`).join("") : `<div class="empty" style="padding:24px">Nothing selected yet.</div>`}</div>${quoteOnly ? `<div class="quote-tag">Some selections require a final quote confirmation.</div>` : ""}<a class="btn btn-dark" style="width:100%;margin-top:12px" href="#quote">Send my setup →</a></aside></div></div>`;
   function builderStepContent() {
     if (state.builderStep === 1)
-      return `<div class="reveal"><span class="eyebrow">STEP 01</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">What are you planning?</h2><p style="color:var(--muted);margin-top:0">Pick the closest event type. The interface uses it to suggest a starting point.</p><div class="choice-grid">${["Wedding", "Corporate Event", "School Event", "Concert", "Private Party", "Outdoor Movie"].map((x) => `<button class="choice ${state.eventType === x ? "selected" : ""}" data-event="${x}"><strong>${x}</strong><span>${x === "Wedding" ? "Ceremony + celebration" : x === "Corporate Event" ? "Meetings + launches" : x === "School Event" ? "Programs + dances" : x === "Concert" ? "Live performance" : x === "Private Party" ? "Celebrations" : "Inflatable movie night"}</span>${state.eventType === x ? "<em>Selected</em>" : ""}</button>`).join("")}</div></div>`;
+      return `<div class="reveal"><span class="eyebrow">STEP 01</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">What are you planning?</h2><p style="color:var(--muted);margin-top:0">Pick the closest event type. The interface uses it to suggest a starting point.</p><div class="choice-grid">${["Wedding", "Corporate Event", "School Event", "Concert", "Private Party", "Outdoor Movie"].map((x) => `<button class="choice ${state.eventType === x ? "selected" : ""}" data-event="${x}"><strong>${x}</strong><span>${x === "Wedding" ? "Ceremony + reception" : x === "Corporate Event" ? "Meetings + launches" : x === "School Event" ? "Programs + dances" : x === "Concert" ? "Live performance" : x === "Private Party" ? "Celebrations" : "Inflatable movie night"}</span>${state.eventType === x ? "<em>Selected</em>" : ""}</button>`).join("")}</div></div>`;
     if (state.builderStep === 2)
       return `<div class="reveal"><span class="eyebrow">STEP 02</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Tell us about the room.</h2><p style="color:var(--muted);margin-top:0">These details help the eventual quote request size the system properly.</p><div class="form-grid"><div class="field"><label>Guest count</label><input class="input" id="guestInput" type="number" min="1" value="${state.guests}"></div><div class="field"><label>Venue</label><select class="select" id="venueInput"><option ${state.venue === "Indoor" ? "selected" : ""}>Indoor</option><option ${state.venue === "Outdoor" ? "selected" : ""}>Outdoor</option><option ${state.venue === "Hybrid" ? "selected" : ""}>Hybrid</option></select></div><div class="field full"><label>Event date</label><input class="input" id="dateInput" type="date" value="${state.date}"></div></div></div>`;
     if (state.builderStep === 3)
@@ -548,8 +548,7 @@ function render(options = {}) {
   bind();
   if (options.preserveScroll) {
     window.requestAnimationFrame(() => {
-      const previousScrollBehavior =
-        document.documentElement.style.scrollBehavior;
+      const previousScrollBehavior = document.documentElement.style.scrollBehavior;
       document.documentElement.style.scrollBehavior = "auto";
       window.scrollTo(0, previousScroll);
       document.documentElement.style.scrollBehavior = previousScrollBehavior;

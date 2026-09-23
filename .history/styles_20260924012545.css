@@ -2080,7 +2080,7 @@ body:before {
   padding-top: 48px;
 }
 
-.bundle-detail-head>.text-btn {
+.bundle-detail-head > .text-btn {
   display: inline-block;
   margin-bottom: 34px;
   color: var(--muted);
@@ -2181,7 +2181,7 @@ body:before {
   border-bottom: 1px solid var(--line);
 }
 
-.bundle-included-item>div {
+.bundle-included-item > div {
   display: grid;
   gap: 4px;
 }
@@ -2228,7 +2228,6 @@ body:before {
 }
 
 @media (max-width: 900px) {
-
   .bundle-detail-layout,
   .bundle-detail-wrap {
     grid-template-columns: 1fr;
