@@ -1936,35 +1936,3 @@ body:before {
     transition-duration: .01ms !important
   }
 }
-
-.hero-art {
-  background: #ebe8e1;
-  border: 1px dashed #c8c3b9;
-  box-shadow: none;
-  animation: none;
-}
-
-.hero-art>* {
-  display: none;
-}
-
-.hero-art::before {
-  content: '';
-  position: absolute;
-  inset: 14px;
-  border: 1px solid rgba(17, 17, 17, .08);
-  background-image: linear-gradient(rgba(17, 17, 17, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(17, 17, 17, .035) 1px, transparent 1px);
-  background-size: 48px 48px;
-}
-
-.hero-art::after {
-  content: 'IMAGE PLACEHOLDER';
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  color: rgba(17, 17, 17, .3);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: .18em;
-}

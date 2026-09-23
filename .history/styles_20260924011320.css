@@ -1944,7 +1944,7 @@ body:before {
   animation: none;
 }
 
-.hero-art>* {
+.hero-art > * {
   display: none;
 }
 
