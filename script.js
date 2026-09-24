@@ -422,19 +422,32 @@ function filteredProducts() {
       (!q || `${p.name} ${p.category} ${p.desc}`.toLowerCase().includes(q)),
   );
 }
+function productImage(p) {
+  if (p.category === "Outdoor Movies") return "outdoor-movie.jpg";
+  if (p.category === "Experiences") return "silent-disco.webp";
+  if (p.category === "Photo Booths") return "photo-booth-360.jpg";
+  if (p.category === "Audio") return "speaker-wall.webp";
+  if (p.category === "Microphones") return "microphone-rentals.jpeg";
+  if (p.category === "Video & Displays") return "69667bc33d884d697701e4c1_Led-Wall.png";
+  if (p.category === "LED Walls") return "led-wall-roses.webp";
+  if (p.category === "Live Streaming") return "live-streaming.jpg";
+  return "concert-audio.webp";
+}
+
 function productCard(p) {
-  return `<article class="product-card reveal"><div class="product-media ${p.tone || ""}"></div><div class="product-meta"><span class="badge">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">${productPriceText(p)}</span><button class="text-btn" data-add="${p.id}">Add +</button></div></div></article>`;
+  const image = productImage(p);
+  return `<article class="product-card reveal"><div class="product-media has-image ${p.tone || ""}" style="--media-image:url('assets/beantown/${image}')"></div><div class="product-meta"><span class="badge">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">${productPriceText(p)}</span><button class="text-btn" data-add="${p.id}">Add +</button></div></div></article>`;
 }
 function home() {
   return `<div class="page">
   <section class="hero reveal"><div class="hero-copy"><span class="eyebrow orange">BOSTON • NEW ENGLAND • EVENT AV</span><h1>Your event.<br><span style="background:linear-gradient(90deg,var(--ink),var(--accent));-webkit-background-clip:text;color:transparent">Your setup.</span></h1><p>Rent speakers, screens, streaming gear, photo booths and complete event systems — then build your exact experience before you request a quote.</p><div class="hero-cta"><a class="btn btn-dark" href="#builder">Build my event <span>→</span></a><a class="btn btn-light" href="#rentals">Explore rentals</a></div><div class="hero-note"><span class="dot"></span> Fixed-price packages + quote-based production gear</div></div><div class="hero-floats" aria-hidden="true">
-    <article class="floating-story" data-scroll-float="-1" style="--tilt:-5deg"><span class="story-media">PHOTO<br>PLACEHOLDER</span><span class="story-kicker">WEDDINGS</span><strong>Every vow, heard.</strong><small>Audio for the aisle and the dance floor.</small></article>
-    <article class="floating-story" data-scroll-float="1" style="--tilt:5deg"><span class="story-media">PHOTO<br>PLACEHOLDER</span><span class="story-kicker">OUTDOOR MOVIES</span><strong>Movie night, made big.</strong><small>Screen and sound for the whole crowd.</small></article>
-    <article class="floating-story" data-scroll-float="-1" style="--tilt:3deg"><span class="story-media">PHOTO<br>PLACEHOLDER</span><span class="story-kicker">SILENT DISCO</span><strong>Three channels. One dance floor.</strong><small>Headphones and transmitters, ready to go.</small></article>
-    <article class="floating-story" data-scroll-float="1" style="--tilt:-4deg"><span class="story-media">PHOTO<br>PLACEHOLDER</span><span class="story-kicker">CORPORATE EVENTS</span><strong>Make every word count.</strong><small>Clear voices and confident presentations.</small></article>
-    <article class="floating-story" data-scroll-float="-1" style="--tilt:-3deg"><span class="story-media">PHOTO<br>PLACEHOLDER</span><span class="story-kicker">LIVE EVENTS</span><strong>Room-filling sound.</strong><small>Audio that meets the moment.</small></article>
-    <article class="floating-story" data-scroll-float="1" style="--tilt:4deg"><span class="story-media">PHOTO<br>PLACEHOLDER</span><span class="story-kicker">PHOTO BOOTHS</span><strong>Keep the good part.</strong><small>A photo moment guests take home.</small></article>
-  </div><div class="hero-art"><div class="hero-surface"></div><div class="hero-grid"></div><div class="hero-screen"></div><div class="hero-speaker one"></div><div class="hero-speaker two"></div><div class="hero-cable"></div></div></section>
+    <article class="floating-story" data-scroll-float="-1" style="--tilt:-5deg"><span class="story-media" style="--story-image:url('assets/beantown/wedding-led-display.webp')"></span><span class="story-kicker">WEDDINGS</span><strong>Every vow, heard.</strong><small>Audio for the aisle and the dance floor.</small></article>
+    <article class="floating-story" data-scroll-float="1" style="--tilt:5deg"><span class="story-media" style="--story-image:url('assets/beantown/outdoor-movie.jpg')"></span><span class="story-kicker">OUTDOOR MOVIES</span><strong>Movie night, made big.</strong><small>Screen and sound for the whole crowd.</small></article>
+    <article class="floating-story" data-scroll-float="-1" style="--tilt:3deg"><span class="story-media" style="--story-image:url('assets/beantown/silent-disco.webp')"></span><span class="story-kicker">SILENT DISCO</span><strong>Three channels. One dance floor.</strong><small>Headphones and transmitters, ready to go.</small></article>
+    <article class="floating-story" data-scroll-float="1" style="--tilt:-4deg"><span class="story-media" style="--story-image:url('assets/beantown/corporate-dance-floor.jpg')"></span><span class="story-kicker">CORPORATE EVENTS</span><strong>Make every word count.</strong><small>Clear voices and confident presentations.</small></article>
+    <article class="floating-story" data-scroll-float="-1" style="--tilt:-3deg"><span class="story-media" style="--story-image:url('assets/beantown/concert-audio.webp')"></span><span class="story-kicker">LIVE EVENTS</span><strong>Room-filling sound.</strong><small>Audio that meets the moment.</small></article>
+    <article class="floating-story" data-scroll-float="1" style="--tilt:4deg"><span class="story-media" style="--story-image:url('assets/beantown/photo-booth-360.jpg')"></span><span class="story-kicker">PHOTO BOOTHS</span><strong>Keep the good part.</strong><small>A photo moment guests take home.</small></article>
+  </div><div class="hero-art has-image" style="--media-image:url('assets/beantown/concert-audio.webp')"><div class="hero-surface"></div><div class="hero-grid"></div><div class="hero-screen"></div><div class="hero-speaker one"></div><div class="hero-speaker two"></div><div class="hero-cable"></div></div></section>
   <div class="marquee"><div class="marquee-track"><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span><b>•</b><span>Live Streaming</span><b>•</b><span>Outdoor Movies</span><b>•</b><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span></div></div>
   <section class="section"><div class="section-head"><div><span class="eyebrow">WHAT ARE YOU RENTING?</span><h2>Start with the<br>experience.</h2></div><p>Skip the endless gear list. Tell us what you're trying to make happen and the interface can guide you to a setup.</p></div><div class="category-grid"><a href="#rentals?cat=Audio" class="category-card cat-a"><div><span class="eyebrow">01</span><h3>Audio</h3><p>Speakers, microphones, mixers and live-performance systems.</p></div><strong>Explore →</strong></a><a href="#rentals?cat=Video%20%26%20Displays" class="category-card cat-b"><div><span class="eyebrow">02</span><h3>Video</h3><p>TVs, projection, switching and visual presentation packages.</p></div><strong>Explore →</strong></a><a href="#rentals?cat=Experiences" class="category-card cat-c"><div><span class="eyebrow">03</span><h3>Experiences</h3><p>Silent disco, outdoor movies and photo booth moments.</p></div><strong>Explore →</strong></a><a href="#rentals?cat=LED%20Walls" class="category-card cat-d"><div><span class="eyebrow">04</span><h3>LED Walls</h3><p>High-impact visuals for stages, launches, parties and concerts.</p></div><strong>Explore →</strong></a></div></section>
   <section class="section"><div class="section-head"><div><span class="eyebrow">POPULAR NOW</span><h2>Public pricing,<br>where it exists.</h2></div><a class="btn btn-light" href="#rentals">See all rentals</a></div><div class="product-grid">${products
@@ -455,7 +468,8 @@ function home() {
           )}</ul><div class="bundle-foot"><span class="bundle-price">${money(b.price)}</span><button class="btn btn-dark btn-small" data-bundle="${b.id}">View bundle →</button></div></div></article>`,
     )
     .join("")}</div></section>
-  <section class="section"><div class="split"><div class="feature-panel dark"><div><span class="eyebrow">THE NEW WAY TO RENT AV</span><h3>Build it<br>before you book it.</h3><p>Give clients a visual, interactive way to configure their event. Fixed-price products can calculate instantly while custom production items stay quote-based.</p></div><div class="stat-row"><div class="stat"><strong>24/7</strong><span>CONFIGURE ANYTIME</span></div><div class="stat"><strong>01</strong><span>EVENT BUILDER</span></div><div class="stat"><strong>∞</strong><span>COMBINATIONS</span></div></div></div><div class="feature-panel orange"><div><span class="eyebrow">EVENT BUNDLES</span><h3>Don’t know what to rent?<br>Start from the occasion.</h3><p>Prebuilt bundles give customers a fast path, then let them customize the exact pieces.</p></div><a class="btn btn-dark" href="#bundles">Browse event bundles →</a></div></div></section>
+  <section class="section"><div class="feature-panel dark"><div><span class="eyebrow">PLAN THE SETUP WITH CONFIDENCE</span><h3>Build it<br>before you book it.</h3><p>Choose your event, add the pieces you need, and see fixed-price items in your estimate. Custom production stays quote-based.</p></div><div class="stat-row"><div class="stat"><strong>24/7</strong><span>CONFIGURE ANYTIME</span></div><div class="stat"><strong>01</strong><span>EVENT BUILDER</span></div><div class="stat"><strong>∞</strong><span>COMBINATIONS</span></div></div></div></section>
+  <section class="section testimonials-section"><div class="section-head"><div><span class="eyebrow">CLIENT STORIES</span><h2>What clients<br>say about the setup.</h2></div><p>Beantown’s site doesn’t publish customer review quotes, so these are clearly marked slots for approved feedback.</p></div><div class="testimonial-track" aria-label="Client testimonial placeholders"><article class="testimonial-card"><span class="testimonial-label">CLIENT STORY · SETUP</span><p>Add an approved quote about a smooth, well-supported setup.</p><div class="testimonial-person"><span class="testimonial-avatar">BA</span><div><strong>Client name</strong><small>Event type · Boston</small></div></div></article><article class="testimonial-card"><span class="testimonial-label">CLIENT STORY · EQUIPMENT</span><p>Add an approved quote about the equipment and event experience.</p><div class="testimonial-person"><span class="testimonial-avatar">BA</span><div><strong>Client name</strong><small>Event type · New England</small></div></div></article><article class="testimonial-card"><span class="testimonial-label">CLIENT STORY · SERVICE</span><p>Add an approved quote about delivery, communication, or support.</p><div class="testimonial-person"><span class="testimonial-avatar">BA</span><div><strong>Client name</strong><small>Event type · Boston</small></div></div></article></div></section>
   <section class="section"><div class="section-head"><div><span class="eyebrow">HOW IT WORKS</span><h2>From “what do I need?”<br>to “send me the quote.”</h2></div></div><div class="service-grid"><div class="service-card"><div class="service-icon">01</div><h3>Choose the occasion</h3><p>Wedding, corporate, school, concert, party or outdoor movie — start from context, not equipment jargon.</p></div><div class="service-card"><div class="service-icon">02</div><h3>Customize the setup</h3><p>Add quantities, remove extras, compare fixed-price packages and flag quote-only equipment.</p></div><div class="service-card"><div class="service-icon">03</div><h3>Request the quote</h3><p>Submit the event date, venue, guest count and your complete equipment configuration in one request.</p></div></div></section>
  </div>`;
 }
@@ -532,7 +546,7 @@ function builder() {
 }
 
 function services() {
-  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">SERVICES</span><h1>More than<br>equipment.</h1></div><p>Position the company as an event technology partner: delivery, setup, support and production wrap around the rental catalog.</p></div><div class="service-grid"><div class="service-card"><div class="service-icon">AV</div><h3>Audio production</h3><p>From small gatherings to large-room PA systems, create the right scale for the audience and venue.</p></div><div class="service-card"><div class="service-icon">VX</div><h3>Video + LED</h3><p>Projection, TVs, LED walls and signal routing for presentations, stages, launches and live events.</p></div><div class="service-card"><div class="service-icon">4K</div><h3>Live streaming</h3><p>Single-camera and multi-angle event production with capture and streaming support.</p></div><div class="service-card"><div class="service-icon">SET</div><h3>Delivery + setup</h3><p>Keep logistics visible in the quote flow rather than hiding the operational work behind a checkout button.</p></div><div class="service-card"><div class="service-icon">FUN</div><h3>Event experiences</h3><p>Silent disco, outdoor cinema and photo booths turn a basic rental into something memorable.</p></div><div class="service-card"><div class="service-icon">OPS</div><h3>On-site support</h3><p>Offer support tiers for events where technical supervision matters.</p></div></div><section class="section"><div class="split"><div class="feature-panel orange"><div><span class="eyebrow">DESIGN SYSTEM</span><h3>Bold enough to feel like an experience brand.</h3><p>Large typography, modular cards, bright accent surfaces and a clean catalog make the website feel premium without becoming hard to use.</p></div></div><div class="feature-panel dark"><div><span class="eyebrow">CONTENT SYSTEM</span><h3>One source of truth for pricing.</h3><p>Every rental can carry a pricing type: fixed, starting-at, or quote-required. That lets the UI stay transparent while the admin side remains flexible.</p></div></div></div></section></div>`;
+ return `<div class="page"><div class="page-hero"><div><span class="eyebrow">SERVICES</span><h1>More than<br>equipment.</h1></div><p>Professional audio, lighting and video rentals, backed by dependable delivery, setup and support across Boston and New England.</p></div><div class="service-grid"><div class="service-card"><div class="service-icon">AV</div><h3>Audio production</h3><p>From small gatherings to large-room PA systems, create the right scale for the audience and venue.</p></div><div class="service-card"><div class="service-icon">VX</div><h3>Video + LED</h3><p>Projection, TVs, LED walls and signal routing for presentations, stages, launches and live events.</p></div><div class="service-card"><div class="service-icon">4K</div><h3>Live streaming</h3><p>Single-camera and multi-angle event production with capture and streaming support.</p></div><div class="service-card"><div class="service-icon">SET</div><h3>Delivery + setup</h3><p>Delivery, setup, pickup, and clear walkthroughs to help your event run smoothly.</p></div><div class="service-card"><div class="service-icon">FUN</div><h3>Event experiences</h3><p>Silent disco, outdoor cinema and photo booths turn a basic rental into something memorable.</p></div><div class="service-card"><div class="service-icon">OPS</div><h3>On-site support</h3><p>Get support from a team that knows the gear and understands event timelines.</p></div></div></div>`;
 }
 
 function quote() {
@@ -553,6 +567,7 @@ function render(options = {}) {
   if (hash === "services") view = services();
   if (hash === "quote") view = quote();
   app.innerHTML = view;
+  document.querySelector(".topbar")?.classList.toggle("is-scrolled", window.scrollY > 72);
   queueFloatingStoryUpdate();
   syncNavigation();
   observePageMotion();
@@ -581,18 +596,24 @@ function syncNavigation() {
   });
 }
 
+function syncMorphingNavigation() {
+  document.querySelector(".topbar")?.classList.toggle("is-scrolled", window.scrollY > 72);
+}
+
 function observePageMotion() {
   const motionTargets = document.querySelectorAll(
-    "#app .reveal, #app .page-hero, #app .rentals-toolbar, #app .bundle-customize, #app .builder-wrap, #app .quote-page, #app .bundle-detail-head, #app .bundle-detail-wrap, #app .page > .section",
+    "#app .reveal, #app .page-hero, #app .rentals-toolbar, #app .bundle-customize, #app .builder-wrap, #app .quote-page, #app .bundle-detail-head, #app .bundle-detail-wrap, #app .service-grid, #app .page > .section",
   );
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   pageRevealObserver?.disconnect();
   if (reducedMotion || !("IntersectionObserver" in window)) {
+    app.classList.remove("motion-enabled");
     motionTargets.forEach((target) => target.classList.add("is-visible"));
     return;
   }
 
+  app.classList.add("motion-enabled");
   pageRevealObserver = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {
@@ -808,6 +829,7 @@ function updateFloatingStories() {
 }
 
 function queueFloatingStoryUpdate() {
+  syncMorphingNavigation();
   if (floatUpdateQueued) return;
   floatUpdateQueued = true;
   window.requestAnimationFrame(updateFloatingStories);

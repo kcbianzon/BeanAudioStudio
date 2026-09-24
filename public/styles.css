@@ -47,7 +47,7 @@ button {
 
 .site-shell {
   min-height: 100vh;
-  overflow: hidden
+  overflow: clip
 }
 
 .topbar {
@@ -2272,6 +2272,47 @@ body {
   .hero-copy, .hero-art, .reveal { animation: none !important; }
 }
 
+/* Authentic Beantown imagery and the stronger MVM inspired type treatment. */
+body { font-family: 'Inter', 'Hind', 'DM Sans', system-ui, sans-serif; }
+h1, h2, h3, h4, .brand-copy strong, .btn, .category-card > strong {
+  font-family: 'Sora', 'Nunito Sans', sans-serif;
+}
+.desktop-nav { font-family: 'Inter', 'Hind', sans-serif; font-weight: 600; }
+.eyebrow, .badge, .story-kicker, .step, .field label, .equipment-count {
+  font-family: 'Hind', 'Inter', sans-serif;
+}
+.hero-art.has-image {
+  border: 1px solid rgba(36,35,31,.12);
+  background-image: linear-gradient(0deg,rgba(28,28,25,.18),rgba(28,28,25,.04) 55%,rgba(28,28,25,.08)), var(--media-image);
+  background-color: #3e3b34;
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 24px 64px rgba(50,40,20,.14);
+}
+.hero-art.has-image::before { inset: 15px; border: 1px solid rgba(255,255,255,.38); background: none; }
+.hero-art.has-image::after { display: none; }
+.product-media.has-image {
+  background-image: linear-gradient(180deg,rgba(18,18,18,.02) 55%,rgba(18,18,18,.26)), var(--media-image) !important;
+  background-position: center;
+  background-size: cover;
+}
+.product-media.has-image::before, .product-media.has-image::after { display: none; }
+.product-media.has-image { border: 0; }
+.story-media {
+  border: 2px solid #fff;
+  background-color: #e7d9af;
+  background-image: var(--story-image);
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 2px 8px rgba(36,35,31,.12);
+}
+.feature-panel.dark h3 { color: #fff8e7 !important; }
+.feature-panel.dark .eyebrow { color: #f2d78b; }
+.feature-panel.dark p { color: rgba(255,255,255,.78); }
+.feature-panel.dark .stat strong { color: #ffe08a; }
+.feature-panel.dark .stat span { color: rgba(255,255,255,.66); }
+.feature-panel.dark { background: #292a2d; }
+
 @media (max-width: 700px) {
   .bundle-customize {
     align-items: flex-start;
@@ -2788,6 +2829,32 @@ body {
   .floating-story { will-change: auto; }
 }
 
+.hero-art.has-image {
+  border: 1px solid rgba(36,35,31,.12);
+  background-image: linear-gradient(0deg,rgba(28,28,25,.18),rgba(28,28,25,.04) 55%,rgba(28,28,25,.08)), var(--media-image);
+  background-color: #3e3b34;
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 24px 64px rgba(50,40,20,.14);
+}
+.hero-art.has-image::before { inset: 15px; border: 1px solid rgba(255,255,255,.38); background: none; }
+.hero-art.has-image::after { display: none; }
+.product-media.has-image {
+  background-image: linear-gradient(180deg,rgba(18,18,18,.02) 55%,rgba(18,18,18,.26)), var(--media-image) !important;
+  background-position: center;
+  background-size: cover;
+  border: 0;
+}
+.product-media.has-image::before, .product-media.has-image::after { display: none; }
+.story-media {
+  border: 2px solid #fff;
+  background-color: #e7d9af;
+  background-image: var(--story-image);
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 2px 8px rgba(36,35,31,.12);
+}
+
 /* Final typography, navigation, grid and scroll-motion refinement. */
 body {
   font-family: 'Hind', 'DM Sans', system-ui, sans-serif;
@@ -2814,11 +2881,11 @@ p { line-height: 1.7; }
   inset: 8px -8vw 72px;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(130, 105, 45, .09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(130, 105, 45, .09) 1px, transparent 1px);
+    linear-gradient(rgba(130, 105, 45, .14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(130, 105, 45, .14) 1px, transparent 1px);
   background-size: 34px 34px;
   mask-image: radial-gradient(ellipse at center, #000 18%, transparent 76%);
-  opacity: .55;
+  opacity: .72;
 }
 .topbar { padding: 4px 0; }
 .nav-wrap {
@@ -2884,23 +2951,24 @@ p { line-height: 1.7; }
   outline-offset: 3px;
 }
 
-#app .reveal,
-#app .page-hero,
-#app .rentals-toolbar,
-#app .bundle-customize,
-#app .builder-wrap,
-#app .quote-page,
-#app .bundle-detail-head,
-#app .bundle-detail-wrap,
-#app .page > .section {
+#app.motion-enabled .reveal,
+#app.motion-enabled .page-hero,
+#app.motion-enabled .rentals-toolbar,
+#app.motion-enabled .bundle-customize,
+#app.motion-enabled .builder-wrap,
+#app.motion-enabled .quote-page,
+#app.motion-enabled .bundle-detail-head,
+#app.motion-enabled .bundle-detail-wrap,
+#app.motion-enabled .service-grid,
+#app.motion-enabled .page > .section {
   animation: none;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity .65s cubic-bezier(.2,.8,.2,1), transform .65s cubic-bezier(.2,.8,.2,1);
 }
 #app .is-visible {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 .category-grid .category-card:nth-child(2), .product-grid .product-card:nth-child(2), .bundle-grid .bundle-card:nth-child(2), .service-grid .service-card:nth-child(2) { transition-delay: .06s; }
 .category-grid .category-card:nth-child(3), .product-grid .product-card:nth-child(3), .bundle-grid .bundle-card:nth-child(3), .service-grid .service-card:nth-child(3) { transition-delay: .12s; }
@@ -2926,9 +2994,39 @@ p { line-height: 1.7; }
 @media (prefers-reduced-motion: reduce) {
   #app .reveal, #app .page-hero, #app .rentals-toolbar, #app .bundle-customize,
   #app .builder-wrap, #app .quote-page, #app .bundle-detail-head,
-  #app .bundle-detail-wrap, #app .page > .section {
+  #app .bundle-detail-wrap, #app .service-grid, #app .page > .section {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
   }
 }
+
+/* Last-in-file overrides keep shared earlier component rules from winning. */
+body { font-family: 'Inter', 'Hind', system-ui, sans-serif; }
+h1, h2, h3, h4, .brand-copy strong { font-family: 'Sora', 'Nunito Sans', sans-serif; }
+.desktop-nav, .mobile-menu a, .btn { font-family: 'Inter', 'Hind', sans-serif; }
+.topbar.is-scrolled .nav-wrap { width: min(100% - 40px,1120px); min-height: 54px; margin-top: 8px; padding: 5px 12px; border: 1px solid rgba(36,35,31,.1); border-radius: 999px; background: rgba(255,255,255,.96); box-shadow: 0 10px 30px rgba(36,35,31,.12); }
+.topbar.is-scrolled { background: transparent; border-bottom-color: transparent; }
+.topbar.is-scrolled .brand-copy { max-width: 0; opacity: 0; transform: translateX(-8px); }
+.topbar.is-scrolled .brand { gap: 0; }
+.nav-wrap, .brand-copy { transition: min-height .35s ease, padding .35s ease, gap .35s ease, max-width .35s ease, opacity .25s ease, transform .35s ease, border-radius .35s ease, box-shadow .35s ease, background-color .35s ease; }
+.brand-copy { max-width: 140px; overflow: hidden; white-space: nowrap; }
+.testimonial-track { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+.testimonial-card { min-height: 205px; padding: 23px; border: 1px solid rgba(255,255,255,.12); border-radius: 24px; background: #4a5059; color: #fff; box-shadow: 0 12px 28px rgba(36,35,31,.1); }
+.testimonial-label { color: #ffe08a; font: 700 10px 'Hind',Inter,sans-serif; letter-spacing: .13em; }
+.testimonial-card > p { min-height: 54px; margin: 19px 0; color: rgba(255,255,255,.86); font-size: 15px; }
+.testimonial-person { display: flex; align-items: center; gap: 11px; padding-top: 13px; border-top: 1px solid rgba(255,255,255,.16); }
+.testimonial-avatar { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 50%; background: #ffe08a; color: #24231f; font: 800 12px Inter,sans-serif; }
+.testimonial-person strong,.testimonial-person small { display: block; }
+.testimonial-person strong { font: 700 13px Inter,sans-serif; }
+.testimonial-person small { margin-top: 3px; color: rgba(255,255,255,.66); font: 500 11px Inter,sans-serif; }
+.feature-panel.dark h3 { color: #fff8e7 !important; }
+@media (max-width: 900px) { .testimonial-track { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 700px) {
+  .topbar.is-scrolled .nav-wrap { width: calc(100% - 24px); min-height: 50px; margin-top: 6px; }
+  .topbar.is-scrolled .brand-copy { max-width: 140px; opacity: 1; transform: none; }
+  .topbar.is-scrolled .brand { gap: 10px; }
+  .testimonial-track { display: flex; overflow-x: auto; padding: 2px 4px 14px; scroll-snap-type: x mandatory; }
+  .testimonial-card { min-width: min(82vw,330px); scroll-snap-align: center; }
+}
+@media (prefers-reduced-motion: reduce) { .nav-wrap, .brand-copy { transition: none !important; } }
