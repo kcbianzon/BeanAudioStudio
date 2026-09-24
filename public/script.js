@@ -426,7 +426,14 @@ function productCard(p) {
 }
 function home() {
   return `<div class="page">
-  <section class="hero reveal"><div class="hero-copy"><span class="eyebrow orange">BOSTON • NEW ENGLAND • EVENT AV</span><h1>Your event.<br><span style="background:linear-gradient(90deg,var(--ink),var(--accent));-webkit-background-clip:text;color:transparent">Your setup.</span></h1><p>Rent speakers, screens, streaming gear, photo booths and complete event systems — then build your exact experience before you request a quote.</p><div class="hero-cta"><a class="btn btn-dark" href="#builder">Build my event <span>→</span></a><a class="btn btn-light" href="#rentals">Explore rentals</a></div><div class="hero-note"><span class="dot"></span> Fixed-price packages + quote-based production gear</div></div><div class="hero-art"><div class="hero-surface"></div><div class="hero-grid"></div><div class="hero-screen"></div><div class="hero-speaker one"></div><div class="hero-speaker two"></div><div class="hero-cable"></div></div></section>
+  <section class="hero reveal"><div class="hero-copy"><span class="eyebrow orange">BOSTON • NEW ENGLAND • EVENT AV</span><h1>Your event.<br><span style="background:linear-gradient(90deg,var(--ink),var(--accent));-webkit-background-clip:text;color:transparent">Your setup.</span></h1><p>Rent speakers, screens, streaming gear, photo booths and complete event systems — then build your exact experience before you request a quote.</p><div class="hero-cta"><a class="btn btn-dark" href="#builder">Build my event <span>→</span></a><a class="btn btn-light" href="#rentals">Explore rentals</a></div><div class="hero-note"><span class="dot"></span> Fixed-price packages + quote-based production gear</div></div><div class="hero-floats" aria-hidden="true">
+    <article class="floating-story" data-scroll-float="-1" style="--tilt:-5deg"><span class="story-media">PHOTO<br>PLACEHOLDER</span><span class="story-kicker">WEDDINGS</span><strong>Every vow, heard.</strong><small>Audio for the aisle and the dance floor.</small></article>
+    <article class="floating-story" data-scroll-float="1" style="--tilt:5deg"><span class="story-media">PHOTO<br>PLACEHOLDER</span><span class="story-kicker">OUTDOOR MOVIES</span><strong>Movie night, made big.</strong><small>Screen and sound for the whole crowd.</small></article>
+    <article class="floating-story" data-scroll-float="-1" style="--tilt:3deg"><span class="story-media">PHOTO<br>PLACEHOLDER</span><span class="story-kicker">SILENT DISCO</span><strong>Three channels. One dance floor.</strong><small>Headphones and transmitters, ready to go.</small></article>
+    <article class="floating-story" data-scroll-float="1" style="--tilt:-4deg"><span class="story-media">PHOTO<br>PLACEHOLDER</span><span class="story-kicker">CORPORATE EVENTS</span><strong>Make every word count.</strong><small>Clear voices and confident presentations.</small></article>
+    <article class="floating-story" data-scroll-float="-1" style="--tilt:-3deg"><span class="story-media">PHOTO<br>PLACEHOLDER</span><span class="story-kicker">LIVE EVENTS</span><strong>Room-filling sound.</strong><small>Audio that meets the moment.</small></article>
+    <article class="floating-story" data-scroll-float="1" style="--tilt:4deg"><span class="story-media">PHOTO<br>PLACEHOLDER</span><span class="story-kicker">PHOTO BOOTHS</span><strong>Keep the good part.</strong><small>A photo moment guests take home.</small></article>
+  </div><div class="hero-art"><div class="hero-surface"></div><div class="hero-grid"></div><div class="hero-screen"></div><div class="hero-speaker one"></div><div class="hero-speaker two"></div><div class="hero-cable"></div></div></section>
   <div class="marquee"><div class="marquee-track"><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span><b>•</b><span>Live Streaming</span><b>•</b><span>Outdoor Movies</span><b>•</b><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span></div></div>
   <section class="section"><div class="section-head"><div><span class="eyebrow">WHAT ARE YOU RENTING?</span><h2>Start with the<br>experience.</h2></div><p>Skip the endless gear list. Tell us what you're trying to make happen and the interface can guide you to a setup.</p></div><div class="category-grid"><a href="#rentals?cat=Audio" class="category-card cat-a"><div><span class="eyebrow">01</span><h3>Audio</h3><p>Speakers, microphones, mixers and live-performance systems.</p></div><strong>Explore →</strong></a><a href="#rentals?cat=Video%20%26%20Displays" class="category-card cat-b"><div><span class="eyebrow">02</span><h3>Video</h3><p>TVs, projection, switching and visual presentation packages.</p></div><strong>Explore →</strong></a><a href="#rentals?cat=Experiences" class="category-card cat-c"><div><span class="eyebrow">03</span><h3>Experiences</h3><p>Silent disco, outdoor movies and photo booth moments.</p></div><strong>Explore →</strong></a><a href="#rentals?cat=LED%20Walls" class="category-card cat-d"><div><span class="eyebrow">04</span><h3>LED Walls</h3><p>High-impact visuals for stages, launches, parties and concerts.</p></div><strong>Explore →</strong></a></div></section>
   <section class="section"><div class="section-head"><div><span class="eyebrow">POPULAR NOW</span><h2>Public pricing,<br>where it exists.</h2></div><a class="btn btn-light" href="#rentals">See all rentals</a></div><div class="product-grid">${products
@@ -545,6 +552,7 @@ function render(options = {}) {
   if (hash === "services") view = services();
   if (hash === "quote") view = quote();
   app.innerHTML = view;
+  queueFloatingStoryUpdate();
   bind();
   if (options.preserveScroll) {
     window.requestAnimationFrame(() => {
@@ -724,9 +732,41 @@ function renderSearch(q) {
   );
 }
 
+let floatUpdateQueued = false;
+
+function updateFloatingStories() {
+  floatUpdateQueued = false;
+  const cards = document.querySelectorAll("[data-scroll-float]");
+  if (!cards.length) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const progress = reducedMotion || window.innerWidth < 1160
+    ? 0
+    : Math.min(Math.max(window.scrollY / 360, 0), 1);
+
+  cards.forEach((card) => {
+    const direction = Number(card.dataset.scrollFloat) || 1;
+    const tilt = Number.parseFloat(card.style.getPropertyValue("--tilt")) || 0;
+    const x = direction * progress * 220;
+    const y = -progress * 72;
+    card.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${tilt + direction * progress * 8}deg) scale(${1 - progress * 0.08})`;
+    card.style.opacity = String(1 - progress);
+  });
+}
+
+function queueFloatingStoryUpdate() {
+  if (floatUpdateQueued) return;
+  floatUpdateQueued = true;
+  window.requestAnimationFrame(updateFloatingStories);
+}
+
+window.addEventListener("scroll", queueFloatingStoryUpdate, { passive: true });
+window.addEventListener("resize", queueFloatingStoryUpdate);
+
 window.addEventListener("hashchange", () => {
   if (getHash() !== "builder") state.builderStep = 1;
   render();
 });
 
 render();
+queueFloatingStoryUpdate();
