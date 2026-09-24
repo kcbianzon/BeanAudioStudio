@@ -377,7 +377,7 @@ const state = {
   guests: 120,
   venue: "Indoor",
   date: "",
-  selected: { "medium-audio": 1, "wired-mic": 2 },
+  selected: loadSelection(),
   bundle: null,
   category: "All",
   search: "",
@@ -422,32 +422,95 @@ function filteredProducts() {
       (!q || `${p.name} ${p.category} ${p.desc}`.toLowerCase().includes(q)),
   );
 }
+function loadSelection() {
+  try {
+    const saved = localStorage.getItem("beantown-selected-products");
+    if (saved === null) return { "medium-audio": 1, "wired-mic": 2 };
+    const parsed = JSON.parse(saved);
+    return Object.fromEntries(
+      Object.entries(parsed).filter(([id, quantity]) =>
+        products.some((product) => product.id === id) &&
+        Number.isInteger(quantity) && quantity > 0,
+      ),
+    );
+  } catch {
+    return { "medium-audio": 1, "wired-mic": 2 };
+  }
+}
+function saveSelection() {
+  try { localStorage.setItem("beantown-selected-products", JSON.stringify(state.selected)); }
+  catch { /* Keep the in-memory builder usable when storage is unavailable. */ }
+}
+function syncSetupCount() {
+  const count = Object.values(state.selected).reduce((sum, quantity) => sum + quantity, 0);
+  const badge = document.querySelector("#setupCount");
+  if (badge) badge.textContent = String(count);
+  const link = document.querySelector("#setupLink");
+  link?.setAttribute("aria-label", `My setup, ${count} item${count === 1 ? "" : "s"}`);
+}
 function productImage(p) {
-  if (p.category === "Outdoor Movies") return "outdoor-movie.jpg";
-  if (p.category === "Experiences") return "silent-disco.webp";
-  if (p.category === "Photo Booths") return "photo-booth-360.jpg";
-  if (p.category === "Audio") return "speaker-wall.webp";
-  if (p.category === "Microphones") return "microphone-rentals.jpeg";
-  if (p.category === "Video & Displays") return "69667bc33d884d697701e4c1_Led-Wall.png";
-  if (p.category === "LED Walls") return "led-wall-roses.webp";
-  if (p.category === "Live Streaming") return "live-streaming.jpg";
-  return "concert-audio.webp";
+  const photo = p.category === "Experiences"
+    ? "photo-1505740420928-5e560c06d30e" // clear headphones product shot
+    : p.category === "Microphones"
+      ? "photo-1540255431229-f8c6137e88d3" // mic with warm live-event background
+      : p.category === "Outdoor Movies" || (p.category === "Video & Displays" && !p.id.startsWith("tv-"))
+        ? "photo-1697059361461-b81d0e98c3af" // projector and conference room
+        : p.category === "Video & Displays"
+          ? "photo-1560439514-0fc9d2cd5e1b" // audience and presentation screen
+          : p.category === "LED Walls"
+            ? "photo-1506157786151-b8491531f063" // live event stage
+            : p.category === "Photo Booths"
+              ? "photo-1530103862676-de8c9debad1d" // colorful event celebration
+              : p.category === "Live Streaming"
+                ? "photo-1492619375914-88005aa9e8fb" // camera production equipment
+                : "photo-1506157786151-b8491531f063"; // live audio production
+  return `https://images.unsplash.com/${photo}?auto=format&fit=crop&w=1200&q=85`;
+}
+
+function bundleImage(bundle) {
+  const photo = {
+    wedding: "event-production.jpg",
+    corporate: "projector-screen.jpg",
+    school: "event-stage.jpg",
+    concert: "live-event.jpg",
+    party: "event-production.jpg",
+    movie: "event-display.jpg",
+  }[bundle.id] || "event-stage.jpg";
+  return `assets/beantown/${photo}`;
 }
 
 function productCard(p) {
   const image = productImage(p);
-  return `<article class="product-card reveal"><div class="product-media has-image ${p.tone || ""}" style="--media-image:url('assets/beantown/${image}')"></div><div class="product-meta"><span class="badge">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">${productPriceText(p)}</span><button class="text-btn" data-add="${p.id}">Add +</button></div></div></article>`;
+  const quantity = state.selected[p.id] || 0;
+  return `<article class="product-card reveal"><div class="product-media has-image ${p.tone || ""}"><img class="product-photo" src="${image}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer"></div><div class="product-meta"><span class="badge">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">${productPriceText(p)}</span><button class="text-btn add-product-btn ${quantity ? "is-added" : ""}" data-add="${p.id}" aria-label="${quantity ? `${quantity} added. Add another ${p.name}` : `Add ${p.name} to my setup`}">${quantity ? `Added · ${quantity} +` : "Add to setup +"}</button></div></div></article>`;
+}
+const testimonialSlots = [
+  { focus: "SMOOTH SETUP", prompt: "Add an approved client note about setup and on-site support.", event: "Event type · Boston" },
+  { focus: "RELIABLE GEAR", prompt: "Add an approved client note about the equipment and event.", event: "Event type · New England" },
+  { focus: "EASY DELIVERY", prompt: "Add an approved client note about delivery or communication.", event: "Event type · Boston" },
+];
+function testimonialCard(slot) {
+  return `<article class="testimonial-card"><div class="testimonial-stars" aria-label="Five-star review placeholder">★★★★★</div><span class="testimonial-focus">${slot.focus}</span><p>${slot.prompt}</p><div class="testimonial-person"><span class="testimonial-avatar">BA</span><div><strong>Client name</strong><small>${slot.event}</small></div></div></article>`;
+}
+function testimonialLane(slots, reverse = false) {
+  const cards = slots.map((slot) => testimonialCard(slot)).join("");
+  const copies = slots.map((slot) => testimonialCard(slot)).join("");
+  return `<div class="testimonial-lane ${reverse ? "reverse" : ""}"><div class="testimonial-track"><div class="testimonial-group">${cards}</div><div class="testimonial-group" aria-hidden="true">${copies}</div></div></div>`;
+}
+function testimonialSection() {
+  const reversed = [...testimonialSlots].reverse();
+  return `<section class="section testimonials-section"><div class="section-head"><div><span class="eyebrow">CLIENT STORIES</span><h2>What clients<br>say about the setup.</h2></div><p>Thoughtful support, dependable equipment, and a smoother event from setup to wrap.</p></div><div class="testimonial-marquee" aria-label="Client testimonials">${testimonialLane(testimonialSlots)}${testimonialLane(reversed, true)}</div></section>`;
 }
 function home() {
   return `<div class="page">
   <section class="hero reveal"><div class="hero-copy"><span class="eyebrow orange">BOSTON • NEW ENGLAND • EVENT AV</span><h1>Your event.<br><span style="background:linear-gradient(90deg,var(--ink),var(--accent));-webkit-background-clip:text;color:transparent">Your setup.</span></h1><p>Rent speakers, screens, streaming gear, photo booths and complete event systems — then build your exact experience before you request a quote.</p><div class="hero-cta"><a class="btn btn-dark" href="#builder">Build my event <span>→</span></a><a class="btn btn-light" href="#rentals">Explore rentals</a></div><div class="hero-note"><span class="dot"></span> Fixed-price packages + quote-based production gear</div></div><div class="hero-floats" aria-hidden="true">
-    <article class="floating-story" data-scroll-float="-1" style="--tilt:-5deg"><span class="story-media" style="--story-image:url('assets/beantown/wedding-led-display.webp')"></span><span class="story-kicker">WEDDINGS</span><strong>Every vow, heard.</strong><small>Audio for the aisle and the dance floor.</small></article>
+    <article class="floating-story" data-scroll-float="-1" style="--tilt:-5deg"><span class="story-media" style="--story-image:url('assets/beantown/event-production.jpg')"></span><span class="story-kicker">WEDDINGS</span><strong>Every vow, heard.</strong><small>Audio for the aisle and the dance floor.</small></article>
     <article class="floating-story" data-scroll-float="1" style="--tilt:5deg"><span class="story-media" style="--story-image:url('assets/beantown/outdoor-movie.jpg')"></span><span class="story-kicker">OUTDOOR MOVIES</span><strong>Movie night, made big.</strong><small>Screen and sound for the whole crowd.</small></article>
-    <article class="floating-story" data-scroll-float="-1" style="--tilt:3deg"><span class="story-media" style="--story-image:url('assets/beantown/silent-disco.webp')"></span><span class="story-kicker">SILENT DISCO</span><strong>Three channels. One dance floor.</strong><small>Headphones and transmitters, ready to go.</small></article>
-    <article class="floating-story" data-scroll-float="1" style="--tilt:-4deg"><span class="story-media" style="--story-image:url('assets/beantown/corporate-dance-floor.jpg')"></span><span class="story-kicker">CORPORATE EVENTS</span><strong>Make every word count.</strong><small>Clear voices and confident presentations.</small></article>
-    <article class="floating-story" data-scroll-float="-1" style="--tilt:-3deg"><span class="story-media" style="--story-image:url('assets/beantown/concert-audio.webp')"></span><span class="story-kicker">LIVE EVENTS</span><strong>Room-filling sound.</strong><small>Audio that meets the moment.</small></article>
+    <article class="floating-story" data-scroll-float="-1" style="--tilt:3deg"><span class="story-media" style="--story-image:url('assets/beantown/headphones.jpg')"></span><span class="story-kicker">SILENT DISCO</span><strong>Three channels. One dance floor.</strong><small>Headphones and transmitters, ready to go.</small></article>
+    <article class="floating-story" data-scroll-float="1" style="--tilt:-4deg"><span class="story-media" style="--story-image:url('assets/beantown/projector-screen.jpg')"></span><span class="story-kicker">CORPORATE EVENTS</span><strong>Make every word count.</strong><small>Clear voices and confident presentations.</small></article>
+    <article class="floating-story" data-scroll-float="-1" style="--tilt:-3deg"><span class="story-media" style="--story-image:url('assets/beantown/live-event.jpg')"></span><span class="story-kicker">LIVE EVENTS</span><strong>Room-filling sound.</strong><small>Audio that meets the moment.</small></article>
     <article class="floating-story" data-scroll-float="1" style="--tilt:4deg"><span class="story-media" style="--story-image:url('assets/beantown/photo-booth-360.jpg')"></span><span class="story-kicker">PHOTO BOOTHS</span><strong>Keep the good part.</strong><small>A photo moment guests take home.</small></article>
-  </div><div class="hero-art has-image" style="--media-image:url('assets/beantown/concert-audio.webp')"><div class="hero-surface"></div><div class="hero-grid"></div><div class="hero-screen"></div><div class="hero-speaker one"></div><div class="hero-speaker two"></div><div class="hero-cable"></div></div></section>
+  </div><div class="hero-art has-image" style="--media-image:url('assets/beantown/event-stage.jpg')"><div class="hero-surface"></div><div class="hero-grid"></div><div class="hero-screen"></div><div class="hero-speaker one"></div><div class="hero-speaker two"></div><div class="hero-cable"></div></div></section>
   <div class="marquee"><div class="marquee-track"><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span><b>•</b><span>Live Streaming</span><b>•</b><span>Outdoor Movies</span><b>•</b><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span></div></div>
   <section class="section"><div class="section-head"><div><span class="eyebrow">WHAT ARE YOU RENTING?</span><h2>Start with the<br>experience.</h2></div><p>Skip the endless gear list. Tell us what you're trying to make happen and the interface can guide you to a setup.</p></div><div class="category-grid"><a href="#rentals?cat=Audio" class="category-card cat-a"><div><span class="eyebrow">01</span><h3>Audio</h3><p>Speakers, microphones, mixers and live-performance systems.</p></div><strong>Explore →</strong></a><a href="#rentals?cat=Video%20%26%20Displays" class="category-card cat-b"><div><span class="eyebrow">02</span><h3>Video</h3><p>TVs, projection, switching and visual presentation packages.</p></div><strong>Explore →</strong></a><a href="#rentals?cat=Experiences" class="category-card cat-c"><div><span class="eyebrow">03</span><h3>Experiences</h3><p>Silent disco, outdoor movies and photo booth moments.</p></div><strong>Explore →</strong></a><a href="#rentals?cat=LED%20Walls" class="category-card cat-d"><div><span class="eyebrow">04</span><h3>LED Walls</h3><p>High-impact visuals for stages, launches, parties and concerts.</p></div><strong>Explore →</strong></a></div></section>
   <section class="section"><div class="section-head"><div><span class="eyebrow">POPULAR NOW</span><h2>Public pricing,<br>where it exists.</h2></div><a class="btn btn-light" href="#rentals">See all rentals</a></div><div class="product-grid">${products
@@ -460,7 +523,7 @@ function home() {
     .slice(0, 3)
     .map(
       (b) =>
-        `<article class="bundle-card reveal"><div class="bundle-top ${b.tone}"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items
+        `<article class="bundle-card reveal"><div class="bundle-top ${b.tone} has-bundle-image" style="--bundle-image:url('${bundleImage(b)}')"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items
           .slice(0, 3)
           .map((i) => `<li>${i}</li>`)
           .join(
@@ -469,7 +532,7 @@ function home() {
     )
     .join("")}</div></section>
   <section class="section"><div class="feature-panel dark"><div><span class="eyebrow">PLAN THE SETUP WITH CONFIDENCE</span><h3>Build it<br>before you book it.</h3><p>Choose your event, add the pieces you need, and see fixed-price items in your estimate. Custom production stays quote-based.</p></div><div class="stat-row"><div class="stat"><strong>24/7</strong><span>CONFIGURE ANYTIME</span></div><div class="stat"><strong>01</strong><span>EVENT BUILDER</span></div><div class="stat"><strong>∞</strong><span>COMBINATIONS</span></div></div></div></section>
-  <section class="section testimonials-section"><div class="section-head"><div><span class="eyebrow">CLIENT STORIES</span><h2>What clients<br>say about the setup.</h2></div><p>Beantown’s site doesn’t publish customer review quotes, so these are clearly marked slots for approved feedback.</p></div><div class="testimonial-track" aria-label="Client testimonial placeholders"><article class="testimonial-card"><span class="testimonial-label">CLIENT STORY · SETUP</span><p>Add an approved quote about a smooth, well-supported setup.</p><div class="testimonial-person"><span class="testimonial-avatar">BA</span><div><strong>Client name</strong><small>Event type · Boston</small></div></div></article><article class="testimonial-card"><span class="testimonial-label">CLIENT STORY · EQUIPMENT</span><p>Add an approved quote about the equipment and event experience.</p><div class="testimonial-person"><span class="testimonial-avatar">BA</span><div><strong>Client name</strong><small>Event type · New England</small></div></div></article><article class="testimonial-card"><span class="testimonial-label">CLIENT STORY · SERVICE</span><p>Add an approved quote about delivery, communication, or support.</p><div class="testimonial-person"><span class="testimonial-avatar">BA</span><div><strong>Client name</strong><small>Event type · Boston</small></div></div></article></div></section>
+  ${testimonialSection()}
   <section class="section"><div class="section-head"><div><span class="eyebrow">HOW IT WORKS</span><h2>From “what do I need?”<br>to “send me the quote.”</h2></div></div><div class="service-grid"><div class="service-card"><div class="service-icon">01</div><h3>Choose the occasion</h3><p>Wedding, corporate, school, concert, party or outdoor movie — start from context, not equipment jargon.</p></div><div class="service-card"><div class="service-icon">02</div><h3>Customize the setup</h3><p>Add quantities, remove extras, compare fixed-price packages and flag quote-only equipment.</p></div><div class="service-card"><div class="service-icon">03</div><h3>Request the quote</h3><p>Submit the event date, venue, guest count and your complete equipment configuration in one request.</p></div></div></section>
  </div>`;
 }
@@ -492,7 +555,7 @@ function rentals() {
 
 function bundlesPage() {
   if (state.bundle) return bundleDetail(state.bundle);
-  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">EVENT BUNDLES</span><h1>Start with<br>the occasion.</h1></div><p>Choose a fixed package built around a familiar event format. Every bundle is a complete starting point with clear inclusions and no hidden customization step.</p></div><section class="bundle-customize"><div><span class="eyebrow">NEED SOMETHING MORE SPECIFIC?</span><h2>Customize your experience.</h2><p>Build an event from the ground up with recommendations for your occasion and access to the full equipment catalog.</p></div><a class="btn btn-dark" href="#builder">Build my setup →</a></section><div class="bundle-grid">${bundles.map((b) => `<article class="bundle-card reveal"><div class="bundle-top ${b.tone}"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items.map((i) => `<li>${i}</li>`).join("")}</ul><div class="bundle-foot"><span class="bundle-price">${money(b.price)}</span><button class="btn btn-dark btn-small" data-bundle="${b.id}">View bundle →</button></div></div></article>`).join("")}</div></div>`;
+  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">EVENT BUNDLES</span><h1>Start with<br>the occasion.</h1></div><p>Choose a fixed package built around a familiar event format. Every bundle is a complete starting point with clear inclusions and no hidden customization step.</p></div><section class="bundle-customize"><div><span class="eyebrow">NEED SOMETHING MORE SPECIFIC?</span><h2>Customize your experience.</h2><p>Build an event from the ground up with recommendations for your occasion and access to the full equipment catalog.</p></div><a class="btn btn-dark" href="#builder">Build my setup →</a></section><div class="bundle-grid">${bundles.map((b) => `<article class="bundle-card reveal"><div class="bundle-top ${b.tone} has-bundle-image" style="--bundle-image:url('${bundleImage(b)}')"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items.map((i) => `<li>${i}</li>`).join("")}</ul><div class="bundle-foot"><span class="bundle-price">${money(b.price)}</span><button class="btn btn-dark btn-small" data-bundle="${b.id}">View bundle →</button></div></div></article>`).join("")}</div></div>`;
 }
 
 function bundleDetail(id) {
@@ -549,8 +612,17 @@ function services() {
  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">SERVICES</span><h1>More than<br>equipment.</h1></div><p>Professional audio, lighting and video rentals, backed by dependable delivery, setup and support across Boston and New England.</p></div><div class="service-grid"><div class="service-card"><div class="service-icon">AV</div><h3>Audio production</h3><p>From small gatherings to large-room PA systems, create the right scale for the audience and venue.</p></div><div class="service-card"><div class="service-icon">VX</div><h3>Video + LED</h3><p>Projection, TVs, LED walls and signal routing for presentations, stages, launches and live events.</p></div><div class="service-card"><div class="service-icon">4K</div><h3>Live streaming</h3><p>Single-camera and multi-angle event production with capture and streaming support.</p></div><div class="service-card"><div class="service-icon">SET</div><h3>Delivery + setup</h3><p>Delivery, setup, pickup, and clear walkthroughs to help your event run smoothly.</p></div><div class="service-card"><div class="service-icon">FUN</div><h3>Event experiences</h3><p>Silent disco, outdoor cinema and photo booths turn a basic rental into something memorable.</p></div><div class="service-card"><div class="service-icon">OPS</div><h3>On-site support</h3><p>Get support from a team that knows the gear and understands event timelines.</p></div></div></div>`;
 }
 
+function quoteSelection() {
+  const items = Object.entries(state.selected)
+    .map(([id, quantity]) => ({ product: products.find((item) => item.id === id), quantity }))
+    .filter((item) => item.product);
+  const estimated = items.reduce((sum, { product, quantity }) => sum + (product.price || 0) * quantity, 0);
+  const quoteOnly = items.some(({ product }) => product.priceType === "quote");
+  return `<div class="quote-selection"><span class="eyebrow">YOUR SETUP · ${items.reduce((sum, item) => sum + item.quantity, 0)} ITEMS</span>${items.length ? `<ul>${items.map(({ product, quantity }) => `<li><span>${quantity} × ${product.name}</span><strong>${product.price ? money(product.price * quantity) : "Quote"}</strong></li>`).join("")}</ul>` : `<p>No rentals selected yet. Go back to the catalog to build your setup.</p>`}<div class="quote-selection-total"><span>Known price estimate${quoteOnly ? " · quote-only items excluded" : ""}</span><strong>${money(estimated)}</strong></div></div>`;
+}
+
 function quote() {
-  return `<div class="page"><section class="quote-page"><div class="quote-copy"><span class="eyebrow orange">REQUEST A QUOTE</span><h1>Let’s build<br>the right setup.</h1><p>Send the details below and the production team can confirm availability, final pricing and any setup or delivery requirements.</p><div class="hero-note"><span class="dot"></span> Your current builder selections can be attached automatically in the production version.</div></div><div class="quote-card" id="quoteCard"><div class="quote-form"><span class="eyebrow">YOUR EVENT</span><form id="quoteForm"><div class="form-grid"><div class="field"><label>Full name</label><input class="input" required placeholder="Alex Morgan"></div><div class="field"><label>Email</label><input class="input" type="email" required placeholder="alex@example.com"></div><div class="field"><label>Phone</label><input class="input" placeholder="617 555 0198"></div><div class="field"><label>Event type</label><select class="select"><option>Wedding</option><option>Corporate Event</option><option>School Event</option><option>Concert</option><option>Private Party</option><option>Outdoor Movie</option></select></div><div class="field"><label>Event date</label><input class="input" type="date"></div><div class="field"><label>Estimated guests</label><input class="input" type="number" min="1" placeholder="150"></div><div class="field full"><label>Venue / location</label><input class="input" placeholder="Venue name or address"></div><div class="field full"><label>What do you need?</label><textarea class="textarea" placeholder="Tell us about the event, room, gear, production support, timing, and anything unusual."></textarea></div></div><button class="btn btn-dark" style="width:100%;margin-top:18px">Send quote request →</button></form></div><div class="quote-success"><div class="success-mark">✓</div><span class="eyebrow">REQUEST RECEIVED</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:10px 0">Your brief is in.</h2><p style="color:var(--muted)">This mockup would send the configured event to the CRM / Firebase backend.</p><a href="#home" class="btn btn-dark">Back to home</a></div></div></section></div>`;
+  return `<div class="page"><section class="quote-page"><div class="quote-copy"><span class="eyebrow orange">REQUEST A QUOTE</span><h1>Let’s build<br>the right setup.</h1><p>Send the details below and the production team can confirm availability, final pricing and any setup or delivery requirements.</p>${quoteSelection()}</div><div class="quote-card" id="quoteCard"><div class="quote-form"><span class="eyebrow">YOUR EVENT</span><form id="quoteForm"><div class="form-grid"><div class="field"><label>Full name</label><input class="input" required placeholder="Alex Morgan"></div><div class="field"><label>Email</label><input class="input" type="email" required placeholder="alex@example.com"></div><div class="field"><label>Phone</label><input class="input" placeholder="617 555 0198"></div><div class="field"><label>Event type</label><select class="select"><option>Wedding</option><option>Corporate Event</option><option>School Event</option><option>Concert</option><option>Private Party</option><option>Outdoor Movie</option></select></div><div class="field"><label>Event date</label><input class="input" type="date"></div><div class="field"><label>Estimated guests</label><input class="input" type="number" min="1" placeholder="150"></div><div class="field full"><label>Venue / location</label><input class="input" placeholder="Venue name or address"></div><div class="field full"><label>What do you need?</label><textarea class="textarea" placeholder="Tell us about the event, room, gear, production support, timing, and anything unusual."></textarea></div></div><button class="btn btn-dark" style="width:100%;margin-top:18px">Send quote request →</button></form></div><div class="quote-success"><div class="success-mark">✓</div><span class="eyebrow">REQUEST RECEIVED</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:10px 0">Your brief is in.</h2><p style="color:var(--muted)">This mockup captures the request locally; connect the production form to the booking backend to submit it.</p><a href="#home" class="btn btn-dark">Back to home</a></div></div></section></div>`;
 }
 
 function render(options = {}) {
@@ -567,7 +639,8 @@ function render(options = {}) {
   if (hash === "services") view = services();
   if (hash === "quote") view = quote();
   app.innerHTML = view;
-  document.querySelector(".topbar")?.classList.toggle("is-scrolled", window.scrollY > 72);
+  syncSetupCount();
+  syncMorphingNavigation();
   queueFloatingStoryUpdate();
   syncNavigation();
   observePageMotion();
@@ -636,8 +709,10 @@ function showToast(msg) {
 function addProduct(id, delta = 1) {
   state.selected[id] = (state.selected[id] || 0) + delta;
   if (state.selected[id] <= 0) delete state.selected[id];
-  render({ preserveScroll: getHash() === "builder" });
-  showToast(delta > 0 ? "Added to your setup" : "Removed from your setup");
+  saveSelection();
+  render({ preserveScroll: true });
+  const product = products.find((item) => item.id === id);
+  showToast(delta > 0 ? `${product?.name || "Rental"} added to your setup` : `${product?.name || "Rental"} removed`);
 }
 
 function bind() {
@@ -645,8 +720,7 @@ function bind() {
     b.addEventListener("click", () => {
       state.category = b.dataset.cat;
       state.search = "";
-      document.querySelector("#rentalSearch")?.focus();
-      render();
+      render({ preserveScroll: true });
     }),
   );
   document.querySelector("#rentalSearch")?.addEventListener("input", (e) => {
@@ -672,10 +746,11 @@ function bind() {
     .forEach((b) =>
       b.addEventListener("click", () => addProduct(b.dataset.minus, -1)),
     );
-  document.querySelectorAll("[data-remove]").forEach((b) =>
+    document.querySelectorAll("[data-remove]").forEach((b) =>
     b.addEventListener("click", () => {
       delete state.selected[b.dataset.remove];
-      render({ preserveScroll: getHash() === "builder" });
+      saveSelection();
+      render({ preserveScroll: true });
       showToast("Removed from your setup");
     }),
   );
@@ -687,6 +762,7 @@ function bind() {
       recommendedIds.forEach((id) => {
         state.selected[id] = state.selected[id] || 1;
       });
+      saveSelection();
       render({ preserveScroll: getHash() === "builder" });
     }),
   );
@@ -704,6 +780,7 @@ function bind() {
       }
       if (match) {
         state.selected = { ...match.included };
+        saveSelection();
         state.builderStep = 1;
         location.hash = `bundles?bundle=${match.id}`;
       }
