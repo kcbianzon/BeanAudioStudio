@@ -4,7 +4,7 @@ Images in this folder were collected from the public Beantown Audio Rentals webs
 
 - https://www.beantownaudiorentals.com/
 - Image files are from the site's observed `cdn.prod.website-files.com` assets.
-- The current homepage exposes no standalone logo image. Its brand is presented as a text wordmark; the mockup pairs that wordmark with a custom Beantown AV emblem because an original logo image is not publicly available.
+- The live homepage exposes its brand as a text wordmark, with no standalone downloadable logo. The supplied Beantown logo image from the user is cropped to its visible mark and converted to transparent black and white PNG variants for the header and dark footer.
 
 The product catalog continues to use the existing mockup product descriptions and prices. These photos are used as visual product/event imagery.
 
