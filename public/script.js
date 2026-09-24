@@ -394,6 +394,7 @@ const eventRecommendations = {
 
 const app = document.getElementById("app");
 const toast = document.getElementById("toast");
+let pageRevealObserver;
 
 function money(value) {
   return new Intl.NumberFormat("en-US", {
@@ -553,6 +554,8 @@ function render(options = {}) {
   if (hash === "quote") view = quote();
   app.innerHTML = view;
   queueFloatingStoryUpdate();
+  syncNavigation();
+  observePageMotion();
   bind();
   if (options.preserveScroll) {
     window.requestAnimationFrame(() => {
@@ -565,6 +568,42 @@ function render(options = {}) {
   } else {
     window.scrollTo(0, 0);
   }
+}
+
+function syncNavigation() {
+  const currentHash = getHash();
+  document.querySelectorAll(".desktop-nav a, #mobileMenu a").forEach((link) => {
+    const targetHash = link.getAttribute("href")?.split("?")[0];
+    const isCurrent = targetHash === `#${currentHash}`;
+    link.classList.toggle("active", isCurrent);
+    if (isCurrent) link.setAttribute("aria-current", "page");
+    else link.removeAttribute("aria-current");
+  });
+}
+
+function observePageMotion() {
+  const motionTargets = document.querySelectorAll(
+    "#app .reveal, #app .page-hero, #app .rentals-toolbar, #app .bundle-customize, #app .builder-wrap, #app .quote-page, #app .bundle-detail-head, #app .bundle-detail-wrap, #app .page > .section",
+  );
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  pageRevealObserver?.disconnect();
+  if (reducedMotion || !("IntersectionObserver" in window)) {
+    motionTargets.forEach((target) => target.classList.add("is-visible"));
+    return;
+  }
+
+  pageRevealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.08, rootMargin: "0px 0px -36px 0px" },
+  );
+  motionTargets.forEach((target) => pageRevealObserver.observe(target));
 }
 
 function showToast(msg) {
@@ -593,6 +632,7 @@ function bind() {
     state.search = e.target.value;
     const scroll = window.scrollY;
     app.innerHTML = rentals();
+    observePageMotion();
     bind();
     window.scrollTo(0, scroll);
   });
@@ -680,14 +720,27 @@ document
   ?.addEventListener(
     "click",
     () =>
-      (mobileMenu.style.display =
-        mobileMenu.style.display === "flex" ? "none" : "flex"),
+      {
+        const isOpen = mobileMenu.style.display !== "flex";
+        mobileMenu.style.display = isOpen ? "flex" : "none";
+        document.getElementById("menuBtn")?.setAttribute("aria-expanded", String(isOpen));
+      },
   );
 mobileMenu
   ?.querySelectorAll("a")
   .forEach((a) =>
-    a.addEventListener("click", () => (mobileMenu.style.display = "none")),
+    a.addEventListener("click", () => {
+      mobileMenu.style.display = "none";
+      document.getElementById("menuBtn")?.setAttribute("aria-expanded", "false");
+    }),
   );
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  if (searchOverlay) searchOverlay.hidden = true;
+  if (mobileMenu) mobileMenu.style.display = "none";
+  document.getElementById("menuBtn")?.setAttribute("aria-expanded", "false");
+});
 
 const searchOverlay = document.getElementById("searchOverlay");
 const searchInput = document.getElementById("searchInput");
