@@ -524,7 +524,7 @@ function home() {
   <section class="experience-journey" data-experience-journey>
     <div class="experience-stage">
       <div class="section-head experience-heading"><div><span class="eyebrow">WHAT ARE YOU RENTING?</span><h2>Start with the<br>experience.</h2></div><p>Scroll to explore the possibilities. Follow the line from sound to the full visual experience.</p></div>
-      <svg class="journey-route" viewBox="0 0 1200 560" preserveAspectRatio="none" aria-hidden="true"><path class="journey-route-base" d="M180 220 C300 220 340 410 468 410 S630 220 756 220 S920 410 1044 410"/><path class="journey-route-progress" d="M180 220 C300 220 340 410 468 410 S630 220 756 220 S920 410 1044 410" pathLength="1"/></svg>
+      <svg class="journey-route" viewBox="0 0 1200 4400" preserveAspectRatio="none" aria-hidden="true"><path class="journey-route-base" d="M470 580 C850 680 920 1370 730 1580 C560 1780 370 2370 470 2580 C590 2810 890 3340 730 3580 C640 3790 510 4090 600 4310"/><path class="journey-route-progress" d="M470 580 C850 680 920 1370 730 1580 C560 1780 370 2370 470 2580 C590 2810 890 3340 730 3580 C640 3790 510 4090 600 4310" pathLength="1"/></svg>
       <div class="journey-cards">
         <a href="#rentals?cat=Audio" class="category-card journey-card cat-a" data-journey-step="0" style="--journey-photo:url('assets/beantown/speaker-rental.jpg');--sticker-photo:url('assets/beantown/microphone.jpg')"><span class="journey-photo" aria-hidden="true"></span><span class="journey-photo-sticker" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">01 / SOUND</span><h3>Audio</h3><p>Speakers, microphones, mixers and live-performance systems.</p></div><strong>Explore →</strong></a>
         <a href="#rentals?cat=Video%20%26%20Displays" class="category-card journey-card cat-b" data-journey-step="1" style="--journey-photo:url('assets/beantown/projector-screen.jpg');--sticker-photo:url('assets/beantown/event-display.jpg')"><span class="journey-photo" aria-hidden="true"></span><span class="journey-photo-sticker" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">02 / PICTURE</span><h3>Video</h3><p>TVs, projection, switching and visual presentation packages.</p></div><strong>Explore →</strong></a>
@@ -932,20 +932,22 @@ function updateFloatingStories() {
 function updateExperienceJourney() {
   const section = document.querySelector("[data-experience-journey]");
   if (!section?.classList.contains("is-enhanced")) return;
-  const stage = section.querySelector(".experience-stage");
-  const travel = Math.max(1, section.offsetHeight - stage.offsetHeight);
-  const progress = Math.min(1, Math.max(0, -section.getBoundingClientRect().top / travel));
+  const sectionRect = section.getBoundingClientRect();
+  const progress = Math.min(1, Math.max(0, (window.innerHeight - sectionRect.top) / (section.offsetHeight + window.innerHeight)));
   section.style.setProperty("--journey-progress", progress.toFixed(4));
-  const active = Math.min(3, Math.floor(progress * 4));
+  let active = -1;
   section.dataset.activeStep = String(active);
   const label = section.querySelector("[data-journey-label]");
-  if (label) label.textContent = String(active + 1).padStart(2, "0");
   section.querySelectorAll("[data-journey-step]").forEach((card) => {
     const index = Number(card.dataset.journeyStep);
-    const stamped = index === 0 || progress >= (index + 0.24) / 4;
+    const rect = card.getBoundingClientRect();
+    const stamped = rect.top < window.innerHeight * 0.84;
+    if (rect.top < window.innerHeight * 0.62) active = Math.max(active, index);
     card.classList.toggle("is-stamped", stamped);
-    card.classList.toggle("is-current", index === active);
+    card.classList.toggle("is-current", stamped && index === active);
   });
+  section.dataset.activeStep = String(Math.max(active, 0));
+  if (label) label.textContent = String(Math.max(active, 0) + 1).padStart(2, "0");
 }
 
 function initExperienceJourney() {

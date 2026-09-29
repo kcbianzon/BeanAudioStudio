@@ -524,12 +524,16 @@ function home() {
   <section class="experience-journey" data-experience-journey>
     <div class="experience-stage">
       <div class="section-head experience-heading"><div><span class="eyebrow">WHAT ARE YOU RENTING?</span><h2>Start with the<br>experience.</h2></div><p>Scroll to explore the possibilities. Follow the line from sound to the full visual experience.</p></div>
-      <svg class="journey-route" viewBox="0 0 1200 560" preserveAspectRatio="none" aria-hidden="true"><path class="journey-route-base" d="M180 220 C300 220 340 410 468 410 S630 220 756 220 S920 410 1044 410"/><path class="journey-route-progress" d="M180 220 C300 220 340 410 468 410 S630 220 756 220 S920 410 1044 410" pathLength="1"/></svg>
+      <svg class="journey-route" viewBox="0 0 1200 4600" preserveAspectRatio="none" aria-hidden="true"><path class="journey-route-base" d="M470 580 C850 680 920 1370 730 1580 C560 1780 370 2370 470 2580 C590 2810 890 3340 730 3580 C640 3790 510 4090 600 4310"/><path class="journey-route-progress" d="M470 580 C850 680 920 1370 730 1580 C560 1780 370 2370 470 2580 C590 2810 890 3340 730 3580 C640 3790 510 4090 600 4310" pathLength="1"/></svg>
       <div class="journey-cards">
         <a href="#rentals?cat=Audio" class="category-card journey-card cat-a" data-journey-step="0" style="--journey-photo:url('assets/beantown/speaker-rental.jpg');--sticker-photo:url('assets/beantown/microphone.jpg')"><span class="journey-photo" aria-hidden="true"></span><span class="journey-photo-sticker" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">01 / SOUND</span><h3>Audio</h3><p>Speakers, microphones, mixers and live-performance systems.</p></div><strong>Explore →</strong></a>
         <a href="#rentals?cat=Video%20%26%20Displays" class="category-card journey-card cat-b" data-journey-step="1" style="--journey-photo:url('assets/beantown/projector-screen.jpg');--sticker-photo:url('assets/beantown/event-display.jpg')"><span class="journey-photo" aria-hidden="true"></span><span class="journey-photo-sticker" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">02 / PICTURE</span><h3>Video</h3><p>TVs, projection, switching and visual presentation packages.</p></div><strong>Explore →</strong></a>
         <a href="#rentals?cat=Experiences" class="category-card journey-card cat-c" data-journey-step="2" style="--journey-photo:url('assets/beantown/photo-booth-360.jpg');--sticker-photo:url('assets/beantown/silent-disco.webp')"><span class="journey-photo" aria-hidden="true"></span><span class="journey-photo-sticker" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">03 / MOMENTS</span><h3>Experiences</h3><p>Silent disco, outdoor movies and photo booth moments.</p></div><strong>Explore →</strong></a>
         <a href="#rentals?cat=LED%20Walls" class="category-card journey-card cat-d" data-journey-step="3" style="--journey-photo:url('assets/beantown/led-wall-roses.webp');--sticker-photo:url('assets/beantown/event-stage.jpg')"><span class="journey-photo" aria-hidden="true"></span><span class="journey-photo-sticker" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">04 / LED WALLS</span><h3>LED Walls</h3><p>High-impact visuals for stages, launches, parties and concerts.</p></div><strong>Explore →</strong></a>
+        <div class="journey-products products-audio" data-journey-step="0" aria-label="Audio equipment examples"><figure class="journey-product-stamp"><img src="assets/beantown/concert-audio.webp" alt="" loading="lazy"><figcaption><strong>PA speakers</strong><span>Full, room-filling sound</span></figcaption></figure><figure class="journey-product-stamp"><img src="assets/beantown/microphone-rentals.jpeg" alt="" loading="lazy"><figcaption><strong>Microphones</strong><span>Ready for every voice</span></figcaption></figure></div>
+        <div class="journey-products products-video" data-journey-step="1" aria-label="Video equipment examples"><figure class="journey-product-stamp"><img src="assets/beantown/projector-screen.jpg" alt="" loading="lazy"><figcaption><strong>Projection</strong><span>Make the picture bigger</span></figcaption></figure><figure class="journey-product-stamp"><img src="assets/beantown/event-display.jpg" alt="" loading="lazy"><figcaption><strong>Event displays</strong><span>Clear, vivid presentation</span></figcaption></figure></div>
+        <div class="journey-products products-experiences" data-journey-step="2" aria-label="Experience equipment examples"><figure class="journey-product-stamp"><img src="assets/beantown/headphones.jpg" alt="" loading="lazy"><figcaption><strong>Silent disco</strong><span>Three channels, one dance floor</span></figcaption></figure><figure class="journey-product-stamp"><img src="assets/beantown/outdoor-movie.jpg" alt="" loading="lazy"><figcaption><strong>Outdoor cinema</strong><span>Big-screen nights outside</span></figcaption></figure></div>
+        <div class="journey-products products-led" data-journey-step="3" aria-label="LED wall examples"><figure class="journey-product-stamp"><img src="assets/beantown/69667bc33d884d697701e4c1_Led-Wall.png" alt="" loading="lazy"><figcaption><strong>LED walls</strong><span>Bright, high-impact visuals</span></figcaption></figure><figure class="journey-product-stamp"><img src="assets/beantown/69667bc5bf1882f6695ff917_V-SHAPE-LED-WALL-p-800.jpg" alt="" loading="lazy"><figcaption><strong>Modular screens</strong><span>Shape the stage your way</span></figcaption></figure></div>
       </div>
       <span class="journey-endpoint" aria-hidden="true">THE FULL SETUP</span>
       <div class="journey-progress-label" aria-live="polite"><span data-journey-label>01</span><i></i><span>04</span></div>
@@ -932,20 +936,26 @@ function updateFloatingStories() {
 function updateExperienceJourney() {
   const section = document.querySelector("[data-experience-journey]");
   if (!section?.classList.contains("is-enhanced")) return;
-  const stage = section.querySelector(".experience-stage");
-  const travel = Math.max(1, section.offsetHeight - stage.offsetHeight);
-  const progress = Math.min(1, Math.max(0, -section.getBoundingClientRect().top / travel));
+  const sectionRect = section.getBoundingClientRect();
+  const travel = Math.max(1, section.offsetHeight);
+  const routeStart = travel * (400 / 4600);
+  const routeEnd = travel * (4310 / 4600);
+  const scrolledThroughSection = window.innerHeight - sectionRect.top;
+  const progress = Math.min(1, Math.max(0, (scrolledThroughSection - routeStart) / (routeEnd - routeStart)));
   section.style.setProperty("--journey-progress", progress.toFixed(4));
-  const active = Math.min(3, Math.floor(progress * 4));
+  let active = -1;
   section.dataset.activeStep = String(active);
   const label = section.querySelector("[data-journey-label]");
-  if (label) label.textContent = String(active + 1).padStart(2, "0");
   section.querySelectorAll("[data-journey-step]").forEach((card) => {
     const index = Number(card.dataset.journeyStep);
-    const stamped = index === 0 || progress >= (index + 0.24) / 4;
+    const rect = card.getBoundingClientRect();
+    const stamped = rect.top < window.innerHeight * 0.84;
+    if (rect.top < window.innerHeight * 0.62) active = Math.max(active, index);
     card.classList.toggle("is-stamped", stamped);
-    card.classList.toggle("is-current", index === active);
+    card.classList.toggle("is-current", stamped && index === active);
   });
+  section.dataset.activeStep = String(Math.max(active, 0));
+  if (label) label.textContent = String(Math.max(active, 0) + 1).padStart(2, "0");
 }
 
 function initExperienceJourney() {
