@@ -521,7 +521,20 @@ function home() {
     <article class="floating-story" data-scroll-float="1" style="--tilt:4deg"><span class="story-media" style="--story-image:url('assets/beantown/photo-booth-360.jpg')"></span><span class="story-kicker">PHOTO BOOTHS</span><strong>Keep the good part.</strong><small>A photo moment guests take home.</small></article>
   </div><div class="hero-art has-image" style="--media-image:url('assets/beantown/event-stage.jpg')"><div class="hero-surface"></div><div class="hero-grid"></div><div class="hero-screen"></div><div class="hero-speaker one"></div><div class="hero-speaker two"></div><div class="hero-cable"></div></div></section>
   <div class="marquee"><div class="marquee-track"><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span><b>•</b><span>Live Streaming</span><b>•</b><span>Outdoor Movies</span><b>•</b><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span></div></div>
-  <section class="section"><div class="section-head"><div><span class="eyebrow">WHAT ARE YOU RENTING?</span><h2>Start with the<br>experience.</h2></div><p>Skip the endless gear list. Tell us what you're trying to make happen and the interface can guide you to a setup.</p></div><div class="category-grid"><a href="#rentals?cat=Audio" class="category-card cat-a"><div><span class="eyebrow">01</span><h3>Audio</h3><p>Speakers, microphones, mixers and live-performance systems.</p></div><strong>Explore →</strong></a><a href="#rentals?cat=Video%20%26%20Displays" class="category-card cat-b"><div><span class="eyebrow">02</span><h3>Video</h3><p>TVs, projection, switching and visual presentation packages.</p></div><strong>Explore →</strong></a><a href="#rentals?cat=Experiences" class="category-card cat-c"><div><span class="eyebrow">03</span><h3>Experiences</h3><p>Silent disco, outdoor movies and photo booth moments.</p></div><strong>Explore →</strong></a><a href="#rentals?cat=LED%20Walls" class="category-card cat-d"><div><span class="eyebrow">04</span><h3>LED Walls</h3><p>High-impact visuals for stages, launches, parties and concerts.</p></div><strong>Explore →</strong></a></div></section>
+  <section class="experience-journey" data-experience-journey>
+    <div class="experience-stage">
+      <div class="section-head experience-heading"><div><span class="eyebrow">WHAT ARE YOU RENTING?</span><h2>Start with the<br>experience.</h2></div><p>Scroll to explore the possibilities. Follow the line from sound to the full visual experience.</p></div>
+      <svg class="journey-route" viewBox="0 0 1200 560" preserveAspectRatio="none" aria-hidden="true"><path class="journey-route-base" d="M110 165 C260 165 250 380 420 380 S565 165 700 165 S860 380 1015 380 S1080 165 1150 165"/><path class="journey-route-progress" d="M110 165 C260 165 250 380 420 380 S565 165 700 165 S860 380 1015 380 S1080 165 1150 165" pathLength="1"/></svg>
+      <div class="journey-cards">
+        <a href="#rentals?cat=Audio" class="category-card journey-card cat-a" data-journey-step="0" style="--journey-photo:url('assets/beantown/speaker-rental.jpg')"><span class="journey-photo" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">01 / SOUND</span><h3>Audio</h3><p>Speakers, microphones, mixers and live-performance systems.</p></div><strong>Explore →</strong></a>
+        <a href="#rentals?cat=Video%20%26%20Displays" class="category-card journey-card cat-b" data-journey-step="1" style="--journey-photo:url('assets/beantown/projector-screen.jpg')"><span class="journey-photo" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">02 / PICTURE</span><h3>Video</h3><p>TVs, projection, switching and visual presentation packages.</p></div><strong>Explore →</strong></a>
+        <a href="#rentals?cat=Experiences" class="category-card journey-card cat-c" data-journey-step="2" style="--journey-photo:url('assets/beantown/photo-booth-360.jpg')"><span class="journey-photo" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">03 / MOMENTS</span><h3>Experiences</h3><p>Silent disco, outdoor movies and photo booth moments.</p></div><strong>Explore →</strong></a>
+        <a href="#rentals?cat=LED%20Walls" class="category-card journey-card cat-d" data-journey-step="3" style="--journey-photo:url('assets/beantown/led-wall-roses.webp')"><span class="journey-photo" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">04 / BIG IMPACT</span><h3>LED Walls</h3><p>High-impact visuals for stages, launches, parties and concerts.</p></div><strong>Explore →</strong></a>
+      </div>
+      <span class="journey-endpoint" aria-hidden="true">THE FULL SETUP</span>
+      <div class="journey-progress-label" aria-live="polite"><span data-journey-label>01</span><i></i><span>04</span></div>
+    </div>
+  </section>
   <section class="section"><div class="section-head"><div><span class="eyebrow">POPULAR NOW</span><h2>Public pricing,<br>where it exists.</h2></div><a class="btn btn-light" href="#rentals">See all rentals</a></div><div class="product-grid">${products
     .filter((p) =>
       ["movie-12", "movie-16", "silent-100", "photo-360"].includes(p.id),
@@ -653,6 +666,7 @@ function render(options = {}) {
   queueFloatingStoryUpdate();
   syncNavigation();
   observePageMotion();
+  initExperienceJourney();
   bind();
   if (options.preserveScroll) {
     window.requestAnimationFrame(() => {
@@ -896,6 +910,7 @@ let floatUpdateQueued = false;
 
 function updateFloatingStories() {
   floatUpdateQueued = false;
+  updateExperienceJourney();
   const cards = document.querySelectorAll("[data-scroll-float]");
   if (!cards.length) return;
 
@@ -914,6 +929,33 @@ function updateFloatingStories() {
   });
 }
 
+function updateExperienceJourney() {
+  const section = document.querySelector("[data-experience-journey]");
+  if (!section?.classList.contains("is-enhanced")) return;
+  const stage = section.querySelector(".experience-stage");
+  const travel = Math.max(1, section.offsetHeight - stage.offsetHeight);
+  const progress = Math.min(1, Math.max(0, -section.getBoundingClientRect().top / travel));
+  section.style.setProperty("--journey-progress", progress.toFixed(4));
+  const active = Math.min(3, Math.floor(progress * 4));
+  section.dataset.activeStep = String(active);
+  const label = section.querySelector("[data-journey-label]");
+  if (label) label.textContent = String(active + 1).padStart(2, "0");
+  section.querySelectorAll("[data-journey-step]").forEach((card) => {
+    const index = Number(card.dataset.journeyStep);
+    const stamped = index === 0 || progress >= (index + 0.24) / 4;
+    card.classList.toggle("is-stamped", stamped);
+    card.classList.toggle("is-current", index === active);
+  });
+}
+
+function initExperienceJourney() {
+  const section = document.querySelector("[data-experience-journey]");
+  if (!section) return;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  section.classList.toggle("is-enhanced", !reducedMotion && window.innerWidth > 1040);
+  updateExperienceJourney();
+}
+
 function queueFloatingStoryUpdate() {
   syncMorphingNavigation();
   if (floatUpdateQueued) return;
@@ -922,7 +964,10 @@ function queueFloatingStoryUpdate() {
 }
 
 window.addEventListener("scroll", queueFloatingStoryUpdate, { passive: true });
-window.addEventListener("resize", queueFloatingStoryUpdate);
+window.addEventListener("resize", () => {
+  initExperienceJourney();
+  queueFloatingStoryUpdate();
+});
 
 function typeHeroHeadline() {
   const headline = document.querySelector("#heroHeadline");
@@ -987,13 +1032,26 @@ function runOpeningSequence() {
 
 document.addEventListener("pointermove", (event) => {
   if (window.matchMedia("(prefers-reduced-motion: reduce), (hover: none)").matches) return;
-  const button = event.target instanceof Element ? event.target.closest(".btn") : null;
-  if (!button) return;
-  const rect = button.getBoundingClientRect();
-  const x = (event.clientX - rect.left - rect.width / 2) / rect.width;
-  const y = (event.clientY - rect.top - rect.height / 2) / rect.height;
-  button.style.setProperty("--button-shift-x", `${(x * 7).toFixed(1)}px`);
-  button.style.setProperty("--button-shift-y", `${(y * 5).toFixed(1)}px`);
+  if (!(event.target instanceof Element)) return;
+  const button = event.target.closest(".btn");
+  if (button) {
+    const rect = button.getBoundingClientRect();
+    const x = (event.clientX - rect.left - rect.width / 2) / rect.width;
+    const y = (event.clientY - rect.top - rect.height / 2) / rect.height;
+    button.style.setProperty("--button-shift-x", `${(x * 7).toFixed(1)}px`);
+    button.style.setProperty("--button-shift-y", `${(y * 5).toFixed(1)}px`);
+  }
+  const bundle = event.target.closest(".bundle-card");
+  if (bundle) {
+    const rect = bundle.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const edge = Math.min(x, rect.width - x, y, rect.height - y);
+    const proximity = Math.max(0, Math.min(1, 1 - edge / 86));
+    const angle = Math.atan2(y - rect.height / 2, x - rect.width / 2) * 180 / Math.PI + 90;
+    bundle.style.setProperty("--edge-proximity", proximity.toFixed(3));
+    bundle.style.setProperty("--cursor-angle", `${angle.toFixed(1)}deg`);
+  }
 });
 
 document.addEventListener("pointerout", (event) => {
@@ -1001,6 +1059,12 @@ document.addEventListener("pointerout", (event) => {
   if (!button || button.contains(event.relatedTarget)) return;
   button.style.setProperty("--button-shift-x", "0px");
   button.style.setProperty("--button-shift-y", "0px");
+});
+
+document.addEventListener("pointerout", (event) => {
+  const bundle = event.target instanceof Element ? event.target.closest(".bundle-card") : null;
+  if (!bundle || bundle.contains(event.relatedTarget)) return;
+  bundle.style.setProperty("--edge-proximity", "0");
 });
 
 window.addEventListener("hashchange", () => {
