@@ -402,6 +402,7 @@ const eventRecommendations = {
 const app = document.getElementById("app");
 const toast = document.getElementById("toast");
 let pageRevealObserver;
+let lastRenderedPage = null;
 
 function escapeHtml(value) {
   return String(value ?? "").replace(/[&<>\"']/g, (character) => ({
@@ -669,6 +670,7 @@ function quote() {
 function render(options = {}) {
   const previousScroll = window.scrollY;
   const hash = getHash();
+  const routeChanged = lastRenderedPage !== null && lastRenderedPage !== hash;
   if (hash === "bundles") {
     state.bundle = getHashParams().get("bundle") || null;
   }
@@ -680,6 +682,17 @@ function render(options = {}) {
   if (hash === "services") view = services();
   if (hash === "quote") view = quote();
   app.innerHTML = view;
+  lastRenderedPage = hash;
+  const pageRoot = app.querySelector(":scope > .page");
+  if (routeChanged && pageRoot && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    pageRoot.classList.add("is-route-entering");
+    const clearRouteAnimation = (event) => {
+      if (event.target !== pageRoot) return;
+      pageRoot.classList.remove("is-route-entering");
+      pageRoot.removeEventListener("animationend", clearRouteAnimation);
+    };
+    pageRoot.addEventListener("animationend", clearRouteAnimation);
+  }
   syncSetupCount();
   syncMorphingNavigation();
   queueFloatingStoryUpdate();
@@ -1032,6 +1045,39 @@ function queueFloatingStoryUpdate() {
 }
 
 window.addEventListener("scroll", queueFloatingStoryUpdate, { passive: true });
+let experienceWheelTarget = null;
+let experienceWheelFrame = 0;
+window.addEventListener("wheel", (event) => {
+  const section = event.target instanceof Element
+    ? event.target.closest("[data-experience-journey].is-enhanced")
+    : null;
+  if (!section) {
+    if (experienceWheelFrame) window.cancelAnimationFrame(experienceWheelFrame);
+    experienceWheelFrame = 0;
+    experienceWheelTarget = null;
+    return;
+  }
+  if (event.ctrlKey || event.deltaY === 0 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  event.preventDefault();
+  const unit = event.deltaMode === WheelEvent.DOM_DELTA_LINE ? 16 : event.deltaMode === WheelEvent.DOM_DELTA_PAGE ? window.innerHeight : 1;
+  const delta = Math.max(-100, Math.min(100, event.deltaY * unit * .48));
+  if (experienceWheelTarget === null) experienceWheelTarget = window.scrollY;
+  const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  experienceWheelTarget = Math.max(0, Math.min(maxScroll, experienceWheelTarget + delta));
+  if (experienceWheelFrame) return;
+  const easeWheelScroll = () => {
+    const remaining = experienceWheelTarget - window.scrollY;
+    if (Math.abs(remaining) < 1) {
+      window.scrollTo({ top: experienceWheelTarget, behavior: "instant" });
+      experienceWheelFrame = 0;
+      experienceWheelTarget = null;
+      return;
+    }
+    window.scrollTo({ top: window.scrollY + remaining * .18, behavior: "instant" });
+    experienceWheelFrame = window.requestAnimationFrame(easeWheelScroll);
+  };
+  experienceWheelFrame = window.requestAnimationFrame(easeWheelScroll);
+}, { passive: false });
 window.addEventListener("resize", () => {
   initExperienceJourney();
   queueFloatingStoryUpdate();
@@ -1136,6 +1182,9 @@ document.addEventListener("pointerout", (event) => {
 });
 
 window.addEventListener("hashchange", () => {
+  if (experienceWheelFrame) window.cancelAnimationFrame(experienceWheelFrame);
+  experienceWheelFrame = 0;
+  experienceWheelTarget = null;
   if (getHash() !== "builder") state.builderStep = 1;
   render();
 });

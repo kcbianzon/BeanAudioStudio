@@ -3682,6 +3682,18 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 /* Keep the broken route visible, then let the solid trace meet the viewport center. */
 .experience-journey.is-enhanced .journey-route-base { stroke: rgba(80,68,52,.58); stroke-width: 3.5; stroke-dasharray: 6 15; }
 .experience-journey.is-enhanced .journey-route-progress { stroke-width: 4; }
+.experience-journey.is-enhanced .journey-card {
+  height: clamp(450px,52svh,520px);
+  min-height: 450px;
+  padding: 0;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.experience-journey.is-enhanced .journey-photo { flex: 0 0 43%; min-height: 0; }
+.experience-journey.is-enhanced .journey-copy { flex: 1 1 auto; min-height: 0; padding: 17px 24px 10px; }
+.experience-journey.is-enhanced .journey-copy h3 { margin: 5px 0 4px; }
+.experience-journey.is-enhanced .journey-copy p { line-height: 1.42; }
+.experience-journey.is-enhanced .journey-card > strong { flex: 0 0 auto; margin: 0 24px 16px; padding: 9px 13px; }
 
 /* A quick press, contact, and settle gives each reveal a stamped paper feel. */
 @keyframes journey-stamp-impression {
@@ -3729,6 +3741,16 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 @media (prefers-reduced-motion: reduce) {
   .experience-journey.is-enhanced .journey-card.is-stamped,
   .experience-journey.is-enhanced .journey-products.is-stamped .journey-product-stamp { animation: none; }
+}
+
+/* Route changes enter with a small, soft lift while the new page settles in. */
+@keyframes route-page-arrive {
+  from { opacity: 0; transform: translate3d(0,18px,0) scale(.994); filter: blur(3px); }
+  to { opacity: 1; transform: translate3d(0,0,0) scale(1); filter: blur(0); }
+}
+#app > .page.is-route-entering { animation: route-page-arrive .52s cubic-bezier(.2,.75,.25,1) both; }
+@media (prefers-reduced-motion: reduce) {
+  #app > .page.is-route-entering { animation: none; }
 }
 @media (max-width: 1100px) and (min-width: 1041px) {
   .experience-journey.is-enhanced .journey-card { width: min(40vw,440px); }
