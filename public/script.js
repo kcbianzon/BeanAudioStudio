@@ -508,7 +508,7 @@ function faqSection() {
     ["How do I reserve equipment?", "Request a quote online or by phone. Beantown will confirm availability, recommend a suitable package, and coordinate event logistics."],
     ["What if I need support onsite?", "On-site or remote support is available. Rentals include setup guides, and the team can be reached by phone if you need help during your event."],
   ];
-  return `<section class="section faq-section"><div class="section-head"><div><span class="eyebrow">GOOD TO KNOW</span><h2>Your questions,<br>answered.</h2></div><p>Helpful details from the Beantown team, so planning your event feels straightforward.</p></div><div class="faq-list">${faqs.map(([question, answer], index) => `<details class="faq-item" ${index === 0 ? "open" : ""}><summary><span>${question}</span><b aria-hidden="true">+</b></summary><p>${answer}</p></details>`).join("")}</div></section>`;
+  return `<section class="section faq-section"><div class="section-head"><div><span class="eyebrow">GOOD TO KNOW</span><h2>Your questions,<br>answered.</h2></div><p>Helpful details from the Beantown team, so planning your event feels straightforward.</p></div><div class="faq-list">${faqs.map(([question, answer], index) => `<details class="faq-item" ${index === 0 ? "open" : ""}><summary><span>${question}</span><b aria-hidden="true">+</b></summary><div class="faq-answer"><div class="faq-answer-inner"><p>${answer}</p></div></div></details>`).join("")}</div></section>`;
 }
 function home() {
   return `<div class="page">
@@ -935,7 +935,7 @@ function typeHeroHeadline() {
       const span = document.createElement("span");
       span.className = "hero-type-char";
       span.textContent = character === " " ? "\u00a0" : character;
-      span.style.animationDelay = `${lineIndex * 760 + index * 48}ms`;
+      span.style.animationDelay = `${lineIndex * 360 + index * 42}ms`;
       line.append(span);
     });
   });
@@ -943,10 +943,14 @@ function typeHeroHeadline() {
 
 function setOpeningWord(word, element) {
   if (!element) return;
-  element.replaceChildren(...[...word].map((character, index) => {
+  const characters = typeof Intl !== "undefined" && Intl.Segmenter
+    ? Array.from(new Intl.Segmenter("en", { granularity: "grapheme" }).segment(word), ({ segment }) => segment)
+    : [...word];
+  element.replaceChildren(...characters.map((character, index) => {
     const span = document.createElement("span");
     span.className = "opening-character";
     span.textContent = character;
+    span.style.setProperty("--opening-index", index);
     span.style.animationDelay = `${index * 48}ms`;
     return span;
   }));
@@ -962,24 +966,42 @@ function runOpeningSequence() {
     return;
   }
 
-  setOpeningWord("EVENT", word);
+  setOpeningWord("EVENT.", word);
   window.setTimeout(() => opening.classList.add("is-switching"), 1000);
   window.setTimeout(() => {
-    setOpeningWord("SETUP", word);
+    setOpeningWord("SETUP.", word);
     opening.classList.remove("is-switching");
     opening.classList.add("is-second");
-  }, 1500);
+  }, 1550);
   window.setTimeout(() => {
+    typeHeroHeadline();
     document.body.classList.remove("intro-pending");
     document.body.classList.add("site-entering");
     opening.classList.add("is-complete");
-  }, 2700);
-  window.setTimeout(() => {
-    opening.remove();
-    typeHeroHeadline();
-  }, 3250);
-  window.setTimeout(() => document.body.classList.remove("site-entering"), 4050);
+    window.setTimeout(() => {
+      opening.remove();
+    }, 650);
+  }, 2450);
+  window.setTimeout(() => document.body.classList.remove("site-entering"), 4100);
 }
+
+document.addEventListener("pointermove", (event) => {
+  if (window.matchMedia("(prefers-reduced-motion: reduce), (hover: none)").matches) return;
+  const button = event.target instanceof Element ? event.target.closest(".btn") : null;
+  if (!button) return;
+  const rect = button.getBoundingClientRect();
+  const x = (event.clientX - rect.left - rect.width / 2) / rect.width;
+  const y = (event.clientY - rect.top - rect.height / 2) / rect.height;
+  button.style.setProperty("--button-shift-x", `${(x * 7).toFixed(1)}px`);
+  button.style.setProperty("--button-shift-y", `${(y * 5).toFixed(1)}px`);
+});
+
+document.addEventListener("pointerout", (event) => {
+  const button = event.target instanceof Element ? event.target.closest(".btn") : null;
+  if (!button || button.contains(event.relatedTarget)) return;
+  button.style.setProperty("--button-shift-x", "0px");
+  button.style.setProperty("--button-shift-y", "0px");
+});
 
 window.addEventListener("hashchange", () => {
   if (getHash() !== "builder") state.builderStep = 1;

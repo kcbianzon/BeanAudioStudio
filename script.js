@@ -508,7 +508,7 @@ function faqSection() {
     ["How do I reserve equipment?", "Request a quote online or by phone. Beantown will confirm availability, recommend a suitable package, and coordinate event logistics."],
     ["What if I need support onsite?", "On-site or remote support is available. Rentals include setup guides, and the team can be reached by phone if you need help during your event."],
   ];
-  return `<section class="section faq-section"><div class="section-head"><div><span class="eyebrow">GOOD TO KNOW</span><h2>Your questions,<br>answered.</h2></div><p>Helpful details from the Beantown team, so planning your event feels straightforward.</p></div><div class="faq-list">${faqs.map(([question, answer], index) => `<details class="faq-item" ${index === 0 ? "open" : ""}><summary><span>${question}</span><b aria-hidden="true">+</b></summary><p>${answer}</p></details>`).join("")}</div></section>`;
+  return `<section class="section faq-section"><div class="section-head"><div><span class="eyebrow">GOOD TO KNOW</span><h2>Your questions,<br>answered.</h2></div><p>Helpful details from the Beantown team, so planning your event feels straightforward.</p></div><div class="faq-list">${faqs.map(([question, answer], index) => `<details class="faq-item" ${index === 0 ? "open" : ""}><summary><span>${question}</span><b aria-hidden="true">+</b></summary><div class="faq-answer"><div class="faq-answer-inner"><p>${answer}</p></div></div></details>`).join("")}</div></section>`;
 }
 function home() {
   return `<div class="page">
@@ -943,22 +943,17 @@ function typeHeroHeadline() {
 
 function setOpeningWord(word, element) {
   if (!element) return;
-  element.replaceChildren(...[...word].map((character, index) => {
+  const characters = typeof Intl !== "undefined" && Intl.Segmenter
+    ? Array.from(new Intl.Segmenter("en", { granularity: "grapheme" }).segment(word), ({ segment }) => segment)
+    : [...word];
+  element.replaceChildren(...characters.map((character, index) => {
     const span = document.createElement("span");
     span.className = "opening-character";
     span.textContent = character;
+    span.style.setProperty("--opening-index", index);
     span.style.animationDelay = `${index * 48}ms`;
     return span;
   }));
-}
-
-function positionOpeningAtHero() {
-  const headline = document.querySelector("#heroHeadline");
-  const lockup = document.querySelector(".opening-lockup");
-  if (!headline || !lockup) return;
-  const rect = headline.getBoundingClientRect();
-  lockup.style.left = `${rect.left + rect.width / 2}px`;
-  lockup.style.top = `${rect.top + rect.height / 2}px`;
 }
 
 function runOpeningSequence() {
@@ -971,18 +966,13 @@ function runOpeningSequence() {
     return;
   }
 
-  setOpeningWord("EVENT", word);
-  positionOpeningAtHero();
-  const repositionOpening = () => {
-    if (!opening.classList.contains("is-complete")) positionOpeningAtHero();
-  };
-  window.addEventListener("resize", repositionOpening, { passive: true });
+  setOpeningWord("EVENT.", word);
   window.setTimeout(() => opening.classList.add("is-switching"), 1000);
   window.setTimeout(() => {
-    setOpeningWord("SETUP", word);
+    setOpeningWord("SETUP.", word);
     opening.classList.remove("is-switching");
     opening.classList.add("is-second");
-  }, 1500);
+  }, 1550);
   window.setTimeout(() => {
     typeHeroHeadline();
     document.body.classList.remove("intro-pending");
@@ -990,7 +980,6 @@ function runOpeningSequence() {
     opening.classList.add("is-complete");
     window.setTimeout(() => {
       opening.remove();
-      window.removeEventListener("resize", repositionOpening);
     }, 650);
   }, 2450);
   window.setTimeout(() => document.body.classList.remove("site-entering"), 4100);
