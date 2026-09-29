@@ -501,9 +501,18 @@ function testimonialSection() {
   const reversed = [...testimonialSlots].reverse();
   return `<section class="section testimonials-section"><div class="section-head"><div><span class="eyebrow">CLIENT STORIES</span><h2>What clients<br>say about the setup.</h2></div><p>Thoughtful support, dependable equipment, and a smoother event from setup to wrap.</p></div><div class="testimonial-marquee" aria-label="Client testimonials">${testimonialLane(testimonialSlots)}${testimonialLane(reversed, true)}</div></section>`;
 }
+function faqSection() {
+  const faqs = [
+    ["What equipment can I rent?", "Beantown offers sound systems, wireless microphones, lighting, TVs, projectors, video walls, and silent disco headphones. Packages are available for small gatherings and large events."],
+    ["Is setup and delivery provided?", "Yes. Delivery, setup, and pickup are available across Boston and New England. Select rentals can also be picked up for DIY use, with clear instructions included."],
+    ["How do I reserve equipment?", "Request a quote online or by phone. Beantown will confirm availability, recommend a suitable package, and coordinate event logistics."],
+    ["What if I need support onsite?", "On-site or remote support is available. Rentals include setup guides, and the team can be reached by phone if you need help during your event."],
+  ];
+  return `<section class="section faq-section"><div class="section-head"><div><span class="eyebrow">GOOD TO KNOW</span><h2>Your questions,<br>answered.</h2></div><p>Helpful details from the Beantown team, so planning your event feels straightforward.</p></div><div class="faq-list">${faqs.map(([question, answer], index) => `<details class="faq-item" ${index === 0 ? "open" : ""}><summary><span>${question}</span><b aria-hidden="true">+</b></summary><p>${answer}</p></details>`).join("")}</div></section>`;
+}
 function home() {
   return `<div class="page">
-  <section class="hero reveal"><div class="hero-copy"><span class="eyebrow orange">BOSTON • NEW ENGLAND • EVENT AV</span><h1>Your event.<br><span style="background:linear-gradient(90deg,var(--ink),var(--accent));-webkit-background-clip:text;color:transparent">Your setup.</span></h1><p>Rent speakers, screens, streaming gear, photo booths and complete event systems — then build your exact experience before you request a quote.</p><div class="hero-cta"><a class="btn btn-dark" href="#builder">Build my event <span>→</span></a><a class="btn btn-light" href="#rentals">Explore rentals</a></div><div class="hero-note"><span class="dot"></span> Fixed-price packages + quote-based production gear</div></div><div class="hero-floats" aria-hidden="true">
+  <section class="hero reveal"><div class="hero-copy"><span class="eyebrow orange">BOSTON • NEW ENGLAND • EVENT AV</span><h1 class="hero-headline" id="heroHeadline" aria-label="Your event. Your setup."><span class="hero-title-line" data-type-text="YOUR EVENT.">YOUR EVENT.</span><br><span class="hero-title-line hero-title-accent" data-type-text="YOUR SETUP.">YOUR SETUP.</span></h1><p>Rent speakers, screens, streaming gear, photo booths and complete event systems — then build your exact experience before you request a quote.</p><div class="hero-cta"><a class="btn btn-dark" href="#builder">Build my event <span>→</span></a><a class="btn btn-light" href="#rentals">Explore rentals</a></div><div class="hero-note"><span class="dot"></span> Fixed-price packages + quote-based production gear</div></div><div class="hero-floats" aria-hidden="true">
     <article class="floating-story" data-scroll-float="-1" style="--tilt:-5deg"><span class="story-media" style="--story-image:url('assets/beantown/event-production.jpg')"></span><span class="story-kicker">WEDDINGS</span><strong>Every vow, heard.</strong><small>Audio for the aisle and the dance floor.</small></article>
     <article class="floating-story" data-scroll-float="1" style="--tilt:5deg"><span class="story-media" style="--story-image:url('assets/beantown/outdoor-movie.jpg')"></span><span class="story-kicker">OUTDOOR MOVIES</span><strong>Movie night, made big.</strong><small>Screen and sound for the whole crowd.</small></article>
     <article class="floating-story" data-scroll-float="-1" style="--tilt:3deg"><span class="story-media" style="--story-image:url('assets/beantown/headphones.jpg')"></span><span class="story-kicker">SILENT DISCO</span><strong>Three channels. One dance floor.</strong><small>Headphones and transmitters, ready to go.</small></article>
@@ -533,7 +542,7 @@ function home() {
     .join("")}</div></section>
   <section class="section"><div class="feature-panel dark"><div><span class="eyebrow">PLAN THE SETUP WITH CONFIDENCE</span><h3>Build it<br>before you book it.</h3><p>Choose your event, add the pieces you need, and see fixed-price items in your estimate. Custom production stays quote-based.</p></div><div class="stat-row"><div class="stat"><strong>24/7</strong><span>CONFIGURE ANYTIME</span></div><div class="stat"><strong>01</strong><span>EVENT BUILDER</span></div><div class="stat"><strong>∞</strong><span>COMBINATIONS</span></div></div></div></section>
   ${testimonialSection()}
-  <section class="section"><div class="section-head"><div><span class="eyebrow">HOW IT WORKS</span><h2>From “what do I need?”<br>to “send me the quote.”</h2></div></div><div class="service-grid"><div class="service-card"><div class="service-icon">01</div><h3>Choose the occasion</h3><p>Wedding, corporate, school, concert, party or outdoor movie — start from context, not equipment jargon.</p></div><div class="service-card"><div class="service-icon">02</div><h3>Customize the setup</h3><p>Add quantities, remove extras, compare fixed-price packages and flag quote-only equipment.</p></div><div class="service-card"><div class="service-icon">03</div><h3>Request the quote</h3><p>Submit the event date, venue, guest count and your complete equipment configuration in one request.</p></div></div></section>
+  ${faqSection()}
  </div>`;
 }
 
@@ -915,6 +924,63 @@ function queueFloatingStoryUpdate() {
 window.addEventListener("scroll", queueFloatingStoryUpdate, { passive: true });
 window.addEventListener("resize", queueFloatingStoryUpdate);
 
+function typeHeroHeadline() {
+  const headline = document.querySelector("#heroHeadline");
+  if (!headline || headline.dataset.typed === "true") return;
+  headline.dataset.typed = "true";
+  headline.querySelectorAll("[data-type-text]").forEach((line, lineIndex) => {
+    const text = line.dataset.typeText;
+    line.textContent = "";
+    [...text].forEach((character, index) => {
+      const span = document.createElement("span");
+      span.className = "hero-type-char";
+      span.textContent = character === " " ? "\u00a0" : character;
+      span.style.animationDelay = `${lineIndex * 760 + index * 48}ms`;
+      line.append(span);
+    });
+  });
+}
+
+function setOpeningWord(word, element) {
+  if (!element) return;
+  element.replaceChildren(...[...word].map((character, index) => {
+    const span = document.createElement("span");
+    span.className = "opening-character";
+    span.textContent = character;
+    span.style.animationDelay = `${index * 48}ms`;
+    return span;
+  }));
+}
+
+function runOpeningSequence() {
+  const opening = document.querySelector("#openingSequence");
+  const word = document.querySelector("#openingWord");
+  if (getHash() !== "home" || !opening || !word || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.body.classList.remove("intro-pending");
+    opening?.remove();
+    typeHeroHeadline();
+    return;
+  }
+
+  setOpeningWord("EVENT", word);
+  window.setTimeout(() => opening.classList.add("is-switching"), 1000);
+  window.setTimeout(() => {
+    setOpeningWord("SETUP", word);
+    opening.classList.remove("is-switching");
+    opening.classList.add("is-second");
+  }, 1500);
+  window.setTimeout(() => {
+    document.body.classList.remove("intro-pending");
+    document.body.classList.add("site-entering");
+    opening.classList.add("is-complete");
+  }, 2700);
+  window.setTimeout(() => {
+    opening.remove();
+    typeHeroHeadline();
+  }, 3250);
+  window.setTimeout(() => document.body.classList.remove("site-entering"), 4050);
+}
+
 window.addEventListener("hashchange", () => {
   if (getHash() !== "builder") state.builderStep = 1;
   render();
@@ -922,3 +988,4 @@ window.addEventListener("hashchange", () => {
 
 render();
 queueFloatingStoryUpdate();
+runOpeningSequence();
