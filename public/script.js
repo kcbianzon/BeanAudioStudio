@@ -377,6 +377,13 @@ const state = {
   guests: 120,
   venue: "Indoor",
   date: "",
+  contactName: "",
+  contactEmail: "",
+  contactPhone: "",
+  organization: "",
+  eventName: "",
+  eventLocation: "",
+  eventNotes: "",
   selected: loadSelection(),
   bundle: null,
   category: "All",
@@ -395,6 +402,12 @@ const eventRecommendations = {
 const app = document.getElementById("app");
 const toast = document.getElementById("toast");
 let pageRevealObserver;
+
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>\"']/g, (character) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;",
+  })[character]);
+}
 
 function money(value) {
   return new Intl.NumberFormat("en-US", {
@@ -524,12 +537,16 @@ function home() {
   <section class="experience-journey" data-experience-journey>
     <div class="experience-stage">
       <div class="section-head experience-heading"><div><span class="eyebrow">WHAT ARE YOU RENTING?</span><h2>Start with the<br>experience.</h2></div><p>Scroll to explore the possibilities. Follow the line from sound to the full visual experience.</p></div>
-      <svg class="journey-route" viewBox="0 0 1200 4400" preserveAspectRatio="none" aria-hidden="true"><path class="journey-route-base" d="M470 580 C850 680 920 1370 730 1580 C560 1780 370 2370 470 2580 C590 2810 890 3340 730 3580 C640 3790 510 4090 600 4310"/><path class="journey-route-progress" d="M470 580 C850 680 920 1370 730 1580 C560 1780 370 2370 470 2580 C590 2810 890 3340 730 3580 C640 3790 510 4090 600 4310" pathLength="1"/></svg>
+      <svg class="journey-route" viewBox="0 0 1200 4800" preserveAspectRatio="none" aria-hidden="true"><path class="journey-route-base" d="M470 600 C850 700 920 1490 730 1700 C560 1900 370 2570 470 2800 C590 3020 890 3670 730 3900 C640 4120 510 4460 600 4700"/><path class="journey-route-progress" d="M470 600 C850 700 920 1490 730 1700 C560 1900 370 2570 470 2800 C590 3020 890 3670 730 3900 C640 4120 510 4460 600 4700" pathLength="1"/></svg>
       <div class="journey-cards">
         <a href="#rentals?cat=Audio" class="category-card journey-card cat-a" data-journey-step="0" style="--journey-photo:url('assets/beantown/speaker-rental.jpg');--sticker-photo:url('assets/beantown/microphone.jpg')"><span class="journey-photo" aria-hidden="true"></span><span class="journey-photo-sticker" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">01 / SOUND</span><h3>Audio</h3><p>Speakers, microphones, mixers and live-performance systems.</p></div><strong>Explore →</strong></a>
         <a href="#rentals?cat=Video%20%26%20Displays" class="category-card journey-card cat-b" data-journey-step="1" style="--journey-photo:url('assets/beantown/projector-screen.jpg');--sticker-photo:url('assets/beantown/event-display.jpg')"><span class="journey-photo" aria-hidden="true"></span><span class="journey-photo-sticker" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">02 / PICTURE</span><h3>Video</h3><p>TVs, projection, switching and visual presentation packages.</p></div><strong>Explore →</strong></a>
         <a href="#rentals?cat=Experiences" class="category-card journey-card cat-c" data-journey-step="2" style="--journey-photo:url('assets/beantown/photo-booth-360.jpg');--sticker-photo:url('assets/beantown/silent-disco.webp')"><span class="journey-photo" aria-hidden="true"></span><span class="journey-photo-sticker" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">03 / MOMENTS</span><h3>Experiences</h3><p>Silent disco, outdoor movies and photo booth moments.</p></div><strong>Explore →</strong></a>
         <a href="#rentals?cat=LED%20Walls" class="category-card journey-card cat-d" data-journey-step="3" style="--journey-photo:url('assets/beantown/led-wall-roses.webp');--sticker-photo:url('assets/beantown/event-stage.jpg')"><span class="journey-photo" aria-hidden="true"></span><span class="journey-photo-sticker" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">04 / LED WALLS</span><h3>LED Walls</h3><p>High-impact visuals for stages, launches, parties and concerts.</p></div><strong>Explore →</strong></a>
+        <div class="journey-products products-audio" data-journey-step="0" role="group" aria-label="Audio equipment examples"><figure class="journey-product-stamp"><img src="assets/beantown/concert-audio.webp" alt="" loading="lazy"><figcaption><strong>PA speakers</strong><span>Full, room-filling sound</span></figcaption></figure><figure class="journey-product-stamp"><img src="assets/beantown/microphone-rentals.jpeg" alt="" loading="lazy"><figcaption><strong>Microphones</strong><span>Ready for every voice</span></figcaption></figure></div>
+        <div class="journey-products products-video" data-journey-step="1" role="group" aria-label="Video equipment examples"><figure class="journey-product-stamp"><img src="assets/beantown/projector-screen.jpg" alt="" loading="lazy"><figcaption><strong>Projection</strong><span>Make the picture bigger</span></figcaption></figure><figure class="journey-product-stamp"><img src="assets/beantown/event-display.jpg" alt="" loading="lazy"><figcaption><strong>Event displays</strong><span>Clear, vivid presentation</span></figcaption></figure></div>
+        <div class="journey-products products-experiences" data-journey-step="2" role="group" aria-label="Experience equipment examples"><figure class="journey-product-stamp"><img src="assets/beantown/headphones.jpg" alt="" loading="lazy"><figcaption><strong>Silent disco</strong><span>Three channels, one dance floor</span></figcaption></figure><figure class="journey-product-stamp"><img src="assets/beantown/outdoor-movie.jpg" alt="" loading="lazy"><figcaption><strong>Outdoor cinema</strong><span>Big-screen nights outside</span></figcaption></figure></div>
+        <div class="journey-products products-led" data-journey-step="3" role="group" aria-label="LED wall examples"><figure class="journey-product-stamp"><img src="assets/beantown/69667bc33d884d697701e4c1_Led-Wall.png" alt="" loading="lazy"><figcaption><strong>LED walls</strong><span>Bright, high-impact visuals</span></figcaption></figure><figure class="journey-product-stamp"><img src="assets/beantown/69667bc5bf1882f6695ff917_V-SHAPE-LED-WALL-p-800.jpg" alt="" loading="lazy"><figcaption><strong>Modular screens</strong><span>Shape the stage your way</span></figcaption></figure></div>
       </div>
       <span class="journey-endpoint" aria-hidden="true">THE FULL SETUP</span>
       <div class="journey-progress-label" aria-live="polite"><span data-journey-label>01</span><i></i><span>04</span></div>
@@ -623,10 +640,12 @@ function builder() {
     if (state.builderStep === 1)
       return `<div class="reveal"><span class="eyebrow">STEP 01</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">What are you planning?</h2><p style="color:var(--muted);margin-top:0">Pick the closest event type. The interface uses it to suggest a starting point.</p><div class="choice-grid">${["Wedding", "Corporate Event", "School Event", "Concert", "Private Party", "Outdoor Movie"].map((x) => `<button class="choice ${state.eventType === x ? "selected" : ""}" data-event="${x}"><strong>${x}</strong><span>${x === "Wedding" ? "Ceremony + celebration" : x === "Corporate Event" ? "Meetings + launches" : x === "School Event" ? "Programs + dances" : x === "Concert" ? "Live performance" : x === "Private Party" ? "Celebrations" : "Inflatable movie night"}</span>${state.eventType === x ? "<em>Selected</em>" : ""}</button>`).join("")}</div></div>`;
     if (state.builderStep === 2)
-      return `<div class="reveal"><span class="eyebrow">STEP 02</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Tell us about the room.</h2><p style="color:var(--muted);margin-top:0">These details help the eventual quote request size the system properly.</p><div class="form-grid"><div class="field"><label>Guest count</label><input class="input" id="guestInput" type="number" min="1" value="${state.guests}"></div><div class="field"><label>Venue</label><select class="select" id="venueInput"><option ${state.venue === "Indoor" ? "selected" : ""}>Indoor</option><option ${state.venue === "Outdoor" ? "selected" : ""}>Outdoor</option><option ${state.venue === "Hybrid" ? "selected" : ""}>Hybrid</option></select></div><div class="field full"><label>Event date</label><input class="input" id="dateInput" type="date" value="${state.date}"></div></div></div>`;
+      return `<div class="reveal"><span class="eyebrow">STEP 02</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Tell us about your event.</h2><p style="color:var(--muted);margin-top:0">Share a few planning and contact details so the quote can be tailored to your venue.</p><div class="form-grid"><div class="field"><label for="contactNameInput">Full name *</label><input class="input" id="contactNameInput" autocomplete="name" required value="${escapeHtml(state.contactName)}" placeholder="Alex Morgan"></div><div class="field"><label for="contactEmailInput">Email *</label><input class="input" id="contactEmailInput" type="email" autocomplete="email" required value="${escapeHtml(state.contactEmail)}" placeholder="alex@example.com"></div><div class="field"><label for="contactPhoneInput">Phone</label><input class="input" id="contactPhoneInput" type="tel" autocomplete="tel" value="${escapeHtml(state.contactPhone)}" placeholder="(617) 555-0198"></div><div class="field"><label for="organizationInput">Organization</label><input class="input" id="organizationInput" autocomplete="organization" value="${escapeHtml(state.organization)}" placeholder="Company or group"></div><div class="field"><label for="eventNameInput">Event name</label><input class="input" id="eventNameInput" value="${escapeHtml(state.eventName)}" placeholder="Annual fundraiser"></div><div class="field"><label for="guestInput">Estimated guests</label><input class="input" id="guestInput" type="number" min="1" value="${state.guests}"></div><div class="field"><label for="venueInput">Venue setting</label><select class="select" id="venueInput"><option ${state.venue === "Indoor" ? "selected" : ""}>Indoor</option><option ${state.venue === "Outdoor" ? "selected" : ""}>Outdoor</option><option ${state.venue === "Hybrid" ? "selected" : ""}>Hybrid</option></select></div><div class="field"><label for="dateInput">Event date</label><input class="input" id="dateInput" type="date" value="${escapeHtml(state.date)}"></div><div class="field full"><label for="eventLocationInput">Venue name or address</label><input class="input" id="eventLocationInput" autocomplete="street-address" value="${escapeHtml(state.eventLocation)}" placeholder="Search for a venue or enter an address"><div class="builder-map-placeholder" role="group" aria-label="Map preview placeholder"><span class="map-placeholder-grid" aria-hidden="true"></span><span class="map-pin" aria-hidden="true">●</span><div class="map-placeholder-copy"><strong id="mapAddressPreview">${state.eventLocation ? escapeHtml(state.eventLocation) : "Your venue preview"}</strong><span>Map preview placeholder · open this address in Google Maps</span><a id="mapPreviewLink" href="${state.eventLocation ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(state.eventLocation)}` : "#"}" ${state.eventLocation ? "" : 'aria-disabled="true" tabindex="-1"'} target="_blank" rel="noopener noreferrer">Preview location in Google Maps ↗</a></div></div><small class="map-api-note">An interactive embedded map can be enabled later with a Maps API key.</small></div><div class="field full"><label for="eventNotesInput">Anything else we should know?</label><textarea class="textarea" id="eventNotesInput" placeholder="Schedule, room details, delivery notes, or special requests">${escapeHtml(state.eventNotes)}</textarea></div></div></div>`;
     if (state.builderStep === 3)
       return `<div class="reveal"><span class="eyebrow">STEP 03</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Pick the pieces.</h2><p style="color:var(--muted);margin-top:0">Start with recommendations for your ${state.eventType.toLowerCase()}, then browse the full equipment catalog. Quantities update the estimate in real time.</p><div class="equipment-group"><div class="equipment-group-head"><span class="eyebrow">FOR YOUR EVENT</span><span class="equipment-count">${recommendedProducts.length} recommendations</span></div><div class="builder-product-grid">${recommendedProducts.map((p) => miniProduct(p, true)).join("")}</div></div><div class="equipment-group all-equipment"><div class="equipment-group-head"><span class="eyebrow">ALL EQUIPMENT</span><span class="equipment-count">${products.length} products</span></div><div class="builder-product-grid">${otherProducts.map((p) => miniProduct(p)).join("")}</div></div></div>`;
-    return `<div class="reveal"><span class="eyebrow">STEP 04</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Review your build.</h2><p style="color:var(--muted);margin-top:0">Everything the client has configured is summarized here before sending the request.</p><div class="selection-list">${items.length ? items.map(({ p, qty }) => `<div class="selection-chip"><span><strong>${qty} ×</strong> ${p.name}</span><span>${p.priceType === "quote" ? "Quote" : productPriceText(p)}</span></div>`).join("") : `<div class="empty">Add at least one product to your setup.</div>`}</div><div style="padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff"><div class="summary-line"><span>Event</span><strong>${state.eventType}</strong></div><div class="summary-line"><span>Guests</span><strong>${state.guests}</strong></div><div class="summary-line"><span>Venue</span><strong>${state.venue}</strong></div><div class="summary-line"><span>Date</span><strong>${state.date || "Not selected"}</strong></div></div></div>`;
+    const detail = (label, value) => `<div class="summary-line"><span>${label}</span><strong>${value || "Not provided"}</strong></div>`;
+    const locationValue = state.eventLocation ? `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(state.eventLocation)}" target="_blank" rel="noopener noreferrer">${escapeHtml(state.eventLocation)} ↗</a>` : "Not provided";
+    return `<div class="reveal"><span class="eyebrow">STEP 04</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Review your build.</h2><p style="color:var(--muted);margin-top:0">Everything the client has configured is summarized here before sending the request.</p><div class="selection-list">${items.length ? items.map(({ p, qty }) => `<div class="selection-chip"><span><strong>${qty} ×</strong> ${p.name}</span><span>${p.priceType === "quote" ? "Quote" : productPriceText(p)}</span></div>`).join("") : `<div class="empty">Add at least one product to your setup.</div>`}</div><div class="builder-event-summary"><h3>Event details</h3>${detail("Event type", escapeHtml(state.eventType))}${detail("Event name", escapeHtml(state.eventName))}${detail("Contact", escapeHtml(state.contactName))}${detail("Email", escapeHtml(state.contactEmail))}${detail("Phone", escapeHtml(state.contactPhone))}${detail("Organization", escapeHtml(state.organization))}${detail("Guests", String(state.guests))}${detail("Venue setting", escapeHtml(state.venue))}${detail("Date", escapeHtml(state.date || "Not selected"))}<div class="summary-line"><span>Venue location</span><strong>${locationValue}</strong></div>${detail("Notes", escapeHtml(state.eventNotes))}</div></div>`;
   }
 }
 
@@ -813,6 +832,17 @@ function bind() {
     .querySelector("[data-builder-next]")
     ?.addEventListener("click", () => {
       if (state.builderStep === 2) {
+        const nameInput = document.querySelector("#contactNameInput");
+        const emailInput = document.querySelector("#contactEmailInput");
+        if (nameInput && !nameInput.reportValidity()) return;
+        if (emailInput && !emailInput.reportValidity()) return;
+        state.contactName = nameInput?.value.trim() || "";
+        state.contactEmail = emailInput?.value.trim() || "";
+        state.contactPhone = document.querySelector("#contactPhoneInput")?.value.trim() || "";
+        state.organization = document.querySelector("#organizationInput")?.value.trim() || "";
+        state.eventName = document.querySelector("#eventNameInput")?.value.trim() || "";
+        state.eventLocation = document.querySelector("#eventLocationInput")?.value.trim() || "";
+        state.eventNotes = document.querySelector("#eventNotesInput")?.value.trim() || "";
         state.guests = parseInt(
           document.querySelector("#guestInput")?.value || 120,
         );
@@ -822,6 +852,23 @@ function bind() {
       state.builderStep = Math.min(4, state.builderStep + 1);
       render({ preserveScroll: getHash() === "builder" });
     });
+  const locationInput = document.querySelector("#eventLocationInput");
+  const mapLink = document.querySelector("#mapPreviewLink");
+  const mapAddress = document.querySelector("#mapAddressPreview");
+  locationInput?.addEventListener("input", () => {
+    const address = locationInput.value.trim();
+    if (mapAddress) mapAddress.textContent = address || "Your venue preview";
+    if (!mapLink) return;
+    if (address) {
+      mapLink.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+      mapLink.removeAttribute("aria-disabled");
+      mapLink.removeAttribute("tabindex");
+    } else {
+      mapLink.href = "#";
+      mapLink.setAttribute("aria-disabled", "true");
+      mapLink.setAttribute("tabindex", "-1");
+    }
+  });
   document
     .querySelector("[data-builder-prev]")
     ?.addEventListener("click", () => {
@@ -932,8 +979,27 @@ function updateFloatingStories() {
 function updateExperienceJourney() {
   const section = document.querySelector("[data-experience-journey]");
   if (!section?.classList.contains("is-enhanced")) return;
-  const sectionRect = section.getBoundingClientRect();
-  const progress = Math.min(1, Math.max(0, (window.innerHeight - sectionRect.top) / (section.offsetHeight + window.innerHeight)));
+  const stage = section.querySelector(".experience-stage");
+  const route = section.querySelector(".journey-route-progress");
+  const stageRect = stage?.getBoundingClientRect();
+  let progress = 0;
+  if (route && stageRect && stageRect.height > 0) {
+    const targetY = ((window.innerHeight / 2 - stageRect.top) / stageRect.height) * 4800;
+    const total = route.getTotalLength();
+    const startY = route.getPointAtLength(0).y;
+    const endY = route.getPointAtLength(total).y;
+    if (targetY >= startY) {
+      let low = 0;
+      let high = total;
+      for (let i = 0; i < 18; i += 1) {
+        const mid = (low + high) / 2;
+        if (route.getPointAtLength(mid).y < targetY) low = mid;
+        else high = mid;
+      }
+      progress = targetY >= endY ? 1 : high / total;
+    }
+  }
+  progress = Math.min(1, Math.max(0, progress));
   section.style.setProperty("--journey-progress", progress.toFixed(4));
   let active = -1;
   section.dataset.activeStep = String(active);
@@ -941,8 +1007,8 @@ function updateExperienceJourney() {
   section.querySelectorAll("[data-journey-step]").forEach((card) => {
     const index = Number(card.dataset.journeyStep);
     const rect = card.getBoundingClientRect();
-    const stamped = rect.top < window.innerHeight * 0.84;
-    if (rect.top < window.innerHeight * 0.62) active = Math.max(active, index);
+    const stamped = rect.top < window.innerHeight * 0.5;
+    if (rect.top < window.innerHeight * 0.48) active = Math.max(active, index);
     card.classList.toggle("is-stamped", stamped);
     card.classList.toggle("is-current", stamped && index === active);
   });

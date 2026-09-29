@@ -3621,7 +3621,7 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 /* A long, staggered path creates room for every category and carries the story below the fold. */
 .experience-journey.is-enhanced { height: auto; padding: 0; }
 .experience-journey.is-enhanced .experience-stage {
-  position: relative; top: auto; width: 100%; max-width: none; height: 440svh; min-height: 3000px;
+  position: relative; top: auto; width: 100%; max-width: none; height: 480svh; min-height: 3000px;
   margin: 0; padding: 40px 0 0; overflow: visible; border: 0; border-radius: 0; box-shadow: none;
   background: radial-gradient(ellipse at 50% 10%,rgba(255,255,255,.58),transparent 50%);
 }
@@ -3632,17 +3632,17 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 .journey-route-progress { stroke: #e8a32e; stroke-width: 3.5; stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--journey-progress,0)); filter: drop-shadow(0 0 5px rgba(232,163,46,.35)); }
 .experience-journey.is-enhanced .journey-cards { position: absolute; inset: 0; z-index: 1; display: block; height: 100%; }
 .experience-journey.is-enhanced .journey-card {
-  position: absolute; z-index: 1; left: 7%; right: auto; top: 40svh;
-  display: flex; width: min(38vw,520px); height: clamp(390px,44svh,480px); max-height: none;
+  position: absolute; z-index: 3; left: 7%; right: auto; top: 40svh;
+  display: flex; width: min(34vw,460px); height: clamp(360px,40svh,430px); max-height: none;
   border-radius: 26px; opacity: 0; transform: translateY(36px) scale(.94) rotate(var(--stamp-tilt,-1deg));
-  transition: opacity .55s ease, transform .72s cubic-bezier(.16,1,.3,1), box-shadow .35s ease;
+  transition: opacity .16s ease, transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease;
 }
 .experience-journey.is-enhanced .journey-card.is-stamped { opacity: 1; transform: translateY(0) scale(1) rotate(var(--stamp-tilt,-1deg)); pointer-events: auto; }
 .experience-journey.is-enhanced .journey-card.is-current { box-shadow: 0 18px 42px rgba(45,37,17,.15),0 0 0 2px rgba(237,170,56,.55); }
 .experience-journey.is-enhanced .journey-card:nth-child(1) { --stamp-tilt:-1.5deg; left:7%; right:auto; top:40svh; }
-.experience-journey.is-enhanced .journey-card:nth-child(2) { --stamp-tilt:1.5deg; left:auto; right:7%; top:140svh; }
-.experience-journey.is-enhanced .journey-card:nth-child(3) { --stamp-tilt:-1deg; left:7%; right:auto; top:240svh; }
-.experience-journey.is-enhanced .journey-card:nth-child(4) { --stamp-tilt:1.5deg; left:auto; right:7%; top:340svh; }
+.experience-journey.is-enhanced .journey-card:nth-child(2) { --stamp-tilt:1.5deg; left:auto; right:7%; top:150svh; }
+.experience-journey.is-enhanced .journey-card:nth-child(3) { --stamp-tilt:-1deg; left:7%; right:auto; top:260svh; }
+.experience-journey.is-enhanced .journey-card:nth-child(4) { --stamp-tilt:1.5deg; left:auto; right:7%; top:370svh; }
 .experience-journey.is-enhanced .journey-photo { flex-basis: 48%; }
 .experience-journey.is-enhanced .journey-photo-sticker { width: clamp(100px,10vw,150px); height: clamp(72px,7vw,108px); }
 .experience-journey.is-enhanced .journey-copy { padding: 20px 24px 12px; }
@@ -3652,8 +3652,88 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 .experience-journey.is-enhanced .journey-card > strong { padding: 0 24px 20px; font-size: 15px; }
 .experience-journey.is-enhanced .journey-endpoint { display: block; position: absolute; right: 7vw; bottom: 3%; z-index: 2; }
 .experience-journey.is-enhanced .journey-progress-label { display: flex; position: absolute; left: 7vw; bottom: 3%; z-index: 2; }
+.experience-journey.is-enhanced .journey-products {
+  position: absolute; z-index: 2; width: 44%; height: 32svh; max-height: 340px;
+  opacity: 0; transform: translateY(22px); transition: opacity .2s ease,transform .36s cubic-bezier(.2,.8,.2,1);
+  pointer-events: none;
+}
+.experience-journey.is-enhanced .journey-products.is-stamped { opacity: 1; transform: translateY(0); }
+.journey-products.products-audio { top: 40svh; right: 7%; }
+.journey-products.products-video { top: 150svh; left: 7%; }
+.journey-products.products-experiences { top: 260svh; right: 7%; }
+.journey-products.products-led { top: 370svh; left: 7%; }
+.journey-product-stamp {
+  position: absolute; width: clamp(180px,13vw,250px); margin: 0; padding: 8px;
+  border: 1px solid rgba(77,63,42,.12); border-radius: 13px; background: rgba(251,250,247,.96);
+  box-shadow: 0 12px 28px rgba(45,37,17,.12);
+  opacity: 0; transform: translateY(18px) scale(.92) rotate(var(--product-tilt,-4deg));
+  transition: opacity .2s ease,transform .36s cubic-bezier(.2,.8,.2,1);
+}
+.journey-product-stamp:first-child { left: 2%; top: 0; --product-tilt:-4deg; }
+.journey-product-stamp:nth-child(2) { right: 1%; top: 34%; --product-tilt:3deg; }
+.journey-products.is-stamped .journey-product-stamp { opacity: 1; transform: translateY(0) scale(1) rotate(var(--product-tilt)); }
+.journey-product-stamp img { display: block; width: 100%; height: clamp(112px,12vw,170px); object-fit: cover; border-radius: 8px; }
+.journey-product-stamp figcaption { display: grid; gap: 3px; padding: 10px 5px 5px; }
+.journey-product-stamp figcaption strong { font-size: 14px; }
+.journey-product-stamp figcaption span { color: var(--muted); font-size: 12px; line-height: 1.35; }
+.experience-journey.is-enhanced .journey-photo-sticker { transition-duration: .3s; }
+.experience-journey.is-enhanced .journey-route-progress { transition: none; }
+
+/* Keep the broken route visible, then let the solid trace meet the viewport center. */
+.experience-journey.is-enhanced .journey-route-base { stroke: rgba(80,68,52,.58); stroke-width: 3.5; stroke-dasharray: 6 15; }
+.experience-journey.is-enhanced .journey-route-progress { stroke-width: 4; }
+
+/* A quick press, contact, and settle gives each reveal a stamped paper feel. */
+@keyframes journey-stamp-impression {
+  0% { transform: translateY(-30px) scale(1.055) rotate(calc(var(--stamp-tilt,-1deg) - 3deg)); filter: blur(1.5px); }
+  48% { transform: translateY(3px) scale(.975) rotate(calc(var(--stamp-tilt,-1deg) + 1deg)); filter: blur(0); }
+  68% { transform: translateY(-2px) scale(1.012) rotate(calc(var(--stamp-tilt,-1deg) - .35deg)); }
+  100% { transform: translateY(0) scale(1) rotate(var(--stamp-tilt,-1deg)); filter: none; }
+}
+.experience-journey.is-enhanced .journey-card.is-stamped { animation: journey-stamp-impression .58s cubic-bezier(.2,.75,.25,1) both; }
+.experience-journey.is-enhanced .journey-products.is-stamped .journey-product-stamp { animation: journey-stamp-impression .58s cubic-bezier(.2,.75,.25,1) both; }
+.experience-journey.is-enhanced .journey-products.is-stamped .journey-product-stamp:nth-child(2) { animation-delay: .1s; }
+
+/* Warm amber light works on every bundle tone, including the dark customize panel. */
+.bundle-card { border-color: #e9dfc9; transition: border-color .2s ease, box-shadow .2s ease; }
+.bundle-card:hover { border-color: #e6aa37; box-shadow: 0 0 0 1px rgba(230,170,55,.26), 0 16px 38px rgba(45,37,17,.12), 0 0 28px rgba(255,190,61,.26); }
+.bundle-card:hover::before { opacity: max(var(--edge-proximity), .58); }
+.bundle-card:focus-within::before { opacity: .82; }
+#app .bundle-top.has-bundle-image .eyebrow { color: #fff3c8 !important; text-shadow: 0 1px 8px rgba(0,0,0,.8); }
+#app .bundle-top.has-bundle-image h3 { color: #fff !important; text-shadow: 0 2px 20px rgba(0,0,0,.68); }
+#app .bundle-top.has-bundle-image { background-image: linear-gradient(180deg,rgba(18,20,21,.2),rgba(18,20,21,.82)),var(--bundle-image); }
+#app .bundle-customize h2 { color: #fff9e9 !important; }
+#app .bundle-customize .eyebrow { color: #ffdc78 !important; }
+#app .bundle-customize p { color: rgba(255,255,255,.82); }
+.bundle-body { color: #302f29; }
+.bundle-body > p { color: #5b5a52 !important; }
+.bundle-body li { color: #4e4c45; }
+.bundle-price { color: #282720; }
+
+/* Event location map fallback and structured builder review. */
+.builder-map-placeholder { position: relative; display: flex; align-items: center; min-height: 142px; margin-top: 10px; overflow: hidden; border: 1px solid #ded8ca; border-radius: 16px; background: #eee9dc; }
+.map-placeholder-grid { position: absolute; inset: 0; opacity: .75; background-color: #eee9dc; background-image: linear-gradient(28deg,transparent 46%,#fffdf5 47% 52%,transparent 53%),linear-gradient(118deg,transparent 42%,#d7d0bf 43% 45%,transparent 46%),linear-gradient(0deg,transparent 47%,#fffdf5 48% 53%,transparent 54%); background-size: 140px 100px,180px 120px,100% 54px; }
+.map-placeholder-grid::after { position: absolute; inset: 0; content: ""; opacity: .6; background-image: radial-gradient(ellipse at 25% 25%,#d4dfc6 0 12%,transparent 13%),radial-gradient(ellipse at 80% 70%,#d4dfc6 0 15%,transparent 16%); }
+.map-pin { position: absolute; z-index: 1; top: 27px; left: 36%; display: grid; width: 30px; height: 30px; place-items: center; border: 5px solid #fff; border-radius: 50% 50% 50% 0; background: #e7a92e; color: #fff; font-size: 10px; transform: rotate(-45deg); box-shadow: 0 3px 12px rgba(48,38,18,.24); }
+.map-placeholder-copy { position: relative; z-index: 1; display: grid; gap: 5px; width: min(72%,360px); margin: 58px 14px 12px auto; padding: 12px 14px; border: 1px solid rgba(60,53,38,.1); border-radius: 12px; background: rgba(255,254,250,.94); box-shadow: 0 6px 18px rgba(45,37,17,.09); }
+.map-placeholder-copy strong { overflow-wrap: anywhere; font-size: 13px; }
+.map-placeholder-copy span,.map-api-note { color: #68665e; font-size: 12px; }
+.map-placeholder-copy a { width: fit-content; color: #76540d; font-size: 12px; font-weight: 700; }
+.map-placeholder-copy a[aria-disabled="true"] { opacity: .58; pointer-events: none; }
+.map-api-note { display: block; margin-top: 7px; }
+.builder-event-summary { display: grid; gap: 2px; margin-top: 18px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: #fff; }
+.builder-event-summary h3 { margin: 0 0 8px; font-size: 18px; }
+.builder-event-summary .summary-line { gap: 16px; align-items: start; padding: 9px 0; }
+.builder-event-summary .summary-line strong { max-width: 65%; overflow-wrap: anywhere; text-align: right; }
+.builder-event-summary a { color: #76540d; }
+@media (prefers-reduced-motion: reduce) {
+  .experience-journey.is-enhanced .journey-card.is-stamped,
+  .experience-journey.is-enhanced .journey-products.is-stamped .journey-product-stamp { animation: none; }
+}
 @media (max-width: 1100px) and (min-width: 1041px) {
   .experience-journey.is-enhanced .journey-card { width: min(40vw,440px); }
+  .experience-journey.is-enhanced .journey-products { width: 46%; }
+  .journey-product-stamp { width: clamp(165px,13vw,220px); }
 }
 @media (max-width: 760px) {
   .experience-journey { width: auto; margin-left: 0; }
@@ -3662,6 +3742,7 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   .experience-journey .journey-route { display: none; }
   .experience-journey .journey-cards { position: relative; display: grid; height: auto; grid-template-columns: 1fr; gap: 18px; margin-top: 24px; }
   .experience-journey .journey-card { position: relative; inset: auto; display: flex; width: 100%; height: 330px; min-height: 0; max-height: none; opacity: 1; transform: none; pointer-events: auto; }
+  .experience-journey .journey-products { display: none; }
   .experience-journey .journey-photo-sticker { width: 92px; height: 68px; }
   .experience-journey .journey-endpoint, .experience-journey .journey-progress-label { display: none; }
 }
