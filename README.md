@@ -1,4 +1,4 @@
-# Beantown Audio + Visual — Website Mockup
+# Beantown Audio + Visual — Website Mockup (underdevelopment all rights belong to the client)
 
 A polished front-end mockup for an event AV rental company inspired by the requested Beantown Audio Rentals redesign direction.
 
