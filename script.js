@@ -537,20 +537,167 @@ function home() {
   <div class="marquee"><div class="marquee-track"><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span><b>•</b><span>Live Streaming</span><b>•</b><span>Outdoor Movies</span><b>•</b><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span></div></div>
   <section class="experience-journey" data-experience-journey>
     <div class="experience-stage">
-      <div class="section-head experience-heading"><div><span class="eyebrow">WHAT ARE YOU RENTING?</span><h2>Start with the<br>experience.</h2></div><p>Scroll to explore the possibilities. Follow the line from sound to the full visual experience.</p></div>
-      <svg class="journey-route" viewBox="0 0 1200 4800" preserveAspectRatio="none" aria-hidden="true"><path class="journey-route-base" d="M470 600 C850 700 920 1490 730 1700 C560 1900 370 2570 470 2800 C590 3020 890 3670 730 3900 C640 4120 510 4460 600 4700"/><path class="journey-route-progress" d="M470 600 C850 700 920 1490 730 1700 C560 1900 370 2570 470 2800 C590 3020 890 3670 730 3900 C640 4120 510 4460 600 4700" pathLength="1"/></svg>
-      <div class="journey-cards">
-        <a href="#rentals?cat=Audio" class="category-card journey-card cat-a" data-journey-step="0" style="--journey-photo:url('assets/beantown/speaker-rental.jpg');--sticker-photo:url('assets/beantown/microphone.jpg')"><span class="journey-photo" aria-hidden="true"></span><span class="journey-photo-sticker" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">01 / SOUND</span><h3>Audio</h3><p>Speakers, microphones, mixers and live-performance systems.</p></div><strong>Explore →</strong></a>
-        <a href="#rentals?cat=Video%20%26%20Displays" class="category-card journey-card cat-b" data-journey-step="1" style="--journey-photo:url('assets/beantown/projector-screen.jpg');--sticker-photo:url('assets/beantown/event-display.jpg')"><span class="journey-photo" aria-hidden="true"></span><span class="journey-photo-sticker" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">02 / PICTURE</span><h3>Video</h3><p>TVs, projection, switching and visual presentation packages.</p></div><strong>Explore →</strong></a>
-        <a href="#rentals?cat=Experiences" class="category-card journey-card cat-c" data-journey-step="2" style="--journey-photo:url('assets/beantown/photo-booth-360.jpg');--sticker-photo:url('assets/beantown/silent-disco.webp')"><span class="journey-photo" aria-hidden="true"></span><span class="journey-photo-sticker" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">03 / MOMENTS</span><h3>Experiences</h3><p>Silent disco, outdoor movies and photo booth moments.</p></div><strong>Explore →</strong></a>
-        <a href="#rentals?cat=LED%20Walls" class="category-card journey-card cat-d" data-journey-step="3" style="--journey-photo:url('assets/beantown/led-wall-roses.webp');--sticker-photo:url('assets/beantown/event-stage.jpg')"><span class="journey-photo" aria-hidden="true"></span><span class="journey-photo-sticker" aria-hidden="true"></span><div class="journey-copy"><span class="eyebrow">04 / LED WALLS</span><h3>LED Walls</h3><p>High-impact visuals for stages, launches, parties and concerts.</p></div><strong>Explore →</strong></a>
-        <div class="journey-products products-audio" data-journey-step="0" role="group" aria-label="Audio equipment examples"><figure class="journey-product-stamp"><img src="assets/beantown/concert-audio.webp" alt="" loading="lazy"><figcaption><strong>PA speakers</strong><span>Full, room-filling sound</span></figcaption></figure><figure class="journey-product-stamp"><img src="assets/beantown/microphone-rentals.jpeg" alt="" loading="lazy"><figcaption><strong>Microphones</strong><span>Ready for every voice</span></figcaption></figure></div>
-        <div class="journey-products products-video" data-journey-step="1" role="group" aria-label="Video equipment examples"><figure class="journey-product-stamp"><img src="assets/beantown/projector-screen.jpg" alt="" loading="lazy"><figcaption><strong>Projection</strong><span>Make the picture bigger</span></figcaption></figure><figure class="journey-product-stamp"><img src="assets/beantown/event-display.jpg" alt="" loading="lazy"><figcaption><strong>Event displays</strong><span>Clear, vivid presentation</span></figcaption></figure></div>
-        <div class="journey-products products-experiences" data-journey-step="2" role="group" aria-label="Experience equipment examples"><figure class="journey-product-stamp"><img src="assets/beantown/headphones.jpg" alt="" loading="lazy"><figcaption><strong>Silent disco</strong><span>Three channels, one dance floor</span></figcaption></figure><figure class="journey-product-stamp"><img src="assets/beantown/outdoor-movie.jpg" alt="" loading="lazy"><figcaption><strong>Outdoor cinema</strong><span>Big-screen nights outside</span></figcaption></figure></div>
-        <div class="journey-products products-led" data-journey-step="3" role="group" aria-label="LED wall examples"><figure class="journey-product-stamp"><img src="assets/beantown/69667bc33d884d697701e4c1_Led-Wall.png" alt="" loading="lazy"><figcaption><strong>LED walls</strong><span>Bright, high-impact visuals</span></figcaption></figure><figure class="journey-product-stamp"><img src="assets/beantown/69667bc5bf1882f6695ff917_V-SHAPE-LED-WALL-p-800.jpg" alt="" loading="lazy"><figcaption><strong>Modular screens</strong><span>Shape the stage your way</span></figcaption></figure></div>
+      <div class="experience-center-anchor">
+        <span class="eyebrow">WHAT ARE YOU RENTING?</span>
+        <h2 class="experience-main-title">Start with the<br>experience.</h2>
+        <p class="experience-subcopy">Scroll to explore the possibilities — from room-filling sound to full-scale visual production.</p>
+        <div class="experience-category-pills" role="navigation" aria-label="Experience categories">
+          <a href="#rentals?cat=Audio" class="exp-pill is-active" data-exp-pill="0"><span>01</span> Audio</a>
+          <a href="#rentals?cat=Video%20%26%20Displays" class="exp-pill" data-exp-pill="1"><span>02</span> Video</a>
+          <a href="#rentals?cat=Experiences" class="exp-pill" data-exp-pill="2"><span>03</span> Experiences</a>
+          <a href="#rentals?cat=LED%20Walls" class="exp-pill" data-exp-pill="3"><span>04</span> LED Walls</a>
+        </div>
       </div>
-      <span class="journey-endpoint" aria-hidden="true">THE FULL SETUP</span>
-      <div class="journey-progress-label" aria-live="polite"><span data-journey-label>01</span><i></i><span>04</span></div>
+
+      <div class="tile-reveal-canvas" aria-label="Interactive equipment collage">
+        <!-- WAVE 1: Sound & Picture Collage -->
+        <a href="#rentals?cat=Audio" class="reveal-tile tile-primary tone-gold" data-tile data-step="0"
+           data-start="-0.06" data-peak-start="0.14" data-peak-end="0.38" data-end="0.55"
+           data-enter-x="-68" data-enter-y="-42" data-enter-rot="-18" data-enter-scale="0.70"
+           data-target-x="-36" data-target-y="-14" data-target-rot="-4" data-target-scale="1"
+           data-exit-x="-64" data-exit-y="-44" data-exit-rot="-14" data-exit-scale="0.76"
+           data-drift-x="1.8" data-drift-y="-2.2" data-drift-rot="1.8">
+          <span class="tile-media"><img src="assets/beantown/speaker-rental.jpg" alt="Audio rentals" loading="lazy"></span>
+          <div class="tile-body">
+            <span class="tile-tag">01 / SOUND</span>
+            <h3>Audio</h3>
+            <p>Speakers, mics, mixers &amp; live PA.</p>
+            <span class="tile-cta">Explore →</span>
+          </div>
+        </a>
+
+        <a href="#rentals?cat=Audio" class="reveal-tile tile-secondary tone-lime" data-tile data-step="0"
+           data-start="-0.01" data-peak-start="0.18" data-peak-end="0.41" data-end="0.58"
+           data-enter-x="-14" data-enter-y="-60" data-enter-rot="16" data-enter-scale="0.66"
+           data-target-x="-13" data-target-y="-31" data-target-rot="3.5" data-target-scale="1"
+           data-exit-x="-28" data-exit-y="-56" data-exit-rot="-13" data-exit-scale="0.74"
+           data-drift-x="-1.6" data-drift-y="-1.8" data-drift-rot="-2.2">
+          <span class="tile-media"><img src="assets/beantown/concert-audio.webp" alt="PA speakers" loading="lazy"></span>
+          <div class="tile-caption"><strong>PA speakers</strong><span>Full, room-filling sound</span></div>
+        </a>
+
+        <a href="#rentals?cat=Video%20%26%20Displays" class="reveal-tile tile-secondary tone-sky" data-tile data-step="1"
+           data-start="0.03" data-peak-start="0.21" data-peak-end="0.43" data-end="0.60"
+           data-enter-x="66" data-enter-y="-44" data-enter-rot="19" data-enter-scale="0.68"
+           data-target-x="32" data-target-y="-22" data-target-rot="4.5" data-target-scale="1"
+           data-exit-x="64" data-exit-y="-36" data-exit-rot="16" data-exit-scale="0.75"
+           data-drift-x="2.2" data-drift-y="-2.0" data-drift-rot="2.0">
+          <span class="tile-media"><img src="assets/beantown/projector-screen.jpg" alt="Projection" loading="lazy"></span>
+          <div class="tile-caption"><strong>Projection</strong><span>Make the picture bigger</span></div>
+        </a>
+
+        <a href="#rentals?cat=Microphones" class="reveal-tile tile-secondary tone-coral" data-tile data-step="0"
+           data-start="0.07" data-peak-start="0.24" data-peak-end="0.45" data-end="0.62"
+           data-enter-x="-64" data-enter-y="48" data-enter-rot="17" data-enter-scale="0.68"
+           data-target-x="-32" data-target-y="24" data-target-rot="4.0" data-target-scale="1"
+           data-exit-x="-66" data-exit-y="38" data-exit-rot="-15" data-exit-scale="0.74"
+           data-drift-x="-2.0" data-drift-y="2.2" data-drift-rot="-1.8">
+          <span class="tile-media"><img src="assets/beantown/microphone-rentals.jpeg" alt="Microphones" loading="lazy"></span>
+          <div class="tile-caption"><strong>Microphones</strong><span>Ready for every voice</span></div>
+        </a>
+
+        <a href="#rentals?cat=Video%20%26%20Displays" class="reveal-tile tile-primary tone-peach" data-tile data-step="1"
+           data-start="0.11" data-peak-start="0.28" data-peak-end="0.48" data-end="0.65"
+           data-enter-x="70" data-enter-y="40" data-enter-rot="16" data-enter-scale="0.72"
+           data-target-x="36" data-target-y="15" data-target-rot="-3.5" data-target-scale="1"
+           data-exit-x="66" data-exit-y="44" data-exit-rot="14" data-exit-scale="0.76"
+           data-drift-x="2.0" data-drift-y="2.2" data-drift-rot="-2.0">
+          <span class="tile-media"><img src="assets/beantown/event-display.jpg" alt="Video &amp; Displays" loading="lazy"></span>
+          <div class="tile-body">
+            <span class="tile-tag">02 / PICTURE</span>
+            <h3>Video</h3>
+            <p>4K TVs, laser projection &amp; switching.</p>
+            <span class="tile-cta">Explore →</span>
+          </div>
+        </a>
+
+        <a href="#rentals?cat=Video%20%26%20Displays" class="reveal-tile tile-secondary tone-lavender" data-tile data-step="1"
+           data-start="0.15" data-peak-start="0.31" data-peak-end="0.50" data-end="0.67"
+           data-enter-x="14" data-enter-y="60" data-enter-rot="-15" data-enter-scale="0.66"
+           data-target-x="13" data-target-y="31" data-target-rot="-3.0" data-target-scale="1"
+           data-exit-x="26" data-exit-y="56" data-exit-rot="12" data-exit-scale="0.74"
+           data-drift-x="1.6" data-drift-y="1.8" data-drift-rot="2.2">
+          <span class="tile-media"><img src="assets/beantown/live-streaming.jpg" alt="Event displays" loading="lazy"></span>
+          <div class="tile-caption"><strong>Event displays</strong><span>Clear, vivid presentation</span></div>
+        </a>
+
+        <!-- WAVE 2: Moments & Full Visual Production Collage -->
+        <a href="#rentals?cat=Experiences" class="reveal-tile tile-primary tone-mint" data-tile data-step="2"
+           data-start="0.40" data-peak-start="0.57" data-peak-end="0.80" data-end="0.96"
+           data-enter-x="-70" data-enter-y="36" data-enter-rot="-17" data-enter-scale="0.70"
+           data-target-x="-36" data-target-y="15" data-target-rot="3.5" data-target-scale="1"
+           data-exit-x="-64" data-exit-y="44" data-exit-rot="-14" data-exit-scale="0.76"
+           data-drift-x="-2.0" data-drift-y="2.2" data-drift-rot="1.8">
+          <span class="tile-media"><img src="assets/beantown/photo-booth-360.jpg" alt="Experiences" loading="lazy"></span>
+          <div class="tile-body">
+            <span class="tile-tag">03 / MOMENTS</span>
+            <h3>Experiences</h3>
+            <p>Silent disco, outdoor cinema &amp; booths.</p>
+            <span class="tile-cta">Explore →</span>
+          </div>
+        </a>
+
+        <a href="#rentals?cat=Experiences" class="reveal-tile tile-secondary tone-gold" data-tile data-step="2"
+           data-start="0.44" data-peak-start="0.60" data-peak-end="0.82" data-end="0.97"
+           data-enter-x="-62" data-enter-y="-48" data-enter-rot="16" data-enter-scale="0.68"
+           data-target-x="-32" data-target-y="-22" data-target-rot="-4.2" data-target-scale="1"
+           data-exit-x="-64" data-exit-y="-36" data-exit-rot="-16" data-exit-scale="0.74"
+           data-drift-x="-2.2" data-drift-y="-2.0" data-drift-rot="-2.0">
+          <span class="tile-media"><img src="assets/beantown/headphones.jpg" alt="Silent disco" loading="lazy"></span>
+          <div class="tile-caption"><strong>Silent disco</strong><span>Three channels, one dance floor</span></div>
+        </a>
+
+        <a href="#rentals?cat=Outdoor%20Movies" class="reveal-tile tile-secondary tone-coral" data-tile data-step="2"
+           data-start="0.47" data-peak-start="0.63" data-peak-end="0.84" data-end="0.98"
+           data-enter-x="14" data-enter-y="-60" data-enter-rot="-15" data-enter-scale="0.66"
+           data-target-x="13" data-target-y="-31" data-target-rot="-3.0" data-target-scale="1"
+           data-exit-x="28" data-exit-y="-56" data-exit-rot="13" data-exit-scale="0.74"
+           data-drift-x="1.6" data-drift-y="-1.8" data-drift-rot="2.0">
+          <span class="tile-media"><img src="assets/beantown/outdoor-movie.jpg" alt="Outdoor cinema" loading="lazy"></span>
+          <div class="tile-caption"><strong>Outdoor cinema</strong><span>Big-screen nights outside</span></div>
+        </a>
+
+        <a href="#rentals?cat=LED%20Walls" class="reveal-tile tile-primary tone-periwinkle" data-tile data-step="3"
+           data-start="0.50" data-peak-start="0.66" data-peak-end="0.87" data-end="0.99"
+           data-enter-x="70" data-enter-y="-36" data-enter-rot="18" data-enter-scale="0.72"
+           data-target-x="36" data-target-y="-14" data-target-rot="3.8" data-target-scale="1"
+           data-exit-x="64" data-exit-y="-44" data-exit-rot="14" data-exit-scale="0.76"
+           data-drift-x="2.0" data-drift-y="-2.0" data-drift-rot="-2.0">
+          <span class="tile-media"><img src="assets/beantown/led-wall-roses.webp" alt="LED Walls" loading="lazy"></span>
+          <div class="tile-body">
+            <span class="tile-tag">04 / LED WALLS</span>
+            <h3>LED Walls</h3>
+            <p>High-impact visuals for stages &amp; launches.</p>
+            <span class="tile-cta">Explore →</span>
+          </div>
+        </a>
+
+        <a href="#rentals?cat=LED%20Walls" class="reveal-tile tile-secondary tone-lavender" data-tile data-step="3"
+           data-start="0.53" data-peak-start="0.69" data-peak-end="0.89" data-end="1.00"
+           data-enter-x="-14" data-enter-y="60" data-enter-rot="16" data-enter-scale="0.68"
+           data-target-x="-13" data-target-y="31" data-target-rot="3.2" data-target-scale="1"
+           data-exit-x="-26" data-exit-y="56" data-exit-rot="-13" data-exit-scale="0.74"
+           data-drift-x="-1.6" data-drift-y="1.8" data-drift-rot="2.2">
+          <span class="tile-media"><img src="assets/beantown/69667bc33d884d697701e4c1_Led-Wall.png" alt="LED stage walls" loading="lazy"></span>
+          <div class="tile-caption"><strong>LED walls</strong><span>Bright, high-impact visuals</span></div>
+        </a>
+
+        <a href="#rentals?cat=LED%20Walls" class="reveal-tile tile-secondary tone-lime" data-tile data-step="3"
+           data-start="0.56" data-peak-start="0.72" data-peak-end="0.91" data-end="1.02"
+           data-enter-x="64" data-enter-y="48" data-enter-rot="-17" data-enter-scale="0.68"
+           data-target-x="32" data-target-y="24" data-target-rot="-4.0" data-target-scale="1"
+           data-exit-x="66" data-exit-y="38" data-exit-rot="15" data-exit-scale="0.75"
+           data-drift-x="2.0" data-drift-y="2.0" data-drift-rot="-1.8">
+          <span class="tile-media"><img src="assets/beantown/69667bc5bf1882f6695ff917_V-SHAPE-LED-WALL-p-800.jpg" alt="Modular screens" loading="lazy"></span>
+          <div class="tile-caption"><strong>Modular screens</strong><span>Shape the stage your way</span></div>
+        </a>
+      </div>
+
+      <div class="experience-scroll-progress" aria-live="polite">
+        <span data-journey-label>01</span>
+        <i></i>
+        <span>04</span>
+      </div>
     </div>
   </section>
   <section class="section"><div class="section-head"><div><span class="eyebrow">POPULAR NOW</span><h2>Public pricing,<br>where it exists.</h2></div><a class="btn btn-light" href="#rentals">See all rentals</a></div><div class="product-grid">${products
@@ -650,8 +797,120 @@ function builder() {
   }
 }
 
+const servicePillars = [
+  {
+    code: "AV",
+    num: "01",
+    title: "Audio production",
+    word: "audio.",
+    desc: "From small gatherings to large-room PA systems, create the right scale for the audience and venue.",
+    href: "#rentals?cat=Audio",
+    cta: "Explore audio rentals →",
+  },
+  {
+    code: "VX",
+    num: "02",
+    title: "Video + LED",
+    word: "video + LED.",
+    desc: "Projection, TVs, LED walls and signal routing for presentations, stages, launches and live events.",
+    href: "#rentals?cat=LED%20Walls",
+    cta: "Explore video & LED →",
+  },
+  {
+    code: "4K",
+    num: "03",
+    title: "Live streaming",
+    word: "streaming.",
+    desc: "Single-camera and multi-angle event production with capture and streaming support.",
+    href: "#rentals?cat=Live%20Streaming",
+    cta: "Explore live streaming →",
+  },
+  {
+    code: "SET",
+    num: "04",
+    title: "Delivery + setup",
+    word: "setup.",
+    desc: "Delivery, setup, pickup, and clear walkthroughs to help your event run smoothly.",
+    href: "#builder",
+    cta: "Plan delivery & setup →",
+  },
+  {
+    code: "FUN",
+    num: "05",
+    title: "Event experiences",
+    word: "experiences.",
+    desc: "Silent disco, outdoor cinema and photo booths turn a basic rental into something memorable.",
+    href: "#rentals?cat=Experiences",
+    cta: "Explore experiences →",
+  },
+  {
+    code: "OPS",
+    num: "06",
+    title: "On-site support",
+    word: "support.",
+    desc: "Get support from a team that knows the gear and understands event timelines.",
+    href: "#quote",
+    cta: "Book on-site support →",
+  },
+];
+
+function renderServiceItem(s, index) {
+  return `
+    <li>
+      <button type="button" class="about13-value-btn ${index === 0 ? "is-active" : ""}" data-about13-item="${index}" aria-pressed="${index === 0 ? "true" : "false"}">
+        <span class="about13-progress-track" aria-hidden="true">
+          <span class="about13-progress-fill" data-about13-bar style="transform: scaleX(${index === 0 ? 0.08 : 0})"></span>
+        </span>
+        <span class="about13-item-meta">
+          <span class="about13-item-num">${s.num}</span>
+          <span class="about13-item-code">${s.code}</span>
+        </span>
+        <span class="about13-item-title">${s.title}</span>
+        <span class="about13-item-desc">${s.desc}</span>
+      </button>
+    </li>`;
+}
+
 function services() {
- return `<div class="page"><div class="page-hero"><div><span class="eyebrow">SERVICES</span><h1>More than<br>equipment.</h1></div><p>Professional audio, lighting and video rentals, backed by dependable delivery, setup and support across Boston and New England.</p></div><div class="service-grid"><div class="service-card"><div class="service-icon">AV</div><h3>Audio production</h3><p>From small gatherings to large-room PA systems, create the right scale for the audience and venue.</p></div><div class="service-card"><div class="service-icon">VX</div><h3>Video + LED</h3><p>Projection, TVs, LED walls and signal routing for presentations, stages, launches and live events.</p></div><div class="service-card"><div class="service-icon">4K</div><h3>Live streaming</h3><p>Single-camera and multi-angle event production with capture and streaming support.</p></div><div class="service-card"><div class="service-icon">SET</div><h3>Delivery + setup</h3><p>Delivery, setup, pickup, and clear walkthroughs to help your event run smoothly.</p></div><div class="service-card"><div class="service-icon">FUN</div><h3>Event experiences</h3><p>Silent disco, outdoor cinema and photo booths turn a basic rental into something memorable.</p></div><div class="service-card"><div class="service-icon">OPS</div><h3>On-site support</h3><p>Get support from a team that knows the gear and understands event timelines.</p></div></div></div>`;
+  return `<div class="page">
+    <section class="about13-section" data-about13>
+      <svg class="about13-svg-defs" aria-hidden="true" width="0" height="0" focusable="false">
+        <defs>
+          <filter id="about13-liquid-filter" x="-20%" y="-35%" width="140%" height="170%" color-interpolation-filters="sRGB">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 25 -10" result="melt" />
+          </filter>
+        </defs>
+      </svg>
+
+      <div class="about13-container">
+        <div class="about13-header">
+          <div class="about13-headline-wrap">
+            <span class="eyebrow">SERVICES · MORE THAN EQUIPMENT</span>
+            <h1 class="about13-heading">
+              <span class="about13-prefix">We deliver</span>
+              <span class="about13-melt-stage" data-melt-stage aria-hidden="true">
+                <span class="about13-melt-word is-primary" data-melt-primary>${servicePillars[0].word}</span>
+                <span class="about13-melt-word is-secondary" data-melt-secondary>${servicePillars[1].word}</span>
+              </span>
+              <span class="about13-sr-only" data-melt-sr>${servicePillars[0].title}</span>
+            </h1>
+          </div>
+
+          <div class="about13-aside">
+            <div class="about13-lead-stage" data-lead-stage>
+              <p class="about13-lead is-primary" data-lead-primary>${servicePillars[0].desc}</p>
+              <p class="about13-lead is-secondary" data-lead-secondary aria-hidden="true">${servicePillars[1].desc}</p>
+            </div>
+          </div>
+        </div>
+
+        <ul class="about13-values" aria-label="Our services">
+          ${servicePillars.map((s, idx) => renderServiceItem(s, idx)).join("")}
+        </ul>
+      </div>
+    </section>
+  </div>`;
 }
 
 function quoteSelection() {
@@ -674,7 +933,10 @@ function render(options = {}) {
   if (hash === "bundles") {
     state.bundle = getHashParams().get("bundle") || null;
   }
-  state.category = hash === "rentals" ? state.category : state.category;
+  if (hash === "rentals") {
+    const catParam = getHashParams().get("cat");
+    if (catParam) state.category = catParam;
+  }
   let view = home();
   if (hash === "rentals") view = rentals();
   if (hash === "bundles") view = bundlesPage();
@@ -699,6 +961,7 @@ function render(options = {}) {
   syncNavigation();
   observePageMotion();
   initExperienceJourney();
+  initServicesMelt();
   bind();
   if (options.preserveScroll) {
     window.requestAnimationFrame(() => {
@@ -967,74 +1230,443 @@ function renderSearch(q) {
 }
 
 let floatUpdateQueued = false;
+let journeyState = null;
+let journeySmoothedScrollY = window.scrollY;
+let journeyLastTime = 0;
+let servicesMeltRaf = 0;
 
-function updateFloatingStories() {
-  floatUpdateQueued = false;
-  updateExperienceJourney();
-  const cards = document.querySelectorAll("[data-scroll-float]");
-  if (!cards.length) return;
-
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const progress = reducedMotion || window.innerWidth < 1160
-    ? 0
-    : Math.min(Math.max(window.scrollY / 360, 0), 1);
-
-  cards.forEach((card) => {
-    const direction = Number(card.dataset.scrollFloat) || 1;
-    const tilt = Number.parseFloat(card.style.getPropertyValue("--tilt")) || 0;
-    const x = direction * progress * 220;
-    const y = -progress * 72;
-    card.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${tilt + direction * progress * 8}deg) scale(${1 - progress * 0.08})`;
-    card.style.opacity = String(1 - progress);
-  });
+function clamp01(value) {
+  return value < 0 ? 0 : value > 1 ? 1 : value;
 }
 
-function updateExperienceJourney() {
-  const section = document.querySelector("[data-experience-journey]");
-  if (!section?.classList.contains("is-enhanced")) return;
-  const stage = section.querySelector(".experience-stage");
-  const route = section.querySelector(".journey-route-progress");
-  const stageRect = stage?.getBoundingClientRect();
-  let progress = 0;
-  if (route && stageRect && stageRect.height > 0) {
-    const targetY = ((window.innerHeight / 2 - stageRect.top) / stageRect.height) * 4800;
-    const total = route.getTotalLength();
-    const startY = route.getPointAtLength(0).y;
-    const endY = route.getPointAtLength(total).y;
-    if (targetY >= startY) {
-      let low = 0;
-      let high = total;
-      for (let i = 0; i < 18; i += 1) {
-        const mid = (low + high) / 2;
-        if (route.getPointAtLength(mid).y < targetY) low = mid;
-        else high = mid;
-      }
-      progress = targetY >= endY ? 1 : high / total;
+function smoothstep(edge0, edge1, x) {
+  const t = clamp01((x - edge0) / (edge1 - edge0));
+  return t * t * (3 - 2 * t);
+}
+
+function updateFloatingStories(now = performance.now()) {
+  floatUpdateQueued = false;
+  const needsMoreFrames = updateExperienceJourney(now);
+  const cards = document.querySelectorAll("[data-scroll-float]");
+  if (cards.length) {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const progress = reducedMotion || window.innerWidth < 1160
+      ? 0
+      : Math.min(Math.max(window.scrollY / 360, 0), 1);
+
+    cards.forEach((card) => {
+      const direction = Number(card.dataset.scrollFloat) || 1;
+      const tilt = Number.parseFloat(card.style.getPropertyValue("--tilt")) || 0;
+      const x = direction * progress * 220;
+      const y = -progress * 72;
+      card.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${tilt + direction * progress * 8}deg) scale(${1 - progress * 0.08})`;
+      card.style.opacity = String(1 - progress);
+    });
+  }
+  if (needsMoreFrames && !floatUpdateQueued) {
+    floatUpdateQueued = true;
+    window.requestAnimationFrame(updateFloatingStories);
+  }
+}
+
+function updateExperienceJourney(now = performance.now(), immediate = false) {
+  if (!journeyState || !journeyState.section.isConnected) return false;
+  const { section, anchor, label, pills, tiles, mode } = journeyState;
+  if (!section.classList.contains("is-enhanced")) return false;
+
+  const targetScrollY = window.scrollY;
+  if (immediate || !journeyLastTime) {
+    journeySmoothedScrollY = targetScrollY;
+  } else {
+    const dt = Math.min(0.05, Math.max(0.004, (now - journeyLastTime) / 1000));
+    const alpha = 1 - Math.exp(-14 * dt);
+    journeySmoothedScrollY += (targetScrollY - journeySmoothedScrollY) * alpha;
+    if (Math.abs(targetScrollY - journeySmoothedScrollY) < 0.15) {
+      journeySmoothedScrollY = targetScrollY;
     }
   }
-  progress = Math.min(1, Math.max(0, progress));
+  journeyLastTime = now;
+
+  const scrollLag = journeySmoothedScrollY - targetScrollY;
+  const sectionRect = section.getBoundingClientRect();
+  const sectionTop = sectionRect.top - scrollLag;
+  const sectionHeight = sectionRect.height || 1;
+  const vh = window.innerHeight || 1;
+  const vw = window.innerWidth || 1;
+
+  const scrollableSpan = Math.max(1, sectionHeight - vh * 0.82);
+  const rawProgress = (vh * 0.18 - sectionTop) / scrollableSpan;
+  const progress = clamp01(rawProgress);
+
   section.style.setProperty("--journey-progress", progress.toFixed(4));
-  let active = -1;
-  section.dataset.activeStep = String(active);
-  const label = section.querySelector("[data-journey-label]");
-  section.querySelectorAll("[data-journey-step]").forEach((card) => {
-    const index = Number(card.dataset.journeyStep);
-    const rect = card.getBoundingClientRect();
-    const stamped = rect.top < window.innerHeight * 0.5;
-    if (rect.top < window.innerHeight * 0.48) active = Math.max(active, index);
-    card.classList.toggle("is-stamped", stamped);
-    card.classList.toggle("is-current", stamped && index === active);
-  });
-  section.dataset.activeStep = String(Math.max(active, 0));
-  if (label) label.textContent = String(Math.max(active, 0) + 1).padStart(2, "0");
+
+  // Keep the centered headline stable as the visual anchor with only a subtle depth breath
+  if (anchor) {
+    const entrance = smoothstep(-0.18, 0.04, rawProgress);
+    const anchorY = (1 - entrance) * 18;
+    const breathScale = 1 + Math.sin(progress * Math.PI) * 0.012;
+    anchor.style.transform = `translate3d(0, ${anchorY.toFixed(1)}px, 0) scale(${breathScale.toFixed(4)})`;
+    anchor.style.opacity = (0.35 + entrance * 0.65).toFixed(3);
+  }
+
+  // Adapt collage radius to viewport aspect ratio so tiles frame the centered headline cleanly
+  const stageH = Math.max(540, vh - (mode === "mobile" ? 64 : 74));
+  const xSpread = mode === "mobile" ? 0.84 : mode === "tablet" ? 0.94 : 1.0;
+  const ySpread = mode === "mobile" ? 1.0 : mode === "tablet" ? 1.05 : 1.0;
+
+  for (let i = 0; i < tiles.length; i += 1) {
+    const t = tiles[i];
+    const effTargetX = mode === "mobile"
+      ? (Math.abs(t.targetX) < 22 ? t.targetX * 0.35 : Math.sign(t.targetX) * 32)
+      : t.targetX;
+    const effTargetY = mode === "mobile"
+      ? Math.sign(t.targetY) * (Math.abs(t.targetX) < 22 ? 35 : 29)
+      : t.targetY;
+
+    if (rawProgress <= t.start || rawProgress >= t.end) {
+      t.el.style.opacity = "0";
+      t.el.style.pointerEvents = "none";
+      const offX = (rawProgress <= t.start ? t.enterX : t.exitX) * xSpread * (vw / 100);
+      const offY = (rawProgress <= t.start ? t.enterY : t.exitY) * ySpread * (stageH / 100);
+      const offRot = rawProgress <= t.start ? t.enterRot : t.exitRot;
+      const offScale = rawProgress <= t.start ? t.enterScale : t.exitScale;
+      t.el.style.transform = `translate3d(calc(-50% + ${offX.toFixed(1)}px), calc(-50% + ${offY.toFixed(1)}px), 0) scale(${offScale}) rotate(${offRot}deg)`;
+      continue;
+    }
+
+    let xVw = effTargetX;
+    let yVh = effTargetY;
+    let rot = t.targetRot;
+    let scale = t.targetScale;
+    let opacity = 1;
+
+    if (rawProgress < t.peakStart) {
+      // Flying into collage from outer direction along a curved trajectory
+      const u = clamp01((rawProgress - t.start) / (t.peakStart - t.start));
+      const invU = 1 - u;
+      const easeX = 1 - invU * invU * invU * invU; // quartic ease-out
+      const easeY = 1 - invU * invU * invU; // cubic ease-out
+      xVw = t.enterX + (effTargetX - t.enterX) * easeX;
+      yVh = t.enterY + (effTargetY - t.enterY) * easeY;
+      rot = t.enterRot + (t.targetRot - t.enterRot) * easeY;
+      scale = t.enterScale + (t.targetScale - t.enterScale) * easeY;
+      opacity = smoothstep(0.0, 0.62, u);
+    } else if (rawProgress <= t.peakEnd) {
+      // Floating in temporary collage around the centered headline
+      const m = clamp01((rawProgress - t.peakStart) / (t.peakEnd - t.peakStart));
+      xVw = effTargetX + t.driftX * m;
+      yVh = effTargetY + t.driftY * m;
+      rot = t.targetRot + t.driftRot * m;
+      scale = t.targetScale + Math.sin(m * Math.PI) * 0.028;
+      opacity = 1;
+    } else {
+      // Dispersing / retracting away as the user continues scrolling
+      const v = clamp01((rawProgress - t.peakEnd) / (t.end - t.peakEnd));
+      const easeExitX = v * v;
+      const easeExitY = v * v * (3 - 2 * v);
+      const settledEndX = effTargetX + t.driftX;
+      const settledEndY = effTargetY + t.driftY;
+      const settledEndRot = t.targetRot + t.driftRot;
+      xVw = settledEndX + (t.exitX - settledEndX) * easeExitX;
+      yVh = settledEndY + (t.exitY - settledEndY) * easeExitY;
+      rot = settledEndRot + (t.exitRot - settledEndRot) * easeExitX;
+      scale = t.targetScale + (t.exitScale - t.targetScale) * easeExitY;
+      opacity = 1 - smoothstep(0.08, 0.95, v);
+    }
+
+    const pxX = xVw * xSpread * (vw / 100);
+    const pxY = yVh * ySpread * (stageH / 100);
+
+    t.el.style.transform = `translate3d(calc(-50% + ${pxX.toFixed(1)}px), calc(-50% + ${pxY.toFixed(1)}px), 0) scale(${scale.toFixed(3)}) rotate(${rot.toFixed(2)}deg)`;
+    t.el.style.opacity = opacity.toFixed(3);
+    t.el.style.pointerEvents = opacity > 0.4 ? "auto" : "none";
+  }
+
+  const activeStep = progress < 0.26 ? 0 : progress < 0.50 ? 1 : progress < 0.74 ? 2 : 3;
+  section.dataset.activeStep = String(activeStep);
+  if (label) label.textContent = String(activeStep + 1).padStart(2, "0");
+  if (pills.length) {
+    for (let i = 0; i < pills.length; i += 1) {
+      pills[i].classList.toggle("is-active", i === activeStep);
+    }
+  }
+
+  return Math.abs(targetScrollY - journeySmoothedScrollY) >= 0.15;
 }
 
 function initExperienceJourney() {
   const section = document.querySelector("[data-experience-journey]");
-  if (!section) return;
+  if (!section) {
+    journeyState = null;
+    return;
+  }
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  section.classList.toggle("is-enhanced", !reducedMotion && window.innerWidth > 1040);
-  updateExperienceJourney();
+  const vw = window.innerWidth;
+  const mode = vw <= 700 ? "mobile" : vw <= 1040 ? "tablet" : "desktop";
+  section.dataset.viewportMode = mode;
+  section.classList.toggle("is-enhanced", !reducedMotion);
+
+  if (reducedMotion) {
+    journeyState = null;
+    section.querySelectorAll("[data-tile], .experience-center-anchor").forEach((el) => {
+      el.style.transform = "";
+      el.style.opacity = "";
+      el.style.pointerEvents = "";
+    });
+    return;
+  }
+
+  const anchor = section.querySelector(".experience-center-anchor");
+  const label = section.querySelector("[data-journey-label]");
+  const pills = Array.from(section.querySelectorAll("[data-exp-pill]"));
+  const tileEls = Array.from(section.querySelectorAll("[data-tile]"));
+
+  const tiles = tileEls.map((el) => ({
+    el,
+    step: Number(el.dataset.step) || 0,
+    start: Number(el.dataset.start) || 0,
+    peakStart: Number(el.dataset.peakStart) || 0.2,
+    peakEnd: Number(el.dataset.peakEnd) || 0.5,
+    end: Number(el.dataset.end) || 0.7,
+    enterX: Number(el.dataset.enterX) || 0,
+    enterY: Number(el.dataset.enterY) || 0,
+    enterRot: Number(el.dataset.enterRot) || 0,
+    enterScale: Number(el.dataset.enterScale) || 0.7,
+    targetX: Number(el.dataset.targetX) || 0,
+    targetY: Number(el.dataset.targetY) || 0,
+    targetRot: Number(el.dataset.targetRot) || 0,
+    targetScale: Number(el.dataset.targetScale) || 1,
+    exitX: Number(el.dataset.exitX) || 0,
+    exitY: Number(el.dataset.exitY) || 0,
+    exitRot: Number(el.dataset.exitRot) || 0,
+    exitScale: Number(el.dataset.exitScale) || 0.75,
+    driftX: Number(el.dataset.driftX) || 0,
+    driftY: Number(el.dataset.driftY) || 0,
+    driftRot: Number(el.dataset.driftRot) || 0,
+  }));
+
+  journeyState = {
+    section,
+    anchor,
+    label,
+    pills,
+    tiles,
+    mode,
+  };
+
+  journeyLastTime = performance.now();
+  updateExperienceJourney(journeyLastTime, true);
+}
+
+function initServicesMelt() {
+  if (servicesMeltRaf) {
+    window.cancelAnimationFrame(servicesMeltRaf);
+    servicesMeltRaf = 0;
+  }
+
+  const section = document.querySelector("[data-about13]");
+  if (!section) return;
+
+  const stage = section.querySelector("[data-melt-stage]");
+  const primaryEl = section.querySelector("[data-melt-primary]");
+  const secondaryEl = section.querySelector("[data-melt-secondary]");
+  const leadPrimaryEl = section.querySelector("[data-lead-primary]");
+  const leadSecondaryEl = section.querySelector("[data-lead-secondary]");
+  const srEl = section.querySelector("[data-melt-sr]");
+  const ctaEl = section.querySelector("[data-melt-cta]");
+  const buttons = Array.from(section.querySelectorAll("[data-about13-item]"));
+  const bars = buttons.map((btn) => btn.querySelector("[data-about13-bar]"));
+
+  if (!stage || !primaryEl || !secondaryEl || !buttons.length) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const CYCLE_MS = 3800;
+  const MELT_MS = 920;
+
+  let activeIndex = 0;
+  let fromIndex = 0;
+  let isMelting = false;
+  let isHoveringCard = false;
+  let meltStartTime = 0;
+  let cycleStartTime = performance.now();
+
+  function triggerMelt(nextIndex, now = performance.now()) {
+    const normalizedNext = (nextIndex + servicePillars.length) % servicePillars.length;
+    if (normalizedNext === activeIndex) {
+      if (!isMelting) cycleStartTime = now;
+      return;
+    }
+
+    if (isMelting && now - meltStartTime < MELT_MS * 0.45) {
+      // Keep current outgoing word if interrupted early in the morph
+    } else {
+      fromIndex = activeIndex;
+    }
+    activeIndex = normalizedNext;
+    cycleStartTime = now;
+
+    buttons.forEach((btn, idx) => {
+      const isActive = idx === activeIndex;
+      btn.classList.toggle("is-active", isActive);
+      btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+
+    bars.forEach((bar, idx) => {
+      if (bar && idx !== activeIndex) {
+        bar.style.transform = "scaleX(0)";
+      }
+    });
+
+    const nextItem = servicePillars[activeIndex];
+    if (srEl) srEl.textContent = nextItem.title;
+    if (ctaEl) {
+      ctaEl.textContent = nextItem.cta;
+      ctaEl.setAttribute("href", nextItem.href);
+    }
+
+    if (reducedMotion) {
+      isMelting = false;
+      stage.classList.remove("is-melting");
+      primaryEl.textContent = nextItem.word;
+      primaryEl.style.filter = "none";
+      primaryEl.style.opacity = "1";
+      primaryEl.style.transform = "translate3d(0, 0, 0) scale(1)";
+      secondaryEl.style.opacity = "0";
+      if (leadPrimaryEl) {
+        leadPrimaryEl.textContent = nextItem.desc;
+        leadPrimaryEl.style.filter = "none";
+        leadPrimaryEl.style.opacity = "1";
+        leadPrimaryEl.style.transform = "translate3d(0, 0, 0)";
+      }
+      if (leadSecondaryEl) {
+        leadSecondaryEl.style.opacity = "0";
+      }
+      if (bars[activeIndex]) {
+        bars[activeIndex].style.transform = "scaleX(1)";
+      }
+      return;
+    }
+
+    isMelting = true;
+    meltStartTime = now;
+    primaryEl.textContent = servicePillars[fromIndex].word;
+    secondaryEl.textContent = nextItem.word;
+    if (leadPrimaryEl && leadSecondaryEl) {
+      leadPrimaryEl.textContent = servicePillars[fromIndex].desc;
+      leadSecondaryEl.textContent = nextItem.desc;
+    }
+    stage.classList.add("is-melting");
+  }
+
+  buttons.forEach((btn, idx) => {
+    btn.addEventListener("mouseenter", () => {
+      isHoveringCard = true;
+      triggerMelt(idx, performance.now());
+    });
+    btn.addEventListener("mouseleave", () => {
+      isHoveringCard = false;
+      cycleStartTime = performance.now();
+    });
+    btn.addEventListener("focus", () => {
+      triggerMelt(idx, performance.now());
+    });
+    btn.addEventListener("click", () => {
+      triggerMelt(idx, performance.now());
+    });
+  });
+
+  if (reducedMotion) {
+    if (bars[0]) bars[0].style.transform = "scaleX(1)";
+    return;
+  }
+
+  function tick(now) {
+    if (!section.isConnected) {
+      servicesMeltRaf = 0;
+      return;
+    }
+
+    const elapsed = now - cycleStartTime;
+    const progress = isHoveringCard ? 1 : clamp01(elapsed / CYCLE_MS);
+    const activeBar = bars[activeIndex];
+    if (activeBar) {
+      activeBar.style.transform = `scaleX(${progress.toFixed(4)})`;
+    }
+
+    if (isMelting) {
+      const rawT = clamp01((now - meltStartTime) / MELT_MS);
+      const easeT = rawT < 0.5
+        ? 4 * rawT * rawT * rawT
+        : 1 - Math.pow(-2 * rawT + 2, 3) / 2;
+
+      if (rawT < 1) {
+        const outBlur = (easeT * 18).toFixed(2);
+        const outOpacity = Math.pow(Math.max(0, 1 - easeT), 0.42).toFixed(3);
+        const outY = (easeT * 6).toFixed(2);
+        const outScale = (1 - easeT * 0.03).toFixed(3);
+
+        const inBlur = ((1 - easeT) * 18).toFixed(2);
+        const inOpacity = Math.pow(Math.max(0, easeT), 0.42).toFixed(3);
+        const inY = ((1 - easeT) * -6).toFixed(2);
+        const inScale = (0.97 + easeT * 0.03).toFixed(3);
+
+        primaryEl.style.filter = `blur(${outBlur}px)`;
+        primaryEl.style.opacity = outOpacity;
+        primaryEl.style.transform = `translate3d(0, ${outY}px, 0) scale(${outScale})`;
+
+        secondaryEl.style.filter = `blur(${inBlur}px)`;
+        secondaryEl.style.opacity = inOpacity;
+        secondaryEl.style.transform = `translate3d(0, ${inY}px, 0) scale(${inScale})`;
+
+        if (leadPrimaryEl && leadSecondaryEl) {
+          const leadOutOpacity = Math.max(0, 1 - smoothstep(0.0, 0.65, rawT)).toFixed(3);
+          const leadInOpacity = smoothstep(0.25, 0.95, rawT).toFixed(3);
+          const leadOutY = (-easeT * 10).toFixed(2);
+          const leadInY = ((1 - easeT) * 10).toFixed(2);
+          const leadOutBlur = (easeT * 5).toFixed(2);
+          const leadInBlur = ((1 - easeT) * 5).toFixed(2);
+
+          leadPrimaryEl.style.opacity = leadOutOpacity;
+          leadPrimaryEl.style.transform = `translate3d(0, ${leadOutY}px, 0)`;
+          leadPrimaryEl.style.filter = `blur(${leadOutBlur}px)`;
+
+          leadSecondaryEl.style.opacity = leadInOpacity;
+          leadSecondaryEl.style.transform = `translate3d(0, ${leadInY}px, 0)`;
+          leadSecondaryEl.style.filter = `blur(${leadInBlur}px)`;
+        }
+      } else {
+        isMelting = false;
+        stage.classList.remove("is-melting");
+        primaryEl.textContent = servicePillars[activeIndex].word;
+        primaryEl.style.filter = "none";
+        primaryEl.style.opacity = "1";
+        primaryEl.style.transform = "translate3d(0, 0, 0) scale(1)";
+
+        secondaryEl.style.filter = "blur(18px)";
+        secondaryEl.style.opacity = "0";
+        secondaryEl.style.transform = "translate3d(0, -6px, 0) scale(0.97)";
+
+        if (leadPrimaryEl && leadSecondaryEl) {
+          leadPrimaryEl.textContent = servicePillars[activeIndex].desc;
+          leadPrimaryEl.style.opacity = "1";
+          leadPrimaryEl.style.transform = "translate3d(0, 0, 0)";
+          leadPrimaryEl.style.filter = "none";
+
+          leadSecondaryEl.style.opacity = "0";
+          leadSecondaryEl.style.transform = "translate3d(0, 10px, 0)";
+          leadSecondaryEl.style.filter = "blur(5px)";
+        }
+      }
+    }
+
+    if (!isHoveringCard && elapsed >= CYCLE_MS) {
+      triggerMelt(activeIndex + 1, now);
+    }
+
+    servicesMeltRaf = window.requestAnimationFrame(tick);
+  }
+
+  servicesMeltRaf = window.requestAnimationFrame(tick);
 }
 
 function queueFloatingStoryUpdate() {
@@ -1045,39 +1677,6 @@ function queueFloatingStoryUpdate() {
 }
 
 window.addEventListener("scroll", queueFloatingStoryUpdate, { passive: true });
-let experienceWheelTarget = null;
-let experienceWheelFrame = 0;
-window.addEventListener("wheel", (event) => {
-  const section = event.target instanceof Element
-    ? event.target.closest("[data-experience-journey].is-enhanced")
-    : null;
-  if (!section) {
-    if (experienceWheelFrame) window.cancelAnimationFrame(experienceWheelFrame);
-    experienceWheelFrame = 0;
-    experienceWheelTarget = null;
-    return;
-  }
-  if (event.ctrlKey || event.deltaY === 0 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  event.preventDefault();
-  const unit = event.deltaMode === WheelEvent.DOM_DELTA_LINE ? 16 : event.deltaMode === WheelEvent.DOM_DELTA_PAGE ? window.innerHeight : 1;
-  const delta = Math.max(-100, Math.min(100, event.deltaY * unit * .48));
-  if (experienceWheelTarget === null) experienceWheelTarget = window.scrollY;
-  const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-  experienceWheelTarget = Math.max(0, Math.min(maxScroll, experienceWheelTarget + delta));
-  if (experienceWheelFrame) return;
-  const easeWheelScroll = () => {
-    const remaining = experienceWheelTarget - window.scrollY;
-    if (Math.abs(remaining) < 1) {
-      window.scrollTo({ top: experienceWheelTarget, behavior: "instant" });
-      experienceWheelFrame = 0;
-      experienceWheelTarget = null;
-      return;
-    }
-    window.scrollTo({ top: window.scrollY + remaining * .18, behavior: "instant" });
-    experienceWheelFrame = window.requestAnimationFrame(easeWheelScroll);
-  };
-  experienceWheelFrame = window.requestAnimationFrame(easeWheelScroll);
-}, { passive: false });
 window.addEventListener("resize", () => {
   initExperienceJourney();
   queueFloatingStoryUpdate();
@@ -1182,9 +1781,6 @@ document.addEventListener("pointerout", (event) => {
 });
 
 window.addEventListener("hashchange", () => {
-  if (experienceWheelFrame) window.cancelAnimationFrame(experienceWheelFrame);
-  experienceWheelFrame = 0;
-  experienceWheelTarget = null;
   if (getHash() !== "builder") state.builderStep = 1;
   render();
 });
