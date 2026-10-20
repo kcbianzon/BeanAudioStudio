@@ -779,11 +779,8 @@ function home() {
         </a>
       </div>
 
-      <div class="experience-scroll-progress" aria-live="polite">
-        <span data-journey-label>01</span>
-        <i></i>
-        <span>04</span>
-      </div>
+      <a href="#rentals" class="experience-cta-pill" data-journey-cta>View rentals <span>→</span></a>
+
     </div>
   </section>
   <section class="section"><div class="section-head"><div><span class="eyebrow">EVENT BUNDLES</span><h2>Start with<br>the occasion.</h2></div><a class="btn btn-light" href="#bundles">View all bundles →</a></div><div class="bundle-grid">${bundles

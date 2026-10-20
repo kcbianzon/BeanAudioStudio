@@ -3859,35 +3859,59 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 }
 
 .experience-scroll-progress {
-  display: none;
+  display: none !important;
 }
 
-.experience-journey.is-enhanced .experience-scroll-progress {
-  position: absolute;
-  left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%);
-  z-index: 4;
+.experience-cta-pill {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 6px 14px;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 22px;
   border-radius: 999px;
-  background: rgba(255, 253, 248, 0.88);
-  border: 1px solid rgba(55, 45, 22, 0.10);
+  background: var(--ink);
+  color: #fff;
   font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: #5c564a;
-  pointer-events: none;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(17, 17, 17, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, background 0.2s ease;
+  pointer-events: auto;
+  cursor: pointer;
+  margin: 24px auto 0;
 }
 
-.experience-scroll-progress i {
-  width: 68px;
-  height: 3px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--ink) calc(var(--journey-progress, 0) * 100%), rgba(80, 68, 44, 0.16) 0);
+.experience-journey.is-enhanced .experience-cta-pill {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  margin: 0;
+  z-index: 5;
+}
+
+.experience-cta-pill:hover {
+  transform: translateY(-2px);
+  background: #000;
+  box-shadow: 0 12px 28px rgba(17, 17, 17, 0.26);
+  color: #fff;
+}
+
+.experience-journey.is-enhanced .experience-cta-pill:hover {
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.experience-cta-pill span {
+  display: inline-block;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+.experience-cta-pill:hover span {
+  transform: translateX(3px);
 }
 
 /* ==========================================================================
@@ -4027,6 +4051,12 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  .experience-journey.is-enhanced .experience-cta-pill {
+    bottom: 14px;
+    padding: 9px 18px;
+    font-size: 12px;
   }
 }
 
