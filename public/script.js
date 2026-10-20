@@ -633,11 +633,11 @@ function home() {
       <div class="tile-reveal-canvas" aria-label="Interactive equipment collage">
         <!-- WAVE 1: Sound & Picture Collage -->
         <a href="#rentals?cat=Audio" class="reveal-tile tile-primary tone-gold" data-tile data-step="0"
-           data-start="-0.06" data-peak-start="0.14" data-peak-end="0.38" data-end="0.55"
-           data-enter-x="-68" data-enter-y="-42" data-enter-rot="-18" data-enter-scale="0.70"
-           data-target-x="-36" data-target-y="-14" data-target-rot="-4" data-target-scale="1"
-           data-exit-x="-64" data-exit-y="-44" data-exit-rot="-14" data-exit-scale="0.76"
-           data-drift-x="1.8" data-drift-y="-2.2" data-drift-rot="1.8">
+           data-start="0.02" data-peak-start="0.18" data-peak-end="0.40" data-end="0.54"
+           data-enter-x="-60" data-enter-y="-12" data-enter-rot="-14" data-enter-scale="0.75"
+           data-target-x="-35" data-target-y="-4" data-target-rot="-4" data-target-scale="1"
+           data-exit-x="-60" data-exit-y="-12" data-exit-rot="-12" data-exit-scale="0.75"
+           data-drift-x="1.6" data-drift-y="-1.4" data-drift-rot="1.8">
           <span class="tile-media"><img src="assets/beantown/speaker-rental.jpg" alt="Audio rentals" loading="lazy"></span>
           <div class="tile-body">
             <span class="tile-tag">01 / SOUND</span>
@@ -648,41 +648,41 @@ function home() {
         </a>
 
         <a href="#rentals?cat=Audio" class="reveal-tile tile-secondary tone-lime" data-tile data-step="0"
-           data-start="-0.01" data-peak-start="0.18" data-peak-end="0.41" data-end="0.58"
-           data-enter-x="-14" data-enter-y="-60" data-enter-rot="16" data-enter-scale="0.66"
-           data-target-x="-13" data-target-y="-31" data-target-rot="3.5" data-target-scale="1"
-           data-exit-x="-28" data-exit-y="-56" data-exit-rot="-13" data-exit-scale="0.74"
-           data-drift-x="-1.6" data-drift-y="-1.8" data-drift-rot="-2.2">
+           data-start="0.04" data-peak-start="0.20" data-peak-end="0.42" data-end="0.56"
+           data-enter-x="-52" data-enter-y="-36" data-enter-rot="12" data-enter-scale="0.72"
+           data-target-x="-30" data-target-y="-24" data-target-rot="3.5" data-target-scale="1"
+           data-exit-x="-52" data-exit-y="-36" data-exit-rot="10" data-exit-scale="0.72"
+           data-drift-x="-1.4" data-drift-y="-1.2" data-drift-rot="-1.5">
           <span class="tile-media"><img src="assets/beantown/concert-audio.webp" alt="PA speakers" loading="lazy"></span>
           <div class="tile-caption"><strong>PA speakers</strong><span>Full, room-filling sound</span></div>
         </a>
 
         <a href="#rentals?cat=Video%20%26%20Displays" class="reveal-tile tile-secondary tone-sky" data-tile data-step="1"
-           data-start="0.03" data-peak-start="0.21" data-peak-end="0.43" data-end="0.60"
-           data-enter-x="66" data-enter-y="-44" data-enter-rot="19" data-enter-scale="0.68"
-           data-target-x="32" data-target-y="-22" data-target-rot="4.5" data-target-scale="1"
-           data-exit-x="64" data-exit-y="-36" data-exit-rot="16" data-exit-scale="0.75"
-           data-drift-x="2.2" data-drift-y="-2.0" data-drift-rot="2.0">
+           data-start="0.06" data-peak-start="0.22" data-peak-end="0.44" data-end="0.58"
+           data-enter-x="52" data-enter-y="-36" data-enter-rot="-12" data-enter-scale="0.72"
+           data-target-x="30" data-target-y="-24" data-target-rot="-4.0" data-target-scale="1"
+           data-exit-x="52" data-exit-y="-36" data-exit-rot="-10" data-exit-scale="0.72"
+           data-drift-x="1.4" data-drift-y="-1.2" data-drift-rot="1.5">
           <span class="tile-media"><img src="assets/beantown/projector-screen.jpg" alt="Projection" loading="lazy"></span>
           <div class="tile-caption"><strong>Projection</strong><span>Make the picture bigger</span></div>
         </a>
 
         <a href="#rentals?cat=Microphones" class="reveal-tile tile-secondary tone-coral" data-tile data-step="0"
-           data-start="0.07" data-peak-start="0.24" data-peak-end="0.45" data-end="0.62"
-           data-enter-x="-64" data-enter-y="48" data-enter-rot="17" data-enter-scale="0.68"
-           data-target-x="-32" data-target-y="24" data-target-rot="4.0" data-target-scale="1"
-           data-exit-x="-66" data-exit-y="38" data-exit-rot="-15" data-exit-scale="0.74"
-           data-drift-x="-2.0" data-drift-y="2.2" data-drift-rot="-1.8">
+           data-start="0.08" data-peak-start="0.24" data-peak-end="0.46" data-end="0.60"
+           data-enter-x="-52" data-enter-y="34" data-enter-rot="12" data-enter-scale="0.72"
+           data-target-x="-30" data-target-y="22" data-target-rot="4.0" data-target-scale="1"
+           data-exit-x="-52" data-exit-y="34" data-exit-rot="10" data-exit-scale="0.72"
+           data-drift-x="-1.4" data-drift-y="1.2" data-drift-rot="-1.5">
           <span class="tile-media"><img src="assets/beantown/microphone-rentals.jpeg" alt="Microphones" loading="lazy"></span>
           <div class="tile-caption"><strong>Microphones</strong><span>Ready for every voice</span></div>
         </a>
 
         <a href="#rentals?cat=Video%20%26%20Displays" class="reveal-tile tile-primary tone-peach" data-tile data-step="1"
-           data-start="0.11" data-peak-start="0.28" data-peak-end="0.48" data-end="0.65"
-           data-enter-x="70" data-enter-y="40" data-enter-rot="16" data-enter-scale="0.72"
-           data-target-x="36" data-target-y="15" data-target-rot="-3.5" data-target-scale="1"
-           data-exit-x="66" data-exit-y="44" data-exit-rot="14" data-exit-scale="0.76"
-           data-drift-x="2.0" data-drift-y="2.2" data-drift-rot="-2.0">
+           data-start="0.10" data-peak-start="0.26" data-peak-end="0.48" data-end="0.62"
+           data-enter-x="60" data-enter-y="12" data-enter-rot="14" data-enter-scale="0.75"
+           data-target-x="35" data-target-y="4" data-target-rot="3.5" data-target-scale="1"
+           data-exit-x="60" data-exit-y="12" data-exit-rot="12" data-exit-scale="0.75"
+           data-drift-x="1.6" data-drift-y="1.4" data-drift-rot="-1.5">
           <span class="tile-media"><img src="assets/beantown/event-display.jpg" alt="Video &amp; Displays" loading="lazy"></span>
           <div class="tile-body">
             <span class="tile-tag">02 / PICTURE</span>
@@ -693,22 +693,22 @@ function home() {
         </a>
 
         <a href="#rentals?cat=Video%20%26%20Displays" class="reveal-tile tile-secondary tone-lavender" data-tile data-step="1"
-           data-start="0.15" data-peak-start="0.31" data-peak-end="0.50" data-end="0.67"
-           data-enter-x="14" data-enter-y="60" data-enter-rot="-15" data-enter-scale="0.66"
-           data-target-x="13" data-target-y="31" data-target-rot="-3.0" data-target-scale="1"
-           data-exit-x="26" data-exit-y="56" data-exit-rot="12" data-exit-scale="0.74"
-           data-drift-x="1.6" data-drift-y="1.8" data-drift-rot="2.2">
+           data-start="0.12" data-peak-start="0.28" data-peak-end="0.50" data-end="0.64"
+           data-enter-x="52" data-enter-y="36" data-enter-rot="-12" data-enter-scale="0.72"
+           data-target-x="30" data-target-y="24" data-target-rot="-3.5" data-target-scale="1"
+           data-exit-x="52" data-exit-y="36" data-exit-rot="-10" data-exit-scale="0.72"
+           data-drift-x="1.4" data-drift-y="1.2" data-drift-rot="1.5">
           <span class="tile-media"><img src="assets/beantown/live-streaming.jpg" alt="Event displays" loading="lazy"></span>
           <div class="tile-caption"><strong>Event displays</strong><span>Clear, vivid presentation</span></div>
         </a>
 
         <!-- WAVE 2: Moments & Full Visual Production Collage -->
         <a href="#rentals?cat=Experiences" class="reveal-tile tile-primary tone-mint" data-tile data-step="2"
-           data-start="0.40" data-peak-start="0.57" data-peak-end="0.80" data-end="0.96"
-           data-enter-x="-70" data-enter-y="36" data-enter-rot="-17" data-enter-scale="0.70"
-           data-target-x="-36" data-target-y="15" data-target-rot="3.5" data-target-scale="1"
-           data-exit-x="-64" data-exit-y="44" data-exit-rot="-14" data-exit-scale="0.76"
-           data-drift-x="-2.0" data-drift-y="2.2" data-drift-rot="1.8">
+           data-start="0.44" data-peak-start="0.60" data-peak-end="0.82" data-end="0.96"
+           data-enter-x="-60" data-enter-y="12" data-enter-rot="14" data-enter-scale="0.75"
+           data-target-x="-35" data-target-y="4" data-target-rot="3.5" data-target-scale="1"
+           data-exit-x="-60" data-exit-y="12" data-exit-rot="12" data-exit-scale="0.75"
+           data-drift-x="-1.6" data-drift-y="1.4" data-drift-rot="1.5">
           <span class="tile-media"><img src="assets/beantown/photo-booth-360.jpg" alt="Experiences" loading="lazy"></span>
           <div class="tile-body">
             <span class="tile-tag">03 / MOMENTS</span>
@@ -719,31 +719,31 @@ function home() {
         </a>
 
         <a href="#rentals?cat=Experiences" class="reveal-tile tile-secondary tone-gold" data-tile data-step="2"
-           data-start="0.44" data-peak-start="0.60" data-peak-end="0.82" data-end="0.97"
-           data-enter-x="-62" data-enter-y="-48" data-enter-rot="16" data-enter-scale="0.68"
-           data-target-x="-32" data-target-y="-22" data-target-rot="-4.2" data-target-scale="1"
-           data-exit-x="-64" data-exit-y="-36" data-exit-rot="-16" data-exit-scale="0.74"
-           data-drift-x="-2.2" data-drift-y="-2.0" data-drift-rot="-2.0">
+           data-start="0.46" data-peak-start="0.62" data-peak-end="0.84" data-end="0.97"
+           data-enter-x="-52" data-enter-y="-36" data-enter-rot="-12" data-enter-scale="0.72"
+           data-target-x="-30" data-target-y="-24" data-target-rot="-3.5" data-target-scale="1"
+           data-exit-x="-52" data-exit-y="-36" data-exit-rot="-10" data-exit-scale="0.72"
+           data-drift-x="-1.4" data-drift-y="-1.2" data-drift-rot="-1.5">
           <span class="tile-media"><img src="assets/beantown/headphones.jpg" alt="Silent disco" loading="lazy"></span>
           <div class="tile-caption"><strong>Silent disco</strong><span>Three channels, one dance floor</span></div>
         </a>
 
         <a href="#rentals?cat=Outdoor%20Movies" class="reveal-tile tile-secondary tone-coral" data-tile data-step="2"
-           data-start="0.47" data-peak-start="0.63" data-peak-end="0.84" data-end="0.98"
-           data-enter-x="14" data-enter-y="-60" data-enter-rot="-15" data-enter-scale="0.66"
-           data-target-x="13" data-target-y="-31" data-target-rot="-3.0" data-target-scale="1"
-           data-exit-x="28" data-exit-y="-56" data-exit-rot="13" data-exit-scale="0.74"
-           data-drift-x="1.6" data-drift-y="-1.8" data-drift-rot="2.0">
+           data-start="0.48" data-peak-start="0.64" data-peak-end="0.86" data-end="0.98"
+           data-enter-x="52" data-enter-y="-36" data-enter-rot="14" data-enter-scale="0.72"
+           data-target-x="30" data-target-y="-24" data-target-rot="4.0" data-target-scale="1"
+           data-exit-x="52" data-exit-y="-36" data-exit-rot="12" data-exit-scale="0.72"
+           data-drift-x="1.4" data-drift-y="-1.2" data-drift-rot="1.5">
           <span class="tile-media"><img src="assets/beantown/outdoor-movie.jpg" alt="Outdoor cinema" loading="lazy"></span>
           <div class="tile-caption"><strong>Outdoor cinema</strong><span>Big-screen nights outside</span></div>
         </a>
 
         <a href="#rentals?cat=LED%20Walls" class="reveal-tile tile-primary tone-periwinkle" data-tile data-step="3"
-           data-start="0.50" data-peak-start="0.66" data-peak-end="0.87" data-end="0.99"
-           data-enter-x="70" data-enter-y="-36" data-enter-rot="18" data-enter-scale="0.72"
-           data-target-x="36" data-target-y="-14" data-target-rot="3.8" data-target-scale="1"
-           data-exit-x="64" data-exit-y="-44" data-exit-rot="14" data-exit-scale="0.76"
-           data-drift-x="2.0" data-drift-y="-2.0" data-drift-rot="-2.0">
+           data-start="0.50" data-peak-start="0.66" data-peak-end="0.88" data-end="0.99"
+           data-enter-x="60" data-enter-y="-12" data-enter-rot="-14" data-enter-scale="0.75"
+           data-target-x="35" data-target-y="-4" data-target-rot="-3.5" data-target-scale="1"
+           data-exit-x="60" data-exit-y="-12" data-exit-rot="-12" data-exit-scale="0.75"
+           data-drift-x="1.6" data-drift-y="-1.4" data-drift-rot="-1.5">
           <span class="tile-media"><img src="assets/beantown/led-wall-roses.webp" alt="LED Walls" loading="lazy"></span>
           <div class="tile-body">
             <span class="tile-tag">04 / LED WALLS</span>
@@ -754,21 +754,21 @@ function home() {
         </a>
 
         <a href="#rentals?cat=LED%20Walls" class="reveal-tile tile-secondary tone-lavender" data-tile data-step="3"
-           data-start="0.53" data-peak-start="0.69" data-peak-end="0.89" data-end="1.00"
-           data-enter-x="-14" data-enter-y="60" data-enter-rot="16" data-enter-scale="0.68"
-           data-target-x="-13" data-target-y="31" data-target-rot="3.2" data-target-scale="1"
-           data-exit-x="-26" data-exit-y="56" data-exit-rot="-13" data-exit-scale="0.74"
-           data-drift-x="-1.6" data-drift-y="1.8" data-drift-rot="2.2">
+           data-start="0.52" data-peak-start="0.68" data-peak-end="0.90" data-end="1.00"
+           data-enter-x="-52" data-enter-y="34" data-enter-rot="-12" data-enter-scale="0.72"
+           data-target-x="-30" data-target-y="22" data-target-rot="-3.5" data-target-scale="1"
+           data-exit-x="-52" data-exit-y="34" data-exit-rot="-10" data-exit-scale="0.72"
+           data-drift-x="-1.4" data-drift-y="1.2" data-drift-rot="1.5">
           <span class="tile-media"><img src="assets/beantown/69667bc33d884d697701e4c1_Led-Wall.png" alt="LED stage walls" loading="lazy"></span>
           <div class="tile-caption"><strong>LED walls</strong><span>Bright, high-impact visuals</span></div>
         </a>
 
         <a href="#rentals?cat=LED%20Walls" class="reveal-tile tile-secondary tone-lime" data-tile data-step="3"
-           data-start="0.56" data-peak-start="0.72" data-peak-end="0.91" data-end="1.02"
-           data-enter-x="64" data-enter-y="48" data-enter-rot="-17" data-enter-scale="0.68"
-           data-target-x="32" data-target-y="24" data-target-rot="-4.0" data-target-scale="1"
-           data-exit-x="66" data-exit-y="38" data-exit-rot="15" data-exit-scale="0.75"
-           data-drift-x="2.0" data-drift-y="2.0" data-drift-rot="-1.8">
+           data-start="0.54" data-peak-start="0.70" data-peak-end="0.92" data-end="1.02"
+           data-enter-x="52" data-enter-y="36" data-enter-rot="12" data-enter-scale="0.72"
+           data-target-x="30" data-target-y="24" data-target-rot="3.5" data-target-scale="1"
+           data-exit-x="52" data-exit-y="36" data-exit-rot="10" data-exit-scale="0.72"
+           data-drift-x="1.4" data-drift-y="1.2" data-drift-rot="-1.5">
           <span class="tile-media"><img src="assets/beantown/69667bc5bf1882f6695ff917_V-SHAPE-LED-WALL-p-800.jpg" alt="Modular screens" loading="lazy"></span>
           <div class="tile-caption"><strong>Modular screens</strong><span>Shape the stage your way</span></div>
         </a>
@@ -1397,13 +1397,13 @@ function updateExperienceJourney(now = performance.now(), immediate = false) {
   for (let i = 0; i < tiles.length; i += 1) {
     const t = tiles[i];
     const effTargetX = mode === "mobile"
-      ? (Math.abs(t.targetX) < 22 ? t.targetX * 0.35 : Math.sign(t.targetX) * 32)
+      ? Math.sign(t.targetX || 1) * 34
       : t.targetX;
     const effTargetY = mode === "mobile"
-      ? Math.sign(t.targetY) * (Math.abs(t.targetX) < 22 ? 35 : 29)
+      ? (t.targetY * 1.05)
       : t.targetY;
 
-    if (rawProgress <= t.start || rawProgress >= t.end) {
+    if (rawProgress <= 0 || rawProgress <= t.start || rawProgress >= t.end) {
       t.el.style.opacity = "0";
       t.el.style.pointerEvents = "none";
       const offX = (rawProgress <= t.start ? t.enterX : t.exitX) * xSpread * (vw / 100);

@@ -3519,6 +3519,7 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   margin-left: calc(50% - 50vw);
   height: clamp(2650px, 350vh, 3300px);
   padding: 0;
+  overflow: clip;
 }
 
 .experience-stage {
