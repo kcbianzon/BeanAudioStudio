@@ -517,12 +517,98 @@ function testimonialSection() {
 }
 function faqSection() {
   const faqs = [
-    ["What equipment can I rent?", "Beantown offers sound systems, wireless microphones, lighting, TVs, projectors, video walls, and silent disco headphones. Packages are available for small gatherings and large events."],
-    ["Is setup and delivery provided?", "Yes. Delivery, setup, and pickup are available across Boston and New England. Select rentals can also be picked up for DIY use, with clear instructions included."],
-    ["How do I reserve equipment?", "Request a quote online or by phone. Beantown will confirm availability, recommend a suitable package, and coordinate event logistics."],
-    ["What if I need support onsite?", "On-site or remote support is available. Rentals include setup guides, and the team can be reached by phone if you need help during your event."],
+    [
+      "What equipment can I rent?",
+      "Beantown offers sound systems, wireless microphones, lighting, 4K TVs, projectors, modular LED video walls, 360 photo booths, and silent disco headphones. Packages are available for small gatherings and large events.",
+    ],
+    [
+      "Is setup and delivery provided?",
+      "Yes. Delivery, full setup, soundcheck, and pickup are available across Boston and New England. Select rentals can also be picked up for DIY use, with clear instructions included.",
+    ],
+    [
+      "How do I reserve equipment?",
+      "Build your setup online or request a quote directly. Beantown will confirm availability for your date, recommend a suitable package, and coordinate event logistics.",
+    ],
+    [
+      "What if I need support onsite?",
+      "On-site or remote support is available. Rentals include setup guides, and our production team can be reached by phone if you need help during your event.",
+    ],
+    [
+      "Can I customize an event bundle?",
+      "Yes. Every Wedding, Corporate, Concert, and Outdoor Movie bundle can be tailored with extra wireless mics, subwoofers, screens, or lighting for your venue.",
+    ],
+    [
+      "How does quote-based pricing work?",
+      "Standard packages show fixed pricing in the catalog. Custom production gear—like modular LED walls and multi-camera streaming—is quoted based on room size, rigging, and crew needs.",
+    ],
+    [
+      "What do you need from our venue?",
+      "Most setups only need standard 15A/20A power within 50 feet and 60–90 minutes for load-in. For outdoor events or large stages, we coordinate power and weather plans in advance.",
+    ],
+    [
+      "What if our guest count or timeline changes?",
+      "Event schedules evolve. Let us know as your headcount or timeline shifts and we will adjust your speaker coverage, headphone count, or delivery window.",
+    ],
   ];
-  return `<section class="section faq-section"><div class="section-head"><div><span class="eyebrow">GOOD TO KNOW</span><h2>Your questions,<br>answered.</h2></div><p>Helpful details from the Beantown team, so planning your event feels straightforward.</p></div><div class="faq-list">${faqs.map(([question, answer], index) => `<details class="faq-item" ${index === 0 ? "open" : ""}><summary><span>${question}</span><b aria-hidden="true">+</b></summary><div class="faq-answer"><div class="faq-answer-inner"><p>${answer}</p></div></div></details>`).join("")}</div></section>`;
+
+  const renderCard = ([question, answer], idx) => `
+    <article class="faq-item faq9-card" data-faq-card style="--faq-delay:${(idx * 0.05).toFixed(2)}s">
+      <button type="button" class="faq9-question" data-faq-toggle aria-expanded="false">
+        <span>${question}</span>
+        <b class="faq9-icon" aria-hidden="true">+</b>
+      </button>
+      <div class="faq9-answer">
+        <div class="faq9-answer-inner">
+          <p>${answer}</p>
+        </div>
+      </div>
+    </article>`;
+
+  const leftCol = faqs.filter((_, i) => i % 2 === 0);
+  const rightCol = faqs.filter((_, i) => i % 2 === 1);
+
+  return `<section class="section faq-section faq9-section">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">GOOD TO KNOW</span>
+        <h2>Your questions,<br>answered.</h2>
+      </div>
+      <p>Helpful details from the Beantown team, so planning your event feels straightforward.</p>
+    </div>
+
+    <div class="faq9-layout">
+      <aside class="faq9-contact-panel">
+        <div class="faq9-contact-card">
+          <h3>Need more information?</h3>
+          <p class="faq9-contact-copy">The answers here cover the essentials. For custom event packages, venue walkthroughs, or equipment recommendations, reach out directly to our Boston production team.</p>
+          <div class="faq9-stats">
+            <div class="faq9-stat">
+              <strong>&lt; 2h</strong>
+              <span>Quote turnaround</span>
+            </div>
+            <div class="faq9-stat">
+              <strong>100%</strong>
+              <span>On-time delivery</span>
+            </div>
+          </div>
+          <a href="#quote" class="faq9-cta-btn">
+            <span>Email the team</span>
+            <i aria-hidden="true">↗</i>
+          </a>
+          <p class="faq9-hours">Boston &amp; New England event production support.</p>
+        </div>
+      </aside>
+
+      <div class="faq9-grid">
+        <div class="faq9-col">
+          ${leftCol.map((item, i) => renderCard(item, i * 2)).join("")}
+        </div>
+        <div class="faq9-col">
+          ${rightCol.map((item, i) => renderCard(item, i * 2 + 1)).join("")}
+        </div>
+      </div>
+    </div>
+  </section>`;
 }
 function home() {
   return `<div class="page">
@@ -1156,6 +1242,14 @@ function bind() {
     document.querySelector("#quoteCard")?.classList.add("submitted");
     showToast("Quote request captured in the mockup");
   });
+  document.querySelectorAll("[data-faq-toggle]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const card = btn.closest("[data-faq-card]");
+      if (!card) return;
+      const isOpen = card.classList.toggle("is-open");
+      btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    }),
+  );
 }
 
 const mobileMenu = document.getElementById("mobileMenu");
