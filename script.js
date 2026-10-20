@@ -625,7 +625,7 @@ function home() {
     <div class="experience-stage">
       <div class="experience-center-anchor">
         <span class="eyebrow">WHAT ARE YOU RENTING?</span>
-        <h2 class="experience-main-title">Start with the<br>experience.</h2>
+        <h2 class="experience-main-title">Start with the<br><span class="experience-word">experience</span>.</h2>
         <p class="experience-subcopy">Scroll to explore the possibilities — from room-filling sound to full-scale visual production.</p>
       </div>
 
