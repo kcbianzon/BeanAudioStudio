@@ -3688,16 +3688,16 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 /* Primary Category Tiles vs Supporting Gear Tiles */
 .experience-journey.is-enhanced .reveal-tile.tile-primary {
   z-index: 3;
-  width: clamp(216px, 18.8vw, 272px);
-  padding: 11px;
-  border-radius: 24px;
+  width: clamp(180px, 14.8vw, 224px);
+  padding: 9px;
+  border-radius: 20px;
 }
 
 .experience-journey.is-enhanced .reveal-tile.tile-secondary {
   z-index: 2;
-  width: clamp(162px, 14vw, 208px);
-  padding: 9px;
-  border-radius: 19px;
+  width: clamp(140px, 11.2vw, 170px);
+  padding: 8px;
+  border-radius: 17px;
 }
 
 /* Colorful Editorial Tile Accents */
@@ -3805,19 +3805,19 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 }
 
 .tile-primary .tile-body h3 {
-  margin: 2px 0 0;
+  margin: 1px 0 0;
   font-family: 'Sora', 'Inter', sans-serif !important;
-  font-size: clamp(18px, 1.55vw, 23px);
+  font-size: clamp(15px, 1.22vw, 19px);
   font-weight: 800 !important;
-  line-height: 1.08;
-  letter-spacing: -0.035em;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
   color: var(--ink);
 }
 
 .tile-primary .tile-body p {
   margin: 0;
-  font-size: 12px !important;
-  line-height: 1.4 !important;
+  font-size: 11px !important;
+  line-height: 1.35 !important;
   color: #555148;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -3829,11 +3829,11 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   display: inline-flex;
   align-items: center;
   align-self: flex-start;
-  margin-top: 5px;
-  padding: 5px 11px;
+  margin-top: 4px;
+  padding: 4px 10px;
   border-radius: 999px;
   background: rgba(17, 17, 17, 0.08);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 800;
   color: var(--ink);
   transition: background-color 0.2s ease, transform 0.2s ease;
@@ -3846,7 +3846,7 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 
 .tile-secondary .tile-caption strong {
   font-family: 'Sora', 'Inter', sans-serif;
-  font-size: clamp(13px, 1.05vw, 15px);
+  font-size: clamp(12px, 0.95vw, 13.5px);
   font-weight: 750;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -3854,8 +3854,8 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 }
 
 .tile-secondary .tile-caption span {
-  font-size: 11px;
-  line-height: 1.32;
+  font-size: 10px;
+  line-height: 1.28;
   color: #5c584e;
 }
 
