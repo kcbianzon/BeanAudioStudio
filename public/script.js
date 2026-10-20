@@ -1,252 +1,677 @@
 const products = [
+  // --- AUDIO & SPEAKERS ---
   {
-    id: "silent-50",
-    name: "Silent Disco — 50 Headphones",
-    category: "Experiences",
-    price: 500,
-    priceType: "fixed",
-    desc: "Small-group silent disco package.",
+    id: "small-audio",
+    name: "Small Event Speaker Package",
+    category: "Audio & Speakers",
+    price: 199,
+    priceType: "starting",
+    desc: "2 powered speakers with tripod stands, wired or wireless Shure microphone, and small audio mixer. Perfect for up to 50 guests, speeches, ceremonies, and background music.",
     tag: "Popular",
     tone: "lime",
   },
   {
-    id: "silent-100",
-    name: "Silent Disco — 100 Headphones",
-    category: "Experiences",
-    price: 900,
-    priceType: "fixed",
-    desc: "Balanced package for larger parties.",
-    tag: "Fixed",
+    id: "medium-audio",
+    name: "Medium Event Speaker Package",
+    category: "Audio & Speakers",
+    price: 349,
+    priceType: "starting",
+    desc: "4 powered speakers, tripod stands, Shure wireless microphone system, and 16-channel mixer. Built for 50–150 guests, wedding receptions, and corporate panels.",
+    tag: "Most popular",
     tone: "lime",
   },
   {
-    id: "silent-150",
-    name: "Silent Disco — 150 Headphones",
-    category: "Experiences",
-    price: 1200,
+    id: "large-audio",
+    name: "Large Event Line Array System",
+    category: "Audio & Speakers",
+    price: null,
+    priceType: "quote",
+    desc: "JBL VRX constant curvature line array modules, high-power subwoofers, digital mixing console, and on-site audio engineer. Designed for 150+ guests, concerts, and festivals.",
+    tag: "Concert grade",
+    tone: "",
+  },
+  {
+    id: "qsc-k12",
+    name: "QSC K12.2 Powered 12″ Loudspeaker",
+    category: "Audio & Speakers",
+    price: 65,
     priceType: "fixed",
-    desc: "Mid-size silent event package.",
-    tag: "Fixed",
+    desc: "2000-watt Class-D active loudspeaker with advanced DSP presets. Pristine vocal clarity and room-filling output for mains or stage monitors.",
+    tag: "Pro audio",
     tone: "lime",
   },
   {
-    id: "silent-200",
-    name: "Silent Disco — 200 Headphones",
-    category: "Experiences",
-    price: 1800,
+    id: "qsc-k10",
+    name: "QSC K10.2 Powered 10″ Loudspeaker",
+    category: "Audio & Speakers",
+    price: 55,
     priceType: "fixed",
-    desc: "Large crowd headphone package.",
-    tag: "Fixed",
+    desc: "2000-watt compact active speaker. Excellent clarity in a lightweight footprint for meetings, ceremonies, and acoustic sets.",
+    tag: "Compact",
     tone: "lime",
   },
   {
-    id: "silent-300",
-    name: "Silent Disco — 300 Headphones",
-    category: "Experiences",
-    price: 2500,
-    priceType: "fixed",
-    desc: "Maximum listed silent disco package.",
-    tag: "Fixed",
-    tone: "lime",
+    id: "jbl-vrx932",
+    name: "JBL VRX932LA Line Array Module",
+    category: "Audio & Speakers",
+    price: null,
+    priceType: "quote",
+    desc: "Constant curvature line array element with Differential Drive woofer and neodymium compression drivers for large audience coverage.",
+    tag: "Line array",
+    tone: "",
   },
+
+  // --- SUBWOOFER RENTALS ---
+  {
+    id: "sub-kw181",
+    name: "QSC KW181 18″ Powered Subwoofer",
+    category: "Subwoofers",
+    price: 95,
+    priceType: "fixed",
+    desc: "1000-watt Class-D 18-inch birch subwoofer. Deep, punchy low-end reinforcement for DJs, live bands, and dance floors.",
+    tag: "Heavy bass",
+    tone: "gold",
+  },
+  {
+    id: "sub-ks212c",
+    name: "QSC KS212C Cardioid Subwoofer",
+    category: "Subwoofers",
+    price: 120,
+    priceType: "fixed",
+    desc: "Dual 12-inch active cardioid subwoofer. Keeps bass directional toward the crowd with 15dB less noise behind the stage—great for sound-sensitive venues.",
+    tag: "Cardioid tech",
+    tone: "gold",
+  },
+  {
+    id: "sub-prx618",
+    name: "JBL PRX 618S 18″ Powered Subwoofer",
+    category: "Subwoofers",
+    price: 85,
+    priceType: "fixed",
+    desc: "Compact 1000W 18″ active subwoofer delivering clean, resonant low-end for mobile DJs, private parties, and medium halls.",
+    tag: "Portable bass",
+    tone: "gold",
+  },
+  {
+    id: "sub-thump18",
+    name: "Mackie Thump18S 18″ Subwoofer",
+    category: "Subwoofers",
+    price: 75,
+    priceType: "fixed",
+    desc: "Solid 1200W peak low-end punch for parties, school functions, and cost-effective bass extension.",
+    tag: "Budget friendly",
+    tone: "gold",
+  },
+
+  // --- MICROPHONES ---
+  {
+    id: "qlxd-handheld",
+    name: "Shure QLX-D Wireless Handheld Mic",
+    category: "Microphones",
+    price: 65,
+    priceType: "fixed",
+    desc: "Digital 24-bit wireless microphone with Shure Beta 58A or SM58 capsule. Pristine RF stability, zero interference, and all-day battery.",
+    tag: "Industry standard",
+    tone: "coral",
+  },
+  {
+    id: "qlxd-lavalier",
+    name: "Shure QLX-D Wireless Lapel / Lavalier",
+    category: "Microphones",
+    price: 65,
+    priceType: "fixed",
+    desc: "Discreet bodypack transmitter with cardioid lavalier clip-on microphone. Ideal for keynote speakers, wedding officiants, and presenters.",
+    tag: "Hands-free",
+    tone: "coral",
+  },
+  {
+    id: "countryman-headset",
+    name: "Countryman E6 Directional Earset Mic",
+    category: "Microphones",
+    price: 50,
+    priceType: "fixed",
+    desc: "Ultra-miniature, skin-tone earset microphone delivering studio-grade vocal reproduction without blocking the speaker's face.",
+    tag: "Broadcast quality",
+    tone: "coral",
+  },
+  {
+    id: "shure-sm58",
+    name: "Shure SM58 / Beta 58A Wired Mic",
+    category: "Microphones",
+    price: 20,
+    priceType: "fixed",
+    desc: "The legendary dynamic vocal microphone. Includes 25ft XLR cable and heavy-duty tripod boom stand. Bulletproof reliability.",
+    tag: "Legendary",
+    tone: "coral",
+  },
+  {
+    id: "ptt-mic",
+    name: "Push-To-Talk (PTT) Conference Mic",
+    category: "Microphones",
+    price: 35,
+    priceType: "fixed",
+    desc: "Gooseneck tabletop conference microphone with LED indicator and momentary/latching talk switch for panels and meetings.",
+    tag: "Conference",
+    tone: "coral",
+  },
+  {
+    id: "iem",
+    name: "Shure PSM900 Wireless In-Ear Monitors",
+    category: "Microphones",
+    price: 75,
+    priceType: "fixed",
+    desc: "Professional wireless bodypack IEM system with sound-isolating earphones. Clean, personalized stage monitoring for singers and musicians.",
+    tag: "Stage monitoring",
+    tone: "coral",
+  },
+
+  // --- AUDIO MIXERS ---
+  {
+    id: "mixer-touchmix",
+    name: "QSC TouchMix-16 Digital Mixer",
+    category: "Audio Mixers",
+    price: 85,
+    priceType: "fixed",
+    desc: "16-input compact digital touchscreen mixer with channel processing, instrument/vocal wizard presets, USB multi-track recording, and iPad Wi-Fi control.",
+    tag: "Touchscreen",
+    tone: "peach",
+  },
+  {
+    id: "mixer-x32",
+    name: "Behringer X32 32-Channel Digital Console",
+    category: "Audio Mixers",
+    price: 150,
+    priceType: "fixed",
+    desc: "32 mic preamps, 25 motorized faders, integrated effects rack, and flexible routing. The go-to digital console for full band shows and galas.",
+    tag: "Full console",
+    tone: "peach",
+  },
+  {
+    id: "mixer-x32-compact",
+    name: "Behringer X32 Compact Digital Mixer",
+    category: "Audio Mixers",
+    price: 110,
+    priceType: "fixed",
+    desc: "16 mic preamps, 17 motorized faders, and complete X32 power in a compact chassis. Ideal for FOH and monitor mixing in tight spaces.",
+    tag: "Compact digital",
+    tone: "peach",
+  },
+  {
+    id: "mixer-sq7",
+    name: "Allen & Heath SQ-7 32-Channel Console",
+    category: "Audio Mixers",
+    price: null,
+    priceType: "quote",
+    desc: "Flagship 96kHz XCVI FPGA digital mixer with 33 faders, custom soft keys, ultra-low latency, and touring-grade audio quality.",
+    tag: "Tour grade",
+    tone: "",
+  },
+  {
+    id: "mixer-mackie1402",
+    name: "Mackie 1402-VLZ3 Compact Analog Mixer",
+    category: "Audio Mixers",
+    price: 45,
+    priceType: "fixed",
+    desc: "Ultra-low-noise 14-channel analog mixer with 6 XDR2 mic preamps and durable steel chassis. Simple, reliable, and user-friendly.",
+    tag: "Analog workhorse",
+    tone: "peach",
+  },
+
+  // --- DJ EQUIPMENT ---
+  {
+    id: "dj-basic-pkg",
+    name: "Basic DJ Package (Up to 50 Guests)",
+    category: "DJ Equipment",
+    price: 299,
+    priceType: "starting",
+    desc: "Pioneer DJ controller, heavy-duty laptop stand, 2 powered speakers, and all connecting cables. Great for house parties and lounge sets.",
+    tag: "Turnkey DJ",
+    tone: "sky",
+  },
+  {
+    id: "dj-standard-pkg",
+    name: "Standard DJ Package (50–150 Guests)",
+    category: "DJ Equipment",
+    price: 449,
+    priceType: "starting",
+    desc: "4-channel controller or dual CDJ setup, 2 powered tops, 1 subwoofer, Scrim Werks facade booth, and wireless mic. Perfect for weddings and dances.",
+    tag: "Wedding favorite",
+    tone: "sky",
+  },
+  {
+    id: "dj-pro-pkg",
+    name: "Pro Club DJ Package (150+ Guests)",
+    category: "DJ Equipment",
+    price: 699,
+    priceType: "starting",
+    desc: "Dual CDJ-3000s, DJM-900NXS2 mixer, 4 powered speakers with dual 18″ subs, Scrim Werks facade, and dance lighting package.",
+    tag: "Festival ready",
+    tone: "sky",
+  },
+  {
+    id: "cdj-3000",
+    name: "Pioneer CDJ-3000 DJ Multi-Player",
+    category: "DJ Equipment",
+    price: 125,
+    priceType: "fixed",
+    desc: "Pioneer's flagship media player with 9-inch HD touchscreen, advanced MPU processor, Pro DJ Link, and uncompressed 96kHz/32-bit audio.",
+    tag: "Club standard",
+    tone: "sky",
+  },
+  {
+    id: "cdj-2000nxs2",
+    name: "Pioneer CDJ-2000NXS2 Multi-Player",
+    category: "DJ Equipment",
+    price: 95,
+    priceType: "fixed",
+    desc: "Industry-standard pro DJ player with 7-inch touch display, 8 hot cues, slip mode, and high-res audio playback.",
+    tag: "Industry pro",
+    tone: "sky",
+  },
+  {
+    id: "djm-900nxs2",
+    name: "Pioneer DJM-900NXS2 4-Channel Mixer",
+    category: "DJ Equipment",
+    price: 95,
+    priceType: "fixed",
+    desc: "Touring-standard 4-channel DJ mixer with 64-bit mixing processor, dual USB soundcards, Sound Color FX, and Beat FX.",
+    tag: "Club mixer",
+    tone: "sky",
+  },
+  {
+    id: "ddj-1000srt",
+    name: "Pioneer DDJ-1000SRT 4-Channel Controller",
+    category: "DJ Equipment",
+    price: 90,
+    priceType: "fixed",
+    desc: "Full-size club-style jog wheels with on-jog color display, Magvel fader, and seamless plug-and-play mapping for Serato DJ Pro.",
+    tag: "Serato pro",
+    tone: "sky",
+  },
+  {
+    id: "djm-s9",
+    name: "Pioneer DJM-S9 2-Channel Battle Mixer",
+    category: "DJ Equipment",
+    price: 75,
+    priceType: "fixed",
+    desc: "High-performance scratch mixer with Magvel Pro crossfader, multi-color performance pads, and dual USB ports for seamless DJ handoffs.",
+    tag: "Turntablist",
+    tone: "sky",
+  },
+  {
+    id: "rane-72",
+    name: "Rane SEVENTY-TWO 2-Channel DJ Mixer",
+    category: "DJ Equipment",
+    price: 85,
+    priceType: "fixed",
+    desc: "Solid steel construction, 4.3-inch color touchscreen, dual Flex FX engines, and MAG FOUR faders for elite battle DJs.",
+    tag: "Heavy duty",
+    tone: "sky",
+  },
+  {
+    id: "technics-1200",
+    name: "Technics SL-1200MK2 Turntable",
+    category: "DJ Equipment",
+    price: 75,
+    priceType: "fixed",
+    desc: "The timeless direct-drive turntable with quartz motor, precision pitch control, and Ortofon DJ cartridge. (Available individually or as a pair).",
+    tag: "Analog vinyl",
+    tone: "sky",
+  },
+  {
+    id: "dj-facade",
+    name: "Scrim Werks Pro DJ Facade",
+    category: "DJ Equipment",
+    price: 50,
+    priceType: "fixed",
+    desc: "Collapsible 4-panel aluminum DJ facade with translucent white scrims. Conceals cables and equipment; looks incredible when backlit with uplights.",
+    tag: "Clean look",
+    tone: "sky",
+  },
+
+  // --- VIDEO & DISPLAYS ---
+  {
+    id: "tv-65",
+    name: "Samsung 65″ 4K UHD Smart TV",
+    category: "Video & Displays",
+    price: 250,
+    priceType: "fixed",
+    desc: "Commercial 4K UHD display on a sleek motorized height-adjustable rolling truss stand with HDMI cables and casting support.",
+    tag: "4K display",
+    tone: "peach",
+  },
+  {
+    id: "tv-75",
+    name: "Samsung 75″ 4K UHD Smart TV",
+    category: "Video & Displays",
+    price: 350,
+    priceType: "fixed",
+    desc: "High-impact 75-inch 4K UHD presentation screen on heavy-duty motorized truss cart. Crystal-clear visuals for conference rooms and keynote overflow.",
+    tag: "Large format",
+    tone: "peach",
+  },
+  {
+    id: "laser-projector",
+    name: "Sony Laser Projector (5,000+ Lumens)",
+    category: "Video & Displays",
+    price: 175,
+    priceType: "fixed",
+    desc: "Crisp laser projection with instant on/off, high color accuracy, and flexible throw distance for conference halls and banquet ballrooms.",
+    tag: "Laser tech",
+    tone: "peach",
+  },
+  {
+    id: "fastfold-screen",
+    name: "Fastfold Screen with Black Dress Kit",
+    category: "Video & Displays",
+    price: 150,
+    priceType: "fixed",
+    desc: "Professional 100″ to 150″ front/rear projection screen with snap-on aluminum frame and full velvet blackout drape surround.",
+    tag: "Conferences",
+    tone: "peach",
+  },
+  {
+    id: "video-switcher",
+    name: "Multi-Input HDMI Video Switcher",
+    category: "Video & Displays",
+    price: 75,
+    priceType: "fixed",
+    desc: "Seamless video switcher with preview/program multiview, picture-in-picture, and clean transitions between presenter laptops and video feeds.",
+    tag: "Seamless",
+    tone: "peach",
+  },
+
+  // --- LED VIDEO WALLS ---
+  {
+    id: "led-12",
+    name: "Indoor LED Video Wall — 12 × 7 ft",
+    category: "LED Video Walls",
+    price: null,
+    priceType: "quote",
+    desc: "Ultra-fine 2.67mm pixel pitch LED wall. Includes NovaStar VX1000 processor, ground rigging, 2 powered speakers, audio mixer, and Shure wireless mic.",
+    tag: "Turnkey package",
+    tone: "periwinkle",
+  },
+  {
+    id: "led-16",
+    name: "Indoor LED Video Wall — 16 × 9 ft",
+    category: "LED Video Walls",
+    price: null,
+    priceType: "quote",
+    desc: "Full-scale 16:9 cinematic LED video wall (2.67mm pitch). Includes NovaStar video processor, sound reinforcement package, and certified lead technician.",
+    tag: "Cinematic scale",
+    tone: "periwinkle",
+  },
+  {
+    id: "led-custom",
+    name: "Custom Modular LED Wall Configuration",
+    category: "LED Video Walls",
+    price: null,
+    priceType: "quote",
+    desc: "Tailored LED displays in curved, pillar, banner, or backdrop layouts. 2.6mm, 2.9mm, or 3.9mm pixel pitch with ground-support truss or crank stands.",
+    tag: "Bespoke design",
+    tone: "periwinkle",
+  },
+  {
+    id: "led-trailer",
+    name: "Mobile Outdoor LED Video Wall Trailer",
+    category: "LED Video Walls",
+    price: null,
+    priceType: "quote",
+    desc: "Turnkey hydraulic-lift outdoor mobile LED trailer. Daylight visible (3.91mm pitch), wind and rain resistant, with built-in sound system and generator support.",
+    tag: "Outdoor mobile",
+    tone: "periwinkle",
+  },
+
+  // --- OUTDOOR MOVIES ---
   {
     id: "movie-12",
-    name: "Outdoor Movie — 12 ft",
+    name: "Outdoor Movie Package — 12 ft",
     category: "Outdoor Movies",
     price: 549,
     priceType: "fixed",
-    desc: "Screen, projector, two powered speakers and core playback gear.",
-    tag: "Public price",
+    desc: "12-foot inflatable screen, Sony laser projector, 2 powered speakers, audio mixer, laptop/DVD player, and delivery/setup. Perfect for 10–30 guests.",
+    tag: "Backyard favorite",
     tone: "orange",
   },
   {
     id: "movie-16",
-    name: "Outdoor Movie — 16 ft",
+    name: "Outdoor Movie Package — 16 ft",
     category: "Outdoor Movies",
     price: 749,
     priceType: "fixed",
-    desc: "Larger inflatable screen with the same core package.",
-    tag: "Public price",
+    desc: "16-foot inflatable movie screen with high-brightness Sony laser projector, sound package, and full setup. Ideal for school nights, parks, and up to 75 guests.",
+    tag: "School & community",
     tone: "orange",
   },
   {
     id: "movie-26",
-    name: "Outdoor Movie — 26 ft",
+    name: "Outdoor Movie Package — 26 ft",
     category: "Outdoor Movies",
     price: 899,
     priceType: "fixed",
-    desc: "Community-scale outdoor cinema package.",
-    tag: "Public price",
+    desc: "26-foot community-scale outdoor cinema. High-lumen laser projector, dual amplified speakers, mixer, and on-site setup for 100–150+ guests.",
+    tag: "Community scale",
     tone: "orange",
   },
   {
     id: "movie-40",
-    name: "Outdoor Movie — 40 ft",
+    name: "Outdoor Movie Package — 40 ft",
     category: "Outdoor Movies",
     price: 1899,
     priceType: "fixed",
-    desc: "Large-format outdoor movie experience.",
-    tag: "Public price",
+    desc: "Colossal 40-foot inflatable cinema screen for city festivals, university fields, and large outdoor crowds. Complete with high-power sound and technician.",
+    tag: "Festival scale",
     tone: "orange",
   },
+
+  // --- PHOTO BOOTHS ---
   {
     id: "ipad-mirror",
     name: "iPad Mirror Photo Booth",
     category: "Photo Booths",
     price: 799,
     priceType: "starting",
-    desc: "Interactive iPad mirror setup. Listed as starting at.",
-    tag: "From",
+    desc: "Interactive beauty mirror photo booth with beauty ring lighting, custom animated overlays, and instant SMS/AirDrop/email sharing.",
+    tag: "From $799",
     tone: "blue",
   },
   {
     id: "magic-air",
-    name: "Magic Mirror Air",
+    name: "Magic Mirror Air Photo Booth",
     category: "Photo Booths",
     price: 1399,
     priceType: "starting",
-    desc: "Full magic mirror photo booth experience.",
-    tag: "From",
+    desc: "Sleek full-length interactive mirror booth with next-generation touch animations, social-media sharing, fun props, and on-site attendant.",
+    tag: "From $1,399",
     tone: "blue",
   },
   {
     id: "magic-frame",
-    name: "Magic Mirror + Frame",
+    name: "Magic Mirror + Frame Photo Booth",
     category: "Photo Booths",
     price: 1699,
     priceType: "starting",
-    desc: "Framed magic mirror experience.",
-    tag: "From",
+    desc: "Ornate gold or silver framed full-length mirror booth with instant high-gloss prints, custom guest signature animations, and dedicated attendant.",
+    tag: "From $1,699",
     tone: "blue",
   },
   {
     id: "photo-360",
-    name: "360 Photo Booth",
+    name: "360 Video Photo Booth Platform",
     category: "Photo Booths",
     price: 1499,
     priceType: "starting",
-    desc: "360-degree video/photo platform.",
-    tag: "From",
+    desc: "Motorized 360-degree rotating arm capturing slow-motion 4K video with studio lighting, custom audio overlay, and instant sharing station.",
+    tag: "From $1,499",
     tone: "blue",
   },
+
+  // --- SILENT DISCO ---
   {
-    id: "small-audio",
-    name: "Small Audio Package",
-    category: "Audio",
-    price: null,
-    priceType: "quote",
-    desc: "2 powered speakers, wireless/wired mic, small mixer.",
-    tag: "Quote",
-    tone: "",
+    id: "silent-50",
+    name: "Silent Disco — 50 Headphones",
+    category: "Silent Disco",
+    price: 500,
+    priceType: "fixed",
+    desc: "50 glowing 3-channel LED wireless headphones, 3 multi-frequency RF transmitters, audio cables, and charging equipment.",
+    tag: "Fixed price",
+    tone: "mint",
   },
   {
-    id: "medium-audio",
-    name: "Medium Audio Package",
-    category: "Audio",
-    price: null,
-    priceType: "quote",
-    desc: "4 speakers, wireless mics and 16-channel mixer.",
-    tag: "Quote",
-    tone: "",
+    id: "silent-100",
+    name: "Silent Disco — 100 Headphones",
+    category: "Silent Disco",
+    price: 900,
+    priceType: "fixed",
+    desc: "100 3-channel wireless headphones with 3 transmitters. Ideal for college socials, rooftop parties, and weddings with quiet hours.",
+    tag: "Most popular",
+    tone: "mint",
   },
   {
-    id: "large-audio",
-    name: "Large Audio Package",
-    category: "Audio",
-    price: null,
-    priceType: "quote",
-    desc: "Line arrays, subs, multi-channel mixer and support.",
-    tag: "Quote",
-    tone: "",
+    id: "silent-150",
+    name: "Silent Disco — 150 Headphones",
+    category: "Silent Disco",
+    price: 1200,
+    priceType: "fixed",
+    desc: "150 glowing headphones and 3 transmitters for campus dances, fraternity/sorority events, and private club nights.",
+    tag: "Fixed price",
+    tone: "mint",
   },
   {
-    id: "tv-65",
-    name: "Samsung 65” 4K TV",
-    category: "Video & Displays",
-    price: null,
-    priceType: "quote",
-    desc: "4K UHD display for presentations and events.",
-    tag: "Quote",
-    tone: "",
+    id: "silent-200",
+    name: "Silent Disco — 200 Headphones",
+    category: "Silent Disco",
+    price: 1800,
+    priceType: "fixed",
+    desc: "200 headphones with long-range transmitters. Delivers a zero-noise-complaint dance party for public parks and outdoor celebrations.",
+    tag: "Fixed price",
+    tone: "mint",
   },
   {
-    id: "tv-75",
-    name: "Samsung 75” 4K TV",
-    category: "Video & Displays",
-    price: null,
-    priceType: "quote",
-    desc: "Larger 4K UHD display for event viewing.",
-    tag: "Quote",
-    tone: "",
+    id: "silent-300",
+    name: "Silent Disco — 300 Headphones",
+    category: "Silent Disco",
+    price: 2500,
+    priceType: "fixed",
+    desc: "300 headphones and commercial transmitters for festivals, town celebrations, and large corporate entertainment.",
+    tag: "Fixed price",
+    tone: "mint",
+  },
+
+  // --- EVENT LIGHTING ---
+  {
+    id: "uplights-6",
+    name: "Wireless Battery Uplights (Pack of 6)",
+    category: "Event Lighting",
+    price: 150,
+    priceType: "fixed",
+    desc: "Chauvet Freedom Par H9 IP battery-powered RGBAW+UV uplights. 100% wireless with smartphone/remote control for walls, columns, and accent lighting.",
+    tag: "Wireless battery",
+    tone: "lavender",
   },
   {
-    id: "led-12",
-    name: "Indoor LED Wall — 12 × 7 ft",
-    category: "LED Walls",
-    price: null,
-    priceType: "quote",
-    desc: "2.67 mm LED wall with processor and audio package.",
-    tag: "Quote",
-    tone: "",
+    id: "uplights-12",
+    name: "Wireless Battery Uplights (Pack of 12)",
+    category: "Event Lighting",
+    price: 275,
+    priceType: "fixed",
+    desc: "12-pack of wireless Chauvet Freedom Par uplights in rolling charging road case. Full room color transformation with warm white or custom hues.",
+    tag: "Full room pack",
+    tone: "lavender",
   },
   {
-    id: "led-16",
-    name: "Indoor LED Wall — 16 × 9 ft",
-    category: "LED Walls",
-    price: null,
-    priceType: "quote",
-    desc: "Large indoor LED wall with controller package.",
-    tag: "Quote",
-    tone: "",
+    id: "moving-heads",
+    name: "Moving Head Stage Light Fixtures (Pair)",
+    category: "Event Lighting",
+    price: 120,
+    priceType: "fixed",
+    desc: "Pair of intelligent DMX moving head spotlight fixtures with gobos, motorized focus, pan/tilt movement, and color prism effects.",
+    tag: "Dynamic FX",
+    tone: "lavender",
   },
+  {
+    id: "pinspot-pack",
+    name: "Chauvet EZPin Battery Pinspots (Pack of 4)",
+    category: "Event Lighting",
+    price: 80,
+    priceType: "fixed",
+    desc: "Magnetic battery-powered warm white pinspots for cake tables, floral centerpieces, and architectural highlights.",
+    tag: "Pinspotting",
+    tone: "lavender",
+  },
+  {
+    id: "light-bar",
+    name: "LED Stage Wash Light Bar",
+    category: "Event Lighting",
+    price: 65,
+    priceType: "fixed",
+    desc: "High-output linear LED bar delivering smooth color washes across stages, drapes, and backdrops.",
+    tag: "Stage wash",
+    tone: "lavender",
+  },
+  {
+    id: "followspot",
+    name: "LED Followspot with Stand",
+    category: "Event Lighting",
+    price: 110,
+    priceType: "fixed",
+    desc: "Precision LED spotlight with smooth manual iris, color wheel, and adjustable stand for tracking keynote speakers and performers.",
+    tag: "Keynote spotlight",
+    tone: "lavender",
+  },
+
+  // --- SPECIAL EFFECTS (FX) ---
+  {
+    id: "cold-spark-2",
+    name: "Cold Sparkler Machines (2 Units)",
+    category: "Special Effects",
+    price: 350,
+    priceType: "starting",
+    desc: "2 indoor-safe cold spark fountain machines with wireless remote, powder granules, and setup. Cool to the touch, non-flammable, and zero smoke.",
+    tag: "100% indoor safe",
+    tone: "yellow",
+  },
+  {
+    id: "cold-spark-4",
+    name: "Cold Sparkler Machines (4 Units)",
+    category: "Special Effects",
+    price: 650,
+    priceType: "starting",
+    desc: "4 cold spark machines with DMX synchronized control, extra refill cycles, and technician support. Spectacular for grand entrances and stage shows.",
+    tag: "Grand entrance",
+    tone: "yellow",
+  },
+  {
+    id: "dry-ice-cloud",
+    name: "Dry Ice “Dancing on a Cloud” Machine",
+    category: "Special Effects",
+    price: 295,
+    priceType: "starting",
+    desc: "Professional dry ice low-lying fog machine creating a thick, dreamy cloud that hugs the floor without rising or triggering fire alarms. Essential for wedding first dances.",
+    tag: "Wedding favorite",
+    tone: "yellow",
+  },
+
+  // --- LIVE STREAMING ---
   {
     id: "stream-basic",
-    name: "Live Streaming — Basic",
+    name: "Live Streaming — Basic (1 Camera)",
     category: "Live Streaming",
     price: null,
     priceType: "quote",
-    desc: "1 × 4K camera, streaming laptop, switcher and mixer.",
-    tag: "Quote",
+    desc: "1 × 4K camera, streaming laptop, QSC digital audio mixer, HDMI switcher, and local HD recording for town halls, webinars, and ceremonies.",
+    tag: "Single camera",
     tone: "",
   },
   {
     id: "stream-pro",
-    name: "Live Streaming — Pro",
+    name: "Live Streaming — Pro (3 Cameras)",
     category: "Live Streaming",
     price: null,
     priceType: "quote",
-    desc: "3 × 4K cameras and multi-angle production setup.",
-    tag: "Quote",
-    tone: "",
-  },
-  {
-    id: "wired-mic",
-    name: "Wired Microphone",
-    category: "Microphones",
-    price: null,
-    priceType: "quote",
-    desc: "Reliable cable-connected microphone for event use.",
-    tag: "Quote",
-    tone: "",
-  },
-  {
-    id: "lapel-mic",
-    name: "Lapel Microphone",
-    category: "Microphones",
-    price: null,
-    priceType: "quote",
-    desc: "Hands-free clip-on mic for presentations and ceremonies.",
-    tag: "Quote",
-    tone: "",
-  },
-  {
-    id: "iem",
-    name: "In-Ear Monitors",
-    category: "Microphones",
-    price: null,
-    priceType: "quote",
-    desc: "Performer monitoring solution.",
-    tag: "Quote",
+    desc: "3 × 4K camera multi-angle broadcast setup, video switcher, dedicated stream technician, pristine audio integration, and recording archive.",
+    tag: "Broadcast multi-cam",
     tone: "",
   },
 ];
@@ -256,118 +681,135 @@ const bundles = [
     id: "wedding",
     title: "Wedding Event",
     price: 1800,
-    included: { "medium-audio": 1, "lapel-mic": 2, "photo-360": 1 },
+    included: { "medium-audio": 1, "qlxd-lavalier": 2, "dry-ice-cloud": 1, "uplights-6": 1, "photo-360": 1 },
     tone: "bundle-wedding",
     label: "WEDDING",
-    desc: "Clear audio and visual support for ceremonies, dinners, and celebrations.",
+    desc: "Complete ceremony and reception AV with pristine wireless vows, dance sound, cloud fog effect, and photo booth.",
     items: [
-      "Main speaker package",
-      "2–4 wireless microphones",
-      "Mixer + signal kit",
-      "Display for slideshow",
-      "Optional lighting",
+      "Medium 4-speaker sound system",
+      "2 Shure QLX-D wireless lapel / handheld mics",
+      "Dry ice “Dancing on a Cloud” first dance effect",
+      "Wireless battery uplighting package",
+      "360 photo booth experience",
     ],
     cta: "Customize wedding",
   },
   {
     id: "corporate",
-    title: "Corporate Event",
-    price: 1200,
+    title: "Corporate Conference",
+    price: 1450,
     included: {
       "medium-audio": 1,
-      "lapel-mic": 2,
-      "tv-65": 1,
+      "qlxd-lavalier": 2,
+      "tv-75": 1,
       "stream-basic": 1,
     },
     tone: "bundle-corporate",
     label: "CORPORATE",
-    desc: "Presentation-ready audio, video and streaming support for meetings and launches.",
+    desc: "Presentation-ready audio, 75″ 4K Samsung displays, wireless microphones, and live streaming support for conferences and launches.",
     items: [
-      "Presentation sound",
-      "Wireless microphones",
-      "Projector / TV",
-      "Signal switching",
-      "Optional live stream",
+      "Presentation sound with QSC speakers",
+      "Shure wireless lavalier & handheld mics",
+      "Samsung 75″ 4K commercial display on truss",
+      "Single-camera 4K live streaming setup",
+      "Audio/video recording archive",
     ],
     cta: "Build corporate setup",
   },
   {
-    id: "school",
-    title: "School Event",
-    price: 900,
-    included: {
-      "medium-audio": 1,
-      "wired-mic": 2,
-      "movie-16": 1,
-      "silent-100": 1,
-    },
-    tone: "bundle-school",
-    label: "SCHOOL",
-    desc: "Flexible AV for ceremonies, recognition programs, dances and outdoor activities.",
-    items: [
-      "Speaker package",
-      "Wireless mics",
-      "Mixer + stands",
-      "Optional lighting",
-      "Movie / silent disco add-on",
-    ],
-    cta: "Plan school event",
-  },
-  {
     id: "concert",
-    title: "Concert + Live Performance",
-    price: 2500,
-    included: { "large-audio": 1, iem: 2, "wired-mic": 2, "led-16": 1 },
+    title: "Concert & Live Performance",
+    price: 2800,
+    included: { "large-audio": 1, "sub-kw181": 2, iem: 2, "qlxd-handheld": 2, "led-16": 1 },
     tone: "bundle-concert",
     label: "CONCERT",
-    desc: "Production-focused setup for stage audio, performers and visual systems.",
+    desc: "Production-focused setup for stage audio, line arrays, 18″ subwoofers, in-ear monitoring, and cinematic LED wall.",
     items: [
-      "Line array PA",
-      "Subwoofers",
-      "Stage monitors",
-      "Digital mixer",
-      "Tech support",
+      "JBL VRX line array PA system",
+      "Dual QSC KW181 18″ high-output subwoofers",
+      "Shure PSM900 wireless IEM monitoring",
+      "Behringer X32 32-channel digital console",
+      "On-site sound technician & support",
     ],
     cta: "Build concert setup",
   },
   {
-    id: "party",
-    title: "Private Party",
-    price: 650,
+    id: "school",
+    title: "School Dance & Social",
+    price: 1100,
     included: {
-      "small-audio": 1,
-      "wired-mic": 1,
-      "photo-360": 1,
+      "medium-audio": 1,
+      "sub-thump18": 1,
+      "moving-heads": 1,
       "silent-100": 1,
+    },
+    tone: "bundle-school",
+    label: "SCHOOL",
+    desc: "High-energy AV for homecomings, proms, recognition programs, and 100-headphone silent disco activations.",
+    items: [
+      "High-output powered speaker system",
+      "18″ powered subwoofer for deep bass",
+      "Intelligent moving head dance lighting",
+      "100 silent disco headphones & transmitters",
+      "Shure wireless mic for announcements",
+    ],
+    cta: "Plan school event",
+  },
+  {
+    id: "party",
+    title: "Private Party & DJ",
+    price: 799,
+    included: {
+      "dj-basic-pkg": 1,
+      "sub-kw181": 1,
+      "uplights-6": 1,
+      "photo-360": 1,
     },
     tone: "bundle-party",
     label: "PARTY",
-    desc: "A compact entertainment setup for birthdays, celebrations and social events.",
+    desc: "Turnkey DJ rig, 18″ powered subwoofer, battery uplights, and 360 photo booth for birthdays, anniversaries, and private club nights.",
     items: [
-      "Powered speakers",
-      "Wireless mic",
-      "Mixer",
-      "Optional DJ gear",
-      "Optional photo booth",
+      "Pioneer DJ controller & sound system",
+      "18″ QSC KW181 powered subwoofer",
+      "Chauvet wireless battery uplighting",
+      "360 rotating video booth",
+      "Plug-and-play music playback",
     ],
     cta: "Customize party",
   },
   {
     id: "movie",
     title: "Outdoor Movie Night",
-    price: 549,
-    included: { "movie-16": 1, "medium-audio": 1, "wired-mic": 1 },
+    price: 749,
+    included: { "movie-16": 1, "qlxd-handheld": 1 },
     tone: "bundle-movie",
     label: "MOVIE NIGHT",
-    desc: "Pick the screen size and turn a backyard, school or community field into a cinema.",
+    desc: "16-foot inflatable movie screen with Sony high-lumen laser projector, full sound, playback gear, and complete setup.",
     items: [
-      "Inflatable movie screen",
-      "Sony laser projector",
-      "2 powered speakers",
-      "Audio mixer",
-      "Playback laptop / DVD",
+      "16-ft inflatable cinema screen",
+      "Sony high-lumen laser projector",
+      "2 powered speakers & audio mixer",
+      "Shure wireless mic for introductions",
+      "Playback laptop / DVD & full setup",
     ],
     cta: "Choose screen size",
+  },
+  {
+    id: "special-fx-pkg",
+    title: "Special FX Celebration",
+    price: 895,
+    included: { "cold-spark-4": 1, "dry-ice-cloud": 1, "uplights-12": 1 },
+    tone: "bundle-wedding",
+    label: "SPECIAL FX",
+    desc: "High-impact visual moments: 4 cold spark fountain machines, dry ice low-lying cloud fog, and 12 wireless uplights.",
+    items: [
+      "4 indoor-safe cold sparkler machines",
+      "Dry ice “Dancing on a Cloud” machine",
+      "12 Chauvet wireless battery uplights",
+      "DMX synchronized control & refills",
+      "Technician operation support",
+    ],
+    cta: "Book special effects",
   },
 ];
 
@@ -391,12 +833,12 @@ const state = {
 };
 
 const eventRecommendations = {
-  Wedding: ["medium-audio", "lapel-mic", "tv-65", "photo-360"],
-  "Corporate Event": ["medium-audio", "lapel-mic", "tv-65", "stream-basic"],
-  "School Event": ["medium-audio", "wired-mic", "movie-16", "silent-100"],
-  Concert: ["large-audio", "iem", "wired-mic", "led-16"],
-  "Private Party": ["small-audio", "wired-mic", "photo-360", "silent-100"],
-  "Outdoor Movie": ["movie-16", "medium-audio", "wired-mic", "silent-100"],
+  Wedding: ["medium-audio", "qlxd-lavalier", "dry-ice-cloud", "uplights-6", "photo-360"],
+  "Corporate Event": ["medium-audio", "qlxd-lavalier", "tv-75", "fastfold-screen", "stream-basic"],
+  "School Event": ["medium-audio", "sub-thump18", "moving-heads", "silent-100", "movie-16"],
+  Concert: ["large-audio", "sub-kw181", "iem", "mixer-x32", "led-16"],
+  "Private Party": ["dj-basic-pkg", "sub-kw181", "uplights-6", "photo-360", "silent-100"],
+  "Outdoor Movie": ["movie-16", "movie-26", "qlxd-handheld", "silent-100"],
 };
 
 const app = document.getElementById("app");
@@ -430,11 +872,29 @@ function productPriceText(p) {
 }
 function filteredProducts() {
   const q = state.search.trim().toLowerCase();
-  return products.filter(
-    (p) =>
-      (state.category === "All" || p.category === state.category) &&
-      (!q || `${p.name} ${p.category} ${p.desc}`.toLowerCase().includes(q)),
-  );
+  return products.filter((p) => {
+    const matchesCategory =
+      state.category === "All" ||
+      p.category === state.category ||
+      (state.category === "Audio" &&
+        (p.category === "Audio & Speakers" ||
+          p.category === "Subwoofers" ||
+          p.category === "Microphones" ||
+          p.category === "Audio Mixers" ||
+          p.category === "DJ Equipment")) ||
+      (state.category === "Video & Displays" &&
+        (p.category === "Video & Displays" || p.category === "LED Video Walls")) ||
+      (state.category === "LED Walls" && p.category === "LED Video Walls") ||
+      (state.category === "Experiences" &&
+        (p.category === "Silent Disco" ||
+          p.category === "Outdoor Movies" ||
+          p.category === "Photo Booths" ||
+          p.category === "Special Effects"));
+    const matchesSearch =
+      !q ||
+      `${p.name} ${p.category} ${p.desc} ${p.tag}`.toLowerCase().includes(q);
+    return matchesCategory && matchesSearch;
+  });
 }
 function loadSelection() {
   try {
@@ -463,22 +923,58 @@ function syncSetupCount() {
   link?.setAttribute("aria-label", `My setup, ${count} item${count === 1 ? "" : "s"}`);
 }
 function productImage(p) {
-  const photo = p.category === "Experiences"
-    ? "photo-1505740420928-5e560c06d30e" // clear headphones product shot
-    : p.category === "Microphones"
-      ? "photo-1540255431229-f8c6137e88d3" // mic with warm live-event background
-      : p.category === "Outdoor Movies" || (p.category === "Video & Displays" && !p.id.startsWith("tv-"))
-        ? "photo-1697059361461-b81d0e98c3af" // projector and conference room
-        : p.category === "Video & Displays"
-          ? "photo-1560439514-0fc9d2cd5e1b" // audience and presentation screen
-          : p.category === "LED Walls"
-            ? "photo-1506157786151-b8491531f063" // live event stage
-            : p.category === "Photo Booths"
-              ? "photo-1530103862676-de8c9debad1d" // colorful event celebration
-              : p.category === "Live Streaming"
-                ? "photo-1492619375914-88005aa9e8fb" // camera production equipment
-                : "photo-1506157786151-b8491531f063"; // live audio production
-  return `https://images.unsplash.com/${photo}?auto=format&fit=crop&w=1200&q=85`;
+  if (p.category === "Special Effects" && p.id.startsWith("cold-spark")) {
+    return "assets/beantown/cold-sparklers.webp";
+  }
+  if (p.category === "Special Effects" && p.id.startsWith("dry-ice")) {
+    return "assets/beantown/corporate-dance-floor.jpg";
+  }
+  if (p.id === "led-trailer") {
+    return "assets/beantown/outdoor-led-trailer.webp";
+  }
+  if (p.category === "Event Lighting") {
+    return "assets/beantown/event-lighting.webp";
+  }
+  if (p.category === "Subwoofers") {
+    return "assets/beantown/speaker-wall.webp";
+  }
+  if (p.category === "DJ Equipment") {
+    return "assets/beantown/69667bc51a89c0b8e055a68c_SMALL-PA-WITH-SUB--FACADE--AND-MOVERS-p-800.jpg";
+  }
+  if (p.category === "Silent Disco") {
+    return "assets/beantown/headphones.jpg";
+  }
+  if (p.category === "Outdoor Movies") {
+    return "assets/beantown/outdoor-movie.jpg";
+  }
+  if (p.id === "photo-360") {
+    return "assets/beantown/photo-booth-360.jpg";
+  }
+  if (p.category === "Photo Booths") {
+    return "assets/beantown/69667bc3b2d970f7c3028354_MAGIC-PB-p-800.jpeg";
+  }
+  if (p.category === "Microphones") {
+    return "assets/beantown/microphone-rentals.jpeg";
+  }
+  if (p.category === "Audio Mixers") {
+    return "assets/beantown/event-production.jpg";
+  }
+  if (p.category === "LED Video Walls") {
+    return "assets/beantown/69667bc33d884d697701e4c1_Led-Wall.png";
+  }
+  if (p.category === "Video & Displays" && p.id.startsWith("tv-")) {
+    return "assets/beantown/event-display.jpg";
+  }
+  if (p.category === "Video & Displays") {
+    return "assets/beantown/projector-screen.jpg";
+  }
+  if (p.category === "Live Streaming") {
+    return "assets/beantown/live-streaming.jpg";
+  }
+  if (p.category === "Audio & Speakers") {
+    return "assets/beantown/speaker-rental.jpg";
+  }
+  return "assets/beantown/event-stage.jpg";
 }
 
 function bundleImage(bundle) {
@@ -517,95 +1013,132 @@ function testimonialSection() {
 }
 function faqSection() {
   const faqs = [
-    [
-      "What equipment can I rent?",
-      "Beantown offers sound systems, wireless microphones, lighting, 4K TVs, projectors, modular LED video walls, 360 photo booths, and silent disco headphones. Packages are available for small gatherings and large events.",
-    ],
-    [
-      "Is setup and delivery provided?",
-      "Yes. Delivery, full setup, soundcheck, and pickup are available across Boston and New England. Select rentals can also be picked up for DIY use, with clear instructions included.",
-    ],
-    [
-      "How do I reserve equipment?",
-      "Build your setup online or request a quote directly. Beantown will confirm availability for your date, recommend a suitable package, and coordinate event logistics.",
-    ],
-    [
-      "What if I need support onsite?",
-      "On-site or remote support is available. Rentals include setup guides, and our production team can be reached by phone if you need help during your event.",
-    ],
-    [
-      "Can I customize an event bundle?",
-      "Yes. Every Wedding, Corporate, Concert, and Outdoor Movie bundle can be tailored with extra wireless mics, subwoofers, screens, or lighting for your venue.",
-    ],
-    [
-      "How does quote-based pricing work?",
-      "Standard packages show fixed pricing in the catalog. Custom production gear—like modular LED walls and multi-camera streaming—is quoted based on room size, rigging, and crew needs.",
-    ],
-    [
-      "What do you need from our venue?",
-      "Most setups only need standard 15A/20A power within 50 feet and 60–90 minutes for load-in. For outdoor events or large stages, we coordinate power and weather plans in advance.",
-    ],
-    [
-      "What if our guest count or timeline changes?",
-      "Event schedules evolve. Let us know as your headcount or timeline shifts and we will adjust your speaker coverage, headphone count, or delivery window.",
-    ],
+    {
+      category: "Rentals & Inventory",
+      question: "What equipment is available in your Boston rental inventory?",
+      answer: "We maintain a comprehensive, commercial-grade event inventory in Boston. Our catalog includes powered sound systems and line arrays (QSC, JBL, Mackie), high-output subwoofers (QSC KW181, cardioid KS212C), Shure QLX-D digital wireless microphones (Beta 58A handhelds, lavaliers, Countryman headsets, and push-to-talk conference mics), audio mixers (Behringer X32, QSC TouchMix-16, Allen & Heath SQ-7), club-standard DJ rigs (Pioneer CDJ-3000, DJM-900NXS2, Technics 1200 turntables, Scrim Werks facades), 65″ & 75″ Samsung 4K TVs on motorized truss stands, 2.67mm modular indoor LED video walls, daylight-viewable mobile outdoor LED trailers, inflatable outdoor movie screens (12′ to 40′) with Sony laser projectors, 3-channel silent disco headphones (50–300+ units), photo booths (iPad Mirror, Magic Mirror Air, 360 Video platform), wireless Chauvet Freedom Par battery uplighting, moving heads, and indoor-safe special FX (Cold Sparklers and Dry Ice “Dancing on a Cloud”).",
+    },
+    {
+      category: "Delivery & Setup",
+      question: "Do you handle delivery, setup, soundcheck, and pickup?",
+      answer: "Yes, we provide full turnkey service throughout Greater Boston and all of New England. Our experienced technicians arrive well before your event begins, manage all load-in, run and tape clean cabling, tune the system for your room acoustics, and conduct a complete soundcheck and microphone walkthrough with you or your speaker. At the end of your event, we return for prompt, quiet teardown. For select compact equipment (such as small PA speakers or silent disco packs), convenient self-pickup and return is also available with straightforward setup guides and on-call telephone support.",
+    },
+    {
+      category: "Pricing & Quotes",
+      question: "How does pricing work, and are there any surprise fees?",
+      answer: "We pride ourselves on 100% transparent pricing. Fixed-format entertainment packages—such as Silent Disco ($500–$2,500), Inflatable Outdoor Movie Nights ($549–$1,899), and Photo Booths ($799–$1,699)—have clearly listed public pricing. For custom sound systems, modular LED walls, multi-camera live streaming, and concert lighting, we provide an itemized quote based on venue dimensions, guest count, rigging requirements, and technician hours. Every quote clearly separates gear, delivery, setup, and labor—so you will never encounter surprise add-ons on event day.",
+    },
+    {
+      category: "On-Site Support",
+      question: "Can we have an on-site technician or sound engineer manage our show?",
+      answer: "Absolutely. In addition to delivery and setup, you can book dedicated Beantown AV technicians and FOH audio engineers to stay on-site for the duration of your event. We handle live mic mixing, volume adjustments, background music transitions, presentation slide advancing, video cueing, camera switching, and immediate troubleshooting so that you and your team can focus entirely on your guests.",
+    },
+    {
+      category: "Venue & Power",
+      question: "What power and venue accommodations do you need?",
+      answer: "Most standard audio setups, 4K TVs, wireless uplights, and projectors operate reliably on standard 120V 15A or 20A wall circuits within 50 feet of the stage area. For high-draw production—like large-scale modular LED video walls, high-power sub arrays, or outdoor park/field screenings—we calculate exact amperage loads in advance and can supply ultra-quiet commercial generator rentals and power distribution boxes. We will gladly coordinate directly with your venue manager or coordinator to review load-in docks, elevator clearance, and power availability.",
+    },
+    {
+      category: "Booking Lead Time",
+      question: "How far in advance should we reserve our rentals?",
+      answer: "We recommend booking 2 to 4 weeks in advance, especially for busy Friday and Saturday dates during peak wedding and graduation seasons (May through October) and corporate holiday galas (November–December). That said, we maintain a deep Boston inventory and do our best to accommodate short-notice, same-week, and emergency rentals whenever equipment and crew are available. Call or text us directly at (617) 286-4757 for urgent requests.",
+    },
+    {
+      category: "Weather & Outdoor",
+      question: "What is your policy for outdoor events and inclement weather?",
+      answer: "Outdoor events are a specialty—from park movie nights to outdoor weddings and athletic watch parties. For safety, electronic gear (speakers, non-waterproof lighting, laser projectors, and indoor LED panels) must be situated under a watertight tent, pavilion, or covered structure in case of precipitation. Our mobile outdoor LED video wall trailers are fully weatherproof and wind-rated up to 35 mph. If severe rain or wind threatens an open-air event, we work with you up to 24–48 hours in advance to adapt the schedule or transition to an indoor backup space.",
+    },
+    {
+      category: "Special FX & Safety",
+      question: "Are Cold Sparklers and Dry Ice fog safe for indoor Boston venues?",
+      answer: "Yes, both effects are 100% venue-friendly and safe for indoor use. Our Cold Sparkler machines utilize a non-pyrotechnic titanium/zirconium composite granule that produces a brilliant spark fountain that remains cool to the touch, generates zero open flame, and produces virtually no smoke. Our Dry Ice machines use solid carbon dioxide and hot water to generate dense, chilled white fog that strictly hugs the floor at ankle height (“Dancing on a Cloud”) and dissipates naturally without rising or triggering optical venue fire alarms.",
+    },
+    {
+      category: "Service Area",
+      question: "What areas in Massachusetts and New England do you service?",
+      answer: "Our primary service area covers Boston proper (Back Bay, Seaport, Downtown, South End, Fenway, Dorchester, Charlestown), Cambridge, Somerville, Brookline, Newton, Waltham, Quincy, and communities throughout Greater Boston and Route 128 / I-95. We also regularly deliver across Massachusetts (Worcester, the North Shore, South Shore, Cape Cod & the Islands), Rhode Island (Providence, Newport), and Southern New Hampshire. Inquire about events across broader New England.",
+    },
+    {
+      category: "Payment & Terms",
+      question: "What payment methods do you accept, and how do deposits work?",
+      answer: "We accept all major credit cards, debit cards, ACH bank transfers, and corporate checks. A deposit secures your equipment and dates on our delivery schedule, with the remaining balance due prior to load-in or upon delivery. Direct invoicing and net-30 vendor billing are available for verified universities, municipal departments, and corporate partners.",
+    },
   ];
 
-  const renderCard = ([question, answer], idx) => `
-    <article class="faq-item faq9-card" data-faq-card style="--faq-delay:${(idx * 0.05).toFixed(2)}s">
+  const renderCard = (item, idx) => `
+    <article class="faq-item faq9-card" data-faq-card style="--faq-delay:${(idx * 0.04).toFixed(2)}s">
       <button type="button" class="faq9-question" data-faq-toggle aria-expanded="false">
-        <span>${question}</span>
+        <div class="faq9-q-meta">
+          <span class="faq9-category-tag">${escapeHtml(item.category)}</span>
+          <span class="faq9-q-text">${escapeHtml(item.question)}</span>
+        </div>
         <b class="faq9-icon" aria-hidden="true">+</b>
       </button>
       <div class="faq9-answer">
         <div class="faq9-answer-inner">
-          <p>${answer}</p>
+          <p>${escapeHtml(item.answer)}</p>
         </div>
       </div>
     </article>`;
 
-  const leftCol = faqs.filter((_, i) => i % 2 === 0);
-  const rightCol = faqs.filter((_, i) => i % 2 === 1);
-
-  return `<section class="section faq-section faq9-section">
+  return `<section class="section faq-section faq9-section" id="faq">
     <div class="section-head">
       <div>
-        <span class="eyebrow">GOOD TO KNOW</span>
+        <span class="eyebrow">HELP &amp; EVENT LOGISTICS</span>
         <h2>Your questions,<br>answered.</h2>
       </div>
-      <p>Helpful details from the Beantown team, so planning your event feels straightforward.</p>
+      <p>Clear, direct answers about our equipment, power requirements, on-site engineers, and delivery across Boston and New England.</p>
     </div>
 
     <div class="faq9-layout">
       <aside class="faq9-contact-panel">
         <div class="faq9-contact-card">
-          <h3>Need more information?</h3>
-          <p class="faq9-contact-copy">The answers here cover the essentials. For custom event packages, venue walkthroughs, or equipment recommendations, reach out directly to our Boston production team.</p>
-          <div class="faq9-stats">
-            <div class="faq9-stat">
-              <strong>&lt; 2h</strong>
-              <span>Quote turnaround</span>
-            </div>
-            <div class="faq9-stat">
-              <strong>100%</strong>
-              <span>On-time delivery</span>
-            </div>
+          <div class="faq9-badge">
+            <span class="faq9-badge-dot"></span>
+            <span>BOSTON PRODUCTION TEAM</span>
           </div>
-          <a href="#quote" class="faq9-cta-btn">
-            <span>Email the team</span>
-            <i aria-hidden="true">↗</i>
-          </a>
-          <p class="faq9-hours">Boston &amp; New England event production support.</p>
+          <h3>Have a question about your venue or setup?</h3>
+          <p class="faq9-contact-copy">Every event and venue has unique logistics. Whether you need help calculating acoustic coverage for 200 guests, checking ceiling clearance for an LED wall, or coordinating a strict 60-minute load-in, our specialists are ready to help.</p>
+          
+          <div class="faq9-channels">
+            <a href="tel:+16172864757" class="faq9-channel-item">
+              <span class="faq9-channel-icon" aria-hidden="true">📞</span>
+              <div class="faq9-channel-info">
+                <span class="faq9-channel-label">Call or text our Boston desk</span>
+                <strong>(617) 286-4757</strong>
+                <small>Mon–Fri 8am–5pm · Weekend on-call support</small>
+              </div>
+            </a>
+
+            <a href="mailto:info@beantownaudiorentals.com" class="faq9-channel-item">
+              <span class="faq9-channel-icon" aria-hidden="true">✉️</span>
+              <div class="faq9-channel-info">
+                <span class="faq9-channel-label">Email specs, RFPs, or questions</span>
+                <strong>info@beantownaudiorentals.com</strong>
+                <small>Fast quote &amp; spec sheet replies</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="faq9-actions">
+            <a href="#quote" class="btn btn-dark" style="width:100%;justify-content:center">
+              Request a Custom Quote <span>→</span>
+            </a>
+            <a href="#builder" class="btn btn-light" style="width:100%;justify-content:center;margin-top:8px">
+              Build My Event Setup
+            </a>
+          </div>
+
+          <ul class="faq9-perks" aria-label="Our service guarantee">
+            <li><span>✓</span> Tested &amp; soundchecked gear before every dispatch</li>
+            <li><span>✓</span> Delivery, setup &amp; strike across New England</li>
+            <li><span>✓</span> Dedicated on-site technicians available</li>
+          </ul>
         </div>
       </aside>
 
-      <div class="faq9-grid">
-        <div class="faq9-col">
-          ${leftCol.map((item, i) => renderCard(item, i * 2)).join("")}
-        </div>
-        <div class="faq9-col">
-          ${rightCol.map((item, i) => renderCard(item, i * 2 + 1)).join("")}
-        </div>
+      <div class="faq9-feed">
+        ${faqs.map((item, idx) => renderCard(item, idx)).join("")}
       </div>
     </div>
   </section>`;
@@ -799,17 +1332,22 @@ function home() {
 function rentals() {
   const cats = [
     "All",
-    "Audio",
+    "Audio & Speakers",
+    "Subwoofers",
     "Microphones",
+    "Audio Mixers",
+    "DJ Equipment",
     "Video & Displays",
-    "LED Walls",
-    "Experiences",
+    "LED Video Walls",
     "Outdoor Movies",
     "Photo Booths",
+    "Silent Disco",
+    "Event Lighting",
+    "Special Effects",
     "Live Streaming",
   ];
   const list = filteredProducts();
-  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">RENTAL CATALOG</span><h1>Everything<br>you can add.</h1></div><p>Explore the catalog by category. Products with public-reference pricing calculate immediately; production gear marked “Quote required” stays flexible for the client.</p></div><div class="rentals-toolbar"><div style="display:flex;gap:8px;flex-wrap:wrap">${cats.map((c) => `<button class="filter-pill ${state.category === c ? "active" : ""}" data-cat="${c}">${c}</button>`).join("")}</div><div class="inline-search"><input id="rentalSearch" value="${state.search}" placeholder="Search equipment…"></div></div><div class="product-grid">${list.length ? list.map(productCard).join("") : `<div class="empty" style="grid-column:1/-1">No rentals match your search. Try another term or clear the category filter.</div>`}</div></div>`;
+  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">RENTAL CATALOG</span><h1>Everything<br>you can add.</h1></div><p>Explore our complete commercial rental inventory. Consumer packages feature transparent fixed pricing; custom staging, line arrays, and LED walls are confirmed with an itemized quote.</p></div><div class="rentals-toolbar"><div style="display:flex;gap:8px;flex-wrap:wrap">${cats.map((c) => `<button class="filter-pill ${state.category === c ? "active" : ""}" data-cat="${c}">${c}</button>`).join("")}</div><div class="inline-search"><input id="rentalSearch" value="${state.search}" placeholder="Search equipment, models, brands…"></div></div><div class="product-grid">${list.length ? list.map(productCard).join("") : `<div class="empty" style="grid-column:1/-1">No rentals match your search. Try another term or clear the category filter.</div>`}</div></div>`;
 }
 
 function bundlesPage() {
