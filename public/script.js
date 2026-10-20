@@ -627,13 +627,8 @@ function home() {
         <span class="eyebrow">WHAT ARE YOU RENTING?</span>
         <h2 class="experience-main-title">Start with the<br>experience.</h2>
         <p class="experience-subcopy">Scroll to explore the possibilities — from room-filling sound to full-scale visual production.</p>
-        <div class="experience-category-pills" role="navigation" aria-label="Experience categories">
-          <a href="#rentals?cat=Audio" class="exp-pill is-active" data-exp-pill="0"><span>01</span> Audio</a>
-          <a href="#rentals?cat=Video%20%26%20Displays" class="exp-pill" data-exp-pill="1"><span>02</span> Video</a>
-          <a href="#rentals?cat=Experiences" class="exp-pill" data-exp-pill="2"><span>03</span> Experiences</a>
-          <a href="#rentals?cat=LED%20Walls" class="exp-pill" data-exp-pill="3"><span>04</span> LED Walls</a>
-        </div>
       </div>
+
 
       <div class="tile-reveal-canvas" aria-label="Interactive equipment collage">
         <!-- WAVE 1: Sound & Picture Collage -->
