@@ -786,12 +786,6 @@ function home() {
       </div>
     </div>
   </section>
-  <section class="section"><div class="section-head"><div><span class="eyebrow">POPULAR NOW</span><h2>Public pricing,<br>where it exists.</h2></div><a class="btn btn-light" href="#rentals">See all rentals</a></div><div class="product-grid">${products
-    .filter((p) =>
-      ["movie-12", "movie-16", "silent-100", "photo-360"].includes(p.id),
-    )
-    .map(productCard)
-    .join("")}</div></section>
   <section class="section"><div class="section-head"><div><span class="eyebrow">EVENT BUNDLES</span><h2>Start with<br>the occasion.</h2></div><a class="btn btn-light" href="#bundles">View all bundles →</a></div><div class="bundle-grid">${bundles
     .slice(0, 3)
     .map(
