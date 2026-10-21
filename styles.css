@@ -18,7 +18,8 @@
 }
 
 html {
-  scroll-behavior: smooth
+  scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -26,7 +27,8 @@ body {
   font-family: 'DM Sans', system-ui, sans-serif;
   background: var(--bg);
   color: var(--ink);
-  line-height: 1.45
+  line-height: 1.45;
+  overflow-x: clip;
 }
 
 a {
@@ -4746,78 +4748,110 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   }
 }
 
-.testimonials-section { padding: 64px 0 74px; overflow: hidden; }
-.testimonial-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(370px, .9fr);
-  align-items: center;
-  gap: 38px;
-  min-height: 690px;
+/* Client stories — rotating half-moon testimonial wheel. */
+.tw-section {
+  position: relative;
+  padding-top: clamp(40px, 4vw, 70px);
+  padding-bottom: clamp(60px, 6vw, 100px);
+  overflow: visible;
 }
-.testimonial-orbit { position: relative; width: 100%; height: 620px; perspective: 1200px; }
-.testimonial-orbit-card {
+.tw-layout {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  align-items: center;
+  gap: clamp(36px, 5vw, 80px);
+  min-height: clamp(760px, 62vw, 900px);
+}
+/* The stage bleeds to the left edge of the viewport, held safely on the left side so it never collides with text. */
+.tw-stage {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 50vw);
+  width: calc(50vw - 50% + 290px);
+  max-width: 43vw;
+  overflow: visible;
+  pointer-events: none;
+}
+.tw-wheel {
   position: absolute;
   top: 0;
   left: 0;
-  width: clamp(230px, 23vw, 290px);
-  padding: 0;
-  border: 0;
-  border-radius: 24px;
-  background: transparent;
-  box-shadow: none;
-  offset-path: ellipse(175px 220px at 50% 50%);
-  offset-anchor: center;
-  offset-distance: var(--orbit-position);
-  offset-rotate: 0deg;
-  animation: testimonial-orbit-loop 36s linear infinite;
-  animation-delay: var(--orbit-delay);
-  will-change: offset-distance;
+  width: 0;
+  height: 0;
+  will-change: transform;
+  pointer-events: none;
 }
-.testimonial-card-inner {
+.tw-card {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
-  min-height: 170px;
+  width: var(--tw-card-w, 205px);
+  height: var(--tw-card-h, 275px);
   flex-direction: column;
-  padding: 24px 26px;
-  border: 1px solid #e6dfd0;
-  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid #e5ded0;
+  border-radius: 20px;
   background: var(--paper);
   color: var(--ink);
-  box-shadow: 0 18px 44px rgba(50, 42, 20, .12);
-  transform: rotate(var(--card-tilt, 0deg));
+  box-shadow: 0 14px 32px rgba(50, 42, 20, .11);
+  /* Each card sits on the circle and turns with it, so it stays tangent to the arc. */
+  transform: rotate(var(--a, 0deg)) translateX(var(--tw-r, 620px)) translate(-50%, -50%);
+  pointer-events: auto;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
-.testimonial-orbit-card:nth-child(1) .testimonial-card-inner { --card-tilt: -5deg; }
-.testimonial-orbit-card:nth-child(2) .testimonial-card-inner { --card-tilt: 3deg; }
-.testimonial-orbit-card:nth-child(3) .testimonial-card-inner { --card-tilt: -2deg; }
-.testimonial-orbit-card:nth-child(4) .testimonial-card-inner { --card-tilt: 4deg; }
-.testimonial-card-inner .testimonial-stars { color: #DFAD2A; font-size: 19px; }
-.testimonial-card-inner > p { margin: 16px 0 0; color: #514d44; font: 600 16px/1.55 'Hind', sans-serif !important; }
-.testimonial-copy { max-width: 570px; }
+.tw-photo { flex: 0 0 34%; overflow: hidden; background: #e8e1d2; }
+.tw-photo img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
+.tw-body { display: flex; min-height: 0; flex: 1; flex-direction: column; gap: 7px; padding: 12px 14px 13px; }
+.tw-stars { color: #DFAD2A; font: 700 14px/1 Inter, sans-serif; letter-spacing: .08em; }
+.tw-body > p {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: #45423a;
+  font: 500 12.5px/1.42 Inter, sans-serif;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.tw-person { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 8px; border-top: 1px solid #eee8db; }
+.tw-avatar { display: grid; width: 28px; height: 28px; flex: 0 0 auto; place-items: center; border-radius: 50%; background: #ffe08a; color: #3b2f0b; font: 800 10px Inter, sans-serif; letter-spacing: .02em; }
+.tw-person strong { color: var(--ink); font: 700 11.5px/1.2 Inter, sans-serif; }
+.tw-person small { margin-top: 1px; color: var(--muted); font: 500 10.5px/1.2 Inter, sans-serif; }
+.testimonial-copy { grid-column: 2; max-width: 560px; }
 .testimonial-copy .eyebrow { color: #75601d; }
-.testimonial-copy h2 { margin: 14px 0 22px; font-size: clamp(42px, 5vw, 76px); line-height: .98; letter-spacing: -.055em; }
+.testimonial-copy h2 { margin: 14px 0 22px; font-size: clamp(38px, 4.2vw, 64px); line-height: 1.02; letter-spacing: -.05em; }
 .testimonial-copy h2 span { color: #DFAD2A; }
-.testimonial-copy > p { max-width: 500px; color: var(--muted); font-size: clamp(17px, 1.5vw, 21px); line-height: 1.6; }
-.testimonial-orbit:hover .testimonial-orbit-card { animation-play-state: paused; }
-@keyframes testimonial-orbit-loop { to { offset-distance: calc(var(--orbit-position) + 100%); } }
+.testimonial-copy > p { max-width: 500px; margin: 0; color: var(--muted); font-size: clamp(17px, 1.5vw, 21px); line-height: 1.6; }
 @media (max-width: 900px) {
-  .testimonial-layout { grid-template-columns: 1fr; gap: 20px; min-height: 0; }
-  .testimonial-copy { grid-row: 1; max-width: 680px; margin-inline: auto; text-align: center; }
+  .tw-section { padding-top: 30px; padding-bottom: 50px; }
+  .tw-layout { grid-template-columns: 1fr; gap: 20px; min-height: 0; }
+  .testimonial-copy { grid-column: 1; grid-row: 1; margin-inline: auto; text-align: center; }
   .testimonial-copy > p { margin-inline: auto; }
-  .testimonial-orbit { grid-row: 2; width: min(100%, 700px); height: 570px; margin-inline: auto; }
-  .testimonial-orbit-card { width: min(42vw, 280px); offset-path: ellipse(125px 205px at 50% 50%); }
+  .tw-stage {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    grid-row: 2;
+    width: 100vw;
+    max-width: 100vw;
+    height: 560px;
+    margin-left: calc(50% - 50vw);
+    overflow: visible;
+  }
 }
 @media (max-width: 560px) {
-  .testimonials-section { padding-block: 48px; }
-  .testimonial-layout { gap: 8px; }
   .testimonial-copy h2 { font-size: clamp(38px, 10vw, 52px); }
-  .testimonial-orbit { height: 580px; }
-  .testimonial-orbit-card { width: min(58vw, 230px); offset-path: ellipse(112px 205px at 50% 50%); }
-  .testimonial-card-inner { min-height: 160px; padding: 18px; }
-  .testimonial-card-inner > p { margin-top: 12px; font-size: 14px; }
+  .tw-stage { height: 520px; }
+  .tw-body { gap: 6px; padding: 10px 12px 11px; }
+  .tw-body > p { font-size: 12px; line-height: 1.4; -webkit-line-clamp: 3; }
+  .tw-photo { flex-basis: 33%; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .testimonial-orbit { display: flex; height: auto; flex-direction: column; align-items: center; gap: 16px; perspective: none; }
-  .testimonial-orbit-card { position: static; width: min(100%, 360px); animation: none; offset-path: none; offset-distance: 0; transform: none; will-change: auto; }
-  .testimonial-card-inner { transform: none; }
+  .tw-wheel { will-change: auto; }
 }
 
 /* Give the hero grid more breathing room and pull the story cards into a staggered frame. */
