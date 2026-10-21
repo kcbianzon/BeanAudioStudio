@@ -1000,17 +1000,10 @@ const testimonialSlots = [
   { quote: "The setup team had everything ready before our guests arrived." },
   { quote: "Delivery was smooth, and communication was clear from start to finish." },
   { quote: "Everything came together effortlessly, from setup through wrap." },
-  { quote: "The inflatable screen was a hit. Picture and sound were perfect for the whole crowd." },
-  { quote: "Three channels, zero noise complaints, and every guest loved the headphones." },
-  { quote: "The 360 booth was the highlight of the night. Guests lined up for hours." },
-  { quote: "The LED wall looked stunning and made our keynote feel like a real production." },
-  { quote: "Our hybrid event streamed flawlessly with clear audio for remote guests." },
-  { quote: "Lighting and sound turned our gym into a real dance floor." },
-  { quote: "The cold sparklers gave our grand entrance exactly the wow moment we wanted." },
-  { quote: "Powerful, clean sound that filled the whole venue. We will book again." },
 ];
 function testimonialCard(slot, index) {
-  return `<article class="tw-card" style="--a:${index * 360 / testimonialSlots.length}deg"><div class="tw-body"><div class="tw-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div><p>“${escapeHtml(slot.quote)}”</p></div></article>`;
+  const tilt = [-4, 3, -2, 4][index % 4];
+  return `<article class="tw-card" style="--tw-tilt:${tilt}deg"><div class="tw-body"><div class="tw-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div><p>“${escapeHtml(slot.quote)}”</p></div></article>`;
 }
 function testimonialSection() {
   const cards = testimonialSlots.map(testimonialCard).join("");
@@ -1026,11 +1019,8 @@ function initTestimonialWheel() {
   if (!stage || !wheel) return;
 
   const cards = Array.from(wheel.querySelectorAll(".tw-card"));
-  const count = cards.length;
-  if (!count) return;
-  const step = 360 / count;
-  const secondsPerCard = 4.6; // steady pace
-  const degreesPerSecond = step / secondsPerCard;
+  if (!cards.length) return;
+  const degreesPerSecond = 18;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let angle = 0;
   let speed = 1;
@@ -1038,45 +1028,19 @@ function initTestimonialWheel() {
   let lastTime = 0;
   let raf = 0;
   let inView = true;
-  let originX = 0;
-  let originY = 0;
-  let isNarrow = false;
-
-  const updateCardVisibilities = () => {
-    // Current angle is `angle` (decreases counter-clockwise)
-    // Card i net angle relative to 3 o'clock:
-    const cutOff = isNarrow ? 48 : 62;
-    const fadeStart = isNarrow ? 30 : 36;
-    for (let i = 0; i < count; i++) {
-      const card = cards[i];
-      const raw = ((i * step + angle) % 360 + 360) % 360;
-      const phi = raw > 180 ? raw - 360 : raw; // [-180, 180]
-      const absPhi = Math.abs(phi);
-
-      if (absPhi >= cutOff) {
-        if (card.style.visibility !== "hidden") {
-          card.style.visibility = "hidden";
-          card.style.opacity = "0";
-          card.style.pointerEvents = "none";
-        }
-      } else {
-        if (card.style.visibility !== "visible") {
-          card.style.visibility = "visible";
-          card.style.pointerEvents = "auto";
-        }
-        if (absPhi <= fadeStart) {
-          card.style.opacity = "1";
-        } else {
-          const t = (cutOff - absPhi) / (cutOff - fadeStart);
-          card.style.opacity = Math.max(0, Math.min(1, t)).toFixed(3);
-        }
-      }
-    }
-  };
+  let centerX = 0;
+  let centerY = 0;
+  let radiusX = 0;
+  let radiusY = 0;
 
   const apply = () => {
-    wheel.style.transform = `translate3d(${originX}px, ${originY}px, 0) rotate(${angle}deg)`;
-    updateCardVisibilities();
+    cards.forEach((card, index) => {
+      const radians = (index * 90 + angle) * Math.PI / 180;
+      const x = centerX + Math.cos(radians) * radiusX;
+      const y = centerY + Math.sin(radians) * radiusY;
+      card.style.left = `${x}px`;
+      card.style.top = `${y}px`;
+    });
   };
 
   const layout = () => {
@@ -1084,32 +1048,12 @@ function initTestimonialWheel() {
     const height = stage.clientHeight;
     if (!width || !height) return;
     // Use the viewport breakpoint, not the narrower left stage, to select the mobile layout.
-    isNarrow = window.innerWidth < 760;
-    // Compact, near-square cards match the reference while keeping the orbital arc clear.
-    const cardWidth = isNarrow
-      ? Math.max(126, Math.min(164, width * 0.34))
-      : Math.max(148, Math.min(160, height * 0.19));
+    const cardWidth = Math.max(148, Math.min(180, width * 0.38));
     const cardHeight = Math.round(cardWidth * 1.16);
-    const gap = 12;
-    const sine = Math.sin(Math.PI / count);
-    // Radius at which neighboring cards maintain proper clearance:
-    const spacingRadius = Math.ceil((cardHeight + gap + cardWidth * sine) / (2 * sine));
-    const visibilityCutoff = (isNarrow ? 48 : 62) * Math.PI / 180;
-    const rightEdge = isNarrow
-      ? (width + cardWidth) / 2
-      : width - Math.max(190, window.innerWidth * 0.21);
-    const arcInset = 1 - Math.cos(visibilityCutoff);
-    const sectionInset = Math.max(32, (window.innerWidth - 1320) / 2 + 32);
-    const safeRadius = isNarrow
-      ? (width - cardWidth) / (2 * arcInset)
-      : (sectionInset + rightEdge - cardWidth) / arcInset;
-    const radius = Math.min(spacingRadius, Math.max(1, safeRadius));
-
-    // Keep the orbit center fixed in the left column, with its visible arc clear of the heading.
-    originX = rightEdge - radius - cardWidth / 2;
-    originY = height / 2;
-
-    wheel.style.setProperty("--tw-r", `${radius}px`);
+    centerX = width / 2;
+    centerY = height / 2;
+    radiusX = Math.max(0, Math.min(136, width / 2 - cardWidth / 2 - 12));
+    radiusY = Math.max(0, Math.min(205, height / 2 - cardHeight / 2 - 16));
     wheel.style.setProperty("--tw-card-w", `${cardWidth}px`);
     wheel.style.setProperty("--tw-card-h", `${cardHeight}px`);
     apply();
