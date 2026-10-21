@@ -4748,95 +4748,86 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   }
 }
 
-/* Client stories — a fixed vertical wheel of anonymous testimonial cards. */
+/* Client stories — a rotating testimonial arch tuned to the brand. */
 .tw-section {
   position: relative;
   width: 100vw;
   margin-left: calc(50% - 50vw);
-  padding-inline: max(32px, calc((100vw - 1320px) / 2 + 32px));
+  padding-inline: max(24px, calc((100vw - 1440px) / 2 + 24px));
   box-sizing: border-box;
-  padding-top: clamp(28px, 3vw, 44px);
-  padding-bottom: clamp(32px, 4vw, 56px);
+  padding-top: clamp(48px, 7vw, 104px);
+  padding-bottom: clamp(36px, 5vw, 72px);
   overflow: visible;
   background: #fff;
   color: var(--ink);
 }
 .tw-layout {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: clamp(28px, 4vw, 64px);
-  min-height: 0;
+  gap: clamp(24px, 4vw, 52px);
 }
-.tw-stage {
-  position: relative;
-  grid-column: 1;
-  grid-row: 1;
-  width: 100%;
-  height: clamp(440px, 38vw, 540px);
-  overflow: visible;
-  pointer-events: none;
-}
+.tw-stage { position: relative; width: 100%; height: clamp(410px, 35vw, 500px); overflow: hidden; perspective: 1400px; perspective-origin: center 36%; touch-action: pan-y; cursor: grab; }
+.tw-stage:active { cursor: grabbing; }
 .tw-wheel {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
+  transform-style: preserve-3d;
 }
 .tw-card {
   position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   width: var(--tw-card-w, 205px);
   height: var(--tw-card-h, 275px);
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid #e5ded0;
-  border-radius: 20px;
-  background: #fff;
+  border: 1px solid #e7dfd0;
+  border-radius: 22px;
+  background: #fbfaf7;
   color: var(--ink);
-  box-shadow: none;
-  transform: translate(-50%, -50%) rotate(var(--tw-tilt, 0deg));
-  pointer-events: auto;
+  will-change: transform;
   backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: opacity .25s ease;
 }
-.tw-body { display: flex; min-height: 0; flex: 1; flex-direction: column; justify-content: center; gap: 12px; padding: 16px 17px; }
-.tw-stars { color: #DFAD2A; font: 700 14px/1 Inter, sans-serif; letter-spacing: .08em; }
+.tw-body { display: flex; min-height: 0; flex: 1; flex-direction: column; justify-content: center; gap: 14px; padding: 22px 20px; }
+.tw-stars { color: #DFAD2A; font: 700 15px/1 Inter, sans-serif; letter-spacing: .08em; }
 .tw-body > p {
   display: -webkit-box;
   margin: 0;
   overflow: hidden;
   color: #45423a;
-  font: 500 13px/1.48 Inter, sans-serif;
-  -webkit-line-clamp: 5;
+  font: 600 15px/1.55 Inter, sans-serif;
+  -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
 }
-.testimonial-copy { grid-column: 2; max-width: 560px; }
+.testimonial-copy { max-width: 1120px; text-align: center; }
 .testimonial-copy .eyebrow { color: #75601d; }
-.testimonial-copy h2 { margin: 14px 0 22px; font-size: clamp(38px, 4.2vw, 64px); line-height: 1.02; letter-spacing: -.05em; }
+.testimonial-copy h2 { margin: 14px 0 22px; font-size: clamp(46px, 6.6vw, 96px); line-height: .98; letter-spacing: -.055em; }
 .testimonial-copy h2 span { color: #DFAD2A; }
-.testimonial-copy > p { max-width: 500px; margin: 0; color: var(--muted); font-size: clamp(17px, 1.5vw, 21px); line-height: 1.6; }
+.testimonial-copy > p { max-width: 700px; margin: 0 auto; color: #35332f; font-size: clamp(17px, 1.5vw, 23px); font-weight: 600; line-height: 1.65; }
 @media (max-width: 900px) {
-  .tw-section { padding-top: 28px; padding-bottom: 36px; }
-  .tw-layout { grid-template-columns: 1fr; gap: 12px; min-height: 0; }
-  .testimonial-copy { grid-column: 1; grid-row: 1; margin-inline: auto; text-align: center; }
-  .testimonial-copy > p { margin-inline: auto; }
-  .tw-stage {
-    position: relative;
-    grid-column: 1;
-    grid-row: 2;
-    width: 100%;
-    height: 500px;
-    overflow: visible;
-  }
+  .tw-section { padding-top: 52px; padding-bottom: 44px; }
+  .tw-layout { gap: 28px; }
+  .tw-stage { height: 400px; }
+}
+@media (max-width: 680px) {
+  .tw-stage { height: auto; overflow: visible; cursor: default; perspective: none; }
+  .tw-wheel.is-grid { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; height: auto; transform: none; }
+  .tw-wheel.is-grid .tw-card { position: relative; top: auto; left: auto; width: auto; height: 180px; transform: none !important; opacity: 1 !important; }
 }
 @media (max-width: 560px) {
-  .testimonial-copy h2 { font-size: clamp(38px, 10vw, 52px); }
-  .tw-stage { height: 480px; }
-  .tw-body { gap: 9px; padding: 12px 13px; }
-  .tw-body > p { font-size: 12px; line-height: 1.42; -webkit-line-clamp: 5; }
+  .tw-section { padding-inline: 20px; padding-top: 48px; }
+  .testimonial-copy h2 { font-size: clamp(40px, 11vw, 58px); }
+  .testimonial-copy > p { font-size: 16px; }
+  .tw-card { border-radius: 18px; }
+  .tw-body { gap: 10px; padding: 16px 14px; }
+  .tw-body > p { font-size: 13px; line-height: 1.45; -webkit-line-clamp: 6; }
 }
 /* Give the hero grid more breathing room and pull the story cards into a staggered frame. */
 .hero::before { background-size: 64px 64px; }

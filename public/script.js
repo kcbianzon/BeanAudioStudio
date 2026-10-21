@@ -994,20 +994,23 @@ function productCard(p) {
   const quantity = state.selected[p.id] || 0;
   return `<article class="product-card reveal"><div class="product-media has-image ${p.tone || ""}"><img class="product-photo" src="${image}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer"></div><div class="product-meta"><span class="badge">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">${productPriceText(p)}</span><button class="text-btn add-product-btn ${quantity ? "is-added" : ""}" data-add="${p.id}" aria-label="${quantity ? `${quantity} added. Add another ${p.name}` : `Add ${p.name} to my setup`}">${quantity ? `Added · ${quantity} +` : "Add to setup +"}</button></div></div></article>`;
 }
-// Client stories — anonymous sample quote copy for the rotating half-moon wheel.
+// Client stories — anonymous sample quote copy for the continuously rotating cart wheel.
 const testimonialSlots = [
   { quote: "The equipment was reliable and everything sounded great throughout the event." },
   { quote: "The setup team had everything ready before our guests arrived." },
   { quote: "Delivery was smooth, and communication was clear from start to finish." },
   { quote: "Everything came together effortlessly, from setup through wrap." },
+  { quote: "Sound was crisp in every corner of the venue, even during the busiest moments." },
+  { quote: "They handled changes on the day without any fuss. Truly stress-free." },
+  { quote: "Pickup was quick, and the gear arrived clean, tested, and ready to plug in." },
+  { quote: "Professional, friendly, and always one step ahead of what we needed." },
 ];
-function testimonialCard(slot, index) {
-  const tilt = [-4, 3, -2, 4][index % 4];
-  return `<article class="tw-card" style="--tw-tilt:${tilt}deg"><div class="tw-body"><div class="tw-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div><p>“${escapeHtml(slot.quote)}”</p></div></article>`;
+function testimonialCard(slot) {
+  return `<article class="tw-card"><div class="tw-body"><div class="tw-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div><p>“${escapeHtml(slot.quote)}”</p></div></article>`;
 }
 function testimonialSection() {
   const cards = testimonialSlots.map(testimonialCard).join("");
-  return `<section class="section tw-section" aria-labelledby="twHeading"><div class="tw-layout"><div class="tw-stage" data-tw-stage role="region" aria-label="Four client testimonials in a fixed vertical wheel"><div class="tw-wheel" data-tw-wheel>${cards}</div></div><div class="testimonial-copy"><span class="eyebrow">CLIENT STORIES</span><h2 id="twHeading">What <span>Clients</span> Say<br>About Our <span>Setup</span></h2><p>Thoughtful support, dependable equipment, and a smoother event from setup to wrap.</p></div></div></section>`;
+  return `<section class="section tw-section" aria-labelledby="twHeading"><div class="tw-layout"><div class="testimonial-copy"><span class="eyebrow">CLIENT STORIES</span><h2 id="twHeading">What <span>Clients</span> Say<br>About Our <span>Setup</span></h2><p>Thoughtful support, dependable equipment, and a smoother event from setup to wrap.</p></div><div class="tw-stage" data-tw-stage role="region" aria-label="Rotating client testimonials"><div class="tw-wheel" data-tw-wheel>${cards}</div></div></div></section>`;
 }
 
 let testimonialWheelCleanup = null;
@@ -1020,42 +1023,146 @@ function initTestimonialWheel() {
 
   const cards = Array.from(wheel.querySelectorAll(".tw-card"));
   if (!cards.length) return;
+
+  const SPEED = 5.5;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const step = 360 / cards.length;
+  let angle = 0;
+  let running = false;
+  let hovering = false;
+  let dragging = false;
+  let inView = true;
+  let rafId = 0;
+  let last = 0;
   let centerX = 0;
-  let centerY = 0;
   let radiusX = 0;
   let radiusY = 0;
+  let depth = 0;
+  let cardHeight = 0;
+  let mobileGrid = false;
 
-  const layout = () => {
-    const width = stage.clientWidth;
-    const height = stage.clientHeight;
-    if (!width || !height) return;
-    const cardWidth = Math.max(92, Math.min(146, width * 0.3));
-    const cardHeight = Math.round(cardWidth * 1.08);
-    centerX = width / 2;
-    centerY = height / 2;
-    radiusX = Math.max(0, Math.min(155, width / 2 - cardWidth / 2 - 24));
-    radiusY = Math.max(0, Math.min(190, height / 2 - cardHeight / 2 - 24));
-    wheel.style.setProperty("--tw-card-w", `${cardWidth}px`);
-    wheel.style.setProperty("--tw-card-h", `${cardHeight}px`);
-    cards.forEach((card, index) => {
-      // Fixed cardinal points make a vertical wheel; cards stay inside the stage without animating.
-      const radians = (index * 90 - 90) * Math.PI / 180;
-      const x = centerX + Math.cos(radians) * radiusX;
-      const y = centerY + Math.sin(radians) * radiusY;
-      card.style.left = `${x}px`;
-      card.style.top = `${y}px`;
+  const place = () => {
+    cards.forEach((card, i) => {
+      const deg = angle + i * step - 67.5;
+      const rad = deg * Math.PI / 180;
+      const front = Math.cos(rad);
+      const x = centerX + Math.sin(rad) * radiusX;
+      const y = cardHeight / 2 + 14 + (1 - front) * radiusY;
+      const z = Math.max(-1, front) * depth;
+      const scale = 0.86 + Math.max(0, front) * 0.14;
+      const tilt = Math.sin(rad) * 12;
+      card.style.transform = `translate3d(${x}px, ${y}px, ${z}px) translate(-50%, -50%) rotateY(${Math.sin(rad) * 34}deg) rotate(${tilt}deg) scale(${scale})`;
+      card.style.opacity = front < -0.12 ? "0" : String(0.68 + Math.max(0, front) * 0.32);
+      card.style.zIndex = String(Math.round((front + 1) * 100));
+      card.style.pointerEvents = front < 0 ? "none" : "auto";
     });
   };
 
+  const layout = () => {
+    const w = stage.clientWidth;
+    if (!w) return;
+    mobileGrid = w < 680;
+    stage.classList.toggle("is-grid", mobileGrid);
+    wheel.classList.toggle("is-grid", mobileGrid);
+    if (mobileGrid) {
+      running = false;
+      cancelAnimationFrame(rafId);
+      stage.style.height = "auto";
+      cards.forEach((card) => {
+        card.style.transform = "";
+        card.style.opacity = "1";
+        card.style.zIndex = "";
+        card.style.pointerEvents = "auto";
+      });
+      sync();
+      return;
+    }
+    stage.style.height = "";
+    const cardW = Math.max(142, Math.min(190, w * 0.105));
+    cardHeight = Math.round(cardW * 1.03);
+    wheel.style.setProperty("--tw-card-w", `${cardW}px`);
+    wheel.style.setProperty("--tw-card-h", `${cardHeight}px`);
+    centerX = w / 2;
+    radiusX = Math.max(0, w / 2 - cardW / 2 - 24);
+    radiusY = 135;
+    depth = Math.min(150, w * 0.08);
+    place();
+  };
+
+  const frame = (now) => {
+    if (!running) return;
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+    angle = (angle + SPEED * dt) % 360;
+    place();
+    rafId = requestAnimationFrame(frame);
+  };
+  const sync = () => {
+    const shouldRun = !mobileGrid && !reduceMotion.matches && !hovering && !dragging && inView && !document.hidden;
+    if (shouldRun && !running) {
+      running = true;
+      last = performance.now();
+      rafId = requestAnimationFrame(frame);
+    } else if (!shouldRun && running) {
+      running = false;
+      cancelAnimationFrame(rafId);
+    }
+  };
+
+  const onEnter = () => { hovering = true; sync(); };
+  const onLeave = () => { hovering = false; sync(); };
+  const onPointerDown = (event) => {
+    if (mobileGrid) return;
+    dragging = true;
+    stage.setPointerCapture?.(event.pointerId);
+    stage.dataset.dragX = String(event.clientX);
+    sync();
+  };
+  const onPointerMove = (event) => {
+    if (!dragging || mobileGrid) return;
+    const previous = Number(stage.dataset.dragX || event.clientX);
+    angle += (event.clientX - previous) * 0.16;
+    stage.dataset.dragX = String(event.clientX);
+    place();
+  };
+  const onPointerUp = () => { dragging = false; sync(); };
+  const onDragStart = (event) => event.preventDefault();
+  stage.addEventListener("pointerenter", onEnter);
+  stage.addEventListener("pointerleave", onLeave);
+  stage.addEventListener("pointerdown", onPointerDown);
+  stage.addEventListener("pointermove", onPointerMove);
+  stage.addEventListener("pointerup", onPointerUp);
+  stage.addEventListener("pointercancel", onPointerUp);
+  document.addEventListener("visibilitychange", sync);
+  reduceMotion.addEventListener?.("change", sync);
+
   const resizeObserver = "ResizeObserver" in window ? new ResizeObserver(layout) : null;
   resizeObserver?.observe(stage);
+  const io = "IntersectionObserver" in window
+    ? new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; sync(); })
+    : null;
+  io?.observe(stage);
+  wheel.addEventListener("dragstart", onDragStart);
 
   testimonialWheelCleanup = () => {
+    running = false;
+    cancelAnimationFrame(rafId);
     resizeObserver?.disconnect();
+    io?.disconnect();
+    stage.removeEventListener("pointerenter", onEnter);
+    stage.removeEventListener("pointerleave", onLeave);
+    stage.removeEventListener("pointerdown", onPointerDown);
+    stage.removeEventListener("pointermove", onPointerMove);
+    stage.removeEventListener("pointerup", onPointerUp);
+    stage.removeEventListener("pointercancel", onPointerUp);
+    wheel.removeEventListener("dragstart", onDragStart);
+    document.removeEventListener("visibilitychange", sync);
+    reduceMotion.removeEventListener?.("change", sync);
     testimonialWheelCleanup = null;
   };
 
   layout();
+  sync();
 }
 function faqSection() {
   const faqs = [
