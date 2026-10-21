@@ -4748,7 +4748,7 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   }
 }
 
-/* Client stories — fixed vertical orbit of anonymous testimonial cards. */
+/* Client stories — a fixed vertical wheel of anonymous testimonial cards. */
 .tw-section {
   position: relative;
   width: 100vw;
@@ -4800,7 +4800,6 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   box-shadow: none;
   transform: translate(-50%, -50%) rotate(var(--tw-tilt, 0deg));
   pointer-events: auto;
-  will-change: left, top;
   backface-visibility: hidden;
 }
 .tw-body { display: flex; min-height: 0; flex: 1; flex-direction: column; justify-content: center; gap: 12px; padding: 16px 17px; }
@@ -4829,20 +4828,16 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
     grid-column: 1;
     grid-row: 2;
     width: 100%;
-    height: 440px;
+    height: 500px;
     overflow: visible;
   }
 }
 @media (max-width: 560px) {
   .testimonial-copy h2 { font-size: clamp(38px, 10vw, 52px); }
-  .tw-stage { height: 420px; }
+  .tw-stage { height: 480px; }
   .tw-body { gap: 9px; padding: 12px 13px; }
   .tw-body > p { font-size: 12px; line-height: 1.42; -webkit-line-clamp: 5; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .tw-wheel { will-change: auto; }
-}
-
 /* Give the hero grid more breathing room and pull the story cards into a staggered frame. */
 .hero::before { background-size: 64px 64px; }
 @media (min-width: 1160px) {

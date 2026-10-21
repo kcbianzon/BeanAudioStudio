@@ -1007,7 +1007,7 @@ function testimonialCard(slot, index) {
 }
 function testimonialSection() {
   const cards = testimonialSlots.map(testimonialCard).join("");
-  return `<section class="section tw-section" aria-labelledby="twHeading"><div class="tw-layout"><div class="tw-stage" data-tw-stage role="region" aria-label="Rotating client testimonials"><div class="tw-wheel" data-tw-wheel>${cards}</div></div><div class="testimonial-copy"><span class="eyebrow">CLIENT STORIES</span><h2 id="twHeading">What <span>Clients</span> Say<br>About Our <span>Setup</span></h2><p>Thoughtful support, dependable equipment, and a smoother event from setup to wrap.</p></div></div></section>`;
+  return `<section class="section tw-section" aria-labelledby="twHeading"><div class="tw-layout"><div class="tw-stage" data-tw-stage role="region" aria-label="Four client testimonials in a fixed vertical wheel"><div class="tw-wheel" data-tw-wheel>${cards}</div></div><div class="testimonial-copy"><span class="eyebrow">CLIENT STORIES</span><h2 id="twHeading">What <span>Clients</span> Say<br>About Our <span>Setup</span></h2><p>Thoughtful support, dependable equipment, and a smoother event from setup to wrap.</p></div></div></section>`;
 }
 
 let testimonialWheelCleanup = null;
@@ -1020,22 +1020,26 @@ function initTestimonialWheel() {
 
   const cards = Array.from(wheel.querySelectorAll(".tw-card"));
   if (!cards.length) return;
-  const degreesPerSecond = 18;
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let angle = 0;
-  let speed = 1;
-  let targetSpeed = 1;
-  let lastTime = 0;
-  let raf = 0;
-  let inView = true;
   let centerX = 0;
   let centerY = 0;
   let radiusX = 0;
   let radiusY = 0;
 
-  const apply = () => {
+  const layout = () => {
+    const width = stage.clientWidth;
+    const height = stage.clientHeight;
+    if (!width || !height) return;
+    const cardWidth = Math.max(92, Math.min(146, width * 0.3));
+    const cardHeight = Math.round(cardWidth * 1.08);
+    centerX = width / 2;
+    centerY = height / 2;
+    radiusX = Math.max(0, Math.min(155, width / 2 - cardWidth / 2 - 24));
+    radiusY = Math.max(0, Math.min(190, height / 2 - cardHeight / 2 - 24));
+    wheel.style.setProperty("--tw-card-w", `${cardWidth}px`);
+    wheel.style.setProperty("--tw-card-h", `${cardHeight}px`);
     cards.forEach((card, index) => {
-      const radians = (index * 90 + angle) * Math.PI / 180;
+      // Fixed cardinal points make a vertical wheel; cards stay inside the stage without animating.
+      const radians = (index * 90 - 90) * Math.PI / 180;
       const x = centerX + Math.cos(radians) * radiusX;
       const y = centerY + Math.sin(radians) * radiusY;
       card.style.left = `${x}px`;
@@ -1043,78 +1047,15 @@ function initTestimonialWheel() {
     });
   };
 
-  const layout = () => {
-    const width = stage.clientWidth;
-    const height = stage.clientHeight;
-    if (!width || !height) return;
-    // Use the viewport breakpoint, not the narrower left stage, to select the mobile layout.
-    const cardWidth = Math.max(148, Math.min(180, width * 0.38));
-    const cardHeight = Math.round(cardWidth * 1.16);
-    centerX = width / 2;
-    centerY = height / 2;
-    radiusX = Math.max(0, Math.min(136, width / 2 - cardWidth / 2 - 12));
-    radiusY = Math.max(0, Math.min(205, height / 2 - cardHeight / 2 - 16));
-    wheel.style.setProperty("--tw-card-w", `${cardWidth}px`);
-    wheel.style.setProperty("--tw-card-h", `${cardHeight}px`);
-    apply();
-  };
-
-  const tick = (now) => {
-    if (!stage.isConnected) {
-      testimonialWheelCleanup?.();
-      return;
-    }
-    const delta = Math.min(0.05, (now - lastTime) / 1000 || 0);
-    lastTime = now;
-    speed += (targetSpeed - speed) * Math.min(1, delta * 6);
-    angle -= degreesPerSecond * speed * delta;
-    if (angle <= -360) angle += 360;
-    apply();
-    raf = requestAnimationFrame(tick);
-  };
-  const start = () => {
-    if (reducedMotion || raf || !inView) return;
-    lastTime = performance.now();
-    raf = requestAnimationFrame(tick);
-  };
-  const stop = () => {
-    cancelAnimationFrame(raf);
-    raf = 0;
-  };
-
-  const onEnter = (event) => { if (event.pointerType === "mouse") targetSpeed = 0; };
-  const onLeave = () => { targetSpeed = 1; };
-  const onTouchStart = () => { targetSpeed = 0; };
-  const onTouchEnd = () => { targetSpeed = 1; };
-
-  stage.addEventListener("pointerenter", onEnter);
-  stage.addEventListener("pointerleave", onLeave);
-  stage.addEventListener("touchstart", onTouchStart, { passive: true });
-  stage.addEventListener("touchend", onTouchEnd, { passive: true });
-
   const resizeObserver = "ResizeObserver" in window ? new ResizeObserver(layout) : null;
   resizeObserver?.observe(stage);
-  const viewObserver = "IntersectionObserver" in window
-    ? new IntersectionObserver(([entry]) => {
-        inView = entry.isIntersecting;
-        if (inView) start(); else stop();
-      }, { rootMargin: "120px 0px" })
-    : null;
-  viewObserver?.observe(stage);
 
   testimonialWheelCleanup = () => {
-    stop();
-    stage.removeEventListener("pointerenter", onEnter);
-    stage.removeEventListener("pointerleave", onLeave);
-    stage.removeEventListener("touchstart", onTouchStart);
-    stage.removeEventListener("touchend", onTouchEnd);
     resizeObserver?.disconnect();
-    viewObserver?.disconnect();
     testimonialWheelCleanup = null;
   };
 
   layout();
-  start();
 }
 function faqSection() {
   const faqs = [
