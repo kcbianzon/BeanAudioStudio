@@ -1031,7 +1031,7 @@ function initTestimonialWheel() {
   const count = cards.length;
   if (!count) return;
   const step = 360 / count;
-  const secondsPerCard = 4.6; // steady pace: one testimonial passes the centre every few seconds
+  const secondsPerCard = 4.6; // steady pace
   const degreesPerSecond = step / secondsPerCard;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   let angle = 0;
@@ -1045,10 +1045,9 @@ function initTestimonialWheel() {
   let isNarrow = false;
 
   const updateCardVisibilities = () => {
-    // Current angle is `angle` (which decreases as wheel turns counter-clockwise)
-    // Card i has angle offset i * step.
-    // Net angle relative to 3 o'clock (the front center apex):
-    const cutOff = isNarrow ? 65 : 60;
+    // Current angle is `angle` (decreases counter-clockwise)
+    // Card i net angle relative to 3 o'clock:
+    const cutOff = isNarrow ? 66 : 62;
     const fadeStart = isNarrow ? 40 : 36;
     for (let i = 0; i < count; i++) {
       const card = cards[i];
@@ -1087,17 +1086,21 @@ function initTestimonialWheel() {
     const height = stage.clientHeight;
     if (!width || !height) return;
     isNarrow = width < 760;
+    // Refined card size: smaller so the arc curvature is dramatically emphasized:
     const cardWidth = isNarrow
-      ? Math.max(184, Math.min(226, width * 0.54))
-      : Math.max(228, Math.min(268, height * 0.30));
-    const cardHeight = Math.round(cardWidth * (isNarrow ? 1.48 : 1.4));
-    const gap = 18;
+      ? Math.max(160, Math.min(192, width * 0.48))
+      : Math.max(195, Math.min(218, height * 0.25));
+    const cardHeight = Math.round(cardWidth * (isNarrow ? 1.40 : 1.35));
+    const gap = 14;
     const sine = Math.sin(Math.PI / count);
-    // Radius at which the inner corners of neighbouring cards still clear each other.
+    // Radius at which neighboring cards maintain proper clearance:
     const radius = Math.ceil((cardHeight + gap + cardWidth * sine) / (2 * sine));
-    const rightEdge = isNarrow ? (width + cardWidth) / 2 : width - 16;
+    
+    // Position safely on the left so cards never overlap the text:
+    const rightEdge = isNarrow ? (width + cardWidth) / 2 : width - 24;
     originX = rightEdge - radius - cardWidth / 2;
     originY = height / 2;
+
     wheel.style.setProperty("--tw-r", `${radius}px`);
     wheel.style.setProperty("--tw-card-w", `${cardWidth}px`);
     wheel.style.setProperty("--tw-card-h", `${cardHeight}px`);
@@ -1112,7 +1115,7 @@ function initTestimonialWheel() {
     const delta = Math.min(0.05, (now - lastTime) / 1000 || 0);
     lastTime = now;
     speed += (targetSpeed - speed) * Math.min(1, delta * 6);
-    angle -= degreesPerSecond * speed * delta; // counter-clockwise: the visible arc travels upward
+    angle -= degreesPerSecond * speed * delta;
     if (angle <= -360) angle += 360;
     apply();
     raf = requestAnimationFrame(tick);
