@@ -1153,7 +1153,27 @@ function home() {
     <article class="floating-story" data-scroll-float="-1" style="--tilt:-3deg"><span class="story-media" style="--story-image:url('assets/beantown/live-event.jpg')"></span><span class="story-kicker">LIVE EVENTS</span><strong>Room-filling sound.</strong><small>Audio that meets the moment.</small></article>
     <article class="floating-story" data-scroll-float="1" style="--tilt:4deg"><span class="story-media" style="--story-image:url('assets/beantown/photo-booth-360.jpg')"></span><span class="story-kicker">PHOTO BOOTHS</span><strong>Keep the good part.</strong><small>A photo moment guests take home.</small></article>
   </div></section>
-  <div class="marquee"><div class="marquee-track"><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span><b>•</b><span>Live Streaming</span><b>•</b><span>Outdoor Movies</span><b>•</b><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span></div></div>
+  <div class="marquee ribbon-marquee" role="img" aria-label="Audio, lighting, video, silent disco, and event production">
+    <svg viewBox="0 0 1600 220" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="ribbon-satin" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#C99318"/><stop offset=".22" stop-color="#F2C64B"/>
+          <stop offset=".48" stop-color="#DFAD2A"/><stop offset=".72" stop-color="#F6D36A"/>
+          <stop offset="1" stop-color="#C99318"/>
+        </linearGradient>
+        <filter id="ribbon-shadow" x="-10%" y="-30%" width="120%" height="170%">
+          <feDropShadow dx="0" dy="10" stdDeviation="7" flood-color="#6F5310" flood-opacity=".2"/>
+        </filter>
+      </defs>
+      <path id="ribbon-type-path" d="M-100 110 C180 10 420 10 650 110 C880 210 1120 210 1350 110 C1580 10 1700 10 1800 55" fill="none" stroke="url(#ribbon-satin)" stroke-width="70" stroke-linecap="butt" filter="url(#ribbon-shadow)">
+        <animate class="ribbon-wave-motion" attributeName="d" dur="9s" repeatCount="indefinite" values="M-100 110 C180 10 420 10 650 110 C880 210 1120 210 1350 110 C1580 10 1700 10 1800 55;M-100 110 C180 200 420 200 650 110 C880 20 1120 20 1350 110 C1580 200 1700 200 1800 165;M-100 110 C180 10 420 10 650 110 C880 210 1120 210 1350 110 C1580 10 1700 10 1800 55"/>
+      </path>
+      <use href="#ribbon-type-path" fill="none" stroke="#FFF3C4" stroke-opacity=".34" stroke-width="2"/>
+      <text fill="#292315" font-family="inherit" font-size="26" font-weight="900" letter-spacing="2.5">
+        <textPath href="#ribbon-type-path" startOffset="0%">SOUND + LIGHTING · VIDEO &amp; LED · EVENT PRODUCTION · SILENT DISCO · AUDIO RENTALS · SOUND + LIGHTING · VIDEO &amp; LED · EVENT PRODUCTION · SILENT DISCO · AUDIO RENTALS · SOUND + LIGHTING · VIDEO &amp; LED ·<animate class="ribbon-text-motion" attributeName="startOffset" from="0%" to="50%" dur="28s" repeatCount="indefinite"/></textPath>
+      </text>
+    </svg>
+  </div>
   <section class="experience-journey" data-experience-journey>
     <div class="experience-stage">
       <div class="experience-center-anchor">
