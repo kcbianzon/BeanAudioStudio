@@ -1045,8 +1045,8 @@ function initTestimonialWheel() {
   const updateCardVisibilities = () => {
     // Current angle is `angle` (decreases counter-clockwise)
     // Card i net angle relative to 3 o'clock:
-    const cutOff = isNarrow ? 66 : 62;
-    const fadeStart = isNarrow ? 40 : 36;
+    const cutOff = isNarrow ? 48 : 62;
+    const fadeStart = isNarrow ? 30 : 36;
     for (let i = 0; i < count; i++) {
       const card = cards[i];
       const raw = ((i * step + angle) % 360 + 360) % 360;
@@ -1083,19 +1083,29 @@ function initTestimonialWheel() {
     const width = stage.clientWidth;
     const height = stage.clientHeight;
     if (!width || !height) return;
-    isNarrow = width < 760;
+    // Use the viewport breakpoint, not the narrower left stage, to select the mobile layout.
+    isNarrow = window.innerWidth < 760;
     // Compact, near-square cards match the reference while keeping the orbital arc clear.
     const cardWidth = isNarrow
-      ? Math.max(145, Math.min(164, width * 0.42))
-      : Math.max(168, Math.min(184, height * 0.22));
+      ? Math.max(126, Math.min(164, width * 0.34))
+      : Math.max(148, Math.min(160, height * 0.19));
     const cardHeight = Math.round(cardWidth * 1.16);
     const gap = 12;
     const sine = Math.sin(Math.PI / count);
     // Radius at which neighboring cards maintain proper clearance:
-    const radius = Math.ceil((cardHeight + gap + cardWidth * sine) / (2 * sine));
-    
-    // Position safely on the left so cards never overlap the text:
-    const rightEdge = isNarrow ? (width + cardWidth) / 2 : width - 24;
+    const spacingRadius = Math.ceil((cardHeight + gap + cardWidth * sine) / (2 * sine));
+    const visibilityCutoff = (isNarrow ? 48 : 62) * Math.PI / 180;
+    const rightEdge = isNarrow
+      ? (width + cardWidth) / 2
+      : width - Math.max(190, window.innerWidth * 0.21);
+    const arcInset = 1 - Math.cos(visibilityCutoff);
+    const sectionInset = Math.max(32, (window.innerWidth - 1320) / 2 + 32);
+    const safeRadius = isNarrow
+      ? (width - cardWidth) / (2 * arcInset)
+      : (sectionInset + rightEdge - cardWidth) / arcInset;
+    const radius = Math.min(spacingRadius, Math.max(1, safeRadius));
+
+    // Keep the orbit center fixed in the left column, with its visible arc clear of the heading.
     originX = rightEdge - radius - cardWidth / 2;
     originY = height / 2;
 

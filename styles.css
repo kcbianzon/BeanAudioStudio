@@ -4751,6 +4751,10 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 /* Client stories — rotating half-moon testimonial wheel. */
 .tw-section {
   position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding-inline: max(32px, calc((100vw - 1320px) / 2 + 32px));
+  box-sizing: border-box;
   padding-top: clamp(40px, 4vw, 70px);
   padding-bottom: clamp(60px, 6vw, 100px);
   overflow: visible;
@@ -4770,9 +4774,9 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   position: absolute;
   top: 0;
   bottom: 0;
-  left: calc(50% - 50vw);
-  width: calc(50vw - 50% + 290px);
-  max-width: 43vw;
+  left: 0;
+  width: min(58vw, 620px);
+  max-width: none;
   overflow: visible;
   pointer-events: none;
 }
