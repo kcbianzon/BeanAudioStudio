@@ -1145,7 +1145,7 @@ function faqSection() {
 }
 function home() {
   return `<div class="page">
-  <section class="hero reveal"><div class="hero-copy"><span class="eyebrow orange">BOSTON • NEW ENGLAND • EVENT AV</span><h1 class="hero-headline" id="heroHeadline" aria-label="Your event. Your setup."><span class="hero-title-line" data-type-text="YOUR EVENT.">YOUR EVENT.</span><br><span class="hero-title-line hero-title-accent" data-type-text="YOUR SETUP.">YOUR SETUP.</span></h1><p>Rent speakers, screens, streaming gear, photo booths and complete event systems — then build your exact experience before you request a quote.</p><div class="hero-cta"><a class="btn btn-dark" href="#builder">Build my event <span>→</span></a><a class="btn btn-light" href="#rentals">Explore rentals</a></div><div class="hero-note"><span class="dot"></span> Fixed-price packages + quote-based production gear</div></div><div class="hero-floats" aria-hidden="true">
+  <section class="hero reveal"><div class="hero-copy"><span class="eyebrow orange">BOSTON • NEW ENGLAND • EVENT AV</span><h1 class="hero-headline" id="heroHeadline" aria-label="Your event. Your setup."><span class="hero-title-line" data-type-text="YOUR EVENT." data-accent-start="5">YOUR EVENT.</span><br><span class="hero-title-line" data-type-text="YOUR SETUP." data-accent-start="5">YOUR SETUP.</span></h1><p>Rent speakers, screens, streaming gear, photo booths and complete event systems — then build your exact experience before you request a quote.</p><div class="hero-cta"><a class="btn btn-dark" href="#builder">Build my event <span>→</span></a><a class="btn btn-light" href="#rentals">Explore rentals</a></div><div class="hero-note"><span class="dot"></span> Fixed-price packages + quote-based production gear</div></div><div class="hero-floats" aria-hidden="true">
     <article class="floating-story" data-scroll-float="-1" style="--tilt:-5deg"><span class="story-media" style="--story-image:url('assets/beantown/event-production.jpg')"></span><span class="story-kicker">WEDDINGS</span><strong>Every vow, heard.</strong><small>Audio for the aisle and the dance floor.</small></article>
     <article class="floating-story" data-scroll-float="1" style="--tilt:5deg"><span class="story-media" style="--story-image:url('assets/beantown/outdoor-movie.jpg')"></span><span class="story-kicker">OUTDOOR MOVIES</span><strong>Movie night, made big.</strong><small>Screen and sound for the whole crowd.</small></article>
     <article class="floating-story" data-scroll-float="-1" style="--tilt:3deg"><span class="story-media" style="--story-image:url('assets/beantown/headphones.jpg')"></span><span class="story-kicker">SILENT DISCO</span><strong>Three channels. One dance floor.</strong><small>Headphones and transmitters, ready to go.</small></article>
@@ -2310,6 +2310,9 @@ function typeHeroHeadline() {
     [...text].forEach((character, index) => {
       const span = document.createElement("span");
       span.className = "hero-type-char";
+      if (index >= Number(line.dataset.accentStart || Infinity)) {
+        span.classList.add("hero-title-highlight");
+      }
       span.textContent = character === " " ? "\u00a0" : character;
       span.style.animationDelay = `${lineIndex * 360 + index * 42}ms`;
       line.append(span);

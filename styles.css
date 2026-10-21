@@ -2262,7 +2262,7 @@ body {
 
 @media (max-width: 700px) {
   .hero { padding-top: 42px; }
-  .hero-copy h1 { font-size: clamp(52px, 15vw, 76px); }
+  .hero-copy h1 { font-size: clamp(46px, 13vw, 67px); }
   .hero-art { min-height: 330px; border-radius: 28px; }
   .section { padding-top: 70px; }
   .footer { border-radius: 25px 25px 0 0; }
@@ -2570,8 +2570,8 @@ h1, h2, h3, h4, .brand-copy strong, .btn, .category-card > strong {
 }
 .hero-copy h1 {
   max-width: 960px;
-  margin: 23px auto 16px;
-  font-size: clamp(64px, 9.5vw, 124px);
+  margin: 23px auto 28px;
+  font-size: clamp(56px, 8.3vw, 108px);
   line-height: .92;
   letter-spacing: -.075em;
 }
@@ -2716,7 +2716,7 @@ h1, h2, h3, h4, .brand-copy strong, .btn, .category-card > strong {
   .nav-actions .btn-small { display: none; }
   .mobile-menu { padding-inline: 20px; }
   .hero { gap: 25px; padding-top: 50px; }
-  .hero-copy h1 { margin-top: 20px; font-size: clamp(53px,15vw,78px); }
+  .hero-copy h1 { margin-top: 20px; font-size: clamp(46px,13vw,68px); }
   .hero-copy p { font-size: 16px; }
   .hero-cta { width: 100%; }
   .hero-cta .btn { flex: 1; padding-inline: 12px; }
@@ -3263,8 +3263,14 @@ body { background: #fff !important; background-image: none !important; }
   animation: site-soft-arrive 1s cubic-bezier(.2,.75,.2,1) both;
 }
 .site-entering #app { animation-delay: .08s; }
-.hero-title-line { background: none !important; color: var(--ink); text-decoration: none !important; }
-.hero-title-accent { background: linear-gradient(90deg,var(--ink),var(--accent)) !important; -webkit-background-clip: text !important; background-clip: text !important; color: transparent !important; text-decoration: none !important; }
+.hero-copy h1 .hero-title-line,
+.hero-copy h1 .hero-type-char { background: none !important; text-decoration: none !important; }
+.hero-copy h1 .hero-title-line { color: var(--ink); }
+.hero-copy h1 .hero-title-highlight { color: #DFAD2A !important; -webkit-text-fill-color: #DFAD2A !important; }
+.hero-copy h1 { font-size: clamp(48px, 7vw, 92px); }
+@media (max-width: 700px) {
+  .hero-copy h1 { font-size: clamp(42px, 11vw, 58px); }
+}
 .hero-type-char { display: inline-block; opacity: 0; animation: hero-type-in .2s ease-out forwards; }
 @keyframes opening-char-in { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: translateY(0); } }
 @keyframes opening-char-out { to { opacity: 0; transform: translateY(-120%); } }
