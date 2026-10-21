@@ -995,16 +995,17 @@ function productCard(p) {
   return `<article class="product-card reveal"><div class="product-media has-image ${p.tone || ""}"><img class="product-photo" src="${image}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer"></div><div class="product-meta"><span class="badge">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">${productPriceText(p)}</span><button class="text-btn add-product-btn ${quantity ? "is-added" : ""}" data-add="${p.id}" aria-label="${quantity ? `${quantity} added. Add another ${p.name}` : `Add ${p.name} to my setup`}">${quantity ? `Added · ${quantity} +` : "Add to setup +"}</button></div></div></article>`;
 }
 const testimonialSlots = [
-  { focus: "SMOOTH SETUP", prompt: "Add an approved client note about setup and on-site support.", event: "Event type · Boston" },
-  { focus: "RELIABLE GEAR", prompt: "Add an approved client note about the equipment and event.", event: "Event type · New England" },
-  { focus: "EASY DELIVERY", prompt: "Add an approved client note about delivery or communication.", event: "Event type · Boston" },
+  { quote: "The equipment was reliable and everything sounded great throughout the event." },
+  { quote: "The setup team had everything ready before our guests arrived." },
+  { quote: "Delivery was smooth, and communication was clear from start to finish." },
+  { quote: "Everything came together effortlessly, from setup through wrap." },
 ];
 function testimonialCard(slot) {
-  return `<article class="testimonial-card"><div class="testimonial-stars" aria-label="Five-star review placeholder">★★★★★</div><span class="testimonial-focus">${slot.focus}</span><p>${slot.prompt}</p><div class="testimonial-person"><span class="testimonial-avatar">BA</span><div><strong>Client name</strong><small>${slot.event}</small></div></div></article>`;
+  return `<article class="testimonial-card"><div class="testimonial-stars" aria-label="Five-star rating">★★★★★</div><p>“${slot.quote}”</p></article>`;
 }
 function testimonialSection() {
   const cards = testimonialSlots.map((slot, index) => `<div class="testimonial-orbit-card" style="--orbit-position:${index * 100 / testimonialSlots.length}%;--orbit-delay:${-index * 36 / testimonialSlots.length}s">${testimonialCard(slot).replace('<article class="testimonial-card">', '<article class="testimonial-card-inner">')}</div>`).join("");
-  return `<section class="section testimonials-section"><div class="testimonial-layout"><div class="testimonial-orbit" role="region" aria-label="Rotating client testimonials">${cards}</div><div class="testimonial-copy"><span class="eyebrow">CLIENT STORIES</span><h2>What Clients Say<br>About Our <span>Setup</span></h2><p>Thoughtful support, dependable equipment, and a smoother event from setup to wrap.</p></div></div></section>`;
+  return `<section class="section testimonials-section"><div class="testimonial-layout"><div class="testimonial-orbit" role="region" aria-label="Four rotating client testimonials">${cards}</div><div class="testimonial-copy"><span class="eyebrow">CLIENT STORIES</span><h2>What <span>Clients</span> Say<br>About Our <span>Setup</span></h2><p>Thoughtful support, dependable equipment, and a smoother event from setup to wrap.</p></div></div></section>`;
 }
 function faqSection() {
   const faqs = [
