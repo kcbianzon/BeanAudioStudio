@@ -4754,6 +4754,8 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   padding-top: clamp(40px, 4vw, 70px);
   padding-bottom: clamp(60px, 6vw, 100px);
   overflow: visible;
+  background: #fff;
+  color: var(--ink);
 }
 .tw-layout {
   position: relative;
@@ -4794,32 +4796,26 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   overflow: hidden;
   border: 1px solid #e5ded0;
   border-radius: 20px;
-  background: var(--paper);
+  background: #fff;
   color: var(--ink);
-  box-shadow: 0 14px 32px rgba(50, 42, 20, .11);
+  box-shadow: none;
   /* Each card sits on the circle and turns with it, so it stays tangent to the arc. */
   transform: rotate(var(--a, 0deg)) translateX(var(--tw-r, 620px)) translate(-50%, -50%);
   pointer-events: auto;
   will-change: transform, opacity;
   backface-visibility: hidden;
 }
-.tw-photo { flex: 0 0 34%; overflow: hidden; background: #e8e1d2; }
-.tw-photo img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
-.tw-body { display: flex; min-height: 0; flex: 1; flex-direction: column; gap: 7px; padding: 12px 14px 13px; }
+.tw-body { display: flex; min-height: 0; flex: 1; flex-direction: column; justify-content: center; gap: 12px; padding: 16px 17px; }
 .tw-stars { color: #DFAD2A; font: 700 14px/1 Inter, sans-serif; letter-spacing: .08em; }
 .tw-body > p {
   display: -webkit-box;
   margin: 0;
   overflow: hidden;
   color: #45423a;
-  font: 500 12.5px/1.42 Inter, sans-serif;
-  -webkit-line-clamp: 3;
+  font: 500 13px/1.48 Inter, sans-serif;
+  -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
 }
-.tw-person { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 8px; border-top: 1px solid #eee8db; }
-.tw-avatar { display: grid; width: 28px; height: 28px; flex: 0 0 auto; place-items: center; border-radius: 50%; background: #ffe08a; color: #3b2f0b; font: 800 10px Inter, sans-serif; letter-spacing: .02em; }
-.tw-person strong { color: var(--ink); font: 700 11.5px/1.2 Inter, sans-serif; }
-.tw-person small { margin-top: 1px; color: var(--muted); font: 500 10.5px/1.2 Inter, sans-serif; }
 .testimonial-copy { grid-column: 2; max-width: 560px; }
 .testimonial-copy .eyebrow { color: #75601d; }
 .testimonial-copy h2 { margin: 14px 0 22px; font-size: clamp(38px, 4.2vw, 64px); line-height: 1.02; letter-spacing: -.05em; }
@@ -4846,9 +4842,8 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 @media (max-width: 560px) {
   .testimonial-copy h2 { font-size: clamp(38px, 10vw, 52px); }
   .tw-stage { height: 520px; }
-  .tw-body { gap: 6px; padding: 10px 12px 11px; }
-  .tw-body > p { font-size: 12px; line-height: 1.4; -webkit-line-clamp: 3; }
-  .tw-photo { flex-basis: 33%; }
+  .tw-body { gap: 9px; padding: 12px 13px; }
+  .tw-body > p { font-size: 12px; line-height: 1.42; -webkit-line-clamp: 5; }
 }
 @media (prefers-reduced-motion: reduce) {
   .tw-wheel { will-change: auto; }

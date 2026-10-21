@@ -994,25 +994,23 @@ function productCard(p) {
   const quantity = state.selected[p.id] || 0;
   return `<article class="product-card reveal"><div class="product-media has-image ${p.tone || ""}"><img class="product-photo" src="${image}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer"></div><div class="product-meta"><span class="badge">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">${productPriceText(p)}</span><button class="text-btn add-product-btn ${quantity ? "is-added" : ""}" data-add="${p.id}" aria-label="${quantity ? `${quantity} added. Add another ${p.name}` : `Add ${p.name} to my setup`}">${quantity ? `Added · ${quantity} +` : "Add to setup +"}</button></div></div></article>`;
 }
-// Client stories — rotating half-moon wheel.
-// SAMPLE COPY: these quotes are placeholders for the mockup. Replace them with approved client reviews
-// (and real event photos) before launch. `photo` files live in assets/beantown/.
+// Client stories — anonymous sample quote copy for the rotating half-moon wheel.
 const testimonialSlots = [
-  { quote: "The equipment was reliable and everything sounded great throughout the event.", who: "Concert client", place: "Worcester, MA", photo: "concert-audio.webp", initials: "CC" },
-  { quote: "The setup team had everything ready before our guests arrived.", who: "Corporate client", place: "Cambridge, MA", photo: "projector-screen.jpg", initials: "CO" },
-  { quote: "Delivery was smooth, and communication was clear from start to finish.", who: "Wedding client", place: "Boston, MA", photo: "event-production.jpg", initials: "WC" },
-  { quote: "Everything came together effortlessly, from setup through wrap.", who: "Private party host", place: "Brookline, MA", photo: "corporate-dance-floor.jpg", initials: "PH" },
-  { quote: "The inflatable screen was a hit. Picture and sound were perfect for the whole crowd.", who: "Movie night host", place: "Somerville, MA", photo: "outdoor-movie.jpg", initials: "MN" },
-  { quote: "Three channels, zero noise complaints, and every guest loved the headphones.", who: "Silent disco client", place: "Boston, MA", photo: "silent-disco.webp", initials: "SD" },
-  { quote: "The 360 booth was the highlight of the night. Guests lined up for hours.", who: "Photo booth client", place: "Newton, MA", photo: "photo-booth-360.jpg", initials: "PB" },
-  { quote: "The LED wall looked stunning and made our keynote feel like a real production.", who: "Conference client", place: "Boston, MA", photo: "led-wall-roses.webp", initials: "LW" },
-  { quote: "Our hybrid event streamed flawlessly with clear audio for remote guests.", who: "Live stream client", place: "Cambridge, MA", photo: "live-streaming.jpg", initials: "LS" },
-  { quote: "Lighting and sound turned our gym into a real dance floor.", who: "School event planner", place: "Newton, MA", photo: "event-lighting.webp", initials: "SE" },
-  { quote: "The cold sparklers gave our grand entrance exactly the wow moment we wanted.", who: "Special FX client", place: "Cape Cod, MA", photo: "cold-sparklers.webp", initials: "FX" },
-  { quote: "Powerful, clean sound that filled the whole venue. We will book again.", who: "Event organizer", place: "New England", photo: "speaker-wall.webp", initials: "EO" },
+  { quote: "The equipment was reliable and everything sounded great throughout the event." },
+  { quote: "The setup team had everything ready before our guests arrived." },
+  { quote: "Delivery was smooth, and communication was clear from start to finish." },
+  { quote: "Everything came together effortlessly, from setup through wrap." },
+  { quote: "The inflatable screen was a hit. Picture and sound were perfect for the whole crowd." },
+  { quote: "Three channels, zero noise complaints, and every guest loved the headphones." },
+  { quote: "The 360 booth was the highlight of the night. Guests lined up for hours." },
+  { quote: "The LED wall looked stunning and made our keynote feel like a real production." },
+  { quote: "Our hybrid event streamed flawlessly with clear audio for remote guests." },
+  { quote: "Lighting and sound turned our gym into a real dance floor." },
+  { quote: "The cold sparklers gave our grand entrance exactly the wow moment we wanted." },
+  { quote: "Powerful, clean sound that filled the whole venue. We will book again." },
 ];
 function testimonialCard(slot, index) {
-  return `<article class="tw-card" style="--a:${index * 360 / testimonialSlots.length}deg"><div class="tw-photo"><img src="assets/beantown/${slot.photo}" alt="" width="520" height="360" decoding="async" draggable="false"></div><div class="tw-body"><div class="tw-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div><p>“${escapeHtml(slot.quote)}”</p><div class="tw-person"><span class="tw-avatar" aria-hidden="true">${escapeHtml(slot.initials)}</span><div><strong>${escapeHtml(slot.who)}</strong><small>${escapeHtml(slot.place)}</small></div></div></div></article>`;
+  return `<article class="tw-card" style="--a:${index * 360 / testimonialSlots.length}deg"><div class="tw-body"><div class="tw-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div><p>“${escapeHtml(slot.quote)}”</p></div></article>`;
 }
 function testimonialSection() {
   const cards = testimonialSlots.map(testimonialCard).join("");
@@ -1086,12 +1084,12 @@ function initTestimonialWheel() {
     const height = stage.clientHeight;
     if (!width || !height) return;
     isNarrow = width < 760;
-    // Refined card size: smaller so the arc curvature is dramatically emphasized:
+    // Compact, near-square cards match the reference while keeping the orbital arc clear.
     const cardWidth = isNarrow
-      ? Math.max(160, Math.min(192, width * 0.48))
-      : Math.max(195, Math.min(218, height * 0.25));
-    const cardHeight = Math.round(cardWidth * (isNarrow ? 1.40 : 1.35));
-    const gap = 14;
+      ? Math.max(145, Math.min(164, width * 0.42))
+      : Math.max(168, Math.min(184, height * 0.22));
+    const cardHeight = Math.round(cardWidth * 1.16);
+    const gap = 12;
     const sine = Math.sin(Math.PI / count);
     // Radius at which neighboring cards maintain proper clearance:
     const radius = Math.ceil((cardHeight + gap + cardWidth * sine) / (2 * sine));
