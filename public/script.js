@@ -1002,14 +1002,9 @@ const testimonialSlots = [
 function testimonialCard(slot) {
   return `<article class="testimonial-card"><div class="testimonial-stars" aria-label="Five-star review placeholder">★★★★★</div><span class="testimonial-focus">${slot.focus}</span><p>${slot.prompt}</p><div class="testimonial-person"><span class="testimonial-avatar">BA</span><div><strong>Client name</strong><small>${slot.event}</small></div></div></article>`;
 }
-function testimonialLane(slots, reverse = false) {
-  const cards = slots.map((slot) => testimonialCard(slot)).join("");
-  const copies = slots.map((slot) => testimonialCard(slot)).join("");
-  return `<div class="testimonial-lane ${reverse ? "reverse" : ""}"><div class="testimonial-track"><div class="testimonial-group">${cards}</div><div class="testimonial-group" aria-hidden="true">${copies}</div></div></div>`;
-}
 function testimonialSection() {
-  const reversed = [...testimonialSlots].reverse();
-  return `<section class="section testimonials-section"><div class="section-head"><div><span class="eyebrow">CLIENT STORIES</span><h2>What clients<br>say about the setup.</h2></div><p>Thoughtful support, dependable equipment, and a smoother event from setup to wrap.</p></div><div class="testimonial-marquee" aria-label="Client testimonials">${testimonialLane(testimonialSlots)}${testimonialLane(reversed, true)}</div></section>`;
+  const cards = testimonialSlots.map((slot, index) => `<div class="testimonial-orbit-card" style="--orbit-position:${index * 100 / testimonialSlots.length}%;--orbit-delay:${-index * 36 / testimonialSlots.length}s">${testimonialCard(slot).replace('<article class="testimonial-card">', '<article class="testimonial-card-inner">')}</div>`).join("");
+  return `<section class="section testimonials-section"><div class="testimonial-layout"><div class="testimonial-orbit" role="region" aria-label="Rotating client testimonials">${cards}</div><div class="testimonial-copy"><span class="eyebrow">CLIENT STORIES</span><h2>What Clients Say<br>About Our <span>Setup</span></h2><p>Thoughtful support, dependable equipment, and a smoother event from setup to wrap.</p></div></div></section>`;
 }
 function faqSection() {
   const faqs = [
