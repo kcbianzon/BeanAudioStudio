@@ -4746,26 +4746,6 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   }
 }
 
-.marquee.ribbon-marquee {
-  display: block;
-  position: relative;
-  width: 100vw;
-  height: clamp(160px, 18vw, 220px);
-  margin: 0 calc(50% - 50vw) 24px;
-  overflow: hidden;
-  border: 0;
-  background: transparent;
-}
-.ribbon-marquee svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.ribbon-marquee text { paint-order: stroke fill; }
-@media (max-width: 700px) {
-  .marquee.ribbon-marquee { height: 150px; margin-bottom: 14px; }
-  .ribbon-marquee text { font-size: 32px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .ribbon-marquee animate { display: none; }
-}
-
 /* Give the hero grid more breathing room and pull the story cards into a staggered frame. */
 .hero::before { background-size: 64px 64px; }
 @media (min-width: 1160px) {
