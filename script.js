@@ -994,18 +994,128 @@ function productCard(p) {
   const quantity = state.selected[p.id] || 0;
   return `<article class="product-card reveal"><div class="product-media has-image ${p.tone || ""}"><img class="product-photo" src="${image}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer"></div><div class="product-meta"><span class="badge">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">${productPriceText(p)}</span><button class="text-btn add-product-btn ${quantity ? "is-added" : ""}" data-add="${p.id}" aria-label="${quantity ? `${quantity} added. Add another ${p.name}` : `Add ${p.name} to my setup`}">${quantity ? `Added · ${quantity} +` : "Add to setup +"}</button></div></div></article>`;
 }
+// Client stories — rotating half-moon wheel.
+// SAMPLE COPY: these quotes are placeholders for the mockup. Replace them with approved client reviews
+// (and real event photos) before launch. `photo` files live in assets/beantown/.
 const testimonialSlots = [
-  { quote: "The equipment was reliable and everything sounded great throughout the event." },
-  { quote: "The setup team had everything ready before our guests arrived." },
-  { quote: "Delivery was smooth, and communication was clear from start to finish." },
-  { quote: "Everything came together effortlessly, from setup through wrap." },
+  { quote: "The equipment was reliable and everything sounded great throughout the event.", who: "Concert client", place: "Worcester, MA", photo: "concert-audio.webp", initials: "CC" },
+  { quote: "The setup team had everything ready before our guests arrived.", who: "Corporate client", place: "Cambridge, MA", photo: "projector-screen.jpg", initials: "CO" },
+  { quote: "Delivery was smooth, and communication was clear from start to finish.", who: "Wedding client", place: "Boston, MA", photo: "event-production.jpg", initials: "WC" },
+  { quote: "Everything came together effortlessly, from setup through wrap.", who: "Private party host", place: "Brookline, MA", photo: "corporate-dance-floor.jpg", initials: "PH" },
+  { quote: "The inflatable screen was a hit. Picture and sound were perfect for the whole crowd.", who: "Movie night host", place: "Somerville, MA", photo: "outdoor-movie.jpg", initials: "MN" },
+  { quote: "Three channels, zero noise complaints, and every guest loved the headphones.", who: "Silent disco client", place: "Boston, MA", photo: "silent-disco.webp", initials: "SD" },
+  { quote: "The 360 booth was the highlight of the night. Guests lined up for hours.", who: "Photo booth client", place: "Newton, MA", photo: "photo-booth-360.jpg", initials: "PB" },
+  { quote: "The LED wall looked stunning and made our keynote feel like a real production.", who: "Conference client", place: "Boston, MA", photo: "led-wall-roses.webp", initials: "LW" },
+  { quote: "Our hybrid event streamed flawlessly with clear audio for remote guests.", who: "Live stream client", place: "Cambridge, MA", photo: "live-streaming.jpg", initials: "LS" },
+  { quote: "Lighting and sound turned our gym into a real dance floor.", who: "School event planner", place: "Newton, MA", photo: "event-lighting.webp", initials: "SE" },
+  { quote: "The cold sparklers gave our grand entrance exactly the wow moment we wanted.", who: "Special FX client", place: "Cape Cod, MA", photo: "cold-sparklers.webp", initials: "FX" },
+  { quote: "Powerful, clean sound that filled the whole venue. We will book again.", who: "Event organizer", place: "New England", photo: "speaker-wall.webp", initials: "EO" },
 ];
-function testimonialCard(slot) {
-  return `<article class="testimonial-card"><div class="testimonial-stars" aria-label="Five-star rating">★★★★★</div><p>“${slot.quote}”</p></article>`;
+function testimonialCard(slot, index) {
+  return `<article class="tw-card" style="--a:${index * 360 / testimonialSlots.length}deg"><div class="tw-photo"><img src="assets/beantown/${slot.photo}" alt="" width="520" height="360" decoding="async" draggable="false"></div><div class="tw-body"><div class="tw-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div><p>“${escapeHtml(slot.quote)}”</p><div class="tw-person"><span class="tw-avatar" aria-hidden="true">${escapeHtml(slot.initials)}</span><div><strong>${escapeHtml(slot.who)}</strong><small>${escapeHtml(slot.place)}</small></div></div></div></article>`;
 }
 function testimonialSection() {
-  const cards = testimonialSlots.map((slot, index) => `<div class="testimonial-orbit-card" style="--orbit-position:${index * 100 / testimonialSlots.length}%;--orbit-delay:${-index * 36 / testimonialSlots.length}s">${testimonialCard(slot).replace('<article class="testimonial-card">', '<article class="testimonial-card-inner">')}</div>`).join("");
-  return `<section class="section testimonials-section"><div class="testimonial-layout"><div class="testimonial-orbit" role="region" aria-label="Four rotating client testimonials">${cards}</div><div class="testimonial-copy"><span class="eyebrow">CLIENT STORIES</span><h2>What <span>Clients</span> Say<br>About Our <span>Setup</span></h2><p>Thoughtful support, dependable equipment, and a smoother event from setup to wrap.</p></div></div></section>`;
+  const cards = testimonialSlots.map(testimonialCard).join("");
+  return `<section class="section tw-section" aria-labelledby="twHeading"><div class="tw-layout"><div class="tw-stage" data-tw-stage role="region" aria-label="Rotating client testimonials"><div class="tw-wheel" data-tw-wheel>${cards}</div></div><div class="testimonial-copy"><span class="eyebrow">CLIENT STORIES</span><h2 id="twHeading">What <span>Clients</span> Say<br>About Our <span>Setup</span></h2><p>Thoughtful support, dependable equipment, and a smoother event from setup to wrap.</p></div></div></section>`;
+}
+
+let testimonialWheelCleanup = null;
+function initTestimonialWheel() {
+  testimonialWheelCleanup?.();
+  testimonialWheelCleanup = null;
+  const stage = document.querySelector("[data-tw-stage]");
+  const wheel = stage?.querySelector("[data-tw-wheel]");
+  if (!stage || !wheel) return;
+
+  const count = wheel.children.length;
+  const step = 360 / count;
+  const secondsPerCard = 4.6; // steady pace: one testimonial passes the centre every few seconds
+  const degreesPerSecond = step / secondsPerCard;
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let angle = 0;
+  let speed = 1;
+  let targetSpeed = 1;
+  let lastTime = 0;
+  let raf = 0;
+  let inView = true;
+  let originX = 0;
+  let originY = 0;
+
+  const apply = () => {
+    wheel.style.transform = `translate3d(${originX}px, ${originY}px, 0) rotate(${angle}deg)`;
+  };
+
+  const layout = () => {
+    const width = stage.clientWidth;
+    const height = stage.clientHeight;
+    if (!width || !height) return;
+    const narrow = width < 760;
+    const cardWidth = narrow
+      ? Math.max(184, Math.min(226, width * 0.56))
+      : Math.max(224, Math.min(264, height * 0.31));
+    const cardHeight = Math.round(cardWidth * (narrow ? 1.5 : 1.4));
+    const gap = 18;
+    const sine = Math.sin(Math.PI / count);
+    // Radius at which the inner corners of neighbouring cards still clear each other.
+    const radius = Math.ceil((cardHeight + gap + cardWidth * sine) / (2 * sine));
+    const rightEdge = narrow ? (width + cardWidth) / 2 : width - 18;
+    originX = rightEdge - radius - cardWidth / 2;
+    originY = height / 2;
+    wheel.style.setProperty("--tw-r", `${radius}px`);
+    wheel.style.setProperty("--tw-card-w", `${cardWidth}px`);
+    wheel.style.setProperty("--tw-card-h", `${cardHeight}px`);
+    apply();
+  };
+
+  const tick = (now) => {
+    if (!stage.isConnected) {
+      testimonialWheelCleanup?.();
+      return;
+    }
+    const delta = Math.min(0.05, (now - lastTime) / 1000 || 0);
+    lastTime = now;
+    speed += (targetSpeed - speed) * Math.min(1, delta * 6);
+    angle -= degreesPerSecond * speed * delta; // counter-clockwise: the visible arc travels upward
+    if (angle <= -360) angle += 360;
+    apply();
+    raf = requestAnimationFrame(tick);
+  };
+  const start = () => {
+    if (reducedMotion || raf || !inView) return;
+    lastTime = performance.now();
+    raf = requestAnimationFrame(tick);
+  };
+  const stop = () => {
+    cancelAnimationFrame(raf);
+    raf = 0;
+  };
+
+  const onEnter = (event) => { if (event.pointerType === "mouse") targetSpeed = 0; };
+  const onLeave = () => { targetSpeed = 1; };
+  stage.addEventListener("pointerenter", onEnter);
+  stage.addEventListener("pointerleave", onLeave);
+
+  const resizeObserver = "ResizeObserver" in window ? new ResizeObserver(layout) : null;
+  resizeObserver?.observe(stage);
+  const viewObserver = "IntersectionObserver" in window
+    ? new IntersectionObserver(([entry]) => {
+        inView = entry.isIntersecting;
+        if (inView) start(); else stop();
+      }, { rootMargin: "120px 0px" })
+    : null;
+  viewObserver?.observe(stage);
+
+  layout();
+  start();
+
+  testimonialWheelCleanup = () => {
+    stop();
+    resizeObserver?.disconnect();
+    viewObserver?.disconnect();
+    stage.removeEventListener("pointerenter", onEnter);
+    stage.removeEventListener("pointerleave", onLeave);
+    testimonialWheelCleanup = null;
+  };
 }
 function faqSection() {
   const faqs = [
@@ -1568,6 +1678,7 @@ function render(options = {}) {
   observePageMotion();
   initExperienceJourney();
   initServicesMelt();
+  initTestimonialWheel();
   bind();
   if (options.preserveScroll) {
     window.requestAnimationFrame(() => {
