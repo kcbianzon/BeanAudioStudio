@@ -1027,7 +1027,9 @@ function initTestimonialWheel() {
   const wheel = stage?.querySelector("[data-tw-wheel]");
   if (!stage || !wheel) return;
 
-  const count = wheel.children.length;
+  const cards = Array.from(wheel.querySelectorAll(".tw-card"));
+  const count = cards.length;
+  if (!count) return;
   const step = 360 / count;
   const secondsPerCard = 4.6; // steady pace: one testimonial passes the centre every few seconds
   const degreesPerSecond = step / secondsPerCard;
@@ -1040,25 +1042,60 @@ function initTestimonialWheel() {
   let inView = true;
   let originX = 0;
   let originY = 0;
+  let isNarrow = false;
+
+  const updateCardVisibilities = () => {
+    // Current angle is `angle` (which decreases as wheel turns counter-clockwise)
+    // Card i has angle offset i * step.
+    // Net angle relative to 3 o'clock (the front center apex):
+    const cutOff = isNarrow ? 65 : 60;
+    const fadeStart = isNarrow ? 40 : 36;
+    for (let i = 0; i < count; i++) {
+      const card = cards[i];
+      const raw = ((i * step + angle) % 360 + 360) % 360;
+      const phi = raw > 180 ? raw - 360 : raw; // [-180, 180]
+      const absPhi = Math.abs(phi);
+
+      if (absPhi >= cutOff) {
+        if (card.style.visibility !== "hidden") {
+          card.style.visibility = "hidden";
+          card.style.opacity = "0";
+          card.style.pointerEvents = "none";
+        }
+      } else {
+        if (card.style.visibility !== "visible") {
+          card.style.visibility = "visible";
+          card.style.pointerEvents = "auto";
+        }
+        if (absPhi <= fadeStart) {
+          card.style.opacity = "1";
+        } else {
+          const t = (cutOff - absPhi) / (cutOff - fadeStart);
+          card.style.opacity = Math.max(0, Math.min(1, t)).toFixed(3);
+        }
+      }
+    }
+  };
 
   const apply = () => {
     wheel.style.transform = `translate3d(${originX}px, ${originY}px, 0) rotate(${angle}deg)`;
+    updateCardVisibilities();
   };
 
   const layout = () => {
     const width = stage.clientWidth;
     const height = stage.clientHeight;
     if (!width || !height) return;
-    const narrow = width < 760;
-    const cardWidth = narrow
-      ? Math.max(184, Math.min(226, width * 0.56))
-      : Math.max(224, Math.min(264, height * 0.31));
-    const cardHeight = Math.round(cardWidth * (narrow ? 1.5 : 1.4));
+    isNarrow = width < 760;
+    const cardWidth = isNarrow
+      ? Math.max(184, Math.min(226, width * 0.54))
+      : Math.max(228, Math.min(268, height * 0.30));
+    const cardHeight = Math.round(cardWidth * (isNarrow ? 1.48 : 1.4));
     const gap = 18;
     const sine = Math.sin(Math.PI / count);
     // Radius at which the inner corners of neighbouring cards still clear each other.
     const radius = Math.ceil((cardHeight + gap + cardWidth * sine) / (2 * sine));
-    const rightEdge = narrow ? (width + cardWidth) / 2 : width - 18;
+    const rightEdge = isNarrow ? (width + cardWidth) / 2 : width - 16;
     originX = rightEdge - radius - cardWidth / 2;
     originY = height / 2;
     wheel.style.setProperty("--tw-r", `${radius}px`);
@@ -1092,8 +1129,13 @@ function initTestimonialWheel() {
 
   const onEnter = (event) => { if (event.pointerType === "mouse") targetSpeed = 0; };
   const onLeave = () => { targetSpeed = 1; };
+  const onTouchStart = () => { targetSpeed = 0; };
+  const onTouchEnd = () => { targetSpeed = 1; };
+
   stage.addEventListener("pointerenter", onEnter);
   stage.addEventListener("pointerleave", onLeave);
+  stage.addEventListener("touchstart", onTouchStart, { passive: true });
+  stage.addEventListener("touchend", onTouchEnd, { passive: true });
 
   const resizeObserver = "ResizeObserver" in window ? new ResizeObserver(layout) : null;
   resizeObserver?.observe(stage);
@@ -1105,17 +1147,19 @@ function initTestimonialWheel() {
     : null;
   viewObserver?.observe(stage);
 
-  layout();
-  start();
-
   testimonialWheelCleanup = () => {
     stop();
-    resizeObserver?.disconnect();
-    viewObserver?.disconnect();
     stage.removeEventListener("pointerenter", onEnter);
     stage.removeEventListener("pointerleave", onLeave);
+    stage.removeEventListener("touchstart", onTouchStart);
+    stage.removeEventListener("touchend", onTouchEnd);
+    resizeObserver?.disconnect();
+    viewObserver?.disconnect();
     testimonialWheelCleanup = null;
   };
+
+  layout();
+  start();
 }
 function faqSection() {
   const faqs = [
