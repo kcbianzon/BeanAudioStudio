@@ -4746,6 +4746,20 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   }
 }
 
+/* Spread the hero story cards toward the page edges and stagger each column. */
+@media (min-width: 1160px) {
+  .hero-floats {
+    left: calc(0px - clamp(20px, calc((100vw - 1320px) / 2 + 20px), 152px));
+    right: calc(0px - clamp(20px, calc((100vw - 1320px) / 2 + 20px), 152px));
+  }
+  .floating-story:nth-child(1) { top: 18px; left: 0; }
+  .floating-story:nth-child(2) { top: 46px; right: 4px; }
+  .floating-story:nth-child(3) { top: 220px; left: 16px; }
+  .floating-story:nth-child(4) { top: 236px; right: 18px; }
+  .floating-story:nth-child(5) { top: 422px; left: 2px; }
+  .floating-story:nth-child(6) { top: 414px; right: 0; }
+}
+
 
 
 
