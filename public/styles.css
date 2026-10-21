@@ -4749,6 +4749,7 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 /* Give the hero grid more breathing room and pull the story cards into a staggered frame. */
 .hero::before { background-size: 64px 64px; }
 @media (min-width: 1160px) {
+  .hero { min-height: 640px; }
   .hero-floats {
     left: calc(0px - clamp(20px, calc((100vw - 1320px) / 2 + 20px), 112px));
     right: calc(0px - clamp(20px, calc((100vw - 1320px) / 2 + 20px), 112px));
