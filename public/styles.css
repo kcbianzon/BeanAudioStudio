@@ -6404,76 +6404,166 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   }
 }
 
-/* Section 3: Who We Serve */
-.about-serve-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  margin-top: 24px;
+/* ==========================================================================
+   Section 3: Who We Serve (Grid & #F7D271 Banner Design)
+   ========================================================================== */
+.about-serve-section {
+  width: 100%;
 }
 
-.about-serve-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 20px;
-  border-radius: 18px;
-  border: 1px solid var(--line);
-  background: #ffffff;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+.serve-header {
+  margin-bottom: 28px;
 }
 
-.about-serve-card:hover {
-  transform: translateY(-3px);
-  border-color: #dfad2a;
-}
-
-.about-serve-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #dfad2a;
-  flex-shrink: 0;
-  margin-top: 6px;
-}
-
-.about-serve-card h4 {
-  font-family: 'Sora', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0 0 5px;
-  color: var(--ink);
-}
-
-.about-serve-card p {
-  margin: 0;
+.serve-eyebrow {
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
   font-size: 13px;
-  line-height: 1.5;
-  color: var(--muted);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #111111;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: block;
 }
 
-.about-serve-banner {
-  margin-top: 24px;
-  padding: 28px 32px;
-  border-radius: 22px;
+.serve-title {
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  font-size: clamp(38px, 5.2vw, 56px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: #111111;
+  line-height: 1.05;
+  margin: 0 0 16px;
+}
+
+.serve-subtitle {
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: #4b5563;
+  max-width: 620px;
+  margin: 0;
+}
+
+.serve-grid-box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid #111111;
   background: #ffffff;
-  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.serve-cell {
+  background: #ffffff;
+  padding: clamp(28px, 3.2vw, 42px) clamp(22px, 2.6vw, 36px);
+  border-right: 1px solid #111111;
+  border-bottom: 1px solid #111111;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  transition: background 0.2s ease;
 }
 
-.about-serve-banner p {
+/* Remove right border on every 3rd item in 3-column layout */
+.serve-cell:nth-child(3n) {
+  border-right: none;
+}
+
+/* Remove bottom border on last row (items 4, 5, 6) */
+.serve-cell:nth-child(n + 4) {
+  border-bottom: none;
+}
+
+.serve-cell:hover {
+  background: #fafaf8;
+}
+
+.serve-num {
+  font-family: 'Space Grotesk', 'Sora', sans-serif;
+  font-size: clamp(38px, 4.2vw, 48px);
+  font-weight: 900;
+  line-height: 1;
+  color: #dfad2a;
+  margin-bottom: 22px;
+  letter-spacing: -0.03em;
+  display: block;
+}
+
+.serve-cell-title {
+  font-family: 'Space Grotesk', -apple-system, sans-serif;
+  font-size: clamp(18px, 1.7vw, 21px);
+  font-weight: 800;
+  line-height: 1.25;
+  color: #111111;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+}
+
+.serve-cell-desc {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: #4b5563;
   margin: 0;
-  font-size: 16px;
-  line-height: 1.65;
-  color: var(--muted);
 }
 
-.about-serve-banner strong {
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--ink);
+/* Rectangle below the grid */
+.serve-gold-banner {
+  margin-top: 36px;
+  padding: clamp(28px, 3.5vw, 38px) clamp(26px, 4vw, 48px);
+  background: #F7D271;
+  color: #111111;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(247, 210, 113, 0.25);
+}
+
+.serve-gold-banner p {
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: #111111;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .serve-grid-box {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .serve-cell {
+    border-right: 1px solid #111111 !important;
+    border-bottom: 1px solid #111111 !important;
+  }
+  .serve-cell:nth-child(2n) {
+    border-right: none !important;
+  }
+  .serve-cell:nth-last-child(-n + 2) {
+    border-bottom: none !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .serve-grid-box {
+    grid-template-columns: 1fr;
+  }
+  .serve-cell {
+    border-right: none !important;
+    border-bottom: 1px solid #111111 !important;
+    padding: 24px 20px;
+  }
+  .serve-cell:last-child {
+    border-bottom: none !important;
+  }
+  .serve-num {
+    font-size: 34px;
+    margin-bottom: 16px;
+  }
+  .serve-cell-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .serve-gold-banner {
+    margin-top: 24px;
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
 }
 
 /* Sections 4 & 5: Why Choose Us & Promise Dark Panel */
@@ -6664,18 +6754,12 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   .about-story-grid {
     grid-template-columns: 1fr;
   }
-  .about-serve-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 600px) {
   .about-hero {
     border-radius: 0 0 24px 24px;
     padding: 60px 18px 48px;
-  }
-  .about-serve-grid {
-    grid-template-columns: 1fr;
   }
   .about-cta-actions {
     flex-direction: column;

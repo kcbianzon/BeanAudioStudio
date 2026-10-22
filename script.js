@@ -1783,12 +1783,12 @@ function aboutUsPage() {
   ];
 
   const clientTypes = [
-    { title: "Local Businesses & Corporate Teams", desc: "Town halls, hybrid summits, client dinners, and product showcases." },
-    { title: "Nonprofits & Community Groups", desc: "Annual fundraisers, charity auctions, galas, and community rallies." },
-    { title: "Colleges & Universities", desc: "Commencements, guest lectures, student concerts, and orientation programs." },
-    { title: "DJs, Musicians & Performers", desc: "Club nights, album releases, festival stages, and live band reinforcement." },
-    { title: "Wedding Planners & Private Hosts", desc: "Ceremonies, cocktail hours, reception dance floors, and private celebrations." },
-    { title: "Production Companies & Organizers", desc: "Multi-stage festivals, outdoor cinema series, and touring agency events." }
+    { num: "01", title: "Local Businesses & Corporate Teams", desc: "Town halls, hybrid summits, client dinners, and product showcases." },
+    { num: "02", title: "Nonprofits & Community Groups", desc: "Annual fundraisers, charity auctions, galas, and community rallies." },
+    { num: "03", title: "Colleges & Universities", desc: "Commencements, guest lectures, student concerts, and orientation programs." },
+    { num: "04", title: "DJs, Musicians & Performers", desc: "Club nights, album releases, festival stages, and live band reinforcement." },
+    { num: "05", title: "Wedding Planners & Private Hosts", desc: "Ceremonies, cocktail hours, reception dance floors, and private celebrations." },
+    { num: "06", title: "Production Companies & Organizers", desc: "Multi-stage festivals, outdoor cinema series, and touring agency event" }
   ];
 
   const differentiators = [
@@ -1907,34 +1907,25 @@ function aboutUsPage() {
       </section>
 
       <!-- Section 3: Who We Serve -->
-      <section class="about-section about-serve-section reveal">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">COMMUNITIES & VENUES</span>
-            <h2>Who We Serve</h2>
-          </div>
-          <p>We’re proud to work with a wide range of clients and organizations throughout Massachusetts.</p>
+      <section class="about-section about-serve-section reveal" aria-labelledby="aboutServeHeading">
+        <div class="serve-header">
+          <span class="serve-eyebrow">COMMUNITIES &amp; VENUES</span>
+          <h2 class="serve-title" id="aboutServeHeading">Who We Serve</h2>
+          <p class="serve-subtitle">We’re proud to work with a wide range of clients and organizations throughout Massachusetts.</p>
         </div>
 
-        <div class="about-serve-grid">
+        <div class="serve-grid-box">
           ${clientTypes.map((client) => `
-            <div class="about-serve-card">
-              <span class="about-serve-dot" aria-hidden="true"></span>
-              <div>
-                <h4>${client.title}</h4>
-                <p>${client.desc}</p>
-              </div>
+            <div class="serve-cell">
+              <span class="serve-num">${client.num}</span>
+              <h3 class="serve-cell-title">${client.title}</h3>
+              <p class="serve-cell-desc">${client.desc}</p>
             </div>
           `).join("")}
         </div>
 
-        <div class="about-serve-banner">
-          <p>
-            Whether your event is in downtown Boston, Cambridge, Somerville, Brookline, or anywhere in New England, we’re ready to bring the AV support you need. We’re known for being flexible, fast, and focused on your goals.
-          </p>
-          <strong>
-            Our clients return because they trust us. We show up on time. We fix problems fast. And we treat every event—big or small—with the same care and respect.
-          </strong>
+        <div class="serve-gold-banner">
+          <p>Whether your event is in downtown Boston, Cambridge, Somerville, Brookline, or anywhere in New England, we’re ready to bring the AV support you need. We’re known for being flexible, fast, and focused on your goals. Our clients return because they trust us. We show up on time. We fix problems fast. And we treat every event—big or small—with the same care and respect.</p>
         </div>
       </section>
 
