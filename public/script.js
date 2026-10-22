@@ -1753,42 +1753,42 @@ function aboutUsPage() {
     {
       num: "01",
       title: "Speakers, Mixers & Microphones",
-      desc: "Wired and wireless Shure systems (Beta 58A handhelds, lavaliers, headsets), powered QSC & JBL loudspeakers, high-output subwoofers, and digital mixing consoles."
+      desc: "Wired and wireless Shure systems (Beta 58A handhelds, lavaliers, headsets), powered QSC & JBL loudspeakers, high-output subwoofers, and digital mixing consoles calibrated for pristine clarity.",
+      iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="about12-icon" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>`
     },
     {
       num: "02",
       title: "Video Gear, Displays & Walls",
-      desc: "High-lumen laser projectors, fast-fold portable screens, 65″–75″ 4K commercial displays on truss stands, and modular 2.67mm ultra-bright LED video walls."
+      desc: "High-lumen laser projectors, fast-fold portable screens, 65″–75″ 4K monitor displays on truss stands, modular 2.67mm ultra-bright LED video walls, and multi-camera switcher feeds.",
+      iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="about12-icon" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>`
     },
     {
       num: "03",
       title: "Lighting Systems & Atmospherics",
-      desc: "Wireless battery-powered Chauvet uplighting, moving head fixtures, warm stage wash, and atmospheric lighting for venue transformations."
+      desc: "Wireless battery-powered Chauvet uplighting, moving head fixtures, warm stage wash, cold-spark fountains, and low-lying dry-ice haze for venue transformations.",
+      iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="about12-icon" aria-hidden="true"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"></path></svg>`
     },
     {
       num: "04",
-      title: "Special Effects & Cold Sparklers",
-      desc: "Indoor-safe cold sparkler fountains, dry-ice 'Dancing on a Cloud' machines, low-lying haze, and grand entrance visual FX."
+      title: "Silent Disco & Interactive Audio",
+      desc: "3-channel silent disco headphone packages, multi-DJ transmitters, 360 photo booth activations, and outdoor movie projection systems with FM broadcast options.",
+      iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="about12-icon" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>`
     },
     {
       num: "05",
-      title: "Silent Disco Packages",
-      desc: "3-channel multi-DJ headphone packages with transmitters, zero noise complaints, 360 photo booth activations, and outdoor movie projection systems."
-    },
-    {
-      num: "06",
       title: "Full Turnkey AV Production",
-      desc: "End-to-end production for large conferences, concerts, festivals, and campus commencements—complete with load-in, live front-of-house mixing, and quiet teardown."
+      desc: "End-to-end production for large conferences, concerts, festivals, and campus commencements—complete with load-in, live front-of-house mixing, and quiet teardown.",
+      iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="about12-icon" aria-hidden="true"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>`
     }
   ];
 
   const clientTypes = [
-    { num: "01", title: "Local Businesses & Corporate Teams", desc: "Town halls, hybrid summits, client dinners, and product showcases." },
-    { num: "02", title: "Nonprofits & Community Groups", desc: "Annual fundraisers, charity auctions, galas, and community rallies." },
-    { num: "03", title: "Colleges & Universities", desc: "Commencements, guest lectures, student concerts, and orientation programs." },
-    { num: "04", title: "DJs, Musicians & Performers", desc: "Club nights, album releases, festival stages, and live band reinforcement." },
-    { num: "05", title: "Wedding Planners & Private Hosts", desc: "Ceremonies, cocktail hours, reception dance floors, and private celebrations." },
-    { num: "06", title: "Production Companies & Organizers", desc: "Multi-stage festivals, outdoor cinema series, and touring agency event" }
+    { title: "Local Businesses & Corporate Teams", desc: "Town halls, hybrid summits, client dinners, and product showcases." },
+    { title: "Nonprofits & Community Groups", desc: "Annual fundraisers, charity auctions, galas, and community rallies." },
+    { title: "Colleges & Universities", desc: "Commencements, guest lectures, student concerts, and orientation programs." },
+    { title: "DJs, Musicians & Performers", desc: "Club nights, album releases, festival stages, and live band reinforcement." },
+    { title: "Wedding Planners & Private Hosts", desc: "Ceremonies, cocktail hours, reception dance floors, and private celebrations." },
+    { title: "Production Companies & Organizers", desc: "Multi-stage festivals, outdoor cinema series, and touring agency events." }
   ];
 
   const differentiators = [
@@ -1850,49 +1850,91 @@ function aboutUsPage() {
         </div>
       </section>
 
-      <!-- Section 2: What We Offer -->
-      <section class="about-section about-offer-section reveal" aria-labelledby="aboutOfferHeading">
-        <div class="bento-header">
-          <span class="bento-eyebrow">EQUIPMENT &amp; CAPABILITIES</span>
-          <h2 class="bento-title" id="aboutOfferHeading">WHAT WE OFFER</h2>
-          <p class="bento-subtitle">We rent and support a wide range of professional audio visual equipment across Boston and New England.</p>
+      <!-- Section 2: What We Offer (React Bits Pro: About 12 Block) -->
+      <section class="about-section about-offer-section about12-block reveal" aria-labelledby="aboutOfferHeading">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">EQUIPMENT &amp; CAPABILITIES</span>
+            <h2 id="aboutOfferHeading">What We Offer</h2>
+          </div>
+          <p>We rent and support a wide range of professional audio visual equipment across Boston and New England.</p>
         </div>
 
-        <div class="bento-grid-box">
-          ${offerItems.map((item) => `
-            <div class="bento-cell">
-              <span class="bento-num">${item.num}</span>
-              <h3 class="bento-cell-title">${item.title}</h3>
-              <p class="bento-cell-desc">${item.desc}</p>
+        <div class="about12-card-wrapper">
+          <!-- Left Column: Quote Card, Narrative -->
+          <div class="about12-left">
+            <div class="about12-quote-card">
+              <blockquote class="about12-quote-text">
+                “An event feels calm when someone has already met its worst day. At Beantown, we prepare for every variable so your event runs effortlessly.”
+              </blockquote>
+              <div class="about12-author">
+                <img 
+                  src="assets/beantown/calvin-reid.jpg" 
+                  alt="Calvin Reid" 
+                  class="about12-avatar"
+                  loading="lazy"
+                >
+                <div class="about12-author-meta">
+                  <strong class="about12-author-name">Calvin Reid</strong>
+                  <span class="about12-author-role">Founder</span>
+                </div>
+              </div>
             </div>
-          `).join("")}
-        </div>
 
-        <div class="bento-banner">
-          <p>Every piece of equipment is tested before delivery, and we’re always happy to explain how it works. Want us to run the show? We offer on-site tech support and full-service production across Boston, Massachusetts, and the greater New England area. That’s just one reason clients say we provide the best audio visual rentals in Boston—we combine reliable equipment with reliable people.</p>
+            <p class="about12-left-desc">
+              Every piece of equipment is tested before delivery, and we’re always happy to explain how it works. Want us to run the show? We offer on-site tech support and full-service production across Boston, Massachusetts, and the greater New England area.
+            </p>
+          </div>
+
+          <!-- Right Column: Numbered Items List with Icons -->
+          <div class="about12-right">
+            <div class="about12-items-list">
+              ${offerItems.map((item) => `
+                <article class="about12-item">
+                  <span class="about12-num">${item.num}</span>
+                  <div class="about12-content">
+                    <h3 class="about12-title">${item.title}</h3>
+                    <p class="about12-desc">${item.desc}</p>
+                  </div>
+                  <div class="about12-icon-box">
+                    ${item.iconSvg}
+                  </div>
+                </article>
+              `).join("")}
+            </div>
+          </div>
         </div>
       </section>
 
       <!-- Section 3: Who We Serve -->
-      <section class="about-section about-serve-section reveal" aria-labelledby="aboutServeHeading">
-        <div class="bento-header">
-          <span class="bento-eyebrow">COMMUNITIES &amp; VENUES</span>
-          <h2 class="bento-title" id="aboutServeHeading">WHO WE SERVE</h2>
-          <p class="bento-subtitle">We're proud to work with a wide range of clients and organizations throughout Massachusetts.</p>
+      <section class="about-section about-serve-section reveal">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">COMMUNITIES & VENUES</span>
+            <h2>Who We Serve</h2>
+          </div>
+          <p>We’re proud to work with a wide range of clients and organizations throughout Massachusetts.</p>
         </div>
 
-        <div class="bento-grid-box">
+        <div class="about-serve-grid">
           ${clientTypes.map((client) => `
-            <div class="bento-cell">
-              <span class="bento-num">${client.num}</span>
-              <h3 class="bento-cell-title">${client.title}</h3>
-              <p class="bento-cell-desc">${client.desc}</p>
+            <div class="about-serve-card">
+              <span class="about-serve-dot" aria-hidden="true"></span>
+              <div>
+                <h4>${client.title}</h4>
+                <p>${client.desc}</p>
+              </div>
             </div>
           `).join("")}
         </div>
 
-        <div class="bento-banner">
-          <p>Whether your event is in downtown Boston, Cambridge, Somerville, Brookline, or anywhere in New England, we're ready to bring the AV support you need. We're known for being flexible, fast, and focused on your goals. Our clients return because they trust us. We show up on time. We fix problems fast. And we treat every event—big or small—with the same care and respect.</p>
+        <div class="about-serve-banner">
+          <p>
+            Whether your event is in downtown Boston, Cambridge, Somerville, Brookline, or anywhere in New England, we’re ready to bring the AV support you need. We’re known for being flexible, fast, and focused on your goals.
+          </p>
+          <strong>
+            Our clients return because they trust us. We show up on time. We fix problems fast. And we treat every event—big or small—with the same care and respect.
+          </strong>
         </div>
       </section>
 
