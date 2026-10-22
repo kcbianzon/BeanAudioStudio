@@ -1748,39 +1748,253 @@ function bundleDetail(id) {
   return `<div class="page"><div class="bundle-detail-head"><a class="text-btn" href="#bundles">← All bundles</a><div class="bundle-detail-layout"><div><span class="eyebrow">${bundle.label} PACKAGE</span><h1>${bundle.title}</h1><p>${bundle.desc}</p></div><div class="bundle-detail-price"><span class="eyebrow">FIXED PACKAGE PRICE</span><strong>${money(bundle.price)}</strong></div></div></div><div class="bundle-detail-wrap"><section class="bundle-detail-main"><div class="detail-section-head"><div><span class="eyebrow">WHAT’S INCLUDED</span><h2>Your package, item by item.</h2></div><span class="detail-lock">Fixed package</span></div><div class="bundle-included-list">${included.map(({ product, quantity }) => `<div class="bundle-included-item"><div><strong>${quantity} × ${product.name}</strong><span>${product.category} · ${product.desc}</span></div><strong>${product.price ? money(product.price * quantity) : "Quote required"}</strong></div>`).join("")}</div><div class="bundle-detail-actions"><a class="btn btn-dark" href="#quote">Request this bundle →</a><a class="btn btn-light" href="#builder">Customize instead</a></div></section><aside class="bundle-detail-summary"><span class="eyebrow">PRICE CHECK</span><div class="detail-total"><span>Known equipment total</span><strong>${money(knownTotal)}</strong></div><div class="detail-total"><span>Fixed package price</span><strong>${money(bundle.price)}</strong></div>${hasQuoteItems ? `<div class="quote-tag">Some included production items need final availability and quote confirmation.</div>` : ""}<p>Package inclusions are fixed. The equipment total is shown for transparency; quote-only production items are confirmed by the team.</p></aside></div></div>`;
 }
 
-function builder() {
-  const items = Object.entries(state.selected)
-    .map(([id, qty]) => {
-      const p = products.find((x) => x.id === id);
-      return p ? { p, qty } : null;
-    })
-    .filter(Boolean);
-  const known = items.reduce((s, { p, qty }) => s + (p.price || 0) * qty, 0);
-  const quoteOnly = items.some(
-    ({ p }) => p.priceType === "quote" || p.priceType === "starting",
-  );
-  const recommendedIds =
-    eventRecommendations[state.eventType] || eventRecommendations.Wedding;
-  const recommendedProducts = recommendedIds
-    .map((id) => products.find((p) => p.id === id))
-    .filter(Boolean);
-  const otherProducts = products.filter((p) => !recommendedIds.includes(p.id));
-  const miniProduct = (p, recommended = false) =>
-    `<div class="mini-product ${recommended ? "is-recommended" : ""}"><div class="mini-product-heading"><h4>${p.name}</h4>${recommended ? '<span class="recommendation-tag">Recommended</span>' : ""}</div><p>${productPriceText(p)}</p><div class="mini-product-row"><span style="font-size:11px;color:var(--muted)">${p.category}</span><div class="qty-controls"><button class="qty-btn" data-minus="${p.id}">−</button><span class="qty">${state.selected[p.id] || 0}</span><button class="qty-btn" data-plus="${p.id}">+</button></div></div></div>`;
-  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">CUSTOM EVENT BUILDER</span><h1>Build your<br>exact setup.</h1></div><p>Prototype a guided experience for clients. This is intentionally quote-friendly: it estimates what is known without pretending custom production has a fixed retail price.</p></div><div class="builder-wrap"><section class="builder-main"><div class="steps">${["Event", "Details", "Equipment", "Review"].map((s, i) => `<div class="step ${state.builderStep === i + 1 ? "active" : ""}">${String(i + 1).padStart(2, "0")} · ${s}</div>`).join("")}</div>${builderStepContent()}<div class="builder-actions"><button class="btn btn-light" data-builder-prev ${state.builderStep === 1 ? "disabled" : ""}>← Back</button>${state.builderStep < 4 ? `<button class="btn btn-dark" data-builder-next>Continue →</button>` : `<a class="btn btn-accent" href="#quote">Request this quote →</a>`}</div></section><aside class="builder-side"><span class="eyebrow">YOUR SETUP</span><div class="summary-total"><div><span class="eyebrow">ESTIMATED TOTAL</span><div style="font-size:11px;color:var(--muted)">${quoteOnly ? "Includes quote-only selections" : ""}</div></div><strong>${money(known)}</strong></div><div class="selection-list">${items.length ? items.map(({ p, qty }) => `<div class="selection-chip"><span>${qty} × ${p.name.replace(" — 50 Headphones", "").replace(" — 100 Headphones", "").replace(" — 150 Headphones", "").replace(" — 200 Headphones", "").replace(" — 300 Headphones", "")}</span><button data-remove="${p.id}" aria-label="Remove">×</button></div>`).join("") : `<div class="empty" style="padding:24px">Nothing selected yet.</div>`}</div>${quoteOnly ? `<div class="quote-tag">Some selections require a final quote confirmation.</div>` : ""}<a class="btn btn-dark" style="width:100%;margin-top:12px" href="#quote">Send my setup →</a></aside></div></div>`;
-  function builderStepContent() {
-    if (state.builderStep === 1)
-      return `<div class="reveal"><span class="eyebrow">STEP 01</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">What are you planning?</h2><p style="color:var(--muted);margin-top:0">Pick the closest event type. The interface uses it to suggest a starting point.</p><div class="choice-grid">${["Wedding", "Corporate Event", "School Event", "Concert", "Private Party", "Outdoor Movie"].map((x) => `<button class="choice ${state.eventType === x ? "selected" : ""}" data-event="${x}"><strong>${x}</strong><span>${x === "Wedding" ? "Ceremony + celebration" : x === "Corporate Event" ? "Meetings + launches" : x === "School Event" ? "Programs + dances" : x === "Concert" ? "Live performance" : x === "Private Party" ? "Celebrations" : "Inflatable movie night"}</span>${state.eventType === x ? "<em>Selected</em>" : ""}</button>`).join("")}</div></div>`;
-    if (state.builderStep === 2)
-      return `<div class="reveal"><span class="eyebrow">STEP 02</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Tell us about your event.</h2><p style="color:var(--muted);margin-top:0">Share a few planning and contact details so the quote can be tailored to your venue.</p><div class="form-grid"><div class="field"><label for="contactNameInput">Full name *</label><input class="input" id="contactNameInput" autocomplete="name" required value="${escapeHtml(state.contactName)}" placeholder="Alex Morgan"></div><div class="field"><label for="contactEmailInput">Email *</label><input class="input" id="contactEmailInput" type="email" autocomplete="email" required value="${escapeHtml(state.contactEmail)}" placeholder="alex@example.com"></div><div class="field"><label for="contactPhoneInput">Phone</label><input class="input" id="contactPhoneInput" type="tel" autocomplete="tel" value="${escapeHtml(state.contactPhone)}" placeholder="(617) 555-0198"></div><div class="field"><label for="organizationInput">Organization</label><input class="input" id="organizationInput" autocomplete="organization" value="${escapeHtml(state.organization)}" placeholder="Company or group"></div><div class="field"><label for="eventNameInput">Event name</label><input class="input" id="eventNameInput" value="${escapeHtml(state.eventName)}" placeholder="Annual fundraiser"></div><div class="field"><label for="guestInput">Estimated guests</label><input class="input" id="guestInput" type="number" min="1" value="${state.guests}"></div><div class="field"><label for="venueInput">Venue setting</label><select class="select" id="venueInput"><option ${state.venue === "Indoor" ? "selected" : ""}>Indoor</option><option ${state.venue === "Outdoor" ? "selected" : ""}>Outdoor</option><option ${state.venue === "Hybrid" ? "selected" : ""}>Hybrid</option></select></div><div class="field"><label for="dateInput">Event date</label><input class="input" id="dateInput" type="date" value="${escapeHtml(state.date)}"></div><div class="field full"><label for="eventLocationInput">Venue name or address</label><input class="input" id="eventLocationInput" autocomplete="street-address" value="${escapeHtml(state.eventLocation)}" placeholder="Search for a venue or enter an address"><div class="builder-map-placeholder" role="group" aria-label="Map preview placeholder"><span class="map-placeholder-grid" aria-hidden="true"></span><span class="map-pin" aria-hidden="true">●</span><div class="map-placeholder-copy"><strong id="mapAddressPreview">${state.eventLocation ? escapeHtml(state.eventLocation) : "Your venue preview"}</strong><span>Map preview placeholder · open this address in Google Maps</span><a id="mapPreviewLink" href="${state.eventLocation ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(state.eventLocation)}` : "#"}" ${state.eventLocation ? "" : 'aria-disabled="true" tabindex="-1"'} target="_blank" rel="noopener noreferrer">Preview location in Google Maps ↗</a></div></div><small class="map-api-note">An interactive embedded map can be enabled later with a Maps API key.</small></div><div class="field full"><label for="eventNotesInput">Anything else we should know?</label><textarea class="textarea" id="eventNotesInput" placeholder="Schedule, room details, delivery notes, or special requests">${escapeHtml(state.eventNotes)}</textarea></div></div></div>`;
-    if (state.builderStep === 3)
-      return `<div class="reveal"><span class="eyebrow">STEP 03</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Pick the pieces.</h2><p style="color:var(--muted);margin-top:0">Start with recommendations for your ${state.eventType.toLowerCase()}, then browse the full equipment catalog. Quantities update the estimate in real time.</p><div class="equipment-group"><div class="equipment-group-head"><span class="eyebrow">FOR YOUR EVENT</span><span class="equipment-count">${recommendedProducts.length} recommendations</span></div><div class="builder-product-grid">${recommendedProducts.map((p) => miniProduct(p, true)).join("")}</div></div><div class="equipment-group all-equipment"><div class="equipment-group-head"><span class="eyebrow">ALL EQUIPMENT</span><span class="equipment-count">${products.length} products</span></div><div class="builder-product-grid">${otherProducts.map((p) => miniProduct(p)).join("")}</div></div></div>`;
-    const detail = (label, value) => `<div class="summary-line"><span>${label}</span><strong>${value || "Not provided"}</strong></div>`;
-    const locationValue = state.eventLocation ? `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(state.eventLocation)}" target="_blank" rel="noopener noreferrer">${escapeHtml(state.eventLocation)} ↗</a>` : "Not provided";
-    return `<div class="reveal"><span class="eyebrow">STEP 04</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Review your build.</h2><p style="color:var(--muted);margin-top:0">Everything the client has configured is summarized here before sending the request.</p><div class="selection-list">${items.length ? items.map(({ p, qty }) => `<div class="selection-chip"><span><strong>${qty} ×</strong> ${p.name}</span><span>${p.priceType === "quote" ? "Quote" : productPriceText(p)}</span></div>`).join("") : `<div class="empty">Add at least one product to your setup.</div>`}</div><div class="builder-event-summary"><h3>Event details</h3>${detail("Event type", escapeHtml(state.eventType))}${detail("Event name", escapeHtml(state.eventName))}${detail("Contact", escapeHtml(state.contactName))}${detail("Email", escapeHtml(state.contactEmail))}${detail("Phone", escapeHtml(state.contactPhone))}${detail("Organization", escapeHtml(state.organization))}${detail("Guests", String(state.guests))}${detail("Venue setting", escapeHtml(state.venue))}${detail("Date", escapeHtml(state.date || "Not selected"))}<div class="summary-line"><span>Venue location</span><strong>${locationValue}</strong></div>${detail("Notes", escapeHtml(state.eventNotes))}</div></div>`;
-  }
-}
+function aboutUsPage() {
+  const offerItems = [
+    {
+      icon: "🔊",
+      title: "Speakers, Mixers & Microphones",
+      desc: "Wired and wireless Shure systems (Beta 58A handhelds, lavaliers, headsets), powered QSC & JBL loudspeakers, high-output subwoofers, and digital mixing consoles.",
+      tag: "Audio & PA"
+    },
+    {
+      icon: "📽️",
+      title: "Video Gear, Displays & Walls",
+      desc: "High-lumen laser projectors, fast-fold portable screens, 65″–75″ 4K monitor displays on truss stands, modular 2.67mm LED video walls, and multi-camera switcher feeds.",
+      tag: "Video & Displays"
+    },
+    {
+      icon: "💡",
+      title: "Lighting Systems",
+      desc: "Wireless battery-powered Chauvet uplighting, moving head fixtures, warm stage wash, and atmospheric lighting for weddings, corporate galas, and venue transformations.",
+      tag: "Event Lighting"
+    },
+    {
+      icon: "✨",
+      title: "Special Effects",
+      desc: "3-channel silent disco headphone packages, indoor-safe cold sparkler fountains, dry-ice 'Dancing on a Cloud' machines, and low-lying haze.",
+      tag: "Special FX"
+    },
+    {
+      icon: "🎛️",
+      title: "Full Turnkey AV Production",
+      desc: "End-to-end production for large conferences, concerts, festivals, and campus commencements—complete with load-in, live front-of-house mixing, and quiet teardown.",
+      tag: "Turnkey Production"
+    }
+  ];
 
+  const clientTypes = [
+    { title: "Local Businesses & Corporate Teams", desc: "Town halls, hybrid summits, client dinners, and product showcases." },
+    { title: "Nonprofits & Community Groups", desc: "Annual fundraisers, charity auctions, galas, and community rallies." },
+    { title: "Colleges & Universities", desc: "Commencements, guest lectures, student concerts, and orientation programs." },
+    { title: "DJs, Musicians & Performers", desc: "Club nights, album releases, festival stages, and live band reinforcement." },
+    { title: "Wedding Planners & Private Hosts", desc: "Ceremonies, cocktail hours, reception dance floors, and private celebrations." },
+    { title: "Production Companies & Organizers", desc: "Multi-stage festivals, outdoor cinema series, and touring agency events." }
+  ];
+
+  const differentiators = [
+    { label: "Local Expertise", desc: "We know Boston venues, traffic, loading docks, and city logistics inside and out." },
+    { label: "Simple Pricing", desc: "No guesswork, no confusing tech speak, and absolutely no last-minute surprise fees." },
+    { label: "Clean, Pro-Grade Equipment", desc: "Every unit is thoroughly soundchecked, cleaned, and tested before delivery." },
+    { label: "Helpful, Real People", desc: "Clear communication, friendly on-site engineers, and responsive support." },
+    { label: "Scalable Service", desc: "From a single wireless microphone to complete arena-scale concert production." }
+  ];
+
+  return `<div class="page about-page">
+    <!-- Hero Banner -->
+    <header class="about-hero">
+      <div class="about-hero-media">
+        <img src="assets/beantown/event-production.jpg" alt="Beantown Audio Rentals production setup" class="about-hero-img">
+        <div class="about-hero-overlay"></div>
+      </div>
+      <div class="about-hero-content">
+        <span class="eyebrow orange">BOSTON • NEW ENGLAND • EVENT AV</span>
+        <h1 class="about-hero-title">BEST AUDIO VISUAL<br>RENTALS IN BOSTON</h1>
+        <p class="about-hero-lead">Commercial-grade equipment, easy booking, and hands-on service that puts people first across Greater Boston and all of New England.</p>
+        <div class="about-hero-badges">
+          <span class="about-pill">✓ On-Time Delivery & Setup</span>
+          <span class="about-pill">✓ Dedicated On-Site Technicians</span>
+          <span class="about-pill">✓ Transparent Fixed Pricing</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="about-container">
+
+      <!-- Section 1: About Beantown Audio Rentals -->
+      <section class="about-section about-story-section reveal">
+        <div class="about-story-card">
+          <div class="about-story-header">
+            <span class="eyebrow">OUR STORY & PHILOSOPHY</span>
+            <h2>About Beantown Audio Rentals</h2>
+          </div>
+          
+          <div class="about-story-grid">
+            <div class="about-story-col">
+              <p class="about-lead-text">
+                At <strong>Beantown Audio Rentals</strong>, we believe great events start with great sound, clear visuals, and dependable support. That’s why we’re proud to offer the <em>best audio visual rentals in Boston</em>, paired with hands-on service that puts people first.
+              </p>
+              <p>
+                We serve everyone from first-time party hosts to seasoned event planners. Whether you’re planning a corporate meeting, a wedding, or a large outdoor concert, our team is here to make sure your message gets heard—and seen—exactly the way you imagined.
+              </p>
+            </div>
+            
+            <div class="about-story-col about-story-box">
+              <h3>Built on Experience. Driven by Simplicity.</h3>
+              <p>
+                Beantown Audio Rentals was founded with a simple goal: to make high-quality AV gear easy and affordable for everyone. We noticed how often people struggled with confusing tech, unreliable setups, and vague pricing. So we set out to change that.
+              </p>
+              <p>
+                Today, we’re known for providing the best audio visual rentals in Boston with a focus on clear communication, easy booking, and trustworthy service. Our clients love how we simplify the process—no jargon, no hidden fees, and no stress.
+              </p>
+              <blockquote class="about-quote">
+                “We’re here to be more than a vendor. We’re your AV partner from the moment you reach out.”
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: What We Offer -->
+      <section class="about-section about-offer-section reveal">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">EQUIPMENT & CAPABILITIES</span>
+            <h2>What We Offer</h2>
+          </div>
+          <p>We rent and support a wide range of professional audio visual equipment across Boston and New England.</p>
+        </div>
+
+        <div class="about-offer-grid">
+          ${offerItems.map((item) => `
+            <article class="about-offer-card">
+              <div class="about-offer-top">
+                <span class="about-offer-icon" aria-hidden="true">${item.icon}</span>
+                <span class="badge">${item.tag}</span>
+              </div>
+              <h3>${item.title}</h3>
+              <p>${item.desc}</p>
+            </article>
+          `).join("")}
+        </div>
+
+        <div class="about-offer-footer-note">
+          <p>
+            <strong>Every piece of equipment is tested before delivery</strong>, and we’re always happy to explain how it works. Want us to run the show? We offer on-site tech support and full-service production across Boston, Massachusetts, and the greater New England area.
+          </p>
+          <p class="about-highlight-line">
+            That’s just one reason clients say we provide the best audio visual rentals in Boston—we combine reliable equipment with reliable people.
+          </p>
+        </div>
+      </section>
+
+      <!-- Section 3: Who We Serve -->
+      <section class="about-section about-serve-section reveal">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">COMMUNITIES & VENUES</span>
+            <h2>Who We Serve</h2>
+          </div>
+          <p>We’re proud to work with a wide range of clients and organizations throughout Massachusetts.</p>
+        </div>
+
+        <div class="about-serve-grid">
+          ${clientTypes.map((client) => `
+            <div class="about-serve-card">
+              <span class="about-serve-dot" aria-hidden="true"></span>
+              <div>
+                <h4>${client.title}</h4>
+                <p>${client.desc}</p>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+
+        <div class="about-serve-banner">
+          <p>
+            Whether your event is in downtown Boston, Cambridge, Somerville, Brookline, or anywhere in New England, we’re ready to bring the AV support you need. We’re known for being flexible, fast, and focused on your goals.
+          </p>
+          <strong>
+            Our clients return because they trust us. We show up on time. We fix problems fast. And we treat every event—big or small—with the same care and respect.
+          </strong>
+        </div>
+      </section>
+
+      <!-- Section 4 & 5: Why Choose Us & Our Promise (Featured Dark Panel) -->
+      <section class="about-section about-why-promise-section reveal">
+        <div class="about-dark-panel">
+          <div class="about-dark-bg" style="background-image: url('assets/beantown/live-event.jpg')"></div>
+          <div class="about-dark-content">
+            
+            <div class="about-why-block">
+              <span class="eyebrow orange">THE BEANTOWN DIFFERENCE</span>
+              <h2>Why Choose Beantown Audio Rentals</h2>
+              <p class="about-dark-intro">There are lots of places to rent gear, but we do things differently. Here’s what sets us apart:</p>
+
+              <div class="about-diff-grid">
+                ${differentiators.map((diff, i) => `
+                  <div class="about-diff-item">
+                    <span class="about-diff-num">0${i + 1}</span>
+                    <div>
+                      <strong>${diff.label}</strong>
+                      <p>${diff.desc}</p>
+                    </div>
+                  </div>
+                `).join("")}
+              </div>
+
+              <p class="about-dark-outro">
+                That’s what makes us the go-to for the best audio visual rentals in Boston. We’re not here to impress you with big words or flashy gear—we’re here to deliver results that make your event shine.
+              </p>
+            </div>
+
+            <div class="about-promise-divider"></div>
+
+            <div class="about-promise-block">
+              <span class="eyebrow orange">OUR COMMITMENT</span>
+              <h3>Our Promise to You</h3>
+              
+              <div class="about-promise-body">
+                <p>
+                  Events are full of moving parts. AV shouldn't be one of the stress factors. That’s why we promise to show up prepared, stay flexible, and focus on helping you succeed. We’ll listen to your needs, work within your budget, and give honest recommendations.
+                </p>
+                <p>
+                  If you ever have a question, we’re just a text or phone call away. If you’re on a tight deadline or need last-minute help, we’ll do everything we can to make it happen.
+                </p>
+                <div class="about-promise-seal">
+                  <p>
+                    When you work with Beantown Audio Rentals, you're not just getting gear—you're getting a partner who cares. That’s what makes us the best audio visual rentals in Boston, and that’s the standard we hold ourselves to every day.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: Let’s Work Together -->
+      <section class="about-section about-cta-section reveal">
+        <div class="about-cta-card">
+          <span class="eyebrow orange">READY TO PLAN?</span>
+          <h2>Let’s Work Together</h2>
+          <p class="about-cta-lead">
+            Planning an event? We'd love to hear about it. Whether you need a few microphones or a full AV setup, Beantown Audio Rentals is ready to help. From Boston to all of Massachusetts and New England, we’re known for dependable service, expert support, and real results.
+          </p>
+          <p class="about-cta-sub">
+            Contact us today to get a free quote, schedule a consultation, or just ask a few questions. We’re friendly, fast, and always ready to help your event run smoothly. Let's bring your vision to life—with the best audio visual rentals in Boston by your side.
+          </p>
+          <div class="about-cta-actions">
+            <a href="#quote" class="btn btn-dark">Get a Free Quote →</a>
+            <a href="tel:+16172864757" class="btn btn-light">Call (617) 286-4757</a>
+            <a href="#rentals" class="btn btn-light">Browse Catalog</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>`;
+}
 const servicePillars = [
   {
     code: "AV",
@@ -1924,7 +2138,7 @@ function render(options = {}) {
   let view = home();
   if (hash === "rentals") view = rentals();
   if (hash === "bundles") view = bundlesPage();
-  if (hash === "builder") view = builder();
+  if (hash === "builder" || hash === "about") view = aboutUsPage();
   if (hash === "services") view = services();
   if (hash === "quote") view = quote();
   app.innerHTML = view;
@@ -1965,7 +2179,7 @@ function syncNavigation() {
   const currentHash = getHash();
   document.querySelectorAll(".desktop-nav a, #mobileMenu a").forEach((link) => {
     const targetHash = link.getAttribute("href")?.split("?")[0];
-    const isCurrent = targetHash === `#${currentHash}`;
+    const isCurrent = targetHash === `#${currentHash}` || (targetHash === "#about" && (currentHash === "about" || currentHash === "builder"));
     link.classList.toggle("active", isCurrent);
     if (isCurrent) link.setAttribute("aria-current", "page");
     else link.removeAttribute("aria-current");
@@ -1978,7 +2192,7 @@ function syncMorphingNavigation() {
 
 function observePageMotion() {
   const motionTargets = document.querySelectorAll(
-    "#app .reveal, #app .page-hero, #app .rentals-toolbar, #app .bundle-customize, #app .builder-wrap, #app .quote-page, #app .bundle-detail-head, #app .bundle-detail-wrap, #app .service-grid, #app .page > .section",
+    "#app .reveal, #app .page-hero, #app .rentals-toolbar, #app .bundle-customize, #app .about-section, #app .about-hero, #app .quote-page, #app .bundle-detail-head, #app .bundle-detail-wrap, #app .service-grid, #app .page > .section",
   );
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
