@@ -2009,119 +2009,184 @@ function aboutUsPage() {
     </div>
   </div>`;
 }
-const servicePillars = [
+const servicesList = [
   {
-    code: "AV",
     num: "01",
-    title: "Audio production",
-    word: "audio.",
-    desc: "From small gatherings to large-room PA systems, create the right scale for the audience and venue.",
+    tag: "CONCERT & EVENT SOUND",
+    title: "Audio Production & Sound Reinforcement",
+    desc: "From keynote presentations to live concert stages, we engineer clean vocal intelligibility, feedback-free wireless microphones, and room-filling acoustics.",
+    inclusions: [
+      "Shure Axient & Beta 58A wireless microphone systems",
+      "Powered QSC & JBL line arrays and high-output subwoofers",
+      "Digital mixing consoles with live acoustic calibration",
+      "Dedicated front-of-house sound engineer on-site"
+    ],
     href: "#rentals?cat=Audio",
-    cta: "Explore audio rentals →",
+    cta: "Explore Audio Rentals"
   },
   {
-    code: "VX",
     num: "02",
-    title: "Video + LED",
-    word: "video + LED.",
-    desc: "Projection, TVs, LED walls and signal routing for presentations, stages, launches and live events.",
+    tag: "DISPLAYS & WALLS",
+    title: "Video Displays & Modular LED Walls",
+    desc: "Make your visual presentations unmissable with ultra-bright modular LED walls, high-lumen laser projection, and confidence monitors engineered for any room.",
+    inclusions: [
+      "Modular 2.67mm indoor/outdoor LED stage walls",
+      "5,000–12,000 lumen laser projectors & fast-fold screens",
+      "65″–75″ 4K commercial confidence displays on truss",
+      "Seamless multi-source presentation switching"
+    ],
     href: "#rentals?cat=LED%20Walls",
-    cta: "Explore video & LED →",
+    cta: "Explore Video & LED"
   },
   {
-    code: "4K",
     num: "03",
-    title: "Live streaming",
-    word: "streaming.",
-    desc: "Single-camera and multi-angle event production with capture and streaming support.",
+    tag: "BROADCAST & HYBRID",
+    title: "Live Streaming & Multi-Camera Capture",
+    desc: "Reach global remote audiences seamlessly with broadcast-grade camera switching, isolated audio console feeds, and multi-platform streaming.",
+    inclusions: [
+      "Multi-camera switching systems (Blackmagic / Roland)",
+      "Dedicated isolated sound feeds directly from the mixer",
+      "Full HD & 4K master recording for post-event archives",
+      "Dedicated streaming technician monitoring live feeds"
+    ],
     href: "#rentals?cat=Live%20Streaming",
-    cta: "Explore live streaming →",
+    cta: "Explore Live Streaming"
   },
   {
-    code: "SET",
     num: "04",
-    title: "Delivery + setup",
-    word: "setup.",
-    desc: "Delivery, setup, pickup, and clear walkthroughs to help your event run smoothly.",
-    href: "#builder",
-    cta: "Plan delivery & setup →",
+    tag: "STAGE & ATMOSPHERE",
+    title: "Event Lighting & Atmospheric Effects",
+    desc: "Transform ballrooms and bare stages into immersive event spaces with wireless battery uplighting, moving head spotlights, and indoor-safe special FX.",
+    inclusions: [
+      "Wireless battery-powered Chauvet RGBA+UV uplights",
+      "Intelligent moving head spotlights & warm stage wash",
+      "Indoor-safe cold sparkler fountains & dancing-on-a-cloud haze",
+      "Custom color palettes matched to your brand or theme"
+    ],
+    href: "#rentals?cat=Event%20Lighting",
+    cta: "Explore Lighting & FX"
   },
   {
-    code: "FUN",
     num: "05",
-    title: "Event experiences",
-    word: "experiences.",
-    desc: "Silent disco, outdoor cinema and photo booths turn a basic rental into something memorable.",
+    tag: "INTERACTIVE PARTY",
+    title: "Silent Disco & Interactive Experiences",
+    desc: "Keep the celebration going past venue curfews with 3-channel silent disco headphones, 360 video photo booths, and outdoor inflatable cinema screens.",
+    inclusions: [
+      "3-channel RF headphones with multi-DJ transmitters",
+      "360 automated video photo booth with instant guest sharing",
+      "Inflatable outdoor cinema packages with laser projection",
+      "Zero noise ordinance issues in residential & city venues"
+    ],
     href: "#rentals?cat=Experiences",
-    cta: "Explore experiences →",
+    cta: "Explore Experiences"
   },
   {
-    code: "OPS",
     num: "06",
-    title: "On-site support",
-    word: "support.",
-    desc: "Get support from a team that knows the gear and understands event timelines.",
+    tag: "FULL PRODUCTION",
+    title: "Turnkey Logistics, Setup & Technical Crew",
+    desc: "Zero stress on event day. Our professional crew manages transport, loading docks, rigging, soundcheck, live cue operation, and quiet strike.",
+    inclusions: [
+      "Guaranteed on-time delivery across Boston & New England",
+      "Clean, concealed cable management & gaffer safety",
+      "On-site audio/visual engineers for the entire duration",
+      "Complete post-event breakdown and quiet load-out"
+    ],
     href: "#quote",
-    cta: "Book on-site support →",
-  },
+    cta: "Request a Custom Quote"
+  }
 ];
 
-function renderServiceItem(s, index) {
-  return `
-    <li>
-      <button type="button" class="about13-value-btn ${index === 0 ? "is-active" : ""}" data-about13-item="${index}" aria-pressed="${index === 0 ? "true" : "false"}">
-        <span class="about13-progress-track" aria-hidden="true">
-          <span class="about13-progress-fill" data-about13-bar style="transform: scaleX(${index === 0 ? 0.08 : 0})"></span>
-        </span>
-        <span class="about13-item-meta">
-          <span class="about13-item-num">${s.num}</span>
-          <span class="about13-item-code">${s.code}</span>
-        </span>
-        <span class="about13-item-title">${s.title}</span>
-        <span class="about13-item-desc">${s.desc}</span>
-      </button>
-    </li>`;
-}
-
 function services() {
-  return `<div class="page">
-    <section class="about13-section" data-about13>
-      <svg class="about13-svg-defs" aria-hidden="true" width="0" height="0" focusable="false">
-        <defs>
-          <filter id="about13-liquid-filter" x="-20%" y="-35%" width="140%" height="170%" color-interpolation-filters="sRGB">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="0" result="blur" />
-            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 25 -10" result="melt" />
-          </filter>
-        </defs>
-      </svg>
+  return `<div class="page services-page">
+    <!-- Hero Header -->
+    <header class="services-hero">
+      <div class="services-hero-content">
+        <span class="eyebrow orange">BEANTOWN SERVICES</span>
+        <h1 class="services-hero-title">Complete Audio Visual<br>Production &amp; Rental Services</h1>
+        <p class="services-hero-lead">Commercial-grade equipment paired with experienced on-site sound and video technicians across Greater Boston and all of New England. No confusing tech jargon, no hidden fees—just dependable event execution.</p>
+        
+        <div class="services-hero-actions">
+          <a href="#quote" class="btn btn-dark">Get a Custom Quote →</a>
+          <a href="#rentals" class="btn btn-light">Browse Equipment Catalog</a>
+        </div>
+      </div>
+    </header>
 
-      <div class="about13-container">
-        <div class="about13-header">
-          <div class="about13-headline-wrap">
-            <span class="eyebrow">SERVICES · MORE THAN EQUIPMENT</span>
-            <h1 class="about13-heading">
-              <span class="about13-prefix">We deliver</span>
-              <span class="about13-melt-stage" data-melt-stage aria-hidden="true">
-                <span class="about13-melt-word is-primary" data-melt-primary>${servicePillars[0].word}</span>
-                <span class="about13-melt-word is-secondary" data-melt-secondary>${servicePillars[1].word}</span>
-              </span>
-              <span class="about13-sr-only" data-melt-sr>${servicePillars[0].title}</span>
-            </h1>
-          </div>
-
-          <div class="about13-aside">
-            <div class="about13-lead-stage" data-lead-stage>
-              <p class="about13-lead is-primary" data-lead-primary>${servicePillars[0].desc}</p>
-              <p class="about13-lead is-secondary" data-lead-secondary aria-hidden="true">${servicePillars[1].desc}</p>
-            </div>
-          </div>
+    <div class="services-container">
+      <!-- 6 Core Services Grid -->
+      <section class="services-grid-section">
+        <div class="services-section-head">
+          <span class="eyebrow">WHAT WE DELIVER</span>
+          <h2>Our Core AV Services</h2>
+          <p>Whether you need a single microphone rental or complete multi-day festival production, our team delivers end-to-end reliability.</p>
         </div>
 
-        <ul class="about13-values" aria-label="Our services">
-          ${servicePillars.map((s, idx) => renderServiceItem(s, idx)).join("")}
-        </ul>
-      </div>
-    </section>
+        <div class="services-cards-grid">
+          ${servicesList.map((s) => `
+            <article class="service-clean-card">
+              <div class="service-card-top">
+                <span class="service-card-num">${s.num}</span>
+                <span class="service-card-tag">${s.tag}</span>
+              </div>
+              <h3 class="service-card-title">${s.title}</h3>
+              <p class="service-card-desc">${s.desc}</p>
+              
+              <div class="service-card-divider"></div>
+              
+              <ul class="service-card-inclusions" aria-label="Key features">
+                ${s.inclusions.map((item) => `
+                  <li><span class="service-check" aria-hidden="true">✓</span> <span>${item}</span></li>
+                `).join("")}
+              </ul>
+              
+              <div class="service-card-action">
+                <a href="${s.href}" class="service-card-btn">${s.cta} →</a>
+              </div>
+            </article>
+          `).join("")}
+        </div>
+      </section>
+
+      <!-- Simple 3-Step Process (Understandable UI) -->
+      <section class="services-process-section">
+        <div class="services-section-head">
+          <span class="eyebrow">HOW IT WORKS</span>
+          <h2>Simple, 3-Step Event Booking</h2>
+          <p>We designed our process to eliminate guesswork, save you time, and guarantee your event runs smoothly.</p>
+        </div>
+
+        <div class="services-steps-grid">
+          <div class="service-step-card">
+            <span class="service-step-badge">STEP 01</span>
+            <h4>Choose Your Setup</h4>
+            <p>Select individual items from our catalog, choose a pre-configured event bundle, or send us your venue specs for a tailored recommendation.</p>
+          </div>
+          <div class="service-step-card">
+            <span class="service-step-badge">STEP 02</span>
+            <h4>Confirm Logistics</h4>
+            <p>Receive a clear, fixed-price quote with zero hidden fees. We coordinate delivery timing, loading access, power needs, and schedule.</p>
+          </div>
+          <div class="service-step-card">
+            <span class="service-step-badge">STEP 03</span>
+            <h4>Flawless Event Day</h4>
+            <p>Our technicians arrive early, set up, test every single signal, engineer the live show if needed, and quietly strike when you're done.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bottom Callout Card -->
+      <section class="services-cta-banner">
+        <div class="services-cta-content">
+          <span class="eyebrow orange">LET’S BUILD YOUR EVENT</span>
+          <h3>Need help figuring out the right AV setup?</h3>
+          <p>Tell us about your venue, guest count, and goals. We’ll provide an itemized proposal and confirm gear availability within hours.</p>
+        </div>
+        <div class="services-cta-btns">
+          <a href="#quote" class="btn btn-dark">Request an Itemized Quote →</a>
+          <a href="#builder" class="btn btn-light">Build Your Custom Event</a>
+        </div>
+      </section>
+    </div>
   </div>`;
 }
 
@@ -2173,7 +2238,6 @@ function render(options = {}) {
   syncNavigation();
   observePageMotion();
   initExperienceJourney();
-  initServicesMelt();
   initTestimonialWheel();
   bind();
   if (options.preserveScroll) {
@@ -2783,216 +2847,7 @@ function initExperienceJourney() {
   updateExperienceJourney(journeyLastTime, true);
 }
 
-function initServicesMelt() {
-  if (servicesMeltRaf) {
-    window.cancelAnimationFrame(servicesMeltRaf);
-    servicesMeltRaf = 0;
-  }
-
-  const section = document.querySelector("[data-about13]");
-  if (!section) return;
-
-  const stage = section.querySelector("[data-melt-stage]");
-  const primaryEl = section.querySelector("[data-melt-primary]");
-  const secondaryEl = section.querySelector("[data-melt-secondary]");
-  const leadPrimaryEl = section.querySelector("[data-lead-primary]");
-  const leadSecondaryEl = section.querySelector("[data-lead-secondary]");
-  const srEl = section.querySelector("[data-melt-sr]");
-  const ctaEl = section.querySelector("[data-melt-cta]");
-  const buttons = Array.from(section.querySelectorAll("[data-about13-item]"));
-  const bars = buttons.map((btn) => btn.querySelector("[data-about13-bar]"));
-
-  if (!stage || !primaryEl || !secondaryEl || !buttons.length) return;
-
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const CYCLE_MS = 3800;
-  const MELT_MS = 920;
-
-  let activeIndex = 0;
-  let fromIndex = 0;
-  let isMelting = false;
-  let isHoveringCard = false;
-  let meltStartTime = 0;
-  let cycleStartTime = performance.now();
-
-  function triggerMelt(nextIndex, now = performance.now()) {
-    const normalizedNext = (nextIndex + servicePillars.length) % servicePillars.length;
-    if (normalizedNext === activeIndex) {
-      if (!isMelting) cycleStartTime = now;
-      return;
-    }
-
-    if (isMelting && now - meltStartTime < MELT_MS * 0.45) {
-      // Keep current outgoing word if interrupted early in the morph
-    } else {
-      fromIndex = activeIndex;
-    }
-    activeIndex = normalizedNext;
-    cycleStartTime = now;
-
-    buttons.forEach((btn, idx) => {
-      const isActive = idx === activeIndex;
-      btn.classList.toggle("is-active", isActive);
-      btn.setAttribute("aria-pressed", isActive ? "true" : "false");
-    });
-
-    bars.forEach((bar, idx) => {
-      if (bar && idx !== activeIndex) {
-        bar.style.transform = "scaleX(0)";
-      }
-    });
-
-    const nextItem = servicePillars[activeIndex];
-    if (srEl) srEl.textContent = nextItem.title;
-    if (ctaEl) {
-      ctaEl.textContent = nextItem.cta;
-      ctaEl.setAttribute("href", nextItem.href);
-    }
-
-    if (reducedMotion) {
-      isMelting = false;
-      stage.classList.remove("is-melting");
-      primaryEl.textContent = nextItem.word;
-      primaryEl.style.filter = "none";
-      primaryEl.style.opacity = "1";
-      primaryEl.style.transform = "translate3d(0, 0, 0) scale(1)";
-      secondaryEl.style.opacity = "0";
-      if (leadPrimaryEl) {
-        leadPrimaryEl.textContent = nextItem.desc;
-        leadPrimaryEl.style.filter = "none";
-        leadPrimaryEl.style.opacity = "1";
-        leadPrimaryEl.style.transform = "translate3d(0, 0, 0)";
-      }
-      if (leadSecondaryEl) {
-        leadSecondaryEl.style.opacity = "0";
-      }
-      if (bars[activeIndex]) {
-        bars[activeIndex].style.transform = "scaleX(1)";
-      }
-      return;
-    }
-
-    isMelting = true;
-    meltStartTime = now;
-    primaryEl.textContent = servicePillars[fromIndex].word;
-    secondaryEl.textContent = nextItem.word;
-    if (leadPrimaryEl && leadSecondaryEl) {
-      leadPrimaryEl.textContent = servicePillars[fromIndex].desc;
-      leadSecondaryEl.textContent = nextItem.desc;
-    }
-    stage.classList.add("is-melting");
-  }
-
-  buttons.forEach((btn, idx) => {
-    btn.addEventListener("mouseenter", () => {
-      isHoveringCard = true;
-      triggerMelt(idx, performance.now());
-    });
-    btn.addEventListener("mouseleave", () => {
-      isHoveringCard = false;
-      cycleStartTime = performance.now();
-    });
-    btn.addEventListener("focus", () => {
-      triggerMelt(idx, performance.now());
-    });
-    btn.addEventListener("click", () => {
-      triggerMelt(idx, performance.now());
-    });
-  });
-
-  if (reducedMotion) {
-    if (bars[0]) bars[0].style.transform = "scaleX(1)";
-    return;
-  }
-
-  function tick(now) {
-    if (!section.isConnected) {
-      servicesMeltRaf = 0;
-      return;
-    }
-
-    const elapsed = now - cycleStartTime;
-    const progress = isHoveringCard ? 1 : clamp01(elapsed / CYCLE_MS);
-    const activeBar = bars[activeIndex];
-    if (activeBar) {
-      activeBar.style.transform = `scaleX(${progress.toFixed(4)})`;
-    }
-
-    if (isMelting) {
-      const rawT = clamp01((now - meltStartTime) / MELT_MS);
-      const easeT = rawT < 0.5
-        ? 4 * rawT * rawT * rawT
-        : 1 - Math.pow(-2 * rawT + 2, 3) / 2;
-
-      if (rawT < 1) {
-        const outBlur = (easeT * 18).toFixed(2);
-        const outOpacity = Math.pow(Math.max(0, 1 - easeT), 0.42).toFixed(3);
-        const outY = (easeT * 6).toFixed(2);
-        const outScale = (1 - easeT * 0.03).toFixed(3);
-
-        const inBlur = ((1 - easeT) * 18).toFixed(2);
-        const inOpacity = Math.pow(Math.max(0, easeT), 0.42).toFixed(3);
-        const inY = ((1 - easeT) * -6).toFixed(2);
-        const inScale = (0.97 + easeT * 0.03).toFixed(3);
-
-        primaryEl.style.filter = `blur(${outBlur}px)`;
-        primaryEl.style.opacity = outOpacity;
-        primaryEl.style.transform = `translate3d(0, ${outY}px, 0) scale(${outScale})`;
-
-        secondaryEl.style.filter = `blur(${inBlur}px)`;
-        secondaryEl.style.opacity = inOpacity;
-        secondaryEl.style.transform = `translate3d(0, ${inY}px, 0) scale(${inScale})`;
-
-        if (leadPrimaryEl && leadSecondaryEl) {
-          const leadOutOpacity = Math.max(0, 1 - smoothstep(0.0, 0.65, rawT)).toFixed(3);
-          const leadInOpacity = smoothstep(0.25, 0.95, rawT).toFixed(3);
-          const leadOutY = (-easeT * 10).toFixed(2);
-          const leadInY = ((1 - easeT) * 10).toFixed(2);
-          const leadOutBlur = (easeT * 5).toFixed(2);
-          const leadInBlur = ((1 - easeT) * 5).toFixed(2);
-
-          leadPrimaryEl.style.opacity = leadOutOpacity;
-          leadPrimaryEl.style.transform = `translate3d(0, ${leadOutY}px, 0)`;
-          leadPrimaryEl.style.filter = `blur(${leadOutBlur}px)`;
-
-          leadSecondaryEl.style.opacity = leadInOpacity;
-          leadSecondaryEl.style.transform = `translate3d(0, ${leadInY}px, 0)`;
-          leadSecondaryEl.style.filter = `blur(${leadInBlur}px)`;
-        }
-      } else {
-        isMelting = false;
-        stage.classList.remove("is-melting");
-        primaryEl.textContent = servicePillars[activeIndex].word;
-        primaryEl.style.filter = "none";
-        primaryEl.style.opacity = "1";
-        primaryEl.style.transform = "translate3d(0, 0, 0) scale(1)";
-
-        secondaryEl.style.filter = "blur(18px)";
-        secondaryEl.style.opacity = "0";
-        secondaryEl.style.transform = "translate3d(0, -6px, 0) scale(0.97)";
-
-        if (leadPrimaryEl && leadSecondaryEl) {
-          leadPrimaryEl.textContent = servicePillars[activeIndex].desc;
-          leadPrimaryEl.style.opacity = "1";
-          leadPrimaryEl.style.transform = "translate3d(0, 0, 0)";
-          leadPrimaryEl.style.filter = "none";
-
-          leadSecondaryEl.style.opacity = "0";
-          leadSecondaryEl.style.transform = "translate3d(0, 10px, 0)";
-          leadSecondaryEl.style.filter = "blur(5px)";
-        }
-      }
-    }
-
-    if (!isHoveringCard && elapsed >= CYCLE_MS) {
-      triggerMelt(activeIndex + 1, now);
-    }
-
-    servicesMeltRaf = window.requestAnimationFrame(tick);
-  }
-
-  servicesMeltRaf = window.requestAnimationFrame(tick);
-}
+function initServicesMelt() {}
 
 function queueFloatingStoryUpdate() {
   syncMorphingNavigation();
