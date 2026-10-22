@@ -1886,18 +1886,23 @@ function aboutUsPage() {
             </p>
           </div>
 
-          <!-- Right Column: Numbered Items List with Icons -->
+          <!-- Right Column: Collapsible Offer Items -->
           <div class="about12-right">
-            <div class="about12-items-list">
+            <div class="about12-items-list" role="region" aria-label="Equipment offerings">
               ${offerItems.map((item) => `
-                <article class="about12-item">
+                <article class="about12-item" tabindex="0" role="button" aria-expanded="false" data-offer-item>
                   <span class="about12-num">${item.num}</span>
                   <div class="about12-content">
                     <h3 class="about12-title">${item.title}</h3>
                     <p class="about12-desc">${item.desc}</p>
                   </div>
-                  <div class="about12-icon-box">
-                    ${item.iconSvg}
+                  <div class="about12-arrow-box">
+                    <span class="about12-arrow-btn" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="about12-arrow-icon">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </span>
                   </div>
                 </article>
               `).join("")}
@@ -2463,6 +2468,19 @@ function bind() {
       btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
     }),
   );
+  document.querySelectorAll("[data-offer-item]").forEach((item) => {
+    item.addEventListener("click", () => {
+      const isOpen = item.classList.toggle("is-open");
+      item.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    });
+    item.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        const isOpen = item.classList.toggle("is-open");
+        item.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      }
+    });
+  });
 }
 
 const mobileMenu = document.getElementById("mobileMenu");

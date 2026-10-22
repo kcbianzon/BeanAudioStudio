@@ -6274,7 +6274,7 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   max-width: 420px;
 }
 
-/* Right Column: Numbered Items */
+/* Right Column: Collapsible Offer Items */
 .about12-right {
   display: flex;
   flex-direction: column;
@@ -6289,17 +6289,21 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 
 .about12-item {
   display: grid;
-  grid-template-columns: 46px 1fr 28px;
-  align-items: start;
+  grid-template-columns: 46px 1fr auto;
+  align-items: center;
   gap: 16px;
-  padding: 24px 8px;
+  padding: 20px 10px;
   border-bottom: 1px solid var(--line);
-  transition: background 0.22s ease, border-color 0.22s ease;
-  border-radius: 10px;
+  transition: background 0.22s ease, border-color 0.22s ease, padding 0.22s ease;
+  border-radius: 12px;
+  cursor: pointer;
+  user-select: none;
 }
 
-.about12-item:hover {
+.about12-item:hover,
+.about12-item.is-open {
   background: #fbf9f4;
+  align-items: start;
 }
 
 .about12-num {
@@ -6307,19 +6311,25 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   font-size: 15px;
   font-weight: 700;
   color: #bfa15f;
-  padding-top: 3px;
+  padding-top: 4px;
   letter-spacing: -0.02em;
+  transition: color 0.2s ease;
+}
+
+.about12-item:hover .about12-num,
+.about12-item.is-open .about12-num {
+  color: #dfad2a;
 }
 
 .about12-content {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  min-width: 0;
 }
 
 .about12-title {
   font-family: 'Sora', -apple-system, sans-serif;
-  font-size: clamp(19px, 1.8vw, 22px);
+  font-size: clamp(18px, 1.8vw, 22px);
   font-weight: 700;
   color: var(--ink);
   letter-spacing: -0.025em;
@@ -6328,35 +6338,83 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   transition: color 0.2s ease;
 }
 
-.about12-item:hover .about12-title {
+.about12-item:hover .about12-title,
+.about12-item.is-open .about12-title {
   color: #b8860b;
 }
 
+/* Collapsible description: hidden by default, expands on hover or click */
 .about12-desc {
   font-size: 14px;
   line-height: 1.62;
   color: var(--muted);
   margin: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-4px);
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.25s ease,
+              transform 0.25s ease,
+              margin-top 0.25s ease;
+  pointer-events: none;
 }
 
-.about12-icon-box {
+.about12-item:hover .about12-desc,
+.about12-item.is-open .about12-desc {
+  max-height: 160px;
+  opacity: 1;
+  transform: translateY(0);
+  margin-top: 10px;
+  pointer-events: auto;
+}
+
+/* Circular Arrow Button */
+.about12-arrow-box {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  padding-top: 4px;
-}
-
-.about12-icon {
-  width: 22px;
-  height: 22px;
-  color: #9c8a66;
-  transition: color 0.22s ease, transform 0.22s ease;
+  justify-content: center;
   flex-shrink: 0;
+  padding-top: 2px;
 }
 
-.about12-item:hover .about12-icon {
-  color: #dfad2a;
-  transform: translateY(-2px);
+.about12-arrow-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  color: #111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background 0.22s ease,
+              color 0.22s ease,
+              border-color 0.22s ease,
+              box-shadow 0.22s ease;
+}
+
+.about12-arrow-icon {
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.about12-item:hover .about12-arrow-btn,
+.about12-item.is-open .about12-arrow-btn {
+  background: #111111;
+  color: #ffffff;
+  border-color: #111111;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+.about12-item:hover .about12-arrow-icon,
+.about12-item.is-open .about12-arrow-icon {
+  transform: rotate(90deg);
 }
 
 /* Responsive */
@@ -6385,9 +6443,17 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
     margin-bottom: 18px;
   }
   .about12-item {
-    grid-template-columns: 32px 1fr 22px;
+    grid-template-columns: 32px 1fr 34px;
     gap: 12px;
-    padding: 18px 4px;
+    padding: 16px 6px;
+  }
+  .about12-arrow-btn {
+    width: 34px;
+    height: 34px;
+  }
+  .about12-arrow-icon {
+    width: 15px;
+    height: 15px;
   }
   .about12-num {
     font-size: 13.5px;
