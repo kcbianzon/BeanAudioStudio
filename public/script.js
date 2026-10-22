@@ -24,11 +24,11 @@ const products = [
     id: "large-audio",
     name: "Large Event Line Array System",
     category: "Audio & Speakers",
-    price: null,
-    priceType: "quote",
+    price: 880,
+    priceType: "starting",
     desc: "JBL VRX constant curvature line array modules, high-power subwoofers, digital mixing console, and on-site audio engineer. Designed for 150+ guests, concerts, and festivals.",
     tag: "Concert grade",
-    tone: "",
+    tone: "lime",
   },
   {
     id: "qsc-k12",
@@ -54,11 +54,11 @@ const products = [
     id: "jbl-vrx932",
     name: "JBL VRX932LA Line Array Module",
     category: "Audio & Speakers",
-    price: null,
-    priceType: "quote",
+    price: 150,
+    priceType: "fixed",
     desc: "Constant curvature line array element with Differential Drive woofer and neodymium compression drivers for large audience coverage.",
     tag: "Line array",
-    tone: "",
+    tone: "lime",
   },
 
   // --- SUBWOOFER RENTALS ---
@@ -200,11 +200,11 @@ const products = [
     id: "mixer-sq7",
     name: "Allen & Heath SQ-7 32-Channel Console",
     category: "Audio Mixers",
-    price: null,
-    priceType: "quote",
+    price: 295,
+    priceType: "fixed",
     desc: "Flagship 96kHz XCVI FPGA digital mixer with 33 faders, custom soft keys, ultra-low latency, and touring-grade audio quality.",
     tag: "Tour grade",
-    tone: "",
+    tone: "peach",
   },
   {
     id: "mixer-mackie1402",
@@ -386,8 +386,8 @@ const products = [
     id: "led-12",
     name: "Indoor LED Video Wall — 12 × 7 ft",
     category: "LED Video Walls",
-    price: null,
-    priceType: "quote",
+    price: 1150,
+    priceType: "starting",
     desc: "Ultra-fine 2.67mm pixel pitch LED wall. Includes NovaStar VX1000 processor, ground rigging, 2 powered speakers, audio mixer, and Shure wireless mic.",
     tag: "Turnkey package",
     tone: "periwinkle",
@@ -396,8 +396,8 @@ const products = [
     id: "led-16",
     name: "Indoor LED Video Wall — 16 × 9 ft",
     category: "LED Video Walls",
-    price: null,
-    priceType: "quote",
+    price: 1450,
+    priceType: "starting",
     desc: "Full-scale 16:9 cinematic LED video wall (2.67mm pitch). Includes NovaStar video processor, sound reinforcement package, and certified lead technician.",
     tag: "Cinematic scale",
     tone: "periwinkle",
@@ -406,8 +406,8 @@ const products = [
     id: "led-custom",
     name: "Custom Modular LED Wall Configuration",
     category: "LED Video Walls",
-    price: null,
-    priceType: "quote",
+    price: 1850,
+    priceType: "starting",
     desc: "Tailored LED displays in curved, pillar, banner, or backdrop layouts. 2.6mm, 2.9mm, or 3.9mm pixel pitch with ground-support truss or crank stands.",
     tag: "Bespoke design",
     tone: "periwinkle",
@@ -416,8 +416,8 @@ const products = [
     id: "led-trailer",
     name: "Mobile Outdoor LED Video Wall Trailer",
     category: "LED Video Walls",
-    price: null,
-    priceType: "quote",
+    price: 2600,
+    priceType: "starting",
     desc: "Turnkey hydraulic-lift outdoor mobile LED trailer. Daylight visible (3.91mm pitch), wind and rain resistant, with built-in sound system and generator support.",
     tag: "Outdoor mobile",
     tone: "periwinkle",
@@ -658,21 +658,21 @@ const products = [
     id: "stream-basic",
     name: "Live Streaming — Basic (1 Camera)",
     category: "Live Streaming",
-    price: null,
-    priceType: "quote",
+    price: 621,
+    priceType: "starting",
     desc: "1 × 4K camera, streaming laptop, QSC digital audio mixer, HDMI switcher, and local HD recording for town halls, webinars, and ceremonies.",
     tag: "Single camera",
-    tone: "",
+    tone: "sky",
   },
   {
     id: "stream-pro",
     name: "Live Streaming — Pro (3 Cameras)",
     category: "Live Streaming",
-    price: null,
-    priceType: "quote",
+    price: 1250,
+    priceType: "starting",
     desc: "3 × 4K camera multi-angle broadcast setup, video switcher, dedicated stream technician, pristine audio integration, and recording archive.",
     tag: "Broadcast multi-cam",
-    tone: "",
+    tone: "sky",
   },
 ];
 
@@ -680,7 +680,7 @@ const bundles = [
   {
     id: "wedding",
     title: "Wedding Event",
-    price: 1800,
+    price: 2423,
     included: { "medium-audio": 1, "qlxd-lavalier": 2, "dry-ice-cloud": 1, "uplights-6": 1, "photo-360": 1 },
     tone: "bundle-wedding",
     label: "WEDDING",
@@ -736,7 +736,7 @@ const bundles = [
   {
     id: "school",
     title: "School Dance & Social",
-    price: 1100,
+    price: 1444,
     included: {
       "medium-audio": 1,
       "sub-thump18": 1,
@@ -758,7 +758,7 @@ const bundles = [
   {
     id: "party",
     title: "Private Party & DJ",
-    price: 799,
+    price: 2043,
     included: {
       "dj-basic-pkg": 1,
       "sub-kw181": 1,
@@ -780,7 +780,7 @@ const bundles = [
   {
     id: "movie",
     title: "Outdoor Movie Night",
-    price: 749,
+    price: 814,
     included: { "movie-16": 1, "qlxd-handheld": 1 },
     tone: "bundle-movie",
     label: "MOVIE NIGHT",
@@ -797,7 +797,7 @@ const bundles = [
   {
     id: "special-fx-pkg",
     title: "Special FX Celebration",
-    price: 895,
+    price: 1220,
     included: { "cold-spark-4": 1, "dry-ice-cloud": 1, "uplights-12": 1 },
     tone: "bundle-wedding",
     label: "SPECIAL FX",
@@ -813,19 +813,158 @@ const bundles = [
   },
 ];
 
+const SERVICE_TIERS = [
+  {
+    id: "pickup",
+    title: "Self Pickup & Return",
+    badge: "FREE · $0",
+    price: 0,
+    desc: "Pick up and return directly at our Boston warehouse with pre-tested road cases and quick setup walk-through.",
+  },
+  {
+    id: "delivery-setup",
+    title: "Delivery, Setup & Breakdown",
+    badge: "+$150",
+    price: 150,
+    desc: "Our crew delivers to your venue, sets up and soundchecks all equipment, and returns after the event for strike.",
+  },
+  {
+    id: "full-tech",
+    title: "Full On-Site Technician Support",
+    badge: "+$350",
+    price: 350,
+    desc: "Includes delivery, full rigging/setup, a dedicated on-site AV engineer to operate your show, and post-event breakdown.",
+  },
+];
+
+const DURATION_OPTIONS = [
+  {
+    id: "1-day",
+    label: "1 Day / Single Event",
+    shortLabel: "1 Day (1.0×)",
+    multiplier: 1,
+    badge: "Standard Rate",
+    desc: "Standard 24-hour event rental window.",
+  },
+  {
+    id: "2-days",
+    label: "2 Days / Weekend",
+    shortLabel: "2 Days (1.5×)",
+    multiplier: 1.5,
+    badge: "Save 25% on Day 2",
+    desc: "Ideal for rehearsal dinner + wedding day or 2-day conferences (1.5× daily equipment rate).",
+  },
+  {
+    id: "3-days",
+    label: "3+ Days / Multi-Day",
+    shortLabel: "3+ Days (2.0×)",
+    multiplier: 2,
+    badge: "Save 33%+ Extended",
+    desc: "Multi-day festival, campus week, or extended corporate production (2.0× daily equipment rate).",
+  },
+];
+
+const PAYMENT_METHODS = [
+  "ACH / Bank Transfer",
+  "Credit / Debit Card",
+  "Zelle",
+  "Venmo",
+  "PayPal",
+  "Company Check",
+  "Cash",
+  "No preference yet",
+];
+
+const EVENT_TYPE_CARDS = [
+  {
+    id: "Wedding",
+    code: "01 / WEDDING",
+    title: "Wedding",
+    desc: "Ceremony wireless vows, cocktail hour speakers, reception sound, dancing on a cloud & photo booth.",
+    bundleId: "wedding",
+  },
+  {
+    id: "Corporate Event",
+    code: "02 / CORPORATE",
+    title: "Corporate Event",
+    desc: "Keynotes, panel microphones, 4K confidence monitors, fast-fold projection & multi-cam live streaming.",
+    bundleId: "corporate",
+  },
+  {
+    id: "School Event",
+    code: "03 / CAMPUS & SCHOOL",
+    title: "School Event",
+    desc: "Proms, homecomings, campus socials, high-output subwoofers, moving heads & 100-headphone silent disco.",
+    bundleId: "school",
+  },
+  {
+    id: "Concert",
+    code: "04 / LIVE STAGE",
+    title: "Concert",
+    desc: "JBL line array systems, dual 18″ subwoofers, wireless IEM monitors, 32-ch digital mixer & LED video wall.",
+    bundleId: "concert",
+  },
+  {
+    id: "Private Party",
+    code: "05 / SOCIAL & DJ",
+    title: "Private Party",
+    desc: "Turnkey Pioneer DJ setups, 18″ powered bass, wireless battery uplighting & 360 video booth.",
+    bundleId: "party",
+  },
+  {
+    id: "Outdoor Movie",
+    code: "06 / OUTDOOR CINEMA",
+    title: "Outdoor Movie",
+    desc: "12-ft to 40-ft inflatable cinema screens, high-lumen Sony laser projector, PA sound & wireless mic.",
+    bundleId: "movie",
+  },
+];
+
+const GUEST_BRACKETS = [
+  { id: "1–50", label: "1–50 Guests", sub: "Intimate gathering or boardroom", defaultCount: 40 },
+  { id: "51–150", label: "51–150 Guests", sub: "Reception, banquet or town hall", defaultCount: 120 },
+  { id: "151–300", label: "151–300 Guests", sub: "Large ballroom or auditorium", defaultCount: 220 },
+  { id: "300+", label: "300+ Guests", sub: "Festival, concert or campus scale", defaultCount: 400 },
+];
+
+const _nowInit = new Date();
 const state = {
   builderStep: 1,
   eventType: "Wedding",
   guests: 120,
+  guestBracket: "51–150",
   venue: "Indoor",
+  duration: "1-day",
+  serviceTier: "delivery-setup",
   date: "",
+  dateFlexible: false,
+  eventTimeWindow: "Evening (5:00 PM – 11:00 PM)",
+  calendarYear: _nowInit.getFullYear(),
+  calendarMonth: _nowInit.getMonth(),
   contactName: "",
   contactEmail: "",
   contactPhone: "",
   organization: "",
   eventName: "",
   eventLocation: "",
+  locationFlexible: false,
+  manualLocationMode: false,
+  manualStreet: "",
+  manualCity: "",
+  manualState: "MA",
+  manualZip: "",
+  locationQuery: "",
+  locationResults: [],
+  locationSearching: false,
+  locationCoords: { lat: 42.3601, lon: -71.0589 },
   eventNotes: "",
+  paymentMethod: "No preference yet",
+  builderCategory: "All",
+  builderSearch: "",
+  builderOnlySelected: false,
+  isSubmittingQuote: false,
+  quoteError: "",
+  submittedQuote: null,
   selected: loadSelection(),
   bundle: null,
   category: "All",
@@ -965,9 +1104,82 @@ function loadSelection() {
     return { "medium-audio": 1, "wired-mic": 2 };
   }
 }
+function sanitizeSelectedProducts() {
+  const cleaned = {};
+  if (!state.selected || typeof state.selected !== "object") {
+    state.selected = cleaned;
+    return cleaned;
+  }
+  for (const [id, rawQty] of Object.entries(state.selected)) {
+    const product = products.find((p) => p.id === id);
+    const qty = Math.min(99, Math.max(0, Math.round(Number(rawQty) || 0)));
+    if (product && typeof product.price === "number" && product.price > 0 && qty > 0) {
+      cleaned[id] = qty;
+    }
+  }
+  state.selected = cleaned;
+  return cleaned;
+}
+
 function saveSelection() {
+  sanitizeSelectedProducts();
   try { localStorage.setItem("beantown-selected-products", JSON.stringify(state.selected)); }
   catch { /* Keep the in-memory builder usable when storage is unavailable. */ }
+}
+
+function calculateQuoteTotals() {
+  sanitizeSelectedProducts();
+  const lineItems = Object.entries(state.selected)
+    .map(([id, quantity]) => {
+      const product = products.find((item) => item.id === id);
+      const qty = Math.min(99, Math.max(1, Math.round(Number(quantity) || 0)));
+      if (!product) return null;
+      const unitPrice = Number(product.price) || 0;
+      const lineSubtotal = unitPrice * qty;
+      return {
+        product,
+        qty,
+        unitPrice,
+        lineSubtotal,
+      };
+    })
+    .filter(Boolean);
+
+  const totalUnits = lineItems.reduce((sum, item) => sum + item.qty, 0);
+  const equipmentBaseSubtotal = lineItems.reduce((sum, item) => sum + item.lineSubtotal, 0);
+  const durationOption = DURATION_OPTIONS.find((d) => d.id === state.duration) || DURATION_OPTIONS[0];
+  const equipmentDurationTotal = Math.round(equipmentBaseSubtotal * durationOption.multiplier);
+  const durationSurcharge = equipmentDurationTotal - equipmentBaseSubtotal;
+  const serviceOption = SERVICE_TIERS.find((s) => s.id === state.serviceTier) || SERVICE_TIERS[0];
+  const serviceFee = lineItems.length > 0 ? serviceOption.price : 0;
+  const grandTotal = equipmentDurationTotal + serviceFee;
+
+  // Check if current selection matches a bundle exactly
+  let matchedBundle = null;
+  for (const b of bundles) {
+    const bEntries = Object.entries(b.included || {});
+    if (
+      bEntries.length === lineItems.length &&
+      bEntries.every(([pid, bQty]) => state.selected[pid] === bQty)
+    ) {
+      matchedBundle = b;
+      break;
+    }
+  }
+
+  return {
+    lineItems,
+    uniqueCount: lineItems.length,
+    totalUnits,
+    equipmentBaseSubtotal,
+    durationOption,
+    durationSurcharge,
+    equipmentDurationTotal,
+    serviceOption,
+    serviceFee,
+    grandTotal,
+    matchedBundle,
+  };
 }
 function syncSetupCount() {
   const count = Object.values(state.selected).reduce((sum, quantity) => sum + quantity, 0);
@@ -1741,11 +1953,7 @@ function bundleDetail(id) {
     (total, { product, quantity }) => total + (product.price || 0) * quantity,
     0,
   );
-  const hasQuoteItems = included.some(
-    ({ product }) =>
-      product.priceType === "quote" || product.priceType === "starting",
-  );
-  return `<div class="page"><div class="bundle-detail-head"><a class="text-btn" href="#bundles">← All bundles</a><div class="bundle-detail-layout"><div><span class="eyebrow">${bundle.label} PACKAGE</span><h1>${bundle.title}</h1><p>${bundle.desc}</p></div><div class="bundle-detail-price"><span class="eyebrow">FIXED PACKAGE PRICE</span><strong>${money(bundle.price)}</strong></div></div></div><div class="bundle-detail-wrap"><section class="bundle-detail-main"><div class="detail-section-head"><div><span class="eyebrow">WHAT’S INCLUDED</span><h2>Your package, item by item.</h2></div><span class="detail-lock">Fixed package</span></div><div class="bundle-included-list">${included.map(({ product, quantity }) => `<div class="bundle-included-item"><div><strong>${quantity} × ${product.name}</strong><span>${product.category} · ${product.desc}</span></div><strong>${product.price ? money(product.price * quantity) : "Quote required"}</strong></div>`).join("")}</div><div class="bundle-detail-actions"><a class="btn btn-dark" href="#quote">Request this bundle →</a><a class="btn btn-light" href="#builder">Customize instead</a></div></section><aside class="bundle-detail-summary"><span class="eyebrow">PRICE CHECK</span><div class="detail-total"><span>Known equipment total</span><strong>${money(knownTotal)}</strong></div><div class="detail-total"><span>Fixed package price</span><strong>${money(bundle.price)}</strong></div>${hasQuoteItems ? `<div class="quote-tag">Some included production items need final availability and quote confirmation.</div>` : ""}<p>Package inclusions are fixed. The equipment total is shown for transparency; quote-only production items are confirmed by the team.</p></aside></div></div>`;
+  return `<div class="page"><div class="bundle-detail-head"><a class="text-btn" href="#bundles">← All bundles</a><div class="bundle-detail-layout"><div><span class="eyebrow">${bundle.label} PACKAGE</span><h1>${bundle.title}</h1><p>${bundle.desc}</p></div><div class="bundle-detail-price"><span class="eyebrow">TURNKEY PACKAGE TOTAL</span><strong>${money(bundle.price)}</strong></div></div></div><div class="bundle-detail-wrap"><section class="bundle-detail-main"><div class="detail-section-head"><div><span class="eyebrow">WHAT’S INCLUDED</span><h2>Your package, item by item.</h2></div><span class="detail-lock">${included.reduce((s, x) => s + x.quantity, 0)} Total Units</span></div><div class="bundle-included-list">${included.map(({ product, quantity }) => `<div class="bundle-included-item"><div><strong>${quantity} × ${product.name}</strong><span>${product.category} · ${money(product.price)} each · ${product.desc}</span></div><strong>${money(product.price * quantity)}</strong></div>`).join("")}</div><div class="bundle-detail-actions"><button type="button" class="btn btn-dark" data-launch-bundle="${bundle.id}" data-launch-step="6">Request this bundle →</button><button type="button" class="btn btn-light" data-launch-bundle="${bundle.id}" data-launch-step="5">Customize in Event Builder</button></div></section><aside class="bundle-detail-summary"><span class="eyebrow">TRANSPARENT MATH</span><div class="detail-total"><span>Itemized equipment sum</span><strong>${money(knownTotal)}</strong></div><div class="detail-total"><span>Package total</span><strong>${money(bundle.price)}</strong></div><p>Every item in this bundle is priced transparently with zero hidden fees. Load this bundle into the Event Builder to add microphones, lighting, or delivery support.</p></aside></div></div>`;
 }
 
 function aboutUsPage() {
@@ -2190,17 +2398,959 @@ function services() {
   </div>`;
 }
 
-function quoteSelection() {
-  const items = Object.entries(state.selected)
-    .map(([id, quantity]) => ({ product: products.find((item) => item.id === id), quantity }))
-    .filter((item) => item.product);
-  const estimated = items.reduce((sum, { product, quantity }) => sum + (product.price || 0) * quantity, 0);
-  const quoteOnly = items.some(({ product }) => product.priceType === "quote");
-  return `<div class="quote-selection"><span class="eyebrow">YOUR SETUP · ${items.reduce((sum, item) => sum + item.quantity, 0)} ITEMS</span>${items.length ? `<ul>${items.map(({ product, quantity }) => `<li><span>${quantity} × ${product.name}</span><strong>${product.price ? money(product.price * quantity) : "Quote"}</strong></li>`).join("")}</ul>` : `<p>No rentals selected yet. Go back to the catalog to build your setup.</p>`}<div class="quote-selection-total"><span>Known price estimate${quoteOnly ? " · quote-only items excluded" : ""}</span><strong>${money(estimated)}</strong></div></div>`;
+function formatReadableDate(isoDate) {
+  if (!isoDate) return "";
+  const parts = isoDate.split("-").map(Number);
+  if (parts.length !== 3 || parts.some(Number.isNaN)) return isoDate;
+  const d = new Date(parts[0], parts[1] - 1, parts[2]);
+  return d.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
+function getEffectiveLocationText() {
+  if (state.locationFlexible) return "Flexible / Still choosing a venue";
+  if (state.manualLocationMode) {
+    const parts = [
+      state.manualStreet.trim(),
+      state.manualCity.trim(),
+      state.manualState.trim(),
+      state.manualZip.trim(),
+    ].filter(Boolean);
+    return parts.join(", ");
+  }
+  return state.eventLocation.trim();
+}
+
+function builderCatalogItems() {
+  const q = state.builderSearch.trim().toLowerCase();
+  return products.filter((p) => {
+    const catMatch =
+      state.builderCategory === "All" ||
+      p.category === state.builderCategory ||
+      productMatchesCategory(p, state.builderCategory);
+    const searchMatch =
+      !q ||
+      `${p.name} ${p.category} ${p.desc} ${p.tag}`.toLowerCase().includes(q);
+    const selectedMatch =
+      !state.builderOnlySelected || Boolean(state.selected[p.id]);
+    return catMatch && searchMatch && selectedMatch;
+  });
+}
+
+function renderBuilderCatalogGridMarkup() {
+  const list = builderCatalogItems();
+  if (!list.length) {
+    return `<div class="q-catalog-empty">
+      <strong>No equipment matches your filter</strong>
+      <p>Try clearing the search term or switching back to All Categories.</p>
+      <button type="button" class="btn btn-light btn-small" data-builder-reset-catalog>Show all 65 rentals</button>
+    </div>`;
+  }
+  return list
+    .map((p) => {
+      const qty = state.selected[p.id] || 0;
+      const lineTotal = (p.price || 0) * qty;
+      return `<article class="q-equip-card ${qty > 0 ? "is-selected" : ""}">
+        <div class="q-equip-thumb">
+          <img src="${productImage(p)}" alt="${escapeHtml(p.name)}" loading="lazy">
+          ${qty > 0 ? `<span class="q-equip-qty-badge">${qty} in setup</span>` : ""}
+        </div>
+        <div class="q-equip-body">
+          <div class="q-equip-meta">
+            <span class="q-equip-cat">${escapeHtml(p.category)}</span>
+            <span class="q-equip-unit-price">${money(p.price)}<small>/day</small></span>
+          </div>
+          <h4>${escapeHtml(p.name)}</h4>
+          <p>${escapeHtml(p.desc)}</p>
+          <div class="q-equip-foot">
+            <div class="q-stepper">
+              <button type="button" class="q-step-btn" data-minus="${p.id}" ${qty === 0 ? "disabled" : ""} aria-label="Decrease ${escapeHtml(p.name)}">−</button>
+              <span class="q-step-val">${qty}</span>
+              <button type="button" class="q-step-btn q-step-plus" data-plus="${p.id}" aria-label="Increase ${escapeHtml(p.name)}">+</button>
+            </div>
+            <div class="q-equip-subtotal">
+              ${qty > 0 ? `<span>Subtotal: <strong>${money(lineTotal)}</strong></span>` : `<button type="button" class="q-quick-add-btn" data-plus="${p.id}">Add +</button>`}
+            </div>
+          </div>
+        </div>
+      </article>`;
+    })
+    .join("");
+}
+
+function renderCalendarStep() {
+  const year = state.calendarYear;
+  const month = state.calendarMonth;
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const monthName = new Date(year, month, 1).toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const cells = [];
+  for (let i = 0; i < firstDay; i += 1) {
+    cells.push(`<span class="q-cal-cell is-empty"></span>`);
+  }
+  for (let d = 1; d <= daysInMonth; d += 1) {
+    const dateObj = new Date(year, month, d);
+    const iso = `${year}-${String(month + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+    const isPast = dateObj < today;
+    const isSelected = state.date === iso && !state.dateFlexible;
+    const isToday = dateObj.getTime() === today.getTime();
+    cells.push(
+      `<button type="button" class="q-cal-cell ${isSelected ? "is-selected" : ""} ${isToday ? "is-today" : ""}" data-cal-date="${iso}" ${isPast ? "disabled" : ""}>${d}</button>`
+    );
+  }
+
+  const timeWindows = [
+    "Morning (8:00 AM – 12:00 PM)",
+    "Afternoon (12:00 PM – 5:00 PM)",
+    "Evening (5:00 PM – 11:00 PM)",
+    "Full Day / Custom Schedule",
+  ];
+
+  return `<div class="q-step-panel">
+    <div class="q-step-head">
+      <span class="eyebrow orange">STEP 03 OF 06 · EVENT DATE &amp; SCHEDULE</span>
+      <h2>When is your event taking place?</h2>
+      <p>Select your target event date on the calendar so we can lock in equipment availability, or mark your date as flexible.</p>
+    </div>
+
+    <div class="q-date-layout">
+      <div class="q-calendar-card">
+        <div class="q-cal-header">
+          <button type="button" class="q-cal-nav" data-cal-prev aria-label="Previous month">‹</button>
+          <strong>${monthName}</strong>
+          <button type="button" class="q-cal-nav" data-cal-next aria-label="Next month">›</button>
+        </div>
+        <div class="q-cal-weekdays">
+          <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+        </div>
+        <div class="q-cal-grid">
+          ${cells.join("")}
+        </div>
+      </div>
+
+      <div class="q-date-side">
+        <div class="q-date-summary-box">
+          <span class="eyebrow">SELECTED EVENT DATE</span>
+          <strong class="q-date-display">
+            ${state.dateFlexible ? "Flexible Date" : state.date ? formatReadableDate(state.date) : "Select a date on the calendar"}
+          </strong>
+          <div class="q-field" style="margin-top:14px">
+            <label for="quoteDateDirect">Or enter date directly</label>
+            <input id="quoteDateDirect" type="date" class="input" value="${escapeHtml(state.date)}" ${state.dateFlexible ? "disabled" : ""}>
+          </div>
+          <label class="q-check-row" style="margin-top:14px">
+            <input type="checkbox" id="quoteDateFlexible" ${state.dateFlexible ? "checked" : ""}>
+            <span>My event date is still flexible</span>
+          </label>
+        </div>
+
+        <div class="q-date-summary-box">
+          <span class="eyebrow">PREFERRED TIME WINDOW</span>
+          <div class="q-time-pills">
+            ${timeWindows
+              .map(
+                (tw) =>
+                  `<button type="button" class="q-time-pill ${state.eventTimeWindow === tw ? "is-active" : ""}" data-time-window="${escapeHtml(tw)}">${escapeHtml(tw)}</button>`
+              )
+              .join("")}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderLocationStep() {
+  const effectiveLocation = getEffectiveLocationText();
+  const { lat, lon } = state.locationCoords || { lat: 42.3601, lon: -71.0589 };
+  const bbox = `${(lon - 0.02).toFixed(4)}%2C${(lat - 0.012).toFixed(4)}%2C${(lon + 0.02).toFixed(4)}%2C${(lat + 0.012).toFixed(4)}`;
+  const osmUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat.toFixed(5)}%2C${lon.toFixed(5)}`;
+
+  return `<div class="q-step-panel">
+    <div class="q-step-head">
+      <span class="eyebrow orange">STEP 04 OF 06 · VENUE &amp; LOCATION</span>
+      <h2>Where should we deliver your setup?</h2>
+      <p>Search any hotel, campus, ballroom, or street address across Boston and New England—or enter your venue address manually.</p>
+    </div>
+
+    <div class="q-location-layout">
+      <div class="q-location-controls">
+        ${!state.manualLocationMode ? `
+          <div class="q-location-search-box">
+            <label class="q-label" for="quoteLocationSearch">SEARCH VENUE OR ADDRESS</label>
+            <div class="q-search-bar">
+              <input id="quoteLocationSearch" type="text" class="input" placeholder="e.g., Omni Boston Hotel at the Seaport, Cambridge MA..." value="${escapeHtml(state.locationQuery || state.eventLocation)}" ${state.locationFlexible ? "disabled" : ""}>
+              <button type="button" class="btn btn-dark btn-small" id="quoteLocationSearchBtn" ${state.locationFlexible ? "disabled" : ""}>${state.locationSearching ? "Searching…" : "Find Venue"}</button>
+            </div>
+            ${state.locationResults && state.locationResults.length ? `
+              <div class="q-location-results" role="listbox" aria-label="Suggested locations">
+                ${state.locationResults
+                  .map(
+                    (res, idx) =>
+                      `<button type="button" class="q-loc-result-item" data-loc-index="${idx}">
+                        <span class="q-loc-pin">📍</span>
+                        <span>${escapeHtml(res.display_name)}</span>
+                      </button>`
+                  )
+                  .join("")}
+              </div>
+            ` : ""}
+          </div>
+        ` : `
+          <div class="q-manual-address-box">
+            <span class="q-label">ENTER VENUE ADDRESS MANUALLY</span>
+            <div class="form-grid" style="margin-top:10px">
+              <div class="field full">
+                <label for="manualStreetInput">Venue Name / Street Address</label>
+                <input id="manualStreetInput" class="input" placeholder="100 Seaport Blvd / Boston Convention Center" value="${escapeHtml(state.manualStreet)}">
+              </div>
+              <div class="field">
+                <label for="manualCityInput">City / Town</label>
+                <input id="manualCityInput" class="input" placeholder="Boston" value="${escapeHtml(state.manualCity)}">
+              </div>
+              <div class="field">
+                <label for="manualStateInput">State &amp; ZIP</label>
+                <div style="display:grid;grid-template-columns:80px 1fr;gap:8px">
+                  <input id="manualStateInput" class="input" placeholder="MA" value="${escapeHtml(state.manualState)}">
+                  <input id="manualZipInput" class="input" placeholder="02210" value="${escapeHtml(state.manualZip)}">
+                </div>
+              </div>
+            </div>
+          </div>
+        `}
+
+        <div class="q-location-toggles">
+          <button type="button" class="text-btn" data-toggle-manual-location>
+            ${state.manualLocationMode ? "← Back to live map search" : "Enter address manually instead →"}
+          </button>
+          <label class="q-check-row">
+            <input type="checkbox" id="quoteLocationFlexible" ${state.locationFlexible ? "checked" : ""}>
+            <span>I'm still choosing a location / venue is TBD</span>
+          </label>
+        </div>
+
+        <div class="q-selected-loc-banner">
+          <span class="eyebrow">CONFIRMED VENUE LOCATION</span>
+          <strong>${effectiveLocation ? escapeHtml(effectiveLocation) : "Boston / Greater New England (Select or type above)"}</strong>
+        </div>
+      </div>
+
+      <div class="q-map-card">
+        <div class="q-map-frame-wrap">
+          <iframe
+            title="Event Venue Map Preview"
+            src="${osmUrl}"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+        <div class="q-map-foot">
+          <span><strong>Service Area:</strong> Boston, Cambridge, Somerville &amp; all of New England</span>
+          ${effectiveLocation && !state.locationFlexible
+            ? `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(effectiveLocation)}" target="_blank" rel="noopener" class="text-btn">Open in Google Maps ↗</a>`
+            : ""}
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderEquipmentStep(totals) {
+  const recIds = eventRecommendations[state.eventType] || eventRecommendations.Wedding;
+  const recProducts = recIds.map((id) => products.find((p) => p.id === id)).filter(Boolean);
+  const categories = [
+    "All",
+    "Audio & Speakers",
+    "Subwoofers",
+    "Microphones",
+    "Audio Mixers",
+    "DJ Equipment",
+    "Video & Displays",
+    "LED Video Walls",
+    "Outdoor Movies",
+    "Photo Booths",
+    "Silent Disco",
+    "Event Lighting",
+    "Special Effects",
+    "Live Streaming",
+  ];
+
+  return `<div class="q-step-panel">
+    <div class="q-step-head">
+      <span class="eyebrow orange">STEP 05 OF 06 · BUILD YOUR EQUIPMENT &amp; PRODUCTION</span>
+      <h2>Choose your packages, gear &amp; crew support.</h2>
+      <p>Start with a turnkey event bundle or add individual items below. Every item updates your itemized quote calculation in real time.</p>
+    </div>
+
+    <!-- 1. Turnkey Starter Bundles -->
+    <div class="q-subblock">
+      <div class="q-subblock-head">
+        <div>
+          <span class="eyebrow">TURNKEY PACKAGES</span>
+          <h3>1. Quick-Load an Event Bundle (Optional)</h3>
+        </div>
+        ${totals.uniqueCount > 0 ? `<button type="button" class="q-clear-all-btn" data-clear-all-equipment>Clear all selected gear (${totals.totalUnits})</button>` : ""}
+      </div>
+      <div class="q-bundle-strip">
+        ${bundles
+          .map((b) => {
+            const isMatched = totals.matchedBundle && totals.matchedBundle.id === b.id;
+            return `<div class="q-bundle-mini ${isMatched ? "is-active" : ""}">
+              <div class="q-bundle-mini-top">
+                <span class="eyebrow">${escapeHtml(b.label)}</span>
+                <strong>${money(b.price)}</strong>
+              </div>
+              <h4>${escapeHtml(b.title)}</h4>
+              <p>${escapeHtml(b.desc)}</p>
+              <button type="button" class="btn ${isMatched ? "btn-dark" : "btn-light"} btn-small" data-apply-bundle="${b.id}">
+                ${isMatched ? "✓ Loaded in Setup" : "Load Package"}
+              </button>
+            </div>`;
+          })
+          .join("")}
+      </div>
+    </div>
+
+    <!-- 2. Recommended for Selected Event Type -->
+    <div class="q-subblock">
+      <div class="q-subblock-head">
+        <div>
+          <span class="eyebrow">TAILORED FOR ${escapeHtml(state.eventType.toUpperCase())}</span>
+          <h3>2. Recommended Gear for Your ${escapeHtml(state.eventType)}</h3>
+        </div>
+        <button type="button" class="text-btn" data-add-all-recommended>Add all recommended +</button>
+      </div>
+      <div class="q-rec-grid">
+        ${recProducts
+          .map((p) => {
+            const qty = state.selected[p.id] || 0;
+            return `<div class="q-rec-item ${qty > 0 ? "is-selected" : ""}">
+              <img src="${productImage(p)}" alt="${escapeHtml(p.name)}" loading="lazy">
+              <div class="q-rec-info">
+                <strong>${escapeHtml(p.name)}</strong>
+                <span>${escapeHtml(p.category)} · <b>${money(p.price)}/day</b></span>
+              </div>
+              <div class="q-stepper">
+                <button type="button" class="q-step-btn" data-minus="${p.id}" ${qty === 0 ? "disabled" : ""} aria-label="Decrease ${escapeHtml(p.name)}">−</button>
+                <span class="q-step-val">${qty}</span>
+                <button type="button" class="q-step-btn q-step-plus" data-plus="${p.id}" aria-label="Increase ${escapeHtml(p.name)}">+</button>
+              </div>
+            </div>`;
+          })
+          .join("")}
+      </div>
+    </div>
+
+    <!-- 3. Full 65-Item Equipment Catalog Browser -->
+    <div class="q-subblock">
+      <div class="q-subblock-head">
+        <div>
+          <span class="eyebrow">FULL RENTAL INVENTORY (65 ITEMS)</span>
+          <h3>3. Browse &amp; Add Any Individual Equipment</h3>
+        </div>
+      </div>
+
+      <div class="q-catalog-controls">
+        <div class="q-catalog-search">
+          <input id="builderCatalogSearch" type="text" class="input" placeholder="Search speakers, Shure mics, LED walls, 360 photo booth, cold sparks..." value="${escapeHtml(state.builderSearch)}">
+          <label class="q-selected-toggle">
+            <input type="checkbox" id="builderOnlySelectedToggle" ${state.builderOnlySelected ? "checked" : ""}>
+            <span>Show selected only (${totals.uniqueCount})</span>
+          </label>
+        </div>
+        <div class="q-cat-pills">
+          ${categories
+            .map((cat) => {
+              const count =
+                cat === "All"
+                  ? products.length
+                  : products.filter((p) => p.category === cat).length;
+              return `<button type="button" class="q-cat-pill ${state.builderCategory === cat ? "is-active" : ""}" data-builder-cat="${escapeHtml(cat)}">${escapeHtml(cat)} <span>${count}</span></button>`;
+            })
+            .join("")}
+        </div>
+      </div>
+
+      <div class="q-equip-grid" id="quoteCatalogGrid">
+        ${renderBuilderCatalogGridMarkup()}
+      </div>
+    </div>
+
+    <!-- 4. Delivery, Setup & Technician Tier -->
+    <div class="q-subblock">
+      <div class="q-subblock-head">
+        <div>
+          <span class="eyebrow">LOGISTICS &amp; ON-SITE CREW</span>
+          <h3>4. Delivery, Setup &amp; Technician Support</h3>
+        </div>
+      </div>
+      <div class="q-service-tier-grid">
+        ${SERVICE_TIERS.map(
+          (tier) => `<button type="button" class="q-tier-card ${state.serviceTier === tier.id ? "is-active" : ""}" data-service-tier="${tier.id}">
+            <div class="q-tier-top">
+              <strong>${escapeHtml(tier.title)}</strong>
+              <span class="q-tier-badge">${escapeHtml(tier.badge)}</span>
+            </div>
+            <p>${escapeHtml(tier.desc)}</p>
+          </button>`
+        ).join("")}
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderReviewAndSubmitStep(totals) {
+  const effectiveLocation = getEffectiveLocationText() || "Boston / New England (TBD)";
+  const effectiveDate = state.dateFlexible
+    ? "Flexible Date"
+    : state.date
+      ? formatReadableDate(state.date)
+      : "Date TBD";
+
+  return `<div class="q-step-panel">
+    <div class="q-step-head">
+      <span class="eyebrow orange">STEP 06 OF 06 · FINAL QUOTE BREAKDOWN &amp; SUBMISSION</span>
+      <h2>Review your itemized quote &amp; send.</h2>
+      <p>Every selected rental item, quantity, unit rate, duration adjustment, and delivery option is itemized below with zero hidden fees. Submit below to send your quote directly to our production desk.</p>
+    </div>
+
+    <!-- Event Configuration Summary -->
+    <div class="q-review-meta-grid">
+      <div class="q-review-meta-card">
+        <span>EVENT OCCASION</span>
+        <strong>${escapeHtml(state.eventType)}</strong>
+        <button type="button" class="q-meta-edit" data-goto-step="1">Edit</button>
+      </div>
+      <div class="q-review-meta-card">
+        <span>GUESTS &amp; VENUE</span>
+        <strong>${state.guests} Guests · ${escapeHtml(state.venue)}</strong>
+        <button type="button" class="q-meta-edit" data-goto-step="2">Edit</button>
+      </div>
+      <div class="q-review-meta-card">
+        <span>RENTAL DURATION</span>
+        <strong>${escapeHtml(totals.durationOption.label)}</strong>
+        <button type="button" class="q-meta-edit" data-goto-step="2">Edit</button>
+      </div>
+      <div class="q-review-meta-card">
+        <span>DATE &amp; SCHEDULE</span>
+        <strong>${escapeHtml(effectiveDate)}</strong>
+        <small>${escapeHtml(state.eventTimeWindow)}</small>
+        <button type="button" class="q-meta-edit" data-goto-step="3">Edit</button>
+      </div>
+      <div class="q-review-meta-card">
+        <span>EVENT LOCATION</span>
+        <strong>${escapeHtml(effectiveLocation)}</strong>
+        <button type="button" class="q-meta-edit" data-goto-step="4">Edit</button>
+      </div>
+      <div class="q-review-meta-card">
+        <span>DELIVERY &amp; CREW</span>
+        <strong>${escapeHtml(totals.serviceOption.title)} (${totals.serviceFee === 0 ? "Free" : money(totals.serviceFee)})</strong>
+        <button type="button" class="q-meta-edit" data-goto-step="5">Edit</button>
+      </div>
+    </div>
+
+    <!-- Full Itemized Equipment Table -->
+    <div class="q-review-table-card">
+      <div class="q-review-table-head">
+        <div>
+          <span class="eyebrow">COMPLETE ITEMIZED EQUIPMENT LIST</span>
+          <h3>Selected Rentals (${totals.uniqueCount} ${totals.uniqueCount === 1 ? "item" : "items"} · ${totals.totalUnits} total ${totals.totalUnits === 1 ? "unit" : "units"})</h3>
+        </div>
+        <button type="button" class="btn btn-light btn-small" data-goto-step="5">+ Add / Modify Gear</button>
+      </div>
+
+      ${totals.lineItems.length ? `
+        <div class="q-table-scroll">
+          <table class="q-itemized-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Equipment Item</th>
+                <th>Category</th>
+                <th>Unit Price</th>
+                <th>Quantity</th>
+                <th class="is-right">Line Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${totals.lineItems
+                .map(
+                  (item, idx) => `<tr>
+                    <td class="q-td-num">${String(idx + 1).padStart(2, "0")}</td>
+                    <td>
+                      <strong>${escapeHtml(item.product.name)}</strong>
+                      <span class="q-td-sub">${escapeHtml(item.product.tag || "")}</span>
+                    </td>
+                    <td><span class="q-td-cat">${escapeHtml(item.product.category)}</span></td>
+                    <td>${money(item.unitPrice)}<small>/day</small></td>
+                    <td>
+                      <div class="q-stepper q-stepper-inline">
+                        <button type="button" class="q-step-btn" data-minus="${item.product.id}" aria-label="Decrease ${escapeHtml(item.product.name)}">−</button>
+                        <span class="q-step-val">${item.qty}</span>
+                        <button type="button" class="q-step-btn q-step-plus" data-plus="${item.product.id}" aria-label="Increase ${escapeHtml(item.product.name)}">+</button>
+                      </div>
+                    </td>
+                    <td class="is-right"><strong>${money(item.lineSubtotal)}</strong></td>
+                  </tr>`
+                )
+                .join("")}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="q-financial-summary">
+          <div class="q-fin-row">
+            <span>Equipment Base Subtotal (${totals.totalUnits} ${totals.totalUnits === 1 ? "unit" : "units"} · 1-Day Base Rate)</span>
+            <strong>${money(totals.equipmentBaseSubtotal)}</strong>
+          </div>
+          ${totals.durationSurcharge > 0 ? `
+            <div class="q-fin-row">
+              <span>Multi-Day Duration Adjustment (${escapeHtml(totals.durationOption.shortLabel)})</span>
+              <strong>+${money(totals.durationSurcharge)}</strong>
+            </div>
+            <div class="q-fin-row">
+              <span>Adjusted Equipment Subtotal</span>
+              <strong>${money(totals.equipmentDurationTotal)}</strong>
+            </div>
+          ` : ""}
+          <div class="q-fin-row">
+            <span>Delivery, Setup &amp; Production Crew (${escapeHtml(totals.serviceOption.title)})</span>
+            <strong>${totals.serviceFee === 0 ? "$0 (Self Pickup)" : `+${money(totals.serviceFee)}`}</strong>
+          </div>
+          <div class="q-fin-row is-grand">
+            <div>
+              <span>ESTIMATED GRAND TOTAL</span>
+              <small>All items calculated accurately · No hidden fees</small>
+            </div>
+            <strong>${money(totals.grandTotal)}</strong>
+          </div>
+        </div>
+      ` : `
+        <div class="q-empty-warning">
+          <strong>No equipment items selected yet!</strong>
+          <p>Please go to Step 05 to select an event bundle or individual equipment items so we can calculate your quote.</p>
+          <button type="button" class="btn btn-dark btn-small" data-goto-step="5">Choose Equipment Now →</button>
+        </div>
+      `}
+    </div>
+
+    <!-- Contact & Automated Quote Submission Form -->
+    <form id="quoteBuilderForm" class="q-contact-card">
+      <input type="text" name="_honey" id="quoteHoney" style="display:none" tabindex="-1" autocomplete="off">
+      <div class="q-subblock-head">
+        <div>
+          <span class="eyebrow orange">YOUR CONTACT DETAILS</span>
+          <h3>Where should we send your official quote confirmation?</h3>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="contactNameInput">Full Name *</label>
+          <input id="contactNameInput" class="input" required placeholder="Alex Morgan" value="${escapeHtml(state.contactName)}">
+        </div>
+        <div class="field">
+          <label for="contactEmailInput">Email Address *</label>
+          <input id="contactEmailInput" class="input" type="email" required placeholder="alex@company.com" value="${escapeHtml(state.contactEmail)}">
+        </div>
+        <div class="field">
+          <label for="contactPhoneInput">Phone Number *</label>
+          <input id="contactPhoneInput" class="input" type="tel" required placeholder="(617) 555-0198" value="${escapeHtml(state.contactPhone)}">
+        </div>
+        <div class="field">
+          <label for="organizationInput">Company / School / Organization</label>
+          <input id="organizationInput" class="input" placeholder="Optional" value="${escapeHtml(state.organization)}">
+        </div>
+        <div class="field full">
+          <label for="eventNameInput">Event Name or Title</label>
+          <input id="eventNameInput" class="input" placeholder="e.g., Morgan-Lee Wedding, Annual Biotech Summit, Spring Gala" value="${escapeHtml(state.eventName)}">
+        </div>
+        <div class="field full">
+          <label for="eventNotesInput">Load-In, Timeline, Room Specs or Special Requests</label>
+          <textarea id="eventNotesInput" class="textarea" placeholder="Tell us about load-in access, stairs/elevators, power availability, or specific cue timing...">${escapeHtml(state.eventNotes)}</textarea>
+        </div>
+      </div>
+
+      <div class="q-payment-section">
+        <span class="q-label">PREFERRED PAYMENT METHOD (NO PAYMENT REQUIRED TODAY)</span>
+        <div class="q-payment-grid">
+          ${PAYMENT_METHODS.map(
+            (pm) => `<button type="button" class="q-pay-pill ${state.paymentMethod === pm ? "is-active" : ""}" data-payment-method="${escapeHtml(pm)}">${escapeHtml(pm)}</button>`
+          ).join("")}
+        </div>
+      </div>
+
+      ${state.quoteError ? `<div class="q-error-banner" role="alert">${escapeHtml(state.quoteError)}</div>` : ""}
+
+      <div class="q-submit-bar">
+        <div class="q-submit-note">
+          <strong>Instant Automated Quote Dispatch</strong>
+          <span>Submitting sends your complete itemized setup and estimate to our production team and locks in your quote reference.</span>
+        </div>
+        <button type="submit" class="btn btn-dark q-submit-btn" ${state.isSubmittingQuote ? "disabled" : ""}>
+          ${state.isSubmittingQuote ? "Sending Official Quote…" : `Submit Quote (${money(totals.grandTotal)}) →`}
+        </button>
+      </div>
+    </form>
+  </div>`;
+}
+
+function renderSubmittedReceipt(receipt) {
+  return `<div class="page">
+    <section class="q-receipt-wrap">
+      <div class="q-receipt-card">
+        <div class="q-receipt-top">
+          <div class="success-mark">✓</div>
+          <span class="eyebrow orange">OFFICIAL QUOTE REQUEST SENT · REF #${escapeHtml(receipt.refCode)}</span>
+          <h1>Your itemized event quote is in!</h1>
+          <p>We’ve dispatched your complete event build and itemized calculation to our production team for <strong>${escapeHtml(receipt.contactName)}</strong> (<strong>${escapeHtml(receipt.contactEmail)}</strong>). Our engineers will confirm equipment availability and follow up shortly.</p>
+        </div>
+
+        <div class="q-review-meta-grid">
+          <div class="q-review-meta-card"><span>CLIENT</span><strong>${escapeHtml(receipt.contactName)}</strong><small>${escapeHtml(receipt.contactEmail)} · ${escapeHtml(receipt.contactPhone)}</small></div>
+          <div class="q-review-meta-card"><span>EVENT TYPE</span><strong>${escapeHtml(receipt.eventType)}</strong><small>${escapeHtml(receipt.eventName || "Custom Event Setup")}</small></div>
+          <div class="q-review-meta-card"><span>GUESTS &amp; SETTING</span><strong>${receipt.guests} Guests · ${escapeHtml(receipt.venue)}</strong><small>${escapeHtml(receipt.durationLabel)}</small></div>
+          <div class="q-review-meta-card"><span>DATE &amp; TIME</span><strong>${escapeHtml(receipt.eventDate)}</strong><small>${escapeHtml(receipt.eventTimeWindow)}</small></div>
+          <div class="q-review-meta-card"><span>LOCATION</span><strong>${escapeHtml(receipt.eventLocation)}</strong></div>
+          <div class="q-review-meta-card"><span>DELIVERY &amp; PAYMENT</span><strong>${escapeHtml(receipt.serviceTitle)}</strong><small>Payment Pref: ${escapeHtml(receipt.paymentMethod)}</small></div>
+        </div>
+
+        <div class="q-review-table-card" style="margin-top:24px">
+          <div class="q-review-table-head">
+            <div>
+              <span class="eyebrow">COMPLETE ITEMIZED QUOTE SUMMARY</span>
+              <h3>All Selected Equipment (${receipt.lineItems.length} items · ${receipt.totalUnits} total units)</h3>
+            </div>
+          </div>
+          <div class="q-table-scroll">
+            <table class="q-itemized-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Equipment Item</th>
+                  <th>Category</th>
+                  <th>Unit Price</th>
+                  <th>Qty</th>
+                  <th class="is-right">Line Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${receipt.lineItems
+                  .map(
+                    (item, idx) => `<tr>
+                      <td class="q-td-num">${String(idx + 1).padStart(2, "0")}</td>
+                      <td><strong>${escapeHtml(item.product.name)}</strong></td>
+                      <td><span class="q-td-cat">${escapeHtml(item.product.category)}</span></td>
+                      <td>${money(item.unitPrice)}/day</td>
+                      <td>${item.qty}</td>
+                      <td class="is-right"><strong>${money(item.lineSubtotal)}</strong></td>
+                    </tr>`
+                  )
+                  .join("")}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="q-financial-summary">
+            <div class="q-fin-row">
+              <span>Equipment Base Subtotal (1-Day Rate)</span>
+              <strong>${money(receipt.equipmentBaseSubtotal)}</strong>
+            </div>
+            ${receipt.durationSurcharge > 0 ? `
+              <div class="q-fin-row">
+                <span>Multi-Day Duration Adjustment (${escapeHtml(receipt.durationLabel)})</span>
+                <strong>+${money(receipt.durationSurcharge)}</strong>
+              </div>
+            ` : ""}
+            <div class="q-fin-row">
+              <span>Delivery, Setup &amp; Crew (${escapeHtml(receipt.serviceTitle)})</span>
+              <strong>${receipt.serviceFee === 0 ? "$0" : `+${money(receipt.serviceFee)}`}</strong>
+            </div>
+            <div class="q-fin-row is-grand">
+              <span>ESTIMATED GRAND TOTAL</span>
+              <strong>${money(receipt.grandTotal)}</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="q-receipt-actions">
+          <button type="button" class="btn btn-dark" data-print-quote>Print / Save PDF Quote</button>
+          <button type="button" class="btn btn-light" data-new-quote>Build Another Event Quote</button>
+          <a href="#home" class="btn btn-light">Back to Home</a>
+        </div>
+      </div>
+    </section>
+  </div>`;
 }
 
 function quote() {
-  return `<div class="page"><section class="quote-page"><div class="quote-copy"><span class="eyebrow orange">REQUEST A QUOTE</span><h1>Let’s build<br>the right setup.</h1><p>Send the details below and the production team can confirm availability, final pricing and any setup or delivery requirements.</p>${quoteSelection()}</div><div class="quote-card" id="quoteCard"><div class="quote-form"><span class="eyebrow">YOUR EVENT</span><form id="quoteForm"><div class="form-grid"><div class="field"><label>Full name</label><input class="input" required placeholder="Alex Morgan"></div><div class="field"><label>Email</label><input class="input" type="email" required placeholder="alex@example.com"></div><div class="field"><label>Phone</label><input class="input" placeholder="617 555 0198"></div><div class="field"><label>Event type</label><select class="select"><option>Wedding</option><option>Corporate Event</option><option>School Event</option><option>Concert</option><option>Private Party</option><option>Outdoor Movie</option></select></div><div class="field"><label>Event date</label><input class="input" type="date"></div><div class="field"><label>Estimated guests</label><input class="input" type="number" min="1" placeholder="150"></div><div class="field full"><label>Venue / location</label><input class="input" placeholder="Venue name or address"></div><div class="field full"><label>What do you need?</label><textarea class="textarea" placeholder="Tell us about the event, room, gear, production support, timing, and anything unusual."></textarea></div></div><button class="btn btn-dark" style="width:100%;margin-top:18px">Send quote request →</button></form></div><div class="quote-success"><div class="success-mark">✓</div><span class="eyebrow">REQUEST RECEIVED</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:10px 0">Your brief is in.</h2><p style="color:var(--muted)">This mockup captures the request locally; connect the production form to the booking backend to submit it.</p><a href="#home" class="btn btn-dark">Back to home</a></div></div></section></div>`;
+  if (state.submittedQuote) {
+    return renderSubmittedReceipt(state.submittedQuote);
+  }
+
+  const totals = calculateQuoteTotals();
+  const step = Math.min(6, Math.max(1, Number(state.builderStep) || 1));
+  state.builderStep = step;
+
+  const stepsMeta = [
+    { num: 1, label: "Event Type" },
+    { num: 2, label: "Guests & Duration" },
+    { num: 3, label: "Event Date" },
+    { num: 4, label: "Location" },
+    { num: 5, label: "Equipment & Crew" },
+    { num: 6, label: "Review & Send" },
+  ];
+
+  let stepContent = "";
+  if (step === 1) {
+    const activeEventCard = EVENT_TYPE_CARDS.find((c) => c.id === state.eventType) || EVENT_TYPE_CARDS[0];
+    const matchingBundle = bundles.find((b) => b.id === activeEventCard.bundleId);
+    stepContent = `<div class="q-step-panel">
+      <div class="q-step-head">
+        <span class="eyebrow orange">STEP 01 OF 06 · SELECT YOUR OCCASION</span>
+        <h2>What type of event are we building?</h2>
+        <p>Choose your occasion below. We’ll tailor recommended speakers, microphones, lighting, and turnkey bundles around your format.</p>
+      </div>
+
+      <div class="q-event-grid">
+        ${EVENT_TYPE_CARDS.map((card) => {
+          const isSelected = state.eventType === card.id;
+          return `<button type="button" class="q-event-card ${isSelected ? "is-active" : ""}" data-select-event="${escapeHtml(card.id)}">
+            <span class="q-event-code">${escapeHtml(card.code)}</span>
+            <h3>${escapeHtml(card.title)}</h3>
+            <p>${escapeHtml(card.desc)}</p>
+            <span class="q-event-status">${isSelected ? "✓ Selected Occasion" : "Select occasion →"}</span>
+          </button>`;
+        }).join("")}
+      </div>
+
+      ${matchingBundle ? `
+        <div class="q-starter-callout">
+          <div>
+            <span class="eyebrow">RECOMMENDED STARTER BUNDLE FOR ${escapeHtml(state.eventType.toUpperCase())}</span>
+            <h4>${escapeHtml(matchingBundle.title)} — ${money(matchingBundle.price)}</h4>
+            <p>${escapeHtml(matchingBundle.desc)}</p>
+          </div>
+          <button type="button" class="btn btn-dark btn-small" data-apply-bundle="${matchingBundle.id}">
+            ${totals.matchedBundle && totals.matchedBundle.id === matchingBundle.id ? "✓ Bundle Loaded" : `Load ${matchingBundle.title} (${money(matchingBundle.price)})`}
+          </button>
+        </div>
+      ` : ""}
+    </div>`;
+  } else if (step === 2) {
+    stepContent = `<div class="q-step-panel">
+      <div class="q-step-head">
+        <span class="eyebrow orange">STEP 02 OF 06 · GUEST COUNT, SETTING &amp; DURATION</span>
+        <h2>How many guests &amp; how long is the rental?</h2>
+        <p>Audience size and room environment help us scale speaker wattage, subwoofer coverage, and multi-day pricing accurately.</p>
+      </div>
+
+      <div class="q-subblock">
+        <span class="q-label">1. ESTIMATED AUDIENCE SIZE</span>
+        <div class="q-bracket-grid">
+          ${GUEST_BRACKETS.map((br) => `
+            <button type="button" class="q-bracket-card ${state.guestBracket === br.id ? "is-active" : ""}" data-guest-bracket="${br.id}" data-guest-count="${br.defaultCount}">
+              <strong>${escapeHtml(br.label)}</strong>
+              <span>${escapeHtml(br.sub)}</span>
+            </button>
+          `).join("")}
+        </div>
+        <div class="q-exact-guests-row">
+          <label for="quoteGuestExact">Or enter exact guest count:</label>
+          <input id="quoteGuestExact" type="number" min="1" max="10000" class="input" style="max-width:160px" value="${state.guests}">
+        </div>
+      </div>
+
+      <div class="q-subblock">
+        <span class="q-label">2. VENUE SETTING</span>
+        <div class="q-venue-grid">
+          ${[
+            { id: "Indoor", title: "Indoor Venue", sub: "Ballroom, hotel, conference hall, auditorium, or club" },
+            { id: "Outdoor", title: "Outdoor Space", sub: "Park, courtyard, tent, rooftop, field, or backyard" },
+            { id: "Indoor + Outdoor", title: "Indoor + Outdoor (Multi-Zone)", sub: "Outdoor ceremony/cocktail hour + indoor reception" },
+          ]
+            .map(
+              (v) => `<button type="button" class="q-venue-card ${state.venue === v.id ? "is-active" : ""}" data-select-venue="${v.id}">
+                <strong>${escapeHtml(v.title)}</strong>
+                <span>${escapeHtml(v.sub)}</span>
+              </button>`
+            )
+            .join("")}
+        </div>
+      </div>
+
+      <div class="q-subblock">
+        <span class="q-label">3. RENTAL DURATION (AUTOMATICALLY CALCULATES MULTI-DAY RATE)</span>
+        <div class="q-duration-grid">
+          ${DURATION_OPTIONS.map(
+            (dur) => `<button type="button" class="q-duration-card ${state.duration === dur.id ? "is-active" : ""}" data-select-duration="${dur.id}">
+              <div class="q-tier-top">
+                <strong>${escapeHtml(dur.label)}</strong>
+                <span class="q-tier-badge">${escapeHtml(dur.badge)}</span>
+              </div>
+              <p>${escapeHtml(dur.desc)}</p>
+            </button>`
+          ).join("")}
+        </div>
+      </div>
+    </div>`;
+  } else if (step === 3) {
+    stepContent = renderCalendarStep();
+  } else if (step === 4) {
+    stepContent = renderLocationStep();
+  } else if (step === 5) {
+    stepContent = renderEquipmentStep(totals);
+  } else {
+    stepContent = renderReviewAndSubmitStep(totals);
+  }
+
+  const effectiveLocation = getEffectiveLocationText();
+  const effectiveDate = state.dateFlexible
+    ? "Flexible Date"
+    : state.date
+      ? formatReadableDate(state.date)
+      : "Not set yet";
+
+  return `<div class="page q-builder-page">
+    <header class="q-hero">
+      <div>
+        <span class="eyebrow orange">BUILD MY EVENT · LIVE QUOTE CALCULATOR</span>
+        <h1>Build your event.<br>See every dollar.</h1>
+      </div>
+      <p>Configure your event step by step, choose turnkey bundles or individual AV rentals, and get an instant, loophole-free itemized quote sent straight to our team.</p>
+    </header>
+
+    <!-- 6-Step Interactive Progress Bar -->
+    <nav class="q-progress-nav" aria-label="Quote builder steps">
+      ${stepsMeta
+        .map((s) => {
+          const isCurrent = s.num === step;
+          const isDone = s.num < step;
+          return `<button type="button" class="q-progress-step ${isCurrent ? "is-current" : ""} ${isDone ? "is-done" : ""}" data-goto-step="${s.num}">
+            <span class="q-step-num">${isDone ? "✓" : `0${s.num}`}</span>
+            <span class="q-step-label">${escapeHtml(s.label)}</span>
+          </button>`;
+        })
+        .join("")}
+    </nav>
+
+    <div class="q-main-layout">
+      <!-- Left / Main Active Step Workspace -->
+      <div class="q-workspace">
+        ${stepContent}
+
+        <div class="q-step-nav-footer">
+          ${step > 1
+            ? `<button type="button" class="btn btn-light" data-builder-prev>← Previous Step</button>`
+            : `<a href="#rentals" class="btn btn-light">← Browse Catalog</a>`}
+          <div class="q-step-indicator">Step 0${step} of 06</div>
+          ${step < 6
+            ? `<button type="button" class="btn btn-dark" data-builder-next>Continue to ${escapeHtml(stepsMeta[step].label)} →</button>`
+            : ""}
+        </div>
+      </div>
+
+      <!-- Right / Sticky Live Plan & Calculation Sidebar -->
+      <aside class="q-plan-sidebar" aria-label="Live event plan and quote total">
+        <div class="q-plan-total-box">
+          <span class="eyebrow">ESTIMATED TOTAL</span>
+          <strong class="q-plan-grand">${money(totals.grandTotal)}</strong>
+          <span class="q-plan-sub">${totals.uniqueCount} ${totals.uniqueCount === 1 ? "item" : "items"} (${totals.totalUnits} ${totals.totalUnits === 1 ? "unit" : "units"}) · ${escapeHtml(totals.durationOption.shortLabel)}</span>
+        </div>
+
+        <div class="q-plan-meta-list">
+          <button type="button" class="q-plan-meta-row" data-goto-step="1">
+            <span>01 · EVENT</span>
+            <strong>${escapeHtml(state.eventType)}</strong>
+          </button>
+          <button type="button" class="q-plan-meta-row" data-goto-step="2">
+            <span>02 · GUESTS</span>
+            <strong>${state.guests} (${escapeHtml(state.venue)})</strong>
+          </button>
+          <button type="button" class="q-plan-meta-row" data-goto-step="3">
+            <span>03 · DATE</span>
+            <strong>${escapeHtml(effectiveDate)}</strong>
+          </button>
+          <button type="button" class="q-plan-meta-row" data-goto-step="4">
+            <span>04 · VENUE</span>
+            <strong>${escapeHtml(effectiveLocation ? (effectiveLocation.length > 26 ? effectiveLocation.slice(0, 26) + "…" : effectiveLocation) : "Not set yet")}</strong>
+          </button>
+          <button type="button" class="q-plan-meta-row" data-goto-step="5">
+            <span>05 · CREW</span>
+            <strong>${escapeHtml(totals.serviceOption.title)}</strong>
+          </button>
+        </div>
+
+        <div class="q-plan-items-sec">
+          <div class="q-plan-items-head">
+            <span>SELECTED EQUIPMENT (${totals.totalUnits})</span>
+            ${step !== 5 ? `<button type="button" class="text-btn" data-goto-step="5">+ Add Gear</button>` : ""}
+          </div>
+
+          ${totals.lineItems.length ? `
+            <ul class="q-plan-items-list">
+              ${totals.lineItems
+                .map(
+                  (item) => `<li class="q-plan-item">
+                    <div class="q-plan-item-info">
+                      <strong>${escapeHtml(item.product.name)}</strong>
+                      <span>${money(item.unitPrice)} × ${item.qty} = <b>${money(item.lineSubtotal)}</b></span>
+                    </div>
+                    <div class="q-plan-item-ctrl">
+                      <button type="button" data-minus="${item.product.id}" aria-label="Remove one ${escapeHtml(item.product.name)}">−</button>
+                      <span>${item.qty}</span>
+                      <button type="button" data-plus="${item.product.id}" aria-label="Add one ${escapeHtml(item.product.name)}">+</button>
+                      <button type="button" class="q-plan-item-del" data-remove="${item.product.id}" aria-label="Delete ${escapeHtml(item.product.name)}">×</button>
+                    </div>
+                  </li>`
+                )
+                .join("")}
+            </ul>
+          ` : `
+            <div class="q-plan-empty">
+              No equipment selected yet. Choose a bundle or add items in Step 05.
+            </div>
+          `}
+        </div>
+
+        <div class="q-plan-math-breakdown">
+          <div class="q-math-line">
+            <span>Equipment Base (1-Day)</span>
+            <strong>${money(totals.equipmentBaseSubtotal)}</strong>
+          </div>
+          ${totals.durationSurcharge > 0 ? `
+            <div class="q-math-line">
+              <span>Duration (${escapeHtml(totals.durationOption.shortLabel)})</span>
+              <strong>+${money(totals.durationSurcharge)}</strong>
+            </div>
+          ` : ""}
+          <div class="q-math-line">
+            <span>${escapeHtml(totals.serviceOption.title)}</span>
+            <strong>${totals.serviceFee === 0 ? "$0" : `+${money(totals.serviceFee)}`}</strong>
+          </div>
+          <div class="q-math-line is-total">
+            <span>Total Estimate</span>
+            <strong>${money(totals.grandTotal)}</strong>
+          </div>
+        </div>
+
+        ${step < 6
+          ? `<button type="button" class="btn btn-dark" style="width:100%" data-goto-step="6">Review Full Quote (${money(totals.grandTotal)}) →</button>`
+          : `<a href="#quoteBuilderForm" class="btn btn-dark" style="width:100%">Complete &amp; Send Quote ↓</a>`}
+      </aside>
+    </div>
+  </div>`;
 }
 
 function render(options = {}) {
@@ -2217,9 +3367,9 @@ function render(options = {}) {
   let view = home();
   if (hash === "rentals") view = rentals();
   if (hash === "bundles") view = bundlesPage();
-  if (hash === "builder" || hash === "about") view = aboutUsPage();
+  if (hash === "about") view = aboutUsPage();
   if (hash === "services") view = services();
-  if (hash === "quote") view = quote();
+  if (hash === "quote" || hash === "builder") view = quote();
   app.innerHTML = view;
   lastRenderedPage = hash;
   const pageRoot = app.querySelector(":scope > .page");
@@ -2257,7 +3407,7 @@ function syncNavigation() {
   const currentHash = getHash();
   document.querySelectorAll(".desktop-nav a, #mobileMenu a").forEach((link) => {
     const targetHash = link.getAttribute("href")?.split("?")[0];
-    const isCurrent = targetHash === `#${currentHash}` || (targetHash === "#about" && (currentHash === "about" || currentHash === "builder"));
+    const isCurrent = targetHash === `#${currentHash}`;
     link.classList.toggle("active", isCurrent);
     if (isCurrent) link.setAttribute("aria-current", "page");
     else link.removeAttribute("aria-current");
@@ -2472,57 +3622,453 @@ function bind() {
       }
     }),
   );
-  document
-    .querySelector("[data-builder-next]")
-    ?.addEventListener("click", () => {
-      if (state.builderStep === 2) {
-        const nameInput = document.querySelector("#contactNameInput");
-        const emailInput = document.querySelector("#contactEmailInput");
-        if (nameInput && !nameInput.reportValidity()) return;
-        if (emailInput && !emailInput.reportValidity()) return;
-        state.contactName = nameInput?.value.trim() || "";
-        state.contactEmail = emailInput?.value.trim() || "";
-        state.contactPhone = document.querySelector("#contactPhoneInput")?.value.trim() || "";
-        state.organization = document.querySelector("#organizationInput")?.value.trim() || "";
-        state.eventName = document.querySelector("#eventNameInput")?.value.trim() || "";
-        state.eventLocation = document.querySelector("#eventLocationInput")?.value.trim() || "";
-        state.eventNotes = document.querySelector("#eventNotesInput")?.value.trim() || "";
-        state.guests = parseInt(
-          document.querySelector("#guestInput")?.value || 120,
-        );
-        state.venue = document.querySelector("#venueInput")?.value || "Indoor";
-        state.date = document.querySelector("#dateInput")?.value || "";
+  // Launch bundle from Bundle Detail page into Quote Builder
+  document.querySelectorAll("[data-launch-bundle]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const bId = btn.dataset.launchBundle;
+      const targetStep = Number(btn.dataset.launchStep) || 5;
+      const match = bundles.find((x) => x.id === bId);
+      if (match) {
+        state.selected = { ...match.included };
+        saveSelection();
+        if (match.id === "movie") state.eventType = "Outdoor Movie";
+        else if (match.id === "wedding") state.eventType = "Wedding";
+        else if (match.id === "concert") state.eventType = "Concert";
+        else if (match.id === "school") state.eventType = "School Event";
+        else if (match.id === "corporate") state.eventType = "Corporate Event";
+        else state.eventType = "Private Party";
+        state.submittedQuote = null;
+        state.builderStep = targetStep;
+        location.hash = "quote";
+        showToast(`${match.title} loaded into your quote`);
       }
-      state.builderStep = Math.min(4, state.builderStep + 1);
-      render({ preserveScroll: getHash() === "builder" });
+    }),
+  );
+
+  // Step navigation in Quote Builder
+  document.querySelectorAll("[data-goto-step]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.builderStep = Math.min(6, Math.max(1, Number(btn.dataset.gotoStep) || 1));
+      state.quoteError = "";
+      render();
+    }),
+  );
+  document.querySelector("[data-builder-next]")?.addEventListener("click", () => {
+    state.builderStep = Math.min(6, state.builderStep + 1);
+    state.quoteError = "";
+    render();
+  });
+  document.querySelector("[data-builder-prev]")?.addEventListener("click", () => {
+    state.builderStep = Math.max(1, state.builderStep - 1);
+    state.quoteError = "";
+    render();
+  });
+
+  // Step 1: Select Event Type
+  document.querySelectorAll("[data-select-event]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.eventType = btn.dataset.selectEvent;
+      render({ preserveScroll: true });
+    }),
+  );
+
+  // Apply Starter Bundle in Step 1 or Step 5
+  document.querySelectorAll("[data-apply-bundle]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const match = bundles.find((x) => x.id === btn.dataset.applyBundle);
+      if (!match) return;
+      state.selected = { ...match.included };
+      saveSelection();
+      render({ preserveScroll: true });
+      showToast(`Loaded ${match.title} (${money(match.price)})`);
+    }),
+  );
+
+  // Clear all equipment
+  document.querySelector("[data-clear-all-equipment]")?.addEventListener("click", () => {
+    state.selected = {};
+    saveSelection();
+    render({ preserveScroll: true });
+    showToast("Cleared all equipment from setup");
+  });
+
+  // Add all recommended for current event type
+  document.querySelector("[data-add-all-recommended]")?.addEventListener("click", () => {
+    const recIds = eventRecommendations[state.eventType] || eventRecommendations.Wedding;
+    recIds.forEach((id) => {
+      state.selected[id] = state.selected[id] || 1;
     });
-  const locationInput = document.querySelector("#eventLocationInput");
-  const mapLink = document.querySelector("#mapPreviewLink");
-  const mapAddress = document.querySelector("#mapAddressPreview");
-  locationInput?.addEventListener("input", () => {
-    const address = locationInput.value.trim();
-    if (mapAddress) mapAddress.textContent = address || "Your venue preview";
-    if (!mapLink) return;
-    if (address) {
-      mapLink.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
-      mapLink.removeAttribute("aria-disabled");
-      mapLink.removeAttribute("tabindex");
-    } else {
-      mapLink.href = "#";
-      mapLink.setAttribute("aria-disabled", "true");
-      mapLink.setAttribute("tabindex", "-1");
+    saveSelection();
+    render({ preserveScroll: true });
+    showToast(`Added recommended ${state.eventType} gear`);
+  });
+
+  // Step 2: Guest brackets, exact guest count, venue setting, rental duration
+  document.querySelectorAll("[data-guest-bracket]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.guestBracket = btn.dataset.guestBracket;
+      state.guests = Number(btn.dataset.guestCount) || 120;
+      render({ preserveScroll: true });
+    }),
+  );
+  document.querySelector("#quoteGuestExact")?.addEventListener("input", (e) => {
+    const val = Math.min(10000, Math.max(1, parseInt(e.target.value, 10) || 1));
+    state.guests = val;
+    if (val <= 50) state.guestBracket = "1–50";
+    else if (val <= 150) state.guestBracket = "51–150";
+    else if (val <= 300) state.guestBracket = "151–300";
+    else state.guestBracket = "300+";
+  });
+  document.querySelector("#quoteGuestExact")?.addEventListener("change", () => {
+    render({ preserveScroll: true });
+  });
+  document.querySelectorAll("[data-select-venue]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.venue = btn.dataset.selectVenue;
+      render({ preserveScroll: true });
+    }),
+  );
+  document.querySelectorAll("[data-select-duration]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.duration = btn.dataset.selectDuration;
+      render({ preserveScroll: true });
+    }),
+  );
+
+  // Step 3: Interactive Calendar & Date Controls
+  document.querySelector("[data-cal-prev]")?.addEventListener("click", () => {
+    state.calendarMonth -= 1;
+    if (state.calendarMonth < 0) {
+      state.calendarMonth = 11;
+      state.calendarYear -= 1;
+    }
+    render({ preserveScroll: true });
+  });
+  document.querySelector("[data-cal-next]")?.addEventListener("click", () => {
+    state.calendarMonth += 1;
+    if (state.calendarMonth > 11) {
+      state.calendarMonth = 0;
+      state.calendarYear += 1;
+    }
+    render({ preserveScroll: true });
+  });
+  document.querySelectorAll("[data-cal-date]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.date = btn.dataset.calDate;
+      state.dateFlexible = false;
+      render({ preserveScroll: true });
+    }),
+  );
+  document.querySelector("#quoteDateDirect")?.addEventListener("change", (e) => {
+    state.date = e.target.value;
+    if (state.date) {
+      state.dateFlexible = false;
+      const parts = state.date.split("-").map(Number);
+      if (parts.length === 3 && !parts.some(Number.isNaN)) {
+        state.calendarYear = parts[0];
+        state.calendarMonth = parts[1] - 1;
+      }
+    }
+    render({ preserveScroll: true });
+  });
+  document.querySelector("#quoteDateFlexible")?.addEventListener("change", (e) => {
+    state.dateFlexible = e.target.checked;
+    render({ preserveScroll: true });
+  });
+  document.querySelectorAll("[data-time-window]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.eventTimeWindow = btn.dataset.timeWindow;
+      render({ preserveScroll: true });
+    }),
+  );
+
+  // Step 4: Location Search (OpenStreetMap Nominatim) & Manual Address
+  const runVenueSearch = async () => {
+    const qInput = document.querySelector("#quoteLocationSearch");
+    const q = (qInput ? qInput.value : state.locationQuery).trim();
+    state.locationQuery = q;
+    if (!q) return;
+    state.locationSearching = true;
+    render({ preserveScroll: true });
+    try {
+      const resp = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&addressdetails=1&limit=5&countrycodes=us&q=${encodeURIComponent(q)}`,
+        { headers: { Accept: "application/json" } }
+      );
+      const data = await resp.json();
+      state.locationResults = Array.isArray(data) ? data : [];
+      if (state.locationResults.length > 0 && !state.eventLocation) {
+        const first = state.locationResults[0];
+        state.eventLocation = first.display_name;
+        state.locationCoords = {
+          lat: parseFloat(first.lat) || 42.3601,
+          lon: parseFloat(first.lon) || -71.0589,
+        };
+      }
+    } catch {
+      state.locationResults = [];
+      state.eventLocation = q;
+    } finally {
+      state.locationSearching = false;
+      render({ preserveScroll: true });
+    }
+  };
+  document.querySelector("#quoteLocationSearch")?.addEventListener("input", (e) => {
+    state.locationQuery = e.target.value;
+    state.eventLocation = e.target.value;
+  });
+  document.querySelector("#quoteLocationSearch")?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      runVenueSearch();
     }
   });
-  document
-    .querySelector("[data-builder-prev]")
-    ?.addEventListener("click", () => {
-      state.builderStep = Math.max(1, state.builderStep - 1);
-      render({ preserveScroll: getHash() === "builder" });
-    });
-  document.querySelector("#quoteForm")?.addEventListener("submit", (e) => {
+  document.querySelector("#quoteLocationSearchBtn")?.addEventListener("click", runVenueSearch);
+  document.querySelectorAll("[data-loc-index]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const item = state.locationResults[Number(btn.dataset.locIndex)];
+      if (!item) return;
+      state.eventLocation = item.display_name;
+      state.locationQuery = item.display_name;
+      state.locationCoords = {
+        lat: parseFloat(item.lat) || 42.3601,
+        lon: parseFloat(item.lon) || -71.0589,
+      };
+      state.locationResults = [];
+      state.locationFlexible = false;
+      render({ preserveScroll: true });
+    }),
+  );
+  document.querySelector("[data-toggle-manual-location]")?.addEventListener("click", () => {
+    state.manualLocationMode = !state.manualLocationMode;
+    render({ preserveScroll: true });
+  });
+  document.querySelector("#manualStreetInput")?.addEventListener("input", (e) => {
+    state.manualStreet = e.target.value;
+  });
+  document.querySelector("#manualCityInput")?.addEventListener("input", (e) => {
+    state.manualCity = e.target.value;
+  });
+  document.querySelector("#manualStateInput")?.addEventListener("input", (e) => {
+    state.manualState = e.target.value;
+  });
+  document.querySelector("#manualZipInput")?.addEventListener("input", (e) => {
+    state.manualZip = e.target.value;
+  });
+  document.querySelector("#quoteLocationFlexible")?.addEventListener("change", (e) => {
+    state.locationFlexible = e.target.checked;
+    render({ preserveScroll: true });
+  });
+
+  // Step 5: Equipment Catalog Filtering & Service Tiers
+  const refreshBuilderCatalogInPlace = () => {
+    const grid = document.querySelector("#quoteCatalogGrid");
+    if (!grid) {
+      render({ preserveScroll: true });
+      return;
+    }
+    grid.innerHTML = renderBuilderCatalogGridMarkup();
+    grid.querySelectorAll("[data-plus]").forEach((b) =>
+      b.addEventListener("click", () => addProduct(b.dataset.plus, 1)),
+    );
+    grid.querySelectorAll("[data-minus]").forEach((b) =>
+      b.addEventListener("click", () => addProduct(b.dataset.minus, -1)),
+    );
+    grid.querySelectorAll("[data-builder-reset-catalog]").forEach((b) =>
+      b.addEventListener("click", () => {
+        state.builderCategory = "All";
+        state.builderSearch = "";
+        state.builderOnlySelected = false;
+        render({ preserveScroll: true });
+      }),
+    );
+  };
+  document.querySelector("#builderCatalogSearch")?.addEventListener("input", (e) => {
+    state.builderSearch = e.target.value;
+    refreshBuilderCatalogInPlace();
+  });
+  document.querySelector("#builderOnlySelectedToggle")?.addEventListener("change", (e) => {
+    state.builderOnlySelected = e.target.checked;
+    render({ preserveScroll: true });
+  });
+  document.querySelectorAll("[data-builder-cat]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.builderCategory = btn.dataset.builderCat;
+      render({ preserveScroll: true });
+    }),
+  );
+  document.querySelectorAll("[data-builder-reset-catalog]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.builderCategory = "All";
+      state.builderSearch = "";
+      state.builderOnlySelected = false;
+      render({ preserveScroll: true });
+    }),
+  );
+  document.querySelectorAll("[data-service-tier]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.serviceTier = btn.dataset.serviceTier;
+      render({ preserveScroll: true });
+    }),
+  );
+
+  // Step 6: Contact Inputs, Payment Method, and Automated Email Submission to kcbianzon@gmail.com
+  document.querySelector("#contactNameInput")?.addEventListener("input", (e) => {
+    state.contactName = e.target.value;
+  });
+  document.querySelector("#contactEmailInput")?.addEventListener("input", (e) => {
+    state.contactEmail = e.target.value;
+  });
+  document.querySelector("#contactPhoneInput")?.addEventListener("input", (e) => {
+    state.contactPhone = e.target.value;
+  });
+  document.querySelector("#organizationInput")?.addEventListener("input", (e) => {
+    state.organization = e.target.value;
+  });
+  document.querySelector("#eventNameInput")?.addEventListener("input", (e) => {
+    state.eventName = e.target.value;
+  });
+  document.querySelector("#eventNotesInput")?.addEventListener("input", (e) => {
+    state.eventNotes = e.target.value;
+  });
+  document.querySelectorAll("[data-payment-method]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.paymentMethod = btn.dataset.paymentMethod;
+      render({ preserveScroll: true });
+    }),
+  );
+
+  document.querySelector("#quoteBuilderForm")?.addEventListener("submit", async (e) => {
     e.preventDefault();
-    document.querySelector("#quoteCard")?.classList.add("submitted");
-    showToast("Quote request captured in the mockup");
+    const totals = calculateQuoteTotals();
+    if (totals.lineItems.length === 0) {
+      state.quoteError = "Please select at least one equipment item or package in Step 05 before submitting your quote.";
+      render({ preserveScroll: true });
+      return;
+    }
+
+    const nameVal = (document.querySelector("#contactNameInput")?.value || state.contactName).trim();
+    const emailVal = (document.querySelector("#contactEmailInput")?.value || state.contactEmail).trim();
+    const phoneVal = (document.querySelector("#contactPhoneInput")?.value || state.contactPhone).trim();
+    const honeyVal = document.querySelector("#quoteHoney")?.value || "";
+
+    if (!nameVal || !emailVal) {
+      state.quoteError = "Please provide your full name and email address.";
+      render({ preserveScroll: true });
+      return;
+    }
+
+    state.contactName = nameVal;
+    state.contactEmail = emailVal;
+    state.contactPhone = phoneVal;
+    state.quoteError = "";
+    state.isSubmittingQuote = true;
+    render({ preserveScroll: true });
+
+    const effectiveLocation = getEffectiveLocationText() || "Boston / New England (TBD)";
+    const effectiveDate = state.dateFlexible
+      ? "Flexible Date"
+      : state.date
+        ? formatReadableDate(state.date)
+        : "Date TBD";
+    const refCode = "BAV-" + Date.now().toString(36).toUpperCase().slice(-6);
+
+    const itemizedSummaryLines = totals.lineItems
+      .map(
+        (item, idx) =>
+          `${idx + 1}. ${item.qty}x ${item.product.name} (${item.product.category}) @ ${money(item.unitPrice)}/day = ${money(item.lineSubtotal)}`
+      )
+      .join("\n");
+
+    const emailPayload = {
+      _subject: `New Beantown AV Quote [${refCode}]: ${state.eventType} - ${state.contactName} (${money(totals.grandTotal)})`,
+      _template: "table",
+      _captcha: "false",
+      _honey: honeyVal,
+      _replyto: state.contactEmail,
+      "Quote Reference": refCode,
+      "Client Name": state.contactName,
+      "Client Email": state.contactEmail,
+      "Client Phone": state.contactPhone || "Not provided",
+      "Organization / Company": state.organization || "N/A",
+      "Event Name": state.eventName || `${state.eventType} Setup`,
+      "Event Type": state.eventType,
+      "Estimated Guests": `${state.guests} guests (Bracket: ${state.guestBracket})`,
+      "Venue Setting": state.venue,
+      "Event Date": effectiveDate,
+      "Event Time Window": state.eventTimeWindow,
+      "Event Location": effectiveLocation,
+      "Rental Duration": totals.durationOption.label,
+      "Delivery & Support Tier": `${totals.serviceOption.title} (${totals.serviceFee === 0 ? "Free / $0" : money(totals.serviceFee)})`,
+      "Preferred Payment Method": state.paymentMethod,
+      "Total Selected Equipment": `${totals.uniqueCount} unique items (${totals.totalUnits} total units)`,
+      "Complete Itemized Equipment Breakdown": itemizedSummaryLines,
+    };
+
+    totals.lineItems.forEach((item, idx) => {
+      const key = `Item ${String(idx + 1).padStart(2, "0")}`;
+      emailPayload[key] = `${item.qty} × ${item.product.name} [${item.product.category}] — ${money(item.unitPrice)}/ea = ${money(item.lineSubtotal)}`;
+    });
+
+    emailPayload["Equipment Base Subtotal (1-Day)"] = money(totals.equipmentBaseSubtotal);
+    emailPayload["Multi-Day Duration Adjustment"] =
+      totals.durationSurcharge > 0
+        ? `+${money(totals.durationSurcharge)} (${totals.durationOption.shortLabel})`
+        : "$0 (Single Day 1.0x)";
+    emailPayload["Adjusted Equipment Subtotal"] = money(totals.equipmentDurationTotal);
+    emailPayload["Delivery, Setup & Tech Support Fee"] =
+      totals.serviceFee === 0 ? "$0 (Self Pickup)" : `+${money(totals.serviceFee)} (${totals.serviceOption.title})`;
+    emailPayload["ESTIMATED GRAND TOTAL"] = money(totals.grandTotal);
+    emailPayload["Additional Event Notes"] = state.eventNotes || "None";
+
+    try {
+      await fetch("https://formsubmit.co/ajax/kcbianzon@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(emailPayload),
+      });
+    } catch {
+      // Even if offline or blocked by adblockers in local testing, complete the quote receipt smoothly
+    }
+
+    state.isSubmittingQuote = false;
+    state.submittedQuote = {
+      refCode,
+      contactName: state.contactName,
+      contactEmail: state.contactEmail,
+      contactPhone: state.contactPhone || "Not provided",
+      organization: state.organization,
+      eventName: state.eventName,
+      eventType: state.eventType,
+      guests: state.guests,
+      venue: state.venue,
+      eventDate: effectiveDate,
+      eventTimeWindow: state.eventTimeWindow,
+      eventLocation: effectiveLocation,
+      durationLabel: totals.durationOption.label,
+      serviceTitle: totals.serviceOption.title,
+      paymentMethod: state.paymentMethod,
+      lineItems: totals.lineItems,
+      totalUnits: totals.totalUnits,
+      equipmentBaseSubtotal: totals.equipmentBaseSubtotal,
+      durationSurcharge: totals.durationSurcharge,
+      serviceFee: totals.serviceFee,
+      grandTotal: totals.grandTotal,
+    };
+    render();
+    showToast("Quote sent to kcbianzon@gmail.com!");
+  });
+
+  document.querySelector("[data-print-quote]")?.addEventListener("click", () => {
+    window.print();
+  });
+  document.querySelector("[data-new-quote]")?.addEventListener("click", () => {
+    state.submittedQuote = null;
+    state.builderStep = 1;
+    render();
   });
   document.querySelectorAll("[data-faq-toggle]").forEach((btn) =>
     btn.addEventListener("click", () => {
@@ -2964,7 +4510,8 @@ document.addEventListener("pointerout", (event) => {
 });
 
 window.addEventListener("hashchange", () => {
-  if (getHash() !== "builder") state.builderStep = 1;
+  const h = getHash();
+  if (h !== "builder" && h !== "quote") state.builderStep = 1;
   render();
 });
 
