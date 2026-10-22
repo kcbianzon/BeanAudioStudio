@@ -1852,31 +1852,37 @@ function aboutUsPage() {
 
       <!-- Section 2: What We Offer (React Bits Pro: About 12 Block) -->
       <section class="about-section about-offer-section about12-block reveal" aria-labelledby="aboutOfferHeading">
-        <div class="about12-card-wrapper">
-          <!-- Left Column: Eyebrow, White Quote Card, Narrative -->
-          <div class="about12-left">
-            <span class="about12-eyebrow" id="aboutOfferHeading">HOW WE OPERATE &bull; WHAT WE OFFER</span>
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">EQUIPMENT &amp; CAPABILITIES</span>
+            <h2 id="aboutOfferHeading">What We Offer</h2>
+          </div>
+          <p>We rent and support a wide range of professional audio visual equipment across Boston and New England.</p>
+        </div>
 
+        <div class="about12-card-wrapper">
+          <!-- Left Column: Quote Card, Narrative -->
+          <div class="about12-left">
             <div class="about12-quote-card">
               <blockquote class="about12-quote-text">
-                “A system feels calm when someone has already met its worst day.”
+                “An event feels calm when someone has already met its worst day. At Beantown, we prepare for every variable so your event runs effortlessly.”
               </blockquote>
               <div class="about12-author">
                 <img 
-                  src="assets/beantown/founder-avatar.jpg" 
-                  alt="Mara Voss" 
+                  src="assets/beantown/calvin-reid.jpg" 
+                  alt="Calvin Reid" 
                   class="about12-avatar"
                   loading="lazy"
                 >
                 <div class="about12-author-meta">
-                  <strong class="about12-author-name">Mara Voss</strong>
-                  <span class="about12-author-role">Co-founder</span>
+                  <strong class="about12-author-name">Calvin Reid</strong>
+                  <span class="about12-author-role">Founder</span>
                 </div>
               </div>
             </div>
 
             <p class="about12-left-desc">
-              Our values are constraints we accept on purpose. They decide how we enter an event, what equipment we refuse to compromise on, and the standard of execution we hand back to every client across Boston and New England.
+              Every piece of equipment is tested before delivery, and we’re always happy to explain how it works. Want us to run the show? We offer on-site tech support and full-service production across Boston, Massachusetts, and the greater New England area.
             </p>
           </div>
 

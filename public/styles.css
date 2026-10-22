@@ -6172,7 +6172,7 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 }
 
 /* ==========================================================================
-   Section 2: What We Offer (React Bits Pro: About 12 Block Redesign)
+   Section 2: What We Offer (React Bits Pro: About 12 Block - White Theme)
    ========================================================================== */
 .about12-block {
   position: relative;
@@ -6180,31 +6180,17 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 }
 
 .about12-card-wrapper {
-  background: #090a0f;
-  background: radial-gradient(circle at 15% 15%, #141722 0%, #090a0f 65%, #050608 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 32px;
-  padding: clamp(38px, 4.8vw, 68px) clamp(24px, 4vw, 56px);
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: clamp(32px, 4vw, 54px);
   display: grid;
   grid-template-columns: minmax(320px, 420px) 1fr;
-  gap: clamp(40px, 5vw, 76px);
+  gap: clamp(36px, 4.5vw, 64px);
   align-items: start;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-  color: #ffffff;
+  box-shadow: 0 8px 30px rgba(45, 37, 17, 0.04);
+  color: var(--ink);
   position: relative;
-  overflow: hidden;
-}
-
-.about12-card-wrapper::before {
-  content: "";
-  position: absolute;
-  top: -120px;
-  right: -120px;
-  width: 380px;
-  height: 380px;
-  background: radial-gradient(circle, rgba(223, 173, 42, 0.08) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
 }
 
 /* Left Column */
@@ -6213,44 +6199,34 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   flex-direction: column;
 }
 
-.about12-eyebrow {
-  font-family: 'Space Grotesk', 'Sora', sans-serif;
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  color: #8b96a5;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-  display: inline-block;
-}
-
 .about12-quote-card {
-  background: #ffffff;
-  color: #0b0c10;
-  border-radius: 24px;
-  padding: clamp(32px, 3.5vw, 42px) clamp(26px, 3vw, 36px) 34px;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  background: #fbf9f4;
+  color: var(--ink);
+  border-radius: 22px;
+  padding: clamp(28px, 3.2vw, 36px) clamp(22px, 2.5vw, 30px);
+  box-shadow: 0 4px 18px rgba(45, 37, 17, 0.04);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  border: 1px solid #ede6d6;
+  border-left: 4px solid #dfad2a;
   position: relative;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
 .about12-quote-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.42);
+  box-shadow: 0 10px 26px rgba(45, 37, 17, 0.08);
 }
 
 .about12-quote-text {
   font-family: 'Sora', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(23px, 2.2vw, 29px);
-  font-weight: 800;
-  line-height: 1.25;
-  letter-spacing: -0.035em;
-  color: #0b0c10;
-  margin: 0 0 28px;
+  font-size: clamp(20px, 2vw, 24px);
+  font-weight: 700;
+  line-height: 1.34;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin: 0 0 24px;
 }
 
 .about12-author {
@@ -6260,12 +6236,12 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 }
 
 .about12-avatar {
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  border: 1.5px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(45, 37, 17, 0.12);
+  border: 1.5px solid rgba(223, 173, 42, 0.35);
   flex-shrink: 0;
 }
 
@@ -6277,23 +6253,24 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 
 .about12-author-name {
   font-family: 'Sora', sans-serif;
-  font-size: 14.5px;
+  font-size: 15px;
   font-weight: 700;
-  color: #0b0c10;
+  color: var(--ink);
   line-height: 1.2;
 }
 
 .about12-author-role {
   font-size: 13px;
-  color: #64748b;
+  color: #8c733e;
+  font-weight: 600;
   line-height: 1.2;
 }
 
 .about12-left-desc {
-  font-size: 14.5px;
-  line-height: 1.65;
-  color: #94a3b8;
-  margin: 28px 0 0;
+  font-size: 15px;
+  line-height: 1.68;
+  color: var(--muted);
+  margin: 24px 0 0;
   max-width: 420px;
 }
 
@@ -6305,7 +6282,7 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 }
 
 .about12-items-list {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid var(--line);
   display: flex;
   flex-direction: column;
 }
@@ -6315,21 +6292,21 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   grid-template-columns: 46px 1fr 28px;
   align-items: start;
   gap: 16px;
-  padding: 26px 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 24px 8px;
+  border-bottom: 1px solid var(--line);
   transition: background 0.22s ease, border-color 0.22s ease;
   border-radius: 10px;
 }
 
 .about12-item:hover {
-  background: rgba(255, 255, 255, 0.03);
+  background: #fbf9f4;
 }
 
 .about12-num {
   font-family: 'Space Grotesk', 'Sora', monospace;
   font-size: 15px;
-  font-weight: 600;
-  color: #64748b;
+  font-weight: 700;
+  color: #bfa15f;
   padding-top: 3px;
   letter-spacing: -0.02em;
 }
@@ -6342,9 +6319,9 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 
 .about12-title {
   font-family: 'Sora', -apple-system, sans-serif;
-  font-size: clamp(20px, 1.9vw, 23px);
+  font-size: clamp(19px, 1.8vw, 22px);
   font-weight: 700;
-  color: #f8fafc;
+  color: var(--ink);
   letter-spacing: -0.025em;
   margin: 0;
   line-height: 1.3;
@@ -6352,13 +6329,13 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 }
 
 .about12-item:hover .about12-title {
-  color: #ffcf40;
+  color: #b8860b;
 }
 
 .about12-desc {
   font-size: 14px;
   line-height: 1.62;
-  color: #94a3b8;
+  color: var(--muted);
   margin: 0;
 }
 
@@ -6372,13 +6349,13 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 .about12-icon {
   width: 22px;
   height: 22px;
-  color: #64748b;
+  color: #9c8a66;
   transition: color 0.22s ease, transform 0.22s ease;
   flex-shrink: 0;
 }
 
 .about12-item:hover .about12-icon {
-  color: #ffcf40;
+  color: #dfad2a;
   transform: translateY(-2px);
 }
 
@@ -6386,8 +6363,8 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 @media (max-width: 960px) {
   .about12-card-wrapper {
     grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 36px 24px;
+    gap: 36px;
+    padding: 28px 20px;
   }
   .about12-left-desc {
     max-width: 100%;
@@ -6396,21 +6373,21 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 
 @media (max-width: 600px) {
   .about12-card-wrapper {
-    padding: 26px 16px;
-    border-radius: 24px;
+    padding: 22px 16px;
+    border-radius: 20px;
   }
   .about12-quote-card {
-    padding: 26px 20px 22px;
-    border-radius: 18px;
+    padding: 22px 18px 20px;
+    border-radius: 16px;
   }
   .about12-quote-text {
-    font-size: 20px;
-    margin-bottom: 20px;
+    font-size: 19px;
+    margin-bottom: 18px;
   }
   .about12-item {
     grid-template-columns: 32px 1fr 22px;
     gap: 12px;
-    padding: 20px 4px;
+    padding: 18px 4px;
   }
   .about12-num {
     font-size: 13.5px;
