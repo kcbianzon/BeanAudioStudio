@@ -1448,7 +1448,7 @@ function faqSection() {
     {
       category: "Booking Lead Time",
       question: "How far in advance should we reserve our rentals?",
-      answer: "We recommend booking 2 to 4 weeks in advance, especially for busy Friday and Saturday dates during peak wedding and graduation seasons (May through October) and corporate holiday galas (November–December). That said, we maintain a deep Boston inventory and do our best to accommodate short-notice, same-week, and emergency rentals whenever equipment and crew are available. Call or text us directly at (617) 286-4757 for urgent requests.",
+      answer: "We recommend booking 2 to 4 weeks in advance, especially for busy Friday and Saturday dates during peak wedding and graduation seasons (May through October) and corporate holiday galas (November–December). That said, we maintain a deep Boston inventory and do our best to accommodate short-notice, same-week, and emergency rentals whenever equipment and crew are available. Call or text us directly at (978) 601-5473 for urgent requests.",
     },
     {
       category: "Weather & Outdoor",
@@ -1508,11 +1508,11 @@ function faqSection() {
           <p class="faq9-contact-copy">Every event and venue has unique logistics. Whether you need help calculating acoustic coverage for 200 guests, checking ceiling clearance for an LED wall, or coordinating a strict 60-minute load-in, our specialists are ready to help.</p>
           
           <div class="faq9-channels">
-            <a href="tel:+16172864757" class="faq9-channel-item">
+            <a href="tel:+19786015473" class="faq9-channel-item">
               <span class="faq9-channel-icon" aria-hidden="true">📞</span>
               <div class="faq9-channel-info">
                 <span class="faq9-channel-label">Call or text our Boston desk</span>
-                <strong>(617) 286-4757</strong>
+                <strong>(978) 601-5473</strong>
                 <small>Mon–Fri 8am–5pm · Weekend on-call support</small>
               </div>
             </a>
@@ -2208,7 +2208,7 @@ function aboutUsPage() {
           </p>
           <div class="about-cta-actions">
             <a href="#quote" class="btn btn-dark">Get a Free Quote →</a>
-            <a href="tel:+16172864757" class="btn btn-light">Call (617) 286-4757</a>
+            <a href="tel:+19786015473" class="btn btn-light">Call (978) 601-5473</a>
             <a href="#rentals" class="btn btn-light">Browse Catalog</a>
           </div>
         </div>
@@ -2966,7 +2966,7 @@ function renderReviewAndSubmitStep(totals) {
         </div>
         <div class="field">
           <label for="contactPhoneInput">Phone Number *</label>
-          <input id="contactPhoneInput" class="input" type="tel" required placeholder="(617) 555-0198" value="${escapeHtml(state.contactPhone)}">
+          <input id="contactPhoneInput" class="input" type="tel" required placeholder="(978) 601-5473" value="${escapeHtml(state.contactPhone)}">
         </div>
         <div class="field">
           <label for="organizationInput">Company / School / Organization</label>
