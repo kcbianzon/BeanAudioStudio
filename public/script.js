@@ -1810,11 +1810,6 @@ function aboutUsPage() {
         <span class="eyebrow orange">BOSTON • NEW ENGLAND • EVENT AV</span>
         <h1 class="about-hero-title">BEST AUDIO VISUAL<br>RENTALS IN BOSTON</h1>
         <p class="about-hero-lead">Commercial-grade equipment, easy booking, and hands-on service that puts people first across Greater Boston and all of New England.</p>
-        <div class="about-hero-badges">
-          <span class="about-pill">✓ On-Time Delivery & Setup</span>
-          <span class="about-pill">✓ Dedicated On-Site Technicians</span>
-          <span class="about-pill">✓ Transparent Fixed Pricing</span>
-        </div>
       </div>
     </header>
 
