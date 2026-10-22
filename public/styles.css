@@ -4748,110 +4748,273 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   }
 }
 
-/* Client stories — rotating half-moon testimonial wheel. */
-.tw-section {
+/* Client stories — Scroll Bend vertical testimonial strip. */
+.tw-section.sb-section {
   position: relative;
-  padding-top: clamp(40px, 4vw, 70px);
-  padding-bottom: clamp(60px, 6vw, 100px);
+  min-height: 175vh;
+  padding-top: clamp(32px, 4vw, 64px);
+  padding-bottom: clamp(48px, 5vw, 84px);
   overflow: visible;
 }
-.tw-layout {
-  position: relative;
+
+.tw-layout.sb-layout {
+  position: sticky;
+  top: 84px;
   display: grid;
-  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  grid-template-columns: minmax(360px, 476px) minmax(0, 1fr);
   align-items: center;
-  gap: clamp(36px, 5vw, 80px);
-  min-height: clamp(760px, 62vw, 900px);
+  gap: clamp(44px, 7vw, 112px);
+  height: calc(100vh - 104px);
+  min-height: 680px;
+  max-height: 820px;
 }
-/* The stage bleeds to the left edge of the viewport, held safely on the left side so it never collides with text. */
-.tw-stage {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: calc(50% - 50vw);
-  width: calc(50vw - 50% + 290px);
-  max-width: 43vw;
-  overflow: visible;
-  pointer-events: none;
+
+.tw-stage.sb-stage {
+  position: relative;
+  width: calc(100% + 112px);
+  max-width: 588px;
+  height: 100%;
+  max-height: 760px;
+  overflow: hidden;
+  padding: 6px 56px;
+  margin-inline: -56px;
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #000 5%,
+    #000 95%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #000 5%,
+    #000 95%,
+    transparent 100%
+  );
+  perspective: 960px;
 }
-.tw-wheel {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  will-change: transform;
-  pointer-events: none;
-}
-.tw-card {
-  position: absolute;
-  top: 0;
-  left: 0;
+
+.tw-wheel.sb-track {
+  position: relative;
   display: flex;
-  width: var(--tw-card-w, 205px);
-  height: var(--tw-card-h, 275px);
   flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  height: auto;
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+.tw-card.sb-card {
+  position: relative;
+  top: auto;
+  left: auto;
+  display: grid;
+  grid-template-columns: 41% 59%;
+  width: 100%;
+  min-height: 224px;
+  height: auto;
   overflow: hidden;
   border: 1px solid #e5ded0;
-  border-radius: 20px;
+  border-radius: 22px;
   background: var(--paper);
   color: var(--ink);
-  box-shadow: 0 14px 32px rgba(50, 42, 20, .11);
-  /* Each card sits on the circle and turns with it, so it stays tangent to the arc. */
-  transform: rotate(var(--a, 0deg)) translateX(var(--tw-r, 620px)) translate(-50%, -50%);
-  pointer-events: auto;
-  will-change: transform, opacity;
+  box-shadow: 0 14px 34px rgba(50, 42, 20, 0.085);
+  transform: none;
+  transform-origin: center center;
+  will-change: transform;
   backface-visibility: hidden;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease;
 }
-.tw-photo { flex: 0 0 34%; overflow: hidden; background: #e8e1d2; }
-.tw-photo img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
-.tw-body { display: flex; min-height: 0; flex: 1; flex-direction: column; gap: 7px; padding: 12px 14px 13px; }
-.tw-stars { color: #DFAD2A; font: 700 14px/1 Inter, sans-serif; letter-spacing: .08em; }
-.tw-body > p {
-  display: -webkit-box;
-  margin: 0;
+
+.tw-card.sb-card:hover {
+  border-color: #dfad2a;
+  box-shadow: 0 18px 40px rgba(50, 42, 20, 0.13);
+}
+
+.sb-card .tw-photo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 224px;
   overflow: hidden;
-  color: #45423a;
-  font: 500 12.5px/1.42 Inter, sans-serif;
-  -webkit-line-clamp: 3;
+  background: #e8e1d2;
+}
+
+.sb-card .tw-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+  transform: scale(1.03);
+  will-change: transform;
+}
+
+.sb-card .tw-body {
+  display: flex;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 20px 22px 18px;
+}
+
+.sb-card .tw-stars {
+  color: #DFAD2A;
+  font: 700 15px/1 Inter, sans-serif;
+  letter-spacing: 0.1em;
+}
+
+.sb-card .tw-body > p {
+  margin: 0;
+  color: #3f3c34;
+  font: 500 14px/1.52 Inter, sans-serif;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
 }
-.tw-person { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 8px; border-top: 1px solid #eee8db; }
-.tw-avatar { display: grid; width: 28px; height: 28px; flex: 0 0 auto; place-items: center; border-radius: 50%; background: #ffe08a; color: #3b2f0b; font: 800 10px Inter, sans-serif; letter-spacing: .02em; }
-.tw-person strong { color: var(--ink); font: 700 11.5px/1.2 Inter, sans-serif; }
-.tw-person small { margin-top: 1px; color: var(--muted); font: 500 10.5px/1.2 Inter, sans-serif; }
-.testimonial-copy { grid-column: 2; max-width: 560px; }
-.testimonial-copy .eyebrow { color: #75601d; }
-.testimonial-copy h2 { margin: 14px 0 22px; font-size: clamp(38px, 4.2vw, 64px); line-height: 1.02; letter-spacing: -.05em; }
-.testimonial-copy h2 span { color: #DFAD2A; }
-.testimonial-copy > p { max-width: 500px; margin: 0; color: var(--muted); font-size: clamp(17px, 1.5vw, 21px); line-height: 1.6; }
-@media (max-width: 900px) {
-  .tw-section { padding-top: 30px; padding-bottom: 50px; }
-  .tw-layout { grid-template-columns: 1fr; gap: 20px; min-height: 0; }
-  .testimonial-copy { grid-column: 1; grid-row: 1; margin-inline: auto; text-align: center; }
-  .testimonial-copy > p { margin-inline: auto; }
-  .tw-stage {
+
+.sb-card .tw-person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 11px;
+  border-top: 1px solid #eee8db;
+}
+
+.sb-card .tw-avatar {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: #ffe08a;
+  color: #3b2f0b;
+  font: 800 11px Inter, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.sb-card .tw-person-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sb-card .tw-person strong {
+  display: block;
+  color: var(--ink);
+  font: 700 13px/1.2 Inter, sans-serif;
+}
+
+.sb-card .tw-person small {
+  display: block;
+  margin: 0;
+  color: var(--muted);
+  font: 500 11.5px/1.2 Inter, sans-serif;
+}
+
+.testimonial-copy {
+  grid-column: 2;
+  max-width: 580px;
+}
+
+.testimonial-copy .eyebrow {
+  color: #75601d;
+}
+
+.testimonial-copy h2 {
+  margin: 14px 0 22px;
+  font-size: clamp(42px, 4.5vw, 66px);
+  line-height: 1.03;
+  letter-spacing: -0.05em;
+}
+
+.testimonial-copy h2 span {
+  color: #DFAD2A;
+}
+
+.testimonial-copy > p {
+  max-width: 500px;
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(17px, 1.45vw, 20px);
+  line-height: 1.6;
+}
+
+@media (max-width: 960px) {
+  .tw-section.sb-section {
+    min-height: 0;
+    padding-top: 36px;
+    padding-bottom: 54px;
+  }
+  .tw-layout.sb-layout {
     position: relative;
     top: auto;
-    bottom: auto;
-    left: auto;
+    height: auto;
+    max-height: none;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    min-height: 0;
+  }
+  .testimonial-copy {
+    grid-column: 1;
+    grid-row: 1;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .testimonial-copy > p {
+    margin-inline: auto;
+  }
+  .tw-stage.sb-stage {
     grid-row: 2;
-    width: 100vw;
-    max-width: 100vw;
-    height: 560px;
-    margin-left: calc(50% - 50vw);
-    overflow: visible;
+    max-width: 500px;
+    height: 620px;
+    margin-inline: auto;
   }
 }
+
 @media (max-width: 560px) {
-  .testimonial-copy h2 { font-size: clamp(38px, 10vw, 52px); }
-  .tw-stage { height: 520px; }
-  .tw-body { gap: 6px; padding: 10px 12px 11px; }
-  .tw-body > p { font-size: 12px; line-height: 1.4; -webkit-line-clamp: 3; }
-  .tw-photo { flex-basis: 33%; }
+  .testimonial-copy h2 {
+    font-size: clamp(36px, 10vw, 50px);
+  }
+  .tw-stage.sb-stage {
+    height: 540px;
+    padding-inline: 8px;
+    margin-inline: -8px;
+  }
+  .tw-card.sb-card {
+    grid-template-columns: 38% 62%;
+    min-height: 196px;
+  }
+  .sb-card .tw-photo {
+    min-height: 196px;
+  }
+  .sb-card .tw-body {
+    gap: 8px;
+    padding: 15px 16px 14px;
+  }
+  .sb-card .tw-body > p {
+    font-size: 13px;
+    line-height: 1.42;
+    -webkit-line-clamp: 3;
+  }
 }
+
 @media (prefers-reduced-motion: reduce) {
-  .tw-wheel { will-change: auto; }
+  .tw-wheel.sb-track,
+  .tw-card.sb-card,
+  .sb-card .tw-photo img {
+    will-change: auto;
+    transform: none !important;
+  }
 }
 
 /* Give the hero grid more breathing room and pull the story cards into a staggered frame. */

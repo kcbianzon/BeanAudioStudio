@@ -1066,11 +1066,39 @@ const testimonialSlots = [
   { quote: "Powerful, clean sound that filled the whole venue. We will book again.", who: "Event organizer", place: "New England", photo: "speaker-wall.webp", initials: "EO" },
 ];
 function testimonialCard(slot, index) {
-  return `<article class="tw-card" style="--a:${index * 360 / testimonialSlots.length}deg"><div class="tw-photo"><img src="assets/beantown/${slot.photo}" alt="" width="520" height="360" decoding="async" draggable="false"></div><div class="tw-body"><div class="tw-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div><p>“${escapeHtml(slot.quote)}”</p><div class="tw-person"><span class="tw-avatar" aria-hidden="true">${escapeHtml(slot.initials)}</span><div><strong>${escapeHtml(slot.who)}</strong><small>${escapeHtml(slot.place)}</small></div></div></div></article>`;
+  return `<article class="tw-card sb-card" data-sb-card data-index="${index}">
+    <div class="tw-photo">
+      <img src="assets/beantown/${slot.photo}" alt="${escapeHtml(slot.who)}" width="520" height="360" decoding="async" draggable="false">
+    </div>
+    <div class="tw-body">
+      <div class="tw-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div>
+      <p>“${escapeHtml(slot.quote)}”</p>
+      <div class="tw-person">
+        <span class="tw-avatar" aria-hidden="true">${escapeHtml(slot.initials)}</span>
+        <div class="tw-person-meta">
+          <strong>${escapeHtml(slot.who)}</strong>
+          <small>${escapeHtml(slot.place)}</small>
+        </div>
+      </div>
+    </div>
+  </article>`;
 }
+
 function testimonialSection() {
-  const cards = testimonialSlots.map(testimonialCard).join("");
-  return `<section class="section tw-section" aria-labelledby="twHeading"><div class="tw-layout"><div class="tw-stage" data-tw-stage role="region" aria-label="Rotating client testimonials"><div class="tw-wheel" data-tw-wheel>${cards}</div></div><div class="testimonial-copy"><span class="eyebrow">CLIENT STORIES</span><h2 id="twHeading">What <span>Clients</span> Say<br>About Our <span>Setup</span></h2><p>Thoughtful support, dependable equipment, and a smoother event from setup to wrap.</p></div></div></section>`;
+  const doubled = [...testimonialSlots, ...testimonialSlots];
+  const cards = doubled.map((slot, idx) => testimonialCard(slot, idx)).join("");
+  return `<section class="section tw-section sb-section" data-sb-section aria-labelledby="twHeading">
+    <div class="tw-layout sb-layout">
+      <div class="tw-stage sb-stage" data-tw-stage role="region" aria-label="Client testimonials strip">
+        <div class="tw-wheel sb-track" data-tw-wheel>${cards}</div>
+      </div>
+      <div class="testimonial-copy">
+        <span class="eyebrow">CLIENT STORIES</span>
+        <h2 id="twHeading">What <span>Clients</span> Say<br>About Our <span>Setup</span></h2>
+        <p>Thoughtful support, dependable equipment, and a smoother event from setup to wrap.</p>
+      </div>
+    </div>
+  </section>`;
 }
 
 let testimonialWheelCleanup = null;
@@ -1078,87 +1106,108 @@ function initTestimonialWheel() {
   testimonialWheelCleanup?.();
   testimonialWheelCleanup = null;
   const stage = document.querySelector("[data-tw-stage]");
-  const wheel = stage?.querySelector("[data-tw-wheel]");
-  if (!stage || !wheel) return;
+  const track = stage?.querySelector("[data-tw-wheel]");
+  if (!stage || !track) return;
 
-  const cards = Array.from(wheel.querySelectorAll(".tw-card"));
-  const count = cards.length;
-  if (!count) return;
-  const step = 360 / count;
-  const secondsPerCard = 4.6; // steady pace
-  const degreesPerSecond = step / secondsPerCard;
+  const cards = Array.from(track.querySelectorAll(".sb-card"));
+  const totalCount = cards.length;
+  const halfCount = Math.floor(totalCount / 2);
+  if (!halfCount) return;
+
+  const images = cards.map((c) => c.querySelector(".tw-photo img"));
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let angle = 0;
-  let speed = 1;
-  let targetSpeed = 1;
-  let lastTime = 0;
-  let raf = 0;
+
+  let offsetY = 0;
+  let singleSetHeight = 0;
+  let cardHeights = [];
+  let cardTops = [];
+  let stageHeight = 740;
+  let lastTime = performance.now();
+  let lastScrollY = window.scrollY;
+  let targetBend = 0;
+  let currentBend = 0;
+  let scrollBoost = 0;
+  let hoverFactor = 1;
+  let targetHoverFactor = 1;
   let inView = true;
-  let originX = 0;
-  let originY = 0;
-  let isNarrow = false;
+  let raf = 0;
 
-  const updateCardVisibilities = () => {
-    // Current angle is `angle` (decreases counter-clockwise)
-    // Card i net angle relative to 3 o'clock:
-    const cutOff = isNarrow ? 66 : 62;
-    const fadeStart = isNarrow ? 40 : 36;
-    for (let i = 0; i < count; i++) {
-      const card = cards[i];
-      const raw = ((i * step + angle) % 360 + 360) % 360;
-      const phi = raw > 180 ? raw - 360 : raw; // [-180, 180]
-      const absPhi = Math.abs(phi);
+  const measure = () => {
+    stageHeight = stage.clientHeight || 740;
+    const gap = parseFloat(getComputedStyle(track).rowGap || getComputedStyle(track).gap || "24") || 24;
+    cardHeights = [];
+    cardTops = [];
+    let y = 0;
+    for (let i = 0; i < totalCount; i++) {
+      const h = cards[i].offsetHeight || 224;
+      cardHeights.push(h);
+      cardTops.push(y);
+      y += h + gap;
+    }
+    singleSetHeight = cardTops[halfCount] || y / 2;
+  };
 
-      if (absPhi >= cutOff) {
-        if (card.style.visibility !== "hidden") {
-          card.style.visibility = "hidden";
-          card.style.opacity = "0";
-          card.style.pointerEvents = "none";
-        }
-      } else {
-        if (card.style.visibility !== "visible") {
-          card.style.visibility = "visible";
-          card.style.pointerEvents = "auto";
-        }
-        if (absPhi <= fadeStart) {
-          card.style.opacity = "1";
+  const applyScrollBend = () => {
+    if (!singleSetHeight) measure();
+    if (!singleSetHeight) return;
+
+    offsetY = ((offsetY % singleSetHeight) + singleSetHeight) % singleSetHeight;
+    track.style.transform = `translate3d(0, ${-offsetY.toFixed(2)}px, 0)`;
+
+    // v in [-1, 1]: positive = bulge (scrolling down), negative = pinch (scrolling up)
+    const v = Math.max(-1, Math.min(1, currentBend));
+    const absV = Math.abs(v);
+    const halfStage = stageHeight * 0.5;
+
+    for (let i = 0; i < totalCount; i++) {
+      const cardCenterY = cardTops[i] + cardHeights[i] * 0.5 - offsetY;
+      if (cardCenterY < -380 || cardCenterY > stageHeight + 380) continue;
+
+      const u = Math.max(-1.35, Math.min(1.35, (cardCenterY - halfStage) / halfStage));
+      const clampedU = Math.max(-1, Math.min(1, u));
+      const bell = Math.cos(clampedU * (Math.PI * 0.5)); // 1 at middle card, 0 at top/bottom
+      const profile = 1 - 1.55 * u * u; // +1 at middle, negative at top/bottom
+
+      // React Bits "Scroll Bend" — bulges or pinches with scroll speed
+      const scaleX = 1 + v * 0.165 * profile;
+      const scaleY = 1 + absV * 0.065 * bell - absV * 0.035 * (u * u);
+      const rotateX = -u * v * 20;
+      const skewY = u * v * 3.4;
+      const translateZ = bell * v * 46;
+      const shiftX = v * 12 * profile;
+
+      cards[i].style.transform =
+        absV > 0.002
+          ? `perspective(880px) translate3d(${shiftX.toFixed(1)}px, 0, ${translateZ.toFixed(1)}px) rotateX(${rotateX.toFixed(2)}deg) skewY(${skewY.toFixed(2)}deg) scale3d(${scaleX.toFixed(4)}, ${scaleY.toFixed(4)}, 1)`
+          : "none";
+
+      const img = images[i];
+      if (img) {
+        if (absV > 0.002) {
+          const imgScale = 1.04 + absV * 0.14 * bell;
+          const imgShiftY = -u * v * 16;
+          img.style.transform = `translate3d(0, ${imgShiftY.toFixed(1)}px, 0) scale(${imgScale.toFixed(3)})`;
         } else {
-          const t = (cutOff - absPhi) / (cutOff - fadeStart);
-          card.style.opacity = Math.max(0, Math.min(1, t)).toFixed(3);
+          img.style.transform = "scale(1.03)";
         }
       }
     }
   };
 
-  const apply = () => {
-    wheel.style.transform = `translate3d(${originX}px, ${originY}px, 0) rotate(${angle}deg)`;
-    updateCardVisibilities();
+  const onWindowScroll = () => {
+    const nowY = window.scrollY;
+    const dy = nowY - lastScrollY;
+    lastScrollY = nowY;
+    if (!inView || reducedMotion) return;
+    targetBend = Math.max(-1.35, Math.min(1.35, targetBend + dy * 0.022));
+    scrollBoost = Math.max(-520, Math.min(520, scrollBoost + dy * 2.8));
   };
 
-  const layout = () => {
-    const width = stage.clientWidth;
-    const height = stage.clientHeight;
-    if (!width || !height) return;
-    isNarrow = width < 760;
-    // Refined card size: smaller so the arc curvature is dramatically emphasized:
-    const cardWidth = isNarrow
-      ? Math.max(160, Math.min(192, width * 0.48))
-      : Math.max(195, Math.min(218, height * 0.25));
-    const cardHeight = Math.round(cardWidth * (isNarrow ? 1.40 : 1.35));
-    const gap = 14;
-    const sine = Math.sin(Math.PI / count);
-    // Radius at which neighboring cards maintain proper clearance:
-    const radius = Math.ceil((cardHeight + gap + cardWidth * sine) / (2 * sine));
-    
-    // Position safely on the left so cards never overlap the text:
-    const rightEdge = isNarrow ? (width + cardWidth) / 2 : width - 24;
-    originX = rightEdge - radius - cardWidth / 2;
-    originY = height / 2;
-
-    wheel.style.setProperty("--tw-r", `${radius}px`);
-    wheel.style.setProperty("--tw-card-w", `${cardWidth}px`);
-    wheel.style.setProperty("--tw-card-h", `${cardHeight}px`);
-    apply();
+  const onStageWheel = (e) => {
+    if (reducedMotion) return;
+    const dy = e.deltaY || 0;
+    targetBend = Math.max(-1.35, Math.min(1.35, targetBend + dy * 0.015));
+    scrollBoost = Math.max(-520, Math.min(520, scrollBoost + dy * 2.0));
   };
 
   const tick = (now) => {
@@ -1166,56 +1215,77 @@ function initTestimonialWheel() {
       testimonialWheelCleanup?.();
       return;
     }
-    const delta = Math.min(0.05, (now - lastTime) / 1000 || 0);
+    const dt = Math.min(0.05, (now - lastTime) / 1000 || 0.016);
     lastTime = now;
-    speed += (targetSpeed - speed) * Math.min(1, delta * 6);
-    angle -= degreesPerSecond * speed * delta;
-    if (angle <= -360) angle += 360;
-    apply();
+
+    hoverFactor += (targetHoverFactor - hoverFactor) * Math.min(1, dt * 8);
+    currentBend += (targetBend - currentBend) * Math.min(1, dt * 13);
+    targetBend *= Math.pow(0.05, dt);
+    if (Math.abs(targetBend) < 0.001) targetBend = 0;
+    if (Math.abs(currentBend) < 0.001 && targetBend === 0) currentBend = 0;
+
+    scrollBoost *= Math.pow(0.06, dt);
+    if (Math.abs(scrollBoost) < 0.2) scrollBoost = 0;
+
+    const baseSpeed = 32 * hoverFactor;
+    offsetY += (baseSpeed + scrollBoost) * dt;
+
+    applyScrollBend();
     raf = requestAnimationFrame(tick);
   };
+
   const start = () => {
     if (reducedMotion || raf || !inView) return;
     lastTime = performance.now();
+    lastScrollY = window.scrollY;
     raf = requestAnimationFrame(tick);
   };
+
   const stop = () => {
     cancelAnimationFrame(raf);
     raf = 0;
   };
 
-  const onEnter = (event) => { if (event.pointerType === "mouse") targetSpeed = 0; };
-  const onLeave = () => { targetSpeed = 1; };
-  const onTouchStart = () => { targetSpeed = 0; };
-  const onTouchEnd = () => { targetSpeed = 1; };
+  const onEnter = (e) => {
+    if (e.pointerType === "mouse") targetHoverFactor = 0.3;
+  };
+  const onLeave = () => {
+    targetHoverFactor = 1;
+  };
 
+  window.addEventListener("scroll", onWindowScroll, { passive: true });
+  stage.addEventListener("wheel", onStageWheel, { passive: true });
   stage.addEventListener("pointerenter", onEnter);
   stage.addEventListener("pointerleave", onLeave);
-  stage.addEventListener("touchstart", onTouchStart, { passive: true });
-  stage.addEventListener("touchend", onTouchEnd, { passive: true });
 
-  const resizeObserver = "ResizeObserver" in window ? new ResizeObserver(layout) : null;
+  const resizeObserver = "ResizeObserver" in window ? new ResizeObserver(() => {
+    measure();
+    applyScrollBend();
+  }) : null;
   resizeObserver?.observe(stage);
+
   const viewObserver = "IntersectionObserver" in window
     ? new IntersectionObserver(([entry]) => {
         inView = entry.isIntersecting;
-        if (inView) start(); else stop();
-      }, { rootMargin: "120px 0px" })
+        if (inView) start();
+        else stop();
+      }, { rootMargin: "160px 0px" })
     : null;
   viewObserver?.observe(stage);
 
   testimonialWheelCleanup = () => {
     stop();
+    window.removeEventListener("scroll", onWindowScroll);
+    stage.removeEventListener("wheel", onStageWheel);
     stage.removeEventListener("pointerenter", onEnter);
     stage.removeEventListener("pointerleave", onLeave);
-    stage.removeEventListener("touchstart", onTouchStart);
-    stage.removeEventListener("touchend", onTouchEnd);
     resizeObserver?.disconnect();
     viewObserver?.disconnect();
     testimonialWheelCleanup = null;
   };
 
-  layout();
+  measure();
+  applyScrollBend();
   start();
 }
 function faqSection() {
