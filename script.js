@@ -1114,100 +1114,31 @@ function initTestimonialWheel() {
   const halfCount = Math.floor(totalCount / 2);
   if (!halfCount) return;
 
-  const images = cards.map((c) => c.querySelector(".tw-photo img"));
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   let offsetY = 0;
   let singleSetHeight = 0;
-  let cardHeights = [];
-  let cardTops = [];
-  let stageHeight = 740;
   let lastTime = performance.now();
-  let lastScrollY = window.scrollY;
-  let targetBend = 0;
-  let currentBend = 0;
-  let scrollBoost = 0;
   let hoverFactor = 1;
   let targetHoverFactor = 1;
   let inView = true;
   let raf = 0;
 
   const measure = () => {
-    stageHeight = stage.clientHeight || 740;
     const gap = parseFloat(getComputedStyle(track).rowGap || getComputedStyle(track).gap || "24") || 24;
-    cardHeights = [];
-    cardTops = [];
     let y = 0;
-    for (let i = 0; i < totalCount; i++) {
+    for (let i = 0; i < halfCount; i++) {
       const h = cards[i].offsetHeight || 224;
-      cardHeights.push(h);
-      cardTops.push(y);
       y += h + gap;
     }
-    singleSetHeight = cardTops[halfCount] || y / 2;
+    singleSetHeight = y;
   };
 
-  const applyScrollBend = () => {
+  const applyPosition = () => {
     if (!singleSetHeight) measure();
     if (!singleSetHeight) return;
-
     offsetY = ((offsetY % singleSetHeight) + singleSetHeight) % singleSetHeight;
     track.style.transform = `translate3d(0, ${-offsetY.toFixed(2)}px, 0)`;
-
-    // v in [-1, 1]: positive = bulge (scrolling down), negative = pinch (scrolling up)
-    const v = Math.max(-1, Math.min(1, currentBend));
-    const absV = Math.abs(v);
-    const halfStage = stageHeight * 0.5;
-
-    for (let i = 0; i < totalCount; i++) {
-      const cardCenterY = cardTops[i] + cardHeights[i] * 0.5 - offsetY;
-      if (cardCenterY < -380 || cardCenterY > stageHeight + 380) continue;
-
-      const u = Math.max(-1.35, Math.min(1.35, (cardCenterY - halfStage) / halfStage));
-      const clampedU = Math.max(-1, Math.min(1, u));
-      const bell = Math.cos(clampedU * (Math.PI * 0.5)); // 1 at middle card, 0 at top/bottom
-      const profile = 1 - 1.55 * u * u; // +1 at middle, negative at top/bottom
-
-      // React Bits "Scroll Bend" — bulges or pinches with scroll speed
-      const scaleX = 1 + v * 0.165 * profile;
-      const scaleY = 1 + absV * 0.065 * bell - absV * 0.035 * (u * u);
-      const rotateX = -u * v * 20;
-      const skewY = u * v * 3.4;
-      const translateZ = bell * v * 46;
-      const shiftX = v * 12 * profile;
-
-      cards[i].style.transform =
-        absV > 0.002
-          ? `perspective(880px) translate3d(${shiftX.toFixed(1)}px, 0, ${translateZ.toFixed(1)}px) rotateX(${rotateX.toFixed(2)}deg) skewY(${skewY.toFixed(2)}deg) scale3d(${scaleX.toFixed(4)}, ${scaleY.toFixed(4)}, 1)`
-          : "none";
-
-      const img = images[i];
-      if (img) {
-        if (absV > 0.002) {
-          const imgScale = 1.04 + absV * 0.14 * bell;
-          const imgShiftY = -u * v * 16;
-          img.style.transform = `translate3d(0, ${imgShiftY.toFixed(1)}px, 0) scale(${imgScale.toFixed(3)})`;
-        } else {
-          img.style.transform = "scale(1.03)";
-        }
-      }
-    }
-  };
-
-  const onWindowScroll = () => {
-    const nowY = window.scrollY;
-    const dy = nowY - lastScrollY;
-    lastScrollY = nowY;
-    if (!inView || reducedMotion) return;
-    targetBend = Math.max(-1.35, Math.min(1.35, targetBend + dy * 0.022));
-    scrollBoost = Math.max(-520, Math.min(520, scrollBoost + dy * 2.8));
-  };
-
-  const onStageWheel = (e) => {
-    if (reducedMotion) return;
-    const dy = e.deltaY || 0;
-    targetBend = Math.max(-1.35, Math.min(1.35, targetBend + dy * 0.015));
-    scrollBoost = Math.max(-520, Math.min(520, scrollBoost + dy * 2.0));
   };
 
   const tick = (now) => {
@@ -1219,25 +1150,16 @@ function initTestimonialWheel() {
     lastTime = now;
 
     hoverFactor += (targetHoverFactor - hoverFactor) * Math.min(1, dt * 8);
-    currentBend += (targetBend - currentBend) * Math.min(1, dt * 13);
-    targetBend *= Math.pow(0.05, dt);
-    if (Math.abs(targetBend) < 0.001) targetBend = 0;
-    if (Math.abs(currentBend) < 0.001 && targetBend === 0) currentBend = 0;
+    const baseSpeed = 30 * hoverFactor;
+    offsetY += baseSpeed * dt;
 
-    scrollBoost *= Math.pow(0.06, dt);
-    if (Math.abs(scrollBoost) < 0.2) scrollBoost = 0;
-
-    const baseSpeed = 32 * hoverFactor;
-    offsetY += (baseSpeed + scrollBoost) * dt;
-
-    applyScrollBend();
+    applyPosition();
     raf = requestAnimationFrame(tick);
   };
 
   const start = () => {
     if (reducedMotion || raf || !inView) return;
     lastTime = performance.now();
-    lastScrollY = window.scrollY;
     raf = requestAnimationFrame(tick);
   };
 
@@ -1247,20 +1169,18 @@ function initTestimonialWheel() {
   };
 
   const onEnter = (e) => {
-    if (e.pointerType === "mouse") targetHoverFactor = 0.3;
+    if (e.pointerType === "mouse") targetHoverFactor = 0;
   };
   const onLeave = () => {
     targetHoverFactor = 1;
   };
 
-  window.addEventListener("scroll", onWindowScroll, { passive: true });
-  stage.addEventListener("wheel", onStageWheel, { passive: true });
   stage.addEventListener("pointerenter", onEnter);
   stage.addEventListener("pointerleave", onLeave);
 
   const resizeObserver = "ResizeObserver" in window ? new ResizeObserver(() => {
     measure();
-    applyScrollBend();
+    applyPosition();
   }) : null;
   resizeObserver?.observe(stage);
 
@@ -1275,8 +1195,6 @@ function initTestimonialWheel() {
 
   testimonialWheelCleanup = () => {
     stop();
-    window.removeEventListener("scroll", onWindowScroll);
-    stage.removeEventListener("wheel", onStageWheel);
     stage.removeEventListener("pointerenter", onEnter);
     stage.removeEventListener("pointerleave", onLeave);
     resizeObserver?.disconnect();
@@ -1285,7 +1203,7 @@ function initTestimonialWheel() {
   };
 
   measure();
-  applyScrollBend();
+  applyPosition();
   start();
 }
 function faqSection() {
