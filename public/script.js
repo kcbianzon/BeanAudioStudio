@@ -830,6 +830,13 @@ const state = {
   bundle: null,
   category: "All",
   search: "",
+  priceType: "all",
+  minPrice: "",
+  maxPrice: "",
+  onlyPopular: false,
+  onlySelected: false,
+  sortBy: "recommended",
+  viewMode: "grid",
 };
 
 const eventRecommendations = {
@@ -870,31 +877,73 @@ function productPriceText(p) {
   if (p.priceType === "starting") return `From ${money(p.price)}`;
   return money(p.price);
 }
+function productMatchesCategory(p, cat) {
+  return (
+    cat === "All" ||
+    p.category === cat ||
+    (cat === "Audio" &&
+      (p.category === "Audio & Speakers" ||
+        p.category === "Subwoofers" ||
+        p.category === "Microphones" ||
+        p.category === "Audio Mixers" ||
+        p.category === "DJ Equipment")) ||
+    (cat === "LED Walls" && p.category === "LED Video Walls") ||
+    (cat === "Experiences" &&
+      (p.category === "Silent Disco" ||
+        p.category === "Outdoor Movies" ||
+        p.category === "Photo Booths" ||
+        p.category === "Special Effects"))
+  );
+}
 function filteredProducts() {
   const q = state.search.trim().toLowerCase();
-  return products.filter((p) => {
-    const matchesCategory =
-      state.category === "All" ||
-      p.category === state.category ||
-      (state.category === "Audio" &&
-        (p.category === "Audio & Speakers" ||
-          p.category === "Subwoofers" ||
-          p.category === "Microphones" ||
-          p.category === "Audio Mixers" ||
-          p.category === "DJ Equipment")) ||
-      (state.category === "Video & Displays" &&
-        (p.category === "Video & Displays" || p.category === "LED Video Walls")) ||
-      (state.category === "LED Walls" && p.category === "LED Video Walls") ||
-      (state.category === "Experiences" &&
-        (p.category === "Silent Disco" ||
-          p.category === "Outdoor Movies" ||
-          p.category === "Photo Booths" ||
-          p.category === "Special Effects"));
+  const minVal = state.minPrice !== "" && !Number.isNaN(Number(state.minPrice)) ? Number(state.minPrice) : null;
+  const maxVal = state.maxPrice !== "" && !Number.isNaN(Number(state.maxPrice)) ? Number(state.maxPrice) : null;
+  const filtered = products.filter((p) => {
+    const matchesCategory = productMatchesCategory(p, state.category);
     const matchesSearch =
       !q ||
       `${p.name} ${p.category} ${p.desc} ${p.tag}`.toLowerCase().includes(q);
-    return matchesCategory && matchesSearch;
+    const matchesPriceType =
+      state.priceType === "all" || p.priceType === state.priceType;
+    const matchesMin =
+      minVal === null || (typeof p.price === "number" && p.price >= minVal);
+    const matchesMax =
+      maxVal === null || (typeof p.price === "number" && p.price <= maxVal);
+    const matchesPopular =
+      !state.onlyPopular ||
+      /popular|most popular|concert|pro|flagship|industry|favorite/i.test(p.tag || "") ||
+      p.priceType === "starting";
+    const matchesSelected =
+      !state.onlySelected || Boolean(state.selected[p.id]);
+    return (
+      matchesCategory &&
+      matchesSearch &&
+      matchesPriceType &&
+      matchesMin &&
+      matchesMax &&
+      matchesPopular &&
+      matchesSelected
+    );
   });
+  if (state.sortBy === "price-asc") {
+    return [...filtered].sort((a, b) => {
+      const pa = typeof a.price === "number" ? a.price : Number.POSITIVE_INFINITY;
+      const pb = typeof b.price === "number" ? b.price : Number.POSITIVE_INFINITY;
+      return pa - pb;
+    });
+  }
+  if (state.sortBy === "price-desc") {
+    return [...filtered].sort((a, b) => {
+      const pa = typeof a.price === "number" ? a.price : -1;
+      const pb = typeof b.price === "number" ? b.price : -1;
+      return pb - pa;
+    });
+  }
+  if (state.sortBy === "name-asc") {
+    return [...filtered].sort((a, b) => a.name.localeCompare(b.name));
+  }
+  return filtered;
 }
 function loadSelection() {
   try {
@@ -1482,25 +1531,155 @@ function home() {
  </div>`;
 }
 
+const RENTAL_CATEGORIES = [
+  "All",
+  "Audio & Speakers",
+  "Subwoofers",
+  "Microphones",
+  "Audio Mixers",
+  "DJ Equipment",
+  "Video & Displays",
+  "LED Video Walls",
+  "Outdoor Movies",
+  "Photo Booths",
+  "Silent Disco",
+  "Event Lighting",
+  "Special Effects",
+  "Live Streaming",
+];
+
+function rentalsResultsGridMarkup(list) {
+  if (!list.length) {
+    return `<div class="empty rentals-empty-state"><strong>No rentals match your filters</strong><p>Try adjusting your search, price range, or category selection.</p><button type="button" class="btn btn-dark btn-small" data-reset-filters>Reset all filters</button></div>`;
+  }
+  return list.map(productCard).join("");
+}
+
 function rentals() {
-  const cats = [
-    "All",
-    "Audio & Speakers",
-    "Subwoofers",
-    "Microphones",
-    "Audio Mixers",
-    "DJ Equipment",
-    "Video & Displays",
-    "LED Video Walls",
-    "Outdoor Movies",
-    "Photo Booths",
-    "Silent Disco",
-    "Event Lighting",
-    "Special Effects",
-    "Live Streaming",
-  ];
   const list = filteredProducts();
-  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">RENTAL CATALOG</span><h1>Everything<br>you can add.</h1></div><p>Explore our complete commercial rental inventory. Consumer packages feature transparent fixed pricing; custom staging, line arrays, and LED walls are confirmed with an itemized quote.</p></div><div class="rentals-toolbar"><div style="display:flex;gap:8px;flex-wrap:wrap">${cats.map((c) => `<button class="filter-pill ${state.category === c ? "active" : ""}" data-cat="${c}">${c}</button>`).join("")}</div><div class="inline-search"><input id="rentalSearch" value="${state.search}" placeholder="Search equipment, models, brands…"></div></div><div class="product-grid">${list.length ? list.map(productCard).join("") : `<div class="empty" style="grid-column:1/-1">No rentals match your search. Try another term or clear the category filter.</div>`}</div></div>`;
+  const selectedTotalCount = Object.values(state.selected).reduce((sum, n) => sum + n, 0);
+  const hasActiveFilters =
+    state.category !== "All" ||
+    state.search.trim() !== "" ||
+    state.priceType !== "all" ||
+    state.minPrice !== "" ||
+    state.maxPrice !== "" ||
+    state.onlyPopular ||
+    state.onlySelected;
+
+  const priceTypeOptions = [
+    { id: "all", label: "Any" },
+    { id: "fixed", label: "Fixed" },
+    { id: "starting", label: "Packages" },
+    { id: "quote", label: "Quote" },
+  ];
+
+  return `<div class="page">
+    <div class="page-hero">
+      <div><span class="eyebrow">RENTAL CATALOG</span><h1>Everything<br>you can add.</h1></div>
+      <p>Explore our complete commercial rental inventory. Consumer packages feature transparent fixed pricing; custom staging, line arrays, and LED walls are confirmed with an itemized quote.</p>
+    </div>
+
+    <section class="rentals-catalog" aria-label="Rental inventory">
+      <div class="rentals-topbar">
+        <div class="rentals-count-title" id="rentalsCountTitle">
+          <strong>${list.length}</strong> <span>${list.length === 1 ? "rental" : "rentals"}</span>
+          ${state.category !== "All" ? `<span class="rentals-active-chip">${escapeHtml(state.category)} <button type="button" data-cat="All" aria-label="Remove category filter">×</button></span>` : ""}
+        </div>
+        <div class="rentals-topbar-actions">
+          <div class="rentals-view-switch" role="group" aria-label="Catalog layout view">
+            <button type="button" class="view-switch-btn ${state.viewMode === "grid" ? "active" : ""}" data-view-mode="grid" aria-pressed="${state.viewMode === "grid"}">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.5" y="1.5" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="9.5" y="1.5" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="1.5" y="9.5" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.6"/><rect x="9.5" y="9.5" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.6"/></svg>
+              Grid
+            </button>
+            <button type="button" class="view-switch-btn ${state.viewMode === "list" ? "active" : ""}" data-view-mode="list" aria-pressed="${state.viewMode === "list"}">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 4H13.5M2.5 8H13.5M2.5 12H13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+              List
+            </button>
+          </div>
+          <div class="rentals-sort-box">
+            <select id="rentalSort" class="rentals-sort-select" aria-label="Sort rentals">
+              <option value="recommended" ${state.sortBy === "recommended" ? "selected" : ""}>Recommended</option>
+              <option value="price-asc" ${state.sortBy === "price-asc" ? "selected" : ""}>Price: Low to High</option>
+              <option value="price-desc" ${state.sortBy === "price-desc" ? "selected" : ""}>Price: High to Low</option>
+              <option value="name-asc" ${state.sortBy === "name-asc" ? "selected" : ""}>Name: A to Z</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="rentals-layout">
+        <aside class="rentals-sidebar" aria-label="Filter equipment">
+          <div class="sidebar-filter-section">
+            <label class="sidebar-section-label" for="rentalSearch">SEARCH</label>
+            <div class="sidebar-search-field">
+              <input id="rentalSearch" type="text" value="${escapeHtml(state.search)}" placeholder="Equipment, model, brand…" autocomplete="off">
+              ${state.search ? `<button type="button" class="sidebar-search-clear" data-clear-search aria-label="Clear search">×</button>` : ""}
+            </div>
+          </div>
+
+          <div class="sidebar-filter-section">
+            <div class="sidebar-section-head">
+              <span class="sidebar-section-label">CATEGORY</span>
+              ${state.category !== "All" ? `<button type="button" class="sidebar-inline-reset" data-cat="All">All</button>` : ""}
+            </div>
+            <div class="sidebar-category-list" role="radiogroup" aria-label="Equipment category">
+              ${RENTAL_CATEGORIES.map((c) => {
+                const count = products.filter((p) => productMatchesCategory(p, c)).length;
+                const isActive = state.category === c || (state.category === "LED Walls" && c === "LED Video Walls");
+                return `<button type="button" class="sidebar-cat-item ${isActive ? "active" : ""}" data-cat="${c}" aria-pressed="${isActive}">
+                  <span class="sidebar-cat-name">${c}</span>
+                  <span class="sidebar-cat-badge">${count}</span>
+                </button>`;
+              }).join("")}
+            </div>
+          </div>
+
+          <div class="sidebar-filter-section">
+            <span class="sidebar-section-label">PRICING TYPE</span>
+            <div class="sidebar-Option-pills" role="group" aria-label="Pricing type">
+              ${priceTypeOptions.map((opt) => `<button type="button" class="sidebar-mini-pill ${state.priceType === opt.id ? "active" : ""}" data-price-type="${opt.id}">${opt.label}</button>`).join("")}
+            </div>
+          </div>
+
+          <div class="sidebar-filter-section">
+            <span class="sidebar-section-label">PRICE RANGE</span>
+            <div class="sidebar-range-row">
+              <input id="rentalMinPrice" type="number" min="0" step="10" placeholder="Min" value="${escapeHtml(state.minPrice)}" aria-label="Minimum price">
+              <input id="rentalMaxPrice" type="number" min="0" step="10" placeholder="Max" value="${escapeHtml(state.maxPrice)}" aria-label="Maximum price">
+            </div>
+          </div>
+
+          <div class="sidebar-filter-section">
+            <span class="sidebar-section-label">EXTRAS</span>
+            <div class="sidebar-checks">
+              <label class="sidebar-check-label">
+                <input type="checkbox" id="filterPopular" ${state.onlyPopular ? "checked" : ""}>
+                <span class="sidebar-check-box" aria-hidden="true"></span>
+                <span>Popular &amp; featured</span>
+              </label>
+              <label class="sidebar-check-label">
+                <input type="checkbox" id="filterSelected" ${state.onlySelected ? "checked" : ""}>
+                <span class="sidebar-check-box" aria-hidden="true"></span>
+                <span>Added to my setup (${selectedTotalCount})</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="sidebar-footer-actions">
+            <button type="button" class="sidebar-btn-clear" data-reset-filters ${!hasActiveFilters ? "disabled" : ""}>Clear</button>
+            <button type="button" class="sidebar-btn-apply" data-apply-filters>Apply</button>
+          </div>
+        </aside>
+
+        <div class="rentals-main-area">
+          <div class="product-grid rentals-grid ${state.viewMode === "list" ? "is-list" : ""}" id="rentalsProductGrid">
+            ${rentalsResultsGridMarkup(list)}
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>`;
 }
 
 function bundlesPage() {
@@ -1798,20 +1977,111 @@ function addProduct(id, delta = 1) {
 }
 
 function bind() {
+  const refreshRentalsInPlace = () => {
+    const grid = document.querySelector("#rentalsProductGrid");
+    const countHeader = document.querySelector("#rentalsCountTitle");
+    if (!grid || !countHeader) {
+      render({ preserveScroll: true });
+      return;
+    }
+    const list = filteredProducts();
+    grid.innerHTML = rentalsResultsGridMarkup(list);
+    countHeader.innerHTML = `<strong>${list.length}</strong> <span>${list.length === 1 ? "rental" : "rentals"}</span>${state.category !== "All" ? ` <span class="rentals-active-chip">${escapeHtml(state.category)} <button type="button" data-cat="All" aria-label="Remove category filter">×</button></span>` : ""}`;
+    const clearBtn = document.querySelector(".sidebar-btn-clear");
+    const hasActive =
+      state.category !== "All" ||
+      state.search.trim() !== "" ||
+      state.priceType !== "all" ||
+      state.minPrice !== "" ||
+      state.maxPrice !== "" ||
+      state.onlyPopular ||
+      state.onlySelected;
+    if (clearBtn) clearBtn.disabled = !hasActive;
+    observePageMotion();
+    grid.querySelectorAll("[data-add]").forEach((b) =>
+      b.addEventListener("click", () => addProduct(b.dataset.add)),
+    );
+    grid.querySelectorAll("[data-reset-filters]").forEach((b) =>
+      b.addEventListener("click", () => {
+        state.category = "All";
+        state.search = "";
+        state.priceType = "all";
+        state.minPrice = "";
+        state.maxPrice = "";
+        state.onlyPopular = false;
+        state.onlySelected = false;
+        render({ preserveScroll: true });
+      }),
+    );
+    countHeader.querySelectorAll("[data-cat]").forEach((b) =>
+      b.addEventListener("click", () => {
+        state.category = b.dataset.cat;
+        render({ preserveScroll: true });
+      }),
+    );
+  };
+
   document.querySelectorAll("[data-cat]").forEach((b) =>
     b.addEventListener("click", () => {
       state.category = b.dataset.cat;
-      state.search = "";
       render({ preserveScroll: true });
     }),
   );
   document.querySelector("#rentalSearch")?.addEventListener("input", (e) => {
     state.search = e.target.value;
-    const scroll = window.scrollY;
-    app.innerHTML = rentals();
-    observePageMotion();
-    bind();
-    window.scrollTo(0, scroll);
+    refreshRentalsInPlace();
+  });
+  document.querySelector("[data-clear-search]")?.addEventListener("click", () => {
+    state.search = "";
+    render({ preserveScroll: true });
+  });
+  document.querySelectorAll("[data-price-type]").forEach((b) =>
+    b.addEventListener("click", () => {
+      state.priceType = b.dataset.priceType;
+      render({ preserveScroll: true });
+    }),
+  );
+  document.querySelector("#rentalMinPrice")?.addEventListener("input", (e) => {
+    state.minPrice = e.target.value;
+    refreshRentalsInPlace();
+  });
+  document.querySelector("#rentalMaxPrice")?.addEventListener("input", (e) => {
+    state.maxPrice = e.target.value;
+    refreshRentalsInPlace();
+  });
+  document.querySelector("#filterPopular")?.addEventListener("change", (e) => {
+    state.onlyPopular = e.target.checked;
+    render({ preserveScroll: true });
+  });
+  document.querySelector("#filterSelected")?.addEventListener("change", (e) => {
+    state.onlySelected = e.target.checked;
+    render({ preserveScroll: true });
+  });
+  document.querySelector("#rentalSort")?.addEventListener("change", (e) => {
+    state.sortBy = e.target.value;
+    render({ preserveScroll: true });
+  });
+  document.querySelectorAll("[data-view-mode]").forEach((b) =>
+    b.addEventListener("click", () => {
+      state.viewMode = b.dataset.viewMode;
+      render({ preserveScroll: true });
+    }),
+  );
+  document.querySelectorAll("[data-reset-filters]").forEach((b) =>
+    b.addEventListener("click", () => {
+      state.category = "All";
+      state.search = "";
+      state.priceType = "all";
+      state.minPrice = "";
+      state.maxPrice = "";
+      state.onlyPopular = false;
+      state.onlySelected = false;
+      render({ preserveScroll: true });
+    }),
+  );
+  document.querySelector("[data-apply-filters]")?.addEventListener("click", () => {
+    refreshRentalsInPlace();
+    showToast(`Showing ${filteredProducts().length} rentals`);
   });
   document
     .querySelectorAll("[data-add]")
