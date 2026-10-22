@@ -881,18 +881,23 @@ function productMatchesCategory(p, cat) {
   return (
     cat === "All" ||
     p.category === cat ||
-    (cat === "Audio" &&
+    ((cat === "Audio" || cat === "Audio & Sound") &&
       (p.category === "Audio & Speakers" ||
         p.category === "Subwoofers" ||
         p.category === "Microphones" ||
         p.category === "Audio Mixers" ||
         p.category === "DJ Equipment")) ||
+    (cat === "Video & Visuals" &&
+      (p.category === "Video & Displays" ||
+        p.category === "LED Video Walls" ||
+        p.category === "Live Streaming")) ||
+    (cat === "Lighting & FX" &&
+      (p.category === "Event Lighting" || p.category === "Special Effects")) ||
     (cat === "LED Walls" && p.category === "LED Video Walls") ||
-    (cat === "Experiences" &&
+    ((cat === "Experiences" || cat === "Event Experiences") &&
       (p.category === "Silent Disco" ||
         p.category === "Outdoor Movies" ||
-        p.category === "Photo Booths" ||
-        p.category === "Special Effects"))
+        p.category === "Photo Booths"))
   );
 }
 function filteredProducts() {
@@ -1531,21 +1536,44 @@ function home() {
  </div>`;
 }
 
-const RENTAL_CATEGORIES = [
-  "All",
-  "Audio & Speakers",
-  "Subwoofers",
-  "Microphones",
-  "Audio Mixers",
-  "DJ Equipment",
-  "Video & Displays",
-  "LED Video Walls",
-  "Outdoor Movies",
-  "Photo Booths",
-  "Silent Disco",
-  "Event Lighting",
-  "Special Effects",
-  "Live Streaming",
+const RENTAL_CATEGORY_GROUPS = [
+  {
+    group: "Audio & Sound",
+    code: "AUDIO",
+    items: [
+      { id: "Audio & Speakers", label: "Speakers & PA" },
+      { id: "Subwoofers", label: "Subwoofers" },
+      { id: "Microphones", label: "Microphones" },
+      { id: "Audio Mixers", label: "Audio Mixers" },
+      { id: "DJ Equipment", label: "DJ Equipment" },
+    ],
+  },
+  {
+    group: "Video & Visuals",
+    code: "VIDEO",
+    items: [
+      { id: "Video & Displays", label: "Displays & Projectors" },
+      { id: "LED Video Walls", label: "LED Video Walls" },
+      { id: "Live Streaming", label: "Live Streaming" },
+    ],
+  },
+  {
+    group: "Lighting & FX",
+    code: "LIGHTING",
+    items: [
+      { id: "Event Lighting", label: "Event Lighting" },
+      { id: "Special Effects", label: "Special Effects" },
+    ],
+  },
+  {
+    group: "Event Experiences",
+    code: "EXPERIENCES",
+    items: [
+      { id: "Photo Booths", label: "Photo Booths" },
+      { id: "Silent Disco", label: "Silent Disco" },
+      { id: "Outdoor Movies", label: "Outdoor Movies" },
+    ],
+  },
 ];
 
 function rentalsResultsGridMarkup(list) {
@@ -1620,17 +1648,43 @@ function rentals() {
 
           <div class="sidebar-filter-section">
             <div class="sidebar-section-head">
-              <span class="sidebar-section-label">CATEGORY</span>
-              ${state.category !== "All" ? `<button type="button" class="sidebar-inline-reset" data-cat="All">All</button>` : ""}
+              <span class="sidebar-section-label">EQUIPMENT BY GROUP</span>
+              ${state.category !== "All" ? `<button type="button" class="sidebar-inline-reset" data-cat="All">Reset</button>` : ""}
             </div>
-            <div class="sidebar-category-list" role="radiogroup" aria-label="Equipment category">
-              ${RENTAL_CATEGORIES.map((c) => {
-                const count = products.filter((p) => productMatchesCategory(p, c)).length;
-                const isActive = state.category === c || (state.category === "LED Walls" && c === "LED Video Walls");
-                return `<button type="button" class="sidebar-cat-item ${isActive ? "active" : ""}" data-cat="${c}" aria-pressed="${isActive}">
-                  <span class="sidebar-cat-name">${c}</span>
-                  <span class="sidebar-cat-badge">${count}</span>
-                </button>`;
+            <button type="button" class="sidebar-cat-item sidebar-cat-all ${state.category === "All" ? "active" : ""}" data-cat="All" aria-pressed="${state.category === "All"}">
+              <span class="sidebar-cat-name">All Rental Equipment</span>
+              <span class="sidebar-cat-badge">${products.length}</span>
+            </button>
+            <div class="sidebar-category-groups" role="region" aria-label="Equipment categories by group">
+              ${RENTAL_CATEGORY_GROUPS.map((grp) => {
+                const groupCount = products.filter((p) => productMatchesCategory(p, grp.group)).length;
+                const isGroupActive =
+                  state.category === grp.group ||
+                  (grp.group === "Audio & Sound" && state.category === "Audio") ||
+                  (grp.group === "Event Experiences" && state.category === "Experiences");
+                const hasActiveChild = grp.items.some(
+                  (item) =>
+                    state.category === item.id ||
+                    (state.category === "LED Walls" && item.id === "LED Video Walls"),
+                );
+                return `<div class="sidebar-cat-group ${isGroupActive || hasActiveChild ? "has-active" : ""}">
+                  <button type="button" class="sidebar-group-header ${isGroupActive ? "active" : ""}" data-cat="${grp.group}" title="View all ${grp.group}">
+                    <span class="sidebar-group-title">${grp.group}</span>
+                    <span class="sidebar-group-meta">All · ${groupCount}</span>
+                  </button>
+                  <div class="sidebar-group-items">
+                    ${grp.items.map((item) => {
+                      const count = products.filter((p) => productMatchesCategory(p, item.id)).length;
+                      const isActive =
+                        state.category === item.id ||
+                        (state.category === "LED Walls" && item.id === "LED Video Walls");
+                      return `<button type="button" class="sidebar-cat-item sidebar-subcat-item ${isActive ? "active" : ""}" data-cat="${item.id}" aria-pressed="${isActive}">
+                        <span class="sidebar-cat-name">${item.label}</span>
+                        <span class="sidebar-cat-badge">${count}</span>
+                      </button>`;
+                    }).join("")}
+                  </div>
+                </div>`;
               }).join("")}
             </div>
           </div>
