@@ -1751,34 +1751,34 @@ function bundleDetail(id) {
 function aboutUsPage() {
   const offerItems = [
     {
-      icon: "🔊",
+      num: "01",
       title: "Speakers, Mixers & Microphones",
-      desc: "Wired and wireless Shure systems (Beta 58A handhelds, lavaliers, headsets), powered QSC & JBL loudspeakers, high-output subwoofers, and digital mixing consoles.",
-      tag: "Audio & PA"
+      desc: "Wired and wireless Shure systems (Beta 58A handhelds, lavaliers, headsets), powered QSC & JBL loudspeakers, high-output subwoofers, and digital mixing consoles calibrated for pristine clarity.",
+      iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="about12-icon" aria-hidden="true"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>`
     },
     {
-      icon: "📽️",
+      num: "02",
       title: "Video Gear, Displays & Walls",
-      desc: "High-lumen laser projectors, fast-fold portable screens, 65″–75″ 4K monitor displays on truss stands, modular 2.67mm LED video walls, and multi-camera switcher feeds.",
-      tag: "Video & Displays"
+      desc: "High-lumen laser projectors, fast-fold portable screens, 65″–75″ 4K monitor displays on truss stands, modular 2.67mm ultra-bright LED video walls, and multi-camera switcher feeds.",
+      iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="about12-icon" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>`
     },
     {
-      icon: "💡",
-      title: "Lighting Systems",
-      desc: "Wireless battery-powered Chauvet uplighting, moving head fixtures, warm stage wash, and atmospheric lighting for weddings, corporate galas, and venue transformations.",
-      tag: "Event Lighting"
+      num: "03",
+      title: "Lighting Systems & Atmospherics",
+      desc: "Wireless battery-powered Chauvet uplighting, moving head fixtures, warm stage wash, cold-spark fountains, and low-lying dry-ice haze for venue transformations.",
+      iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="about12-icon" aria-hidden="true"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"></path></svg>`
     },
     {
-      icon: "✨",
-      title: "Special Effects",
-      desc: "3-channel silent disco headphone packages, indoor-safe cold sparkler fountains, dry-ice 'Dancing on a Cloud' machines, and low-lying haze.",
-      tag: "Special FX"
+      num: "04",
+      title: "Silent Disco & Interactive Audio",
+      desc: "3-channel silent disco headphone packages, multi-DJ transmitters, 360 photo booth activations, and outdoor movie projection systems with FM broadcast options.",
+      iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="about12-icon" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>`
     },
     {
-      icon: "🎛️",
+      num: "05",
       title: "Full Turnkey AV Production",
       desc: "End-to-end production for large conferences, concerts, festivals, and campus commencements—complete with load-in, live front-of-house mixing, and quiet teardown.",
-      tag: "Turnkey Production"
+      iconSvg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="about12-icon" aria-hidden="true"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>`
     }
   ];
 
@@ -1850,36 +1850,53 @@ function aboutUsPage() {
         </div>
       </section>
 
-      <!-- Section 2: What We Offer -->
-      <section class="about-section about-offer-section reveal">
-        <div class="section-head">
-          <div>
-            <span class="eyebrow">EQUIPMENT & CAPABILITIES</span>
-            <h2>What We Offer</h2>
-          </div>
-          <p>We rent and support a wide range of professional audio visual equipment across Boston and New England.</p>
-        </div>
+      <!-- Section 2: What We Offer (React Bits Pro: About 12 Block) -->
+      <section class="about-section about-offer-section about12-block reveal" aria-labelledby="aboutOfferHeading">
+        <div class="about12-card-wrapper">
+          <!-- Left Column: Eyebrow, White Quote Card, Narrative -->
+          <div class="about12-left">
+            <span class="about12-eyebrow" id="aboutOfferHeading">HOW WE OPERATE &bull; WHAT WE OFFER</span>
 
-        <div class="about-offer-grid">
-          ${offerItems.map((item) => `
-            <article class="about-offer-card">
-              <div class="about-offer-top">
-                <span class="about-offer-icon" aria-hidden="true">${item.icon}</span>
-                <span class="badge">${item.tag}</span>
+            <div class="about12-quote-card">
+              <blockquote class="about12-quote-text">
+                “A system feels calm when someone has already met its worst day.”
+              </blockquote>
+              <div class="about12-author">
+                <img 
+                  src="assets/beantown/founder-avatar.jpg" 
+                  alt="Mara Voss" 
+                  class="about12-avatar"
+                  loading="lazy"
+                >
+                <div class="about12-author-meta">
+                  <strong class="about12-author-name">Mara Voss</strong>
+                  <span class="about12-author-role">Co-founder</span>
+                </div>
               </div>
-              <h3>${item.title}</h3>
-              <p>${item.desc}</p>
-            </article>
-          `).join("")}
-        </div>
+            </div>
 
-        <div class="about-offer-footer-note">
-          <p>
-            <strong>Every piece of equipment is tested before delivery</strong>, and we’re always happy to explain how it works. Want us to run the show? We offer on-site tech support and full-service production across Boston, Massachusetts, and the greater New England area.
-          </p>
-          <p class="about-highlight-line">
-            That’s just one reason clients say we provide the best audio visual rentals in Boston—we combine reliable equipment with reliable people.
-          </p>
+            <p class="about12-left-desc">
+              Our values are constraints we accept on purpose. They decide how we enter an event, what equipment we refuse to compromise on, and the standard of execution we hand back to every client across Boston and New England.
+            </p>
+          </div>
+
+          <!-- Right Column: Numbered Items List with Icons -->
+          <div class="about12-right">
+            <div class="about12-items-list">
+              ${offerItems.map((item) => `
+                <article class="about12-item">
+                  <span class="about12-num">${item.num}</span>
+                  <div class="about12-content">
+                    <h3 class="about12-title">${item.title}</h3>
+                    <p class="about12-desc">${item.desc}</p>
+                  </div>
+                  <div class="about12-icon-box">
+                    ${item.iconSvg}
+                  </div>
+                </article>
+              `).join("")}
+            </div>
+          </div>
         </div>
       </section>
 
