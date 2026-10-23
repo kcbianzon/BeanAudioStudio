@@ -9032,3 +9032,127 @@ button.setup-link {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   QUOTE STEP 1: BIG TEXT BOX & COMPACT OPTIONAL PRESETS
+   ========================================================================== */
+.q-main-event-input-box {
+  background: #ffffff;
+  border: 2px solid var(--line, #ddd8ce);
+  border-radius: 22px;
+  padding: 22px 24px;
+  box-shadow: 0 8px 24px rgba(45, 37, 17, 0.04);
+  margin-bottom: 28px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.q-main-event-input-box:focus-within {
+  border-color: #dfad2a;
+  box-shadow: 0 10px 30px rgba(223, 173, 42, 0.16);
+}
+
+.q-main-input-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Space Grotesk', Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--ink, #111111);
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.q-main-badge {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #fff3ca;
+  color: #926f18;
+  border: 1px solid #ebd9ab;
+  text-transform: uppercase;
+}
+
+.q-big-input-wrapper {
+  position: relative;
+}
+
+.q-big-text-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-family: 'Space Grotesk', Inter, sans-serif;
+  font-size: clamp(18px, 2.2vw, 22px);
+  font-weight: 700;
+  color: var(--ink, #111111);
+  outline: none;
+  padding: 4px 0;
+  line-height: 1.35;
+}
+
+.q-big-text-input::placeholder {
+  color: #9ca3af;
+  font-weight: 500;
+  font-size: clamp(15px, 1.8vw, 18px);
+}
+
+.q-optional-presets-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.q-presets-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.q-presets-sub {
+  font-size: 13.5px;
+  color: var(--muted, #6f6d67);
+  font-weight: 500;
+}
+
+.q-event-grid-compact {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.q-event-card-compact {
+  padding: 16px 18px;
+  border-radius: 18px;
+  min-height: 96px;
+  justify-content: space-between;
+}
+
+.q-event-card-compact h3 {
+  font-size: 17px;
+  margin: 2px 0 6px;
+  line-height: 1.25;
+}
+
+.q-event-card-compact .q-event-code {
+  margin-bottom: 2px;
+}
+
+@media (max-width: 860px) {
+  .q-event-grid-compact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .q-event-grid-compact {
+    grid-template-columns: 1fr;
+  }
+  .q-main-event-input-box {
+    padding: 18px 18px;
+  }
+}

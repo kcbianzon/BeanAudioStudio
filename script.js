@@ -3171,39 +3171,47 @@ function quote() {
 
   let stepContent = "";
   if (step === 1) {
-    const activeEventCard = EVENT_TYPE_CARDS.find((c) => c.id === state.eventType) || EVENT_TYPE_CARDS[0];
-    const matchingBundle = bundles.find((b) => b.id === activeEventCard.bundleId);
     stepContent = `<div class="q-step-panel">
       <div class="q-step-head">
-        <span class="eyebrow orange">STEP 01 OF 06 · SELECT YOUR OCCASION</span>
         <h2>What type of event are we building?</h2>
-        <p>Choose your occasion below. We’ll tailor recommended speakers, microphones, lighting, and turnkey bundles around your format.</p>
+        <p>Tell us what you're planning below, or select from our optional quick presets.</p>
       </div>
 
-      <div class="q-event-grid">
-        ${EVENT_TYPE_CARDS.map((card) => {
-          const isSelected = state.eventType === card.id;
-          return `<button type="button" class="q-event-card ${isSelected ? "is-active" : ""}" data-select-event="${escapeHtml(card.id)}">
-            <span class="q-event-code">${escapeHtml(card.code)}</span>
-            <h3>${escapeHtml(card.title)}</h3>
-            <p>${escapeHtml(card.desc)}</p>
-            <span class="q-event-status">${isSelected ? "✓ Selected Occasion" : "Select occasion →"}</span>
-          </button>`;
-        }).join("")}
-      </div>
-
-      ${matchingBundle ? `
-        <div class="q-starter-callout">
-          <div>
-            <span class="eyebrow">RECOMMENDED STARTER BUNDLE FOR ${escapeHtml(state.eventType.toUpperCase())}</span>
-            <h4>${escapeHtml(matchingBundle.title)} — ${money(matchingBundle.price)}</h4>
-            <p>${escapeHtml(matchingBundle.desc)}</p>
-          </div>
-          <button type="button" class="btn btn-dark btn-small" data-apply-bundle="${matchingBundle.id}">
-            ${totals.matchedBundle && totals.matchedBundle.id === matchingBundle.id ? "✓ Bundle Loaded" : `Load ${matchingBundle.title} (${money(matchingBundle.price)})`}
-          </button>
+      <!-- Main Event Type Big Text Box -->
+      <div class="q-main-event-input-box">
+        <label for="quoteEventTypeInput" class="q-main-input-label">
+          <span>What type of event?</span>
+          <span class="q-main-badge">Primary</span>
+        </label>
+        <div class="q-big-input-wrapper">
+          <input
+            type="text"
+            id="quoteEventTypeInput"
+            class="q-big-text-input"
+            placeholder="e.g. 50th Birthday Party, Tech Conference, Wedding Reception, Live Concert, Charity Gala..."
+            value="${escapeHtml(state.eventType || "")}"
+            autocomplete="off"
+          />
         </div>
-      ` : ""}
+      </div>
+
+      <!-- Optional Choices Section -->
+      <div class="q-optional-presets-wrap">
+        <div class="q-presets-header">
+          <span class="eyebrow">OPTIONAL CHOICES</span>
+          <span class="q-presets-sub">Click any option to quickly fill:</span>
+        </div>
+        <div class="q-event-grid q-event-grid-compact">
+          ${EVENT_TYPE_CARDS.map((card) => {
+            const isSelected = (state.eventType || "").trim().toLowerCase() === card.id.toLowerCase();
+            return `<button type="button" class="q-event-card q-event-card-compact ${isSelected ? "is-active" : ""}" data-select-event="${escapeHtml(card.id)}">
+              <span class="q-event-code">${escapeHtml(card.code)}</span>
+              <h3>${escapeHtml(card.title)}</h3>
+              <span class="q-event-status">${isSelected ? "✓ Selected" : "Select"}</span>
+            </button>`;
+          }).join("")}
+        </div>
+      </div>
     </div>`;
   } else if (step === 2) {
     stepContent = `<div class="q-step-panel">
@@ -3313,7 +3321,7 @@ function quote() {
             : `<a href="#rentals" class="btn btn-light">← Browse Catalog</a>`}
           <div class="q-step-indicator">Step 0${step} of 06</div>
           ${step < 6
-            ? `<button type="button" class="btn btn-dark" data-quote-next>Continue to ${escapeHtml(stepsMeta[step].label)} →</button>`
+            ? `<button type="button" class="btn btn-dark" data-quote-next>NEXT</button>`
             : ""}
         </div>
       </div>
@@ -3990,13 +3998,24 @@ function bind() {
     render({ preserveScroll: getHash() === "builder" });
   });
 
-  // Step 1: Select Event Type
+  // Step 1: Select Event Type & Input
   document.querySelectorAll("[data-select-event]").forEach((btn) =>
     btn.addEventListener("click", () => {
       state.eventType = btn.dataset.selectEvent;
+      const input = document.querySelector("#quoteEventTypeInput");
+      if (input) input.value = state.eventType;
       render({ preserveScroll: true });
     }),
   );
+  document.querySelector("#quoteEventTypeInput")?.addEventListener("input", (e) => {
+    state.eventType = e.target.value;
+    document.querySelectorAll("[data-select-event]").forEach((btn) => {
+      const match = btn.dataset.selectEvent.trim().toLowerCase() === e.target.value.trim().toLowerCase();
+      btn.classList.toggle("is-active", match);
+      const status = btn.querySelector(".q-event-status");
+      if (status) status.textContent = match ? "✓ Selected" : "Select";
+    });
+  });
 
   // Apply Starter Bundle in Step 1 or Step 5
   document.querySelectorAll("[data-apply-bundle]").forEach((btn) =>
