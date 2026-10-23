@@ -9156,3 +9156,192 @@ button.setup-link {
     padding: 18px 18px;
   }
 }
+
+/* ==========================================================================
+   QUOTE STEP 2: TYPING AUDIENCE SIZE, REFINED VENUE & DURATION TYPING
+   ========================================================================== */
+.q-guest-input-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.q-input-helper-desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted, #6f6d67);
+  margin: -4px 0 16px;
+}
+
+.q-input-unit-label {
+  font-family: 'Space Grotesk', Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #8c6d1f;
+  background: #fff3ca;
+  border: 1px solid #ebd9ab;
+  padding: 8px 16px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* Venue Setting Refined UI/UX & Typography */
+.q-venue-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.q-venue-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 22px;
+  border-radius: 22px;
+  border: 1.5px solid var(--line, #ddd8ce);
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(45, 37, 17, 0.04);
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+}
+
+.q-venue-card:hover {
+  border-color: #dfad2a;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(45, 37, 17, 0.08);
+}
+
+.q-venue-card.is-active {
+  border-color: var(--ink, #111111);
+  background: #fff8e8;
+  box-shadow: 0 14px 32px rgba(45, 37, 17, 0.1);
+}
+
+.q-venue-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.q-venue-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: #fff3ca;
+  color: #926f18;
+  border: 1px solid #ebd9ab;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.q-venue-tag {
+  font-family: 'Space Grotesk', Inter, sans-serif;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8c6d1f;
+}
+
+.q-venue-title {
+  font-family: 'Space Grotesk', Inter, sans-serif;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--ink, #111111);
+  margin: 0 0 8px;
+  line-height: 1.25;
+}
+
+.q-venue-desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted, #6f6d67);
+  margin: 0 0 18px;
+  flex-grow: 1;
+}
+
+.q-venue-foot {
+  display: flex;
+  align-items: center;
+}
+
+/* Duration Input & Rate Badge */
+.q-duration-input-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.q-duration-rate-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff3ca;
+  border: 1px solid #ebd9ab;
+  padding: 8px 18px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.q-rate-calc-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #8c6d1f;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.q-rate-calc-val {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 14.5px;
+  font-weight: 900;
+  color: var(--ink, #111111);
+}
+
+.q-duration-grid-compact {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.q-duration-card-compact {
+  padding: 16px 18px;
+  border-radius: 18px;
+  min-height: 96px;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.q-dur-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.q-dur-title {
+  font-family: 'Sora', Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink, #111111);
+  margin: 2px 0 6px;
+  line-height: 1.25;
+}
+
+@media (max-width: 860px) {
+  .q-venue-grid,
+  .q-duration-grid-compact {
+    grid-template-columns: 1fr;
+  }
+}
