@@ -930,6 +930,7 @@ const GUEST_BRACKETS = [
 const _nowInit = new Date();
 const state = {
   builderStep: 1,
+  quoteStep: 1,
   eventType: "Wedding",
   guests: 120,
   guestBracket: "51–150",
@@ -1953,7 +1954,7 @@ function bundleDetail(id) {
     (total, { product, quantity }) => total + (product.price || 0) * quantity,
     0,
   );
-  return `<div class="page"><div class="bundle-detail-head"><a class="text-btn" href="#bundles">← All bundles</a><div class="bundle-detail-layout"><div><span class="eyebrow">${bundle.label} PACKAGE</span><h1>${bundle.title}</h1><p>${bundle.desc}</p></div><div class="bundle-detail-price"><span class="eyebrow">TURNKEY PACKAGE TOTAL</span><strong>${money(bundle.price)}</strong></div></div></div><div class="bundle-detail-wrap"><section class="bundle-detail-main"><div class="detail-section-head"><div><span class="eyebrow">WHAT’S INCLUDED</span><h2>Your package, item by item.</h2></div><span class="detail-lock">${included.reduce((s, x) => s + x.quantity, 0)} Total Units</span></div><div class="bundle-included-list">${included.map(({ product, quantity }) => `<div class="bundle-included-item"><div><strong>${quantity} × ${product.name}</strong><span>${product.category} · ${money(product.price)} each · ${product.desc}</span></div><strong>${money(product.price * quantity)}</strong></div>`).join("")}</div><div class="bundle-detail-actions"><button type="button" class="btn btn-dark" data-launch-bundle="${bundle.id}" data-launch-step="6">Request this bundle →</button><button type="button" class="btn btn-light" data-launch-bundle="${bundle.id}" data-launch-step="5">Customize in Event Builder</button></div></section><aside class="bundle-detail-summary"><span class="eyebrow">TRANSPARENT MATH</span><div class="detail-total"><span>Itemized equipment sum</span><strong>${money(knownTotal)}</strong></div><div class="detail-total"><span>Package total</span><strong>${money(bundle.price)}</strong></div><p>Every item in this bundle is priced transparently with zero hidden fees. Load this bundle into the Event Builder to add microphones, lighting, or delivery support.</p></aside></div></div>`;
+  return `<div class="page"><div class="bundle-detail-head"><a class="text-btn" href="#bundles">← All bundles</a><div class="bundle-detail-layout"><div><span class="eyebrow">${bundle.label} PACKAGE</span><h1>${bundle.title}</h1><p>${bundle.desc}</p></div><div class="bundle-detail-price"><span class="eyebrow">TURNKEY PACKAGE TOTAL</span><strong>${money(bundle.price)}</strong></div></div></div><div class="bundle-detail-wrap"><section class="bundle-detail-main"><div class="detail-section-head"><div><span class="eyebrow">WHAT’S INCLUDED</span><h2>Your package, item by item.</h2></div><span class="detail-lock">${included.reduce((s, x) => s + x.quantity, 0)} Total Units</span></div><div class="bundle-included-list">${included.map(({ product, quantity }) => `<div class="bundle-included-item"><div><strong>${quantity} × ${product.name}</strong><span>${product.category} · ${money(product.price)} each · ${product.desc}</span></div><strong>${money(product.price * quantity)}</strong></div>`).join("")}</div><div class="bundle-detail-actions"><button type="button" class="btn btn-dark" data-launch-bundle="${bundle.id}" data-launch-step="6">Request this bundle →</button><a class="btn btn-light" href="#builder">Customize in Event Builder</a></div></section><aside class="bundle-detail-summary"><span class="eyebrow">TRANSPARENT MATH</span><div class="detail-total"><span>Itemized equipment sum</span><strong>${money(knownTotal)}</strong></div><div class="detail-total"><span>Package total</span><strong>${money(bundle.price)}</strong></div><p>Every item in this bundle is priced transparently with zero hidden fees. Load this bundle into the Event Builder to add microphones, lighting, or delivery support.</p></aside></div></div>`;
 }
 
 function aboutUsPage() {
@@ -3094,14 +3095,47 @@ function renderSubmittedReceipt(receipt) {
   </div>`;
 }
 
+function builder() {
+  const items = Object.entries(state.selected)
+    .map(([id, qty]) => {
+      const p = products.find((x) => x.id === id);
+      return p ? { p, qty } : null;
+    })
+    .filter(Boolean);
+  const known = items.reduce((s, { p, qty }) => s + (p.price || 0) * qty, 0);
+  const quoteOnly = items.some(
+    ({ p }) => p.priceType === "quote" || p.priceType === "starting",
+  );
+  const recommendedIds =
+    eventRecommendations[state.eventType] || eventRecommendations.Wedding;
+  const recommendedProducts = recommendedIds
+    .map((id) => products.find((p) => p.id === id))
+    .filter(Boolean);
+  const otherProducts = products.filter((p) => !recommendedIds.includes(p.id));
+  const miniProduct = (p, recommended = false) =>
+    `<div class="mini-product ${recommended ? "is-recommended" : ""}"><div class="mini-product-heading"><h4>${p.name}</h4>${recommended ? '<span class="recommendation-tag">Recommended</span>' : ""}</div><p>${productPriceText(p)}</p><div class="mini-product-row"><span style="font-size:11px;color:var(--muted)">${p.category}</span><div class="qty-controls"><button class="qty-btn" data-minus="${p.id}">−</button><span class="qty">${state.selected[p.id] || 0}</span><button class="qty-btn" data-plus="${p.id}">+</button></div></div></div>`;
+  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">CUSTOM EVENT BUILDER</span><h1>Build your<br>exact setup.</h1></div><p>Prototype a guided experience for clients. This is intentionally quote-friendly: it estimates what is known without pretending custom production has a fixed retail price.</p></div><div class="builder-wrap"><section class="builder-main"><div class="steps">${["Event", "Details", "Equipment", "Review"].map((s, i) => `<div class="step ${state.builderStep === i + 1 ? "active" : ""}">${String(i + 1).padStart(2, "0")} · ${s}</div>`).join("")}</div>${builderStepContent()}<div class="builder-actions"><button class="btn btn-light" data-builder-prev ${state.builderStep === 1 ? "disabled" : ""}>← Back</button>${state.builderStep < 4 ? `<button class="btn btn-dark" data-builder-next>Continue →</button>` : `<a class="btn btn-accent" href="#quote">Request this quote →</a>`}</div></section><aside class="builder-side"><span class="eyebrow">YOUR SETUP</span><div class="summary-total"><div><span class="eyebrow">ESTIMATED TOTAL</span><div style="font-size:11px;color:var(--muted)">${quoteOnly ? "Includes quote-only selections" : ""}</div></div><strong>${money(known)}</strong></div><div class="selection-list">${items.length ? items.map(({ p, qty }) => `<div class="selection-chip"><span>${qty} × ${p.name.replace(" — 50 Headphones", "").replace(" — 100 Headphones", "").replace(" — 150 Headphones", "").replace(" — 200 Headphones", "").replace(" — 300 Headphones", "")}</span><button data-remove="${p.id}" aria-label="Remove">×</button></div>`).join("") : `<div class="empty" style="padding:24px">Nothing selected yet.</div>`}</div>${quoteOnly ? `<div class="quote-tag">Some selections require a final quote confirmation.</div>` : ""}<a class="btn btn-dark" style="width:100%;margin-top:12px" href="#quote">Send my setup →</a></aside></div></div>`;
+  function builderStepContent() {
+    if (state.builderStep === 1)
+      return `<div class="reveal"><span class="eyebrow">STEP 01</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">What are you planning?</h2><p style="color:var(--muted);margin-top:0">Pick the closest event type. The interface uses it to suggest a starting point.</p><div class="choice-grid">${["Wedding", "Corporate Event", "School Event", "Concert", "Private Party", "Outdoor Movie"].map((x) => `<button class="choice ${state.eventType === x ? "selected" : ""}" data-event="${x}"><strong>${x}</strong><span>${x === "Wedding" ? "Ceremony + celebration" : x === "Corporate Event" ? "Meetings + launches" : x === "School Event" ? "Programs + dances" : x === "Concert" ? "Live performance" : x === "Private Party" ? "Celebrations" : "Inflatable movie night"}</span>${state.eventType === x ? "<em>Selected</em>" : ""}</button>`).join("")}</div></div>`;
+    if (state.builderStep === 2)
+      return `<div class="reveal"><span class="eyebrow">STEP 02</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Tell us about your event.</h2><p style="color:var(--muted);margin-top:0">Share a few planning and contact details so the quote can be tailored to your venue.</p><div class="form-grid"><div class="field"><label for="contactNameInput">Full name *</label><input class="input" id="contactNameInput" autocomplete="name" required value="${escapeHtml(state.contactName)}" placeholder="Alex Morgan"></div><div class="field"><label for="contactEmailInput">Email *</label><input class="input" id="contactEmailInput" type="email" autocomplete="email" required value="${escapeHtml(state.contactEmail)}" placeholder="alex@example.com"></div><div class="field"><label for="contactPhoneInput">Phone</label><input class="input" id="contactPhoneInput" type="tel" autocomplete="tel" value="${escapeHtml(state.contactPhone)}" placeholder="(978) 601-5473"></div><div class="field"><label for="organizationInput">Company or organization</label><input class="input" id="organizationInput" value="${escapeHtml(state.organization)}" placeholder="Company or group"></div><div class="field"><label for="eventNameInput">Event name</label><input class="input" id="eventNameInput" value="${escapeHtml(state.eventName)}" placeholder="Annual fundraiser"></div><div class="field"><label for="guestInput">Estimated guests</label><input class="input" id="guestInput" type="number" min="1" value="${state.guests}"></div><div class="field"><label for="venueInput">Venue setting</label><select class="select" id="venueInput"><option ${state.venue === "Indoor" ? "selected" : ""}>Indoor</option><option ${state.venue === "Outdoor" ? "selected" : ""}>Outdoor</option><option ${state.venue === "Hybrid" ? "selected" : ""}>Hybrid</option></select></div><div class="field"><label for="dateInput">Event date</label><input class="input" id="dateInput" type="date" value="${escapeHtml(state.date)}"></div><div class="field full"><label for="eventLocationInput">Venue name or address</label><input class="input" id="eventLocationInput" autocomplete="street-address" value="${escapeHtml(state.eventLocation)}" placeholder="Search for a venue or enter an address"><div class="builder-map-placeholder" role="group" aria-label="Map preview placeholder"><span class="map-placeholder-grid" aria-hidden="true"></span><span class="map-pin" aria-hidden="true">●</span><div class="map-placeholder-copy"><strong id="mapAddressPreview">${state.eventLocation ? escapeHtml(state.eventLocation) : "Your venue preview"}</strong><span>Map preview placeholder · open this address in Google Maps</span><a id="mapPreviewLink" href="${state.eventLocation ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(state.eventLocation)}` : "#"}" ${state.eventLocation ? "" : 'aria-disabled="true" tabindex="-1"'} target="_blank" rel="noopener noreferrer">Preview location in Google Maps ↗</a></div></div><small class="map-api-note">An interactive embedded map can be enabled later with a Maps API key.</small></div><div class="field full"><label for="eventNotesInput">Anything else we should know?</label><textarea class="textarea" id="eventNotesInput" placeholder="Schedule, room details, delivery notes, or special requests">${escapeHtml(state.eventNotes)}</textarea></div></div></div>`;
+    if (state.builderStep === 3)
+      return `<div class="reveal"><span class="eyebrow">STEP 03</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Pick the pieces.</h2><p style="color:var(--muted);margin-top:0">Start with recommendations for your ${state.eventType.toLowerCase()}, then browse the full equipment catalog. Quantities update the estimate in real time.</p><div class="equipment-group"><div class="equipment-group-head"><span class="eyebrow">FOR YOUR EVENT</span><span class="equipment-count">${recommendedProducts.length} recommendations</span></div><div class="builder-product-grid">${recommendedProducts.map((p) => miniProduct(p, true)).join("")}</div></div><div class="equipment-group all-equipment"><div class="equipment-group-head"><span class="eyebrow">ALL EQUIPMENT</span><span class="equipment-count">${products.length} products</span></div><div class="builder-product-grid">${otherProducts.map((p) => miniProduct(p)).join("")}</div></div></div>`;
+    const detail = (label, value) => `<div class="summary-line"><span>${label}</span><strong>${value || "Not provided"}</strong></div>`;
+    const locationValue = state.eventLocation ? `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(state.eventLocation)}" target="_blank" rel="noopener noreferrer">${escapeHtml(state.eventLocation)} ↗</a>` : "Not provided";
+    return `<div class="reveal"><span class="eyebrow">STEP 04</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Review your build.</h2><p style="color:var(--muted);margin-top:0">Everything the client has configured is summarized here before sending the request.</p><div class="selection-list">${items.length ? items.map(({ p, qty }) => `<div class="selection-chip"><span><strong>${qty} ×</strong> ${p.name}</span><span>${p.priceType === "quote" ? "Quote" : productPriceText(p)}</span></div>`).join("") : `<div class="empty">Add at least one product to your setup.</div>`}</div><div class="builder-event-summary"><h3>Event details</h3>${detail("Event type", escapeHtml(state.eventType))}${detail("Event name", escapeHtml(state.eventName))}${detail("Contact", escapeHtml(state.contactName))}${detail("Email", escapeHtml(state.contactEmail))}${detail("Phone", escapeHtml(state.contactPhone))}${detail("Organization", escapeHtml(state.organization))}${detail("Guests", String(state.guests))}${detail("Venue setting", escapeHtml(state.venue))}${detail("Date", escapeHtml(state.date || "Not selected"))}<div class="summary-line"><span>Venue location</span><strong>${locationValue}</strong></div>${detail("Notes", escapeHtml(state.eventNotes))}</div></div>`;
+  }
+}
+
 function quote() {
   if (state.submittedQuote) {
     return renderSubmittedReceipt(state.submittedQuote);
   }
 
   const totals = calculateQuoteTotals();
-  const step = Math.min(6, Math.max(1, Number(state.builderStep) || 1));
-  state.builderStep = step;
+  const step = Math.min(6, Math.max(1, Number(state.quoteStep) || 1));
+  state.quoteStep = step;
 
   const stepsMeta = [
     { num: 1, label: "Event Type" },
@@ -3237,7 +3271,7 @@ function quote() {
         .map((s) => {
           const isCurrent = s.num === step;
           const isDone = s.num < step;
-          return `<button type="button" class="q-progress-step ${isCurrent ? "is-current" : ""} ${isDone ? "is-done" : ""}" data-goto-step="${s.num}">
+          return `<button type="button" class="q-progress-step ${isCurrent ? "is-current" : ""} ${isDone ? "is-done" : ""}" data-quote-step="${s.num}">
             <span class="q-step-num">${isDone ? "✓" : `0${s.num}`}</span>
             <span class="q-step-label">${escapeHtml(s.label)}</span>
           </button>`;
@@ -3252,11 +3286,11 @@ function quote() {
 
         <div class="q-step-nav-footer">
           ${step > 1
-            ? `<button type="button" class="btn btn-light" data-builder-prev>← Previous Step</button>`
+            ? `<button type="button" class="btn btn-light" data-quote-prev>← Previous Step</button>`
             : `<a href="#rentals" class="btn btn-light">← Browse Catalog</a>`}
           <div class="q-step-indicator">Step 0${step} of 06</div>
           ${step < 6
-            ? `<button type="button" class="btn btn-dark" data-builder-next>Continue to ${escapeHtml(stepsMeta[step].label)} →</button>`
+            ? `<button type="button" class="btn btn-dark" data-quote-next>Continue to ${escapeHtml(stepsMeta[step].label)} →</button>`
             : ""}
         </div>
       </div>
@@ -3369,7 +3403,8 @@ function render(options = {}) {
   if (hash === "bundles") view = bundlesPage();
   if (hash === "about") view = aboutUsPage();
   if (hash === "services") view = services();
-  if (hash === "quote" || hash === "builder") view = quote();
+  if (hash === "builder") view = builder();
+  if (hash === "quote") view = quote();
   app.innerHTML = view;
   lastRenderedPage = hash;
   const pageRoot = app.querySelector(":scope > .page");
@@ -3420,7 +3455,7 @@ function syncMorphingNavigation() {
 
 function observePageMotion() {
   const motionTargets = document.querySelectorAll(
-    "#app .reveal, #app .page-hero, #app .rentals-toolbar, #app .bundle-customize, #app .about-section, #app .about-hero, #app .quote-page, #app .bundle-detail-head, #app .bundle-detail-wrap, #app .service-grid, #app .page > .section",
+    "#app .reveal, #app .page-hero, #app .rentals-toolbar, #app .bundle-customize, #app .builder-wrap, #app .about-section, #app .about-hero, #app .quote-page, #app .bundle-detail-head, #app .bundle-detail-wrap, #app .service-grid, #app .page > .section",
   );
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -3638,30 +3673,84 @@ function bind() {
         else if (match.id === "corporate") state.eventType = "Corporate Event";
         else state.eventType = "Private Party";
         state.submittedQuote = null;
-        state.builderStep = targetStep;
+        state.quoteStep = targetStep;
         location.hash = "quote";
         showToast(`${match.title} loaded into your quote`);
       }
     }),
   );
 
-  // Step navigation in Quote Builder
-  document.querySelectorAll("[data-goto-step]").forEach((btn) =>
+  // Step navigation in Quote
+  document.querySelectorAll("[data-quote-step]").forEach((btn) =>
     btn.addEventListener("click", () => {
-      state.builderStep = Math.min(6, Math.max(1, Number(btn.dataset.gotoStep) || 1));
+      state.quoteStep = Math.min(6, Math.max(1, Number(btn.dataset.quoteStep) || 1));
       state.quoteError = "";
       render();
     }),
   );
-  document.querySelector("[data-builder-next]")?.addEventListener("click", () => {
-    state.builderStep = Math.min(6, state.builderStep + 1);
+  document.querySelectorAll("[data-goto-step]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.quoteStep = Math.min(6, Math.max(1, Number(btn.dataset.gotoStep) || 1));
+      state.quoteError = "";
+      render();
+    }),
+  );
+  document.querySelector("[data-quote-next]")?.addEventListener("click", () => {
+    state.quoteStep = Math.min(6, state.quoteStep + 1);
     state.quoteError = "";
     render();
   });
-  document.querySelector("[data-builder-prev]")?.addEventListener("click", () => {
-    state.builderStep = Math.max(1, state.builderStep - 1);
+  document.querySelector("[data-quote-prev]")?.addEventListener("click", () => {
+    state.quoteStep = Math.max(1, state.quoteStep - 1);
     state.quoteError = "";
     render();
+  });
+
+  // Step navigation in Event Builder (My setup)
+  document.querySelector("[data-builder-next]")?.addEventListener("click", () => {
+    if (state.builderStep === 2) {
+      const nameInput = document.querySelector("#contactNameInput");
+      const emailInput = document.querySelector("#contactEmailInput");
+      if (nameInput && !nameInput.reportValidity()) return;
+      if (emailInput && !emailInput.reportValidity()) return;
+      state.contactName = nameInput?.value.trim() || "";
+      state.contactEmail = emailInput?.value.trim() || "";
+      state.contactPhone = document.querySelector("#contactPhoneInput")?.value.trim() || "";
+      state.organization = document.querySelector("#organizationInput")?.value.trim() || "";
+      state.eventName = document.querySelector("#eventNameInput")?.value.trim() || "";
+      state.eventLocation = document.querySelector("#eventLocationInput")?.value.trim() || "";
+      state.eventNotes = document.querySelector("#eventNotesInput")?.value.trim() || "";
+      state.guests = parseInt(
+        document.querySelector("#guestInput")?.value || 120,
+      );
+      state.venue = document.querySelector("#venueInput")?.value || "Indoor";
+      state.date = document.querySelector("#dateInput")?.value || "";
+    }
+    state.builderStep = Math.min(4, state.builderStep + 1);
+    render({ preserveScroll: getHash() === "builder" });
+  });
+
+  const locationInput = document.querySelector("#eventLocationInput");
+  const mapLink = document.querySelector("#mapPreviewLink");
+  const mapAddress = document.querySelector("#mapAddressPreview");
+  locationInput?.addEventListener("input", () => {
+    const address = locationInput.value.trim();
+    if (mapAddress) mapAddress.textContent = address || "Your venue preview";
+    if (!mapLink) return;
+    if (address) {
+      mapLink.href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+      mapLink.removeAttribute("aria-disabled");
+      mapLink.removeAttribute("tabindex");
+    } else {
+      mapLink.href = "#";
+      mapLink.setAttribute("aria-disabled", "true");
+      mapLink.setAttribute("tabindex", "-1");
+    }
+  });
+
+  document.querySelector("[data-builder-prev]")?.addEventListener("click", () => {
+    state.builderStep = Math.max(1, state.builderStep - 1);
+    render({ preserveScroll: getHash() === "builder" });
   });
 
   // Step 1: Select Event Type
@@ -4067,7 +4156,7 @@ function bind() {
   });
   document.querySelector("[data-new-quote]")?.addEventListener("click", () => {
     state.submittedQuote = null;
-    state.builderStep = 1;
+    state.quoteStep = 1;
     render();
   });
   document.querySelectorAll("[data-faq-toggle]").forEach((btn) =>
@@ -4510,8 +4599,7 @@ document.addEventListener("pointerout", (event) => {
 });
 
 window.addEventListener("hashchange", () => {
-  const h = getHash();
-  if (h !== "builder" && h !== "quote") state.builderStep = 1;
+  if (getHash() !== "builder") state.builderStep = 1;
   render();
 });
 
