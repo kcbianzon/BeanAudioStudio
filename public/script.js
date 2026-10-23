@@ -3282,14 +3282,12 @@ function quote() {
         <p>Type your estimated audience size and rental duration below. Pricing and speaker wattage scale automatically.</p>
       </div>
 
-      <!-- 1. Estimated Audience Size (Type Only - No Options) -->
+      <!-- 1. Estimated Audience Size (Type Only - Clean) -->
       <div class="q-subblock">
         <div class="q-main-event-input-box">
           <label for="quoteGuestExact" class="q-main-input-label">
             <span>1. Estimated Audience Size</span>
-            <span class="q-main-badge">Type Count Only</span>
           </label>
-          <p class="q-input-helper-desc">Type your estimated attendee count. We scale speaker wattage, subwoofer throw, and microphone systems to fit your room.</p>
           <div class="q-guest-input-row">
             <input
               id="quoteGuestExact"
@@ -3306,46 +3304,38 @@ function quote() {
         </div>
       </div>
 
-      <!-- 2. Venue Setting (Refined UI/UX & Typography) -->
+      <!-- 2. Venue Setting (Matches Uploaded Mockup Exactly) -->
       <div class="q-subblock">
-        <div class="q-presets-header">
-          <span class="eyebrow">2. VENUE SETTING</span>
-          <span class="q-presets-sub">Select your environment for acoustic calibration &amp; power needs:</span>
+        <div class="q-venue-header-row">
+          <h3 class="q-venue-main-title">Venue Setting</h3>
+          <span class="q-venue-sub-text">Select your environment for acoustic calibration &amp; power needs:</span>
         </div>
         <div class="q-venue-grid">
           ${[
             {
               id: "Indoor",
               title: "Indoor Venue",
-              tag: "ENCLOSED ROOM ACOUSTICS",
-              sub: "Ballrooms, hotels, convention centers, auditoriums, or banquet halls",
-              icon: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4 6 3v15M9 9v.01M9 13v.01M9 17v.01M15 9v.01M15 13v.01M15 17v.01"/></svg>`
+              sub: "Gatherings held inside an enclosed building, hotel ballroom, or event hall."
             },
             {
               id: "Outdoor",
-              title: "Outdoor Space",
-              tag: "OPEN AIR & WEATHERPROOF",
-              sub: "Courtyards, festival lawns, parks, tents, rooftops, or private backyards",
-              icon: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/><circle cx="12" cy="12" r="3"/></svg>`
+              title: "Outdoor Venue",
+              sub: "Open-air gatherings held outdoors in parks, lawns, courtyards, or tents."
             },
             {
-              id: "Indoor + Outdoor",
-              title: "Indoor + Outdoor (Multi-Zone)",
-              tag: "MULTI-ZONE WIRELESS SYNC",
-              sub: "Outdoor ceremony / cocktail hour + indoor reception and dance floor",
-              icon: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20M2 12h20"/></svg>`
+              id: "Outdoor & Indoor",
+              title: "Outdoor & Indoor",
+              sub: "Multi-space gatherings spanning both indoor rooms and outdoor open-air areas."
             }
           ].map((v) => {
-            const isSelected = state.venue === v.id;
+            const isSelected = state.venue === v.id || (v.id === "Outdoor & Indoor" && state.venue === "Indoor + Outdoor");
             return `<button type="button" class="q-venue-card ${isSelected ? "is-active" : ""}" data-select-venue="${escapeHtml(v.id)}">
-              <div class="q-venue-top">
-                <div class="q-venue-icon-box" aria-hidden="true">${v.icon}</div>
-                <span class="q-venue-tag">${escapeHtml(v.tag)}</span>
+              <div class="q-venue-card-body">
+                <h4 class="q-venue-title">${escapeHtml(v.title)}</h4>
+                <p class="q-venue-desc">${escapeHtml(v.sub)}</p>
               </div>
-              <h4 class="q-venue-title">${escapeHtml(v.title)}</h4>
-              <p class="q-venue-desc">${escapeHtml(v.sub)}</p>
               <div class="q-venue-foot">
-                <span class="q-event-status">${isSelected ? "✓ Selected Setting" : "Select"}</span>
+                <span class="q-venue-pill ${isSelected ? "is-selected" : ""}">${isSelected ? "Selected" : "Select"}</span>
               </div>
             </button>`;
           }).join("")}
