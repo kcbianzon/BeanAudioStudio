@@ -1093,7 +1093,7 @@ function filteredProducts() {
 function loadSelection() {
   try {
     const saved = localStorage.getItem("beantown-selected-products");
-    if (saved === null) return { "medium-audio": 1, "wired-mic": 2 };
+    if (saved === null) return {};
     const parsed = JSON.parse(saved);
     return Object.fromEntries(
       Object.entries(parsed).filter(([id, quantity]) =>
@@ -1102,7 +1102,7 @@ function loadSelection() {
       ),
     );
   } catch {
-    return { "medium-audio": 1, "wired-mic": 2 };
+    return {};
   }
 }
 function sanitizeSelectedProducts() {
@@ -3099,12 +3099,64 @@ function builder() {
   return rentals();
 }
 
+function renderEmptyQuoteGate() {
+  const sampleBundles = bundles.slice(0, 3);
+  return `<div class="page quote-gate-page">
+    <div class="quote-gate-container">
+      <div class="quote-gate-card">
+        <div class="quote-gate-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+            <path d="M3 6h18"></path>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+        </div>
+        <span class="eyebrow orange">ITEMIZED QUOTE REQUIRES EQUIPMENT</span>
+        <h1 class="quote-gate-title">Your setup is empty</h1>
+        <p class="quote-gate-lead">
+          To request an itemized quote, please <strong>add items to your cart first</strong> or <strong>select a turnkey event bundle</strong> before proceeding.
+        </p>
+
+        <div class="quote-gate-actions">
+          <a href="#rentals" class="btn btn-dark">Browse Rentals &amp; Add to Cart <span>→</span></a>
+          <a href="#bundles" class="btn btn-light">Explore Event Bundles</a>
+        </div>
+      </div>
+
+      <div class="quote-gate-bundles-section">
+        <div class="quote-gate-bundles-head">
+          <span class="eyebrow">OR START WITH A TURNKEY BUNDLE</span>
+          <h3>Quick-start packages with transparent pricing:</h3>
+        </div>
+        <div class="quote-gate-bundles-grid">
+          ${sampleBundles.map((b) => `
+            <div class="quote-bundle-card">
+              <div class="quote-bundle-meta">
+                <span class="eyebrow orange">${escapeHtml(b.label)}</span>
+                <h4>${escapeHtml(b.title)}</h4>
+                <p>${escapeHtml(b.desc)}</p>
+              </div>
+              <div class="quote-bundle-foot">
+                <span class="quote-bundle-price">${money(b.price)}</span>
+                <button type="button" class="btn btn-dark btn-small" data-launch-bundle="${b.id}" data-launch-step="1">Select bundle →</button>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
 function quote() {
   if (state.submittedQuote) {
     return renderSubmittedReceipt(state.submittedQuote);
   }
 
   const totals = calculateQuoteTotals();
+  if (totals.lineItems.length === 0) {
+    return renderEmptyQuoteGate();
+  }
   const step = Math.min(6, Math.max(1, Number(state.quoteStep) || 1));
   state.quoteStep = step;
 
@@ -3840,11 +3892,13 @@ function bind() {
   document.querySelectorAll("[data-launch-bundle]").forEach((btn) =>
     btn.addEventListener("click", () => {
       const bId = btn.dataset.launchBundle;
-      const targetStep = Number(btn.dataset.launchStep) || 5;
+      const targetStep = Number(btn.dataset.launchStep) || 1;
       const match = bundles.find((x) => x.id === bId);
       if (match) {
         state.selected = { ...match.included };
         saveSelection();
+        syncSetupCount();
+        updateCartDrawer();
         if (match.id === "movie") state.eventType = "Outdoor Movie";
         else if (match.id === "wedding") state.eventType = "Wedding";
         else if (match.id === "concert") state.eventType = "Concert";
@@ -3853,7 +3907,11 @@ function bind() {
         else state.eventType = "Private Party";
         state.submittedQuote = null;
         state.quoteStep = targetStep;
-        location.hash = "quote";
+        if (location.hash === "#quote" || location.hash === "quote") {
+          render();
+        } else {
+          location.hash = "quote";
+        }
         showToast(`${match.title} loaded into your quote`);
       }
     }),

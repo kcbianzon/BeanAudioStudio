@@ -8875,3 +8875,160 @@ button.setup-link {
   background: transparent;
   outline: none;
 }
+
+/* ==========================================================================
+   QUOTE EMPTY GATE (WHEN CART HAS NO ITEMS)
+   ========================================================================== */
+.quote-gate-page {
+  padding: clamp(48px, 6vw, 84px) 24px clamp(64px, 8vw, 100px);
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quote-gate-container {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.quote-gate-card {
+  background: #ffffff;
+  border: 1px solid var(--line, #ddd8ce);
+  border-radius: 28px;
+  padding: clamp(36px, 6vw, 64px) clamp(24px, 5vw, 48px);
+  text-align: center;
+  box-shadow: 0 16px 44px rgba(52, 43, 20, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quote-gate-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 24px;
+  background: #fff3ca;
+  color: #9d6811;
+  border: 1px solid #f0d98a;
+  display: grid;
+  place-items: center;
+  margin-bottom: 24px;
+}
+
+.quote-gate-title {
+  font-family: 'Space Grotesk', Inter, sans-serif;
+  font-size: clamp(32px, 4.5vw, 48px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--ink, #111111);
+  margin: 10px 0 14px;
+  line-height: 1.1;
+}
+
+.quote-gate-lead {
+  font-size: clamp(15.5px, 1.4vw, 18px);
+  line-height: 1.62;
+  color: var(--muted, #6f6d67);
+  max-width: 580px;
+  margin: 0 0 32px;
+}
+
+.quote-gate-lead strong {
+  color: var(--ink, #111111);
+  font-weight: 700;
+}
+
+.quote-gate-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+/* Bundles section on quote gate */
+.quote-gate-bundles-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.quote-gate-bundles-head {
+  text-align: center;
+}
+
+.quote-gate-bundles-head h3 {
+  font-family: 'Space Grotesk', Inter, sans-serif;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--ink, #111111);
+  margin: 6px 0 0;
+}
+
+.quote-gate-bundles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.quote-bundle-card {
+  background: #ffffff;
+  border: 1px solid #eee7d8;
+  border-radius: 22px;
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  box-shadow: 0 8px 24px rgba(52, 43, 20, 0.04);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.quote-bundle-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(52, 43, 20, 0.08);
+  border-color: #dfad2a;
+}
+
+.quote-bundle-meta h4 {
+  font-family: 'Sora', Inter, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink, #111111);
+  margin: 6px 0 8px;
+  letter-spacing: -0.02em;
+}
+
+.quote-bundle-meta p {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted, #6f6d67);
+  margin: 0;
+}
+
+.quote-bundle-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid #eee7d8;
+}
+
+.quote-bundle-price {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ink, #111111);
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 860px) {
+  .quote-gate-bundles-grid {
+    grid-template-columns: 1fr;
+  }
+}
