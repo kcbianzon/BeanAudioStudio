@@ -8393,17 +8393,30 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 /* ==========================================================================
    CART DRAWER PANEL (ORDERING SYSTEM — PANEL ONLY) — BEANTOWN WARM THEME
    ========================================================================== */
+
+/* Smooth site shell blur when cart panel is open */
+.site-shell {
+  transition: filter 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.cart-drawer-open .site-shell {
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  pointer-events: none;
+  user-select: none;
+}
+
 .cart-drawer-overlay {
   position: fixed;
   inset: 0;
   z-index: 1200;
-  background: rgba(36, 35, 31, 0.38);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(20, 18, 14, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.28s ease, visibility 0.28s ease;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cart-drawer-overlay.is-open {
@@ -8855,4 +8868,10 @@ body.cart-drawer-open {
   .cart-proceed-btn {
     transition: none;
   }
+}
+
+button.setup-link {
+  cursor: pointer;
+  background: transparent;
+  outline: none;
 }

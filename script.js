@@ -3375,9 +3375,8 @@ function render(options = {}) {
   if (hash === "about") view = aboutUsPage();
   if (hash === "services") view = services();
   if (hash === "builder" || hash === "cart") {
-    location.hash = "#rentals";
-    setTimeout(() => openCartDrawer(), 80);
-    return;
+    view = rentals();
+    setTimeout(() => openCartDrawer(), 60);
   }
   if (hash === "quote") view = quote();
   app.innerHTML = view;
