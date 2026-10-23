@@ -3522,23 +3522,6 @@ function updateCartDrawer() {
       </div>
     `;
     footerEl.innerHTML = `
-      <div class="cart-footer-summary">
-        <div class="cart-summary-line">
-          <span>Subtotal</span>
-          <strong>$0</strong>
-        </div>
-        <div class="cart-summary-line muted-line">
-          <span>Estimated fees</span>
-          <span>Calculated at checkout</span>
-        </div>
-        <div class="cart-total-line">
-          <div class="cart-total-meta">
-            <span class="cart-total-title">Total</span>
-            <span class="cart-total-note">Before delivery or pickup fees</span>
-          </div>
-          <strong class="cart-total-val">$0</strong>
-        </div>
-      </div>
       <button type="button" class="cart-proceed-btn" id="cartProceedBtn" data-cart-proceed disabled>
         Proceed <span aria-hidden="true">→</span>
       </button>
@@ -3576,23 +3559,6 @@ function updateCartDrawer() {
       .join("");
 
     footerEl.innerHTML = `
-      <div class="cart-footer-summary">
-        <div class="cart-summary-line">
-          <span>Subtotal</span>
-          <strong>${money(subtotal)}</strong>
-        </div>
-        <div class="cart-summary-line muted-line">
-          <span>Estimated fees</span>
-          <span>Calculated at checkout</span>
-        </div>
-        <div class="cart-total-line">
-          <div class="cart-total-meta">
-            <span class="cart-total-title">Total</span>
-            <span class="cart-total-note">Before delivery or pickup fees</span>
-          </div>
-          <strong class="cart-total-val">${money(subtotal)}</strong>
-        </div>
-      </div>
       <button type="button" class="cart-proceed-btn" id="cartProceedBtn" data-cart-proceed>
         Proceed <span aria-hidden="true">→</span>
       </button>
