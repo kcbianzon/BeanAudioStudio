@@ -3494,7 +3494,7 @@ function deleteCartItem(id) {
   syncSetupCount();
   render({ preserveScroll: true });
   updateCartDrawer();
-  showToast(`${product?.name || "Rental"} removed from cart`);
+  showToast(`${product?.name || "Rental"} removed from your setup`);
 }
 
 function updateCartDrawer() {
@@ -3516,14 +3516,14 @@ function updateCartDrawer() {
             <path d="M16 10a4 4 0 0 1-8 0"></path>
           </svg>
         </div>
-        <h3 class="cart-empty-title">Your cart is empty.</h3>
+        <h3 class="cart-empty-title">Your setup is empty.</h3>
         <p class="cart-empty-desc">Add speakers, lighting, screens, or event bundles and they will appear here.</p>
         <button type="button" class="cart-continue-btn" data-cart-continue>Continue ordering</button>
       </div>
     `;
     footerEl.innerHTML = `
       <button type="button" class="cart-proceed-btn" id="cartProceedBtn" data-cart-proceed disabled>
-        Proceed <span aria-hidden="true">→</span>
+        Proceed
       </button>
     `;
   } else {
@@ -3560,7 +3560,7 @@ function updateCartDrawer() {
 
     footerEl.innerHTML = `
       <button type="button" class="cart-proceed-btn" id="cartProceedBtn" data-cart-proceed>
-        Proceed <span aria-hidden="true">→</span>
+        Proceed
       </button>
     `;
   }
@@ -3642,7 +3642,7 @@ function initCartDrawer() {
         location.hash = "#quote";
         showToast("Setup loaded! Finalize your event details below.");
       } else {
-        showToast("Your cart is empty. Add items first!");
+        showToast("Your setup is empty. Add items first!");
       }
       return;
     }
@@ -3671,7 +3671,7 @@ function addProduct(id, delta = 1, options = {}) {
   if (delta > 0 && !options.silentCart) {
     openCartDrawer();
   }
-  showToast(delta > 0 ? `${product?.name || "Rental"} added to your cart` : `${product?.name || "Rental"} removed`);
+  showToast(delta > 0 ? `${product?.name || "Rental"} added to your setup` : `${product?.name || "Rental"} removed`);
 }
 
 function bind() {
