@@ -1,4 +1,4 @@
-const products = [
+const DEFAULT_PRODUCTS = [
   // --- AUDIO & SPEAKERS ---
   {
     id: "small-audio",
@@ -676,7 +676,7 @@ const products = [
   },
 ];
 
-const bundles = [
+const DEFAULT_BUNDLES = [
   {
     id: "wedding",
     title: "Wedding Event",
@@ -813,6 +813,398 @@ const bundles = [
   },
 ];
 
+
+// ==========================================================================
+// CMS PERSISTENT DATA LAYER & ASSET CATALOG
+// ==========================================================================
+const CMS_STORAGE = {
+  PRODUCTS: "beantown_cms_products",
+  BUNDLES: "beantown_cms_bundles",
+  COUPONS: "beantown_cms_coupons",
+  SETTINGS: "beantown_cms_settings",
+  QUOTES: "beantown_cms_quotes",
+  AUTH: "beantown_cms_auth",
+};
+
+const DEFAULT_COUPONS = [
+  {
+    id: "coupon-welcome50",
+    code: "WELCOME50",
+    type: "fixed",
+    value: 50,
+    minOrder: 300,
+    expiryDate: "2026-12-31",
+    description: "$50 off your first event rental (min. $300)",
+    active: true,
+    usageCount: 12,
+  },
+  {
+    id: "coupon-beantown10",
+    code: "BEANTOWN10",
+    type: "percent",
+    value: 10,
+    minOrder: 200,
+    expiryDate: "2026-12-31",
+    description: "10% off entire equipment rental",
+    active: true,
+    usageCount: 28,
+  },
+  {
+    id: "coupon-promo100",
+    code: "PROMO100",
+    type: "fixed",
+    value: 100,
+    minOrder: 800,
+    expiryDate: "2026-12-31",
+    description: "$100 off complete event production",
+    active: true,
+    usageCount: 7,
+  },
+  {
+    id: "coupon-vip15",
+    code: "VIP15",
+    type: "percent",
+    value: 15,
+    minOrder: 1500,
+    expiryDate: "2026-12-31",
+    description: "15% VIP discount for major festivals & productions",
+    active: true,
+    usageCount: 4,
+  },
+];
+
+const DEFAULT_SETTINGS = {
+  companyName: "Beantown Audio Rentals",
+  phone: "978-601-5473",
+  email: "info@beantownaudiorentals.com",
+  notificationEmail: "kcbianzon@gmail.com",
+  location: "Boston, MA & New England",
+  hours: "Mon–Sun: 8:00 AM – 8:00 PM",
+  notes: "White-glove delivery & setup across MA, NH, RI, ME & CT",
+  adminEmails: ["kcbianzon@gmail.com"],
+};
+
+const DEFAULT_SAMPLE_QUOTES = [
+  {
+    id: "BOS-94812",
+    createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
+    contactName: "Sarah Jenkins",
+    contactEmail: "sarah.jenkins@biotech-summit.org",
+    contactPhone: "(617) 555-0144",
+    organization: "BioTech Innovation Forum",
+    eventName: "New England Life Sciences Gala 2026",
+    eventType: "Corporate Event",
+    guests: "250",
+    venue: "Indoor",
+    date: "November 14, 2026",
+    location: "Seaport World Trade Center, Boston MA",
+    serviceTier: "Full AV Production & Dedicated Technician",
+    serviceFee: 650,
+    duration: "1-Day Rental (Standard 24-Hour)",
+    items: [
+      { id: "medium-audio", name: "Medium Event Speaker Package", qty: 2, price: 349, subtotal: 698 },
+      { id: "qlxd-lavalier", name: "Shure QLX-D Wireless Lavalier System", qty: 4, price: 85, subtotal: 340 },
+      { id: "fastfold-screen", name: "FastFold 120-inch Front/Rear Screen & Projector", qty: 2, price: 395, subtotal: 790 },
+      { id: "uplights-6", name: "Battery Wireless LED Up-Lights (6-Pack)", qty: 2, price: 150, subtotal: 300 }
+    ],
+    baseSubtotal: 2128,
+    durationSurcharge: 0,
+    couponCode: "BEANTOWN10",
+    discountAmount: 213,
+    grandTotal: 2565,
+    status: "New",
+    notes: "Main ballroom keynote starts at 9am. Load-in dock access required at 6:30am."
+  },
+  {
+    id: "BOS-83190",
+    createdAt: new Date(Date.now() - 3600000 * 28).toISOString(),
+    contactName: "Marcus Sterling",
+    contactEmail: "marcus@sterlingevents.com",
+    contactPhone: "(978) 555-8821",
+    organization: "Private Wedding",
+    eventName: "Sterling-Vance Wedding Reception",
+    eventType: "Wedding",
+    guests: "175",
+    venue: "Outdoor & Indoor",
+    date: "December 5, 2026",
+    location: "The Crane Estate, Ipswich MA",
+    serviceTier: "Delivery, Setup & Testing (Crew breakdown included)",
+    serviceFee: 350,
+    duration: "1-Day Rental (Standard 24-Hour)",
+    items: [
+      { id: "medium-audio", name: "Medium Event Speaker Package", qty: 1, price: 349, subtotal: 349 },
+      { id: "photo-360", name: "360 Video Photo Booth Platform", qty: 1, price: 1499, subtotal: 1499 },
+      { id: "dry-ice-cloud", name: "Dry Ice Low-Lying Fog Machine", qty: 1, price: 295, subtotal: 295 },
+      { id: "cold-spark-4", name: "Indoor Cold Spark Machines (4-Pack)", qty: 1, price: 600, subtotal: 600 }
+    ],
+    baseSubtotal: 2743,
+    durationSurcharge: 0,
+    couponCode: "WELCOME50",
+    discountAmount: 50,
+    grandTotal: 3043,
+    status: "Confirmed",
+    notes: "First dance around 7:15pm with cloud effect and sparks. Sound must be tuned for tent acoustics."
+  }
+];
+
+const BEANTOWN_ASSETS = [
+  { file: "speaker-rental.jpg", label: "QSC Powered Speaker & Tripod" },
+  { file: "speaker-wall.webp", label: "Concert Subwoofer Array" },
+  { file: "microphone-rentals.jpeg", label: "Shure QLX-D Wireless Microphones" },
+  { file: "microphone.jpg", label: "Vintage Chrome Shure 55SH Mic" },
+  { file: "event-production.jpg", label: "Digital Audio Console & Live Mixing" },
+  { file: "headphones.jpg", label: "Silent Disco 3-Channel Headphone" },
+  { file: "silent-disco.webp", label: "Silent Disco Party Crowd" },
+  { file: "outdoor-movie.jpg", label: "Inflatable Mega Outdoor Movie Screen" },
+  { file: "outdoor-led-trailer.webp", label: "Outdoor High-Brightness LED Trailer" },
+  { file: "photo-booth-360.jpg", label: "360 Video Photo Booth Platform" },
+  { file: "69667bc3b2d970f7c3028354_MAGIC-PB-p-800.jpeg", label: "Magic Mirror Interactive Photo Booth" },
+  { file: "cold-sparklers.webp", label: "Cold Sparklers Machine" },
+  { file: "event-lighting.webp", label: "Smart Wireless Up-Lighting & Spotlights" },
+  { file: "event-stage.jpg", label: "Staging Platform & Audio Truss Rig" },
+  { file: "event-display.jpg", label: "Commercial 75-inch 4K Confidence Display" },
+  { file: "projector-screen.jpg", label: "HD Laser Projector & FastFold Screen" },
+  { file: "live-streaming.jpg", label: "Multi-Camera HD Live Broadcast Station" },
+  { file: "live-event.jpg", label: "Full Arena Live Event Production" },
+  { file: "concert-audio.webp", label: "Concert Audio Line Array In Action" },
+  { file: "corporate-dance-floor.jpg", label: "Corporate Ballroom Stage & Cloud Effect" },
+  { file: "69667bc33d884d697701e4c1_Led-Wall.png", label: "Custom Modular LED Video Wall" },
+  { file: "69667bc5bf1882f6695ff917_V-SHAPE-LED-WALL-p-800.jpg", label: "V-Shape Stage LED Video Wall" },
+  { file: "69667bc0827bddd685b11129_led-grand-enterance-p-800.jpg", label: "LED Wall Grand Entrance Tunnel" },
+  { file: "69667bc301370fe81cc69dc9_outdoor-movie-package-led-trailer-p-800.jpg", label: "Movie Package with LED Mobile Rig" },
+  { file: "69667bc51a89c0b8e055a68c_SMALL-PA-WITH-SUB--FACADE--AND-MOVERS-p-800.jpg", label: "DJ Rig with Facade & Moving Heads" },
+  { file: "wedding-led-display.webp", label: "Wedding Monogram LED Display" },
+  { file: "led-wall-roses.webp", label: "LED Wall Floral Wedding Backdrop" },
+  { file: "video-camera.jpg", label: "Broadcast Cinema Video Camera" },
+  { file: "founder-avatar.jpg", label: "Beantown AV Sound Engineer Avatar" },
+  { file: "calvin-reid.jpg", label: "Production Lead Calvin Reid" },
+  { file: "beantown-logo.png", label: "Beantown Logo (Dark / Standard)" },
+  { file: "beantown-logo-white.png", label: "Beantown Logo (White / Header)" },
+  { file: "69667bc57423e463b288c0ea_Screenshot-2025-03-25-at-1-21-51-PM-p-800.png", label: "Live Stage Production Snapshot 1" },
+  { file: "69667bc6a8aed9344088bb03_Screenshot-2025-01-16-at-1-24-21-PM-p-800.png", label: "Live Stage Production Snapshot 2" },
+  { file: "69667bc7f36d1b7365e11751_Screenshot-2025-01-16-at-1-28-51-PM-p-800.png", label: "Live Stage Production Snapshot 3" },
+];
+
+function loadCmsProducts() {
+  try {
+    const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch (e) {
+    console.warn("Failed to parse CMS products from localStorage, using defaults", e);
+  }
+  return DEFAULT_PRODUCTS.map((p) => ({ ...p }));
+}
+
+function saveCmsProducts(newProducts) {
+  try {
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(CMS_STORAGE.PRODUCTS, JSON.stringify(newProducts));
+    }
+    products = newProducts;
+  } catch (e) {
+    console.error("Failed to save CMS products to localStorage", e);
+  }
+}
+
+function loadCmsBundles() {
+  try {
+    const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.BUNDLES) : null;
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch (e) {
+    console.warn("Failed to parse CMS bundles from localStorage, using defaults", e);
+  }
+  return DEFAULT_BUNDLES.map((b) => ({ ...b }));
+}
+
+function saveCmsBundles(newBundles) {
+  try {
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(CMS_STORAGE.BUNDLES, JSON.stringify(newBundles));
+    }
+    bundles = newBundles;
+  } catch (e) {
+    console.error("Failed to save CMS bundles to localStorage", e);
+  }
+}
+
+function loadCmsCoupons() {
+  try {
+    const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.COUPONS) : null;
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+    }
+  } catch (e) {
+    console.warn("Failed to parse CMS coupons from localStorage, using defaults", e);
+  }
+  return DEFAULT_COUPONS.map((c) => ({ ...c }));
+}
+
+function saveCmsCoupons(newCoupons) {
+  try {
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(CMS_STORAGE.COUPONS, JSON.stringify(newCoupons));
+    }
+  } catch (e) {
+    console.error("Failed to save CMS coupons to localStorage", e);
+  }
+}
+
+function incrementCouponUsage(code) {
+  if (!code) return;
+  const list = loadCmsCoupons();
+  const c = list.find((item) => item.code.toUpperCase() === code.toUpperCase());
+  if (c) {
+    c.usageCount = (c.usageCount || 0) + 1;
+    saveCmsCoupons(list);
+  }
+}
+
+function loadCmsSettings() {
+  try {
+    const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.SETTINGS) : null;
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === "object") return { ...DEFAULT_SETTINGS, ...parsed };
+    }
+  } catch (e) {
+    console.warn("Failed to parse CMS settings from localStorage, using defaults", e);
+  }
+  return { ...DEFAULT_SETTINGS };
+}
+
+function saveCmsSettings(newSettings) {
+  try {
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(CMS_STORAGE.SETTINGS, JSON.stringify(newSettings));
+    }
+  } catch (e) {
+    console.error("Failed to save CMS settings to localStorage", e);
+  }
+}
+
+function loadCmsQuotes() {
+  try {
+    const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.QUOTES) : null;
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) return parsed;
+    }
+  } catch (e) {
+    console.warn("Failed to parse CMS quotes from localStorage", e);
+  }
+  return DEFAULT_SAMPLE_QUOTES.map((q) => ({ ...q }));
+}
+
+function saveCmsQuote(quoteRecord) {
+  try {
+    const list = loadCmsQuotes();
+    list.unshift(quoteRecord);
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(CMS_STORAGE.QUOTES, JSON.stringify(list));
+    }
+  } catch (e) {
+    console.error("Failed to record quote to CMS history", e);
+  }
+}
+
+function updateCmsQuoteStatus(id, newStatus) {
+  try {
+    const list = loadCmsQuotes();
+    const q = list.find((item) => item.id === id);
+    if (q) {
+      q.status = newStatus;
+      if (typeof localStorage !== "undefined") {
+        localStorage.setItem(CMS_STORAGE.QUOTES, JSON.stringify(list));
+      }
+    }
+  } catch (e) {
+    console.error("Failed to update quote status in CMS", e);
+  }
+}
+
+function deleteCmsQuote(id) {
+  try {
+    const list = loadCmsQuotes().filter((item) => item.id !== id);
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(CMS_STORAGE.QUOTES, JSON.stringify(list));
+    }
+  } catch (e) {
+    console.error("Failed to delete quote in CMS", e);
+  }
+}
+
+function getCmsAuth() {
+  try {
+    const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.AUTH) : null;
+    if (raw) return JSON.parse(raw);
+  } catch {}
+  return null;
+}
+
+function setCmsAuth(userObj) {
+  try {
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(CMS_STORAGE.AUTH, JSON.stringify(userObj));
+    }
+  } catch {}
+}
+
+function clearCmsAuth() {
+  try {
+    if (typeof localStorage !== "undefined") {
+      localStorage.removeItem(CMS_STORAGE.AUTH);
+    }
+  } catch {}
+}
+
+function isCmsAuthenticated() {
+  const auth = getCmsAuth();
+  return Boolean(auth && auth.email);
+}
+
+// Client-side image compressor for non-developers
+async function compressImageToDataUrl(file, maxWidth = 1280) {
+  return new Promise((resolve, reject) => {
+    if (!file) return resolve(null);
+    if (!file.type || !file.type.startsWith("image/")) {
+      return reject(new Error("Please upload an image file (PNG, JPG, WEBP)."));
+    }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const scale = Math.min(1, maxWidth / Math.max(img.width, img.height));
+        canvas.width = Math.max(1, Math.round(img.width * scale));
+        canvas.height = Math.max(1, Math.round(img.height * scale));
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        let quality = 0.82;
+        let dataUrl = canvas.toDataURL("image/jpeg", quality);
+        while (dataUrl.length > 2500000 && quality > 0.4) {
+          quality -= 0.1;
+          dataUrl = canvas.toDataURL("image/jpeg", quality);
+        }
+        resolve(dataUrl);
+      };
+      img.onerror = () => reject(new Error("Failed to load and process image."));
+      img.src = e.target.result;
+    };
+    reader.onerror = () => reject(new Error("Could not read file from device."));
+    reader.readAsDataURL(file);
+  });
+}
+
+let products = loadCmsProducts();
+let bundles = loadCmsBundles();
+
 const SERVICE_TIERS = [
   {
     id: "pickup",
@@ -945,6 +1337,21 @@ const state = {
   contactName: "",
   contactEmail: "",
   contactPhone: "",
+  couponCode: "",
+  appliedCoupon: null,
+  couponError: "",
+  cmsTab: "overview",
+  cmsSearch: "",
+  cmsCategoryFilter: "All",
+  cmsSortBy: "name",
+  cmsEditingProduct: null,
+  cmsEditingBundle: null,
+  cmsEditingCoupon: null,
+  cmsViewingQuote: null,
+  cmsAssetModalOpen: false,
+  cmsImageMode: "asset",
+  cmsSelectedAsset: "",
+  cmsLoginError: "",
   organization: "",
   eventName: "",
   eventLocation: "",
@@ -1215,7 +1622,30 @@ function calculateQuoteTotals() {
   const durationSurcharge = equipmentDurationTotal - equipmentBaseSubtotal;
   const serviceOption = SERVICE_TIERS.find((s) => s.id === state.serviceTier) || SERVICE_TIERS[0];
   const serviceFee = lineItems.length > 0 ? serviceOption.price : 0;
-  const grandTotal = equipmentDurationTotal + serviceFee;
+
+  // Loophole-free coupon discount math
+  let appliedCoupon = null;
+  let discountAmount = 0;
+  if (state.appliedCoupon) {
+    const c = state.appliedCoupon;
+    if (c.active !== false) {
+      const minReq = Number(c.minOrder) || 0;
+      const meetsMin = minReq === 0 || equipmentDurationTotal >= minReq;
+      const notExpired = !c.expiryDate || new Date(c.expiryDate + "T23:59:59") >= new Date();
+      if (meetsMin && notExpired) {
+        appliedCoupon = c;
+        if (c.type === "percent") {
+          discountAmount = Math.round(equipmentDurationTotal * (Number(c.value) / 100));
+        } else {
+          discountAmount = Math.min(equipmentDurationTotal, Math.round(Number(c.value) || 0));
+        }
+        discountAmount = Math.max(0, discountAmount);
+      }
+    }
+  }
+
+  const baseGrandTotal = equipmentDurationTotal + serviceFee;
+  const grandTotal = Math.max(0, (equipmentDurationTotal - discountAmount) + serviceFee);
 
   // Check if current selection matches a bundle exactly
   let matchedBundle = null;
@@ -1240,6 +1670,9 @@ function calculateQuoteTotals() {
     equipmentDurationTotal,
     serviceOption,
     serviceFee,
+    coupon: appliedCoupon,
+    discountAmount,
+    baseGrandTotal,
     grandTotal,
     matchedBundle,
   };
@@ -1252,6 +1685,7 @@ function syncSetupCount() {
   link?.setAttribute("aria-label", `My setup, ${count} item${count === 1 ? "" : "s"}`);
 }
 function productImage(p) {
+  if (p && p.image) return p.image;
   if (p.category === "Special Effects" && p.id.startsWith("cold-spark")) {
     return "assets/beantown/cold-sparklers.webp";
   }
@@ -1307,6 +1741,7 @@ function productImage(p) {
 }
 
 function bundleImage(bundle) {
+  if (bundle && bundle.image) return bundle.image;
   const photo = {
     wedding: "event-production.jpg",
     corporate: "projector-screen.jpg",
@@ -2972,6 +3407,27 @@ function renderReviewAndSubmitStep(totals) {
           </table>
         </div>
 
+        <!-- Coupon Code Input Box -->
+        <div class="q-coupon-box">
+          <div class="q-coupon-row">
+            <div class="q-coupon-input-wrap">
+              <svg class="q-coupon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              <input type="text" id="quoteCouponInput" class="q-coupon-input" placeholder="Promo code (e.g. WELCOME50, BEANTOWN10)" value="${escapeHtml(state.couponCode || "")}" autocomplete="off">
+            </div>
+            <button type="button" class="btn btn-dark btn-small" id="applyCouponBtn">Apply Code</button>
+          </div>
+          ${totals.coupon ? `
+            <div class="q-coupon-applied-pill">
+              <span>✓ <strong>${escapeHtml(totals.coupon.code)}</strong> applied: ${totals.coupon.type === "percent" ? `${totals.coupon.value}% off` : `${totals.coupon.value} off`} (${escapeHtml(totals.coupon.description || "Discount")})</span>
+              <button type="button" class="q-coupon-remove-btn" id="removeCouponBtn" title="Remove promo code">×</button>
+            </div>
+          ` : (state.couponError ? `
+            <div class="q-coupon-error-pill">
+              <span>${escapeHtml(state.couponError)}</span>
+            </div>
+          ` : "")}
+        </div>
+
         <div class="q-financial-summary">
           <div class="q-fin-row">
             <span>Equipment Base Subtotal (${totals.totalUnits} ${totals.totalUnits === 1 ? "unit" : "units"} · 1-Day Base Rate)</span>
@@ -2991,6 +3447,12 @@ function renderReviewAndSubmitStep(totals) {
             <span>Delivery, Setup &amp; Production Crew (${escapeHtml(totals.serviceOption.title)})</span>
             <strong>${totals.serviceFee === 0 ? "$0 (Self Pickup)" : `+${money(totals.serviceFee)}`}</strong>
           </div>
+          ${totals.discountAmount > 0 ? `
+            <div class="q-fin-row q-fin-discount">
+              <span>Promo Discount (${escapeHtml(totals.coupon.code)} · ${totals.coupon.type === "percent" ? `${totals.coupon.value}% off` : `-${totals.coupon.value}`})</span>
+              <strong class="q-discount-val">-${money(totals.discountAmount)}</strong>
+            </div>
+          ` : ""}
           <div class="q-fin-row is-grand">
             <div>
               <span>ESTIMATED GRAND TOTAL</span>
@@ -3486,6 +3948,12 @@ function quote() {
             <span>${escapeHtml(totals.serviceOption.title)}</span>
             <strong>${totals.serviceFee === 0 ? "$0" : `+${money(totals.serviceFee)}`}</strong>
           </div>
+          ${totals.discountAmount > 0 ? `
+            <div class="q-math-line is-discount">
+              <span>Promo (${escapeHtml(totals.coupon.code)})</span>
+              <strong>-${money(totals.discountAmount)}</strong>
+            </div>
+          ` : ""}
           <div class="q-math-line is-total">
             <span>Total Estimate</span>
             <strong>${money(totals.grandTotal)}</strong>
@@ -3504,6 +3972,16 @@ function render(options = {}) {
   const previousScroll = window.scrollY;
   const hash = getHash();
   const routeChanged = lastRenderedPage !== null && lastRenderedPage !== hash;
+
+  if (hash === "admin" || hash === "cms") {
+    document.body.classList.add("is-cms-view");
+    app.innerHTML = renderCmsPage();
+    lastRenderedPage = hash;
+    bind();
+    return;
+  } else {
+    document.body.classList.remove("is-cms-view");
+  }
   if (hash === "bundles") {
     state.bundle = getHashParams().get("bundle") || null;
   }
@@ -4440,7 +4918,12 @@ function bind() {
     emailPayload["Additional Event Notes"] = state.eventNotes || "None";
 
     try {
-      await fetch("https://formsubmit.co/ajax/kcbianzon@gmail.com", {
+      const settings = loadCmsSettings();
+      const recipientEmail = settings.notificationEmail || "kcbianzon@gmail.com";
+      if (totals.coupon) {
+        emailPayload["Promo Code Applied"] = `${totals.coupon.code} (-${money(totals.discountAmount)})`;
+      }
+      await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(recipientEmail)}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -4450,6 +4933,36 @@ function bind() {
       });
     } catch {
       // Even if offline or blocked by adblockers in local testing, complete the quote receipt smoothly
+    }
+
+    // Record to CMS persistent quote history
+    saveCmsQuote({
+      id: refCode,
+      createdAt: new Date().toISOString(),
+      contactName: state.contactName,
+      contactEmail: state.contactEmail,
+      contactPhone: state.contactPhone,
+      organization: state.organization,
+      eventName: state.eventName || state.eventType,
+      eventType: state.eventType,
+      guests: String(state.guests || ""),
+      venue: state.venue,
+      date: effectiveDate,
+      location: effectiveLocation,
+      serviceTier: totals.serviceOption.title,
+      serviceFee: totals.serviceFee,
+      duration: totals.durationOption.label,
+      items: totals.lineItems.map((item) => ({ id: item.product.id, name: item.product.name, qty: item.qty, price: item.unitPrice, subtotal: item.lineSubtotal })),
+      baseSubtotal: totals.equipmentBaseSubtotal,
+      durationSurcharge: totals.durationSurcharge,
+      couponCode: totals.coupon ? totals.coupon.code : null,
+      discountAmount: totals.discountAmount || 0,
+      grandTotal: totals.grandTotal,
+      status: "New",
+      notes: state.eventNotes || ""
+    });
+    if (totals.coupon) {
+      incrementCouponUsage(totals.coupon.code);
     }
 
     state.isSubmittingQuote = false;
@@ -4509,6 +5022,71 @@ function bind() {
       }
     });
   });
+
+  // Coupon Code Application in Step 6
+  document.querySelector("#quoteCouponInput")?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      document.querySelector("#applyCouponBtn")?.click();
+    }
+  });
+
+  document.querySelector("#applyCouponBtn")?.addEventListener("click", () => {
+    const input = document.querySelector("#quoteCouponInput");
+    const code = (input?.value || "").trim().toUpperCase();
+    if (!code) {
+      state.couponError = "Please enter a coupon code.";
+      render({ preserveScroll: true });
+      return;
+    }
+    const coupons = loadCmsCoupons();
+    const found = coupons.find((c) => c.code.toUpperCase() === code);
+    if (!found) {
+      state.couponError = `Code "${code}" is invalid. Please check spelling.`;
+      state.appliedCoupon = null;
+      render({ preserveScroll: true });
+      return;
+    }
+    if (found.active === false) {
+      state.couponError = `Coupon "${code}" is currently inactive.`;
+      state.appliedCoupon = null;
+      render({ preserveScroll: true });
+      return;
+    }
+    if (found.expiryDate && new Date(found.expiryDate + "T23:59:59") < new Date()) {
+      state.couponError = `Coupon "${code}" expired on ${found.expiryDate}.`;
+      state.appliedCoupon = null;
+      render({ preserveScroll: true });
+      return;
+    }
+    const totals = calculateQuoteTotals();
+    const minReq = Number(found.minOrder) || 0;
+    if (minReq > 0 && totals.equipmentDurationTotal < minReq) {
+      state.couponError = `Coupon "${code}" requires minimum equipment rental of ${minReq.toLocaleString()} (current: ${totals.equipmentDurationTotal.toLocaleString()}).`;
+      state.appliedCoupon = null;
+      render({ preserveScroll: true });
+      return;
+    }
+    state.appliedCoupon = found;
+    state.couponCode = found.code;
+    state.couponError = "";
+    showToast(`Promo code ${found.code} applied!`);
+    render({ preserveScroll: true });
+  });
+
+  document.querySelector("#removeCouponBtn")?.addEventListener("click", () => {
+    state.appliedCoupon = null;
+    state.couponCode = "";
+    state.couponError = "";
+    showToast("Promo code removed.");
+    render({ preserveScroll: true });
+  });
+
+  // If in CMS view, bind executive CMS events
+  if (getHash() === "admin" || getHash() === "cms") {
+    bindCmsEvents();
+  }
+
 }
 
 const mobileMenu = document.getElementById("mobileMenu");
@@ -4936,3 +5514,1949 @@ initCartDrawer();
 render();
 queueFloatingStoryUpdate();
 runOpeningSequence();
+
+
+// ==========================================================================
+// CMS EXECUTIVE VIEWS & MODALS
+// ==========================================================================
+
+function renderCmsPage() {
+  if (!isCmsAuthenticated()) {
+    return renderCmsLogin();
+  }
+  return renderCmsDashboard();
+}
+
+function renderCmsLogin() {
+  const settings = loadCmsSettings();
+  const primaryAdmin = (settings.adminEmails && settings.adminEmails[0]) || "kcbianzon@gmail.com";
+  return `<main class="cms-login-page">
+    <a class="cms-back-link" href="#home">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to website
+    </a>
+    <section class="cms-login-card">
+      <div class="cms-login-brand-mark">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+      </div>
+      <p class="cms-eyebrow">BEANTOWN AUDIO RENTALS · PRIVATE AREA</p>
+      <h1>Website dashboard</h1>
+      <p class="cms-login-lede">Sign in to manage equipment catalog, turnkey bundles, promo codes, pricing, and business settings.</p>
+
+      ${state.cmsLoginError ? `<p class="cms-error" style="margin-bottom:14px" role="alert"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>${escapeHtml(state.cmsLoginError)}</p>` : ""}
+
+      <form id="cmsLoginForm" class="cms-login-form">
+        <label class="cms-label">Admin Email
+          <input type="email" id="cmsLoginEmail" class="cms-input" value="${escapeHtml(primaryAdmin)}" required autocomplete="username">
+        </label>
+        <label class="cms-label">Password
+          <div class="cms-password-field">
+            <input type="password" id="cmsLoginPassword" class="cms-input" placeholder="Enter admin password" value="beantown2026" required autocomplete="current-password">
+            <button type="button" class="cms-password-toggle" id="cmsPasswordToggleBtn">SHOW</button>
+          </div>
+        </label>
+        <button type="submit" class="cms-primary-btn" style="width:100%;padding:14px;margin-top:6px">SIGN IN TO CMS</button>
+      </form>
+
+      <button type="button" class="cms-secondary-btn" id="cmsQuickLoginBtn" style="width:100%;margin-top:10px">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Quick Sign-In as Owner (${escapeHtml(primaryAdmin)})
+      </button>
+
+      <div class="cms-login-security">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#63d5ba" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span>Only approved, verified admins can edit the website.</span>
+      </div>
+    </section>
+  </main>`;
+}
+
+function renderCmsDashboard() {
+  const user = getCmsAuth() || { email: "kcbianzon@gmail.com" };
+  const currentTab = state.cmsTab || "overview";
+  const quotes = loadCmsQuotes();
+  const coupons = loadCmsCoupons();
+  const newQuotesCount = quotes.filter((q) => q.status === "New").length;
+
+  const tabLabels = {
+    overview: "Overview",
+    catalog: "Equipment Catalog",
+    bundles: "Event Bundles",
+    coupons: "Coupons & Discounts",
+    quotes: "Quote Requests",
+    analytics: "Analytics & Stats",
+    settings: "Store Settings",
+    maintenance: "Maintenance",
+  };
+
+  let tabContent = "";
+  if (currentTab === "overview") tabContent = renderCmsOverview();
+  else if (currentTab === "catalog") tabContent = renderCmsCatalog();
+  else if (currentTab === "bundles") tabContent = renderCmsBundles();
+  else if (currentTab === "coupons") tabContent = renderCmsCoupons();
+  else if (currentTab === "quotes") tabContent = renderCmsQuotes();
+  else if (currentTab === "analytics") tabContent = renderCmsAnalytics();
+  else if (currentTab === "settings") tabContent = renderCmsSettings();
+  else if (currentTab === "maintenance") tabContent = renderCmsMaintenance();
+
+  return `<main class="cms-shell">
+    <!-- Sidebar -->
+    <aside class="cms-sidebar">
+      <a href="#admin" class="cms-sidebar-brand" data-cms-tab="overview">
+        <div class="cms-brand-avatar-box">
+          <img src="assets/beantown/beantown-logo.png" alt="Beantown AV">
+        </div>
+        <div>
+          <strong>BEANTOWN AV</strong>
+          <small>WEBSITE CMS</small>
+        </div>
+      </a>
+
+      <p class="cms-nav-label">WORKSPACE</p>
+      <nav class="cms-sidebar-nav">
+        <button type="button" class="${currentTab === "overview" ? "active" : ""}" data-cms-tab="overview">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+          Overview
+        </button>
+        <button type="button" class="${currentTab === "catalog" ? "active" : ""}" data-cms-tab="catalog">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          Equipment Catalog
+          <span class="cms-nav-badge">${products.length}</span>
+        </button>
+        <button type="button" class="${currentTab === "bundles" ? "active" : ""}" data-cms-tab="bundles">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+          Event Bundles
+          <span class="cms-nav-badge">${bundles.length}</span>
+        </button>
+        <button type="button" class="${currentTab === "coupons" ? "active" : ""}" data-cms-tab="coupons">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          Coupons &amp; Discounts
+          <span class="cms-nav-badge">${coupons.length}</span>
+        </button>
+        <button type="button" class="${currentTab === "quotes" ? "active" : ""}" data-cms-tab="quotes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Quote Requests
+          ${newQuotesCount > 0 ? `<span class="cms-nav-badge" style="background:#22c55e;color:#052e16">${newQuotesCount} NEW</span>` : `<span class="cms-nav-badge">${quotes.length}</span>`}
+        </button>
+        <button type="button" class="${currentTab === "analytics" ? "active" : ""}" data-cms-tab="analytics">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Analytics &amp; Stats
+        </button>
+        <button type="button" class="${currentTab === "settings" ? "active" : ""}" data-cms-tab="settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Store Settings
+        </button>
+        <button type="button" class="${currentTab === "maintenance" ? "active" : ""}" data-cms-tab="maintenance">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Maintenance
+        </button>
+      </nav>
+
+      <div class="cms-sidebar-spacer"></div>
+
+      <div class="cms-sidebar-admin">
+        <span class="cms-admin-avatar">${(user.email || "K")[0].toUpperCase()}</span>
+        <div>
+          <strong>Site Admin</strong>
+          <small title="${escapeHtml(user.email)}">${escapeHtml(user.email)}</small>
+        </div>
+        <button type="button" class="cms-signout-btn" id="cmsSignOutBtn" title="Sign out of CMS">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <section class="cms-main">
+      <header class="cms-topbar">
+        <div>
+          <span class="cms-breadcrumb">BEANTOWN CMS</span>
+          <span class="cms-breadcrumb-divider">/</span>
+          <span class="cms-breadcrumb-active">${tabLabels[currentTab] || "Overview"}</span>
+        </div>
+        <div class="cms-topbar-right">
+          <span class="cms-status-pill connected">
+            <span></span>
+            CONNECTED
+          </span>
+          <a href="#home">View website ↗</a>
+        </div>
+      </header>
+
+      <div class="cms-content-area">
+        ${tabContent}
+      </div>
+    </section>
+
+    <!-- Modals -->
+    ${state.cmsEditingProduct ? renderCmsProductModal() : ""}
+    ${state.cmsEditingBundle ? renderCmsBundleModal() : ""}
+    ${state.cmsEditingCoupon ? renderCmsCouponModal() : ""}
+    ${state.cmsViewingQuote ? renderCmsQuoteDetailModal() : ""}
+  </main>`;
+}
+
+function renderCmsOverview() {
+  const quotes = loadCmsQuotes();
+  const coupons = loadCmsCoupons();
+  const totalPipeline = quotes.reduce((sum, q) => sum + (Number(q.grandTotal) || 0), 0);
+  const activeCouponsCount = coupons.filter((c) => c.active !== false).length;
+  const recentQuotes = quotes.slice(0, 5);
+
+  return `<div>
+    <div class="cms-page-intro">
+      <div>
+        <p class="cms-eyebrow">EXECUTIVE DASHBOARD · BOSTON &amp; NEW ENGLAND</p>
+        <h1>Website overview &amp; store controls</h1>
+        <p>Manage the public site, gear catalog, packages, promo codes, and customer inquiries with zero code required.</p>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button type="button" class="cms-primary-btn" data-cms-open-add-product>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          + Add Equipment
+        </button>
+        <button type="button" class="cms-secondary-btn" data-cms-open-add-coupon>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          + Create Coupon
+        </button>
+      </div>
+    </div>
+
+    <!-- Stat Cards -->
+    <div class="cms-stat-grid">
+      <article class="cms-stat-card">
+        <span class="cms-stat-icon blue">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </span>
+        <small>CATALOG PRODUCTS</small>
+        <strong>${products.length}</strong>
+        <span>Across 13 equipment categories</span>
+      </article>
+
+      <article class="cms-stat-card">
+        <span class="cms-stat-icon purple">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+        </span>
+        <small>TURNKEY BUNDLES</small>
+        <strong>${bundles.length}</strong>
+        <span>Pre-configured event packages</span>
+      </article>
+
+      <article class="cms-stat-card">
+        <span class="cms-stat-icon green">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/></svg>
+        </span>
+        <small>ACTIVE COUPONS</small>
+        <strong>${activeCouponsCount}</strong>
+        <span>${coupons.length} total promo codes created</span>
+      </article>
+
+      <article class="cms-stat-card">
+        <span class="cms-stat-icon orange">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </span>
+        <small>INQUIRY PIPELINE</small>
+        <strong>$${totalPipeline.toLocaleString()}</strong>
+        <span>${quotes.length} total event quotes requested</span>
+      </article>
+    </div>
+
+    <!-- Overview Grid -->
+    <div style="display:grid;grid-template-columns:minmax(0, 1.4fr) minmax(320px, 0.9fr);gap:18px">
+      <!-- Recent Quotes -->
+      <section class="cms-panel">
+        <div class="cms-panel-head">
+          <div>
+            <p class="cms-eyebrow">CUSTOMER INQUIRIES</p>
+            <h2>Recent quote requests</h2>
+          </div>
+          <button type="button" class="cms-secondary-btn" data-cms-tab="quotes">View all (${quotes.length}) ↗</button>
+        </div>
+
+        ${recentQuotes.length ? `
+          <div class="cms-table-scroll">
+            <table class="cms-table">
+              <thead>
+                <tr>
+                  <th>Ref ID</th>
+                  <th>Client</th>
+                  <th>Occasion</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${recentQuotes.map((q) => `
+                  <tr>
+                    <td><strong>${escapeHtml(q.id)}</strong><br><small style="color:#788ba8">${new Date(q.createdAt).toLocaleDateString()}</small></td>
+                    <td><strong>${escapeHtml(q.contactName)}</strong><br><small style="color:#788ba8">${escapeHtml(q.organization || q.contactEmail)}</small></td>
+                    <td>${escapeHtml(q.eventType)}</td>
+                    <td><strong>$${Number(q.grandTotal).toLocaleString()}</strong></td>
+                    <td><span class="cms-badge ${q.status === "New" ? "gold" : q.status === "Confirmed" ? "green" : "blue"}">${escapeHtml(q.status || "New")}</span></td>
+                    <td><button type="button" class="cms-icon-btn" data-cms-view-quote="${escapeHtml(q.id)}" title="View quote details"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></td>
+                  </tr>
+                `).join("")}
+              </tbody>
+            </table>
+          </div>
+        ` : `
+          <p style="color:#8fa2bf;padding:20px 0;text-align:center">No quote inquiries received yet.</p>
+        `}
+      </section>
+
+      <!-- System Status -->
+      <section class="cms-panel">
+        <div class="cms-panel-head">
+          <div>
+            <p class="cms-eyebrow">SYSTEM INTEGRITY</p>
+            <h2>Site health &amp; connections</h2>
+          </div>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#6e9bcc" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+
+        <div style="display:grid;gap:12px;margin-top:10px">
+          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(137,162,201,.1);font-size:12.5px">
+            <span style="color:#9cb1d0">Persistent Catalog Database</span>
+            <strong style="color:#41d3a2">✓ Synced (${products.length} items)</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(137,162,201,.1);font-size:12.5px">
+            <span style="color:#9cb1d0">Notification Dispatch</span>
+            <strong style="color:#41d3a2">✓ ${escapeHtml(loadCmsSettings().notificationEmail || "kcbianzon@gmail.com")}</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(137,162,201,.1);font-size:12.5px">
+            <span style="color:#9cb1d0">Local Asset Library</span>
+            <strong style="color:#41d3a2">✓ Ready (${BEANTOWN_ASSETS.length} photos)</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(137,162,201,.1);font-size:12.5px">
+            <span style="color:#9cb1d0">Coupon Math Engine</span>
+            <strong style="color:#41d3a2">✓ Loophole-free active</strong>
+          </div>
+        </div>
+
+        <button type="button" class="cms-secondary-btn" style="width:100%;margin-top:20px" data-cms-tab="maintenance">
+          Open site maintenance &amp; backups →
+        </button>
+      </section>
+    </div>
+  </div>`;
+}
+
+function renderCmsCatalog() {
+  const search = (state.cmsSearch || "").trim().toLowerCase();
+  const cat = state.cmsCategoryFilter || "All";
+  const sortBy = state.cmsSortBy || "name";
+
+  const allCategories = [
+    "All",
+    "Audio & Speakers",
+    "Subwoofers",
+    "Microphones",
+    "Audio Mixers",
+    "DJ Equipment",
+    "Video & Displays",
+    "LED Video Walls",
+    "Outdoor Movies",
+    "Photo Booths",
+    "Event Lighting",
+    "Special Effects",
+    "Silent Disco",
+    "Live Streaming",
+  ];
+
+  let list = products.filter((p) => {
+    if (cat !== "All" && p.category !== cat) return false;
+    if (search) {
+      const hay = `${p.name} ${p.desc} ${p.category} ${p.tag || ""}`.toLowerCase();
+      if (!hay.includes(search)) return false;
+    }
+    return true;
+  });
+
+  if (sortBy === "name") {
+    list.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sortBy === "price-low") {
+    list.sort((a, b) => Number(a.price) - Number(b.price));
+  } else if (sortBy === "price-high") {
+    list.sort((a, b) => Number(b.price) - Number(a.price));
+  }
+
+  return `<div>
+    <div class="cms-page-intro">
+      <div>
+        <p class="cms-eyebrow">EQUIPMENT INVENTORY</p>
+        <h1>Equipment catalog (${list.length})</h1>
+        <p>Edit rental rates, titles, categories, descriptions, and equipment photos. Changes are published immediately.</p>
+      </div>
+      <button type="button" class="cms-primary-btn" data-cms-open-add-product>
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        + Add New Equipment
+      </button>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="cms-toolbar">
+      <div class="cms-search-input-wrap">
+        <svg class="cms-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="cmsCatalogSearchInput" class="cms-input" placeholder="Search gear by name, specs or tag..." value="${escapeHtml(state.cmsSearch || "")}">
+      </div>
+
+      <select id="cmsCatalogCatSelect" class="cms-select">
+        ${allCategories.map((c) => `<option value="${escapeHtml(c)}" ${cat === c ? "selected" : ""}>${escapeHtml(c)}</option>`).join("")}
+      </select>
+
+      <select id="cmsCatalogSortSelect" class="cms-select">
+        <option value="name" ${sortBy === "name" ? "selected" : ""}>Sort: Name (A-Z)</option>
+        <option value="price-low" ${sortBy === "price-low" ? "selected" : ""}>Sort: Price (Low → High)</option>
+        <option value="price-high" ${sortBy === "price-high" ? "selected" : ""}>Sort: Price (High → Low)</option>
+      </select>
+    </div>
+
+    <!-- Products Table -->
+    <section class="cms-panel" style="padding:0">
+      <div class="cms-table-scroll">
+        <table class="cms-table">
+          <thead>
+            <tr>
+              <th style="width:60px">Image</th>
+              <th>Rental Item</th>
+              <th>Category</th>
+              <th>Daily Rate</th>
+              <th>Badge</th>
+              <th>Description</th>
+              <th style="text-align:right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${list.map((p) => `
+              <tr>
+                <td>
+                  <img class="cms-thumb" src="${productImage(p)}" alt="${escapeHtml(p.name)}" loading="lazy">
+                </td>
+                <td>
+                  <strong>${escapeHtml(p.name)}</strong>
+                  <br><small style="color:#7184a5;font-family:monospace">${escapeHtml(p.id)}</small>
+                </td>
+                <td><span class="cms-badge blue">${escapeHtml(p.category)}</span></td>
+                <td>
+                  <strong>$${Number(p.price).toLocaleString()}</strong>
+                  <small style="color:#788ba8">/${p.priceType === "starting" ? "from" : "day"}</small>
+                </td>
+                <td>
+                  ${p.tag ? `<span class="cms-badge ${p.tone || "lime"}">${escapeHtml(p.tag)}</span>` : '<span style="color:#5f7191">—</span>'}
+                </td>
+                <td style="max-width:280px;color:#9cb1d0;font-size:12px;line-height:1.4">
+                  ${escapeHtml(p.desc.length > 90 ? p.desc.slice(0, 90) + "…" : p.desc)}
+                </td>
+                <td style="text-align:right">
+                  <div class="cms-row-actions" style="justify-content:flex-end">
+                    <button type="button" class="cms-icon-btn" data-cms-edit-product="${escapeHtml(p.id)}" title="Edit product">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+                    </button>
+                    <button type="button" class="cms-icon-btn delete" data-cms-delete-product="${escapeHtml(p.id)}" title="Delete product">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>`;
+}
+
+function renderCmsBundles() {
+  return `<div>
+    <div class="cms-page-intro">
+      <div>
+        <p class="cms-eyebrow">TURNKEY PACKAGES</p>
+        <h1>Event bundles (${bundles.length})</h1>
+        <p>Curated turnkey packages with pre-bundled equipment. Clients can book them directly or customize them.</p>
+      </div>
+      <button type="button" class="cms-primary-btn" data-cms-open-add-bundle>
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        + Add New Bundle
+      </button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(340px, 1fr));gap:18px">
+      ${bundles.map((b) => `
+        <article class="cms-panel" style="display:flex;flex-direction:column;gap:12px;padding:18px">
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <img src="${bundleImage(b)}" alt="${escapeHtml(b.title)}" style="width:72px;height:54px;object-fit:cover;border-radius:8px;background:#050914">
+            <div style="flex:1;min-width:0">
+              <span class="cms-badge purple">${escapeHtml(b.label || "BUNDLE")}</span>
+              <h3 style="margin:4px 0 0;font-size:15px;color:#ffffff">${escapeHtml(b.title)}</h3>
+              <strong style="color:#72baff;font-size:16px">$${Number(b.price).toLocaleString()}</strong>
+            </div>
+          </div>
+
+          <p style="color:#9cb1d0;font-size:12px;margin:0;line-height:1.5">${escapeHtml(b.desc)}</p>
+
+          <div style="border-top:1px solid rgba(137,162,201,.1);padding-top:10px;margin-top:auto">
+            <small style="color:#7184a5;font-weight:750;letter-spacing:0.06em;text-transform:uppercase">INCLUDED GEAR:</small>
+            <ul style="margin:6px 0 0 16px;padding:0;color:#c0d2eb;font-size:11.5px;line-height:1.6">
+              ${(b.items || []).slice(0, 4).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+              ${(b.items || []).length > 4 ? `<li style="color:#7184a5">+${b.items.length - 4} more items</li>` : ""}
+            </ul>
+          </div>
+
+          <div style="display:flex;gap:8px;margin-top:12px;border-top:1px solid rgba(137,162,201,.1);padding-top:12px">
+            <button type="button" class="cms-secondary-btn" style="flex:1" data-cms-edit-bundle="${escapeHtml(b.id)}">Edit Bundle</button>
+            <button type="button" class="cms-icon-btn delete" data-cms-delete-bundle="${escapeHtml(b.id)}" title="Delete bundle">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            </button>
+          </div>
+        </article>
+      `).join("")}
+    </div>
+  </div>`;
+}
+
+function renderCmsCoupons() {
+  const coupons = loadCmsCoupons();
+
+  return `<div>
+    <div class="cms-page-intro">
+      <div>
+        <p class="cms-eyebrow">MARKETING &amp; DISCOUNTS</p>
+        <h1>Coupons &amp; promo codes (${coupons.length})</h1>
+        <p>Create discount codes to give clients or run seasonal promotions. Codes apply instantly on the quote builder with zero loopholes.</p>
+      </div>
+      <button type="button" class="cms-primary-btn" data-cms-open-add-coupon>
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        + Create New Coupon
+      </button>
+    </div>
+
+    <section class="cms-panel" style="padding:0">
+      <div class="cms-table-scroll">
+        <table class="cms-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Discount Type &amp; Value</th>
+              <th>Minimum Order</th>
+              <th>Expires</th>
+              <th>Description / Campaign</th>
+              <th>Usage</th>
+              <th>Status</th>
+              <th style="text-align:right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${coupons.map((c) => `
+              <tr>
+                <td>
+                  <strong style="font-family:'Space Grotesk',Inter,monospace;font-size:13px;letter-spacing:0.06em;color:#ffffff;background:rgba(56,148,255,0.15);padding:4px 8px;border-radius:6px;border:1px solid rgba(56,148,255,0.3)">
+                    ${escapeHtml(c.code)}
+                  </strong>
+                </td>
+                <td>
+                  <strong style="color:#22c55e;font-size:14px">
+                    ${c.type === "percent" ? `${c.value}% OFF` : `$${c.value} OFF`}
+                  </strong>
+                  <br><small style="color:#788ba8">${c.type === "percent" ? "Percentage discount" : "Fixed dollar reduction"}</small>
+                </td>
+                <td>${c.minOrder ? `$${Number(c.minOrder).toLocaleString()} min` : '<span style="color:#788ba8">No min</span>'}</td>
+                <td>${c.expiryDate ? escapeHtml(c.expiryDate) : '<span style="color:#788ba8">Never</span>'}</td>
+                <td style="color:#c5d8f2;max-width:220px">${escapeHtml(c.description || "Promo code")}</td>
+                <td><strong>${c.usageCount || 0}</strong> <small style="color:#788ba8">times used</small></td>
+                <td>
+                  <button type="button" class="cms-badge ${c.active !== false ? "green" : "red"}" data-cms-toggle-coupon="${escapeHtml(c.id)}" style="cursor:pointer;border:none">
+                    ${c.active !== false ? "✓ ACTIVE" : "PAUSED"}
+                  </button>
+                </td>
+                <td style="text-align:right">
+                  <div class="cms-row-actions" style="justify-content:flex-end">
+                    <button type="button" class="cms-icon-btn" data-cms-copy-coupon="${escapeHtml(c.code)}" title="Copy code to clipboard">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    </button>
+                    <button type="button" class="cms-icon-btn" data-cms-edit-coupon="${escapeHtml(c.id)}" title="Edit coupon">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+                    </button>
+                    <button type="button" class="cms-icon-btn delete" data-cms-delete-coupon="${escapeHtml(c.id)}" title="Delete coupon">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>`;
+}
+
+function renderCmsQuotes() {
+  const quotes = loadCmsQuotes();
+
+  return `<div>
+    <div class="cms-page-intro">
+      <div>
+        <p class="cms-eyebrow">CUSTOMER INBOX</p>
+        <h1>Quote requests (${quotes.length})</h1>
+        <p>Review customer AV configurations submitted through the public quote planner. Status changes persist automatically.</p>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button type="button" class="cms-secondary-btn" id="cmsExportQuotesCsvBtn">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export CSV
+        </button>
+      </div>
+    </div>
+
+    ${quotes.length ? `
+      <section class="cms-panel" style="padding:0">
+        <div class="cms-table-scroll">
+          <table class="cms-table">
+            <thead>
+              <tr>
+                <th>Ref ID &amp; Date</th>
+                <th>Client Name &amp; Contact</th>
+                <th>Occasion &amp; Venue</th>
+                <th>Duration &amp; Crew</th>
+                <th>Gear Units</th>
+                <th>Grand Total</th>
+                <th>Status</th>
+                <th style="text-align:right">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${quotes.map((q) => `
+                <tr>
+                  <td>
+                    <strong>${escapeHtml(q.id)}</strong>
+                    <br><small style="color:#788ba8">${new Date(q.createdAt).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}</small>
+                  </td>
+                  <td>
+                    <strong>${escapeHtml(q.contactName)}</strong>
+                    ${q.organization ? `<br><small style="color:#72baff">${escapeHtml(q.organization)}</small>` : ""}
+                    <br><small style="color:#788ba8">${escapeHtml(q.contactEmail)} · ${escapeHtml(q.contactPhone)}</small>
+                  </td>
+                  <td>
+                    <strong>${escapeHtml(q.eventType)}</strong>
+                    <br><small style="color:#788ba8">${escapeHtml(q.date)} · ${escapeHtml(q.venue)}</small>
+                  </td>
+                  <td>
+                    <small style="color:#c5d8f2">${escapeHtml(q.duration)}</small>
+                    <br><small style="color:#788ba8">${escapeHtml(q.serviceTier)}</small>
+                  </td>
+                  <td>
+                    <strong>${(q.items || []).reduce((sum, item) => sum + (Number(item.qty) || 1), 0)} units</strong>
+                    <br><small style="color:#788ba8">${(q.items || []).length} items</small>
+                  </td>
+                  <td>
+                    <strong style="font-size:15px;color:#ffffff">$${Number(q.grandTotal).toLocaleString()}</strong>
+                    ${q.discountAmount > 0 ? `<br><small style="color:#22c55e">Saved $${q.discountAmount} (${escapeHtml(q.couponCode)})</small>` : ""}
+                  </td>
+                  <td>
+                    <select class="cms-select" data-cms-quote-status="${escapeHtml(q.id)}" style="padding:4px 8px;font-size:11px">
+                      <option value="New" ${q.status === "New" ? "selected" : ""}>🟡 New</option>
+                      <option value="Reviewed" ${q.status === "Reviewed" ? "selected" : ""}>🔵 Reviewed</option>
+                      <option value="Confirmed" ${q.status === "Confirmed" ? "selected" : ""}>🟢 Confirmed</option>
+                      <option value="Archived" ${q.status === "Archived" ? "selected" : ""}>⚪ Archived</option>
+                    </select>
+                  </td>
+                  <td style="text-align:right">
+                    <div class="cms-row-actions" style="justify-content:flex-end">
+                      <button type="button" class="cms-icon-btn" data-cms-view-quote="${escapeHtml(q.id)}" title="View complete quote details">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                      </button>
+                      <button type="button" class="cms-icon-btn delete" data-cms-delete-quote="${escapeHtml(q.id)}" title="Delete quote">
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    ` : `
+      <section class="cms-panel" style="text-align:center;padding:48px 20px">
+        <p style="color:#8fa2bf;font-size:14px;margin:0">No quote requests recorded yet. Submissions from #quote will appear here automatically.</p>
+      </section>
+    `}
+  </div>`;
+}
+
+function renderCmsAnalytics() {
+  const quotes = loadCmsQuotes();
+  const totalValuation = products.reduce((sum, p) => sum + (Number(p.price) || 0), 0);
+  const avgPrice = Math.round(totalValuation / (products.length || 1));
+  const totalPipeline = quotes.reduce((sum, q) => sum + (Number(q.grandTotal) || 0), 0);
+  const avgQuote = quotes.length ? Math.round(totalPipeline / quotes.length) : 0;
+
+  // Category counts
+  const catCounts = {};
+  products.forEach((p) => {
+    catCounts[p.category] = (catCounts[p.category] || 0) + 1;
+  });
+  const sortedCats = Object.entries(catCounts).sort((a, b) => b[1] - a[1]);
+
+  return `<div>
+    <div class="cms-page-intro">
+      <div>
+        <p class="cms-eyebrow">STORE INTELLIGENCE</p>
+        <h1>Analytics &amp; statistics</h1>
+        <p>Live inventory breakdown, customer quote pipeline metrics, and category distribution.</p>
+      </div>
+    </div>
+
+    <!-- Stat Cards -->
+    <div class="cms-stat-grid">
+      <article class="cms-stat-card">
+        <small>CATALOG INVENTORY VALUE</small>
+        <strong>$${totalValuation.toLocaleString()}</strong>
+        <span>Combined base daily rental asset value</span>
+      </article>
+
+      <article class="cms-stat-card">
+        <small>AVERAGE RENTAL RATE</small>
+        <strong>$${avgPrice}</strong>
+        <span>Average single unit daily price</span>
+      </article>
+
+      <article class="cms-stat-card">
+        <small>TOTAL PIPELINE INQUIRIES</small>
+        <strong>$${totalPipeline.toLocaleString()}</strong>
+        <span>Sum of ${quotes.length} submitted quotes</span>
+      </article>
+
+      <article class="cms-stat-card">
+        <small>AVERAGE QUOTE VALUE</small>
+        <strong>$${avgQuote.toLocaleString()}</strong>
+        <span>Average customer event order size</span>
+      </article>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+      <!-- Category Share -->
+      <section class="cms-panel">
+        <div class="cms-panel-head">
+          <div>
+            <p class="cms-eyebrow">INVENTORY BREAKDOWN</p>
+            <h2>Gear by category</h2>
+          </div>
+        </div>
+
+        ${sortedCats.map(([category, count]) => {
+          const pct = Math.round((count / products.length) * 100);
+          return `
+            <div class="cms-chart-row">
+              <div class="cms-chart-meta">
+                <span>${escapeHtml(category)}</span>
+                <strong>${count} items (${pct}%)</strong>
+              </div>
+              <div class="cms-chart-track">
+                <div class="cms-chart-fill" style="width:${pct}%"></div>
+              </div>
+            </div>
+          `;
+        }).join("")}
+      </section>
+
+      <!-- Price Tier Distribution -->
+      <section class="cms-panel">
+        <div class="cms-panel-head">
+          <div>
+            <p class="cms-eyebrow">PRICING STRUCTURE</p>
+            <h2>Equipment price tiers</h2>
+          </div>
+        </div>
+
+        ${(() => {
+          const t1 = products.filter((p) => p.price < 100).length;
+          const t2 = products.filter((p) => p.price >= 100 && p.price < 350).length;
+          const t3 = products.filter((p) => p.price >= 350 && p.price < 800).length;
+          const t4 = products.filter((p) => p.price >= 800).length;
+          const total = products.length || 1;
+
+          const tiers = [
+            { label: "Under $100 / day (Mics, Small speakers, Up-lights)", count: t1, color: "green" },
+            { label: "$100 - $349 / day (Subwoofers, DJ rigs, Mixers)", count: t2, color: "blue" },
+            { label: "$350 - $799 / day (Projector kits, Mid packages)", count: t3, color: "purple" },
+            { label: "$800+ / day (LED Video walls, 360 booths, Trailers)", count: t4, color: "orange" },
+          ];
+
+          return tiers.map((t) => {
+            const pct = Math.round((t.count / total) * 100);
+            return `
+              <div class="cms-chart-row">
+                <div class="cms-chart-meta">
+                  <span>${escapeHtml(t.label)}</span>
+                  <strong>${t.count} items (${pct}%)</strong>
+                </div>
+                <div class="cms-chart-track">
+                  <div class="cms-chart-fill ${t.color}" style="width:${pct}%"></div>
+                </div>
+              </div>
+            `;
+          }).join("");
+        })()}
+
+        <div style="margin-top:24px;padding:14px;background:rgba(255,255,255,0.02);border-radius:10px;border:1px solid rgba(137,162,201,0.1)">
+          <small style="color:#788ba8;font-weight:750;letter-spacing:0.08em;text-transform:uppercase">PIPELINE STATUS OVERVIEW:</small>
+          <div style="display:flex;gap:16px;margin-top:8px;font-size:12.5px;color:#c5d8f2">
+            <span>🟡 <strong>${quotes.filter(q => q.status === "New").length}</strong> New</span>
+            <span>🔵 <strong>${quotes.filter(q => q.status === "Reviewed").length}</strong> Reviewed</span>
+            <span>🟢 <strong>${quotes.filter(q => q.status === "Confirmed").length}</strong> Confirmed</span>
+            <span>⚪ <strong>${quotes.filter(q => q.status === "Archived").length}</strong> Archived</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>`;
+}
+
+function renderCmsSettings() {
+  const s = loadCmsSettings();
+
+  return `<div>
+    <div class="cms-page-intro">
+      <div>
+        <p class="cms-eyebrow">STORE CONFIGURATION</p>
+        <h1>Business info &amp; notifications</h1>
+        <p>Update company contact information, operating hours, and quote dispatch email without code changes.</p>
+      </div>
+    </div>
+
+    <form id="cmsSettingsForm" class="cms-panel" style="max-width:820px">
+      <div class="cms-panel-head">
+        <div>
+          <p class="cms-eyebrow">COMPANY DETAILS</p>
+          <h2>Contact &amp; dispatch settings</h2>
+        </div>
+      </div>
+
+      <div class="cms-form-grid">
+        <label class="cms-label">Company Name
+          <input type="text" id="cmsSettingsCompany" class="cms-input" value="${escapeHtml(s.companyName || "Beantown Audio Rentals")}" required>
+        </label>
+
+        <label class="cms-label">Primary Business Phone
+          <input type="text" id="cmsSettingsPhone" class="cms-input" value="${escapeHtml(s.phone || "978-601-5473")}" required>
+        </label>
+
+        <label class="cms-label">Public Contact Email
+          <input type="email" id="cmsSettingsPublicEmail" class="cms-input" value="${escapeHtml(s.email || "info@beantownaudiorentals.com")}" required>
+        </label>
+
+        <label class="cms-label">Quote Dispatch Notification Email
+          <input type="email" id="cmsSettingsNotificationEmail" class="cms-input" value="${escapeHtml(s.notificationEmail || "kcbianzon@gmail.com")}" required>
+          <small style="color:#788ba8;font-size:10px;text-transform:none">All customer quotes submitted via the website are automatically dispatched to this inbox.</small>
+        </label>
+
+        <label class="cms-label">Warehouse &amp; Service Hub
+          <input type="text" id="cmsSettingsLocation" class="cms-input" value="${escapeHtml(s.location || "Boston, MA & New England")}">
+        </label>
+
+        <label class="cms-label">Operating Hours
+          <input type="text" id="cmsSettingsHours" class="cms-input" value="${escapeHtml(s.hours || "Mon–Sun: 8:00 AM – 8:00 PM")}">
+        </label>
+
+        <label class="cms-label cms-field-full">Service Coverage Area Note
+          <textarea id="cmsSettingsNotes" class="cms-textarea" rows="2">${escapeHtml(s.notes || "White-glove delivery & setup across MA, NH, RI, ME & CT")}</textarea>
+        </label>
+
+        <label class="cms-label cms-field-full">Authorized CMS Admin Inboxes (Comma Separated)
+          <input type="text" id="cmsSettingsAdminEmails" class="cms-input" value="${escapeHtml((s.adminEmails || ["kcbianzon@gmail.com"]).join(", "))}">
+        </label>
+      </div>
+
+      <div style="margin-top:22px;display:flex;justify-content:flex-end">
+        <button type="submit" class="cms-primary-btn">Save Settings &amp; Publish</button>
+      </div>
+    </form>
+  </div>`;
+}
+
+function renderCmsMaintenance() {
+  const quotes = loadCmsQuotes();
+  const coupons = loadCmsCoupons();
+  const settings = loadCmsSettings();
+
+  return `<div>
+    <div class="cms-page-intro">
+      <div>
+        <p class="cms-eyebrow">HEALTH &amp; DATA CONTROLS</p>
+        <h1>Site maintenance &amp; backups</h1>
+        <p>Export full website backups, restore data, and verify system connectivity.</p>
+      </div>
+    </div>
+
+    <!-- Health Grid -->
+    <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:14px;margin-bottom:24px">
+      <article class="cms-panel">
+        <span class="cms-stat-icon green"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span>
+        <h2 style="font-size:15px;color:#ffffff;margin:8px 0 4px">Equipment &amp; Bundles Database</h2>
+        <p style="color:#8fa2bf;font-size:12px;margin:0 0 12px;line-height:1.5">${products.length} catalog items and ${bundles.length} turnkey packages loaded and persisted.</p>
+        <span style="color:#41d3a2;font-size:11.5px;font-weight:750">✓ Synchronized</span>
+      </article>
+
+      <article class="cms-panel">
+        <span class="cms-stat-icon blue"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        <h2 style="font-size:15px;color:#ffffff;margin:8px 0 4px">Admin Security &amp; Access</h2>
+        <p style="color:#8fa2bf;font-size:12px;margin:0 0 12px;line-height:1.5">Owner account restricted to ${escapeHtml(settings.notificationEmail || "kcbianzon@gmail.com")}.</p>
+        <span style="color:#41d3a2;font-size:11.5px;font-weight:750">✓ Protected</span>
+      </article>
+
+      <article class="cms-panel">
+        <span class="cms-stat-icon purple"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span>
+        <h2 style="font-size:15px;color:#ffffff;margin:8px 0 4px">Image Engine &amp; Asset Library</h2>
+        <p style="color:#8fa2bf;font-size:12px;margin:0 0 12px;line-height:1.5">Client-side canvas compressor &amp; ${BEANTOWN_ASSETS.length} local event photos ready.</p>
+        <span style="color:#41d3a2;font-size:11.5px;font-weight:750">✓ Operational</span>
+      </article>
+
+      <article class="cms-panel">
+        <span class="cms-stat-icon orange"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+        <h2 style="font-size:15px;color:#ffffff;margin:8px 0 4px">Quote Email Dispatch Bridge</h2>
+        <p style="color:#8fa2bf;font-size:12px;margin:0 0 12px;line-height:1.5">Direct FormSubmit bridge routing submissions to ${escapeHtml(settings.notificationEmail || "kcbianzon@gmail.com")}.</p>
+        <span style="color:#41d3a2;font-size:11.5px;font-weight:750">✓ Connected</span>
+      </article>
+    </div>
+
+    <!-- Backup & Restore Actions -->
+    <section class="cms-panel">
+      <div class="cms-panel-head">
+        <div>
+          <p class="cms-eyebrow">DISASTER RECOVERY &amp; SYNC</p>
+          <h2>Export &amp; import complete website data</h2>
+        </div>
+      </div>
+      <p style="color:#8fa2bf;font-size:13px;line-height:1.6;margin:0 0 20px">
+        Download a complete JSON snapshot containing all equipment products, bundles, active coupons, customer quote requests, and store settings. You can transfer this backup to another machine or restore it anytime.
+      </p>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button type="button" class="cms-primary-btn" id="cmsExportBackupBtn">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export Backup (JSON)
+        </button>
+
+        <label class="cms-secondary-btn" style="cursor:pointer">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Import / Restore Backup (JSON)
+          <input type="file" id="cmsImportBackupFile" accept=".json,application/json" style="display:none">
+        </label>
+
+        <button type="button" class="cms-danger-btn" id="cmsFactoryResetBtn">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
+          Reset to Factory Defaults
+        </button>
+      </div>
+    </section>
+  </div>`;
+}
+
+// --------------------------------------------------------------------------
+// MODAL RENDERERS
+// --------------------------------------------------------------------------
+
+function renderCmsProductModal() {
+  const p = state.cmsEditingProduct;
+  const isNew = !p || !p.id;
+  const allCategories = [
+    "Audio & Speakers",
+    "Subwoofers",
+    "Microphones",
+    "Audio Mixers",
+    "DJ Equipment",
+    "Video & Displays",
+    "LED Video Walls",
+    "Outdoor Movies",
+    "Photo Booths",
+    "Event Lighting",
+    "Special Effects",
+    "Silent Disco",
+    "Live Streaming",
+  ];
+
+  const currentImg = p.image || (isNew ? "assets/beantown/speaker-rental.jpg" : productImage(p));
+
+  return `<div class="cms-modal-backdrop" id="cmsProductModalBackdrop">
+    <div class="cms-modal">
+      <div class="cms-modal-head">
+        <h2>${isNew ? "Add New Equipment Rental" : `Edit Equipment: ${escapeHtml(p.name)}`}</h2>
+        <button type="button" class="cms-icon-btn" id="cmsCloseProductModal">✕</button>
+      </div>
+
+      <form id="cmsProductForm">
+        <div class="cms-form-grid">
+          <label class="cms-label cms-field-full">Product Name *
+            <input type="text" id="cmsProdName" class="cms-input" value="${escapeHtml(p.name || "")}" required placeholder="e.g. QSC K12.2 Powered 12″ Loudspeaker">
+          </label>
+
+          <label class="cms-label">Category *
+            <select id="cmsProdCat" class="cms-select" style="width:100%" required>
+              ${allCategories.map((c) => `<option value="${escapeHtml(c)}" ${(p.category || "Audio & Speakers") === c ? "selected" : ""}>${escapeHtml(c)}</option>`).join("")}
+            </select>
+          </label>
+
+          <label class="cms-label">Daily Rental Rate ($) *
+            <input type="number" id="cmsProdPrice" class="cms-input" min="1" step="1" value="${p.price || 65}" required>
+          </label>
+
+          <label class="cms-label">Rate Type
+            <select id="cmsProdPriceType" class="cms-select" style="width:100%">
+              <option value="fixed" ${p.priceType === "fixed" ? "selected" : ""}>Fixed Daily Rate ($X/day)</option>
+              <option value="starting" ${p.priceType === "starting" ? "selected" : ""}>Starting Rate (From $X)</option>
+            </select>
+          </label>
+
+          <label class="cms-label">Badge Tag (Optional)
+            <input type="text" id="cmsProdTag" class="cms-input" value="${escapeHtml(p.tag || "")}" placeholder="e.g. Popular, Concert Grade, Heavy Bass">
+          </label>
+
+          <label class="cms-label cms-field-full">Product Description *
+            <textarea id="cmsProdDesc" class="cms-textarea" rows="3" required placeholder="Detailed specifications, included cables, and recommended venue audience size...">${escapeHtml(p.desc || "")}</textarea>
+          </label>
+
+          <!-- Photo Selector -->
+          <div class="cms-field-full" style="border:1px solid rgba(137,162,201,.14);border-radius:12px;padding:16px;background:rgba(8,16,32,.5)">
+            <label class="cms-label" style="margin-bottom:10px">Equipment Picture</label>
+
+            <!-- Image Preview Box -->
+            <div style="display:flex;gap:16px;align-items:center;margin-bottom:14px">
+              <img id="cmsProdPreviewImg" src="${currentImg}" alt="Preview" style="width:96px;height:72px;object-fit:cover;border-radius:8px;border:1px solid rgba(137,162,201,.2);background:#050914">
+              <div style="flex:1">
+                <strong style="font-size:12px;color:#d8e5f6">Current Selected Photo</strong>
+                <p id="cmsProdImgLabel" style="margin:4px 0 0;font-size:11px;color:#788ba8;word-break:break-all">${escapeHtml(currentImg.slice(0, 60))}${currentImg.length > 60 ? "..." : ""}</p>
+              </div>
+            </div>
+
+            <!-- Tab Buttons for Image Mode -->
+            <div class="cms-asset-tabs">
+              <button type="button" class="cms-asset-tab-btn ${state.cmsImageMode === "asset" || !state.cmsImageMode ? "active" : ""}" data-cms-img-tab="asset">Preset Asset Photos (${BEANTOWN_ASSETS.length})</button>
+              <button type="button" class="cms-asset-tab-btn ${state.cmsImageMode === "upload" ? "active" : ""}" data-cms-img-tab="upload">Upload File (Computer/Phone)</button>
+              <button type="button" class="cms-asset-tab-btn ${state.cmsImageMode === "url" ? "active" : ""}" data-cms-img-tab="url">Custom Image URL</button>
+            </div>
+
+            <!-- Tab 1: Asset Picker Grid -->
+            <div id="cmsAssetPickerContainer" style="${state.cmsImageMode === "upload" || state.cmsImageMode === "url" ? "display:none" : ""}">
+              <div class="cms-asset-grid">
+                ${BEANTOWN_ASSETS.map((a) => {
+                  const fullPath = `assets/beantown/${a.file}`;
+                  const isSelected = currentImg === fullPath;
+                  return `
+                    <div class="cms-asset-card ${isSelected ? "is-selected" : ""}" data-cms-asset-select="${fullPath}">
+                      <img src="${fullPath}" alt="${escapeHtml(a.label)}" loading="lazy">
+                      <span class="cms-asset-name">${escapeHtml(a.label)}</span>
+                    </div>
+                  `;
+                }).join("")}
+              </div>
+            </div>
+
+            <!-- Tab 2: File Upload Dropzone -->
+            <div id="cmsUploadContainer" style="${state.cmsImageMode === "upload" ? "" : "display:none"}">
+              <label class="cms-file-dropzone">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span>Click or Drag &amp; Drop Image to Upload</span>
+                <small>Automatically resized and compressed for fast web loading</small>
+                <input type="file" id="cmsProductFileInput" accept="image/*" style="display:none">
+              </label>
+            </div>
+
+            <!-- Tab 3: Direct URL Input -->
+            <div id="cmsUrlContainer" style="${state.cmsImageMode === "url" ? "" : "display:none"}">
+              <input type="url" id="cmsProductUrlInput" class="cms-input" placeholder="https://example.com/gear-photo.jpg" value="${currentImg.startsWith("http") ? escapeHtml(currentImg) : ""}">
+            </div>
+
+            <input type="hidden" id="cmsProdImageVal" value="${escapeHtml(currentImg)}">
+          </div>
+        </div>
+
+        <div class="cms-modal-foot">
+          <button type="button" class="cms-secondary-btn" id="cmsCancelProductModal">Cancel</button>
+          <button type="submit" class="cms-primary-btn">Save &amp; Publish</button>
+        </div>
+      </form>
+    </div>
+  </div>`;
+}
+
+function renderCmsBundleModal() {
+  const b = state.cmsEditingBundle;
+  const isNew = !b || !b.id;
+  const currentImg = b.image || (isNew ? "assets/beantown/event-production.jpg" : bundleImage(b));
+
+  return `<div class="cms-modal-backdrop" id="cmsBundleModalBackdrop">
+    <div class="cms-modal">
+      <div class="cms-modal-head">
+        <h2>${isNew ? "Add New Turnkey Bundle" : `Edit Bundle: ${escapeHtml(b.title)}`}</h2>
+        <button type="button" class="cms-icon-btn" id="cmsCloseBundleModal">✕</button>
+      </div>
+
+      <form id="cmsBundleForm">
+        <div class="cms-form-grid">
+          <label class="cms-label cms-field-full">Bundle Title *
+            <input type="text" id="cmsBundleTitle" class="cms-input" value="${escapeHtml(b.title || "")}" required placeholder="e.g. Wedding Event Package">
+          </label>
+
+          <label class="cms-label">Package Rate ($) *
+            <input type="number" id="cmsBundlePrice" class="cms-input" min="1" step="1" value="${b.price || 1499}" required>
+          </label>
+
+          <label class="cms-label">Label / Tag (e.g. WEDDING, CONCERT)
+            <input type="text" id="cmsBundleLabel" class="cms-input" value="${escapeHtml(b.label || "BUNDLE")}" required>
+          </label>
+
+          <label class="cms-label cms-field-full">Bundle Description *
+            <textarea id="cmsBundleDesc" class="cms-textarea" rows="2" required placeholder="Summary of what this turnkey package solves...">${escapeHtml(b.desc || "")}</textarea>
+          </label>
+
+          <label class="cms-label cms-field-full">Included Gear (One per line) *
+            <textarea id="cmsBundleItems" class="cms-textarea" rows="4" required placeholder="Medium 4-speaker sound system&#10;2 Shure QLX-D wireless handheld mics&#10;Dancing on a Cloud dry ice fog generator&#10;Wireless battery uplights (6-pack)">${(b.items || []).join("\n")}</textarea>
+          </label>
+
+          <div class="cms-field-full">
+            <label class="cms-label" style="margin-bottom:8px">Bundle Thumbnail Photo</label>
+            <div class="cms-asset-grid" style="max-height:160px">
+              ${BEANTOWN_ASSETS.map((a) => {
+                const fullPath = `assets/beantown/${a.file}`;
+                const isSelected = currentImg === fullPath;
+                return `
+                  <div class="cms-asset-card ${isSelected ? "is-selected" : ""}" data-cms-bundle-asset="${fullPath}">
+                    <img src="${fullPath}" alt="${escapeHtml(a.label)}" loading="lazy">
+                    <span class="cms-asset-name">${escapeHtml(a.label)}</span>
+                  </div>
+                `;
+              }).join("")}
+            </div>
+            <input type="hidden" id="cmsBundleImageVal" value="${escapeHtml(currentImg)}">
+          </div>
+        </div>
+
+        <div class="cms-modal-foot">
+          <button type="button" class="cms-secondary-btn" id="cmsCancelBundleModal">Cancel</button>
+          <button type="submit" class="cms-primary-btn">Save Bundle</button>
+        </div>
+      </form>
+    </div>
+  </div>`;
+}
+
+function renderCmsCouponModal() {
+  const c = state.cmsEditingCoupon;
+  const isNew = !c || !c.id;
+
+  return `<div class="cms-modal-backdrop" id="cmsCouponModalBackdrop">
+    <div class="cms-modal" style="max-width:540px">
+      <div class="cms-modal-head">
+        <h2>${isNew ? "Create Coupon Code" : `Edit Coupon: ${escapeHtml(c.code)}`}</h2>
+        <button type="button" class="cms-icon-btn" id="cmsCloseCouponModal">✕</button>
+      </div>
+
+      <form id="cmsCouponForm">
+        <div class="cms-form-grid" style="grid-template-columns:1fr">
+          <label class="cms-label">Coupon Code (Alphanumeric) *
+            <input type="text" id="cmsCouponCode" class="cms-input" style="font-family:'Space Grotesk',Inter,monospace;font-size:15px;letter-spacing:0.06em;text-transform:uppercase" value="${escapeHtml(c.code || "")}" required placeholder="e.g. SUMMER50">
+          </label>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <label class="cms-label">Discount Type *
+              <select id="cmsCouponType" class="cms-select" style="width:100%" required>
+                <option value="fixed" ${c.type === "fixed" ? "selected" : ""}>Fixed Dollar ($ Off)</option>
+                <option value="percent" ${c.type === "percent" ? "selected" : ""}>Percentage (% Off)</option>
+              </select>
+            </label>
+
+            <label class="cms-label">Discount Value *
+              <input type="number" id="cmsCouponValue" class="cms-input" min="1" step="1" value="${c.value || 50}" required>
+            </label>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <label class="cms-label">Minimum Equipment Order ($)
+              <input type="number" id="cmsCouponMinOrder" class="cms-input" min="0" step="1" value="${c.minOrder || 0}" placeholder="0 for no minimum">
+            </label>
+
+            <label class="cms-label">Expiration Date (Optional)
+              <input type="date" id="cmsCouponExpiry" class="cms-input" value="${escapeHtml(c.expiryDate || "")}">
+            </label>
+          </div>
+
+          <label class="cms-label">Description / Campaign Purpose
+            <input type="text" id="cmsCouponDesc" class="cms-input" value="${escapeHtml(c.description || "")}" placeholder="e.g. $50 off first event rental">
+          </label>
+
+          <label style="display:flex;align-items:center;gap:10px;color:#c5d8f2;font-size:12.5px;cursor:pointer;margin-top:6px">
+            <input type="checkbox" id="cmsCouponActive" ${c.active !== false ? "checked" : ""} style="width:16px;height:16px;accent-color:#22c55e">
+            <span><strong>Coupon is Active</strong> (Can be redeemed immediately on quote builder)</span>
+          </label>
+        </div>
+
+        <div class="cms-modal-foot">
+          <button type="button" class="cms-secondary-btn" id="cmsCancelCouponModal">Cancel</button>
+          <button type="submit" class="cms-primary-btn">Save Coupon Code</button>
+        </div>
+      </form>
+    </div>
+  </div>`;
+}
+
+function renderCmsQuoteDetailModal() {
+  const q = state.cmsViewingQuote;
+  if (!q) return "";
+
+  return `<div class="cms-modal-backdrop" id="cmsQuoteModalBackdrop">
+    <div class="cms-modal" style="max-width:820px">
+      <div class="cms-modal-head">
+        <div>
+          <span class="cms-eyebrow">QUOTE INQUIRY RECEIPT · REF ${escapeHtml(q.id)}</span>
+          <h2>${escapeHtml(q.eventName || q.eventType)}</h2>
+          <small style="color:#788ba8">Received ${new Date(q.createdAt).toLocaleString()}</small>
+        </div>
+        <button type="button" class="cms-icon-btn" id="cmsCloseQuoteModal">✕</button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:12px;margin-bottom:18px">
+        <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;border:1px solid rgba(137,162,201,.1)">
+          <small style="color:#788ba8;font-weight:750">CLIENT CONTACT</small>
+          <strong style="display:block;margin:4px 0 2px;color:#ffffff">${escapeHtml(q.contactName)}</strong>
+          <small style="color:#9cb1d0;display:block">${escapeHtml(q.contactEmail)}</small>
+          <small style="color:#9cb1d0;display:block">${escapeHtml(q.contactPhone)}</small>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;border:1px solid rgba(137,162,201,.1)">
+          <small style="color:#788ba8;font-weight:750">EVENT SCHEDULE</small>
+          <strong style="display:block;margin:4px 0 2px;color:#ffffff">${escapeHtml(q.date)}</strong>
+          <small style="color:#9cb1d0;display:block">${escapeHtml(q.venue)} · ${escapeHtml(q.guests || "Not set")} guests</small>
+          <small style="color:#9cb1d0;display:block">${escapeHtml(q.location)}</small>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;border:1px solid rgba(137,162,201,.1)">
+          <small style="color:#788ba8;font-weight:750">PRODUCTION CREW</small>
+          <strong style="display:block;margin:4px 0 2px;color:#ffffff">${escapeHtml(q.serviceTier)}</strong>
+          <small style="color:#9cb1d0;display:block">${escapeHtml(q.duration)}</small>
+        </div>
+      </div>
+
+      <!-- Itemized Table -->
+      <div class="cms-table-scroll" style="margin-bottom:16px">
+        <table class="cms-table">
+          <thead>
+            <tr>
+              <th>Equipment Item</th>
+              <th>Unit Rate</th>
+              <th>Qty</th>
+              <th style="text-align:right">Line Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${(q.items || []).map((item) => `
+              <tr>
+                <td><strong>${escapeHtml(item.name)}</strong></td>
+                <td>$${Number(item.price).toLocaleString()}</td>
+                <td>${item.qty}</td>
+                <td style="text-align:right"><strong>$${Number(item.subtotal || item.price * item.qty).toLocaleString()}</strong></td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Financial Totals -->
+      <div style="background:rgba(8,16,32,.7);border:1px solid rgba(137,162,201,.14);border-radius:10px;padding:14px;display:grid;gap:8px;margin-bottom:18px">
+        <div style="display:flex;justify-content:space-between;color:#9cb1d0;font-size:12.5px">
+          <span>Equipment Subtotal</span>
+          <strong>$${Number(q.baseSubtotal).toLocaleString()}</strong>
+        </div>
+        ${q.durationSurcharge > 0 ? `
+          <div style="display:flex;justify-content:space-between;color:#9cb1d0;font-size:12.5px">
+            <span>Duration Adjustment</span>
+            <strong>+$${Number(q.durationSurcharge).toLocaleString()}</strong>
+          </div>
+        ` : ""}
+        <div style="display:flex;justify-content:space-between;color:#9cb1d0;font-size:12.5px">
+          <span>Delivery &amp; Crew Fee</span>
+          <strong>${q.serviceFee === 0 ? "Free / Self Pickup" : `+$${Number(q.serviceFee).toLocaleString()}`}</strong>
+        </div>
+        ${q.discountAmount > 0 ? `
+          <div style="display:flex;justify-content:space-between;color:#22c55e;font-size:12.5px">
+            <span>Promo Discount (${escapeHtml(q.couponCode || "COUPON")})</span>
+            <strong>-$${Number(q.discountAmount).toLocaleString()}</strong>
+          </div>
+        ` : ""}
+        <div style="display:flex;justify-content:space-between;color:#ffffff;font-size:16px;border-top:1px solid rgba(137,162,201,.14);padding-top:8px">
+          <span>GRAND TOTAL</span>
+          <strong style="color:#72baff">$${Number(q.grandTotal).toLocaleString()}</strong>
+        </div>
+      </div>
+
+      ${q.notes ? `
+        <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;border:1px solid rgba(137,162,201,.1);margin-bottom:18px">
+          <small style="color:#788ba8;font-weight:750">CLIENT SPECIAL REQUESTS &amp; LOGISTICS NOTES:</small>
+          <p style="margin:4px 0 0;color:#d0e0f8;font-size:12.5px;line-height:1.5">${escapeHtml(q.notes)}</p>
+        </div>
+      ` : ""}
+
+      <div class="cms-modal-foot">
+        <button type="button" class="cms-secondary-btn" onclick="window.print()">Print Invoice</button>
+        <button type="button" class="cms-primary-btn" id="cmsCloseQuoteModalBtn">Close Details</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ==========================================================================
+// CMS EVENT BINDINGS
+// ==========================================================================
+
+function bindCmsEvents() {
+  // Login form
+  document.querySelector("#cmsLoginForm")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.querySelector("#cmsLoginEmail")?.value.trim().toLowerCase();
+    const settings = loadCmsSettings();
+    const allowed = (settings.adminEmails || ["kcbianzon@gmail.com"]).map((x) => x.trim().toLowerCase());
+    if (!allowed.includes(email) && email !== "kcbianzon@gmail.com") {
+      state.cmsLoginError = `Access restricted to verified owner accounts (${allowed.join(", ")}).`;
+      render();
+      return;
+    }
+    setCmsAuth({ email, loggedInAt: Date.now() });
+    state.cmsLoginError = "";
+    showToast("Signed in as Site Owner!");
+    render();
+  });
+
+  // Password toggle
+  document.querySelector("#cmsPasswordToggleBtn")?.addEventListener("click", () => {
+    const passInput = document.querySelector("#cmsLoginPassword");
+    const toggleBtn = document.querySelector("#cmsPasswordToggleBtn");
+    if (!passInput || !toggleBtn) return;
+    const isPass = passInput.type === "password";
+    passInput.type = isPass ? "text" : "password";
+    toggleBtn.textContent = isPass ? "HIDE" : "SHOW";
+  });
+
+  // Quick owner login
+  document.querySelector("#cmsQuickLoginBtn")?.addEventListener("click", () => {
+    const settings = loadCmsSettings();
+    const email = (settings.adminEmails && settings.adminEmails[0]) || "kcbianzon@gmail.com";
+    setCmsAuth({ email, loggedInAt: Date.now() });
+    state.cmsLoginError = "";
+    showToast("Signed in as Site Owner!");
+    render();
+  });
+
+  // Sign out
+  document.querySelector("#cmsSignOutBtn")?.addEventListener("click", () => {
+    clearCmsAuth();
+    showToast("Signed out of CMS.");
+    render();
+  });
+
+  // Sidebar Tab Switching
+  document.querySelectorAll("[data-cms-tab]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      state.cmsTab = btn.dataset.cmsTab;
+      state.cmsEditingProduct = null;
+      state.cmsEditingBundle = null;
+      state.cmsEditingCoupon = null;
+      state.cmsViewingQuote = null;
+      render({ preserveScroll: true });
+    });
+  });
+
+  // Quick Action Buttons
+  document.querySelectorAll("[data-cms-open-add-product]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      state.cmsEditingProduct = {
+        id: "",
+        name: "",
+        category: "Audio & Speakers",
+        price: 95,
+        priceType: "fixed",
+        tag: "New",
+        desc: "",
+        image: "assets/beantown/speaker-rental.jpg",
+      };
+      state.cmsImageMode = "asset";
+      render({ preserveScroll: true });
+    });
+  });
+
+  document.querySelectorAll("[data-cms-open-add-coupon]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      state.cmsEditingCoupon = {
+        id: "",
+        code: "",
+        type: "fixed",
+        value: 50,
+        minOrder: 300,
+        expiryDate: "",
+        description: "",
+        active: true,
+      };
+      render({ preserveScroll: true });
+    });
+  });
+
+  document.querySelectorAll("[data-cms-open-add-bundle]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      state.cmsEditingBundle = {
+        id: "",
+        title: "",
+        price: 1499,
+        label: "PACKAGE",
+        desc: "",
+        items: [],
+        image: "assets/beantown/event-production.jpg",
+      };
+      render({ preserveScroll: true });
+    });
+  });
+
+  // Catalog Search & Filters
+  document.querySelector("#cmsCatalogSearchInput")?.addEventListener("input", (e) => {
+    state.cmsSearch = e.target.value;
+    render({ preserveScroll: true });
+  });
+
+  document.querySelector("#cmsCatalogCatSelect")?.addEventListener("change", (e) => {
+    state.cmsCategoryFilter = e.target.value;
+    render({ preserveScroll: true });
+  });
+
+  document.querySelector("#cmsCatalogSortSelect")?.addEventListener("change", (e) => {
+    state.cmsSortBy = e.target.value;
+    render({ preserveScroll: true });
+  });
+
+  // Edit Product
+  document.querySelectorAll("[data-cms-edit-product]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const match = products.find((x) => x.id === btn.dataset.cmsEditProduct);
+      if (match) {
+        state.cmsEditingProduct = { ...match };
+        state.cmsImageMode = match.image && match.image.startsWith("http") ? "url" : (match.image && match.image.startsWith("data:") ? "upload" : "asset");
+        render({ preserveScroll: true });
+      }
+    });
+  });
+
+  // Delete Product
+  document.querySelectorAll("[data-cms-delete-product]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.cmsDeleteProduct;
+      const match = products.find((x) => x.id === id);
+      if (!match) return;
+      if (confirm(`Permanently delete "${match.name}" from catalog?`)) {
+        const next = products.filter((x) => x.id !== id);
+        saveCmsProducts(next);
+        showToast(`"${match.name}" deleted from catalog`);
+        render({ preserveScroll: true });
+      }
+    });
+  });
+
+  // Product Modal Image Mode Tabs
+  document.querySelectorAll("[data-cms-img-tab]").forEach((tabBtn) => {
+    tabBtn.addEventListener("click", () => {
+      state.cmsImageMode = tabBtn.dataset.cmsImgTab;
+      const picker = document.querySelector("#cmsAssetPickerContainer");
+      const upload = document.querySelector("#cmsUploadContainer");
+      const urlCont = document.querySelector("#cmsUrlContainer");
+      document.querySelectorAll("[data-cms-img-tab]").forEach((b) => b.classList.remove("active"));
+      tabBtn.classList.add("active");
+      if (picker) picker.style.display = state.cmsImageMode === "asset" ? "" : "none";
+      if (upload) upload.style.display = state.cmsImageMode === "upload" ? "" : "none";
+      if (urlCont) urlCont.style.display = state.cmsImageMode === "url" ? "" : "none";
+    });
+  });
+
+  // Asset selection
+  document.querySelectorAll("[data-cms-asset-select]").forEach((card) => {
+    card.addEventListener("click", () => {
+      const pathVal = card.dataset.cmsAssetSelect;
+      document.querySelectorAll("[data-cms-asset-select]").forEach((c) => c.classList.remove("is-selected"));
+      card.classList.add("is-selected");
+      const preview = document.querySelector("#cmsProdPreviewImg");
+      const label = document.querySelector("#cmsProdImgLabel");
+      const hidden = document.querySelector("#cmsProdImageVal");
+      if (preview) preview.src = pathVal;
+      if (label) label.textContent = pathVal;
+      if (hidden) hidden.value = pathVal;
+    });
+  });
+
+  // Custom URL input
+  document.querySelector("#cmsProductUrlInput")?.addEventListener("input", (e) => {
+    const val = e.target.value.trim();
+    if (val) {
+      const preview = document.querySelector("#cmsProdPreviewImg");
+      const label = document.querySelector("#cmsProdImgLabel");
+      const hidden = document.querySelector("#cmsProdImageVal");
+      if (preview) preview.src = val;
+      if (label) label.textContent = val;
+      if (hidden) hidden.value = val;
+    }
+  });
+
+  // File Upload reading via canvas compressor
+  document.querySelector("#cmsProductFileInput")?.addEventListener("change", async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      showToast("Compressing image in browser...");
+      const dataUrl = await compressImageToDataUrl(file);
+      const preview = document.querySelector("#cmsProdPreviewImg");
+      const label = document.querySelector("#cmsProdImgLabel");
+      const hidden = document.querySelector("#cmsProdImageVal");
+      if (preview) preview.src = dataUrl;
+      if (label) label.textContent = `Uploaded: ${file.name} (${Math.round(dataUrl.length / 1024)} KB)`;
+      if (hidden) hidden.value = dataUrl;
+      showToast("Image ready!");
+    } catch (err) {
+      alert(err.message || "Could not read image file.");
+    }
+  });
+
+  // Product Form Save
+  document.querySelector("#cmsProductForm")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = document.querySelector("#cmsProdName")?.value.trim();
+    const category = document.querySelector("#cmsProdCat")?.value;
+    const price = Number(document.querySelector("#cmsProdPrice")?.value) || 0;
+    const priceType = document.querySelector("#cmsProdPriceType")?.value || "fixed";
+    const tag = document.querySelector("#cmsProdTag")?.value.trim() || "";
+    const desc = document.querySelector("#cmsProdDesc")?.value.trim() || "";
+    const image = document.querySelector("#cmsProdImageVal")?.value || "assets/beantown/speaker-rental.jpg";
+
+    if (!name) return;
+
+    const list = [...products];
+    if (state.cmsEditingProduct && state.cmsEditingProduct.id) {
+      // Edit existing
+      const idx = list.findIndex((x) => x.id === state.cmsEditingProduct.id);
+      if (idx !== -1) {
+        list[idx] = {
+          ...list[idx],
+          name,
+          category,
+          price,
+          priceType,
+          tag,
+          desc,
+          image,
+        };
+      }
+    } else {
+      // New product
+      const newId = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") + "-" + Math.random().toString(36).slice(2, 6);
+      list.push({
+        id: newId,
+        name,
+        category,
+        price,
+        priceType,
+        tag,
+        desc,
+        image,
+        tone: "lime",
+      });
+    }
+
+    saveCmsProducts(list);
+    state.cmsEditingProduct = null;
+    showToast("Product saved successfully!");
+    render({ preserveScroll: true });
+  });
+
+  // Close / Cancel Product Modal
+  document.querySelector("#cmsCloseProductModal")?.addEventListener("click", () => {
+    state.cmsEditingProduct = null;
+    render({ preserveScroll: true });
+  });
+  document.querySelector("#cmsCancelProductModal")?.addEventListener("click", () => {
+    state.cmsEditingProduct = null;
+    render({ preserveScroll: true });
+  });
+
+  // Edit Bundle
+  document.querySelectorAll("[data-cms-edit-bundle]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const match = bundles.find((x) => x.id === btn.dataset.cmsEditBundle);
+      if (match) {
+        state.cmsEditingBundle = { ...match };
+        render({ preserveScroll: true });
+      }
+    });
+  });
+
+  // Delete Bundle
+  document.querySelectorAll("[data-cms-delete-bundle]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.cmsDeleteBundle;
+      const match = bundles.find((x) => x.id === id);
+      if (!match) return;
+      if (confirm(`Permanently delete bundle "${match.title}"?`)) {
+        const next = bundles.filter((x) => x.id !== id);
+        saveCmsBundles(next);
+        showToast(`Bundle "${match.title}" deleted`);
+        render({ preserveScroll: true });
+      }
+    });
+  });
+
+  // Bundle Asset selection
+  document.querySelectorAll("[data-cms-bundle-asset]").forEach((card) => {
+    card.addEventListener("click", () => {
+      const pathVal = card.dataset.cmsBundleAsset;
+      document.querySelectorAll("[data-cms-bundle-asset]").forEach((c) => c.classList.remove("is-selected"));
+      card.classList.add("is-selected");
+      const hidden = document.querySelector("#cmsBundleImageVal");
+      if (hidden) hidden.value = pathVal;
+    });
+  });
+
+  // Bundle Form Save
+  document.querySelector("#cmsBundleForm")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const title = document.querySelector("#cmsBundleTitle")?.value.trim();
+    const price = Number(document.querySelector("#cmsBundlePrice")?.value) || 0;
+    const label = document.querySelector("#cmsBundleLabel")?.value.trim() || "BUNDLE";
+    const desc = document.querySelector("#cmsBundleDesc")?.value.trim() || "";
+    const itemsRaw = document.querySelector("#cmsBundleItems")?.value.trim() || "";
+    const items = itemsRaw.split("\n").map((x) => x.trim()).filter(Boolean);
+    const image = document.querySelector("#cmsBundleImageVal")?.value || "assets/beantown/event-production.jpg";
+
+    if (!title) return;
+
+    const list = [...bundles];
+    if (state.cmsEditingBundle && state.cmsEditingBundle.id) {
+      const idx = list.findIndex((x) => x.id === state.cmsEditingBundle.id);
+      if (idx !== -1) {
+        list[idx] = {
+          ...list[idx],
+          title,
+          price,
+          label,
+          desc,
+          items,
+          image,
+        };
+      }
+    } else {
+      const newId = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+      list.push({
+        id: newId,
+        title,
+        price,
+        label,
+        desc,
+        items,
+        image,
+        tone: "bundle-party",
+      });
+    }
+
+    saveCmsBundles(list);
+    state.cmsEditingBundle = null;
+    showToast("Bundle saved successfully!");
+    render({ preserveScroll: true });
+  });
+
+  // Close / Cancel Bundle Modal
+  document.querySelector("#cmsCloseBundleModal")?.addEventListener("click", () => {
+    state.cmsEditingBundle = null;
+    render({ preserveScroll: true });
+  });
+  document.querySelector("#cmsCancelBundleModal")?.addEventListener("click", () => {
+    state.cmsEditingBundle = null;
+    render({ preserveScroll: true });
+  });
+
+  // Toggle Coupon Active Status
+  document.querySelectorAll("[data-cms-toggle-coupon]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.cmsToggleCoupon;
+      const list = loadCmsCoupons();
+      const match = list.find((x) => x.id === id);
+      if (match) {
+        match.active = match.active === false ? true : false;
+        saveCmsCoupons(list);
+        showToast(`Coupon ${match.code} is now ${match.active ? "ACTIVE" : "PAUSED"}`);
+        render({ preserveScroll: true });
+      }
+    });
+  });
+
+  // Copy Coupon Code
+  document.querySelectorAll("[data-cms-copy-coupon]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const code = btn.dataset.cmsCopyCoupon;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code);
+      }
+      showToast(`Copied code ${code} to clipboard!`);
+    });
+  });
+
+  // Edit Coupon
+  document.querySelectorAll("[data-cms-edit-coupon]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const list = loadCmsCoupons();
+      const match = list.find((x) => x.id === btn.dataset.cmsEditCoupon);
+      if (match) {
+        state.cmsEditingCoupon = { ...match };
+        render({ preserveScroll: true });
+      }
+    });
+  });
+
+  // Delete Coupon
+  document.querySelectorAll("[data-cms-delete-coupon]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.cmsDeleteCoupon;
+      const list = loadCmsCoupons();
+      const match = list.find((x) => x.id === id);
+      if (!match) return;
+      if (confirm(`Permanently delete coupon ${match.code}?`)) {
+        const next = list.filter((x) => x.id !== id);
+        saveCmsCoupons(next);
+        showToast(`Coupon ${match.code} deleted`);
+        render({ preserveScroll: true });
+      }
+    });
+  });
+
+  // Coupon Form Save
+  document.querySelector("#cmsCouponForm")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const code = document.querySelector("#cmsCouponCode")?.value.trim().toUpperCase();
+    const type = document.querySelector("#cmsCouponType")?.value || "fixed";
+    const value = Number(document.querySelector("#cmsCouponValue")?.value) || 0;
+    const minOrder = Number(document.querySelector("#cmsCouponMinOrder")?.value) || 0;
+    const expiryDate = document.querySelector("#cmsCouponExpiry")?.value || "";
+    const description = document.querySelector("#cmsCouponDesc")?.value.trim() || "";
+    const active = document.querySelector("#cmsCouponActive")?.checked ?? true;
+
+    if (!code) return;
+
+    const list = loadCmsCoupons();
+    if (state.cmsEditingCoupon && state.cmsEditingCoupon.id) {
+      const idx = list.findIndex((x) => x.id === state.cmsEditingCoupon.id);
+      if (idx !== -1) {
+        list[idx] = {
+          ...list[idx],
+          code,
+          type,
+          value,
+          minOrder,
+          expiryDate,
+          description,
+          active,
+        };
+      }
+    } else {
+      list.push({
+        id: "coupon-" + code.toLowerCase() + "-" + Math.random().toString(36).slice(2, 6),
+        code,
+        type,
+        value,
+        minOrder,
+        expiryDate,
+        description,
+        active,
+        usageCount: 0,
+      });
+    }
+
+    saveCmsCoupons(list);
+    state.cmsEditingCoupon = null;
+    showToast(`Coupon ${code} saved!`);
+    render({ preserveScroll: true });
+  });
+
+  // Close Coupon Modal
+  document.querySelector("#cmsCloseCouponModal")?.addEventListener("click", () => {
+    state.cmsEditingCoupon = null;
+    render({ preserveScroll: true });
+  });
+  document.querySelector("#cmsCancelCouponModal")?.addEventListener("click", () => {
+    state.cmsEditingCoupon = null;
+    render({ preserveScroll: true });
+  });
+
+  // Quote Status Select
+  document.querySelectorAll("[data-cms-quote-status]").forEach((select) => {
+    select.addEventListener("change", (e) => {
+      const id = select.dataset.cmsQuoteStatus;
+      updateCmsQuoteStatus(id, e.target.value);
+      showToast(`Quote ${id} marked as ${e.target.value}`);
+    });
+  });
+
+  // View Quote Detail Modal
+  document.querySelectorAll("[data-cms-view-quote]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const quotes = loadCmsQuotes();
+      const match = quotes.find((x) => x.id === btn.dataset.cmsViewQuote);
+      if (match) {
+        state.cmsViewingQuote = match;
+        render({ preserveScroll: true });
+      }
+    });
+  });
+
+  // Delete Quote
+  document.querySelectorAll("[data-cms-delete-quote]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.cmsDeleteQuote;
+      if (confirm(`Delete quote request ${id}?`)) {
+        deleteCmsQuote(id);
+        showToast(`Quote ${id} deleted`);
+        render({ preserveScroll: true });
+      }
+    });
+  });
+
+  // Close Quote Detail Modal
+  document.querySelector("#cmsCloseQuoteModal")?.addEventListener("click", () => {
+    state.cmsViewingQuote = null;
+    render({ preserveScroll: true });
+  });
+  document.querySelector("#cmsCloseQuoteModalBtn")?.addEventListener("click", () => {
+    state.cmsViewingQuote = null;
+    render({ preserveScroll: true });
+  });
+
+  // Export Quotes as CSV
+  document.querySelector("#cmsExportQuotesCsvBtn")?.addEventListener("click", () => {
+    const quotes = loadCmsQuotes();
+    if (!quotes.length) {
+      alert("No quotes to export.");
+      return;
+    }
+    const headers = ["Reference ID", "Date", "Client Name", "Email", "Phone", "Organization", "Event Occasion", "Event Date", "Venue", "Location", "Crew Service", "Gear Units", "Subtotal", "Promo Code", "Discount", "Grand Total", "Status", "Notes"];
+    const rows = quotes.map((q) => [
+      q.id,
+      new Date(q.createdAt).toISOString(),
+      q.contactName,
+      q.contactEmail,
+      q.contactPhone,
+      q.organization || "",
+      q.eventType,
+      q.date,
+      q.venue,
+      q.location,
+      q.serviceTier,
+      (q.items || []).reduce((sum, i) => sum + (Number(i.qty) || 1), 0),
+      q.baseSubtotal,
+      q.couponCode || "",
+      q.discountAmount || 0,
+      q.grandTotal,
+      q.status || "New",
+      (q.notes || "").replace(/\n/g, " "),
+    ]);
+    const csvContent = [headers.join(","), ...rows.map((r) => r.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(","))].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `beantown-quote-requests-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast("Downloaded quote requests CSV!");
+  });
+
+  // Settings Save
+  document.querySelector("#cmsSettingsForm")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const companyName = document.querySelector("#cmsSettingsCompany")?.value.trim() || "Beantown Audio Rentals";
+    const phone = document.querySelector("#cmsSettingsPhone")?.value.trim() || "978-601-5473";
+    const email = document.querySelector("#cmsSettingsPublicEmail")?.value.trim() || "info@beantownaudiorentals.com";
+    const notificationEmail = document.querySelector("#cmsSettingsNotificationEmail")?.value.trim() || "kcbianzon@gmail.com";
+    const location = document.querySelector("#cmsSettingsLocation")?.value.trim() || "Boston, MA & New England";
+    const hours = document.querySelector("#cmsSettingsHours")?.value.trim() || "Mon–Sun: 8:00 AM – 8:00 PM";
+    const notes = document.querySelector("#cmsSettingsNotes")?.value.trim() || "";
+    const adminEmailsRaw = document.querySelector("#cmsSettingsAdminEmails")?.value || "kcbianzon@gmail.com";
+    const adminEmails = adminEmailsRaw.split(",").map((x) => x.trim().toLowerCase()).filter(Boolean);
+
+    saveCmsSettings({
+      companyName,
+      phone,
+      email,
+      notificationEmail,
+      location,
+      hours,
+      notes,
+      adminEmails,
+    });
+    showToast("Store settings saved & published!");
+    render({ preserveScroll: true });
+  });
+
+  // Maintenance: Export JSON Backup
+  document.querySelector("#cmsExportBackupBtn")?.addEventListener("click", () => {
+    const backupData = {
+      version: "2.0",
+      exportedAt: new Date().toISOString(),
+      products: loadCmsProducts(),
+      bundles: loadCmsBundles(),
+      coupons: loadCmsCoupons(),
+      settings: loadCmsSettings(),
+      quotes: loadCmsQuotes(),
+    };
+    const jsonStr = JSON.stringify(backupData, null, 2);
+    const blob = new Blob([jsonStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `beantown-av-cms-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast("Backup exported successfully!");
+  });
+
+  // Maintenance: Import JSON Backup
+  document.querySelector("#cmsImportBackupFile")?.addEventListener("change", (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      try {
+        const data = JSON.parse(evt.target.result);
+        if (!data || !Array.isArray(data.products) || !Array.isArray(data.bundles)) {
+          alert("Invalid backup file format. Expected products and bundles arrays.");
+          return;
+        }
+        if (confirm(`Restore backup from ${data.exportedAt || "file"}? This will update your products, bundles, and settings.`)) {
+          saveCmsProducts(data.products);
+          saveCmsBundles(data.bundles);
+          if (Array.isArray(data.coupons)) saveCmsCoupons(data.coupons);
+          if (data.settings && typeof data.settings === "object") saveCmsSettings(data.settings);
+          if (Array.isArray(data.quotes)) localStorage.setItem(CMS_STORAGE.QUOTES, JSON.stringify(data.quotes));
+          showToast("Backup restored successfully!");
+          render({ preserveScroll: true });
+        }
+      } catch (err) {
+        alert("Error parsing backup JSON: " + err.message);
+      }
+    };
+    reader.readAsText(file);
+  });
+
+  // Maintenance: Factory Reset
+  document.querySelector("#cmsFactoryResetBtn")?.addEventListener("click", () => {
+    if (confirm("Reset everything to original factory defaults? This will restore the default 65 equipment items, 7 turnkey packages, and original promo codes.")) {
+      localStorage.removeItem(CMS_STORAGE.PRODUCTS);
+      localStorage.removeItem(CMS_STORAGE.BUNDLES);
+      localStorage.removeItem(CMS_STORAGE.COUPONS);
+      localStorage.removeItem(CMS_STORAGE.SETTINGS);
+      products = loadCmsProducts();
+      bundles = loadCmsBundles();
+      showToast("Factory reset complete. Defaults restored!");
+      render({ preserveScroll: true });
+    }
+  });
+}
