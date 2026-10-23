@@ -3517,7 +3517,7 @@ function updateCartDrawer() {
           </svg>
         </div>
         <h3 class="cart-empty-title">Your cart is empty.</h3>
-        <p class="cart-empty-desc">Add audio, lighting, video, or packages and they will appear here.</p>
+        <p class="cart-empty-desc">Add speakers, lighting, screens, or event bundles and they will appear here.</p>
         <button type="button" class="cart-continue-btn" data-cart-continue>Continue ordering</button>
       </div>
     `;
@@ -3540,7 +3540,7 @@ function updateCartDrawer() {
         </div>
       </div>
       <button type="button" class="cart-proceed-btn" id="cartProceedBtn" data-cart-proceed disabled>
-        Proceed
+        Proceed <span aria-hidden="true">→</span>
       </button>
     `;
   } else {
@@ -3594,7 +3594,7 @@ function updateCartDrawer() {
         </div>
       </div>
       <button type="button" class="cart-proceed-btn" id="cartProceedBtn" data-cart-proceed>
-        Proceed
+        Proceed <span aria-hidden="true">→</span>
       </button>
     `;
   }
