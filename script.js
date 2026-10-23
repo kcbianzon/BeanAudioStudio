@@ -1553,7 +1553,7 @@ function faqSection() {
 }
 function home() {
   return `<div class="page">
-  <section class="hero reveal"><div class="hero-copy"><span class="eyebrow orange">BOSTON • NEW ENGLAND • EVENT AV</span><h1 class="hero-headline" id="heroHeadline" aria-label="Your event. Your setup."><span class="hero-title-line" data-type-text="YOUR EVENT." data-accent-start="5">YOUR EVENT.</span><br><span class="hero-title-line" data-type-text="YOUR SETUP." data-accent-start="5">YOUR SETUP.</span></h1><p>Rent speakers, screens, streaming gear, photo booths and complete event systems — then build your exact experience before you request a quote.</p><div class="hero-cta"><a class="btn btn-dark" href="#builder">Build my event <span>→</span></a><a class="btn btn-light" href="#rentals">Explore rentals</a></div></div><div class="hero-floats" aria-hidden="true">
+  <section class="hero reveal"><div class="hero-copy"><span class="eyebrow orange">BOSTON • NEW ENGLAND • EVENT AV</span><h1 class="hero-headline" id="heroHeadline" aria-label="Your event. Your setup."><span class="hero-title-line" data-type-text="YOUR EVENT." data-accent-start="5">YOUR EVENT.</span><br><span class="hero-title-line" data-type-text="YOUR SETUP." data-accent-start="5">YOUR SETUP.</span></h1><p>Rent speakers, screens, streaming gear, photo booths and complete event systems — then build your exact experience before you request a quote.</p><div class="hero-cta"><button type="button" class="btn btn-dark" data-open-cart>Build your setup <span>→</span></button><a class="btn btn-light" href="#rentals">Explore rentals</a></div></div><div class="hero-floats" aria-hidden="true">
     <article class="floating-story" data-scroll-float="-1" style="--tilt:-5deg"><span class="story-media" style="--story-image:url('assets/beantown/event-production.jpg')"></span><span class="story-kicker">WEDDINGS</span><strong>Every vow, heard.</strong><small>Audio for the aisle and the dance floor.</small></article>
     <article class="floating-story" data-scroll-float="1" style="--tilt:5deg"><span class="story-media" style="--story-image:url('assets/beantown/outdoor-movie.jpg')"></span><span class="story-kicker">OUTDOOR MOVIES</span><strong>Movie night, made big.</strong><small>Screen and sound for the whole crowd.</small></article>
     <article class="floating-story" data-scroll-float="-1" style="--tilt:3deg"><span class="story-media" style="--story-image:url('assets/beantown/headphones.jpg')"></span><span class="story-kicker">SILENT DISCO</span><strong>Three channels. One dance floor.</strong><small>Headphones and transmitters, ready to go.</small></article>
@@ -1939,7 +1939,7 @@ function rentals() {
 
 function bundlesPage() {
   if (state.bundle) return bundleDetail(state.bundle);
-  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">EVENT BUNDLES</span><h1>Start with<br>the occasion.</h1></div><p>Choose a fixed package built around a familiar event format. Every bundle is a complete starting point with clear inclusions and no hidden customization step.</p></div><section class="bundle-customize"><div><span class="eyebrow">NEED SOMETHING MORE SPECIFIC?</span><h2>Customize your experience.</h2><p>Build an event from the ground up with recommendations for your occasion and access to the full equipment catalog.</p></div><a class="btn btn-dark" href="#builder">Build my setup →</a></section><div class="bundle-grid">${bundles.map((b) => `<article class="bundle-card reveal"><div class="bundle-top ${b.tone} has-bundle-image" style="--bundle-image:url('${bundleImage(b)}')"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items.map((i) => `<li>${i}</li>`).join("")}</ul><div class="bundle-foot"><span class="bundle-price">${money(b.price)}</span><button class="btn btn-dark btn-small" data-bundle="${b.id}">View bundle →</button></div></div></article>`).join("")}</div></div>`;
+  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">EVENT BUNDLES</span><h1>Start with<br>the occasion.</h1></div><p>Choose a fixed package built around a familiar event format. Every bundle is a complete starting point with clear inclusions and no hidden customization step.</p></div><section class="bundle-customize"><div><span class="eyebrow">NEED SOMETHING MORE SPECIFIC?</span><h2>Customize your experience.</h2><p>Build an event from the ground up with recommendations for your occasion and access to the full equipment catalog.</p></div><button type="button" class="btn btn-dark" data-open-cart>Build your setup →</button></section><div class="bundle-grid">${bundles.map((b) => `<article class="bundle-card reveal"><div class="bundle-top ${b.tone} has-bundle-image" style="--bundle-image:url('${bundleImage(b)}')"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items.map((i) => `<li>${i}</li>`).join("")}</ul><div class="bundle-foot"><span class="bundle-price">${money(b.price)}</span><button class="btn btn-dark btn-small" data-bundle="${b.id}">View bundle →</button></div></div></article>`).join("")}</div></div>`;
 }
 
 function bundleDetail(id) {
@@ -1954,7 +1954,7 @@ function bundleDetail(id) {
     (total, { product, quantity }) => total + (product.price || 0) * quantity,
     0,
   );
-  return `<div class="page"><div class="bundle-detail-head"><a class="text-btn" href="#bundles">← All bundles</a><div class="bundle-detail-layout"><div><span class="eyebrow">${bundle.label} PACKAGE</span><h1>${bundle.title}</h1><p>${bundle.desc}</p></div><div class="bundle-detail-price"><span class="eyebrow">TURNKEY PACKAGE TOTAL</span><strong>${money(bundle.price)}</strong></div></div></div><div class="bundle-detail-wrap"><section class="bundle-detail-main"><div class="detail-section-head"><div><span class="eyebrow">WHAT’S INCLUDED</span><h2>Your package, item by item.</h2></div><span class="detail-lock">${included.reduce((s, x) => s + x.quantity, 0)} Total Units</span></div><div class="bundle-included-list">${included.map(({ product, quantity }) => `<div class="bundle-included-item"><div><strong>${quantity} × ${product.name}</strong><span>${product.category} · ${money(product.price)} each · ${product.desc}</span></div><strong>${money(product.price * quantity)}</strong></div>`).join("")}</div><div class="bundle-detail-actions"><button type="button" class="btn btn-dark" data-launch-bundle="${bundle.id}" data-launch-step="6">Request this bundle →</button><a class="btn btn-light" href="#builder">Customize in Event Builder</a></div></section><aside class="bundle-detail-summary"><span class="eyebrow">TRANSPARENT MATH</span><div class="detail-total"><span>Itemized equipment sum</span><strong>${money(knownTotal)}</strong></div><div class="detail-total"><span>Package total</span><strong>${money(bundle.price)}</strong></div><p>Every item in this bundle is priced transparently with zero hidden fees. Load this bundle into the Event Builder to add microphones, lighting, or delivery support.</p></aside></div></div>`;
+  return `<div class="page"><div class="bundle-detail-head"><a class="text-btn" href="#bundles">← All bundles</a><div class="bundle-detail-layout"><div><span class="eyebrow">${bundle.label} PACKAGE</span><h1>${bundle.title}</h1><p>${bundle.desc}</p></div><div class="bundle-detail-price"><span class="eyebrow">TURNKEY PACKAGE TOTAL</span><strong>${money(bundle.price)}</strong></div></div></div><div class="bundle-detail-wrap"><section class="bundle-detail-main"><div class="detail-section-head"><div><span class="eyebrow">WHAT’S INCLUDED</span><h2>Your package, item by item.</h2></div><span class="detail-lock">${included.reduce((s, x) => s + x.quantity, 0)} Total Units</span></div><div class="bundle-included-list">${included.map(({ product, quantity }) => `<div class="bundle-included-item"><div><strong>${quantity} × ${product.name}</strong><span>${product.category} · ${money(product.price)} each · ${product.desc}</span></div><strong>${money(product.price * quantity)}</strong></div>`).join("")}</div><div class="bundle-detail-actions"><button type="button" class="btn btn-dark" data-launch-bundle="${bundle.id}" data-launch-step="6">Request this bundle →</button><button type="button" class="btn btn-light" data-open-cart>View in Cart →</button></div></section><aside class="bundle-detail-summary"><span class="eyebrow">TRANSPARENT MATH</span><div class="detail-total"><span>Itemized equipment sum</span><strong>${money(knownTotal)}</strong></div><div class="detail-total"><span>Package total</span><strong>${money(bundle.price)}</strong></div><p>Every item in this bundle is priced transparently with zero hidden fees. Load this bundle into the Event Builder to add microphones, lighting, or delivery support.</p></aside></div></div>`;
 }
 
 function aboutUsPage() {
@@ -2392,7 +2392,7 @@ function services() {
         </div>
         <div class="services-cta-btns">
           <a href="#quote" class="btn btn-dark">Request an Itemized Quote →</a>
-          <a href="#builder" class="btn btn-light">Build Your Custom Event</a>
+          <button type="button" class="btn btn-light" data-open-cart>Build Your Custom Setup</button>
         </div>
       </section>
     </div>
@@ -3096,36 +3096,7 @@ function renderSubmittedReceipt(receipt) {
 }
 
 function builder() {
-  const items = Object.entries(state.selected)
-    .map(([id, qty]) => {
-      const p = products.find((x) => x.id === id);
-      return p ? { p, qty } : null;
-    })
-    .filter(Boolean);
-  const known = items.reduce((s, { p, qty }) => s + (p.price || 0) * qty, 0);
-  const quoteOnly = items.some(
-    ({ p }) => p.priceType === "quote" || p.priceType === "starting",
-  );
-  const recommendedIds =
-    eventRecommendations[state.eventType] || eventRecommendations.Wedding;
-  const recommendedProducts = recommendedIds
-    .map((id) => products.find((p) => p.id === id))
-    .filter(Boolean);
-  const otherProducts = products.filter((p) => !recommendedIds.includes(p.id));
-  const miniProduct = (p, recommended = false) =>
-    `<div class="mini-product ${recommended ? "is-recommended" : ""}"><div class="mini-product-heading"><h4>${p.name}</h4>${recommended ? '<span class="recommendation-tag">Recommended</span>' : ""}</div><p>${productPriceText(p)}</p><div class="mini-product-row"><span style="font-size:11px;color:var(--muted)">${p.category}</span><div class="qty-controls"><button class="qty-btn" data-minus="${p.id}">−</button><span class="qty">${state.selected[p.id] || 0}</span><button class="qty-btn" data-plus="${p.id}">+</button></div></div></div>`;
-  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">CUSTOM EVENT BUILDER</span><h1>Build your<br>exact setup.</h1></div><p>Prototype a guided experience for clients. This is intentionally quote-friendly: it estimates what is known without pretending custom production has a fixed retail price.</p></div><div class="builder-wrap"><section class="builder-main"><div class="steps">${["Event", "Details", "Equipment", "Review"].map((s, i) => `<div class="step ${state.builderStep === i + 1 ? "active" : ""}">${String(i + 1).padStart(2, "0")} · ${s}</div>`).join("")}</div>${builderStepContent()}<div class="builder-actions"><button class="btn btn-light" data-builder-prev ${state.builderStep === 1 ? "disabled" : ""}>← Back</button>${state.builderStep < 4 ? `<button class="btn btn-dark" data-builder-next>Continue →</button>` : `<a class="btn btn-accent" href="#quote">Request this quote →</a>`}</div></section><aside class="builder-side"><span class="eyebrow">YOUR SETUP</span><div class="summary-total"><div><span class="eyebrow">ESTIMATED TOTAL</span><div style="font-size:11px;color:var(--muted)">${quoteOnly ? "Includes quote-only selections" : ""}</div></div><strong>${money(known)}</strong></div><div class="selection-list">${items.length ? items.map(({ p, qty }) => `<div class="selection-chip"><span>${qty} × ${p.name.replace(" — 50 Headphones", "").replace(" — 100 Headphones", "").replace(" — 150 Headphones", "").replace(" — 200 Headphones", "").replace(" — 300 Headphones", "")}</span><button data-remove="${p.id}" aria-label="Remove">×</button></div>`).join("") : `<div class="empty" style="padding:24px">Nothing selected yet.</div>`}</div>${quoteOnly ? `<div class="quote-tag">Some selections require a final quote confirmation.</div>` : ""}<a class="btn btn-dark" style="width:100%;margin-top:12px" href="#quote">Send my setup →</a></aside></div></div>`;
-  function builderStepContent() {
-    if (state.builderStep === 1)
-      return `<div class="reveal"><span class="eyebrow">STEP 01</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">What are you planning?</h2><p style="color:var(--muted);margin-top:0">Pick the closest event type. The interface uses it to suggest a starting point.</p><div class="choice-grid">${["Wedding", "Corporate Event", "School Event", "Concert", "Private Party", "Outdoor Movie"].map((x) => `<button class="choice ${state.eventType === x ? "selected" : ""}" data-event="${x}"><strong>${x}</strong><span>${x === "Wedding" ? "Ceremony + celebration" : x === "Corporate Event" ? "Meetings + launches" : x === "School Event" ? "Programs + dances" : x === "Concert" ? "Live performance" : x === "Private Party" ? "Celebrations" : "Inflatable movie night"}</span>${state.eventType === x ? "<em>Selected</em>" : ""}</button>`).join("")}</div></div>`;
-    if (state.builderStep === 2)
-      return `<div class="reveal"><span class="eyebrow">STEP 02</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Tell us about your event.</h2><p style="color:var(--muted);margin-top:0">Share a few planning and contact details so the quote can be tailored to your venue.</p><div class="form-grid"><div class="field"><label for="contactNameInput">Full name *</label><input class="input" id="contactNameInput" autocomplete="name" required value="${escapeHtml(state.contactName)}" placeholder="Alex Morgan"></div><div class="field"><label for="contactEmailInput">Email *</label><input class="input" id="contactEmailInput" type="email" autocomplete="email" required value="${escapeHtml(state.contactEmail)}" placeholder="alex@example.com"></div><div class="field"><label for="contactPhoneInput">Phone</label><input class="input" id="contactPhoneInput" type="tel" autocomplete="tel" value="${escapeHtml(state.contactPhone)}" placeholder="(978) 601-5473"></div><div class="field"><label for="organizationInput">Company or organization</label><input class="input" id="organizationInput" value="${escapeHtml(state.organization)}" placeholder="Company or group"></div><div class="field"><label for="eventNameInput">Event name</label><input class="input" id="eventNameInput" value="${escapeHtml(state.eventName)}" placeholder="Annual fundraiser"></div><div class="field"><label for="guestInput">Estimated guests</label><input class="input" id="guestInput" type="number" min="1" value="${state.guests}"></div><div class="field"><label for="venueInput">Venue setting</label><select class="select" id="venueInput"><option ${state.venue === "Indoor" ? "selected" : ""}>Indoor</option><option ${state.venue === "Outdoor" ? "selected" : ""}>Outdoor</option><option ${state.venue === "Hybrid" ? "selected" : ""}>Hybrid</option></select></div><div class="field"><label for="dateInput">Event date</label><input class="input" id="dateInput" type="date" value="${escapeHtml(state.date)}"></div><div class="field full"><label for="eventLocationInput">Venue name or address</label><input class="input" id="eventLocationInput" autocomplete="street-address" value="${escapeHtml(state.eventLocation)}" placeholder="Search for a venue or enter an address"><div class="builder-map-placeholder" role="group" aria-label="Map preview placeholder"><span class="map-placeholder-grid" aria-hidden="true"></span><span class="map-pin" aria-hidden="true">●</span><div class="map-placeholder-copy"><strong id="mapAddressPreview">${state.eventLocation ? escapeHtml(state.eventLocation) : "Your venue preview"}</strong><span>Map preview placeholder · open this address in Google Maps</span><a id="mapPreviewLink" href="${state.eventLocation ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(state.eventLocation)}` : "#"}" ${state.eventLocation ? "" : 'aria-disabled="true" tabindex="-1"'} target="_blank" rel="noopener noreferrer">Preview location in Google Maps ↗</a></div></div><small class="map-api-note">An interactive embedded map can be enabled later with a Maps API key.</small></div><div class="field full"><label for="eventNotesInput">Anything else we should know?</label><textarea class="textarea" id="eventNotesInput" placeholder="Schedule, room details, delivery notes, or special requests">${escapeHtml(state.eventNotes)}</textarea></div></div></div>`;
-    if (state.builderStep === 3)
-      return `<div class="reveal"><span class="eyebrow">STEP 03</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Pick the pieces.</h2><p style="color:var(--muted);margin-top:0">Start with recommendations for your ${state.eventType.toLowerCase()}, then browse the full equipment catalog. Quantities update the estimate in real time.</p><div class="equipment-group"><div class="equipment-group-head"><span class="eyebrow">FOR YOUR EVENT</span><span class="equipment-count">${recommendedProducts.length} recommendations</span></div><div class="builder-product-grid">${recommendedProducts.map((p) => miniProduct(p, true)).join("")}</div></div><div class="equipment-group all-equipment"><div class="equipment-group-head"><span class="eyebrow">ALL EQUIPMENT</span><span class="equipment-count">${products.length} products</span></div><div class="builder-product-grid">${otherProducts.map((p) => miniProduct(p)).join("")}</div></div></div>`;
-    const detail = (label, value) => `<div class="summary-line"><span>${label}</span><strong>${value || "Not provided"}</strong></div>`;
-    const locationValue = state.eventLocation ? `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(state.eventLocation)}" target="_blank" rel="noopener noreferrer">${escapeHtml(state.eventLocation)} ↗</a>` : "Not provided";
-    return `<div class="reveal"><span class="eyebrow">STEP 04</span><h2 style="font-family:'Space Grotesk';font-size:42px;letter-spacing:-.04em;margin:8px 0 10px">Review your build.</h2><p style="color:var(--muted);margin-top:0">Everything the client has configured is summarized here before sending the request.</p><div class="selection-list">${items.length ? items.map(({ p, qty }) => `<div class="selection-chip"><span><strong>${qty} ×</strong> ${p.name}</span><span>${p.priceType === "quote" ? "Quote" : productPriceText(p)}</span></div>`).join("") : `<div class="empty">Add at least one product to your setup.</div>`}</div><div class="builder-event-summary"><h3>Event details</h3>${detail("Event type", escapeHtml(state.eventType))}${detail("Event name", escapeHtml(state.eventName))}${detail("Contact", escapeHtml(state.contactName))}${detail("Email", escapeHtml(state.contactEmail))}${detail("Phone", escapeHtml(state.contactPhone))}${detail("Organization", escapeHtml(state.organization))}${detail("Guests", String(state.guests))}${detail("Venue setting", escapeHtml(state.venue))}${detail("Date", escapeHtml(state.date || "Not selected"))}<div class="summary-line"><span>Venue location</span><strong>${locationValue}</strong></div>${detail("Notes", escapeHtml(state.eventNotes))}</div></div>`;
-  }
+  return rentals();
 }
 
 function quote() {
@@ -3403,7 +3374,11 @@ function render(options = {}) {
   if (hash === "bundles") view = bundlesPage();
   if (hash === "about") view = aboutUsPage();
   if (hash === "services") view = services();
-  if (hash === "builder") view = builder();
+  if (hash === "builder" || hash === "cart") {
+    location.hash = "#rentals";
+    setTimeout(() => openCartDrawer(), 80);
+    return;
+  }
   if (hash === "quote") view = quote();
   app.innerHTML = view;
   lastRenderedPage = hash;
@@ -3486,13 +3461,251 @@ function showToast(msg) {
   clearTimeout(showToast.t);
   showToast.t = setTimeout(() => toast.classList.remove("show"), 2200);
 }
-function addProduct(id, delta = 1) {
+/* ==========================================================================
+   CART DRAWER (ORDERING SYSTEM — PANEL ONLY)
+   ========================================================================== */
+let cartDrawerInitialized = false;
+
+function openCartDrawer() {
+  const overlay = document.querySelector("#cartDrawerOverlay");
+  const drawer = document.querySelector("#cartDrawer");
+  if (!overlay || !drawer) return;
+  updateCartDrawer();
+  overlay.classList.add("is-open");
+  overlay.setAttribute("aria-hidden", "false");
+  drawer.classList.add("is-open");
+  document.body.classList.add("cart-drawer-open");
+}
+
+function closeCartDrawer() {
+  const overlay = document.querySelector("#cartDrawerOverlay");
+  const drawer = document.querySelector("#cartDrawer");
+  if (!overlay || !drawer) return;
+  overlay.classList.remove("is-open");
+  overlay.setAttribute("aria-hidden", "true");
+  drawer.classList.remove("is-open");
+  document.body.classList.remove("cart-drawer-open");
+}
+
+function deleteCartItem(id) {
+  const product = products.find((item) => item.id === id);
+  delete state.selected[id];
+  saveSelection();
+  syncSetupCount();
+  render({ preserveScroll: true });
+  updateCartDrawer();
+  showToast(`${product?.name || "Rental"} removed from cart`);
+}
+
+function updateCartDrawer() {
+  const bodyEl = document.querySelector("#cartDrawerBody");
+  const footerEl = document.querySelector("#cartDrawerFooter");
+  if (!bodyEl || !footerEl) return;
+
+  const totals = calculateQuoteTotals();
+  const lineItems = totals.lineItems || [];
+  const subtotal = totals.equipmentBaseSubtotal || 0;
+
+  if (lineItems.length === 0) {
+    bodyEl.innerHTML = `
+      <div class="cart-empty-card">
+        <div class="cart-empty-icon-wrap" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+            <path d="M3 6h18"></path>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+        </div>
+        <h3 class="cart-empty-title">Your cart is empty.</h3>
+        <p class="cart-empty-desc">Add audio, lighting, video, or packages and they will appear here.</p>
+        <button type="button" class="cart-continue-btn" data-cart-continue>Continue ordering</button>
+      </div>
+    `;
+    footerEl.innerHTML = `
+      <div class="cart-footer-summary">
+        <div class="cart-summary-line">
+          <span>Subtotal</span>
+          <strong>$0</strong>
+        </div>
+        <div class="cart-summary-line muted-line">
+          <span>Estimated fees</span>
+          <span>Calculated at checkout</span>
+        </div>
+        <div class="cart-total-line">
+          <div class="cart-total-meta">
+            <span class="cart-total-title">Total</span>
+            <span class="cart-total-note">Before delivery or pickup fees</span>
+          </div>
+          <strong class="cart-total-val">$0</strong>
+        </div>
+      </div>
+      <button type="button" class="cart-proceed-btn" id="cartProceedBtn" data-cart-proceed disabled>
+        Proceed
+      </button>
+    `;
+  } else {
+    bodyEl.innerHTML = lineItems
+      .map(({ product, qty, lineSubtotal }) => `
+        <article class="cart-item-card" data-item-id="${product.id}">
+          <img class="cart-item-img" src="${productImage(product)}" alt="${escapeHtml(product.name)}" loading="lazy" />
+          <div class="cart-item-details">
+            <span class="cart-item-cat">${escapeHtml(product.category || "Rental")}</span>
+            <h4 class="cart-item-name">${escapeHtml(product.name)}</h4>
+            <span class="cart-item-unit">${product.price ? `${money(product.price)} each` : "Custom quote"}</span>
+          </div>
+          <div class="cart-item-actions">
+            <span class="cart-item-price">${product.price ? money(lineSubtotal) : "Quote"}</span>
+            <div class="cart-item-controls">
+              <div class="cart-stepper">
+                <button type="button" class="cart-step-btn" data-cart-minus="${product.id}" aria-label="Decrease ${escapeHtml(product.name)}">−</button>
+                <span class="cart-step-qty">${qty}</span>
+                <button type="button" class="cart-step-btn" data-cart-plus="${product.id}" aria-label="Increase ${escapeHtml(product.name)}">+</button>
+              </div>
+              <button type="button" class="cart-del-btn" data-cart-delete="${product.id}" aria-label="Delete ${escapeHtml(product.name)}" title="Delete item">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="3 6 5 6 21 6"></polyline>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                  <line x1="10" y1="11" x2="10" y2="17"></line>
+                  <line x1="14" y1="11" x2="14" y2="17"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </article>
+      `)
+      .join("");
+
+    footerEl.innerHTML = `
+      <div class="cart-footer-summary">
+        <div class="cart-summary-line">
+          <span>Subtotal</span>
+          <strong>${money(subtotal)}</strong>
+        </div>
+        <div class="cart-summary-line muted-line">
+          <span>Estimated fees</span>
+          <span>Calculated at checkout</span>
+        </div>
+        <div class="cart-total-line">
+          <div class="cart-total-meta">
+            <span class="cart-total-title">Total</span>
+            <span class="cart-total-note">Before delivery or pickup fees</span>
+          </div>
+          <strong class="cart-total-val">${money(subtotal)}</strong>
+        </div>
+      </div>
+      <button type="button" class="cart-proceed-btn" id="cartProceedBtn" data-cart-proceed>
+        Proceed
+      </button>
+    `;
+  }
+}
+
+function initCartDrawer() {
+  if (cartDrawerInitialized) return;
+  cartDrawerInitialized = true;
+
+  const overlay = document.querySelector("#cartDrawerOverlay");
+  const drawer = document.querySelector("#cartDrawer");
+  if (!overlay || !drawer) return;
+
+  // Close button
+  document.querySelector("#closeCartDrawer")?.addEventListener("click", closeCartDrawer);
+
+  // Click on backdrop
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      closeCartDrawer();
+    }
+  });
+
+  // Escape key
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && overlay.classList.contains("is-open")) {
+      closeCartDrawer();
+    }
+  });
+
+  // Topbar setup/cart button
+  document.querySelector("#setupLink")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    openCartDrawer();
+  });
+
+  // Delegated events for drawer body and footer
+  drawer.addEventListener("click", (e) => {
+    const plusBtn = e.target.closest("[data-cart-plus]");
+    if (plusBtn) {
+      e.preventDefault();
+      const id = plusBtn.dataset.cartPlus;
+      addProduct(id, 1, { silentCart: true });
+      return;
+    }
+
+    const minusBtn = e.target.closest("[data-cart-minus]");
+    if (minusBtn) {
+      e.preventDefault();
+      const id = minusBtn.dataset.cartMinus;
+      addProduct(id, -1, { silentCart: true });
+      return;
+    }
+
+    const delBtn = e.target.closest("[data-cart-delete]");
+    if (delBtn) {
+      e.preventDefault();
+      const id = delBtn.dataset.cartDelete;
+      deleteCartItem(id);
+      return;
+    }
+
+    const contBtn = e.target.closest("[data-cart-continue]");
+    if (contBtn) {
+      e.preventDefault();
+      closeCartDrawer();
+      if (getHash() !== "rentals") {
+        location.hash = "#rentals";
+      }
+      return;
+    }
+
+    const proceedBtn = e.target.closest("[data-cart-proceed]");
+    if (proceedBtn) {
+      e.preventDefault();
+      const count = Object.values(state.selected).reduce((sum, q) => sum + q, 0);
+      if (count > 0) {
+        closeCartDrawer();
+        location.hash = "#quote";
+        showToast("Setup loaded! Finalize your event details below.");
+      } else {
+        showToast("Your cart is empty. Add items first!");
+      }
+      return;
+    }
+  });
+
+  // Global delegation for any [data-open-cart] button
+  document.addEventListener("click", (e) => {
+    const openBtn = e.target.closest("[data-open-cart]");
+    if (openBtn) {
+      e.preventDefault();
+      openCartDrawer();
+    }
+  });
+
+  updateCartDrawer();
+}
+
+function addProduct(id, delta = 1, options = {}) {
   state.selected[id] = (state.selected[id] || 0) + delta;
   if (state.selected[id] <= 0) delete state.selected[id];
   saveSelection();
+  syncSetupCount();
   render({ preserveScroll: true });
+  updateCartDrawer();
   const product = products.find((item) => item.id === id);
-  showToast(delta > 0 ? `${product?.name || "Rental"} added to your setup` : `${product?.name || "Rental"} removed`);
+  if (delta > 0 && !options.silentCart) {
+    openCartDrawer();
+  }
+  showToast(delta > 0 ? `${product?.name || "Rental"} added to your cart` : `${product?.name || "Rental"} removed`);
 }
 
 function bind() {
