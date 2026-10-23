@@ -3393,6 +3393,7 @@ function render(options = {}) {
     pageRoot.addEventListener("animationend", clearRouteAnimation);
   }
   syncSetupCount();
+  updateCartDrawer();
   syncMorphingNavigation();
   queueFloatingStoryUpdate();
   syncNavigation();
@@ -4782,6 +4783,7 @@ window.addEventListener("hashchange", () => {
   render();
 });
 
+initCartDrawer();
 render();
 queueFloatingStoryUpdate();
 runOpeningSequence();
