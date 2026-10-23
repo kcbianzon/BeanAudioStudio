@@ -932,7 +932,7 @@ const state = {
   builderStep: 1,
   quoteStep: 1,
   eventType: "Wedding",
-  guests: 120,
+  guests: null,
   guestBracket: "51–150",
   venue: "Indoor",
   duration: "1-day",
@@ -3282,30 +3282,25 @@ function quote() {
         <p>Type your estimated audience size and rental duration below. Pricing and speaker wattage scale automatically.</p>
       </div>
 
-      <!-- 1. Estimated Audience Size (Type Only - Clean) -->
-      <div class="q-subblock">
-        <div class="q-main-event-input-box">
-          <label for="quoteGuestExact" class="q-main-input-label">
-            <span>1. Estimated Audience Size</span>
-          </label>
-          <div class="q-guest-input-row">
-            <input
-              id="quoteGuestExact"
-              type="number"
-              min="1"
-              max="50000"
-              class="q-big-text-input"
-              placeholder="e.g. 150"
-              value="${state.guests || 120}"
-              autocomplete="off"
-            />
-            <span class="q-input-unit-label">Guests / Attendees</span>
-          </div>
+      <!-- 1. Estimated Audience Size (Outside the Box) -->
+      <div class="q-clean-section">
+        <h3 class="q-clean-section-title">Estimated Audience Size</h3>
+        <div class="q-clean-input-wrap">
+          <input
+            id="quoteGuestExact"
+            type="number"
+            min="1"
+            max="50000"
+            class="q-clean-big-input"
+            placeholder="type your audience size, eg. 150"
+            value="${state.guests ? state.guests : ""}"
+            autocomplete="off"
+          />
         </div>
       </div>
 
-      <!-- 2. Venue Setting (Matches Uploaded Mockup Exactly) -->
-      <div class="q-subblock">
+      <!-- 2. Venue Setting -->
+      <div class="q-clean-section">
         <div class="q-venue-header-row">
           <h3 class="q-venue-main-title">Venue Setting</h3>
           <span class="q-venue-sub-text">Select your environment for acoustic calibration &amp; power needs:</span>
@@ -3342,50 +3337,18 @@ function quote() {
         </div>
       </div>
 
-      <!-- 3. Rental Duration (Typing + Optional Presets) -->
-      <div class="q-subblock">
-        <div class="q-main-event-input-box">
-          <label for="quoteDurationInput" class="q-main-input-label">
-            <span>3. Rental Duration</span>
-            <span class="q-main-badge">Auto-Calculates Multi-Day Rate</span>
-          </label>
-          <p class="q-input-helper-desc">Type your rental duration or number of days (e.g. 1 day, 2 days, 3 days, 1 week), and multi-day discounts are calculated automatically.</p>
-          <div class="q-duration-input-row">
-            <input
-              type="text"
-              id="quoteDurationInput"
-              class="q-big-text-input"
-              placeholder="e.g. 1 Day, 2 Days, 3 Days, Weekend, 1 Week..."
-              value="${escapeHtml(state.customDurationText || (DURATION_OPTIONS.find(d => d.id === state.duration)?.label || "1 Day / Single Event"))}"
-              autocomplete="off"
-            />
-            <div class="q-duration-rate-chip" id="durationRateBadge">
-              <span class="q-rate-calc-label">Calculated Rate:</span>
-              <strong class="q-rate-calc-val">${escapeHtml(totals.durationOption.shortLabel || "1.0×")}</strong>
-            </div>
-          </div>
-        </div>
-
-        <!-- Optional Duration Presets -->
-        <div class="q-optional-presets-wrap">
-          <div class="q-presets-header">
-            <span class="eyebrow">OPTIONAL DURATION PRESETS</span>
-            <span class="q-presets-sub">Click an option below to auto-fill:</span>
-          </div>
-          <div class="q-duration-grid q-duration-grid-compact">
-            ${DURATION_OPTIONS.map((dur) => {
-              const currentText = (state.customDurationText || "").toLowerCase();
-              const isSelected = state.duration === dur.id || currentText === dur.label.toLowerCase() || currentText === dur.id;
-              return `<button type="button" class="q-duration-card q-duration-card-compact ${isSelected ? "is-active" : ""}" data-select-duration="${escapeHtml(dur.id)}">
-                <div class="q-dur-top">
-                  <span class="q-event-code">${escapeHtml(dur.shortLabel)}</span>
-                  <span class="q-tier-badge">${escapeHtml(dur.badge)}</span>
-                </div>
-                <h4 class="q-dur-title">${escapeHtml(dur.label)}</h4>
-                <span class="q-event-status">${isSelected ? "✓ Selected" : "Select"}</span>
-              </button>`;
-            }).join("")}
-          </div>
+      <!-- 3. Rental duration (Outside the Box) -->
+      <div class="q-clean-section">
+        <h3 class="q-clean-section-title">Rental duration</h3>
+        <div class="q-clean-input-wrap">
+          <input
+            type="text"
+            id="quoteDurationInput"
+            class="q-clean-big-input"
+            placeholder="Type your rental duration or number of days (e.g. 1 day"
+            value="${escapeHtml(state.customDurationText || "")}"
+            autocomplete="off"
+          />
         </div>
       </div>
     </div>`;
@@ -3460,7 +3423,7 @@ function quote() {
           </button>
           <button type="button" class="q-plan-meta-row" data-goto-step="2">
             <span>02 · GUESTS</span>
-            <strong>${state.guests} (${escapeHtml(state.venue)})</strong>
+            <strong>${state.guests ? `${state.guests} (${escapeHtml(state.venue)})` : `Not set yet (${escapeHtml(state.venue)})`}</strong>
           </button>
           <button type="button" class="q-plan-meta-row" data-goto-step="3">
             <span>03 · DATE</span>
@@ -4167,10 +4130,10 @@ function bind() {
     showToast(`Added recommended ${state.eventType} gear`);
   });
 
-  // Step 2: Audience size typing, venue setting, rental duration typing & presets
+  // Step 2: Audience size typing, venue setting, rental duration typing
   document.querySelector("#quoteGuestExact")?.addEventListener("input", (e) => {
     const val = parseInt(e.target.value, 10);
-    state.guests = Number.isFinite(val) && val > 0 ? val : 0;
+    state.guests = Number.isFinite(val) && val > 0 ? val : null;
   });
   document.querySelector("#quoteGuestExact")?.addEventListener("change", () => {
     render({ preserveScroll: true });
@@ -4185,36 +4148,10 @@ function bind() {
 
   document.querySelector("#quoteDurationInput")?.addEventListener("input", (e) => {
     state.customDurationText = e.target.value;
-    const parsed = parseDurationText(e.target.value);
-    const badge = document.querySelector("#durationRateBadge .q-rate-calc-val");
-    if (badge && parsed) {
-      badge.textContent = parsed.label;
-    }
-    document.querySelectorAll("[data-select-duration]").forEach((btn) => {
-      const match = parsed && parsed.days && (
-        (parsed.days === 1 && btn.dataset.selectDuration === "1-day") ||
-        (parsed.days === 2 && btn.dataset.selectDuration === "2-days") ||
-        (parsed.days >= 3 && btn.dataset.selectDuration === "3-days")
-      );
-      btn.classList.toggle("is-active", Boolean(match));
-      const status = btn.querySelector(".q-event-status");
-      if (status) status.textContent = match ? "✓ Selected" : "Select";
-    });
   });
   document.querySelector("#quoteDurationInput")?.addEventListener("change", () => {
     render({ preserveScroll: true });
   });
-
-  document.querySelectorAll("[data-select-duration]").forEach((btn) =>
-    btn.addEventListener("click", () => {
-      state.duration = btn.dataset.selectDuration;
-      const opt = DURATION_OPTIONS.find((d) => d.id === btn.dataset.selectDuration);
-      state.customDurationText = opt ? opt.label : "";
-      const input = document.querySelector("#quoteDurationInput");
-      if (input) input.value = state.customDurationText;
-      render({ preserveScroll: true });
-    }),
-  );
 
   // Step 3: Interactive Calendar & Date Controls
   document.querySelector("[data-cal-prev]")?.addEventListener("click", () => {
