@@ -11066,3 +11066,45 @@ body.is-cms-view #app {
     grid-template-columns: 1fr;
   }
 }
+
+.q-time-modifiers-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 4px 0 2px;
+}
+
+.q-minute-pills {
+  display: flex;
+  gap: 4px;
+}
+
+.q-min-pill {
+  border: 1px solid #dcd8d0;
+  background: #ffffff;
+  color: #666666;
+  font-family: 'Space Grotesk', Inter, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.q-min-pill:hover {
+  background: #f0eee8;
+  border-color: #bbbbbb;
+}
+
+.q-min-pill.is-selected {
+  background: #1e1e1e !important;
+  color: #ffffff !important;
+  border-color: #1e1e1e !important;
+}
+
+.q-analog-clock-svg {
+  cursor: pointer;
+}

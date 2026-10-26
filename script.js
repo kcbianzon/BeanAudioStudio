@@ -2907,6 +2907,24 @@ function services() {
   </div>`;
 }
 
+
+function parseTimeString(str) {
+  if (!str) return null;
+  const match = str.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)?$/i);
+  if (!match) return null;
+  let h = parseInt(match[1], 10);
+  let m = match[2];
+  let ampm = match[3] ? match[3].toUpperCase() : "AM";
+  if (h > 12) {
+    h -= 12;
+    ampm = "PM";
+  } else if (h === 0) {
+    h = 12;
+    ampm = "AM";
+  }
+  return { hour: h, minute: m, ampm };
+}
+
 function formatReadableDate(isoDate) {
   if (!isoDate) return "";
   const parts = isoDate.split("-").map(Number);
@@ -3175,9 +3193,16 @@ function renderDateAndLocationStep() {
                   maxlength="5"
                 />
               </div>
-              <div class="q-ampm-pills">
-                <button type="button" class="q-ampm-pill ${state.selectedAmpm === 'AM' ? 'is-selected' : ''}" data-set-ampm="AM">AM</button>
-                <button type="button" class="q-ampm-pill ${state.selectedAmpm === 'PM' ? 'is-selected' : ''}" data-set-ampm="PM">PM</button>
+              <div class="q-time-modifiers-row">
+                <div class="q-ampm-pills">
+                  <button type="button" class="q-ampm-pill ${(state.selectedAmpm || 'AM') === 'AM' ? 'is-selected' : ''}" data-set-ampm="AM">AM</button>
+                  <button type="button" class="q-ampm-pill ${state.selectedAmpm === 'PM' ? 'is-selected' : ''}" data-set-ampm="PM">PM</button>
+                </div>
+                <div class="q-minute-pills">
+                  ${["00", "15", "30", "45"].map((m) => `
+                    <button type="button" class="q-min-pill ${(state.selectedMinute || "00") === m ? "is-selected" : ""}" data-set-minute="${m}">:${m}</button>
+                  `).join("")}
+                </div>
               </div>
               <button type="button" class="q-clock-apply-btn" id="quoteApplyTimeBtn">Apply</button>
             </div>
@@ -3624,6 +3649,9 @@ function renderEquipmentStep(totals) {
 }
 
 function renderReviewAndSubmitStep(totals) {
+  const effectiveTime = (state.startTime && state.startTime !== "Start Time" && state.endTime && state.endTime !== "End Time")
+    ? `${state.startTime} – ${state.endTime}`
+    : (state.startTime && state.startTime !== "Start Time" ? state.startTime : (state.eventTimeWindow || "Schedule TBD"));
   const effectiveLocation = getEffectiveLocationText() || "Boston / New England (TBD)";
   const effectiveDate = state.dateFlexible
     ? "Flexible Date"
@@ -4139,11 +4167,19 @@ function quote() {
   }
 
   const effectiveLocation = getEffectiveLocationText();
+  const dateRangeStr = (state.startDate && state.endDate)
+    ? (state.startDate === state.endDate
+        ? formatReadableDate(state.startDate)
+        : `${formatReadableDate(state.startDate)} – ${formatReadableDate(state.endDate)}`)
+    : (state.date ? formatReadableDate(state.date) : "Not set yet");
+
+  const timeRangeStr = (state.startTime && state.startTime !== "Start Time" && state.endTime && state.endTime !== "End Time")
+    ? ` (${state.startTime} – ${state.endTime})`
+    : (state.startTime && state.startTime !== "Start Time" ? ` (${state.startTime})` : "");
+
   const effectiveDate = state.dateFlexible
     ? "Flexible Date"
-    : state.date
-      ? formatReadableDate(state.date)
-      : "Not set yet";
+    : `${dateRangeStr}${timeRangeStr}`;
 
   return `<div class="page q-builder-page">
     <header class="q-hero">
@@ -4972,23 +5008,182 @@ function bind() {
     }
     render({ preserveScroll: true });
   });
+  // Calendar Date Range Selection
   document.querySelectorAll("[data-cal-date]").forEach((btn) =>
     btn.addEventListener("click", () => {
-      state.date = btn.dataset.calDate;
+      const clickedIso = btn.dataset.calDate;
+      if (!state.isSelectingRange || (state.startDate && state.endDate && state.startDate !== state.endDate && !state.isSelectingRange)) {
+        state.startDate = clickedIso;
+        state.endDate = clickedIso;
+        state.date = clickedIso;
+        state.isSelectingRange = true;
+      } else {
+        if (clickedIso >= state.startDate) {
+          state.endDate = clickedIso;
+          state.isSelectingRange = false;
+        } else {
+          state.startDate = clickedIso;
+          state.endDate = clickedIso;
+          state.date = clickedIso;
+          state.isSelectingRange = true;
+        }
+      }
       state.dateFlexible = false;
       render({ preserveScroll: true });
-    }),
+    })
   );
-  document.querySelector("#quoteDateDirect")?.addEventListener("change", (e) => {
-    state.date = e.target.value;
-    if (state.date) {
+
+  // Direct Date Inputs (Start Date and End Date)
+  document.querySelector("#quoteStartDateInput")?.addEventListener("input", (e) => {
+    state.startDate = e.target.value.trim();
+    state.date = state.startDate;
+  });
+  document.querySelector("#quoteStartDateInput")?.addEventListener("change", (e) => {
+    const val = e.target.value.trim();
+    state.startDate = val;
+    state.date = val;
+    if (val) {
       state.dateFlexible = false;
-      const parts = state.date.split("-").map(Number);
+      const parts = val.split("-").map(Number);
       if (parts.length === 3 && !parts.some(Number.isNaN)) {
         state.calendarYear = parts[0];
         state.calendarMonth = parts[1] - 1;
       }
     }
+    setTimeout(() => render({ preserveScroll: true }), 0);
+  });
+
+  document.querySelector("#quoteEndDateInput")?.addEventListener("input", (e) => {
+    state.endDate = e.target.value.trim();
+  });
+  document.querySelector("#quoteEndDateInput")?.addEventListener("change", (e) => {
+    state.endDate = e.target.value.trim();
+    setTimeout(() => render({ preserveScroll: true }), 0);
+  });
+
+  // Target Time Switcher (Start Time vs End Time)
+  document.querySelectorAll("[data-target-time]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const target = btn.dataset.targetTime;
+      state.activeTimeTarget = target;
+      const existing = target === "start" ? state.startTime : state.endTime;
+      const parsed = parseTimeString(existing);
+      if (parsed) {
+        state.selectedHour = parsed.hour;
+        state.selectedMinute = parsed.minute;
+        state.selectedAmpm = parsed.ampm;
+      } else {
+        if (target === "start") {
+          state.selectedHour = 9;
+          state.selectedMinute = "00";
+          state.selectedAmpm = "AM";
+        } else {
+          state.selectedHour = 11;
+          state.selectedMinute = "00";
+          state.selectedAmpm = "PM";
+        }
+      }
+      render({ preserveScroll: true });
+    })
+  );
+
+  // Analog Clock: Click Numbers 1 to 12
+  document.querySelectorAll("[data-clock-hour]").forEach((el) =>
+    el.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const h = parseInt(el.dataset.clockHour, 10);
+      if (!isNaN(h)) {
+        state.selectedHour = h;
+        render({ preserveScroll: true });
+      }
+    })
+  );
+
+  // Analog Clock: Click anywhere on Clock Face to calculate hour from angle
+  document.querySelector(".q-analog-clock-svg")?.addEventListener("click", (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const scaleX = 130 / rect.width;
+    const scaleY = 130 / rect.height;
+    const dx = (x * scaleX) - 65;
+    const dy = (y * scaleY) - 65;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 10) return;
+    let angleDeg = (Math.atan2(dy, dx) * 180 / Math.PI) + 90;
+    if (angleDeg < 0) angleDeg += 360;
+    let hour = Math.round(angleDeg / 30);
+    if (hour === 0) hour = 12;
+    state.selectedHour = hour;
+    render({ preserveScroll: true });
+  });
+
+  // Digital Time Input Direct Typing
+  document.querySelector("#quoteDigitalTimeInput")?.addEventListener("input", (e) => {
+    const val = e.target.value.trim();
+    const parts = val.split(":");
+    if (parts.length > 0) {
+      const h = parseInt(parts[0], 10);
+      if (!isNaN(h) && h >= 1 && h <= 12) {
+        state.selectedHour = h;
+      }
+    }
+    if (parts.length > 1) {
+      const m = parts[1].slice(0, 2);
+      state.selectedMinute = m;
+    }
+  });
+  document.querySelector("#quoteDigitalTimeInput")?.addEventListener("change", (e) => {
+    const val = e.target.value.trim();
+    const parts = val.split(":");
+    if (parts.length > 0) {
+      const h = parseInt(parts[0], 10);
+      if (!isNaN(h) && h >= 1 && h <= 12) state.selectedHour = h;
+    }
+    if (parts.length > 1) {
+      const m = parseInt(parts[1], 10);
+      if (!isNaN(m) && m >= 0 && m <= 59) {
+        state.selectedMinute = String(m).padStart(2, "0");
+      }
+    }
+    setTimeout(() => render({ preserveScroll: true }), 0);
+  });
+
+  // AM / PM Toggle
+  document.querySelectorAll("[data-set-ampm]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.selectedAmpm = btn.dataset.setAmpm;
+      render({ preserveScroll: true });
+    })
+  );
+
+  // Quick Minute Selectors
+  document.querySelectorAll("[data-set-minute]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.selectedMinute = btn.dataset.setMinute;
+      render({ preserveScroll: true });
+    })
+  );
+
+  // Apply Button: Saves selected time to active target badge (Start Time or End Time)
+  document.querySelector("#quoteApplyTimeBtn")?.addEventListener("click", () => {
+    const hr = String(state.selectedHour || 12).padStart(2, "0");
+    const min = String(state.selectedMinute || "00").padStart(2, "0");
+    const ampm = state.selectedAmpm || "AM";
+    const formatted = `${hr}:${min} ${ampm}`;
+
+    if (state.activeTimeTarget === "start") {
+      state.startTime = formatted;
+      if (!state.endTime || state.endTime === "End Time") {
+        state.activeTimeTarget = "end";
+        state.selectedHour = 11;
+        state.selectedMinute = "00";
+        state.selectedAmpm = "PM";
+      }
+    } else {
+      state.endTime = formatted;
+    }
+    showToast(`Time set: ${formatted}`);
     render({ preserveScroll: true });
   });
   document.querySelector("#quoteDateFlexible")?.addEventListener("change", (e) => {
