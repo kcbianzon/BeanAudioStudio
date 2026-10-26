@@ -1333,7 +1333,17 @@ const state = {
   dateFlexible: false,
   eventTimeWindow: "Evening (5:00 PM – 11:00 PM)",
   calendarYear: _nowInit.getFullYear(),
-  calendarMonth: _nowInit.getMonth(),
+  calendarMonth: 9, // October (0-indexed)
+  calendarYear: 2026,
+  startDate: "2026-10-11",
+  endDate: "2026-10-15",
+  startTime: "Start Time",
+  endTime: "End Time",
+  activeTimeTarget: "start",
+  selectedHour: 12,
+  selectedMinute: "00",
+  selectedAmpm: "AM",
+  pickingRangeEnd: false,
   contactName: "",
   contactEmail: "",
   contactPhone: "",
@@ -2986,188 +2996,298 @@ function renderDateAndLocationStep() {
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December",
   ];
-  const year = state.calendarYear;
-  const month = state.calendarMonth;
+  const year = state.calendarYear || 2026;
+  const month = state.calendarMonth !== undefined ? state.calendarMonth : 9;
   const monthName = `${monthNames[month]} ${year}`;
 
   const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
 
   const cells = [];
   for (let i = 0; i < firstDay; i += 1) {
-    cells.push('<span class="q-cal-cell is-empty" aria-hidden="true"></span>');
+    cells.push('<span class="q-new-cal-cell is-empty" aria-hidden="true"></span>');
   }
   for (let d = 1; d <= daysInMonth; d += 1) {
-    const dateObj = new Date(year, month, d);
     const iso = `${year}-${String(month + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
-    const isPast = dateObj < today;
-    const isSelected = state.date === iso && !state.dateFlexible;
-    const isToday = dateObj.getTime() === today.getTime();
+    const isStart = state.startDate === iso;
+    const isEnd = state.endDate === iso;
+    const isSingle = isStart && isEnd;
+    const inRange = Boolean(
+      state.startDate &&
+      state.endDate &&
+      iso > state.startDate &&
+      iso < state.endDate
+    );
+
+    let cellClass = "q-new-cal-cell";
+    if (isSingle) {
+      cellClass += " is-range-single";
+    } else if (isStart) {
+      cellClass += " is-range-start";
+    } else if (isEnd) {
+      cellClass += " is-range-end";
+    } else if (inRange) {
+      cellClass += " is-in-range";
+    }
+
     cells.push(
-      `<button type="button" class="q-cal-cell ${isSelected ? "is-selected" : ""} ${isToday ? "is-today" : ""}" data-cal-date="${iso}" ${isPast ? "disabled" : ""}>${d}</button>`
+      `<button type="button" class="${cellClass}" data-cal-date="${iso}">
+        <span class="q-cell-text">${d}</span>
+      </button>`
     );
   }
 
-  const timeWindows = [
-    "Morning (8:00 AM – 12:00 PM)",
-    "Afternoon (12:00 PM – 5:00 PM)",
-    "Evening (5:00 PM – 11:00 PM)",
-    "Full Day / Custom Schedule",
-  ];
+  // Clock numbers SVG
+  const clockNumbersSvg = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    .map((h) => {
+      const angleRad = ((h * 30 - 90) * Math.PI) / 180;
+      const r = 43;
+      const x = (65 + r * Math.cos(angleRad)).toFixed(1);
+      const y = (65 + r * Math.sin(angleRad) + 4).toFixed(1);
+      const isSelected = state.selectedHour === h;
+      return `<text
+        x="${x}"
+        y="${y}"
+        text-anchor="middle"
+        class="q-clock-num ${isSelected ? "is-active-hour" : ""}"
+        data-clock-hour="${h}"
+      >${h}</text>`;
+    })
+    .join("");
 
-  const effectiveLocation = getEffectiveLocationText();
+  const selectedHour = state.selectedHour || 12;
+  const handAngle = (selectedHour % 12) * 30;
+  const digitalTimeDisplay = `${String(selectedHour).padStart(2, "0")}:${state.selectedMinute || "00"}`;
+
   const { lat, lon } = state.locationCoords || { lat: 42.3601, lon: -71.0589 };
   const bbox = `${(lon - 0.02).toFixed(4)}%2C${(lat - 0.012).toFixed(4)}%2C${(lon + 0.02).toFixed(4)}%2C${(lat + 0.012).toFixed(4)}`;
   const osmUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat.toFixed(5)}%2C${lon.toFixed(5)}`;
 
   return `<div class="q-step-panel">
     <div class="q-step-head">
-      <span class="eyebrow orange">STEP 03 OF 05 · EVENT DATE &amp; LOCATION</span>
       <h2>When &amp; where is your event taking place?</h2>
       <p>Select your target event date and delivery venue across Boston and New England.</p>
     </div>
+    <div class="q-step-head-divider"></div>
 
-    <!-- 1. Event Date & Schedule -->
+    <!-- Date & Schedule -->
     <div class="q-clean-section">
-      <div class="q-venue-header-row">
-        <h3 class="q-venue-main-title">1. Event Date &amp; Schedule</h3>
-        <span class="q-venue-sub-text">Lock in equipment availability for your date:</span>
-      </div>
+      <h3 class="q-clean-section-title">Date &amp; Schedule</h3>
 
-      <div class="q-date-layout">
-        <div class="q-calendar-card">
-          <div class="q-cal-header">
-            <button type="button" class="q-cal-nav" data-cal-prev aria-label="Previous month">‹</button>
-            <strong>${monthName}</strong>
-            <button type="button" class="q-cal-nav" data-cal-next aria-label="Next month">›</button>
+      <div class="q-schedule-card">
+        <!-- Left: Calendar -->
+        <div class="q-schedule-cal-col">
+          <div class="q-cal-pill-header">
+            <button type="button" class="q-cal-circle-btn" data-cal-prev aria-label="Previous month">‹</button>
+            <span class="q-cal-month-title">${monthName}</span>
+            <button type="button" class="q-cal-circle-btn" data-cal-next aria-label="Next month">›</button>
           </div>
-          <div class="q-cal-weekdays">
+
+          <div class="q-cal-weekdays-row">
             <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
           </div>
-          <div class="q-cal-grid">
+
+          <div class="q-cal-days-grid">
             ${cells.join("")}
           </div>
         </div>
 
-        <div class="q-date-side">
-          <div class="q-date-summary-box">
-            <span class="eyebrow">SELECTED EVENT DATE</span>
-            <strong class="q-date-display">
-              ${state.dateFlexible ? "Flexible Date" : state.date ? formatReadableDate(state.date) : "Select a date on the calendar"}
-            </strong>
-            <div class="q-field" style="margin-top:14px">
-              <label for="quoteDateDirect">Or enter date directly</label>
-              <input id="quoteDateDirect" type="date" class="input" value="${escapeHtml(state.date)}" ${state.dateFlexible ? "disabled" : ""}>
+        <!-- Right: Controls -->
+        <div class="q-schedule-controls-col">
+          <!-- Start Date -->
+          <div class="q-schedule-field-group">
+            <label class="q-schedule-input-label" for="quoteStartDateInput">Start Date *</label>
+            <div class="q-schedule-pill-box">
+              <input
+                type="text"
+                id="quoteStartDateInput"
+                class="q-schedule-date-input"
+                value="${escapeHtml(state.startDate || '')}"
+                placeholder="YYYY-MM-DD"
+                autocomplete="off"
+              />
+              <button
+                type="button"
+                class="q-schedule-time-badge ${state.activeTimeTarget === 'start' ? 'is-active' : ''}"
+                data-target-time="start"
+              >
+                ${escapeHtml(state.startTime || "Start Time")}
+              </button>
             </div>
-            <label class="q-check-row" style="margin-top:14px">
-              <input type="checkbox" id="quoteDateFlexible" ${state.dateFlexible ? "checked" : ""}>
-              <span>My event date is still flexible</span>
-            </label>
           </div>
 
-          <div class="q-date-summary-box">
-            <span class="eyebrow">PREFERRED TIME WINDOW</span>
-            <div class="q-time-pills">
-              ${timeWindows
-                .map(
-                  (tw) =>
-                    `<button type="button" class="q-time-pill ${state.eventTimeWindow === tw ? "is-active" : ""}" data-time-window="${escapeHtml(tw)}">${escapeHtml(tw)}</button>`
-                )
-                .join("")}
+          <!-- End Date -->
+          <div class="q-schedule-field-group">
+            <label class="q-schedule-input-label" for="quoteEndDateInput">End Date *</label>
+            <div class="q-schedule-pill-box">
+              <input
+                type="text"
+                id="quoteEndDateInput"
+                class="q-schedule-date-input"
+                value="${escapeHtml(state.endDate || '')}"
+                placeholder="YYYY-MM-DD"
+                autocomplete="off"
+              />
+              <button
+                type="button"
+                class="q-schedule-time-badge ${state.activeTimeTarget === 'end' ? 'is-active' : ''}"
+                data-target-time="end"
+              >
+                ${escapeHtml(state.endTime || "End Time")}
+              </button>
+            </div>
+          </div>
+
+          <!-- Clock & Digital Time Display -->
+          <div class="q-time-picker-block">
+            <div class="q-analog-clock-wrap">
+              <svg viewBox="0 0 130 130" class="q-analog-clock-svg" aria-label="Clock face">
+                <circle cx="65" cy="65" r="60" fill="#f0efea" />
+                ${clockNumbersSvg}
+                <circle cx="65" cy="65" r="3.5" fill="#1e1e1e" />
+                <line
+                  x1="65"
+                  y1="65"
+                  x2="65"
+                  y2="30"
+                  stroke="#1e1e1e"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  transform="rotate(${handAngle} 65 65)"
+                />
+                <circle
+                  cx="65"
+                  cy="30"
+                  r="7"
+                  fill="rgba(30, 30, 30, 0.15)"
+                  transform="rotate(${handAngle} 65 65)"
+                />
+              </svg>
+            </div>
+
+            <div class="q-digital-clock-side">
+              <div class="q-digital-time-readout">
+                <input
+                  type="text"
+                  id="quoteDigitalTimeInput"
+                  class="q-digital-time-val"
+                  value="${digitalTimeDisplay}"
+                  maxlength="5"
+                />
+              </div>
+              <div class="q-ampm-pills">
+                <button type="button" class="q-ampm-pill ${state.selectedAmpm === 'AM' ? 'is-selected' : ''}" data-set-ampm="AM">AM</button>
+                <button type="button" class="q-ampm-pill ${state.selectedAmpm === 'PM' ? 'is-selected' : ''}" data-set-ampm="PM">PM</button>
+              </div>
+              <button type="button" class="q-clock-apply-btn" id="quoteApplyTimeBtn">Apply</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Combined Section Divider -->
+    <!-- Divider -->
     <div class="q-combined-step-divider"></div>
 
-    <!-- 2. Venue & Delivery Location -->
+    <!-- Venue & Delivery Location -->
     <div class="q-clean-section">
-      <div class="q-venue-header-row">
-        <h3 class="q-venue-main-title">2. Venue &amp; Delivery Location</h3>
-        <span class="q-venue-sub-text">Delivery and setup address in Boston &amp; New England:</span>
-      </div>
+      <h3 class="q-clean-section-title">Venue &amp; Delivery Location</h3>
 
-      <div class="q-location-layout">
-        <div class="q-location-controls">
-          ${!state.manualLocationMode ? `
-            <div class="q-location-search-box">
-              <label class="q-label" for="quoteLocationSearch">SEARCH VENUE OR ADDRESS</label>
-              <div class="q-search-bar">
-                <input id="quoteLocationSearch" type="text" class="input" placeholder="e.g., Omni Boston Hotel at the Seaport, Cambridge MA..." value="${escapeHtml(state.locationQuery || state.eventLocation)}" ${state.locationFlexible ? "disabled" : ""}>
-                <button type="button" class="btn btn-dark btn-small" id="quoteLocationSearchBtn" ${state.locationFlexible ? "disabled" : ""}>${state.locationSearching ? "Searching…" : "Find Venue"}</button>
-              </div>
-              ${state.locationResults && state.locationResults.length ? `
-                <div class="q-location-results" role="listbox" aria-label="Suggested locations">
-                  ${state.locationResults
-                    .map(
-                      (res, idx) =>
-                        `<button type="button" class="q-loc-result-item" data-loc-index="${idx}">
-                          <span class="q-loc-pin">📍</span>
-                          <span>${escapeHtml(res.display_name)}</span>
-                        </button>`
-                    )
-                    .join("")}
-                </div>
-              ` : ""}
+      <div class="q-venue-location-wrap">
+        ${!state.manualLocationMode ? `
+          <!-- Version 1: Live search map -->
+          <div class="q-venue-left-col">
+            <label class="q-venue-field-label" for="quoteLocationSearch">Search Venue or Adress</label>
+            <div class="q-venue-search-wrap">
+              <input
+                type="text"
+                id="quoteLocationSearch"
+                class="q-venue-search-input"
+                placeholder=""
+                value="${escapeHtml(state.locationQuery || state.eventLocation)}"
+              />
+              <button type="button" class="q-venue-btn-dark" id="quoteLocationSearchBtn">
+                ${state.locationSearching ? "Searching…" : "Find Venue"}
+              </button>
             </div>
-          ` : `
-            <div class="q-manual-address-box">
-              <span class="q-label">ENTER VENUE ADDRESS MANUALLY</span>
-              <div class="form-grid" style="margin-top:10px">
-                <div class="field full">
-                  <label for="manualStreetInput">Venue Name / Street Address</label>
-                  <input id="manualStreetInput" class="input" placeholder="100 Seaport Blvd / Boston Convention Center" value="${escapeHtml(state.manualStreet)}">
-                </div>
-                <div class="field">
-                  <label for="manualCityInput">City / Town</label>
-                  <input id="manualCityInput" class="input" placeholder="Boston" value="${escapeHtml(state.manualCity)}">
-                </div>
-                <div class="field">
-                  <label for="manualStateInput">State &amp; ZIP</label>
-                  <div style="display:grid;grid-template-columns:80px 1fr;gap:8px">
-                    <input id="manualStateInput" class="input" placeholder="MA" value="${escapeHtml(state.manualState)}">
-                    <input id="manualZipInput" class="input" placeholder="02210" value="${escapeHtml(state.manualZip)}">
-                  </div>
-                </div>
+
+            ${state.locationResults && state.locationResults.length ? `
+              <div class="q-location-results" role="listbox">
+                ${state.locationResults.map((res, idx) => `
+                  <button type="button" class="q-loc-result-item" data-loc-index="${idx}">
+                    <span class="q-loc-pin">📍</span>
+                    <span>${escapeHtml(res.display_name)}</span>
+                  </button>
+                `).join("")}
+              </div>
+            ` : ""}
+
+            <div class="q-venue-toggle-row">
+              <button type="button" class="q-venue-btn-dark" data-toggle-manual-location>Enter Address Manually</button>
+            </div>
+          </div>
+        ` : `
+          <!-- Version 2: Enter address manually -->
+          <div class="q-venue-left-col">
+            <div class="q-manual-field">
+              <label class="q-venue-label" for="manualStreetInput">Venue Name / Street Address</label>
+              <input
+                type="text"
+                id="manualStreetInput"
+                class="q-manual-input full"
+                placeholder=""
+                value="${escapeHtml(state.manualStreet)}"
+              />
+            </div>
+
+            <div class="q-manual-grid-3">
+              <div class="q-manual-field">
+                <label class="q-venue-label" for="manualCityInput">City / Town</label>
+                <input
+                  type="text"
+                  id="manualCityInput"
+                  class="q-manual-input"
+                  placeholder=""
+                  value="${escapeHtml(state.manualCity)}"
+                />
+              </div>
+              <div class="q-manual-field">
+                <label class="q-venue-label" for="manualStateInput">State</label>
+                <input
+                  type="text"
+                  id="manualStateInput"
+                  class="q-manual-input"
+                  placeholder=""
+                  value="${escapeHtml(state.manualState)}"
+                />
+              </div>
+              <div class="q-manual-field">
+                <label class="q-venue-label" for="manualZipInput">Zip</label>
+                <input
+                  type="text"
+                  id="manualZipInput"
+                  class="q-manual-input"
+                  placeholder=""
+                  value="${escapeHtml(state.manualZip)}"
+                />
               </div>
             </div>
-          `}
 
-          <div class="q-location-toggles">
-            <button type="button" class="text-btn" data-toggle-manual-location>
-              ${state.manualLocationMode ? "← Back to live map search" : "Enter address manually instead →"}
-            </button>
-            <label class="q-check-row">
-              <input type="checkbox" id="quoteLocationFlexible" ${state.locationFlexible ? "checked" : ""}>
-              <span>I'm still choosing a location / venue is TBD</span>
-            </label>
+            <div class="q-venue-toggle-row">
+              <button type="button" class="q-venue-btn-dark" data-toggle-manual-location>Back to live map search</button>
+            </div>
           </div>
+        `}
 
-          <div class="q-selected-loc-banner">
-            <span class="eyebrow">CONFIRMED VENUE LOCATION</span>
-            <strong>${effectiveLocation ? escapeHtml(effectiveLocation) : "Boston / Greater New England (Select or type above)"}</strong>
-          </div>
-        </div>
-
-        <div class="q-map-card">
-          <div class="q-map-frame-wrap">
+        <!-- Right: Map -->
+        <div class="q-venue-right-col">
+          <div class="q-venue-map-preview">
             <iframe
               title="Event Venue Map Preview"
               src="${osmUrl}"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
             ></iframe>
-          </div>
-          <div class="q-map-foot">
-            <span><strong>Service Area:</strong> Boston, Cambridge, Somerville &amp; all of New England</span>
-            ${effectiveLocation && !state.locationFlexible
-              ? `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(effectiveLocation)}" target="_blank" rel="noopener" class="text-btn">Open in Google Maps ↗</a>`
-              : ""}
           </div>
         </div>
       </div>
@@ -4059,7 +4179,7 @@ function quote() {
             : `<a href="#rentals" class="btn btn-light">← Browse Catalog</a>`}
           <div class="q-step-indicator">Step 0${step} of 05</div>
           ${step < 5
-            ? `<button type="button" class="btn btn-dark" data-quote-next>NEXT</button>`
+            ? `<button type="button" class="btn btn-gold btn-quote-next" data-quote-next>NEXT</button>`
             : ""}
         </div>
       </div>
