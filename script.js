@@ -1270,42 +1270,42 @@ const PAYMENT_METHODS = [
 const EVENT_TYPE_CARDS = [
   {
     id: "Wedding",
-    code: "01 / WEDDING",
-    title: "Wedding",
+    code: "01 / Wedding",
+    title: "Wedding Event",
     desc: "Ceremony wireless vows, cocktail hour speakers, reception sound, dancing on a cloud & photo booth.",
     bundleId: "wedding",
   },
   {
     id: "Corporate Event",
-    code: "02 / CORPORATE",
+    code: "02 / Corporate",
     title: "Corporate Event",
     desc: "Keynotes, panel microphones, 4K confidence monitors, fast-fold projection & multi-cam live streaming.",
     bundleId: "corporate",
   },
   {
     id: "School Event",
-    code: "03 / CAMPUS & SCHOOL",
+    code: "03 / Campus & School",
     title: "School Event",
     desc: "Proms, homecomings, campus socials, high-output subwoofers, moving heads & 100-headphone silent disco.",
     bundleId: "school",
   },
   {
     id: "Concert",
-    code: "04 / LIVE STAGE",
+    code: "04 / Live Stage",
     title: "Concert",
     desc: "JBL line array systems, dual 18″ subwoofers, wireless IEM monitors, 32-ch digital mixer & LED video wall.",
     bundleId: "concert",
   },
   {
     id: "Private Party",
-    code: "05 / SOCIAL & DJ",
+    code: "05 / Social & DJ",
     title: "Private Party",
     desc: "Turnkey Pioneer DJ setups, 18″ powered bass, wireless battery uplighting & 360 video booth.",
     bundleId: "party",
   },
   {
     id: "Outdoor Movie",
-    code: "06 / OUTDOOR CINEMA",
+    code: "06 / Outdoor Cinema",
     title: "Outdoor Movie",
     desc: "12-ft to 40-ft inflatable cinema screens, high-lumen Sony laser projector, PA sound & wireless mic.",
     bundleId: "movie",
@@ -1323,7 +1323,7 @@ const _nowInit = new Date();
 const state = {
   builderStep: 1,
   quoteStep: 1,
-  eventType: "Wedding",
+  eventType: "",
   guests: null,
   guestBracket: "51–150",
   venue: "Indoor",
@@ -1333,7 +1333,17 @@ const state = {
   dateFlexible: false,
   eventTimeWindow: "Evening (5:00 PM – 11:00 PM)",
   calendarYear: _nowInit.getFullYear(),
-  calendarMonth: _nowInit.getMonth(),
+  calendarMonth: 9, // October (0-indexed)
+  calendarYear: 2026,
+  startDate: "2026-10-11",
+  endDate: "2026-10-15",
+  startTime: "Start Time",
+  endTime: "End Time",
+  activeTimeTarget: "start",
+  selectedHour: 12,
+  selectedMinute: "00",
+  selectedAmpm: "AM",
+  pickingRangeEnd: false,
   contactName: "",
   contactEmail: "",
   contactPhone: "",
@@ -1388,6 +1398,7 @@ const state = {
 
 const eventRecommendations = {
   Wedding: ["medium-audio", "qlxd-lavalier", "dry-ice-cloud", "uplights-6", "photo-360"],
+  "Wedding Event": ["medium-audio", "qlxd-lavalier", "dry-ice-cloud", "uplights-6", "photo-360"],
   "Corporate Event": ["medium-audio", "qlxd-lavalier", "tv-75", "fastfold-screen", "stream-basic"],
   "School Event": ["medium-audio", "sub-thump18", "moving-heads", "silent-100", "movie-16"],
   Concert: ["large-audio", "sub-kw181", "iem", "mixer-x32", "led-16"],
@@ -2451,7 +2462,7 @@ function bundleDetail(id) {
     (total, { product, quantity }) => total + (product.price || 0) * quantity,
     0,
   );
-  return `<div class="page"><div class="bundle-detail-head"><a class="text-btn" href="#bundles">← All bundles</a><div class="bundle-detail-layout"><div><span class="eyebrow">${bundle.label} PACKAGE</span><h1>${bundle.title}</h1><p>${bundle.desc}</p></div><div class="bundle-detail-price"><span class="eyebrow">TURNKEY PACKAGE TOTAL</span><strong>${money(bundle.price)}</strong></div></div></div><div class="bundle-detail-wrap"><section class="bundle-detail-main"><div class="detail-section-head"><div><span class="eyebrow">WHAT’S INCLUDED</span><h2>Your package, item by item.</h2></div><span class="detail-lock">${included.reduce((s, x) => s + x.quantity, 0)} Total Units</span></div><div class="bundle-included-list">${included.map(({ product, quantity }) => `<div class="bundle-included-item"><div><strong>${quantity} × ${product.name}</strong><span>${product.category} · ${money(product.price)} each · ${product.desc}</span></div><strong>${money(product.price * quantity)}</strong></div>`).join("")}</div><div class="bundle-detail-actions"><button type="button" class="btn btn-dark" data-launch-bundle="${bundle.id}" data-launch-step="6">Request this bundle →</button><button type="button" class="btn btn-light" data-open-cart>View in Cart →</button></div></section><aside class="bundle-detail-summary"><span class="eyebrow">TRANSPARENT MATH</span><div class="detail-total"><span>Itemized equipment sum</span><strong>${money(knownTotal)}</strong></div><div class="detail-total"><span>Package total</span><strong>${money(bundle.price)}</strong></div><p>Every item in this bundle is priced transparently with zero hidden fees. Load this bundle into the Event Builder to add microphones, lighting, or delivery support.</p></aside></div></div>`;
+  return `<div class="page"><div class="bundle-detail-head"><a class="text-btn" href="#bundles">← All bundles</a><div class="bundle-detail-layout"><div><span class="eyebrow">${bundle.label} PACKAGE</span><h1>${bundle.title}</h1><p>${bundle.desc}</p></div><div class="bundle-detail-price"><span class="eyebrow">TURNKEY PACKAGE TOTAL</span><strong>${money(bundle.price)}</strong></div></div></div><div class="bundle-detail-wrap"><section class="bundle-detail-main"><div class="detail-section-head"><div><span class="eyebrow">WHAT’S INCLUDED</span><h2>Your package, item by item.</h2></div><span class="detail-lock">${included.reduce((s, x) => s + x.quantity, 0)} Total Units</span></div><div class="bundle-included-list">${included.map(({ product, quantity }) => `<div class="bundle-included-item"><div><strong>${quantity} × ${product.name}</strong><span>${product.category} · ${money(product.price)} each · ${product.desc}</span></div><strong>${money(product.price * quantity)}</strong></div>`).join("")}</div><div class="bundle-detail-actions"><button type="button" class="btn btn-dark" data-launch-bundle="${bundle.id}" data-launch-step="5">Request this bundle →</button><button type="button" class="btn btn-light" data-open-cart>View in Cart →</button></div></section><aside class="bundle-detail-summary"><span class="eyebrow">TRANSPARENT MATH</span><div class="detail-total"><span>Itemized equipment sum</span><strong>${money(knownTotal)}</strong></div><div class="detail-total"><span>Package total</span><strong>${money(bundle.price)}</strong></div><p>Every item in this bundle is priced transparently with zero hidden fees. Load this bundle into the Event Builder to add microphones, lighting, or delivery support.</p></aside></div></div>`;
 }
 
 function aboutUsPage() {
@@ -2896,6 +2907,24 @@ function services() {
   </div>`;
 }
 
+
+function parseTimeString(str) {
+  if (!str) return null;
+  const match = str.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)?$/i);
+  if (!match) return null;
+  let h = parseInt(match[1], 10);
+  let m = match[2];
+  let ampm = match[3] ? match[3].toUpperCase() : "AM";
+  if (h > 12) {
+    h -= 12;
+    ampm = "PM";
+  } else if (h === 0) {
+    h = 12;
+    ampm = "AM";
+  }
+  return { hour: h, minute: m, ampm };
+}
+
 function formatReadableDate(isoDate) {
   if (!isoDate) return "";
   const parts = isoDate.split("-").map(Number);
@@ -2978,6 +3007,317 @@ function renderBuilderCatalogGridMarkup() {
       </article>`;
     })
     .join("");
+}
+
+function renderDateAndLocationStep() {
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
+  ];
+  const year = state.calendarYear || 2026;
+  const month = state.calendarMonth !== undefined ? state.calendarMonth : 9;
+  const monthName = `${monthNames[month]} ${year}`;
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  const cells = [];
+  for (let i = 0; i < firstDay; i += 1) {
+    cells.push('<span class="q-new-cal-cell is-empty" aria-hidden="true"></span>');
+  }
+  for (let d = 1; d <= daysInMonth; d += 1) {
+    const iso = `${year}-${String(month + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+    const isStart = state.startDate === iso;
+    const isEnd = state.endDate === iso;
+    const isSingle = isStart && isEnd;
+    const inRange = Boolean(
+      state.startDate &&
+      state.endDate &&
+      iso > state.startDate &&
+      iso < state.endDate
+    );
+
+    let cellClass = "q-new-cal-cell";
+    if (isSingle) {
+      cellClass += " is-range-single";
+    } else if (isStart) {
+      cellClass += " is-range-start";
+    } else if (isEnd) {
+      cellClass += " is-range-end";
+    } else if (inRange) {
+      cellClass += " is-in-range";
+    }
+
+    cells.push(
+      `<button type="button" class="${cellClass}" data-cal-date="${iso}">
+        <span class="q-cell-text">${d}</span>
+      </button>`
+    );
+  }
+
+  // Clock numbers SVG
+  const clockNumbersSvg = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    .map((h) => {
+      const angleRad = ((h * 30 - 90) * Math.PI) / 180;
+      const r = 43;
+      const x = (65 + r * Math.cos(angleRad)).toFixed(1);
+      const y = (65 + r * Math.sin(angleRad) + 4).toFixed(1);
+      const isSelected = state.selectedHour === h;
+      return `<text
+        x="${x}"
+        y="${y}"
+        text-anchor="middle"
+        class="q-clock-num ${isSelected ? "is-active-hour" : ""}"
+        data-clock-hour="${h}"
+      >${h}</text>`;
+    })
+    .join("");
+
+  const selectedHour = state.selectedHour || 12;
+  const handAngle = (selectedHour % 12) * 30;
+  const digitalTimeDisplay = `${String(selectedHour).padStart(2, "0")}:${state.selectedMinute || "00"}`;
+
+  const { lat, lon } = state.locationCoords || { lat: 42.3601, lon: -71.0589 };
+  const bbox = `${(lon - 0.02).toFixed(4)}%2C${(lat - 0.012).toFixed(4)}%2C${(lon + 0.02).toFixed(4)}%2C${(lat + 0.012).toFixed(4)}`;
+  const osmUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat.toFixed(5)}%2C${lon.toFixed(5)}`;
+
+  return `<div class="q-step-panel">
+    <div class="q-step-head">
+      <h2>When &amp; where is your event taking place?</h2>
+      <p>Select your target event date and delivery venue across Boston and New England.</p>
+    </div>
+    <div class="q-step-head-divider"></div>
+
+    <!-- Date & Schedule -->
+    <div class="q-clean-section">
+      <h3 class="q-clean-section-title">Date &amp; Schedule</h3>
+
+      <div class="q-schedule-card">
+        <!-- Left: Calendar -->
+        <div class="q-schedule-cal-col">
+          <div class="q-cal-pill-header">
+            <button type="button" class="q-cal-circle-btn" data-cal-prev aria-label="Previous month">‹</button>
+            <span class="q-cal-month-title">${monthName}</span>
+            <button type="button" class="q-cal-circle-btn" data-cal-next aria-label="Next month">›</button>
+          </div>
+
+          <div class="q-cal-weekdays-row">
+            <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+          </div>
+
+          <div class="q-cal-days-grid">
+            ${cells.join("")}
+          </div>
+        </div>
+
+        <!-- Right: Controls -->
+        <div class="q-schedule-controls-col">
+          <!-- Start Date -->
+          <div class="q-schedule-field-group">
+            <label class="q-schedule-input-label" for="quoteStartDateInput">Start Date *</label>
+            <div class="q-schedule-pill-box">
+              <input
+                type="text"
+                id="quoteStartDateInput"
+                class="q-schedule-date-input"
+                value="${escapeHtml(state.startDate || '')}"
+                placeholder="YYYY-MM-DD"
+                autocomplete="off"
+              />
+              <button
+                type="button"
+                class="q-schedule-time-badge ${state.activeTimeTarget === 'start' ? 'is-active' : ''}"
+                data-target-time="start"
+              >
+                ${escapeHtml(state.startTime || "Start Time")}
+              </button>
+            </div>
+          </div>
+
+          <!-- End Date -->
+          <div class="q-schedule-field-group">
+            <label class="q-schedule-input-label" for="quoteEndDateInput">End Date *</label>
+            <div class="q-schedule-pill-box">
+              <input
+                type="text"
+                id="quoteEndDateInput"
+                class="q-schedule-date-input"
+                value="${escapeHtml(state.endDate || '')}"
+                placeholder="YYYY-MM-DD"
+                autocomplete="off"
+              />
+              <button
+                type="button"
+                class="q-schedule-time-badge ${state.activeTimeTarget === 'end' ? 'is-active' : ''}"
+                data-target-time="end"
+              >
+                ${escapeHtml(state.endTime || "End Time")}
+              </button>
+            </div>
+          </div>
+
+          <!-- Clock & Digital Time Display -->
+          <div class="q-time-picker-block">
+            <div class="q-analog-clock-wrap">
+              <svg viewBox="0 0 130 130" class="q-analog-clock-svg" aria-label="Clock face">
+                <circle cx="65" cy="65" r="60" fill="#f0efea" />
+                ${clockNumbersSvg}
+                <circle cx="65" cy="65" r="3.5" fill="#1e1e1e" />
+                <line
+                  x1="65"
+                  y1="65"
+                  x2="65"
+                  y2="30"
+                  stroke="#1e1e1e"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  transform="rotate(${handAngle} 65 65)"
+                />
+                <circle
+                  cx="65"
+                  cy="30"
+                  r="7"
+                  fill="rgba(30, 30, 30, 0.15)"
+                  transform="rotate(${handAngle} 65 65)"
+                />
+              </svg>
+            </div>
+
+            <div class="q-digital-clock-side">
+              <div class="q-digital-time-readout">
+                <input
+                  type="text"
+                  id="quoteDigitalTimeInput"
+                  class="q-digital-time-val"
+                  value="${digitalTimeDisplay}"
+                  maxlength="5"
+                />
+              </div>
+              <div class="q-time-modifiers-row">
+                <div class="q-ampm-pills">
+                  <button type="button" class="q-ampm-pill ${(state.selectedAmpm || 'AM') === 'AM' ? 'is-selected' : ''}" data-set-ampm="AM">AM</button>
+                  <button type="button" class="q-ampm-pill ${state.selectedAmpm === 'PM' ? 'is-selected' : ''}" data-set-ampm="PM">PM</button>
+                </div>
+                <div class="q-minute-pills">
+                  ${["00", "15", "30", "45"].map((m) => `
+                    <button type="button" class="q-min-pill ${(state.selectedMinute || "00") === m ? "is-selected" : ""}" data-set-minute="${m}">:${m}</button>
+                  `).join("")}
+                </div>
+              </div>
+              <button type="button" class="q-clock-apply-btn" id="quoteApplyTimeBtn">Apply</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="q-combined-step-divider"></div>
+
+    <!-- Venue & Delivery Location -->
+    <div class="q-clean-section">
+      <h3 class="q-clean-section-title">Venue &amp; Delivery Location</h3>
+
+      <div class="q-venue-location-wrap">
+        ${!state.manualLocationMode ? `
+          <!-- Version 1: Live search map -->
+          <div class="q-venue-left-col">
+            <label class="q-venue-field-label" for="quoteLocationSearch">Search Venue or Adress</label>
+            <div class="q-venue-search-wrap">
+              <input
+                type="text"
+                id="quoteLocationSearch"
+                class="q-venue-search-input"
+                placeholder=""
+                value="${escapeHtml(state.locationQuery || state.eventLocation)}"
+              />
+              <button type="button" class="q-venue-btn-dark" id="quoteLocationSearchBtn">
+                ${state.locationSearching ? "Searching…" : "Find Venue"}
+              </button>
+            </div>
+
+            ${state.locationResults && state.locationResults.length ? `
+              <div class="q-location-results" role="listbox">
+                ${state.locationResults.map((res, idx) => `
+                  <button type="button" class="q-loc-result-item" data-loc-index="${idx}">
+                    <span class="q-loc-pin">📍</span>
+                    <span>${escapeHtml(res.display_name)}</span>
+                  </button>
+                `).join("")}
+              </div>
+            ` : ""}
+
+            <div class="q-venue-toggle-row">
+              <button type="button" class="q-venue-btn-dark" data-toggle-manual-location>Enter Address Manually</button>
+            </div>
+          </div>
+        ` : `
+          <!-- Version 2: Enter address manually -->
+          <div class="q-venue-left-col">
+            <div class="q-manual-field">
+              <label class="q-venue-label" for="manualStreetInput">Venue Name / Street Address</label>
+              <input
+                type="text"
+                id="manualStreetInput"
+                class="q-manual-input full"
+                placeholder=""
+                value="${escapeHtml(state.manualStreet)}"
+              />
+            </div>
+
+            <div class="q-manual-grid-3">
+              <div class="q-manual-field">
+                <label class="q-venue-label" for="manualCityInput">City / Town</label>
+                <input
+                  type="text"
+                  id="manualCityInput"
+                  class="q-manual-input"
+                  placeholder=""
+                  value="${escapeHtml(state.manualCity)}"
+                />
+              </div>
+              <div class="q-manual-field">
+                <label class="q-venue-label" for="manualStateInput">State</label>
+                <input
+                  type="text"
+                  id="manualStateInput"
+                  class="q-manual-input"
+                  placeholder=""
+                  value="${escapeHtml(state.manualState)}"
+                />
+              </div>
+              <div class="q-manual-field">
+                <label class="q-venue-label" for="manualZipInput">Zip</label>
+                <input
+                  type="text"
+                  id="manualZipInput"
+                  class="q-manual-input"
+                  placeholder=""
+                  value="${escapeHtml(state.manualZip)}"
+                />
+              </div>
+            </div>
+
+            <div class="q-venue-toggle-row">
+              <button type="button" class="q-venue-btn-dark" data-toggle-manual-location>Back to live map search</button>
+            </div>
+          </div>
+        `}
+
+        <!-- Right: Map -->
+        <div class="q-venue-right-col">
+          <div class="q-venue-map-preview">
+            <iframe
+              title="Event Venue Map Preview"
+              src="${osmUrl}"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
 }
 
 function renderCalendarStep() {
@@ -3186,7 +3526,7 @@ function renderEquipmentStep(totals) {
 
   return `<div class="q-step-panel">
     <div class="q-step-head">
-      <span class="eyebrow orange">STEP 05 OF 06 · BUILD YOUR EQUIPMENT &amp; PRODUCTION</span>
+      <span class="eyebrow orange">STEP 04 OF 05 · BUILD YOUR EQUIPMENT &amp; PRODUCTION</span>
       <h2>Choose your packages, gear &amp; crew support.</h2>
       <p>Start with a turnkey event bundle or add individual items below. Every item updates your itemized quote calculation in real time.</p>
     </div>
@@ -3309,6 +3649,9 @@ function renderEquipmentStep(totals) {
 }
 
 function renderReviewAndSubmitStep(totals) {
+  const effectiveTime = (state.startTime && state.startTime !== "Start Time" && state.endTime && state.endTime !== "End Time")
+    ? `${state.startTime} – ${state.endTime}`
+    : (state.startTime && state.startTime !== "Start Time" ? state.startTime : (state.eventTimeWindow || "Schedule TBD"));
   const effectiveLocation = getEffectiveLocationText() || "Boston / New England (TBD)";
   const effectiveDate = state.dateFlexible
     ? "Flexible Date"
@@ -3318,7 +3661,7 @@ function renderReviewAndSubmitStep(totals) {
 
   return `<div class="q-step-panel">
     <div class="q-step-head">
-      <span class="eyebrow orange">STEP 06 OF 06 · FINAL QUOTE BREAKDOWN &amp; SUBMISSION</span>
+      <span class="eyebrow orange">STEP 05 OF 05 · FINAL QUOTE BREAKDOWN &amp; SUBMISSION</span>
       <h2>Review your itemized quote &amp; send.</h2>
       <p>Every selected rental item, quantity, unit rate, duration adjustment, and delivery option is itemized below with zero hidden fees. Submit below to send your quote directly to our production desk.</p>
     </div>
@@ -3365,7 +3708,7 @@ function renderReviewAndSubmitStep(totals) {
           <span class="eyebrow">COMPLETE ITEMIZED EQUIPMENT LIST</span>
           <h3>Selected Rentals (${totals.uniqueCount} ${totals.uniqueCount === 1 ? "item" : "items"} · ${totals.totalUnits} total ${totals.totalUnits === 1 ? "unit" : "units"})</h3>
         </div>
-        <button type="button" class="btn btn-light btn-small" data-goto-step="5">+ Add / Modify Gear</button>
+        <button type="button" class="btn btn-light btn-small" data-goto-step="4">+ Add / Modify Gear</button>
       </div>
 
       ${totals.lineItems.length ? `
@@ -3681,16 +4024,15 @@ function quote() {
   if (totals.lineItems.length === 0) {
     return renderEmptyQuoteGate();
   }
-  const step = Math.min(6, Math.max(1, Number(state.quoteStep) || 1));
+  const step = Math.min(5, Math.max(1, Number(state.quoteStep) || 1));
   state.quoteStep = step;
 
   const stepsMeta = [
     { num: 1, label: "Event Type" },
     { num: 2, label: "Guests & Duration" },
-    { num: 3, label: "Event Date" },
-    { num: 4, label: "Location" },
-    { num: 5, label: "Equipment & Crew" },
-    { num: 6, label: "Review & Send" },
+    { num: 3, label: "Date & Location" },
+    { num: 4, label: "Equipment & Crew" },
+    { num: 5, label: "Review & Send" },
   ];
 
   let stepContent = "";
@@ -3701,37 +4043,39 @@ function quote() {
         <p>Tell us what you're planning below, or select from our optional quick presets.</p>
       </div>
 
-      <!-- Main Event Type Big Text Box -->
-      <div class="q-main-event-input-box">
-        <label for="quoteEventTypeInput" class="q-main-input-label">
-          <span>What type of event?</span>
-          <span class="q-main-badge">Primary</span>
-        </label>
-        <div class="q-big-input-wrapper">
+      <!-- 1. What type of event (Outside the Box - Clean Minimalist) -->
+      <div class="q-clean-section">
+        <h3 class="q-clean-section-title">What type of event</h3>
+        <div class="q-clean-input-wrap">
           <input
             type="text"
             id="quoteEventTypeInput"
-            class="q-big-text-input"
-            placeholder="e.g. 50th Birthday Party, Tech Conference, Wedding Reception, Live Concert, Charity Gala..."
+            class="q-clean-big-input"
+            placeholder="type your event. e.g. Birthday Party, Tech Conference, etc"
             value="${escapeHtml(state.eventType || "")}"
             autocomplete="off"
           />
         </div>
       </div>
 
-      <!-- Optional Choices Section -->
-      <div class="q-optional-presets-wrap">
-        <div class="q-presets-header">
-          <span class="eyebrow">OPTIONAL CHOICES</span>
-          <span class="q-presets-sub">Click any option to quickly fill:</span>
+      <!-- 2. Optional Choice (Clean Cards matching Mockup) -->
+      <div class="q-clean-section">
+        <div class="q-venue-header-row">
+          <h3 class="q-venue-main-title">Optional Choice</h3>
+          <span class="q-venue-sub-text">Click any option to quickly fill:</span>
         </div>
-        <div class="q-event-grid q-event-grid-compact">
+        <div class="q-event-clean-grid">
           ${EVENT_TYPE_CARDS.map((card) => {
-            const isSelected = (state.eventType || "").trim().toLowerCase() === card.id.toLowerCase();
-            return `<button type="button" class="q-event-card q-event-card-compact ${isSelected ? "is-active" : ""}" data-select-event="${escapeHtml(card.id)}">
-              <span class="q-event-code">${escapeHtml(card.code)}</span>
-              <h3>${escapeHtml(card.title)}</h3>
-              <span class="q-event-status">${isSelected ? "✓ Selected" : "Select"}</span>
+            const current = (state.eventType || "").trim().toLowerCase();
+            const isSelected = current && (current === card.id.toLowerCase() || current === card.title.toLowerCase());
+            return `<button type="button" class="q-event-clean-card ${isSelected ? "is-active" : ""}" data-select-event="${escapeHtml(card.id)}">
+              <div class="q-event-clean-body">
+                <span class="q-event-clean-code">${escapeHtml(card.code)}</span>
+                <h4 class="q-event-clean-title">${escapeHtml(card.title)}</h4>
+              </div>
+              <div class="q-event-clean-foot">
+                <span class="q-venue-pill ${isSelected ? "is-selected" : ""}">${isSelected ? "Selected" : "Select"}</span>
+              </div>
             </button>`;
           }).join("")}
         </div>
@@ -3815,21 +4159,27 @@ function quote() {
       </div>
     </div>`;
   } else if (step === 3) {
-    stepContent = renderCalendarStep();
+    stepContent = renderDateAndLocationStep();
   } else if (step === 4) {
-    stepContent = renderLocationStep();
-  } else if (step === 5) {
     stepContent = renderEquipmentStep(totals);
   } else {
     stepContent = renderReviewAndSubmitStep(totals);
   }
 
   const effectiveLocation = getEffectiveLocationText();
+  const dateRangeStr = (state.startDate && state.endDate)
+    ? (state.startDate === state.endDate
+        ? formatReadableDate(state.startDate)
+        : `${formatReadableDate(state.startDate)} – ${formatReadableDate(state.endDate)}`)
+    : (state.date ? formatReadableDate(state.date) : "Not set yet");
+
+  const timeRangeStr = (state.startTime && state.startTime !== "Start Time" && state.endTime && state.endTime !== "End Time")
+    ? ` (${state.startTime} – ${state.endTime})`
+    : (state.startTime && state.startTime !== "Start Time" ? ` (${state.startTime})` : "");
+
   const effectiveDate = state.dateFlexible
     ? "Flexible Date"
-    : state.date
-      ? formatReadableDate(state.date)
-      : "Not set yet";
+    : `${dateRangeStr}${timeRangeStr}`;
 
   return `<div class="page q-builder-page">
     <header class="q-hero">
@@ -3863,9 +4213,9 @@ function quote() {
           ${step > 1
             ? `<button type="button" class="btn btn-light" data-quote-prev>← Previous Step</button>`
             : `<a href="#rentals" class="btn btn-light">← Browse Catalog</a>`}
-          <div class="q-step-indicator">Step 0${step} of 06</div>
-          ${step < 6
-            ? `<button type="button" class="btn btn-dark" data-quote-next>NEXT</button>`
+          <div class="q-step-indicator">Step 0${step} of 05</div>
+          ${step < 5
+            ? `<button type="button" class="btn btn-gold btn-quote-next" data-quote-next>NEXT</button>`
             : ""}
         </div>
       </div>
@@ -3881,22 +4231,18 @@ function quote() {
         <div class="q-plan-meta-list">
           <button type="button" class="q-plan-meta-row" data-goto-step="1">
             <span>01 · EVENT</span>
-            <strong>${escapeHtml(state.eventType)}</strong>
+            <strong>${escapeHtml(state.eventType || "Not set yet")}</strong>
           </button>
           <button type="button" class="q-plan-meta-row" data-goto-step="2">
             <span>02 · GUESTS</span>
             <strong>${state.guests ? `${state.guests} (${escapeHtml(state.venue)})` : `Not set yet (${escapeHtml(state.venue)})`}</strong>
           </button>
           <button type="button" class="q-plan-meta-row" data-goto-step="3">
-            <span>03 · DATE</span>
-            <strong>${escapeHtml(effectiveDate)}</strong>
+            <span>03 · DATE &amp; LOCATION</span>
+            <strong>${escapeHtml(effectiveDate)} · ${escapeHtml(effectiveLocation ? (effectiveLocation.length > 20 ? effectiveLocation.slice(0, 20) + "…" : effectiveLocation) : "Location TBD")}</strong>
           </button>
           <button type="button" class="q-plan-meta-row" data-goto-step="4">
-            <span>04 · VENUE</span>
-            <strong>${escapeHtml(effectiveLocation ? (effectiveLocation.length > 26 ? effectiveLocation.slice(0, 26) + "…" : effectiveLocation) : "Not set yet")}</strong>
-          </button>
-          <button type="button" class="q-plan-meta-row" data-goto-step="5">
-            <span>05 · CREW</span>
+            <span>04 · CREW</span>
             <strong>${escapeHtml(totals.serviceOption.title)}</strong>
           </button>
         </div>
@@ -3904,7 +4250,7 @@ function quote() {
         <div class="q-plan-items-sec">
           <div class="q-plan-items-head">
             <span>SELECTED EQUIPMENT (${totals.totalUnits})</span>
-            ${step !== 5 ? `<button type="button" class="text-btn" data-goto-step="5">+ Add Gear</button>` : ""}
+            ${step !== 4 ? `<button type="button" class="text-btn" data-goto-step="4">+ Add Gear</button>` : ""}
           </div>
 
           ${totals.lineItems.length ? `
@@ -4488,20 +4834,20 @@ function bind() {
   // Step navigation in Quote
   document.querySelectorAll("[data-quote-step]").forEach((btn) =>
     btn.addEventListener("click", () => {
-      state.quoteStep = Math.min(6, Math.max(1, Number(btn.dataset.quoteStep) || 1));
+      state.quoteStep = Math.min(5, Math.max(1, Number(btn.dataset.quoteStep) || 1));
       state.quoteError = "";
       render();
     }),
   );
   document.querySelectorAll("[data-goto-step]").forEach((btn) =>
     btn.addEventListener("click", () => {
-      state.quoteStep = Math.min(6, Math.max(1, Number(btn.dataset.gotoStep) || 1));
+      state.quoteStep = Math.min(5, Math.max(1, Number(btn.dataset.gotoStep) || 1));
       state.quoteError = "";
       render();
     }),
   );
   document.querySelector("[data-quote-next]")?.addEventListener("click", () => {
-    state.quoteStep = Math.min(6, state.quoteStep + 1);
+    state.quoteStep = Math.min(5, state.quoteStep + 1);
     state.quoteError = "";
     render();
   });
@@ -4561,7 +4907,9 @@ function bind() {
   // Step 1: Select Event Type & Input
   document.querySelectorAll("[data-select-event]").forEach((btn) =>
     btn.addEventListener("click", () => {
-      state.eventType = btn.dataset.selectEvent;
+      const cardId = btn.dataset.selectEvent;
+      const card = EVENT_TYPE_CARDS.find((c) => c.id === cardId);
+      state.eventType = card ? card.title : cardId;
       const input = document.querySelector("#quoteEventTypeInput");
       if (input) input.value = state.eventType;
       render({ preserveScroll: true });
@@ -4569,12 +4917,24 @@ function bind() {
   );
   document.querySelector("#quoteEventTypeInput")?.addEventListener("input", (e) => {
     state.eventType = e.target.value;
+    const typed = e.target.value.trim().toLowerCase();
     document.querySelectorAll("[data-select-event]").forEach((btn) => {
-      const match = btn.dataset.selectEvent.trim().toLowerCase() === e.target.value.trim().toLowerCase();
-      btn.classList.toggle("is-active", match);
-      const status = btn.querySelector(".q-event-status");
-      if (status) status.textContent = match ? "✓ Selected" : "Select";
+      const cardId = btn.dataset.selectEvent;
+      const card = EVENT_TYPE_CARDS.find((c) => c.id === cardId);
+      const isMatch = Boolean(typed && (
+        cardId.toLowerCase() === typed ||
+        (card && card.title.toLowerCase() === typed)
+      ));
+      btn.classList.toggle("is-active", isMatch);
+      const pill = btn.querySelector(".q-venue-pill");
+      if (pill) {
+        pill.textContent = isMatch ? "Selected" : "Select";
+        pill.classList.toggle("is-selected", isMatch);
+      }
     });
+  });
+  document.querySelector("#quoteEventTypeInput")?.addEventListener("change", () => {
+    render({ preserveScroll: true });
   });
 
   // Apply Starter Bundle in Step 1 or Step 5
@@ -4648,23 +5008,182 @@ function bind() {
     }
     render({ preserveScroll: true });
   });
+  // Calendar Date Range Selection
   document.querySelectorAll("[data-cal-date]").forEach((btn) =>
     btn.addEventListener("click", () => {
-      state.date = btn.dataset.calDate;
+      const clickedIso = btn.dataset.calDate;
+      if (!state.isSelectingRange || (state.startDate && state.endDate && state.startDate !== state.endDate && !state.isSelectingRange)) {
+        state.startDate = clickedIso;
+        state.endDate = clickedIso;
+        state.date = clickedIso;
+        state.isSelectingRange = true;
+      } else {
+        if (clickedIso >= state.startDate) {
+          state.endDate = clickedIso;
+          state.isSelectingRange = false;
+        } else {
+          state.startDate = clickedIso;
+          state.endDate = clickedIso;
+          state.date = clickedIso;
+          state.isSelectingRange = true;
+        }
+      }
       state.dateFlexible = false;
       render({ preserveScroll: true });
-    }),
+    })
   );
-  document.querySelector("#quoteDateDirect")?.addEventListener("change", (e) => {
-    state.date = e.target.value;
-    if (state.date) {
+
+  // Direct Date Inputs (Start Date and End Date)
+  document.querySelector("#quoteStartDateInput")?.addEventListener("input", (e) => {
+    state.startDate = e.target.value.trim();
+    state.date = state.startDate;
+  });
+  document.querySelector("#quoteStartDateInput")?.addEventListener("change", (e) => {
+    const val = e.target.value.trim();
+    state.startDate = val;
+    state.date = val;
+    if (val) {
       state.dateFlexible = false;
-      const parts = state.date.split("-").map(Number);
+      const parts = val.split("-").map(Number);
       if (parts.length === 3 && !parts.some(Number.isNaN)) {
         state.calendarYear = parts[0];
         state.calendarMonth = parts[1] - 1;
       }
     }
+    setTimeout(() => render({ preserveScroll: true }), 0);
+  });
+
+  document.querySelector("#quoteEndDateInput")?.addEventListener("input", (e) => {
+    state.endDate = e.target.value.trim();
+  });
+  document.querySelector("#quoteEndDateInput")?.addEventListener("change", (e) => {
+    state.endDate = e.target.value.trim();
+    setTimeout(() => render({ preserveScroll: true }), 0);
+  });
+
+  // Target Time Switcher (Start Time vs End Time)
+  document.querySelectorAll("[data-target-time]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const target = btn.dataset.targetTime;
+      state.activeTimeTarget = target;
+      const existing = target === "start" ? state.startTime : state.endTime;
+      const parsed = parseTimeString(existing);
+      if (parsed) {
+        state.selectedHour = parsed.hour;
+        state.selectedMinute = parsed.minute;
+        state.selectedAmpm = parsed.ampm;
+      } else {
+        if (target === "start") {
+          state.selectedHour = 9;
+          state.selectedMinute = "00";
+          state.selectedAmpm = "AM";
+        } else {
+          state.selectedHour = 11;
+          state.selectedMinute = "00";
+          state.selectedAmpm = "PM";
+        }
+      }
+      render({ preserveScroll: true });
+    })
+  );
+
+  // Analog Clock: Click Numbers 1 to 12
+  document.querySelectorAll("[data-clock-hour]").forEach((el) =>
+    el.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const h = parseInt(el.dataset.clockHour, 10);
+      if (!isNaN(h)) {
+        state.selectedHour = h;
+        render({ preserveScroll: true });
+      }
+    })
+  );
+
+  // Analog Clock: Click anywhere on Clock Face to calculate hour from angle
+  document.querySelector(".q-analog-clock-svg")?.addEventListener("click", (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const scaleX = 130 / rect.width;
+    const scaleY = 130 / rect.height;
+    const dx = (x * scaleX) - 65;
+    const dy = (y * scaleY) - 65;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 10) return;
+    let angleDeg = (Math.atan2(dy, dx) * 180 / Math.PI) + 90;
+    if (angleDeg < 0) angleDeg += 360;
+    let hour = Math.round(angleDeg / 30);
+    if (hour === 0) hour = 12;
+    state.selectedHour = hour;
+    render({ preserveScroll: true });
+  });
+
+  // Digital Time Input Direct Typing
+  document.querySelector("#quoteDigitalTimeInput")?.addEventListener("input", (e) => {
+    const val = e.target.value.trim();
+    const parts = val.split(":");
+    if (parts.length > 0) {
+      const h = parseInt(parts[0], 10);
+      if (!isNaN(h) && h >= 1 && h <= 12) {
+        state.selectedHour = h;
+      }
+    }
+    if (parts.length > 1) {
+      const m = parts[1].slice(0, 2);
+      state.selectedMinute = m;
+    }
+  });
+  document.querySelector("#quoteDigitalTimeInput")?.addEventListener("change", (e) => {
+    const val = e.target.value.trim();
+    const parts = val.split(":");
+    if (parts.length > 0) {
+      const h = parseInt(parts[0], 10);
+      if (!isNaN(h) && h >= 1 && h <= 12) state.selectedHour = h;
+    }
+    if (parts.length > 1) {
+      const m = parseInt(parts[1], 10);
+      if (!isNaN(m) && m >= 0 && m <= 59) {
+        state.selectedMinute = String(m).padStart(2, "0");
+      }
+    }
+    setTimeout(() => render({ preserveScroll: true }), 0);
+  });
+
+  // AM / PM Toggle
+  document.querySelectorAll("[data-set-ampm]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.selectedAmpm = btn.dataset.setAmpm;
+      render({ preserveScroll: true });
+    })
+  );
+
+  // Quick Minute Selectors
+  document.querySelectorAll("[data-set-minute]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.selectedMinute = btn.dataset.setMinute;
+      render({ preserveScroll: true });
+    })
+  );
+
+  // Apply Button: Saves selected time to active target badge (Start Time or End Time)
+  document.querySelector("#quoteApplyTimeBtn")?.addEventListener("click", () => {
+    const hr = String(state.selectedHour || 12).padStart(2, "0");
+    const min = String(state.selectedMinute || "00").padStart(2, "0");
+    const ampm = state.selectedAmpm || "AM";
+    const formatted = `${hr}:${min} ${ampm}`;
+
+    if (state.activeTimeTarget === "start") {
+      state.startTime = formatted;
+      if (!state.endTime || state.endTime === "End Time") {
+        state.activeTimeTarget = "end";
+        state.selectedHour = 11;
+        state.selectedMinute = "00";
+        state.selectedAmpm = "PM";
+      }
+    } else {
+      state.endTime = formatted;
+    }
+    showToast(`Time set: ${formatted}`);
     render({ preserveScroll: true });
   });
   document.querySelector("#quoteDateFlexible")?.addEventListener("change", (e) => {
