@@ -1,6 +1,15 @@
-2026/10/26-23:22:56.245 af0 Reusing MANIFEST C:\Users\kc\Downloads\beantown-audio-visual-mockup\scratch\edge_user_data\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
-2026/10/26-23:22:56.251 af0 Recovering log #13
-2026/10/26-23:22:56.253 af0 Reusing old log C:\Users\kc\Downloads\beantown-audio-visual-mockup\scratch\edge_user_data\Default\EdgeCoupons/coupons_data.db/000013.log 
-2026/10/26-23:22:56.911 3b00 Level-0 table #17: started
-2026/10/26-23:22:56.915 3b00 Level-0 table #17: 683376 bytes OK
-2026/10/26-23:22:56.917 3b00 Delete type=0 #13
+2026/10/26-23:27:14.386 512c Reusing MANIFEST C:\Users\kc\Downloads\beantown-audio-visual-mockup\scratch\edge_user_data\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2026/10/26-23:27:14.388 512c Recovering log #29
+2026/10/26-23:27:14.389 512c Reusing old log C:\Users\kc\Downloads\beantown-audio-visual-mockup\scratch\edge_user_data\Default\EdgeCoupons/coupons_data.db/000029.log 
+2026/10/26-23:27:14.576 1730 Level-0 table #33: started
+2026/10/26-23:27:14.583 1730 Level-0 table #33: 683376 bytes OK
+2026/10/26-23:27:14.584 1730 Delete type=0 #29
+2026/10/26-23:27:14.585 1730 Compacting 4@0 + 1@1 files
+2026/10/26-23:27:14.595 1730 Generated table #34@0: 3 keys, 683376 bytes
+2026/10/26-23:27:14.595 1730 Compacted 4@0 + 1@1 files => 683376 bytes
+2026/10/26-23:27:14.597 1730 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/10/26-23:27:14.599 1730 Delete type=2 #21
+2026/10/26-23:27:14.599 1730 Delete type=2 #24
+2026/10/26-23:27:14.599 1730 Delete type=2 #27
+2026/10/26-23:27:14.599 1730 Delete type=2 #30
+2026/10/26-23:27:14.599 1730 Delete type=2 #33

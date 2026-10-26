@@ -1,0 +1,6 @@
+2026/10/26-23:30:47.987 6390 Reusing MANIFEST C:\Users\kc\Downloads\beantown-audio-visual-mockup\scratch\edge_user_data_test\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2026/10/26-23:30:48.028 6390 Recovering log #4
+2026/10/26-23:30:48.072 6390 Reusing old log C:\Users\kc\Downloads\beantown-audio-visual-mockup\scratch\edge_user_data_test\Default\EdgeCoupons/coupons_data.db/000004.log 
+2026/10/26-23:30:48.437 5354 Level-0 table #8: started
+2026/10/26-23:30:48.448 5354 Level-0 table #8: 683376 bytes OK
+2026/10/26-23:30:48.454 5354 Delete type=0 #4

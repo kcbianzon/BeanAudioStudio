@@ -98,8 +98,16 @@ server.listen(8089, async () => {
       screenHeight: 800
     });
 
-    // Navigate to #quote
+    // Set localStorage with selected product and reload #quote
     await send('Page.navigate', { url: 'http://localhost:8089/#quote' });
+    await new Promise(r => setTimeout(r, 600));
+
+    await evaluate(`function() {
+      // In products array:
+      const pId = (typeof products !== 'undefined' && products.length > 0) ? products[0].id : 'p-sound-starter';
+      localStorage.setItem('beantown-selected-products', JSON.stringify({ [pId]: 2 }));
+      location.reload();
+    }`);
     await new Promise(r => setTimeout(r, 1500));
 
     // Wait for quote builder page to render
@@ -121,6 +129,34 @@ server.listen(8089, async () => {
       };
     }`);
     console.log('Page info:', pageInfo);
+
+    const treeReport = await evaluate(`function() {
+      const sels = ['.page.q-builder-page', '.q-hero', '.q-progress-nav', '.q-main-layout', '.q-workspace', '.q-step-panel', '.q-plan-sidebar'];
+      return sels.map(s => {
+        const el = document.querySelector(s);
+        if (!el) return { s, found: false };
+        const r = el.getBoundingClientRect();
+        const cs = window.getComputedStyle(el);
+        return {
+          s,
+          left: Math.round(r.left),
+          right: Math.round(r.right),
+          width: Math.round(r.width),
+          scrollWidth: el.scrollWidth,
+          clientWidth: el.clientWidth,
+          cssWidth: cs.width,
+          cssMaxWidth: cs.maxWidth,
+          cssMinWidth: cs.minWidth,
+          boxSizing: cs.boxSizing,
+          pl: cs.paddingLeft,
+          pr: cs.paddingRight,
+          ml: cs.marginLeft,
+          mr: cs.marginRight
+        };
+      });
+    }`);
+    console.log('=== EXACT TREE REPORT STEP 1 ===');
+    console.log(JSON.stringify(treeReport, null, 2));
     let diag = await evaluate(`function() {
       const vw = window.innerWidth;
       const docW = document.documentElement.scrollWidth;
@@ -176,13 +212,40 @@ server.listen(8089, async () => {
     }`);
     console.log(JSON.stringify(diag, null, 2));
 
-    // Now switch to Step 3
     console.log('--- SWITCHING TO STEP 3 ---');
-    await evaluate(`function() {
-      const btn = document.querySelector('[data-quote-step=\"3\"]');
-      if (btn) btn.click();
+    const step3Res = await evaluate(`function() {
+      const btn = document.querySelector('[data-quote-step="3"]');
+      if (!btn) return { error: 'No button found with data-quote-step=3' };
+      btn.click();
+      return { clicked: true, currentStep: window.state ? window.state.quoteStep : 'no state' };
     }`);
-    await new Promise(r => setTimeout(r, 600));
+    console.log('Step 3 click res:', step3Res);
+    await new Promise(r => setTimeout(r, 1000));
+
+    // Take screenshot of step 3
+    const ss = await send('Page.captureScreenshot', { format: 'png' });
+    if (ss && ss.result && ss.result.data) {
+      fs.writeFileSync(path.join(__dirname, 'step3_actual_320.png'), Buffer.from(ss.result.data, 'base64'));
+      console.log('Saved step3_actual_320.png');
+    }
+
+    const domInfo = await evaluate(`function() {
+      const page = document.querySelector('.q-builder-page');
+      const stepPanel = document.querySelector('.q-step-panel');
+      const sched = document.querySelector('.q-schedule-card');
+      const app = document.getElementById('app');
+      return {
+        hash: window.location.hash,
+        appHtmlStart: app ? app.innerHTML.slice(0, 300) : null,
+        allButtons: Array.from(document.querySelectorAll('button')).map(b => ({
+          text: b.textContent.trim(),
+          cls: b.className,
+          step: b.dataset.quoteStep,
+          next: b.hasAttribute('data-quote-next')
+        })).slice(0, 15)
+      };
+    }`);
+    console.log('DOM info:', JSON.stringify(domInfo, null, 2));
 
     diag = await evaluate(`function() {
       const vw = window.innerWidth;

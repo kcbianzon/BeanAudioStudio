@@ -1,0 +1,5 @@
+2026/10/26-23:27:44.342 77e4 Creating DB C:\Users\kc\Downloads\beantown-audio-visual-mockup\scratch\edge_user_data_3\Default\EdgeCoupons/coupons_data.db since it was missing.
+2026/10/26-23:27:44.359 77e4 Reusing MANIFEST C:\Users\kc\Downloads\beantown-audio-visual-mockup\scratch\edge_user_data_3\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2026/10/26-23:27:44.960 4070 Level-0 table #5: started
+2026/10/26-23:27:44.964 4070 Level-0 table #5: 683273 bytes OK
+2026/10/26-23:27:44.967 4070 Delete type=0 #3
