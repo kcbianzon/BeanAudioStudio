@@ -2452,7 +2452,7 @@ function bundleDetail(id) {
     (total, { product, quantity }) => total + (product.price || 0) * quantity,
     0,
   );
-  return `<div class="page"><div class="bundle-detail-head"><a class="text-btn" href="#bundles">← All bundles</a><div class="bundle-detail-layout"><div><span class="eyebrow">${bundle.label} PACKAGE</span><h1>${bundle.title}</h1><p>${bundle.desc}</p></div><div class="bundle-detail-price"><span class="eyebrow">TURNKEY PACKAGE TOTAL</span><strong>${money(bundle.price)}</strong></div></div></div><div class="bundle-detail-wrap"><section class="bundle-detail-main"><div class="detail-section-head"><div><span class="eyebrow">WHAT’S INCLUDED</span><h2>Your package, item by item.</h2></div><span class="detail-lock">${included.reduce((s, x) => s + x.quantity, 0)} Total Units</span></div><div class="bundle-included-list">${included.map(({ product, quantity }) => `<div class="bundle-included-item"><div><strong>${quantity} × ${product.name}</strong><span>${product.category} · ${money(product.price)} each · ${product.desc}</span></div><strong>${money(product.price * quantity)}</strong></div>`).join("")}</div><div class="bundle-detail-actions"><button type="button" class="btn btn-dark" data-launch-bundle="${bundle.id}" data-launch-step="6">Request this bundle →</button><button type="button" class="btn btn-light" data-open-cart>View in Cart →</button></div></section><aside class="bundle-detail-summary"><span class="eyebrow">TRANSPARENT MATH</span><div class="detail-total"><span>Itemized equipment sum</span><strong>${money(knownTotal)}</strong></div><div class="detail-total"><span>Package total</span><strong>${money(bundle.price)}</strong></div><p>Every item in this bundle is priced transparently with zero hidden fees. Load this bundle into the Event Builder to add microphones, lighting, or delivery support.</p></aside></div></div>`;
+  return `<div class="page"><div class="bundle-detail-head"><a class="text-btn" href="#bundles">← All bundles</a><div class="bundle-detail-layout"><div><span class="eyebrow">${bundle.label} PACKAGE</span><h1>${bundle.title}</h1><p>${bundle.desc}</p></div><div class="bundle-detail-price"><span class="eyebrow">TURNKEY PACKAGE TOTAL</span><strong>${money(bundle.price)}</strong></div></div></div><div class="bundle-detail-wrap"><section class="bundle-detail-main"><div class="detail-section-head"><div><span class="eyebrow">WHAT’S INCLUDED</span><h2>Your package, item by item.</h2></div><span class="detail-lock">${included.reduce((s, x) => s + x.quantity, 0)} Total Units</span></div><div class="bundle-included-list">${included.map(({ product, quantity }) => `<div class="bundle-included-item"><div><strong>${quantity} × ${product.name}</strong><span>${product.category} · ${money(product.price)} each · ${product.desc}</span></div><strong>${money(product.price * quantity)}</strong></div>`).join("")}</div><div class="bundle-detail-actions"><button type="button" class="btn btn-dark" data-launch-bundle="${bundle.id}" data-launch-step="5">Request this bundle →</button><button type="button" class="btn btn-light" data-open-cart>View in Cart →</button></div></section><aside class="bundle-detail-summary"><span class="eyebrow">TRANSPARENT MATH</span><div class="detail-total"><span>Itemized equipment sum</span><strong>${money(knownTotal)}</strong></div><div class="detail-total"><span>Package total</span><strong>${money(bundle.price)}</strong></div><p>Every item in this bundle is priced transparently with zero hidden fees. Load this bundle into the Event Builder to add microphones, lighting, or delivery support.</p></aside></div></div>`;
 }
 
 function aboutUsPage() {
@@ -2981,6 +2981,200 @@ function renderBuilderCatalogGridMarkup() {
     .join("");
 }
 
+function renderDateAndLocationStep() {
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
+  ];
+  const year = state.calendarYear;
+  const month = state.calendarMonth;
+  const monthName = `${monthNames[month]} ${year}`;
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const cells = [];
+  for (let i = 0; i < firstDay; i += 1) {
+    cells.push('<span class="q-cal-cell is-empty" aria-hidden="true"></span>');
+  }
+  for (let d = 1; d <= daysInMonth; d += 1) {
+    const dateObj = new Date(year, month, d);
+    const iso = `${year}-${String(month + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+    const isPast = dateObj < today;
+    const isSelected = state.date === iso && !state.dateFlexible;
+    const isToday = dateObj.getTime() === today.getTime();
+    cells.push(
+      `<button type="button" class="q-cal-cell ${isSelected ? "is-selected" : ""} ${isToday ? "is-today" : ""}" data-cal-date="${iso}" ${isPast ? "disabled" : ""}>${d}</button>`
+    );
+  }
+
+  const timeWindows = [
+    "Morning (8:00 AM – 12:00 PM)",
+    "Afternoon (12:00 PM – 5:00 PM)",
+    "Evening (5:00 PM – 11:00 PM)",
+    "Full Day / Custom Schedule",
+  ];
+
+  const effectiveLocation = getEffectiveLocationText();
+  const { lat, lon } = state.locationCoords || { lat: 42.3601, lon: -71.0589 };
+  const bbox = `${(lon - 0.02).toFixed(4)}%2C${(lat - 0.012).toFixed(4)}%2C${(lon + 0.02).toFixed(4)}%2C${(lat + 0.012).toFixed(4)}`;
+  const osmUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat.toFixed(5)}%2C${lon.toFixed(5)}`;
+
+  return `<div class="q-step-panel">
+    <div class="q-step-head">
+      <span class="eyebrow orange">STEP 03 OF 05 · EVENT DATE &amp; LOCATION</span>
+      <h2>When &amp; where is your event taking place?</h2>
+      <p>Select your target event date and delivery venue across Boston and New England.</p>
+    </div>
+
+    <!-- 1. Event Date & Schedule -->
+    <div class="q-clean-section">
+      <div class="q-venue-header-row">
+        <h3 class="q-venue-main-title">1. Event Date &amp; Schedule</h3>
+        <span class="q-venue-sub-text">Lock in equipment availability for your date:</span>
+      </div>
+
+      <div class="q-date-layout">
+        <div class="q-calendar-card">
+          <div class="q-cal-header">
+            <button type="button" class="q-cal-nav" data-cal-prev aria-label="Previous month">‹</button>
+            <strong>${monthName}</strong>
+            <button type="button" class="q-cal-nav" data-cal-next aria-label="Next month">›</button>
+          </div>
+          <div class="q-cal-weekdays">
+            <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+          </div>
+          <div class="q-cal-grid">
+            ${cells.join("")}
+          </div>
+        </div>
+
+        <div class="q-date-side">
+          <div class="q-date-summary-box">
+            <span class="eyebrow">SELECTED EVENT DATE</span>
+            <strong class="q-date-display">
+              ${state.dateFlexible ? "Flexible Date" : state.date ? formatReadableDate(state.date) : "Select a date on the calendar"}
+            </strong>
+            <div class="q-field" style="margin-top:14px">
+              <label for="quoteDateDirect">Or enter date directly</label>
+              <input id="quoteDateDirect" type="date" class="input" value="${escapeHtml(state.date)}" ${state.dateFlexible ? "disabled" : ""}>
+            </div>
+            <label class="q-check-row" style="margin-top:14px">
+              <input type="checkbox" id="quoteDateFlexible" ${state.dateFlexible ? "checked" : ""}>
+              <span>My event date is still flexible</span>
+            </label>
+          </div>
+
+          <div class="q-date-summary-box">
+            <span class="eyebrow">PREFERRED TIME WINDOW</span>
+            <div class="q-time-pills">
+              ${timeWindows
+                .map(
+                  (tw) =>
+                    `<button type="button" class="q-time-pill ${state.eventTimeWindow === tw ? "is-active" : ""}" data-time-window="${escapeHtml(tw)}">${escapeHtml(tw)}</button>`
+                )
+                .join("")}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Combined Section Divider -->
+    <div class="q-combined-step-divider"></div>
+
+    <!-- 2. Venue & Delivery Location -->
+    <div class="q-clean-section">
+      <div class="q-venue-header-row">
+        <h3 class="q-venue-main-title">2. Venue &amp; Delivery Location</h3>
+        <span class="q-venue-sub-text">Delivery and setup address in Boston &amp; New England:</span>
+      </div>
+
+      <div class="q-location-layout">
+        <div class="q-location-controls">
+          ${!state.manualLocationMode ? `
+            <div class="q-location-search-box">
+              <label class="q-label" for="quoteLocationSearch">SEARCH VENUE OR ADDRESS</label>
+              <div class="q-search-bar">
+                <input id="quoteLocationSearch" type="text" class="input" placeholder="e.g., Omni Boston Hotel at the Seaport, Cambridge MA..." value="${escapeHtml(state.locationQuery || state.eventLocation)}" ${state.locationFlexible ? "disabled" : ""}>
+                <button type="button" class="btn btn-dark btn-small" id="quoteLocationSearchBtn" ${state.locationFlexible ? "disabled" : ""}>${state.locationSearching ? "Searching…" : "Find Venue"}</button>
+              </div>
+              ${state.locationResults && state.locationResults.length ? `
+                <div class="q-location-results" role="listbox" aria-label="Suggested locations">
+                  ${state.locationResults
+                    .map(
+                      (res, idx) =>
+                        `<button type="button" class="q-loc-result-item" data-loc-index="${idx}">
+                          <span class="q-loc-pin">📍</span>
+                          <span>${escapeHtml(res.display_name)}</span>
+                        </button>`
+                    )
+                    .join("")}
+                </div>
+              ` : ""}
+            </div>
+          ` : `
+            <div class="q-manual-address-box">
+              <span class="q-label">ENTER VENUE ADDRESS MANUALLY</span>
+              <div class="form-grid" style="margin-top:10px">
+                <div class="field full">
+                  <label for="manualStreetInput">Venue Name / Street Address</label>
+                  <input id="manualStreetInput" class="input" placeholder="100 Seaport Blvd / Boston Convention Center" value="${escapeHtml(state.manualStreet)}">
+                </div>
+                <div class="field">
+                  <label for="manualCityInput">City / Town</label>
+                  <input id="manualCityInput" class="input" placeholder="Boston" value="${escapeHtml(state.manualCity)}">
+                </div>
+                <div class="field">
+                  <label for="manualStateInput">State &amp; ZIP</label>
+                  <div style="display:grid;grid-template-columns:80px 1fr;gap:8px">
+                    <input id="manualStateInput" class="input" placeholder="MA" value="${escapeHtml(state.manualState)}">
+                    <input id="manualZipInput" class="input" placeholder="02210" value="${escapeHtml(state.manualZip)}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          `}
+
+          <div class="q-location-toggles">
+            <button type="button" class="text-btn" data-toggle-manual-location>
+              ${state.manualLocationMode ? "← Back to live map search" : "Enter address manually instead →"}
+            </button>
+            <label class="q-check-row">
+              <input type="checkbox" id="quoteLocationFlexible" ${state.locationFlexible ? "checked" : ""}>
+              <span>I'm still choosing a location / venue is TBD</span>
+            </label>
+          </div>
+
+          <div class="q-selected-loc-banner">
+            <span class="eyebrow">CONFIRMED VENUE LOCATION</span>
+            <strong>${effectiveLocation ? escapeHtml(effectiveLocation) : "Boston / Greater New England (Select or type above)"}</strong>
+          </div>
+        </div>
+
+        <div class="q-map-card">
+          <div class="q-map-frame-wrap">
+            <iframe
+              title="Event Venue Map Preview"
+              src="${osmUrl}"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+          <div class="q-map-foot">
+            <span><strong>Service Area:</strong> Boston, Cambridge, Somerville &amp; all of New England</span>
+            ${effectiveLocation && !state.locationFlexible
+              ? `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(effectiveLocation)}" target="_blank" rel="noopener" class="text-btn">Open in Google Maps ↗</a>`
+              : ""}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
 function renderCalendarStep() {
   const year = state.calendarYear;
   const month = state.calendarMonth;
@@ -3187,7 +3381,7 @@ function renderEquipmentStep(totals) {
 
   return `<div class="q-step-panel">
     <div class="q-step-head">
-      <span class="eyebrow orange">STEP 05 OF 06 · BUILD YOUR EQUIPMENT &amp; PRODUCTION</span>
+      <span class="eyebrow orange">STEP 04 OF 05 · BUILD YOUR EQUIPMENT &amp; PRODUCTION</span>
       <h2>Choose your packages, gear &amp; crew support.</h2>
       <p>Start with a turnkey event bundle or add individual items below. Every item updates your itemized quote calculation in real time.</p>
     </div>
@@ -3319,7 +3513,7 @@ function renderReviewAndSubmitStep(totals) {
 
   return `<div class="q-step-panel">
     <div class="q-step-head">
-      <span class="eyebrow orange">STEP 06 OF 06 · FINAL QUOTE BREAKDOWN &amp; SUBMISSION</span>
+      <span class="eyebrow orange">STEP 05 OF 05 · FINAL QUOTE BREAKDOWN &amp; SUBMISSION</span>
       <h2>Review your itemized quote &amp; send.</h2>
       <p>Every selected rental item, quantity, unit rate, duration adjustment, and delivery option is itemized below with zero hidden fees. Submit below to send your quote directly to our production desk.</p>
     </div>
@@ -3366,7 +3560,7 @@ function renderReviewAndSubmitStep(totals) {
           <span class="eyebrow">COMPLETE ITEMIZED EQUIPMENT LIST</span>
           <h3>Selected Rentals (${totals.uniqueCount} ${totals.uniqueCount === 1 ? "item" : "items"} · ${totals.totalUnits} total ${totals.totalUnits === 1 ? "unit" : "units"})</h3>
         </div>
-        <button type="button" class="btn btn-light btn-small" data-goto-step="5">+ Add / Modify Gear</button>
+        <button type="button" class="btn btn-light btn-small" data-goto-step="4">+ Add / Modify Gear</button>
       </div>
 
       ${totals.lineItems.length ? `
@@ -3682,16 +3876,15 @@ function quote() {
   if (totals.lineItems.length === 0) {
     return renderEmptyQuoteGate();
   }
-  const step = Math.min(6, Math.max(1, Number(state.quoteStep) || 1));
+  const step = Math.min(5, Math.max(1, Number(state.quoteStep) || 1));
   state.quoteStep = step;
 
   const stepsMeta = [
     { num: 1, label: "Event Type" },
     { num: 2, label: "Guests & Duration" },
-    { num: 3, label: "Event Date" },
-    { num: 4, label: "Location" },
-    { num: 5, label: "Equipment & Crew" },
-    { num: 6, label: "Review & Send" },
+    { num: 3, label: "Date & Location" },
+    { num: 4, label: "Equipment & Crew" },
+    { num: 5, label: "Review & Send" },
   ];
 
   let stepContent = "";
@@ -3818,10 +4011,8 @@ function quote() {
       </div>
     </div>`;
   } else if (step === 3) {
-    stepContent = renderCalendarStep();
+    stepContent = renderDateAndLocationStep();
   } else if (step === 4) {
-    stepContent = renderLocationStep();
-  } else if (step === 5) {
     stepContent = renderEquipmentStep(totals);
   } else {
     stepContent = renderReviewAndSubmitStep(totals);
@@ -3866,8 +4057,8 @@ function quote() {
           ${step > 1
             ? `<button type="button" class="btn btn-light" data-quote-prev>← Previous Step</button>`
             : `<a href="#rentals" class="btn btn-light">← Browse Catalog</a>`}
-          <div class="q-step-indicator">Step 0${step} of 06</div>
-          ${step < 6
+          <div class="q-step-indicator">Step 0${step} of 05</div>
+          ${step < 5
             ? `<button type="button" class="btn btn-dark" data-quote-next>NEXT</button>`
             : ""}
         </div>
@@ -3884,22 +4075,18 @@ function quote() {
         <div class="q-plan-meta-list">
           <button type="button" class="q-plan-meta-row" data-goto-step="1">
             <span>01 · EVENT</span>
-            <strong>${escapeHtml(state.eventType)}</strong>
+            <strong>${escapeHtml(state.eventType || "Not set yet")}</strong>
           </button>
           <button type="button" class="q-plan-meta-row" data-goto-step="2">
             <span>02 · GUESTS</span>
             <strong>${state.guests ? `${state.guests} (${escapeHtml(state.venue)})` : `Not set yet (${escapeHtml(state.venue)})`}</strong>
           </button>
           <button type="button" class="q-plan-meta-row" data-goto-step="3">
-            <span>03 · DATE</span>
-            <strong>${escapeHtml(effectiveDate)}</strong>
+            <span>03 · DATE &amp; LOCATION</span>
+            <strong>${escapeHtml(effectiveDate)} · ${escapeHtml(effectiveLocation ? (effectiveLocation.length > 20 ? effectiveLocation.slice(0, 20) + "…" : effectiveLocation) : "Location TBD")}</strong>
           </button>
           <button type="button" class="q-plan-meta-row" data-goto-step="4">
-            <span>04 · VENUE</span>
-            <strong>${escapeHtml(effectiveLocation ? (effectiveLocation.length > 26 ? effectiveLocation.slice(0, 26) + "…" : effectiveLocation) : "Not set yet")}</strong>
-          </button>
-          <button type="button" class="q-plan-meta-row" data-goto-step="5">
-            <span>05 · CREW</span>
+            <span>04 · CREW</span>
             <strong>${escapeHtml(totals.serviceOption.title)}</strong>
           </button>
         </div>
@@ -3907,7 +4094,7 @@ function quote() {
         <div class="q-plan-items-sec">
           <div class="q-plan-items-head">
             <span>SELECTED EQUIPMENT (${totals.totalUnits})</span>
-            ${step !== 5 ? `<button type="button" class="text-btn" data-goto-step="5">+ Add Gear</button>` : ""}
+            ${step !== 4 ? `<button type="button" class="text-btn" data-goto-step="4">+ Add Gear</button>` : ""}
           </div>
 
           ${totals.lineItems.length ? `
@@ -4491,20 +4678,20 @@ function bind() {
   // Step navigation in Quote
   document.querySelectorAll("[data-quote-step]").forEach((btn) =>
     btn.addEventListener("click", () => {
-      state.quoteStep = Math.min(6, Math.max(1, Number(btn.dataset.quoteStep) || 1));
+      state.quoteStep = Math.min(5, Math.max(1, Number(btn.dataset.quoteStep) || 1));
       state.quoteError = "";
       render();
     }),
   );
   document.querySelectorAll("[data-goto-step]").forEach((btn) =>
     btn.addEventListener("click", () => {
-      state.quoteStep = Math.min(6, Math.max(1, Number(btn.dataset.gotoStep) || 1));
+      state.quoteStep = Math.min(5, Math.max(1, Number(btn.dataset.gotoStep) || 1));
       state.quoteError = "";
       render();
     }),
   );
   document.querySelector("[data-quote-next]")?.addEventListener("click", () => {
-    state.quoteStep = Math.min(6, state.quoteStep + 1);
+    state.quoteStep = Math.min(5, state.quoteStep + 1);
     state.quoteError = "";
     render();
   });

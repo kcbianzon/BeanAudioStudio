@@ -10591,3 +10591,9 @@ body.is-cms-view #app {
     grid-template-columns: 1fr;
   }
 }
+
+/* Combined Step Divider */
+.q-combined-step-divider {
+  margin: 38px 0;
+  border-top: 1.5px solid var(--line, #ddd8ce);
+}
