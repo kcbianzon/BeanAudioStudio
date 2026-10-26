@@ -10503,3 +10503,91 @@ body.is-cms-view #app {
     grid-template-columns: 1fr;
   }
 }
+/* ==========================================================================
+   QUOTE STEP 1: CLEAN EVENT SELECTION CARDS (MATCHES MOCKUP & STEP 2 DESIGN)
+   ========================================================================== */
+.q-event-clean-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.q-event-clean-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 26px 24px 22px;
+  border-radius: 22px;
+  border: 1.5px solid var(--line, #ddd8ce);
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(45, 37, 17, 0.02);
+  min-height: 146px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-sizing: border-box;
+}
+
+.q-event-clean-card:hover {
+  border-color: #dfad2a;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(45, 37, 17, 0.06);
+}
+
+.q-event-clean-card.is-active {
+  border-color: var(--ink, #111111);
+  background: #ffffff;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.q-event-clean-body {
+  margin-bottom: 18px;
+}
+
+.q-event-clean-code {
+  display: block;
+  font-family: 'Space Grotesk', Inter, sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink, #111111);
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+
+.q-event-clean-title {
+  font-family: 'Space Grotesk', Inter, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--ink, #111111);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.q-event-clean-foot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.q-event-clean-card:hover .q-venue-pill {
+  background: #ded9cd;
+}
+
+.q-event-clean-card.is-active .q-venue-pill {
+  background: #111111;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+@media (max-width: 860px) {
+  .q-event-clean-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .q-event-clean-grid {
+    grid-template-columns: 1fr;
+  }
+}

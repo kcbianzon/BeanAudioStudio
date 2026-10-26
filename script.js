@@ -1270,42 +1270,42 @@ const PAYMENT_METHODS = [
 const EVENT_TYPE_CARDS = [
   {
     id: "Wedding",
-    code: "01 / WEDDING",
-    title: "Wedding",
+    code: "01 / Wedding",
+    title: "Wedding Event",
     desc: "Ceremony wireless vows, cocktail hour speakers, reception sound, dancing on a cloud & photo booth.",
     bundleId: "wedding",
   },
   {
     id: "Corporate Event",
-    code: "02 / CORPORATE",
+    code: "02 / Corporate",
     title: "Corporate Event",
     desc: "Keynotes, panel microphones, 4K confidence monitors, fast-fold projection & multi-cam live streaming.",
     bundleId: "corporate",
   },
   {
     id: "School Event",
-    code: "03 / CAMPUS & SCHOOL",
+    code: "03 / Campus & School",
     title: "School Event",
     desc: "Proms, homecomings, campus socials, high-output subwoofers, moving heads & 100-headphone silent disco.",
     bundleId: "school",
   },
   {
     id: "Concert",
-    code: "04 / LIVE STAGE",
+    code: "04 / Live Stage",
     title: "Concert",
     desc: "JBL line array systems, dual 18″ subwoofers, wireless IEM monitors, 32-ch digital mixer & LED video wall.",
     bundleId: "concert",
   },
   {
     id: "Private Party",
-    code: "05 / SOCIAL & DJ",
+    code: "05 / Social & DJ",
     title: "Private Party",
     desc: "Turnkey Pioneer DJ setups, 18″ powered bass, wireless battery uplighting & 360 video booth.",
     bundleId: "party",
   },
   {
     id: "Outdoor Movie",
-    code: "06 / OUTDOOR CINEMA",
+    code: "06 / Outdoor Cinema",
     title: "Outdoor Movie",
     desc: "12-ft to 40-ft inflatable cinema screens, high-lumen Sony laser projector, PA sound & wireless mic.",
     bundleId: "movie",
@@ -1323,7 +1323,7 @@ const _nowInit = new Date();
 const state = {
   builderStep: 1,
   quoteStep: 1,
-  eventType: "Wedding",
+  eventType: "",
   guests: null,
   guestBracket: "51–150",
   venue: "Indoor",
@@ -1388,6 +1388,7 @@ const state = {
 
 const eventRecommendations = {
   Wedding: ["medium-audio", "qlxd-lavalier", "dry-ice-cloud", "uplights-6", "photo-360"],
+  "Wedding Event": ["medium-audio", "qlxd-lavalier", "dry-ice-cloud", "uplights-6", "photo-360"],
   "Corporate Event": ["medium-audio", "qlxd-lavalier", "tv-75", "fastfold-screen", "stream-basic"],
   "School Event": ["medium-audio", "sub-thump18", "moving-heads", "silent-100", "movie-16"],
   Concert: ["large-audio", "sub-kw181", "iem", "mixer-x32", "led-16"],
@@ -3701,37 +3702,39 @@ function quote() {
         <p>Tell us what you're planning below, or select from our optional quick presets.</p>
       </div>
 
-      <!-- Main Event Type Big Text Box -->
-      <div class="q-main-event-input-box">
-        <label for="quoteEventTypeInput" class="q-main-input-label">
-          <span>What type of event?</span>
-          <span class="q-main-badge">Primary</span>
-        </label>
-        <div class="q-big-input-wrapper">
+      <!-- 1. What type of event (Outside the Box - Clean Minimalist) -->
+      <div class="q-clean-section">
+        <h3 class="q-clean-section-title">What type of event</h3>
+        <div class="q-clean-input-wrap">
           <input
             type="text"
             id="quoteEventTypeInput"
-            class="q-big-text-input"
-            placeholder="e.g. 50th Birthday Party, Tech Conference, Wedding Reception, Live Concert, Charity Gala..."
+            class="q-clean-big-input"
+            placeholder="type your event. e.g. Birthday Party, Tech Conference, etc"
             value="${escapeHtml(state.eventType || "")}"
             autocomplete="off"
           />
         </div>
       </div>
 
-      <!-- Optional Choices Section -->
-      <div class="q-optional-presets-wrap">
-        <div class="q-presets-header">
-          <span class="eyebrow">OPTIONAL CHOICES</span>
-          <span class="q-presets-sub">Click any option to quickly fill:</span>
+      <!-- 2. Optional Choice (Clean Cards matching Mockup) -->
+      <div class="q-clean-section">
+        <div class="q-venue-header-row">
+          <h3 class="q-venue-main-title">Optional Choice</h3>
+          <span class="q-venue-sub-text">Click any option to quickly fill:</span>
         </div>
-        <div class="q-event-grid q-event-grid-compact">
+        <div class="q-event-clean-grid">
           ${EVENT_TYPE_CARDS.map((card) => {
-            const isSelected = (state.eventType || "").trim().toLowerCase() === card.id.toLowerCase();
-            return `<button type="button" class="q-event-card q-event-card-compact ${isSelected ? "is-active" : ""}" data-select-event="${escapeHtml(card.id)}">
-              <span class="q-event-code">${escapeHtml(card.code)}</span>
-              <h3>${escapeHtml(card.title)}</h3>
-              <span class="q-event-status">${isSelected ? "✓ Selected" : "Select"}</span>
+            const current = (state.eventType || "").trim().toLowerCase();
+            const isSelected = current && (current === card.id.toLowerCase() || current === card.title.toLowerCase());
+            return `<button type="button" class="q-event-clean-card ${isSelected ? "is-active" : ""}" data-select-event="${escapeHtml(card.id)}">
+              <div class="q-event-clean-body">
+                <span class="q-event-clean-code">${escapeHtml(card.code)}</span>
+                <h4 class="q-event-clean-title">${escapeHtml(card.title)}</h4>
+              </div>
+              <div class="q-event-clean-foot">
+                <span class="q-venue-pill ${isSelected ? "is-selected" : ""}">${isSelected ? "Selected" : "Select"}</span>
+              </div>
             </button>`;
           }).join("")}
         </div>
@@ -4561,7 +4564,9 @@ function bind() {
   // Step 1: Select Event Type & Input
   document.querySelectorAll("[data-select-event]").forEach((btn) =>
     btn.addEventListener("click", () => {
-      state.eventType = btn.dataset.selectEvent;
+      const cardId = btn.dataset.selectEvent;
+      const card = EVENT_TYPE_CARDS.find((c) => c.id === cardId);
+      state.eventType = card ? card.title : cardId;
       const input = document.querySelector("#quoteEventTypeInput");
       if (input) input.value = state.eventType;
       render({ preserveScroll: true });
@@ -4569,12 +4574,24 @@ function bind() {
   );
   document.querySelector("#quoteEventTypeInput")?.addEventListener("input", (e) => {
     state.eventType = e.target.value;
+    const typed = e.target.value.trim().toLowerCase();
     document.querySelectorAll("[data-select-event]").forEach((btn) => {
-      const match = btn.dataset.selectEvent.trim().toLowerCase() === e.target.value.trim().toLowerCase();
-      btn.classList.toggle("is-active", match);
-      const status = btn.querySelector(".q-event-status");
-      if (status) status.textContent = match ? "✓ Selected" : "Select";
+      const cardId = btn.dataset.selectEvent;
+      const card = EVENT_TYPE_CARDS.find((c) => c.id === cardId);
+      const isMatch = Boolean(typed && (
+        cardId.toLowerCase() === typed ||
+        (card && card.title.toLowerCase() === typed)
+      ));
+      btn.classList.toggle("is-active", isMatch);
+      const pill = btn.querySelector(".q-venue-pill");
+      if (pill) {
+        pill.textContent = isMatch ? "Selected" : "Select";
+        pill.classList.toggle("is-selected", isMatch);
+      }
     });
+  });
+  document.querySelector("#quoteEventTypeInput")?.addEventListener("change", () => {
+    render({ preserveScroll: true });
   });
 
   // Apply Starter Bundle in Step 1 or Step 5
