@@ -3556,10 +3556,10 @@ function renderReviewAndSubmitStep(totals) {
     : (state.startTime && state.startTime !== "Start Time" ? state.startTime : (state.eventTimeWindow || "Schedule TBD"));
   const effectiveLocation = getEffectiveLocationText() || "Boston / New England (TBD)";
   const effectiveDate = state.dateFlexible
-    ? "Flexible Date"
-    : state.date
-      ? formatReadableDate(state.date)
-      : "Date TBD";
+      ? "Flexible Date"
+      : (state.startDate && state.endDate
+          ? (state.startDate === state.endDate ? formatReadableDate(state.startDate) : `${formatReadableDate(state.startDate)} – ${formatReadableDate(state.endDate)}`)
+          : (state.date ? formatReadableDate(state.date) : "Date TBD"));
 
   return `<div class="q-step-panel">
     <div class="q-step-head">
@@ -3588,18 +3588,18 @@ function renderReviewAndSubmitStep(totals) {
       <div class="q-review-meta-card">
         <span>DATE &amp; SCHEDULE</span>
         <strong>${escapeHtml(effectiveDate)}</strong>
-        <small>${escapeHtml(state.eventTimeWindow)}</small>
+        <small>${escapeHtml(effectiveTime)}</small>
         <button type="button" class="q-meta-edit" data-goto-step="3">Edit</button>
       </div>
       <div class="q-review-meta-card">
         <span>EVENT LOCATION</span>
-        <strong>${escapeHtml(effectiveLocation)}</strong>
-        <button type="button" class="q-meta-edit" data-goto-step="4">Edit</button>
+          <strong>${escapeHtml(effectiveLocation)}</strong>
+          <button type="button" class="q-meta-edit" data-goto-step="3">Edit</button>
       </div>
       <div class="q-review-meta-card">
         <span>DELIVERY &amp; CREW</span>
-        <strong>${escapeHtml(totals.serviceOption.title)} (${totals.serviceFee === 0 ? "Free" : money(totals.serviceFee)})</strong>
-        <button type="button" class="q-meta-edit" data-goto-step="5">Edit</button>
+          <strong>${escapeHtml(totals.serviceOption.title)} (${totals.serviceFee === 0 ? "Free" : money(totals.serviceFee)})</strong>
+          <button type="button" class="q-meta-edit" data-goto-step="4">Edit</button>
       </div>
     </div>
 
