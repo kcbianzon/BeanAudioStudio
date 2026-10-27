@@ -224,7 +224,14 @@ function loadCmsProducts() {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        parsed.forEach((p) => {
+          if (p.id === "small-audio" || p.id === "medium-audio" || p.id === "large-audio") {
+            p.image = "assets/beantown/audio-package.png";
+          }
+        });
+        return parsed;
+      }
     }
   } catch (e) {
     console.warn("Failed to parse CMS products from localStorage, using defaults", e);
@@ -940,6 +947,9 @@ function syncSetupCount() {
   link?.setAttribute("aria-label", `My setup, ${count} item${count === 1 ? "" : "s"}`);
 }
 function productImage(p) {
+  if (p && (p.id === "small-audio" || p.id === "medium-audio" || p.id === "large-audio")) {
+    return "assets/beantown/audio-package.png";
+  }
   if (p && p.image) return p.image;
   if (p.category === "Special Effects" && p.id.startsWith("cold-spark")) {
     return "assets/beantown/cold-sparklers.webp";
