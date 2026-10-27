@@ -1,686 +1,10 @@
-const DEFAULT_PRODUCTS = [
-  // --- AUDIO & SPEAKERS ---
-  {
-    id: "small-audio",
-    name: "Small Event Speaker Package",
-    category: "Audio & Speakers",
-    price: 199,
-    priceType: "starting",
-    desc: "2 powered speakers with tripod stands, wired or wireless Shure microphone, and small audio mixer. Perfect for up to 50 guests, speeches, ceremonies, and background music.",
-    tag: "Popular",
-    tone: "lime",
-  },
-  {
-    id: "medium-audio",
-    name: "Medium Event Speaker Package",
-    category: "Audio & Speakers",
-    price: 349,
-    priceType: "starting",
-    desc: "4 powered speakers, tripod stands, Shure wireless microphone system, and 16-channel mixer. Built for 50–150 guests, wedding receptions, and corporate panels.",
-    tag: "Most popular",
-    tone: "lime",
-  },
-  {
-    id: "large-audio",
-    name: "Large Event Line Array System",
-    category: "Audio & Speakers",
-    price: 880,
-    priceType: "starting",
-    desc: "JBL VRX constant curvature line array modules, high-power subwoofers, digital mixing console, and on-site audio engineer. Designed for 150+ guests, concerts, and festivals.",
-    tag: "Concert grade",
-    tone: "lime",
-  },
-  {
-    id: "qsc-k12",
-    name: "QSC K12.2 Powered 12″ Loudspeaker",
-    category: "Audio & Speakers",
-    price: 65,
-    priceType: "fixed",
-    desc: "2000-watt Class-D active loudspeaker with advanced DSP presets. Pristine vocal clarity and room-filling output for mains or stage monitors.",
-    tag: "Pro audio",
-    tone: "lime",
-  },
-  {
-    id: "qsc-k10",
-    name: "QSC K10.2 Powered 10″ Loudspeaker",
-    category: "Audio & Speakers",
-    price: 55,
-    priceType: "fixed",
-    desc: "2000-watt compact active speaker. Excellent clarity in a lightweight footprint for meetings, ceremonies, and acoustic sets.",
-    tag: "Compact",
-    tone: "lime",
-  },
-  {
-    id: "jbl-vrx932",
-    name: "JBL VRX932LA Line Array Module",
-    category: "Audio & Speakers",
-    price: 150,
-    priceType: "fixed",
-    desc: "Constant curvature line array element with Differential Drive woofer and neodymium compression drivers for large audience coverage.",
-    tag: "Line array",
-    tone: "lime",
-  },
-
-  // --- SUBWOOFER RENTALS ---
-  {
-    id: "sub-kw181",
-    name: "QSC KW181 18″ Powered Subwoofer",
-    category: "Subwoofers",
-    price: 95,
-    priceType: "fixed",
-    desc: "1000-watt Class-D 18-inch birch subwoofer. Deep, punchy low-end reinforcement for DJs, live bands, and dance floors.",
-    tag: "Heavy bass",
-    tone: "gold",
-  },
-  {
-    id: "sub-ks212c",
-    name: "QSC KS212C Cardioid Subwoofer",
-    category: "Subwoofers",
-    price: 120,
-    priceType: "fixed",
-    desc: "Dual 12-inch active cardioid subwoofer. Keeps bass directional toward the crowd with 15dB less noise behind the stage—great for sound-sensitive venues.",
-    tag: "Cardioid tech",
-    tone: "gold",
-  },
-  {
-    id: "sub-prx618",
-    name: "JBL PRX 618S 18″ Powered Subwoofer",
-    category: "Subwoofers",
-    price: 85,
-    priceType: "fixed",
-    desc: "Compact 1000W 18″ active subwoofer delivering clean, resonant low-end for mobile DJs, private parties, and medium halls.",
-    tag: "Portable bass",
-    tone: "gold",
-  },
-  {
-    id: "sub-thump18",
-    name: "Mackie Thump18S 18″ Subwoofer",
-    category: "Subwoofers",
-    price: 75,
-    priceType: "fixed",
-    desc: "Solid 1200W peak low-end punch for parties, school functions, and cost-effective bass extension.",
-    tag: "Budget friendly",
-    tone: "gold",
-  },
-
-  // --- MICROPHONES ---
-  {
-    id: "qlxd-handheld",
-    name: "Shure QLX-D Wireless Handheld Mic",
-    category: "Microphones",
-    price: 65,
-    priceType: "fixed",
-    desc: "Digital 24-bit wireless microphone with Shure Beta 58A or SM58 capsule. Pristine RF stability, zero interference, and all-day battery.",
-    tag: "Industry standard",
-    tone: "coral",
-  },
-  {
-    id: "qlxd-lavalier",
-    name: "Shure QLX-D Wireless Lapel / Lavalier",
-    category: "Microphones",
-    price: 65,
-    priceType: "fixed",
-    desc: "Discreet bodypack transmitter with cardioid lavalier clip-on microphone. Ideal for keynote speakers, wedding officiants, and presenters.",
-    tag: "Hands-free",
-    tone: "coral",
-  },
-  {
-    id: "countryman-headset",
-    name: "Countryman E6 Directional Earset Mic",
-    category: "Microphones",
-    price: 50,
-    priceType: "fixed",
-    desc: "Ultra-miniature, skin-tone earset microphone delivering studio-grade vocal reproduction without blocking the speaker's face.",
-    tag: "Broadcast quality",
-    tone: "coral",
-  },
-  {
-    id: "shure-sm58",
-    name: "Shure SM58 / Beta 58A Wired Mic",
-    category: "Microphones",
-    price: 20,
-    priceType: "fixed",
-    desc: "The legendary dynamic vocal microphone. Includes 25ft XLR cable and heavy-duty tripod boom stand. Bulletproof reliability.",
-    tag: "Legendary",
-    tone: "coral",
-  },
-  {
-    id: "ptt-mic",
-    name: "Push-To-Talk (PTT) Conference Mic",
-    category: "Microphones",
-    price: 35,
-    priceType: "fixed",
-    desc: "Gooseneck tabletop conference microphone with LED indicator and momentary/latching talk switch for panels and meetings.",
-    tag: "Conference",
-    tone: "coral",
-  },
-  {
-    id: "iem",
-    name: "Shure PSM900 Wireless In-Ear Monitors",
-    category: "Microphones",
-    price: 75,
-    priceType: "fixed",
-    desc: "Professional wireless bodypack IEM system with sound-isolating earphones. Clean, personalized stage monitoring for singers and musicians.",
-    tag: "Stage monitoring",
-    tone: "coral",
-  },
-
-  // --- AUDIO MIXERS ---
-  {
-    id: "mixer-touchmix",
-    name: "QSC TouchMix-16 Digital Mixer",
-    category: "Audio Mixers",
-    price: 85,
-    priceType: "fixed",
-    desc: "16-input compact digital touchscreen mixer with channel processing, instrument/vocal wizard presets, USB multi-track recording, and iPad Wi-Fi control.",
-    tag: "Touchscreen",
-    tone: "peach",
-  },
-  {
-    id: "mixer-x32",
-    name: "Behringer X32 32-Channel Digital Console",
-    category: "Audio Mixers",
-    price: 150,
-    priceType: "fixed",
-    desc: "32 mic preamps, 25 motorized faders, integrated effects rack, and flexible routing. The go-to digital console for full band shows and galas.",
-    tag: "Full console",
-    tone: "peach",
-  },
-  {
-    id: "mixer-x32-compact",
-    name: "Behringer X32 Compact Digital Mixer",
-    category: "Audio Mixers",
-    price: 110,
-    priceType: "fixed",
-    desc: "16 mic preamps, 17 motorized faders, and complete X32 power in a compact chassis. Ideal for FOH and monitor mixing in tight spaces.",
-    tag: "Compact digital",
-    tone: "peach",
-  },
-  {
-    id: "mixer-sq7",
-    name: "Allen & Heath SQ-7 32-Channel Console",
-    category: "Audio Mixers",
-    price: 295,
-    priceType: "fixed",
-    desc: "Flagship 96kHz XCVI FPGA digital mixer with 33 faders, custom soft keys, ultra-low latency, and touring-grade audio quality.",
-    tag: "Tour grade",
-    tone: "peach",
-  },
-  {
-    id: "mixer-mackie1402",
-    name: "Mackie 1402-VLZ3 Compact Analog Mixer",
-    category: "Audio Mixers",
-    price: 45,
-    priceType: "fixed",
-    desc: "Ultra-low-noise 14-channel analog mixer with 6 XDR2 mic preamps and durable steel chassis. Simple, reliable, and user-friendly.",
-    tag: "Analog workhorse",
-    tone: "peach",
-  },
-
-  // --- DJ EQUIPMENT ---
-  {
-    id: "dj-basic-pkg",
-    name: "Basic DJ Package (Up to 50 Guests)",
-    category: "DJ Equipment",
-    price: 299,
-    priceType: "starting",
-    desc: "Pioneer DJ controller, heavy-duty laptop stand, 2 powered speakers, and all connecting cables. Great for house parties and lounge sets.",
-    tag: "Turnkey DJ",
-    tone: "sky",
-  },
-  {
-    id: "dj-standard-pkg",
-    name: "Standard DJ Package (50–150 Guests)",
-    category: "DJ Equipment",
-    price: 449,
-    priceType: "starting",
-    desc: "4-channel controller or dual CDJ setup, 2 powered tops, 1 subwoofer, Scrim Werks facade booth, and wireless mic. Perfect for weddings and dances.",
-    tag: "Wedding favorite",
-    tone: "sky",
-  },
-  {
-    id: "dj-pro-pkg",
-    name: "Pro Club DJ Package (150+ Guests)",
-    category: "DJ Equipment",
-    price: 699,
-    priceType: "starting",
-    desc: "Dual CDJ-3000s, DJM-900NXS2 mixer, 4 powered speakers with dual 18″ subs, Scrim Werks facade, and dance lighting package.",
-    tag: "Festival ready",
-    tone: "sky",
-  },
-  {
-    id: "cdj-3000",
-    name: "Pioneer CDJ-3000 DJ Multi-Player",
-    category: "DJ Equipment",
-    price: 125,
-    priceType: "fixed",
-    desc: "Pioneer's flagship media player with 9-inch HD touchscreen, advanced MPU processor, Pro DJ Link, and uncompressed 96kHz/32-bit audio.",
-    tag: "Club standard",
-    tone: "sky",
-  },
-  {
-    id: "cdj-2000nxs2",
-    name: "Pioneer CDJ-2000NXS2 Multi-Player",
-    category: "DJ Equipment",
-    price: 95,
-    priceType: "fixed",
-    desc: "Industry-standard pro DJ player with 7-inch touch display, 8 hot cues, slip mode, and high-res audio playback.",
-    tag: "Industry pro",
-    tone: "sky",
-  },
-  {
-    id: "djm-900nxs2",
-    name: "Pioneer DJM-900NXS2 4-Channel Mixer",
-    category: "DJ Equipment",
-    price: 95,
-    priceType: "fixed",
-    desc: "Touring-standard 4-channel DJ mixer with 64-bit mixing processor, dual USB soundcards, Sound Color FX, and Beat FX.",
-    tag: "Club mixer",
-    tone: "sky",
-  },
-  {
-    id: "ddj-1000srt",
-    name: "Pioneer DDJ-1000SRT 4-Channel Controller",
-    category: "DJ Equipment",
-    price: 90,
-    priceType: "fixed",
-    desc: "Full-size club-style jog wheels with on-jog color display, Magvel fader, and seamless plug-and-play mapping for Serato DJ Pro.",
-    tag: "Serato pro",
-    tone: "sky",
-  },
-  {
-    id: "djm-s9",
-    name: "Pioneer DJM-S9 2-Channel Battle Mixer",
-    category: "DJ Equipment",
-    price: 75,
-    priceType: "fixed",
-    desc: "High-performance scratch mixer with Magvel Pro crossfader, multi-color performance pads, and dual USB ports for seamless DJ handoffs.",
-    tag: "Turntablist",
-    tone: "sky",
-  },
-  {
-    id: "rane-72",
-    name: "Rane SEVENTY-TWO 2-Channel DJ Mixer",
-    category: "DJ Equipment",
-    price: 85,
-    priceType: "fixed",
-    desc: "Solid steel construction, 4.3-inch color touchscreen, dual Flex FX engines, and MAG FOUR faders for elite battle DJs.",
-    tag: "Heavy duty",
-    tone: "sky",
-  },
-  {
-    id: "technics-1200",
-    name: "Technics SL-1200MK2 Turntable",
-    category: "DJ Equipment",
-    price: 75,
-    priceType: "fixed",
-    desc: "The timeless direct-drive turntable with quartz motor, precision pitch control, and Ortofon DJ cartridge. (Available individually or as a pair).",
-    tag: "Analog vinyl",
-    tone: "sky",
-  },
-  {
-    id: "dj-facade",
-    name: "Scrim Werks Pro DJ Facade",
-    category: "DJ Equipment",
-    price: 50,
-    priceType: "fixed",
-    desc: "Collapsible 4-panel aluminum DJ facade with translucent white scrims. Conceals cables and equipment; looks incredible when backlit with uplights.",
-    tag: "Clean look",
-    tone: "sky",
-  },
-
-  // --- VIDEO & DISPLAYS ---
-  {
-    id: "tv-65",
-    name: "Samsung 65″ 4K UHD Smart TV",
-    category: "Video & Displays",
-    price: 250,
-    priceType: "fixed",
-    desc: "Commercial 4K UHD display on a sleek motorized height-adjustable rolling truss stand with HDMI cables and casting support.",
-    tag: "4K display",
-    tone: "peach",
-  },
-  {
-    id: "tv-75",
-    name: "Samsung 75″ 4K UHD Smart TV",
-    category: "Video & Displays",
-    price: 350,
-    priceType: "fixed",
-    desc: "High-impact 75-inch 4K UHD presentation screen on heavy-duty motorized truss cart. Crystal-clear visuals for conference rooms and keynote overflow.",
-    tag: "Large format",
-    tone: "peach",
-  },
-  {
-    id: "laser-projector",
-    name: "Sony Laser Projector (5,000+ Lumens)",
-    category: "Video & Displays",
-    price: 175,
-    priceType: "fixed",
-    desc: "Crisp laser projection with instant on/off, high color accuracy, and flexible throw distance for conference halls and banquet ballrooms.",
-    tag: "Laser tech",
-    tone: "peach",
-  },
-  {
-    id: "fastfold-screen",
-    name: "Fastfold Screen with Black Dress Kit",
-    category: "Video & Displays",
-    price: 150,
-    priceType: "fixed",
-    desc: "Professional 100″ to 150″ front/rear projection screen with snap-on aluminum frame and full velvet blackout drape surround.",
-    tag: "Conferences",
-    tone: "peach",
-  },
-  {
-    id: "video-switcher",
-    name: "Multi-Input HDMI Video Switcher",
-    category: "Video & Displays",
-    price: 75,
-    priceType: "fixed",
-    desc: "Seamless video switcher with preview/program multiview, picture-in-picture, and clean transitions between presenter laptops and video feeds.",
-    tag: "Seamless",
-    tone: "peach",
-  },
-
-  // --- LED VIDEO WALLS ---
-  {
-    id: "led-12",
-    name: "Indoor LED Video Wall — 12 × 7 ft",
-    category: "LED Video Walls",
-    price: 1150,
-    priceType: "starting",
-    desc: "Ultra-fine 2.67mm pixel pitch LED wall. Includes NovaStar VX1000 processor, ground rigging, 2 powered speakers, audio mixer, and Shure wireless mic.",
-    tag: "Turnkey package",
-    tone: "periwinkle",
-  },
-  {
-    id: "led-16",
-    name: "Indoor LED Video Wall — 16 × 9 ft",
-    category: "LED Video Walls",
-    price: 1450,
-    priceType: "starting",
-    desc: "Full-scale 16:9 cinematic LED video wall (2.67mm pitch). Includes NovaStar video processor, sound reinforcement package, and certified lead technician.",
-    tag: "Cinematic scale",
-    tone: "periwinkle",
-  },
-  {
-    id: "led-custom",
-    name: "Custom Modular LED Wall Configuration",
-    category: "LED Video Walls",
-    price: 1850,
-    priceType: "starting",
-    desc: "Tailored LED displays in curved, pillar, banner, or backdrop layouts. 2.6mm, 2.9mm, or 3.9mm pixel pitch with ground-support truss or crank stands.",
-    tag: "Bespoke design",
-    tone: "periwinkle",
-  },
-  {
-    id: "led-trailer",
-    name: "Mobile Outdoor LED Video Wall Trailer",
-    category: "LED Video Walls",
-    price: 2600,
-    priceType: "starting",
-    desc: "Turnkey hydraulic-lift outdoor mobile LED trailer. Daylight visible (3.91mm pitch), wind and rain resistant, with built-in sound system and generator support.",
-    tag: "Outdoor mobile",
-    tone: "periwinkle",
-  },
-
-  // --- OUTDOOR MOVIES ---
-  {
-    id: "movie-12",
-    name: "Outdoor Movie Package — 12 ft",
-    category: "Outdoor Movies",
-    price: 549,
-    priceType: "fixed",
-    desc: "12-foot inflatable screen, Sony laser projector, 2 powered speakers, audio mixer, laptop/DVD player, and delivery/setup. Perfect for 10–30 guests.",
-    tag: "Backyard favorite",
-    tone: "orange",
-  },
-  {
-    id: "movie-16",
-    name: "Outdoor Movie Package — 16 ft",
-    category: "Outdoor Movies",
-    price: 749,
-    priceType: "fixed",
-    desc: "16-foot inflatable movie screen with high-brightness Sony laser projector, sound package, and full setup. Ideal for school nights, parks, and up to 75 guests.",
-    tag: "School & community",
-    tone: "orange",
-  },
-  {
-    id: "movie-26",
-    name: "Outdoor Movie Package — 26 ft",
-    category: "Outdoor Movies",
-    price: 899,
-    priceType: "fixed",
-    desc: "26-foot community-scale outdoor cinema. High-lumen laser projector, dual amplified speakers, mixer, and on-site setup for 100–150+ guests.",
-    tag: "Community scale",
-    tone: "orange",
-  },
-  {
-    id: "movie-40",
-    name: "Outdoor Movie Package — 40 ft",
-    category: "Outdoor Movies",
-    price: 1899,
-    priceType: "fixed",
-    desc: "Colossal 40-foot inflatable cinema screen for city festivals, university fields, and large outdoor crowds. Complete with high-power sound and technician.",
-    tag: "Festival scale",
-    tone: "orange",
-  },
-
-  // --- PHOTO BOOTHS ---
-  {
-    id: "ipad-mirror",
-    name: "iPad Mirror Photo Booth",
-    category: "Photo Booths",
-    price: 799,
-    priceType: "starting",
-    desc: "Interactive beauty mirror photo booth with beauty ring lighting, custom animated overlays, and instant SMS/AirDrop/email sharing.",
-    tag: "From $799",
-    tone: "blue",
-  },
-  {
-    id: "magic-air",
-    name: "Magic Mirror Air Photo Booth",
-    category: "Photo Booths",
-    price: 1399,
-    priceType: "starting",
-    desc: "Sleek full-length interactive mirror booth with next-generation touch animations, social-media sharing, fun props, and on-site attendant.",
-    tag: "From $1,399",
-    tone: "blue",
-  },
-  {
-    id: "magic-frame",
-    name: "Magic Mirror + Frame Photo Booth",
-    category: "Photo Booths",
-    price: 1699,
-    priceType: "starting",
-    desc: "Ornate gold or silver framed full-length mirror booth with instant high-gloss prints, custom guest signature animations, and dedicated attendant.",
-    tag: "From $1,699",
-    tone: "blue",
-  },
-  {
-    id: "photo-360",
-    name: "360 Video Photo Booth Platform",
-    category: "Photo Booths",
-    price: 1499,
-    priceType: "starting",
-    desc: "Motorized 360-degree rotating arm capturing slow-motion 4K video with studio lighting, custom audio overlay, and instant sharing station.",
-    tag: "From $1,499",
-    tone: "blue",
-  },
-
-  // --- SILENT DISCO ---
-  {
-    id: "silent-50",
-    name: "Silent Disco — 50 Headphones",
-    category: "Silent Disco",
-    price: 500,
-    priceType: "fixed",
-    desc: "50 glowing 3-channel LED wireless headphones, 3 multi-frequency RF transmitters, audio cables, and charging equipment.",
-    tag: "Fixed price",
-    tone: "mint",
-  },
-  {
-    id: "silent-100",
-    name: "Silent Disco — 100 Headphones",
-    category: "Silent Disco",
-    price: 900,
-    priceType: "fixed",
-    desc: "100 3-channel wireless headphones with 3 transmitters. Ideal for college socials, rooftop parties, and weddings with quiet hours.",
-    tag: "Most popular",
-    tone: "mint",
-  },
-  {
-    id: "silent-150",
-    name: "Silent Disco — 150 Headphones",
-    category: "Silent Disco",
-    price: 1200,
-    priceType: "fixed",
-    desc: "150 glowing headphones and 3 transmitters for campus dances, fraternity/sorority events, and private club nights.",
-    tag: "Fixed price",
-    tone: "mint",
-  },
-  {
-    id: "silent-200",
-    name: "Silent Disco — 200 Headphones",
-    category: "Silent Disco",
-    price: 1800,
-    priceType: "fixed",
-    desc: "200 headphones with long-range transmitters. Delivers a zero-noise-complaint dance party for public parks and outdoor celebrations.",
-    tag: "Fixed price",
-    tone: "mint",
-  },
-  {
-    id: "silent-300",
-    name: "Silent Disco — 300 Headphones",
-    category: "Silent Disco",
-    price: 2500,
-    priceType: "fixed",
-    desc: "300 headphones and commercial transmitters for festivals, town celebrations, and large corporate entertainment.",
-    tag: "Fixed price",
-    tone: "mint",
-  },
-
-  // --- EVENT LIGHTING ---
-  {
-    id: "uplights-6",
-    name: "Wireless Battery Uplights (Pack of 6)",
-    category: "Event Lighting",
-    price: 150,
-    priceType: "fixed",
-    desc: "Chauvet Freedom Par H9 IP battery-powered RGBAW+UV uplights. 100% wireless with smartphone/remote control for walls, columns, and accent lighting.",
-    tag: "Wireless battery",
-    tone: "lavender",
-  },
-  {
-    id: "uplights-12",
-    name: "Wireless Battery Uplights (Pack of 12)",
-    category: "Event Lighting",
-    price: 275,
-    priceType: "fixed",
-    desc: "12-pack of wireless Chauvet Freedom Par uplights in rolling charging road case. Full room color transformation with warm white or custom hues.",
-    tag: "Full room pack",
-    tone: "lavender",
-  },
-  {
-    id: "moving-heads",
-    name: "Moving Head Stage Light Fixtures (Pair)",
-    category: "Event Lighting",
-    price: 120,
-    priceType: "fixed",
-    desc: "Pair of intelligent DMX moving head spotlight fixtures with gobos, motorized focus, pan/tilt movement, and color prism effects.",
-    tag: "Dynamic FX",
-    tone: "lavender",
-  },
-  {
-    id: "pinspot-pack",
-    name: "Chauvet EZPin Battery Pinspots (Pack of 4)",
-    category: "Event Lighting",
-    price: 80,
-    priceType: "fixed",
-    desc: "Magnetic battery-powered warm white pinspots for cake tables, floral centerpieces, and architectural highlights.",
-    tag: "Pinspotting",
-    tone: "lavender",
-  },
-  {
-    id: "light-bar",
-    name: "LED Stage Wash Light Bar",
-    category: "Event Lighting",
-    price: 65,
-    priceType: "fixed",
-    desc: "High-output linear LED bar delivering smooth color washes across stages, drapes, and backdrops.",
-    tag: "Stage wash",
-    tone: "lavender",
-  },
-  {
-    id: "followspot",
-    name: "LED Followspot with Stand",
-    category: "Event Lighting",
-    price: 110,
-    priceType: "fixed",
-    desc: "Precision LED spotlight with smooth manual iris, color wheel, and adjustable stand for tracking keynote speakers and performers.",
-    tag: "Keynote spotlight",
-    tone: "lavender",
-  },
-
-  // --- SPECIAL EFFECTS (FX) ---
-  {
-    id: "cold-spark-2",
-    name: "Cold Sparkler Machines (2 Units)",
-    category: "Special Effects",
-    price: 350,
-    priceType: "starting",
-    desc: "2 indoor-safe cold spark fountain machines with wireless remote, powder granules, and setup. Cool to the touch, non-flammable, and zero smoke.",
-    tag: "100% indoor safe",
-    tone: "yellow",
-  },
-  {
-    id: "cold-spark-4",
-    name: "Cold Sparkler Machines (4 Units)",
-    category: "Special Effects",
-    price: 650,
-    priceType: "starting",
-    desc: "4 cold spark machines with DMX synchronized control, extra refill cycles, and technician support. Spectacular for grand entrances and stage shows.",
-    tag: "Grand entrance",
-    tone: "yellow",
-  },
-  {
-    id: "dry-ice-cloud",
-    name: "Dry Ice “Dancing on a Cloud” Machine",
-    category: "Special Effects",
-    price: 295,
-    priceType: "starting",
-    desc: "Professional dry ice low-lying fog machine creating a thick, dreamy cloud that hugs the floor without rising or triggering fire alarms. Essential for wedding first dances.",
-    tag: "Wedding favorite",
-    tone: "yellow",
-  },
-
-  // --- LIVE STREAMING ---
-  {
-    id: "stream-basic",
-    name: "Live Streaming — Basic (1 Camera)",
-    category: "Live Streaming",
-    price: 621,
-    priceType: "starting",
-    desc: "1 × 4K camera, streaming laptop, QSC digital audio mixer, HDMI switcher, and local HD recording for town halls, webinars, and ceremonies.",
-    tag: "Single camera",
-    tone: "sky",
-  },
-  {
-    id: "stream-pro",
-    name: "Live Streaming — Pro (3 Cameras)",
-    category: "Live Streaming",
-    price: 1250,
-    priceType: "starting",
-    desc: "3 × 4K camera multi-angle broadcast setup, video switcher, dedicated stream technician, pristine audio integration, and recording archive.",
-    tag: "Broadcast multi-cam",
-    tone: "sky",
-  },
-];
+const DEFAULT_PRODUCTS = window.BEANTOWN_SOURCE_CATALOG || [];
 
 const DEFAULT_BUNDLES = [
   {
     id: "wedding",
     title: "Wedding Event",
-    price: 2423,
+    price: 0,
     included: { "medium-audio": 1, "qlxd-lavalier": 2, "dry-ice-cloud": 1, "uplights-6": 1, "photo-360": 1 },
     tone: "bundle-wedding",
     label: "WEDDING",
@@ -697,7 +21,7 @@ const DEFAULT_BUNDLES = [
   {
     id: "corporate",
     title: "Corporate Conference",
-    price: 1450,
+    price: 0,
     included: {
       "medium-audio": 1,
       "qlxd-lavalier": 2,
@@ -719,7 +43,7 @@ const DEFAULT_BUNDLES = [
   {
     id: "concert",
     title: "Concert & Live Performance",
-    price: 2800,
+    price: 0,
     included: { "large-audio": 1, "sub-kw181": 2, iem: 2, "qlxd-handheld": 2, "led-16": 1 },
     tone: "bundle-concert",
     label: "CONCERT",
@@ -736,7 +60,7 @@ const DEFAULT_BUNDLES = [
   {
     id: "school",
     title: "School Dance & Social",
-    price: 1444,
+    price: 0,
     included: {
       "medium-audio": 1,
       "sub-thump18": 1,
@@ -758,7 +82,7 @@ const DEFAULT_BUNDLES = [
   {
     id: "party",
     title: "Private Party & DJ",
-    price: 2043,
+    price: 0,
     included: {
       "dj-basic-pkg": 1,
       "sub-kw181": 1,
@@ -780,7 +104,7 @@ const DEFAULT_BUNDLES = [
   {
     id: "movie",
     title: "Outdoor Movie Night",
-    price: 814,
+    price: 0,
     included: { "movie-16": 1, "qlxd-handheld": 1 },
     tone: "bundle-movie",
     label: "MOVIE NIGHT",
@@ -797,8 +121,8 @@ const DEFAULT_BUNDLES = [
   {
     id: "special-fx-pkg",
     title: "Special FX Celebration",
-    price: 1220,
-    included: { "cold-spark-4": 1, "dry-ice-cloud": 1, "uplights-12": 1 },
+    price: 0,
+    included: { "cold-spark-4": 1, "dry-ice-cloud": 1, "uplights-6": 1 },
     tone: "bundle-wedding",
     label: "SPECIAL FX",
     desc: "High-impact visual moments: 4 cold spark fountain machines, dry ice low-lying cloud fog, and 12 wireless uplights.",
@@ -813,12 +137,20 @@ const DEFAULT_BUNDLES = [
   },
 ];
 
+// The original site quotes most AV rentals individually. These bundles are
+// mockup suggestions only, so do not present their old demo totals as rates.
+for (const bundle of DEFAULT_BUNDLES) {
+  bundle.price = 0;
+  bundle.priceType = "quote";
+}
+
 
 // ==========================================================================
 // CMS PERSISTENT DATA LAYER & ASSET CATALOG
 // ==========================================================================
 const CMS_STORAGE = {
   PRODUCTS: "beantown_cms_products",
+  CATALOG_VERSION: "beantown_cms_catalog_version",
   BUNDLES: "beantown_cms_bundles",
   COUPONS: "beantown_cms_coupons",
   SETTINGS: "beantown_cms_settings",
@@ -826,52 +158,7 @@ const CMS_STORAGE = {
   AUTH: "beantown_cms_auth",
 };
 
-const DEFAULT_COUPONS = [
-  {
-    id: "coupon-welcome50",
-    code: "WELCOME50",
-    type: "fixed",
-    value: 50,
-    minOrder: 300,
-    expiryDate: "2026-12-31",
-    description: "$50 off your first event rental (min. $300)",
-    active: true,
-    usageCount: 12,
-  },
-  {
-    id: "coupon-beantown10",
-    code: "BEANTOWN10",
-    type: "percent",
-    value: 10,
-    minOrder: 200,
-    expiryDate: "2026-12-31",
-    description: "10% off entire equipment rental",
-    active: true,
-    usageCount: 28,
-  },
-  {
-    id: "coupon-promo100",
-    code: "PROMO100",
-    type: "fixed",
-    value: 100,
-    minOrder: 800,
-    expiryDate: "2026-12-31",
-    description: "$100 off complete event production",
-    active: true,
-    usageCount: 7,
-  },
-  {
-    id: "coupon-vip15",
-    code: "VIP15",
-    type: "percent",
-    value: 15,
-    minOrder: 1500,
-    expiryDate: "2026-12-31",
-    description: "15% VIP discount for major festivals & productions",
-    active: true,
-    usageCount: 4,
-  },
-];
+const DEFAULT_COUPONS = [];
 
 const DEFAULT_SETTINGS = {
   companyName: "Beantown Audio Rentals",
@@ -884,68 +171,7 @@ const DEFAULT_SETTINGS = {
   adminEmails: ["kcbianzon@gmail.com"],
 };
 
-const DEFAULT_SAMPLE_QUOTES = [
-  {
-    id: "BOS-94812",
-    createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
-    contactName: "Sarah Jenkins",
-    contactEmail: "sarah.jenkins@biotech-summit.org",
-    contactPhone: "(617) 555-0144",
-    organization: "BioTech Innovation Forum",
-    eventName: "New England Life Sciences Gala 2026",
-    eventType: "Corporate Event",
-    guests: "250",
-    venue: "Indoor",
-    date: "November 14, 2026",
-    location: "Seaport World Trade Center, Boston MA",
-    serviceTier: "Full AV Production & Dedicated Technician",
-    serviceFee: 650,
-    duration: "1-Day Rental (Standard 24-Hour)",
-    items: [
-      { id: "medium-audio", name: "Medium Event Speaker Package", qty: 2, price: 349, subtotal: 698 },
-      { id: "qlxd-lavalier", name: "Shure QLX-D Wireless Lavalier System", qty: 4, price: 85, subtotal: 340 },
-      { id: "fastfold-screen", name: "FastFold 120-inch Front/Rear Screen & Projector", qty: 2, price: 395, subtotal: 790 },
-      { id: "uplights-6", name: "Battery Wireless LED Up-Lights (6-Pack)", qty: 2, price: 150, subtotal: 300 }
-    ],
-    baseSubtotal: 2128,
-    durationSurcharge: 0,
-    couponCode: "BEANTOWN10",
-    discountAmount: 213,
-    grandTotal: 2565,
-    status: "New",
-    notes: "Main ballroom keynote starts at 9am. Load-in dock access required at 6:30am."
-  },
-  {
-    id: "BOS-83190",
-    createdAt: new Date(Date.now() - 3600000 * 28).toISOString(),
-    contactName: "Marcus Sterling",
-    contactEmail: "marcus@sterlingevents.com",
-    contactPhone: "(978) 555-8821",
-    organization: "Private Wedding",
-    eventName: "Sterling-Vance Wedding Reception",
-    eventType: "Wedding",
-    guests: "175",
-    venue: "Outdoor & Indoor",
-    date: "December 5, 2026",
-    location: "The Crane Estate, Ipswich MA",
-    serviceTier: "Delivery, Setup & Testing (Crew breakdown included)",
-    serviceFee: 350,
-    duration: "1-Day Rental (Standard 24-Hour)",
-    items: [
-      { id: "medium-audio", name: "Medium Event Speaker Package", qty: 1, price: 349, subtotal: 349 },
-      { id: "photo-360", name: "360 Video Photo Booth Platform", qty: 1, price: 1499, subtotal: 1499 },
-      { id: "dry-ice-cloud", name: "Dry Ice Low-Lying Fog Machine", qty: 1, price: 295, subtotal: 295 },
-      { id: "cold-spark-4", name: "Indoor Cold Spark Machines (4-Pack)", qty: 1, price: 600, subtotal: 600 }
-    ],
-    baseSubtotal: 2743,
-    durationSurcharge: 0,
-    couponCode: "WELCOME50",
-    discountAmount: 50,
-    grandTotal: 3043,
-    status: "Confirmed",
-    notes: "First dance around 7:15pm with cloud effect and sparks. Sound must be tuned for tent acoustics."
-  }
-];
+const DEFAULT_SAMPLE_QUOTES = [];
 
 const BEANTOWN_ASSETS = [
   { file: "speaker-rental.jpg", label: "QSC Powered Speaker & Tripod" },
@@ -986,6 +212,14 @@ const BEANTOWN_ASSETS = [
 ];
 
 function loadCmsProducts() {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-27-public-catalog-v1") {
+    // Replace the earlier mock catalog once so all product names, descriptions,
+    // and rates come from the source website. Later CMS edits remain persistent.
+    localStorage.removeItem(CMS_STORAGE.PRODUCTS);
+    localStorage.removeItem(CMS_STORAGE.BUNDLES);
+    localStorage.removeItem(CMS_STORAGE.COUPONS);
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-27-public-catalog-v1");
+  }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
     if (raw) {
@@ -1209,50 +443,53 @@ const SERVICE_TIERS = [
   {
     id: "pickup",
     title: "Self Pickup & Return",
-    badge: "FREE · $0",
+    badge: "Quote required",
     price: 0,
-    desc: "Pick up and return directly at our Boston warehouse with pre-tested road cases and quick setup walk-through.",
+    priceType: "quote",
+    desc: "Self-pickup is available for select rentals. Confirm availability and any fees when requesting a quote.",
   },
   {
     id: "delivery-setup",
     title: "Delivery, Setup & Breakdown",
-    badge: "+$150",
-    price: 150,
-    desc: "Our crew delivers to your venue, sets up and soundchecks all equipment, and returns after the event for strike.",
+    badge: "Quote required",
+    price: 0,
+    priceType: "quote",
+    desc: "Delivery and setup are available. Confirm the service scope and price when requesting a quote.",
   },
   {
     id: "full-tech",
     title: "Full On-Site Technician Support",
-    badge: "+$350",
-    price: 350,
-    desc: "Includes delivery, full rigging/setup, a dedicated on-site AV engineer to operate your show, and post-event breakdown.",
+    badge: "Quote required",
+    price: 0,
+    priceType: "quote",
+    desc: "On-site technical support is available for select rentals. Confirm staffing and price when requesting a quote.",
   },
 ];
 
 const DURATION_OPTIONS = [
   {
     id: "1-day",
-    label: "1 Day / Single Event",
-    shortLabel: "1 Day (1.0×)",
+    label: "Single event",
+    shortLabel: "Single event",
     multiplier: 1,
-    badge: "Standard Rate",
-    desc: "Standard 24-hour event rental window.",
+    badge: "Quote confirmed",
+    desc: "Rental period and availability are confirmed in your quote.",
   },
   {
     id: "2-days",
-    label: "2 Days / Weekend",
-    shortLabel: "2 Days (1.5×)",
-    multiplier: 1.5,
-    badge: "Save 25% on Day 2",
-    desc: "Ideal for rehearsal dinner + wedding day or 2-day conferences (1.5× daily equipment rate).",
+    label: "Weekend / 2 days",
+    shortLabel: "Weekend / 2 days",
+    multiplier: 1,
+    badge: "Quote confirmed",
+    desc: "Weekend availability and pricing are confirmed in your quote.",
   },
   {
     id: "3-days",
-    label: "3+ Days / Multi-Day",
-    shortLabel: "3+ Days (2.0×)",
-    multiplier: 2,
-    badge: "Save 33%+ Extended",
-    desc: "Multi-day festival, campus week, or extended corporate production (2.0× daily equipment rate).",
+    label: "Multi-day event",
+    shortLabel: "Multi-day event",
+    multiplier: 1,
+    badge: "Quote confirmed",
+    desc: "Multi-day availability and pricing are confirmed in your quote.",
   },
 ];
 
@@ -1436,6 +673,12 @@ function productPriceText(p) {
   if (p.priceType === "starting") return `From ${money(p.price)}`;
   return money(p.price);
 }
+function bundlePriceText(bundle) {
+  return bundle.priceType === "quote" ? "Quote required" : money(bundle.price);
+}
+function totalPriceText(totals) {
+  return totals.quoteRequired ? "Quote required" : money(totals.grandTotal);
+}
 function productMatchesCategory(p, cat) {
   return (
     cat === "All" ||
@@ -1533,7 +776,7 @@ function sanitizeSelectedProducts() {
   for (const [id, rawQty] of Object.entries(state.selected)) {
     const product = products.find((p) => p.id === id);
     const qty = Math.min(99, Math.max(0, Math.round(Number(rawQty) || 0)));
-    if (product && typeof product.price === "number" && product.price > 0 && qty > 0) {
+    if (product && ((typeof product.price === "number" && product.price > 0) || product.priceType === "quote") && qty > 0) {
       cleaned[id] = qty;
     }
   }
@@ -1555,21 +798,20 @@ function parseDurationText(text) {
   if (t.includes("week")) {
     const m = t.match(/(\d+)/);
     const weeks = m ? Math.max(1, parseInt(m[1], 10)) : 1;
-    const mult = Math.min(3.5, 2.5 + (weeks - 1) * 0.5);
     return {
       days: weeks * 7,
-      multiplier: mult,
-      label: `${weeks} Week${weeks > 1 ? "s" : ""} (${mult.toFixed(1)}×)`,
-      badge: `${weeks} Week${weeks > 1 ? "s" : ""} (${mult.toFixed(1)}× Rate)`
+      multiplier: 1,
+      label: `${weeks} Week${weeks > 1 ? "s" : ""}`,
+      badge: "Quote confirmed"
     };
   }
 
   if (t.includes("weekend")) {
     return {
       days: 2,
-      multiplier: 1.5,
-      label: "2 Days (Weekend)",
-      badge: "Save 25% on Day 2"
+      multiplier: 1,
+      label: "Weekend / 2 days",
+      badge: "Quote confirmed"
     };
   }
 
@@ -1577,20 +819,19 @@ function parseDurationText(text) {
   if (dayMatch) {
     const days = Math.max(1, parseInt(dayMatch[1], 10));
     if (days === 1) {
-      return { days: 1, multiplier: 1, label: "1 Day (1.0×)", badge: "Standard Rate" };
+      return { days: 1, multiplier: 1, label: "1 Day", badge: "Quote confirmed" };
     }
     if (days === 2) {
-      return { days: 2, multiplier: 1.5, label: "2 Days (1.5×)", badge: "Save 25% on Day 2" };
+      return { days: 2, multiplier: 1, label: "2 Days", badge: "Quote confirmed" };
     }
     if (days === 3) {
-      return { days: 3, multiplier: 2.0, label: "3 Days (2.0×)", badge: "Save 33%+ Extended" };
+      return { days: 3, multiplier: 1, label: "3 Days", badge: "Quote confirmed" };
     }
-    const mult = Math.min(3.5, 2.0 + (days - 3) * 0.25);
     return {
       days,
-      multiplier: mult,
-      label: `${days} Days (${mult.toFixed(1)}×)`,
-      badge: `${mult.toFixed(1)}× Multi-Day Rate`
+      multiplier: 1,
+      label: `${days} Days`,
+      badge: "Quote confirmed"
     };
   }
 
@@ -1634,6 +875,7 @@ function calculateQuoteTotals() {
   const durationSurcharge = equipmentDurationTotal - equipmentBaseSubtotal;
   const serviceOption = SERVICE_TIERS.find((s) => s.id === state.serviceTier) || SERVICE_TIERS[0];
   const serviceFee = lineItems.length > 0 ? serviceOption.price : 0;
+  const quoteRequired = lineItems.some(({ product }) => product.priceType === "quote") || (lineItems.length > 0 && serviceOption.priceType === "quote");
 
   // Loophole-free coupon discount math
   let appliedCoupon = null;
@@ -1682,6 +924,7 @@ function calculateQuoteTotals() {
     equipmentDurationTotal,
     serviceOption,
     serviceFee,
+    quoteRequired,
     coupon: appliedCoupon,
     discountAmount,
     baseGrandTotal,
@@ -1933,7 +1176,7 @@ function faqSection() {
     {
       category: "Rentals & Inventory",
       question: "What equipment is available in your Boston rental inventory?",
-      answer: "We maintain a comprehensive, commercial-grade event inventory in Boston. Our catalog includes powered sound systems and line arrays (QSC, JBL, Mackie), high-output subwoofers (QSC KW181, cardioid KS212C), Shure QLX-D digital wireless microphones (Beta 58A handhelds, lavaliers, Countryman headsets, and push-to-talk conference mics), audio mixers (Behringer X32, QSC TouchMix-16, Allen & Heath SQ-7), club-standard DJ rigs (Pioneer CDJ-3000, DJM-900NXS2, Technics 1200 turntables, Scrim Werks facades), 65″ & 75″ Samsung 4K TVs on motorized truss stands, 2.67mm modular indoor LED video walls, daylight-viewable mobile outdoor LED trailers, inflatable outdoor movie screens (12′ to 40′) with Sony laser projectors, 3-channel silent disco headphones (50–300+ units), photo booths (iPad Mirror, Magic Mirror Air, 360 Video platform), wireless Chauvet Freedom Par battery uplighting, moving heads, and indoor-safe special FX (Cold Sparklers and Dry Ice “Dancing on a Cloud”).",
+      answer: "The rental catalog includes small, medium, and large audio packages; speakers and subwoofers; microphone packages and equipment; audio mixers; DJ packages and individual DJ gear; video packages, Samsung 65-inch and 75-inch TVs, and indoor LED wall packages; five outdoor LED trailer sizes; four outdoor movie screen sizes; photo booths; silent disco packages for 50–300 headphones; lighting fixtures and packages; cold spark packages; a dry ice machine; and basic and pro live-streaming packages. Published rates appear only on the outdoor movie, photo booth, and silent disco listings; other rentals require a quote.",
     },
     {
       category: "Delivery & Setup",
@@ -1943,7 +1186,7 @@ function faqSection() {
     {
       category: "Pricing & Quotes",
       question: "How does pricing work, and are there any surprise fees?",
-      answer: "We pride ourselves on 100% transparent pricing. Fixed-format entertainment packages—such as Silent Disco ($500–$2,500), Inflatable Outdoor Movie Nights ($549–$1,899), and Photo Booths ($799–$1,699)—have clearly listed public pricing. For custom sound systems, modular LED walls, multi-camera live streaming, and concert lighting, we provide an itemized quote based on venue dimensions, guest count, rigging requirements, and technician hours. Every quote clearly separates gear, delivery, setup, and labor—so you will never encounter surprise add-ons on event day.",
+      answer: "The original site publishes rates for outdoor movie packages ($549–$1,899), photo booths (starting at $799, $1,399, $1,699, and $1,499 by listing), and silent disco packages ($500–$2,500). Other rental pages ask customers to request pricing. The project marks those listings as quote required and does not estimate rates, rental periods, delivery, or setup fees.",
     },
     {
       category: "On-Site Support",
@@ -2237,10 +1480,10 @@ function home() {
           .map((i) => `<li>${i}</li>`)
           .join(
             "",
-          )}</ul><div class="bundle-foot"><span class="bundle-price">${money(b.price)}</span><button class="btn btn-dark btn-small" data-bundle="${b.id}">View bundle →</button></div></div></article>`,
+          )}</ul><div class="bundle-foot"><span class="bundle-price">${bundlePriceText(b)}</span><button class="btn btn-dark btn-small" data-bundle="${b.id}">View bundle →</button></div></div></article>`,
     )
     .join("")}</div></section>
-  <section class="section"><div class="feature-panel dark"><div><span class="eyebrow">PLAN THE SETUP WITH CONFIDENCE</span><h3>Build it<br>before you book it.</h3><p>Choose your event, add the pieces you need, and see fixed-price items in your estimate. Custom production stays quote-based.</p></div><div class="stat-row"><div class="stat"><strong>24/7</strong><span>CONFIGURE ANYTIME</span></div><div class="stat"><strong>01</strong><span>EVENT BUILDER</span></div><div class="stat"><strong>∞</strong><span>COMBINATIONS</span></div></div></div></section>
+  <section class="section"><div class="feature-panel dark"><div><span class="eyebrow">PLAN THE SETUP WITH CONFIDENCE</span><h3>Build it<br>before you book it.</h3><p>Choose your event and requested items. Public rates appear where listed; other prices are confirmed by quote.</p></div><div class="stat-row"><div class="stat"><strong>24/7</strong><span>CONFIGURE ANYTIME</span></div><div class="stat"><strong>01</strong><span>EVENT BUILDER</span></div><div class="stat"><strong>∞</strong><span>COMBINATIONS</span></div></div></div></section>
   ${testimonialSection()}
   ${faqSection()}
  </div>`;
@@ -2315,7 +1558,7 @@ function rentals() {
   return `<div class="page">
     <div class="page-hero">
       <div><span class="eyebrow">RENTAL CATALOG</span><h1>Everything<br>you can add.</h1></div>
-      <p>Explore our complete commercial rental inventory. Consumer packages feature transparent fixed pricing; custom staging, line arrays, and LED walls are confirmed with an itemized quote.</p>
+      <p>Explore all rental listings. Public prices are shown where the original site publishes them; other rentals are quote-based.</p>
     </div>
 
     <section class="rentals-catalog" aria-label="Rental inventory">
@@ -2448,7 +1691,7 @@ function rentals() {
 
 function bundlesPage() {
   if (state.bundle) return bundleDetail(state.bundle);
-  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">EVENT BUNDLES</span><h1>Start with<br>the occasion.</h1></div><p>Choose a fixed package built around a familiar event format. Every bundle is a complete starting point with clear inclusions and no hidden customization step.</p></div><section class="bundle-customize"><div><span class="eyebrow">NEED SOMETHING MORE SPECIFIC?</span><h2>Customize your experience.</h2><p>Build an event from the ground up with recommendations for your occasion and access to the full equipment catalog.</p></div><button type="button" class="btn btn-dark" data-open-cart>Build your setup →</button></section><div class="bundle-grid">${bundles.map((b) => `<article class="bundle-card reveal"><div class="bundle-top ${b.tone} has-bundle-image" style="--bundle-image:url('${bundleImage(b)}')"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items.map((i) => `<li>${i}</li>`).join("")}</ul><div class="bundle-foot"><span class="bundle-price">${money(b.price)}</span><button class="btn btn-dark btn-small" data-bundle="${b.id}">View bundle →</button></div></div></article>`).join("")}</div></div>`;
+  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">EVENT BUNDLES</span><h1>Start with<br>the occasion.</h1></div><p>Use these mockup setup suggestions as a starting point. Package contents and pricing are confirmed by quote.</p></div><section class="bundle-customize"><div><span class="eyebrow">NEED SOMETHING MORE SPECIFIC?</span><h2>Customize your experience.</h2><p>Build an event from the ground up with recommendations for your occasion and access to the full equipment catalog.</p></div><button type="button" class="btn btn-dark" data-open-cart>Build your setup →</button></section><div class="bundle-grid">${bundles.map((b) => `<article class="bundle-card reveal"><div class="bundle-top ${b.tone} has-bundle-image" style="--bundle-image:url('${bundleImage(b)}')"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items.map((i) => `<li>${i}</li>`).join("")}</ul><div class="bundle-foot"><span class="bundle-price">${bundlePriceText(b)}</span><button class="btn btn-dark btn-small" data-bundle="${b.id}">View bundle →</button></div></div></article>`).join("")}</div></div>`;
 }
 
 function bundleDetail(id) {
@@ -2463,7 +1706,7 @@ function bundleDetail(id) {
     (total, { product, quantity }) => total + (product.price || 0) * quantity,
     0,
   );
-  return `<div class="page"><div class="bundle-detail-head"><a class="text-btn" href="#bundles">← All bundles</a><div class="bundle-detail-layout"><div><span class="eyebrow">${bundle.label} PACKAGE</span><h1>${bundle.title}</h1><p>${bundle.desc}</p></div><div class="bundle-detail-price"><span class="eyebrow">TURNKEY PACKAGE TOTAL</span><strong>${money(bundle.price)}</strong></div></div></div><div class="bundle-detail-wrap"><section class="bundle-detail-main"><div class="detail-section-head"><div><span class="eyebrow">WHAT’S INCLUDED</span><h2>Your package, item by item.</h2></div><span class="detail-lock">${included.reduce((s, x) => s + x.quantity, 0)} Total Units</span></div><div class="bundle-included-list">${included.map(({ product, quantity }) => `<div class="bundle-included-item"><div><strong>${quantity} × ${product.name}</strong><span>${product.category} · ${money(product.price)} each · ${product.desc}</span></div><strong>${money(product.price * quantity)}</strong></div>`).join("")}</div><div class="bundle-detail-actions"><button type="button" class="btn btn-dark" data-launch-bundle="${bundle.id}" data-launch-step="5">Request this bundle →</button><button type="button" class="btn btn-light" data-open-cart>View in Cart →</button></div></section><aside class="bundle-detail-summary"><span class="eyebrow">TRANSPARENT MATH</span><div class="detail-total"><span>Itemized equipment sum</span><strong>${money(knownTotal)}</strong></div><div class="detail-total"><span>Package total</span><strong>${money(bundle.price)}</strong></div><p>Every item in this bundle is priced transparently with zero hidden fees. Load this bundle into the Event Builder to add microphones, lighting, or delivery support.</p></aside></div></div>`;
+  return `<div class="page"><div class="bundle-detail-head"><a class="text-btn" href="#bundles">← All bundles</a><div class="bundle-detail-layout"><div><span class="eyebrow">${bundle.label} PACKAGE</span><h1>${bundle.title}</h1><p>${bundle.desc}</p></div><div class="bundle-detail-price"><span class="eyebrow">PACKAGE PRICE</span><strong>${bundlePriceText(bundle)}</strong></div></div></div><div class="bundle-detail-wrap"><section class="bundle-detail-main"><div class="detail-section-head"><div><span class="eyebrow">WHAT’S INCLUDED</span><h2>Your package, item by item.</h2></div><span class="detail-lock">${included.reduce((s, x) => s + x.quantity, 0)} Total Units</span></div><div class="bundle-included-list">${included.map(({ product, quantity }) => `<div class="bundle-included-item"><div><strong>${quantity} × ${product.name}</strong><span>${product.category} · ${productPriceText(product)} · ${product.desc}</span></div><strong>${productPriceText(product)}</strong></div>`).join("")}</div><div class="bundle-detail-actions"><button type="button" class="btn btn-dark" data-launch-bundle="${bundle.id}" data-launch-step="5">Request this bundle →</button><button type="button" class="btn btn-light" data-open-cart>View in Cart →</button></div></section><aside class="bundle-detail-summary"><span class="eyebrow">TRANSPARENT MATH</span><div class="detail-total"><span>Itemized equipment sum</span><strong>${money(knownTotal)}</strong></div><div class="detail-total"><span>Package total</span><strong>${bundlePriceText(bundle)}</strong></div><p>Package contents and pricing are confirmed with your event quote.</p></aside></div></div>`;
 }
 
 function aboutUsPage() {
@@ -2975,7 +2218,7 @@ function renderBuilderCatalogGridMarkup() {
     return `<div class="q-catalog-empty">
       <strong>No equipment matches your filter</strong>
       <p>Try clearing the search term or switching back to All Categories.</p>
-      <button type="button" class="btn btn-light btn-small" data-builder-reset-catalog>Show all 65 rentals</button>
+      <button type="button" class="btn btn-light btn-small" data-builder-reset-catalog>Show all ${products.length} rentals</button>
     </div>`;
   }
   return list
@@ -2990,7 +2233,7 @@ function renderBuilderCatalogGridMarkup() {
         <div class="q-equip-body">
           <div class="q-equip-meta">
             <span class="q-equip-cat">${escapeHtml(p.category)}</span>
-            <span class="q-equip-unit-price">${money(p.price)}<small>/day</small></span>
+            <span class="q-equip-unit-price">${productPriceText(p)}</span>
           </div>
           <h4>${escapeHtml(p.name)}</h4>
           <p>${escapeHtml(p.desc)}</p>
@@ -3438,7 +2681,7 @@ function renderEquipmentStep(totals) {
       <div class="q-subblock-head">
         <div>
           <span class="eyebrow">TURNKEY PACKAGES</span>
-          <h3>1. Quick-Load an Event Bundle (Optional)</h3>
+          <h3>1. Quick-Load an Event Setup Suggestion</h3>
         </div>
         ${totals.uniqueCount > 0 ? `<button type="button" class="q-clear-all-btn" data-clear-all-equipment>Clear all selected gear (${totals.totalUnits})</button>` : ""}
       </div>
@@ -3449,7 +2692,7 @@ function renderEquipmentStep(totals) {
             return `<div class="q-bundle-mini ${isMatched ? "is-active" : ""}">
               <div class="q-bundle-mini-top">
                 <span class="eyebrow">${escapeHtml(b.label)}</span>
-                <strong>${money(b.price)}</strong>
+                <strong>${bundlePriceText(b)}</strong>
               </div>
               <h4>${escapeHtml(b.title)}</h4>
               <p>${escapeHtml(b.desc)}</p>
@@ -3479,7 +2722,7 @@ function renderEquipmentStep(totals) {
               <img src="${productImage(p)}" alt="${escapeHtml(p.name)}" loading="lazy">
               <div class="q-rec-info">
                 <strong>${escapeHtml(p.name)}</strong>
-                <span>${escapeHtml(p.category)} · <b>${money(p.price)}/day</b></span>
+                <span>${escapeHtml(p.category)} · <b>${productPriceText(p)}</b></span>
               </div>
               <div class="q-stepper">
                 <button type="button" class="q-step-btn" data-minus="${p.id}" ${qty === 0 ? "disabled" : ""} aria-label="Decrease ${escapeHtml(p.name)}">−</button>
@@ -3492,11 +2735,11 @@ function renderEquipmentStep(totals) {
       </div>
     </div>
 
-    <!-- 3. Full 65-Item Equipment Catalog Browser -->
+    <!-- 3. Full Rental Catalog -->
     <div class="q-subblock">
       <div class="q-subblock-head">
         <div>
-          <span class="eyebrow">FULL RENTAL INVENTORY (65 ITEMS)</span>
+          <span class="eyebrow">FULL RENTAL INVENTORY (${products.length} ITEMS)</span>
           <h3>3. Browse &amp; Add Any Individual Equipment</h3>
         </div>
       </div>
@@ -3598,7 +2841,7 @@ function renderReviewAndSubmitStep(totals) {
       </div>
       <div class="q-review-meta-card">
         <span>DELIVERY &amp; CREW</span>
-          <strong>${escapeHtml(totals.serviceOption.title)} (${totals.serviceFee === 0 ? "Free" : money(totals.serviceFee)})</strong>
+          <strong>${escapeHtml(totals.serviceOption.title)} (Quote required)</strong>
           <button type="button" class="q-meta-edit" data-goto-step="4">Edit</button>
       </div>
     </div>
@@ -3636,7 +2879,7 @@ function renderReviewAndSubmitStep(totals) {
                       <span class="q-td-sub">${escapeHtml(item.product.tag || "")}</span>
                     </td>
                     <td><span class="q-td-cat">${escapeHtml(item.product.category)}</span></td>
-                    <td>${money(item.unitPrice)}<small>/day</small></td>
+                    <td>${productPriceText(item.product)}</td>
                     <td>
                       <div class="q-stepper q-stepper-inline">
                         <button type="button" class="q-step-btn" data-minus="${item.product.id}" aria-label="Decrease ${escapeHtml(item.product.name)}">−</button>
@@ -3644,7 +2887,7 @@ function renderReviewAndSubmitStep(totals) {
                         <button type="button" class="q-step-btn q-step-plus" data-plus="${item.product.id}" aria-label="Increase ${escapeHtml(item.product.name)}">+</button>
                       </div>
                     </td>
-                    <td class="is-right"><strong>${money(item.lineSubtotal)}</strong></td>
+                    <td class="is-right"><strong>${item.product.priceType === "quote" ? "Quote" : money(item.lineSubtotal)}</strong></td>
                   </tr>`
                 )
                 .join("")}
@@ -3690,7 +2933,7 @@ function renderReviewAndSubmitStep(totals) {
           ` : ""}
           <div class="q-fin-row">
             <span>Delivery, Setup &amp; Production Crew (${escapeHtml(totals.serviceOption.title)})</span>
-            <strong>${totals.serviceFee === 0 ? "$0 (Self Pickup)" : `+${money(totals.serviceFee)}`}</strong>
+            <strong>${totals.serviceOption.priceType === "quote" ? "Quote required" : totals.serviceFee === 0 ? "$0" : `+${money(totals.serviceFee)}`}</strong>
           </div>
           ${totals.discountAmount > 0 ? `
             <div class="q-fin-row q-fin-discount">
@@ -3701,9 +2944,9 @@ function renderReviewAndSubmitStep(totals) {
           <div class="q-fin-row is-grand">
             <div>
               <span>ESTIMATED GRAND TOTAL</span>
-              <small>All items calculated accurately · No hidden fees</small>
+              <small>Publicly listed prices shown; unpriced items confirmed by quote.</small>
             </div>
-            <strong>${money(totals.grandTotal)}</strong>
+            <strong>${totalPriceText(totals)}</strong>
           </div>
         </div>
       ` : `
@@ -3766,10 +3009,10 @@ function renderReviewAndSubmitStep(totals) {
       <div class="q-submit-bar">
         <div class="q-submit-note">
           <strong>Instant Automated Quote Dispatch</strong>
-          <span>Submitting sends your complete itemized setup and estimate to our production team and locks in your quote reference.</span>
+          <span>Submitting sends your requested setup to our production team so they can confirm availability and pricing.</span>
         </div>
         <button type="submit" class="btn btn-dark q-submit-btn" ${state.isSubmittingQuote ? "disabled" : ""}>
-          ${state.isSubmittingQuote ? "Sending Official Quote…" : `Submit Quote (${money(totals.grandTotal)}) →`}
+          ${state.isSubmittingQuote ? "Sending Official Quote…" : `Submit Quote (${totalPriceText(totals)}) →`}
         </button>
       </div>
     </form>
@@ -3822,9 +3065,9 @@ function renderSubmittedReceipt(receipt) {
                       <td class="q-td-num">${String(idx + 1).padStart(2, "0")}</td>
                       <td><strong>${escapeHtml(item.product.name)}</strong></td>
                       <td><span class="q-td-cat">${escapeHtml(item.product.category)}</span></td>
-                      <td>${money(item.unitPrice)}/day</td>
+                      <td>${productPriceText(item.product)}</td>
                       <td>${item.qty}</td>
-                      <td class="is-right"><strong>${money(item.lineSubtotal)}</strong></td>
+                      <td class="is-right"><strong>${item.product.priceType === "quote" ? "Quote" : money(item.lineSubtotal)}</strong></td>
                     </tr>`
                   )
                   .join("")}
@@ -3845,11 +3088,11 @@ function renderSubmittedReceipt(receipt) {
             ` : ""}
             <div class="q-fin-row">
               <span>Delivery, Setup &amp; Crew (${escapeHtml(receipt.serviceTitle)})</span>
-              <strong>${receipt.serviceFee === 0 ? "$0" : `+${money(receipt.serviceFee)}`}</strong>
+              <strong>${receipt.quoteRequired ? "Quote required" : receipt.serviceFee === 0 ? "$0" : `+${money(receipt.serviceFee)}`}</strong>
             </div>
             <div class="q-fin-row is-grand">
               <span>ESTIMATED GRAND TOTAL</span>
-              <strong>${money(receipt.grandTotal)}</strong>
+              <strong>${receipt.quoteRequired ? "Quote required" : money(receipt.grandTotal)}</strong>
             </div>
           </div>
         </div>
@@ -3895,7 +3138,7 @@ function renderEmptyQuoteGate() {
       <div class="quote-gate-bundles-section">
         <div class="quote-gate-bundles-head">
           <span class="eyebrow">OR START WITH A TURNKEY BUNDLE</span>
-          <h3>Quick-start packages with transparent pricing:</h3>
+          <h3>Planning suggestions; package contents and pricing are confirmed by quote:</h3>
         </div>
         <div class="quote-gate-bundles-grid">
           ${sampleBundles.map((b) => `
@@ -3906,7 +3149,7 @@ function renderEmptyQuoteGate() {
                 <p>${escapeHtml(b.desc)}</p>
               </div>
               <div class="quote-bundle-foot">
-                <span class="quote-bundle-price">${money(b.price)}</span>
+                <span class="quote-bundle-price">${bundlePriceText(b)}</span>
                 <button type="button" class="btn btn-dark btn-small" data-launch-bundle="${b.id}" data-launch-step="1">Select bundle →</button>
               </div>
             </div>
@@ -4126,7 +3369,7 @@ function quote() {
       <aside class="q-plan-sidebar" aria-label="Live event plan and quote total">
         <div class="q-plan-total-box">
           <span class="eyebrow">ESTIMATED TOTAL</span>
-          <strong class="q-plan-grand">${money(totals.grandTotal)}</strong>
+          <strong class="q-plan-grand">${totalPriceText(totals)}</strong>
           <span class="q-plan-sub">${totals.uniqueCount} ${totals.uniqueCount === 1 ? "item" : "items"} (${totals.totalUnits} ${totals.totalUnits === 1 ? "unit" : "units"}) · ${escapeHtml(totals.durationOption.shortLabel)}</span>
         </div>
 
@@ -4162,7 +3405,7 @@ function quote() {
                   (item) => `<li class="q-plan-item">
                     <div class="q-plan-item-info">
                       <strong>${escapeHtml(item.product.name)}</strong>
-                      <span>${money(item.unitPrice)} × ${item.qty} = <b>${money(item.lineSubtotal)}</b></span>
+                      <span>${item.product.priceType === "quote" ? "Quote required" : `${money(item.unitPrice)} × ${item.qty} = <b>${money(item.lineSubtotal)}</b>`}</span>
                     </div>
                     <div class="q-plan-item-ctrl">
                       <button type="button" data-minus="${item.product.id}" aria-label="Remove one ${escapeHtml(item.product.name)}">−</button>
@@ -4194,7 +3437,7 @@ function quote() {
           ` : ""}
           <div class="q-math-line">
             <span>${escapeHtml(totals.serviceOption.title)}</span>
-            <strong>${totals.serviceFee === 0 ? "$0" : `+${money(totals.serviceFee)}`}</strong>
+            <strong>${totals.serviceOption.priceType === "quote" ? "Quote required" : totals.serviceFee === 0 ? "$0" : `+${money(totals.serviceFee)}`}</strong>
           </div>
           ${totals.discountAmount > 0 ? `
             <div class="q-math-line is-discount">
@@ -4204,12 +3447,12 @@ function quote() {
           ` : ""}
           <div class="q-math-line is-total">
             <span>Total Estimate</span>
-            <strong>${money(totals.grandTotal)}</strong>
+            <strong>${totalPriceText(totals)}</strong>
           </div>
         </div>
 
         ${step < 6
-          ? `<button type="button" class="btn btn-dark" style="width:100%" data-goto-step="6">Review Full Quote (${money(totals.grandTotal)}) →</button>`
+          ? `<button type="button" class="btn btn-dark" style="width:100%" data-goto-step="6">Review Full Quote →</button>`
           : `<a href="#quoteBuilderForm" class="btn btn-dark" style="width:100%">Complete &amp; Send Quote ↓</a>`}
       </aside>
     </div>
@@ -4402,10 +3645,10 @@ function updateCartDrawer() {
           <div class="cart-item-details">
             <span class="cart-item-cat">${escapeHtml(product.category || "Rental")}</span>
             <h4 class="cart-item-name">${escapeHtml(product.name)}</h4>
-            <span class="cart-item-unit">${product.price ? `${money(product.price)} each` : "Custom quote"}</span>
+            <span class="cart-item-unit">${product.price ? `${productPriceText(product)}` : "Custom quote"}</span>
           </div>
           <div class="cart-item-actions">
-            <span class="cart-item-price">${product.price ? money(lineSubtotal) : "Quote"}</span>
+            <span class="cart-item-price">${productPriceText(product)}</span>
             <div class="cart-item-controls">
               <div class="cart-stepper">
                 <button type="button" class="cart-step-btn" data-cart-minus="${product.id}" aria-label="Decrease ${escapeHtml(product.name)}">−</button>
@@ -4847,7 +4090,7 @@ function bind() {
       state.selected = { ...match.included };
       saveSelection();
       render({ preserveScroll: true });
-      showToast(`Loaded ${match.title} (${money(match.price)})`);
+      showToast(`Loaded ${match.title} (${bundlePriceText(match)})`);
     }),
   );
 
@@ -5437,12 +4680,12 @@ function bind() {
     const itemizedSummaryLines = totals.lineItems
       .map(
         (item, idx) =>
-          `${idx + 1}. ${item.qty}x ${item.product.name} (${item.product.category}) @ ${money(item.unitPrice)}/day = ${money(item.lineSubtotal)}`
+          `${idx + 1}. ${item.qty}x ${item.product.name} (${item.product.category}) — ${item.product.priceType === "quote" ? "Quote required" : `${productPriceText(item.product)} = ${money(item.lineSubtotal)}`}`
       )
       .join("\n");
 
     const emailPayload = {
-      _subject: `New Beantown AV Quote [${refCode}]: ${state.eventType} - ${state.contactName} (${money(totals.grandTotal)})`,
+      _subject: `New Beantown AV Quote [${refCode}]: ${state.eventType} - ${state.contactName} (${totalPriceText(totals)})`,
       _template: "table",
       _captcha: "false",
       _honey: honeyVal,
@@ -5460,7 +4703,7 @@ function bind() {
       "Event Time Window": state.eventTimeWindow,
       "Event Location": effectiveLocation,
       "Rental Duration": totals.durationOption.label,
-      "Delivery & Support Tier": `${totals.serviceOption.title} (${totals.serviceFee === 0 ? "Free / $0" : money(totals.serviceFee)})`,
+      "Delivery & Support Tier": `${totals.serviceOption.title} (${totals.serviceOption.priceType === "quote" ? "Quote required" : totals.serviceFee === 0 ? "$0" : money(totals.serviceFee)})`,
       "Preferred Payment Method": state.paymentMethod,
       "Total Selected Equipment": `${totals.uniqueCount} unique items (${totals.totalUnits} total units)`,
       "Complete Itemized Equipment Breakdown": itemizedSummaryLines,
@@ -5468,18 +4711,18 @@ function bind() {
 
     totals.lineItems.forEach((item, idx) => {
       const key = `Item ${String(idx + 1).padStart(2, "0")}`;
-      emailPayload[key] = `${item.qty} × ${item.product.name} [${item.product.category}] — ${money(item.unitPrice)}/ea = ${money(item.lineSubtotal)}`;
+      emailPayload[key] = `${item.qty} × ${item.product.name} [${item.product.category}] — ${productPriceText(item.product)}`;
     });
 
-    emailPayload["Equipment Base Subtotal (1-Day)"] = money(totals.equipmentBaseSubtotal);
+    emailPayload["Subtotal of listings with public prices"] = money(totals.equipmentBaseSubtotal);
     emailPayload["Multi-Day Duration Adjustment"] =
       totals.durationSurcharge > 0
         ? `+${money(totals.durationSurcharge)} (${totals.durationOption.shortLabel})`
-        : "$0 (Single Day 1.0x)";
+        : "$0 (no public duration adjustment listed)";
     emailPayload["Adjusted Equipment Subtotal"] = money(totals.equipmentDurationTotal);
     emailPayload["Delivery, Setup & Tech Support Fee"] =
-      totals.serviceFee === 0 ? "$0 (Self Pickup)" : `+${money(totals.serviceFee)} (${totals.serviceOption.title})`;
-    emailPayload["ESTIMATED GRAND TOTAL"] = money(totals.grandTotal);
+      totals.serviceOption.priceType === "quote" ? "Quote required" : totals.serviceFee === 0 ? "$0" : `+${money(totals.serviceFee)} (${totals.serviceOption.title})`;
+    emailPayload["ESTIMATED GRAND TOTAL"] = totalPriceText(totals);
     emailPayload["Additional Event Notes"] = state.eventNotes || "None";
 
     try {
@@ -5523,6 +4766,7 @@ function bind() {
       couponCode: totals.coupon ? totals.coupon.code : null,
       discountAmount: totals.discountAmount || 0,
       grandTotal: totals.grandTotal,
+      quoteRequired: totals.quoteRequired,
       status: "New",
       notes: state.eventNotes || ""
     });
@@ -5546,6 +4790,7 @@ function bind() {
       eventLocation: effectiveLocation,
       durationLabel: totals.durationOption.label,
       serviceTitle: totals.serviceOption.title,
+      quoteRequired: totals.quoteRequired,
       paymentMethod: state.paymentMethod,
       lineItems: totals.lineItems,
       totalUnits: totals.totalUnits,
@@ -6357,7 +5602,7 @@ function renderCmsOverview() {
                     <td><strong>${escapeHtml(q.id)}</strong><br><small style="color:#788ba8">${new Date(q.createdAt).toLocaleDateString()}</small></td>
                     <td><strong>${escapeHtml(q.contactName)}</strong><br><small style="color:#788ba8">${escapeHtml(q.organization || q.contactEmail)}</small></td>
                     <td>${escapeHtml(q.eventType)}</td>
-                    <td><strong>$${Number(q.grandTotal).toLocaleString()}</strong></td>
+                    <td><strong>${q.quoteRequired ? "Quote required" : `$${Number(q.grandTotal).toLocaleString()}`}</strong></td>
                     <td><span class="cms-badge ${q.status === "New" ? "gold" : q.status === "Confirmed" ? "green" : "blue"}">${escapeHtml(q.status || "New")}</span></td>
                     <td><button type="button" class="cms-icon-btn" data-cms-view-quote="${escapeHtml(q.id)}" title="View quote details"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></td>
                   </tr>
@@ -6486,7 +5731,7 @@ function renderCmsCatalog() {
               <th style="width:60px">Image</th>
               <th>Rental Item</th>
               <th>Category</th>
-              <th>Daily Rate</th>
+              <th>Published Rate</th>
               <th>Badge</th>
               <th>Description</th>
               <th style="text-align:right">Actions</th>
@@ -6504,8 +5749,7 @@ function renderCmsCatalog() {
                 </td>
                 <td><span class="cms-badge blue">${escapeHtml(p.category)}</span></td>
                 <td>
-                  <strong>$${Number(p.price).toLocaleString()}</strong>
-                  <small style="color:#788ba8">/${p.priceType === "starting" ? "from" : "day"}</small>
+                  <strong>${productPriceText(p)}</strong>
                 </td>
                 <td>
                   ${p.tag ? `<span class="cms-badge ${p.tone || "lime"}">${escapeHtml(p.tag)}</span>` : '<span style="color:#5f7191">—</span>'}
@@ -6715,7 +5959,7 @@ function renderCmsQuotes() {
                     <br><small style="color:#788ba8">${(q.items || []).length} items</small>
                   </td>
                   <td>
-                    <strong style="font-size:15px;color:#ffffff">$${Number(q.grandTotal).toLocaleString()}</strong>
+                    <strong style="font-size:15px;color:#ffffff">${q.quoteRequired ? "Quote required" : `$${Number(q.grandTotal).toLocaleString()}`}</strong>
                     ${q.discountAmount > 0 ? `<br><small style="color:#22c55e">Saved $${q.discountAmount} (${escapeHtml(q.couponCode)})</small>` : ""}
                   </td>
                   <td>
@@ -6752,8 +5996,9 @@ function renderCmsQuotes() {
 
 function renderCmsAnalytics() {
   const quotes = loadCmsQuotes();
-  const totalValuation = products.reduce((sum, p) => sum + (Number(p.price) || 0), 0);
-  const avgPrice = Math.round(totalValuation / (products.length || 1));
+  const publicRateProducts = products.filter((p) => p.priceType !== "quote");
+  const totalPublicRates = publicRateProducts.reduce((sum, p) => sum + (Number(p.price) || 0), 0);
+  const avgPublicRate = Math.round(totalPublicRates / (publicRateProducts.length || 1));
   const totalPipeline = quotes.reduce((sum, q) => sum + (Number(q.grandTotal) || 0), 0);
   const avgQuote = quotes.length ? Math.round(totalPipeline / quotes.length) : 0;
 
@@ -6776,15 +6021,15 @@ function renderCmsAnalytics() {
     <!-- Stat Cards -->
     <div class="cms-stat-grid">
       <article class="cms-stat-card">
-        <small>CATALOG INVENTORY VALUE</small>
-        <strong>$${totalValuation.toLocaleString()}</strong>
-        <span>Combined base daily rental asset value</span>
+        <small>SUM OF PUBLISHED RATES</small>
+        <strong>$${totalPublicRates.toLocaleString()}</strong>
+        <span>Across ${publicRateProducts.length} listings with a public price</span>
       </article>
 
       <article class="cms-stat-card">
-        <small>AVERAGE RENTAL RATE</small>
-        <strong>$${avgPrice}</strong>
-        <span>Average single unit daily price</span>
+        <small>AVERAGE PUBLISHED RATE</small>
+        <strong>$${avgPublicRate}</strong>
+        <span>Across public package and starting prices</span>
       </article>
 
       <article class="cms-stat-card">
@@ -6836,17 +6081,17 @@ function renderCmsAnalytics() {
         </div>
 
         ${(() => {
-          const t1 = products.filter((p) => p.price < 100).length;
-          const t2 = products.filter((p) => p.price >= 100 && p.price < 350).length;
-          const t3 = products.filter((p) => p.price >= 350 && p.price < 800).length;
-          const t4 = products.filter((p) => p.price >= 800).length;
-          const total = products.length || 1;
+          const t1 = publicRateProducts.filter((p) => p.price < 100).length;
+          const t2 = publicRateProducts.filter((p) => p.price >= 100 && p.price < 350).length;
+          const t3 = publicRateProducts.filter((p) => p.price >= 350 && p.price < 800).length;
+          const t4 = publicRateProducts.filter((p) => p.price >= 800).length;
+          const total = publicRateProducts.length || 1;
 
           const tiers = [
-            { label: "Under $100 / day (Mics, Small speakers, Up-lights)", count: t1, color: "green" },
-            { label: "$100 - $349 / day (Subwoofers, DJ rigs, Mixers)", count: t2, color: "blue" },
-            { label: "$350 - $799 / day (Projector kits, Mid packages)", count: t3, color: "purple" },
-            { label: "$800+ / day (LED Video walls, 360 booths, Trailers)", count: t4, color: "orange" },
+            { label: "Under $100", count: t1, color: "green" },
+            { label: "$100 - $349", count: t2, color: "blue" },
+            { label: "$350 - $799", count: t3, color: "purple" },
+            { label: "$800+", count: t4, color: "orange" },
           ];
 
           return tiers.map((t) => {
@@ -7063,14 +6308,15 @@ function renderCmsProductModal() {
             </select>
           </label>
 
-          <label class="cms-label">Daily Rental Rate ($) *
-            <input type="number" id="cmsProdPrice" class="cms-input" min="1" step="1" value="${p.price || 65}" required>
+          <label class="cms-label">Published Rate ($)
+            <input type="number" id="cmsProdPrice" class="cms-input" min="1" step="1" value="${p.price || ""}" ${p.priceType === "quote" ? "disabled" : "required"}>
           </label>
 
           <label class="cms-label">Rate Type
             <select id="cmsProdPriceType" class="cms-select" style="width:100%">
-              <option value="fixed" ${p.priceType === "fixed" ? "selected" : ""}>Fixed Daily Rate ($X/day)</option>
-              <option value="starting" ${p.priceType === "starting" ? "selected" : ""}>Starting Rate (From $X)</option>
+              <option value="fixed" ${p.priceType === "fixed" ? "selected" : ""}>Published package rate</option>
+              <option value="starting" ${p.priceType === "starting" ? "selected" : ""}>Starting rate (From $X)</option>
+              <option value="quote" ${p.priceType === "quote" ? "selected" : ""}>Quote required (no public price)</option>
             </select>
           </label>
 
@@ -7164,8 +6410,8 @@ function renderCmsBundleModal() {
             <input type="text" id="cmsBundleTitle" class="cms-input" value="${escapeHtml(b.title || "")}" required placeholder="e.g. Wedding Event Package">
           </label>
 
-          <label class="cms-label">Package Rate ($) *
-            <input type="number" id="cmsBundlePrice" class="cms-input" min="1" step="1" value="${b.price || 1499}" required>
+          <label class="cms-label">Package Rate
+            <input type="text" id="cmsBundlePrice" class="cms-input" value="Quote required" readonly>
           </label>
 
           <label class="cms-label">Label / Tag (e.g. WEDDING, CONCERT)
@@ -7351,7 +6597,7 @@ function renderCmsQuoteDetailModal() {
         ` : ""}
         <div style="display:flex;justify-content:space-between;color:#ffffff;font-size:16px;border-top:1px solid rgba(137,162,201,.14);padding-top:8px">
           <span>GRAND TOTAL</span>
-          <strong style="color:#72baff">$${Number(q.grandTotal).toLocaleString()}</strong>
+          <strong style="color:#72baff">${q.quoteRequired ? "Quote required" : `$${Number(q.grandTotal).toLocaleString()}`}</strong>
         </div>
       </div>
 
@@ -7438,8 +6684,8 @@ function bindCmsEvents() {
         id: "",
         name: "",
         category: "Audio & Speakers",
-        price: 95,
-        priceType: "fixed",
+        price: 0,
+        priceType: "quote",
         tag: "New",
         desc: "",
         image: "assets/beantown/speaker-rental.jpg",
@@ -7470,7 +6716,8 @@ function bindCmsEvents() {
       state.cmsEditingBundle = {
         id: "",
         title: "",
-        price: 1499,
+        price: 0,
+        priceType: "quote",
         label: "PACKAGE",
         desc: "",
         items: [],
@@ -7586,12 +6833,23 @@ function bindCmsEvents() {
   });
 
   // Product Form Save
+  const cmsRateType = document.querySelector("#cmsProdPriceType");
+  const cmsRateInput = document.querySelector("#cmsProdPrice");
+  cmsRateType?.addEventListener("change", () => {
+    const isQuote = cmsRateType.value === "quote";
+    if (cmsRateInput) {
+      cmsRateInput.disabled = isQuote;
+      cmsRateInput.required = !isQuote;
+      if (isQuote) cmsRateInput.value = "";
+    }
+  });
+
   document.querySelector("#cmsProductForm")?.addEventListener("submit", (e) => {
     e.preventDefault();
     const name = document.querySelector("#cmsProdName")?.value.trim();
     const category = document.querySelector("#cmsProdCat")?.value;
-    const price = Number(document.querySelector("#cmsProdPrice")?.value) || 0;
     const priceType = document.querySelector("#cmsProdPriceType")?.value || "fixed";
+    const price = priceType === "quote" ? 0 : Number(document.querySelector("#cmsProdPrice")?.value) || 0;
     const tag = document.querySelector("#cmsProdTag")?.value.trim() || "";
     const desc = document.querySelector("#cmsProdDesc")?.value.trim() || "";
     const image = document.querySelector("#cmsProdImageVal")?.value || "assets/beantown/speaker-rental.jpg";
@@ -7687,7 +6945,7 @@ function bindCmsEvents() {
   document.querySelector("#cmsBundleForm")?.addEventListener("submit", (e) => {
     e.preventDefault();
     const title = document.querySelector("#cmsBundleTitle")?.value.trim();
-    const price = Number(document.querySelector("#cmsBundlePrice")?.value) || 0;
+    const price = 0;
     const label = document.querySelector("#cmsBundleLabel")?.value.trim() || "BUNDLE";
     const desc = document.querySelector("#cmsBundleDesc")?.value.trim() || "";
     const itemsRaw = document.querySelector("#cmsBundleItems")?.value.trim() || "";
@@ -7704,6 +6962,7 @@ function bindCmsEvents() {
           ...list[idx],
           title,
           price,
+          priceType: "quote",
           label,
           desc,
           items,
@@ -7716,6 +6975,7 @@ function bindCmsEvents() {
         id: newId,
         title,
         price,
+        priceType: "quote",
         label,
         desc,
         items,
@@ -8013,7 +7273,7 @@ function bindCmsEvents() {
 
   // Maintenance: Factory Reset
   document.querySelector("#cmsFactoryResetBtn")?.addEventListener("click", () => {
-    if (confirm("Reset everything to original factory defaults? This will restore the default 65 equipment items, 7 turnkey packages, and original promo codes.")) {
+    if (confirm("Reset everything to original factory defaults? This will restore the official rental catalog and quote-based event suggestions, and original promo codes.")) {
       localStorage.removeItem(CMS_STORAGE.PRODUCTS);
       localStorage.removeItem(CMS_STORAGE.BUNDLES);
       localStorage.removeItem(CMS_STORAGE.COUPONS);

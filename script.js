@@ -4,7 +4,7 @@ const DEFAULT_BUNDLES = [
   {
     id: "wedding",
     title: "Wedding Event",
-    price: 2423,
+    price: 0,
     included: { "medium-audio": 1, "qlxd-lavalier": 2, "dry-ice-cloud": 1, "uplights-6": 1, "photo-360": 1 },
     tone: "bundle-wedding",
     label: "WEDDING",
@@ -21,7 +21,7 @@ const DEFAULT_BUNDLES = [
   {
     id: "corporate",
     title: "Corporate Conference",
-    price: 1450,
+    price: 0,
     included: {
       "medium-audio": 1,
       "qlxd-lavalier": 2,
@@ -43,7 +43,7 @@ const DEFAULT_BUNDLES = [
   {
     id: "concert",
     title: "Concert & Live Performance",
-    price: 2800,
+    price: 0,
     included: { "large-audio": 1, "sub-kw181": 2, iem: 2, "qlxd-handheld": 2, "led-16": 1 },
     tone: "bundle-concert",
     label: "CONCERT",
@@ -60,7 +60,7 @@ const DEFAULT_BUNDLES = [
   {
     id: "school",
     title: "School Dance & Social",
-    price: 1444,
+    price: 0,
     included: {
       "medium-audio": 1,
       "sub-thump18": 1,
@@ -82,7 +82,7 @@ const DEFAULT_BUNDLES = [
   {
     id: "party",
     title: "Private Party & DJ",
-    price: 2043,
+    price: 0,
     included: {
       "dj-basic-pkg": 1,
       "sub-kw181": 1,
@@ -104,7 +104,7 @@ const DEFAULT_BUNDLES = [
   {
     id: "movie",
     title: "Outdoor Movie Night",
-    price: 814,
+    price: 0,
     included: { "movie-16": 1, "qlxd-handheld": 1 },
     tone: "bundle-movie",
     label: "MOVIE NIGHT",
@@ -121,8 +121,8 @@ const DEFAULT_BUNDLES = [
   {
     id: "special-fx-pkg",
     title: "Special FX Celebration",
-    price: 1220,
-    included: { "cold-spark-4": 1, "dry-ice-cloud": 1, "uplights-12": 1 },
+    price: 0,
+    included: { "cold-spark-4": 1, "dry-ice-cloud": 1, "uplights-6": 1 },
     tone: "bundle-wedding",
     label: "SPECIAL FX",
     desc: "High-impact visual moments: 4 cold spark fountain machines, dry ice low-lying cloud fog, and 12 wireless uplights.",
@@ -158,52 +158,7 @@ const CMS_STORAGE = {
   AUTH: "beantown_cms_auth",
 };
 
-const DEFAULT_COUPONS = [
-  {
-    id: "coupon-welcome50",
-    code: "WELCOME50",
-    type: "fixed",
-    value: 50,
-    minOrder: 300,
-    expiryDate: "2026-12-31",
-    description: "$50 off your first event rental (min. $300)",
-    active: true,
-    usageCount: 12,
-  },
-  {
-    id: "coupon-beantown10",
-    code: "BEANTOWN10",
-    type: "percent",
-    value: 10,
-    minOrder: 200,
-    expiryDate: "2026-12-31",
-    description: "10% off entire equipment rental",
-    active: true,
-    usageCount: 28,
-  },
-  {
-    id: "coupon-promo100",
-    code: "PROMO100",
-    type: "fixed",
-    value: 100,
-    minOrder: 800,
-    expiryDate: "2026-12-31",
-    description: "$100 off complete event production",
-    active: true,
-    usageCount: 7,
-  },
-  {
-    id: "coupon-vip15",
-    code: "VIP15",
-    type: "percent",
-    value: 15,
-    minOrder: 1500,
-    expiryDate: "2026-12-31",
-    description: "15% VIP discount for major festivals & productions",
-    active: true,
-    usageCount: 4,
-  },
-];
+const DEFAULT_COUPONS = [];
 
 const DEFAULT_SETTINGS = {
   companyName: "Beantown Audio Rentals",
@@ -216,68 +171,7 @@ const DEFAULT_SETTINGS = {
   adminEmails: ["kcbianzon@gmail.com"],
 };
 
-const DEFAULT_SAMPLE_QUOTES = [
-  {
-    id: "BOS-94812",
-    createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
-    contactName: "Sarah Jenkins",
-    contactEmail: "sarah.jenkins@biotech-summit.org",
-    contactPhone: "(617) 555-0144",
-    organization: "BioTech Innovation Forum",
-    eventName: "New England Life Sciences Gala 2026",
-    eventType: "Corporate Event",
-    guests: "250",
-    venue: "Indoor",
-    date: "November 14, 2026",
-    location: "Seaport World Trade Center, Boston MA",
-    serviceTier: "Full AV Production & Dedicated Technician",
-    serviceFee: 650,
-    duration: "1-Day Rental (Standard 24-Hour)",
-    items: [
-      { id: "medium-audio", name: "Medium Event Speaker Package", qty: 2, price: 349, subtotal: 698 },
-      { id: "qlxd-lavalier", name: "Shure QLX-D Wireless Lavalier System", qty: 4, price: 85, subtotal: 340 },
-      { id: "fastfold-screen", name: "FastFold 120-inch Front/Rear Screen & Projector", qty: 2, price: 395, subtotal: 790 },
-      { id: "uplights-6", name: "Battery Wireless LED Up-Lights (6-Pack)", qty: 2, price: 150, subtotal: 300 }
-    ],
-    baseSubtotal: 2128,
-    durationSurcharge: 0,
-    couponCode: "BEANTOWN10",
-    discountAmount: 213,
-    grandTotal: 2565,
-    status: "New",
-    notes: "Main ballroom keynote starts at 9am. Load-in dock access required at 6:30am."
-  },
-  {
-    id: "BOS-83190",
-    createdAt: new Date(Date.now() - 3600000 * 28).toISOString(),
-    contactName: "Marcus Sterling",
-    contactEmail: "marcus@sterlingevents.com",
-    contactPhone: "(978) 555-8821",
-    organization: "Private Wedding",
-    eventName: "Sterling-Vance Wedding Reception",
-    eventType: "Wedding",
-    guests: "175",
-    venue: "Outdoor & Indoor",
-    date: "December 5, 2026",
-    location: "The Crane Estate, Ipswich MA",
-    serviceTier: "Delivery, Setup & Testing (Crew breakdown included)",
-    serviceFee: 350,
-    duration: "1-Day Rental (Standard 24-Hour)",
-    items: [
-      { id: "medium-audio", name: "Medium Event Speaker Package", qty: 1, price: 349, subtotal: 349 },
-      { id: "photo-360", name: "360 Video Photo Booth Platform", qty: 1, price: 1499, subtotal: 1499 },
-      { id: "dry-ice-cloud", name: "Dry Ice Low-Lying Fog Machine", qty: 1, price: 295, subtotal: 295 },
-      { id: "cold-spark-4", name: "Indoor Cold Spark Machines (4-Pack)", qty: 1, price: 600, subtotal: 600 }
-    ],
-    baseSubtotal: 2743,
-    durationSurcharge: 0,
-    couponCode: "WELCOME50",
-    discountAmount: 50,
-    grandTotal: 3043,
-    status: "Confirmed",
-    notes: "First dance around 7:15pm with cloud effect and sparks. Sound must be tuned for tent acoustics."
-  }
-];
+const DEFAULT_SAMPLE_QUOTES = [];
 
 const BEANTOWN_ASSETS = [
   { file: "speaker-rental.jpg", label: "QSC Powered Speaker & Tripod" },
@@ -323,6 +217,7 @@ function loadCmsProducts() {
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
+    localStorage.removeItem(CMS_STORAGE.COUPONS);
     localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-27-public-catalog-v1");
   }
   try {
@@ -781,6 +676,9 @@ function productPriceText(p) {
 function bundlePriceText(bundle) {
   return bundle.priceType === "quote" ? "Quote required" : money(bundle.price);
 }
+function totalPriceText(totals) {
+  return totals.quoteRequired ? "Quote required" : money(totals.grandTotal);
+}
 function productMatchesCategory(p, cat) {
   return (
     cat === "All" ||
@@ -900,21 +798,20 @@ function parseDurationText(text) {
   if (t.includes("week")) {
     const m = t.match(/(\d+)/);
     const weeks = m ? Math.max(1, parseInt(m[1], 10)) : 1;
-    const mult = Math.min(3.5, 2.5 + (weeks - 1) * 0.5);
     return {
       days: weeks * 7,
-      multiplier: mult,
-      label: `${weeks} Week${weeks > 1 ? "s" : ""} (${mult.toFixed(1)}×)`,
-      badge: `${weeks} Week${weeks > 1 ? "s" : ""} (${mult.toFixed(1)}× Rate)`
+      multiplier: 1,
+      label: `${weeks} Week${weeks > 1 ? "s" : ""}`,
+      badge: "Quote confirmed"
     };
   }
 
   if (t.includes("weekend")) {
     return {
       days: 2,
-      multiplier: 1.5,
-      label: "2 Days (Weekend)",
-      badge: "Save 25% on Day 2"
+      multiplier: 1,
+      label: "Weekend / 2 days",
+      badge: "Quote confirmed"
     };
   }
 
@@ -922,20 +819,19 @@ function parseDurationText(text) {
   if (dayMatch) {
     const days = Math.max(1, parseInt(dayMatch[1], 10));
     if (days === 1) {
-      return { days: 1, multiplier: 1, label: "1 Day (1.0×)", badge: "Standard Rate" };
+      return { days: 1, multiplier: 1, label: "1 Day", badge: "Quote confirmed" };
     }
     if (days === 2) {
-      return { days: 2, multiplier: 1.5, label: "2 Days (1.5×)", badge: "Save 25% on Day 2" };
+      return { days: 2, multiplier: 1, label: "2 Days", badge: "Quote confirmed" };
     }
     if (days === 3) {
-      return { days: 3, multiplier: 2.0, label: "3 Days (2.0×)", badge: "Save 33%+ Extended" };
+      return { days: 3, multiplier: 1, label: "3 Days", badge: "Quote confirmed" };
     }
-    const mult = Math.min(3.5, 2.0 + (days - 3) * 0.25);
     return {
       days,
-      multiplier: mult,
-      label: `${days} Days (${mult.toFixed(1)}×)`,
-      badge: `${mult.toFixed(1)}× Multi-Day Rate`
+      multiplier: 1,
+      label: `${days} Days`,
+      badge: "Quote confirmed"
     };
   }
 
@@ -1280,7 +1176,7 @@ function faqSection() {
     {
       category: "Rentals & Inventory",
       question: "What equipment is available in your Boston rental inventory?",
-      answer: "We maintain a comprehensive, commercial-grade event inventory in Boston. Our catalog includes powered sound systems and line arrays (QSC, JBL, Mackie), high-output subwoofers (QSC KW181, cardioid KS212C), Shure QLX-D digital wireless microphones (Beta 58A handhelds, lavaliers, Countryman headsets, and push-to-talk conference mics), audio mixers (Behringer X32, QSC TouchMix-16, Allen & Heath SQ-7), club-standard DJ rigs (Pioneer CDJ-3000, DJM-900NXS2, Technics 1200 turntables, Scrim Werks facades), 65″ & 75″ Samsung 4K TVs on motorized truss stands, 2.67mm modular indoor LED video walls, daylight-viewable mobile outdoor LED trailers, inflatable outdoor movie screens (12′ to 40′) with Sony laser projectors, 3-channel silent disco headphones (50–300+ units), photo booths (iPad Mirror, Magic Mirror Air, 360 Video platform), wireless Chauvet Freedom Par battery uplighting, moving heads, and indoor-safe special FX (Cold Sparklers and Dry Ice “Dancing on a Cloud”).",
+      answer: "The rental catalog includes small, medium, and large audio packages; speakers and subwoofers; microphone packages and equipment; audio mixers; DJ packages and individual DJ gear; video packages, Samsung 65-inch and 75-inch TVs, and indoor LED wall packages; five outdoor LED trailer sizes; four outdoor movie screen sizes; photo booths; silent disco packages for 50–300 headphones; lighting fixtures and packages; cold spark packages; a dry ice machine; and basic and pro live-streaming packages. Published rates appear only on the outdoor movie, photo booth, and silent disco listings; other rentals require a quote.",
     },
     {
       category: "Delivery & Setup",
@@ -1290,7 +1186,7 @@ function faqSection() {
     {
       category: "Pricing & Quotes",
       question: "How does pricing work, and are there any surprise fees?",
-      answer: "We pride ourselves on 100% transparent pricing. Fixed-format entertainment packages—such as Silent Disco ($500–$2,500), Inflatable Outdoor Movie Nights ($549–$1,899), and Photo Booths ($799–$1,699)—have clearly listed public pricing. For custom sound systems, modular LED walls, multi-camera live streaming, and concert lighting, we provide an itemized quote based on venue dimensions, guest count, rigging requirements, and technician hours. Every quote clearly separates gear, delivery, setup, and labor—so you will never encounter surprise add-ons on event day.",
+      answer: "The original site publishes rates for outdoor movie packages ($549–$1,899), photo booths (starting at $799, $1,399, $1,699, and $1,499 by listing), and silent disco packages ($500–$2,500). Other rental pages ask customers to request pricing. The project marks those listings as quote required and does not estimate rates, rental periods, delivery, or setup fees.",
     },
     {
       category: "On-Site Support",
@@ -1584,10 +1480,10 @@ function home() {
           .map((i) => `<li>${i}</li>`)
           .join(
             "",
-          )}</ul><div class="bundle-foot"><span class="bundle-price">${money(b.price)}</span><button class="btn btn-dark btn-small" data-bundle="${b.id}">View bundle →</button></div></div></article>`,
+          )}</ul><div class="bundle-foot"><span class="bundle-price">${bundlePriceText(b)}</span><button class="btn btn-dark btn-small" data-bundle="${b.id}">View bundle →</button></div></div></article>`,
     )
     .join("")}</div></section>
-  <section class="section"><div class="feature-panel dark"><div><span class="eyebrow">PLAN THE SETUP WITH CONFIDENCE</span><h3>Build it<br>before you book it.</h3><p>Choose your event, add the pieces you need, and see fixed-price items in your estimate. Custom production stays quote-based.</p></div><div class="stat-row"><div class="stat"><strong>24/7</strong><span>CONFIGURE ANYTIME</span></div><div class="stat"><strong>01</strong><span>EVENT BUILDER</span></div><div class="stat"><strong>∞</strong><span>COMBINATIONS</span></div></div></div></section>
+  <section class="section"><div class="feature-panel dark"><div><span class="eyebrow">PLAN THE SETUP WITH CONFIDENCE</span><h3>Build it<br>before you book it.</h3><p>Choose your event and requested items. Public rates appear where listed; other prices are confirmed by quote.</p></div><div class="stat-row"><div class="stat"><strong>24/7</strong><span>CONFIGURE ANYTIME</span></div><div class="stat"><strong>01</strong><span>EVENT BUILDER</span></div><div class="stat"><strong>∞</strong><span>COMBINATIONS</span></div></div></div></section>
   ${testimonialSection()}
   ${faqSection()}
  </div>`;
@@ -1662,7 +1558,7 @@ function rentals() {
   return `<div class="page">
     <div class="page-hero">
       <div><span class="eyebrow">RENTAL CATALOG</span><h1>Everything<br>you can add.</h1></div>
-      <p>Explore our complete commercial rental inventory. Consumer packages feature transparent fixed pricing; custom staging, line arrays, and LED walls are confirmed with an itemized quote.</p>
+      <p>Explore all rental listings. Public prices are shown where the original site publishes them; other rentals are quote-based.</p>
     </div>
 
     <section class="rentals-catalog" aria-label="Rental inventory">
@@ -1795,7 +1691,7 @@ function rentals() {
 
 function bundlesPage() {
   if (state.bundle) return bundleDetail(state.bundle);
-  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">EVENT BUNDLES</span><h1>Start with<br>the occasion.</h1></div><p>Choose a fixed package built around a familiar event format. Every bundle is a complete starting point with clear inclusions and no hidden customization step.</p></div><section class="bundle-customize"><div><span class="eyebrow">NEED SOMETHING MORE SPECIFIC?</span><h2>Customize your experience.</h2><p>Build an event from the ground up with recommendations for your occasion and access to the full equipment catalog.</p></div><button type="button" class="btn btn-dark" data-open-cart>Build your setup →</button></section><div class="bundle-grid">${bundles.map((b) => `<article class="bundle-card reveal"><div class="bundle-top ${b.tone} has-bundle-image" style="--bundle-image:url('${bundleImage(b)}')"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items.map((i) => `<li>${i}</li>`).join("")}</ul><div class="bundle-foot"><span class="bundle-price">${money(b.price)}</span><button class="btn btn-dark btn-small" data-bundle="${b.id}">View bundle →</button></div></div></article>`).join("")}</div></div>`;
+  return `<div class="page"><div class="page-hero"><div><span class="eyebrow">EVENT BUNDLES</span><h1>Start with<br>the occasion.</h1></div><p>Use these mockup setup suggestions as a starting point. Package contents and pricing are confirmed by quote.</p></div><section class="bundle-customize"><div><span class="eyebrow">NEED SOMETHING MORE SPECIFIC?</span><h2>Customize your experience.</h2><p>Build an event from the ground up with recommendations for your occasion and access to the full equipment catalog.</p></div><button type="button" class="btn btn-dark" data-open-cart>Build your setup →</button></section><div class="bundle-grid">${bundles.map((b) => `<article class="bundle-card reveal"><div class="bundle-top ${b.tone} has-bundle-image" style="--bundle-image:url('${bundleImage(b)}')"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items.map((i) => `<li>${i}</li>`).join("")}</ul><div class="bundle-foot"><span class="bundle-price">${bundlePriceText(b)}</span><button class="btn btn-dark btn-small" data-bundle="${b.id}">View bundle →</button></div></div></article>`).join("")}</div></div>`;
 }
 
 function bundleDetail(id) {
@@ -1810,7 +1706,7 @@ function bundleDetail(id) {
     (total, { product, quantity }) => total + (product.price || 0) * quantity,
     0,
   );
-  return `<div class="page"><div class="bundle-detail-head"><a class="text-btn" href="#bundles">← All bundles</a><div class="bundle-detail-layout"><div><span class="eyebrow">${bundle.label} PACKAGE</span><h1>${bundle.title}</h1><p>${bundle.desc}</p></div><div class="bundle-detail-price"><span class="eyebrow">TURNKEY PACKAGE TOTAL</span><strong>${money(bundle.price)}</strong></div></div></div><div class="bundle-detail-wrap"><section class="bundle-detail-main"><div class="detail-section-head"><div><span class="eyebrow">WHAT’S INCLUDED</span><h2>Your package, item by item.</h2></div><span class="detail-lock">${included.reduce((s, x) => s + x.quantity, 0)} Total Units</span></div><div class="bundle-included-list">${included.map(({ product, quantity }) => `<div class="bundle-included-item"><div><strong>${quantity} × ${product.name}</strong><span>${product.category} · ${money(product.price)} each · ${product.desc}</span></div><strong>${money(product.price * quantity)}</strong></div>`).join("")}</div><div class="bundle-detail-actions"><button type="button" class="btn btn-dark" data-launch-bundle="${bundle.id}" data-launch-step="5">Request this bundle →</button><button type="button" class="btn btn-light" data-open-cart>View in Cart →</button></div></section><aside class="bundle-detail-summary"><span class="eyebrow">TRANSPARENT MATH</span><div class="detail-total"><span>Itemized equipment sum</span><strong>${money(knownTotal)}</strong></div><div class="detail-total"><span>Package total</span><strong>${money(bundle.price)}</strong></div><p>Every item in this bundle is priced transparently with zero hidden fees. Load this bundle into the Event Builder to add microphones, lighting, or delivery support.</p></aside></div></div>`;
+  return `<div class="page"><div class="bundle-detail-head"><a class="text-btn" href="#bundles">← All bundles</a><div class="bundle-detail-layout"><div><span class="eyebrow">${bundle.label} PACKAGE</span><h1>${bundle.title}</h1><p>${bundle.desc}</p></div><div class="bundle-detail-price"><span class="eyebrow">PACKAGE PRICE</span><strong>${bundlePriceText(bundle)}</strong></div></div></div><div class="bundle-detail-wrap"><section class="bundle-detail-main"><div class="detail-section-head"><div><span class="eyebrow">WHAT’S INCLUDED</span><h2>Your package, item by item.</h2></div><span class="detail-lock">${included.reduce((s, x) => s + x.quantity, 0)} Total Units</span></div><div class="bundle-included-list">${included.map(({ product, quantity }) => `<div class="bundle-included-item"><div><strong>${quantity} × ${product.name}</strong><span>${product.category} · ${productPriceText(product)} · ${product.desc}</span></div><strong>${productPriceText(product)}</strong></div>`).join("")}</div><div class="bundle-detail-actions"><button type="button" class="btn btn-dark" data-launch-bundle="${bundle.id}" data-launch-step="5">Request this bundle →</button><button type="button" class="btn btn-light" data-open-cart>View in Cart →</button></div></section><aside class="bundle-detail-summary"><span class="eyebrow">TRANSPARENT MATH</span><div class="detail-total"><span>Itemized equipment sum</span><strong>${money(knownTotal)}</strong></div><div class="detail-total"><span>Package total</span><strong>${bundlePriceText(bundle)}</strong></div><p>Package contents and pricing are confirmed with your event quote.</p></aside></div></div>`;
 }
 
 function aboutUsPage() {
@@ -2322,7 +2218,7 @@ function renderBuilderCatalogGridMarkup() {
     return `<div class="q-catalog-empty">
       <strong>No equipment matches your filter</strong>
       <p>Try clearing the search term or switching back to All Categories.</p>
-      <button type="button" class="btn btn-light btn-small" data-builder-reset-catalog>Show all 65 rentals</button>
+      <button type="button" class="btn btn-light btn-small" data-builder-reset-catalog>Show all ${products.length} rentals</button>
     </div>`;
   }
   return list
@@ -2337,7 +2233,7 @@ function renderBuilderCatalogGridMarkup() {
         <div class="q-equip-body">
           <div class="q-equip-meta">
             <span class="q-equip-cat">${escapeHtml(p.category)}</span>
-            <span class="q-equip-unit-price">${money(p.price)}<small>/day</small></span>
+            <span class="q-equip-unit-price">${productPriceText(p)}</span>
           </div>
           <h4>${escapeHtml(p.name)}</h4>
           <p>${escapeHtml(p.desc)}</p>
@@ -2785,7 +2681,7 @@ function renderEquipmentStep(totals) {
       <div class="q-subblock-head">
         <div>
           <span class="eyebrow">TURNKEY PACKAGES</span>
-          <h3>1. Quick-Load an Event Bundle (Optional)</h3>
+          <h3>1. Quick-Load an Event Setup Suggestion</h3>
         </div>
         ${totals.uniqueCount > 0 ? `<button type="button" class="q-clear-all-btn" data-clear-all-equipment>Clear all selected gear (${totals.totalUnits})</button>` : ""}
       </div>
@@ -2796,7 +2692,7 @@ function renderEquipmentStep(totals) {
             return `<div class="q-bundle-mini ${isMatched ? "is-active" : ""}">
               <div class="q-bundle-mini-top">
                 <span class="eyebrow">${escapeHtml(b.label)}</span>
-                <strong>${money(b.price)}</strong>
+                <strong>${bundlePriceText(b)}</strong>
               </div>
               <h4>${escapeHtml(b.title)}</h4>
               <p>${escapeHtml(b.desc)}</p>
@@ -2826,7 +2722,7 @@ function renderEquipmentStep(totals) {
               <img src="${productImage(p)}" alt="${escapeHtml(p.name)}" loading="lazy">
               <div class="q-rec-info">
                 <strong>${escapeHtml(p.name)}</strong>
-                <span>${escapeHtml(p.category)} · <b>${money(p.price)}/day</b></span>
+                <span>${escapeHtml(p.category)} · <b>${productPriceText(p)}</b></span>
               </div>
               <div class="q-stepper">
                 <button type="button" class="q-step-btn" data-minus="${p.id}" ${qty === 0 ? "disabled" : ""} aria-label="Decrease ${escapeHtml(p.name)}">−</button>
@@ -2839,11 +2735,11 @@ function renderEquipmentStep(totals) {
       </div>
     </div>
 
-    <!-- 3. Full 65-Item Equipment Catalog Browser -->
+    <!-- 3. Full Rental Catalog -->
     <div class="q-subblock">
       <div class="q-subblock-head">
         <div>
-          <span class="eyebrow">FULL RENTAL INVENTORY (65 ITEMS)</span>
+          <span class="eyebrow">FULL RENTAL INVENTORY (${products.length} ITEMS)</span>
           <h3>3. Browse &amp; Add Any Individual Equipment</h3>
         </div>
       </div>
@@ -2945,7 +2841,7 @@ function renderReviewAndSubmitStep(totals) {
       </div>
       <div class="q-review-meta-card">
         <span>DELIVERY &amp; CREW</span>
-          <strong>${escapeHtml(totals.serviceOption.title)} (${totals.serviceFee === 0 ? "Free" : money(totals.serviceFee)})</strong>
+          <strong>${escapeHtml(totals.serviceOption.title)} (Quote required)</strong>
           <button type="button" class="q-meta-edit" data-goto-step="4">Edit</button>
       </div>
     </div>
@@ -2983,7 +2879,7 @@ function renderReviewAndSubmitStep(totals) {
                       <span class="q-td-sub">${escapeHtml(item.product.tag || "")}</span>
                     </td>
                     <td><span class="q-td-cat">${escapeHtml(item.product.category)}</span></td>
-                    <td>${money(item.unitPrice)}<small>/day</small></td>
+                    <td>${productPriceText(item.product)}</td>
                     <td>
                       <div class="q-stepper q-stepper-inline">
                         <button type="button" class="q-step-btn" data-minus="${item.product.id}" aria-label="Decrease ${escapeHtml(item.product.name)}">−</button>
@@ -2991,7 +2887,7 @@ function renderReviewAndSubmitStep(totals) {
                         <button type="button" class="q-step-btn q-step-plus" data-plus="${item.product.id}" aria-label="Increase ${escapeHtml(item.product.name)}">+</button>
                       </div>
                     </td>
-                    <td class="is-right"><strong>${money(item.lineSubtotal)}</strong></td>
+                    <td class="is-right"><strong>${item.product.priceType === "quote" ? "Quote" : money(item.lineSubtotal)}</strong></td>
                   </tr>`
                 )
                 .join("")}
@@ -3037,7 +2933,7 @@ function renderReviewAndSubmitStep(totals) {
           ` : ""}
           <div class="q-fin-row">
             <span>Delivery, Setup &amp; Production Crew (${escapeHtml(totals.serviceOption.title)})</span>
-            <strong>${totals.serviceFee === 0 ? "$0 (Self Pickup)" : `+${money(totals.serviceFee)}`}</strong>
+            <strong>${totals.serviceOption.priceType === "quote" ? "Quote required" : totals.serviceFee === 0 ? "$0" : `+${money(totals.serviceFee)}`}</strong>
           </div>
           ${totals.discountAmount > 0 ? `
             <div class="q-fin-row q-fin-discount">
@@ -3048,9 +2944,9 @@ function renderReviewAndSubmitStep(totals) {
           <div class="q-fin-row is-grand">
             <div>
               <span>ESTIMATED GRAND TOTAL</span>
-              <small>All items calculated accurately · No hidden fees</small>
+              <small>Publicly listed prices shown; unpriced items confirmed by quote.</small>
             </div>
-            <strong>${money(totals.grandTotal)}</strong>
+            <strong>${totalPriceText(totals)}</strong>
           </div>
         </div>
       ` : `
@@ -3113,10 +3009,10 @@ function renderReviewAndSubmitStep(totals) {
       <div class="q-submit-bar">
         <div class="q-submit-note">
           <strong>Instant Automated Quote Dispatch</strong>
-          <span>Submitting sends your complete itemized setup and estimate to our production team and locks in your quote reference.</span>
+          <span>Submitting sends your requested setup to our production team so they can confirm availability and pricing.</span>
         </div>
         <button type="submit" class="btn btn-dark q-submit-btn" ${state.isSubmittingQuote ? "disabled" : ""}>
-          ${state.isSubmittingQuote ? "Sending Official Quote…" : `Submit Quote (${money(totals.grandTotal)}) →`}
+          ${state.isSubmittingQuote ? "Sending Official Quote…" : `Submit Quote (${totalPriceText(totals)}) →`}
         </button>
       </div>
     </form>
@@ -3169,9 +3065,9 @@ function renderSubmittedReceipt(receipt) {
                       <td class="q-td-num">${String(idx + 1).padStart(2, "0")}</td>
                       <td><strong>${escapeHtml(item.product.name)}</strong></td>
                       <td><span class="q-td-cat">${escapeHtml(item.product.category)}</span></td>
-                      <td>${money(item.unitPrice)}/day</td>
+                      <td>${productPriceText(item.product)}</td>
                       <td>${item.qty}</td>
-                      <td class="is-right"><strong>${money(item.lineSubtotal)}</strong></td>
+                      <td class="is-right"><strong>${item.product.priceType === "quote" ? "Quote" : money(item.lineSubtotal)}</strong></td>
                     </tr>`
                   )
                   .join("")}
@@ -3192,11 +3088,11 @@ function renderSubmittedReceipt(receipt) {
             ` : ""}
             <div class="q-fin-row">
               <span>Delivery, Setup &amp; Crew (${escapeHtml(receipt.serviceTitle)})</span>
-              <strong>${receipt.serviceFee === 0 ? "$0" : `+${money(receipt.serviceFee)}`}</strong>
+              <strong>${receipt.quoteRequired ? "Quote required" : receipt.serviceFee === 0 ? "$0" : `+${money(receipt.serviceFee)}`}</strong>
             </div>
             <div class="q-fin-row is-grand">
               <span>ESTIMATED GRAND TOTAL</span>
-              <strong>${money(receipt.grandTotal)}</strong>
+              <strong>${receipt.quoteRequired ? "Quote required" : money(receipt.grandTotal)}</strong>
             </div>
           </div>
         </div>
@@ -3242,7 +3138,7 @@ function renderEmptyQuoteGate() {
       <div class="quote-gate-bundles-section">
         <div class="quote-gate-bundles-head">
           <span class="eyebrow">OR START WITH A TURNKEY BUNDLE</span>
-          <h3>Quick-start packages with transparent pricing:</h3>
+          <h3>Planning suggestions; package contents and pricing are confirmed by quote:</h3>
         </div>
         <div class="quote-gate-bundles-grid">
           ${sampleBundles.map((b) => `
@@ -3253,7 +3149,7 @@ function renderEmptyQuoteGate() {
                 <p>${escapeHtml(b.desc)}</p>
               </div>
               <div class="quote-bundle-foot">
-                <span class="quote-bundle-price">${money(b.price)}</span>
+                <span class="quote-bundle-price">${bundlePriceText(b)}</span>
                 <button type="button" class="btn btn-dark btn-small" data-launch-bundle="${b.id}" data-launch-step="1">Select bundle →</button>
               </div>
             </div>
@@ -3473,7 +3369,7 @@ function quote() {
       <aside class="q-plan-sidebar" aria-label="Live event plan and quote total">
         <div class="q-plan-total-box">
           <span class="eyebrow">ESTIMATED TOTAL</span>
-          <strong class="q-plan-grand">${money(totals.grandTotal)}</strong>
+          <strong class="q-plan-grand">${totalPriceText(totals)}</strong>
           <span class="q-plan-sub">${totals.uniqueCount} ${totals.uniqueCount === 1 ? "item" : "items"} (${totals.totalUnits} ${totals.totalUnits === 1 ? "unit" : "units"}) · ${escapeHtml(totals.durationOption.shortLabel)}</span>
         </div>
 
@@ -3509,7 +3405,7 @@ function quote() {
                   (item) => `<li class="q-plan-item">
                     <div class="q-plan-item-info">
                       <strong>${escapeHtml(item.product.name)}</strong>
-                      <span>${money(item.unitPrice)} × ${item.qty} = <b>${money(item.lineSubtotal)}</b></span>
+                      <span>${item.product.priceType === "quote" ? "Quote required" : `${money(item.unitPrice)} × ${item.qty} = <b>${money(item.lineSubtotal)}</b>`}</span>
                     </div>
                     <div class="q-plan-item-ctrl">
                       <button type="button" data-minus="${item.product.id}" aria-label="Remove one ${escapeHtml(item.product.name)}">−</button>
@@ -3541,7 +3437,7 @@ function quote() {
           ` : ""}
           <div class="q-math-line">
             <span>${escapeHtml(totals.serviceOption.title)}</span>
-            <strong>${totals.serviceFee === 0 ? "$0" : `+${money(totals.serviceFee)}`}</strong>
+            <strong>${totals.serviceOption.priceType === "quote" ? "Quote required" : totals.serviceFee === 0 ? "$0" : `+${money(totals.serviceFee)}`}</strong>
           </div>
           ${totals.discountAmount > 0 ? `
             <div class="q-math-line is-discount">
@@ -3551,12 +3447,12 @@ function quote() {
           ` : ""}
           <div class="q-math-line is-total">
             <span>Total Estimate</span>
-            <strong>${money(totals.grandTotal)}</strong>
+            <strong>${totalPriceText(totals)}</strong>
           </div>
         </div>
 
         ${step < 6
-          ? `<button type="button" class="btn btn-dark" style="width:100%" data-goto-step="6">Review Full Quote (${money(totals.grandTotal)}) →</button>`
+          ? `<button type="button" class="btn btn-dark" style="width:100%" data-goto-step="6">Review Full Quote →</button>`
           : `<a href="#quoteBuilderForm" class="btn btn-dark" style="width:100%">Complete &amp; Send Quote ↓</a>`}
       </aside>
     </div>
@@ -3749,10 +3645,10 @@ function updateCartDrawer() {
           <div class="cart-item-details">
             <span class="cart-item-cat">${escapeHtml(product.category || "Rental")}</span>
             <h4 class="cart-item-name">${escapeHtml(product.name)}</h4>
-            <span class="cart-item-unit">${product.price ? `${money(product.price)} each` : "Custom quote"}</span>
+            <span class="cart-item-unit">${product.price ? `${productPriceText(product)}` : "Custom quote"}</span>
           </div>
           <div class="cart-item-actions">
-            <span class="cart-item-price">${product.price ? money(lineSubtotal) : "Quote"}</span>
+            <span class="cart-item-price">${productPriceText(product)}</span>
             <div class="cart-item-controls">
               <div class="cart-stepper">
                 <button type="button" class="cart-step-btn" data-cart-minus="${product.id}" aria-label="Decrease ${escapeHtml(product.name)}">−</button>
@@ -4194,7 +4090,7 @@ function bind() {
       state.selected = { ...match.included };
       saveSelection();
       render({ preserveScroll: true });
-      showToast(`Loaded ${match.title} (${money(match.price)})`);
+      showToast(`Loaded ${match.title} (${bundlePriceText(match)})`);
     }),
   );
 
@@ -4784,12 +4680,12 @@ function bind() {
     const itemizedSummaryLines = totals.lineItems
       .map(
         (item, idx) =>
-          `${idx + 1}. ${item.qty}x ${item.product.name} (${item.product.category}) @ ${money(item.unitPrice)}/day = ${money(item.lineSubtotal)}`
+          `${idx + 1}. ${item.qty}x ${item.product.name} (${item.product.category}) — ${item.product.priceType === "quote" ? "Quote required" : `${productPriceText(item.product)} = ${money(item.lineSubtotal)}`}`
       )
       .join("\n");
 
     const emailPayload = {
-      _subject: `New Beantown AV Quote [${refCode}]: ${state.eventType} - ${state.contactName} (${money(totals.grandTotal)})`,
+      _subject: `New Beantown AV Quote [${refCode}]: ${state.eventType} - ${state.contactName} (${totalPriceText(totals)})`,
       _template: "table",
       _captcha: "false",
       _honey: honeyVal,
@@ -4807,7 +4703,7 @@ function bind() {
       "Event Time Window": state.eventTimeWindow,
       "Event Location": effectiveLocation,
       "Rental Duration": totals.durationOption.label,
-      "Delivery & Support Tier": `${totals.serviceOption.title} (${totals.serviceFee === 0 ? "Free / $0" : money(totals.serviceFee)})`,
+      "Delivery & Support Tier": `${totals.serviceOption.title} (${totals.serviceOption.priceType === "quote" ? "Quote required" : totals.serviceFee === 0 ? "$0" : money(totals.serviceFee)})`,
       "Preferred Payment Method": state.paymentMethod,
       "Total Selected Equipment": `${totals.uniqueCount} unique items (${totals.totalUnits} total units)`,
       "Complete Itemized Equipment Breakdown": itemizedSummaryLines,
@@ -4815,18 +4711,18 @@ function bind() {
 
     totals.lineItems.forEach((item, idx) => {
       const key = `Item ${String(idx + 1).padStart(2, "0")}`;
-      emailPayload[key] = `${item.qty} × ${item.product.name} [${item.product.category}] — ${money(item.unitPrice)}/ea = ${money(item.lineSubtotal)}`;
+      emailPayload[key] = `${item.qty} × ${item.product.name} [${item.product.category}] — ${productPriceText(item.product)}`;
     });
 
-    emailPayload["Equipment Base Subtotal (1-Day)"] = money(totals.equipmentBaseSubtotal);
+    emailPayload["Subtotal of listings with public prices"] = money(totals.equipmentBaseSubtotal);
     emailPayload["Multi-Day Duration Adjustment"] =
       totals.durationSurcharge > 0
         ? `+${money(totals.durationSurcharge)} (${totals.durationOption.shortLabel})`
-        : "$0 (Single Day 1.0x)";
+        : "$0 (no public duration adjustment listed)";
     emailPayload["Adjusted Equipment Subtotal"] = money(totals.equipmentDurationTotal);
     emailPayload["Delivery, Setup & Tech Support Fee"] =
-      totals.serviceFee === 0 ? "$0 (Self Pickup)" : `+${money(totals.serviceFee)} (${totals.serviceOption.title})`;
-    emailPayload["ESTIMATED GRAND TOTAL"] = money(totals.grandTotal);
+      totals.serviceOption.priceType === "quote" ? "Quote required" : totals.serviceFee === 0 ? "$0" : `+${money(totals.serviceFee)} (${totals.serviceOption.title})`;
+    emailPayload["ESTIMATED GRAND TOTAL"] = totalPriceText(totals);
     emailPayload["Additional Event Notes"] = state.eventNotes || "None";
 
     try {
@@ -4870,6 +4766,7 @@ function bind() {
       couponCode: totals.coupon ? totals.coupon.code : null,
       discountAmount: totals.discountAmount || 0,
       grandTotal: totals.grandTotal,
+      quoteRequired: totals.quoteRequired,
       status: "New",
       notes: state.eventNotes || ""
     });
@@ -4893,6 +4790,7 @@ function bind() {
       eventLocation: effectiveLocation,
       durationLabel: totals.durationOption.label,
       serviceTitle: totals.serviceOption.title,
+      quoteRequired: totals.quoteRequired,
       paymentMethod: state.paymentMethod,
       lineItems: totals.lineItems,
       totalUnits: totals.totalUnits,
@@ -5704,7 +5602,7 @@ function renderCmsOverview() {
                     <td><strong>${escapeHtml(q.id)}</strong><br><small style="color:#788ba8">${new Date(q.createdAt).toLocaleDateString()}</small></td>
                     <td><strong>${escapeHtml(q.contactName)}</strong><br><small style="color:#788ba8">${escapeHtml(q.organization || q.contactEmail)}</small></td>
                     <td>${escapeHtml(q.eventType)}</td>
-                    <td><strong>$${Number(q.grandTotal).toLocaleString()}</strong></td>
+                    <td><strong>${q.quoteRequired ? "Quote required" : `$${Number(q.grandTotal).toLocaleString()}`}</strong></td>
                     <td><span class="cms-badge ${q.status === "New" ? "gold" : q.status === "Confirmed" ? "green" : "blue"}">${escapeHtml(q.status || "New")}</span></td>
                     <td><button type="button" class="cms-icon-btn" data-cms-view-quote="${escapeHtml(q.id)}" title="View quote details"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button></td>
                   </tr>
@@ -5833,7 +5731,7 @@ function renderCmsCatalog() {
               <th style="width:60px">Image</th>
               <th>Rental Item</th>
               <th>Category</th>
-              <th>Daily Rate</th>
+              <th>Published Rate</th>
               <th>Badge</th>
               <th>Description</th>
               <th style="text-align:right">Actions</th>
@@ -5851,8 +5749,7 @@ function renderCmsCatalog() {
                 </td>
                 <td><span class="cms-badge blue">${escapeHtml(p.category)}</span></td>
                 <td>
-                  <strong>$${Number(p.price).toLocaleString()}</strong>
-                  <small style="color:#788ba8">/${p.priceType === "starting" ? "from" : "day"}</small>
+                  <strong>${productPriceText(p)}</strong>
                 </td>
                 <td>
                   ${p.tag ? `<span class="cms-badge ${p.tone || "lime"}">${escapeHtml(p.tag)}</span>` : '<span style="color:#5f7191">—</span>'}
@@ -6062,7 +5959,7 @@ function renderCmsQuotes() {
                     <br><small style="color:#788ba8">${(q.items || []).length} items</small>
                   </td>
                   <td>
-                    <strong style="font-size:15px;color:#ffffff">$${Number(q.grandTotal).toLocaleString()}</strong>
+                    <strong style="font-size:15px;color:#ffffff">${q.quoteRequired ? "Quote required" : `$${Number(q.grandTotal).toLocaleString()}`}</strong>
                     ${q.discountAmount > 0 ? `<br><small style="color:#22c55e">Saved $${q.discountAmount} (${escapeHtml(q.couponCode)})</small>` : ""}
                   </td>
                   <td>
@@ -6099,8 +5996,9 @@ function renderCmsQuotes() {
 
 function renderCmsAnalytics() {
   const quotes = loadCmsQuotes();
-  const totalValuation = products.reduce((sum, p) => sum + (Number(p.price) || 0), 0);
-  const avgPrice = Math.round(totalValuation / (products.length || 1));
+  const publicRateProducts = products.filter((p) => p.priceType !== "quote");
+  const totalPublicRates = publicRateProducts.reduce((sum, p) => sum + (Number(p.price) || 0), 0);
+  const avgPublicRate = Math.round(totalPublicRates / (publicRateProducts.length || 1));
   const totalPipeline = quotes.reduce((sum, q) => sum + (Number(q.grandTotal) || 0), 0);
   const avgQuote = quotes.length ? Math.round(totalPipeline / quotes.length) : 0;
 
@@ -6123,15 +6021,15 @@ function renderCmsAnalytics() {
     <!-- Stat Cards -->
     <div class="cms-stat-grid">
       <article class="cms-stat-card">
-        <small>CATALOG INVENTORY VALUE</small>
-        <strong>$${totalValuation.toLocaleString()}</strong>
-        <span>Combined base daily rental asset value</span>
+        <small>SUM OF PUBLISHED RATES</small>
+        <strong>$${totalPublicRates.toLocaleString()}</strong>
+        <span>Across ${publicRateProducts.length} listings with a public price</span>
       </article>
 
       <article class="cms-stat-card">
-        <small>AVERAGE RENTAL RATE</small>
-        <strong>$${avgPrice}</strong>
-        <span>Average single unit daily price</span>
+        <small>AVERAGE PUBLISHED RATE</small>
+        <strong>$${avgPublicRate}</strong>
+        <span>Across public package and starting prices</span>
       </article>
 
       <article class="cms-stat-card">
@@ -6183,17 +6081,17 @@ function renderCmsAnalytics() {
         </div>
 
         ${(() => {
-          const t1 = products.filter((p) => p.price < 100).length;
-          const t2 = products.filter((p) => p.price >= 100 && p.price < 350).length;
-          const t3 = products.filter((p) => p.price >= 350 && p.price < 800).length;
-          const t4 = products.filter((p) => p.price >= 800).length;
-          const total = products.length || 1;
+          const t1 = publicRateProducts.filter((p) => p.price < 100).length;
+          const t2 = publicRateProducts.filter((p) => p.price >= 100 && p.price < 350).length;
+          const t3 = publicRateProducts.filter((p) => p.price >= 350 && p.price < 800).length;
+          const t4 = publicRateProducts.filter((p) => p.price >= 800).length;
+          const total = publicRateProducts.length || 1;
 
           const tiers = [
-            { label: "Under $100 / day (Mics, Small speakers, Up-lights)", count: t1, color: "green" },
-            { label: "$100 - $349 / day (Subwoofers, DJ rigs, Mixers)", count: t2, color: "blue" },
-            { label: "$350 - $799 / day (Projector kits, Mid packages)", count: t3, color: "purple" },
-            { label: "$800+ / day (LED Video walls, 360 booths, Trailers)", count: t4, color: "orange" },
+            { label: "Under $100", count: t1, color: "green" },
+            { label: "$100 - $349", count: t2, color: "blue" },
+            { label: "$350 - $799", count: t3, color: "purple" },
+            { label: "$800+", count: t4, color: "orange" },
           ];
 
           return tiers.map((t) => {
@@ -6410,14 +6308,15 @@ function renderCmsProductModal() {
             </select>
           </label>
 
-          <label class="cms-label">Daily Rental Rate ($) *
-            <input type="number" id="cmsProdPrice" class="cms-input" min="1" step="1" value="${p.price || 65}" required>
+          <label class="cms-label">Published Rate ($)
+            <input type="number" id="cmsProdPrice" class="cms-input" min="1" step="1" value="${p.price || ""}" ${p.priceType === "quote" ? "disabled" : "required"}>
           </label>
 
           <label class="cms-label">Rate Type
             <select id="cmsProdPriceType" class="cms-select" style="width:100%">
-              <option value="fixed" ${p.priceType === "fixed" ? "selected" : ""}>Fixed Daily Rate ($X/day)</option>
-              <option value="starting" ${p.priceType === "starting" ? "selected" : ""}>Starting Rate (From $X)</option>
+              <option value="fixed" ${p.priceType === "fixed" ? "selected" : ""}>Published package rate</option>
+              <option value="starting" ${p.priceType === "starting" ? "selected" : ""}>Starting rate (From $X)</option>
+              <option value="quote" ${p.priceType === "quote" ? "selected" : ""}>Quote required (no public price)</option>
             </select>
           </label>
 
@@ -6511,8 +6410,8 @@ function renderCmsBundleModal() {
             <input type="text" id="cmsBundleTitle" class="cms-input" value="${escapeHtml(b.title || "")}" required placeholder="e.g. Wedding Event Package">
           </label>
 
-          <label class="cms-label">Package Rate ($) *
-            <input type="number" id="cmsBundlePrice" class="cms-input" min="1" step="1" value="${b.price || 1499}" required>
+          <label class="cms-label">Package Rate
+            <input type="text" id="cmsBundlePrice" class="cms-input" value="Quote required" readonly>
           </label>
 
           <label class="cms-label">Label / Tag (e.g. WEDDING, CONCERT)
@@ -6698,7 +6597,7 @@ function renderCmsQuoteDetailModal() {
         ` : ""}
         <div style="display:flex;justify-content:space-between;color:#ffffff;font-size:16px;border-top:1px solid rgba(137,162,201,.14);padding-top:8px">
           <span>GRAND TOTAL</span>
-          <strong style="color:#72baff">$${Number(q.grandTotal).toLocaleString()}</strong>
+          <strong style="color:#72baff">${q.quoteRequired ? "Quote required" : `$${Number(q.grandTotal).toLocaleString()}`}</strong>
         </div>
       </div>
 
@@ -6785,8 +6684,8 @@ function bindCmsEvents() {
         id: "",
         name: "",
         category: "Audio & Speakers",
-        price: 95,
-        priceType: "fixed",
+        price: 0,
+        priceType: "quote",
         tag: "New",
         desc: "",
         image: "assets/beantown/speaker-rental.jpg",
@@ -6817,7 +6716,8 @@ function bindCmsEvents() {
       state.cmsEditingBundle = {
         id: "",
         title: "",
-        price: 1499,
+        price: 0,
+        priceType: "quote",
         label: "PACKAGE",
         desc: "",
         items: [],
@@ -6933,12 +6833,23 @@ function bindCmsEvents() {
   });
 
   // Product Form Save
+  const cmsRateType = document.querySelector("#cmsProdPriceType");
+  const cmsRateInput = document.querySelector("#cmsProdPrice");
+  cmsRateType?.addEventListener("change", () => {
+    const isQuote = cmsRateType.value === "quote";
+    if (cmsRateInput) {
+      cmsRateInput.disabled = isQuote;
+      cmsRateInput.required = !isQuote;
+      if (isQuote) cmsRateInput.value = "";
+    }
+  });
+
   document.querySelector("#cmsProductForm")?.addEventListener("submit", (e) => {
     e.preventDefault();
     const name = document.querySelector("#cmsProdName")?.value.trim();
     const category = document.querySelector("#cmsProdCat")?.value;
-    const price = Number(document.querySelector("#cmsProdPrice")?.value) || 0;
     const priceType = document.querySelector("#cmsProdPriceType")?.value || "fixed";
+    const price = priceType === "quote" ? 0 : Number(document.querySelector("#cmsProdPrice")?.value) || 0;
     const tag = document.querySelector("#cmsProdTag")?.value.trim() || "";
     const desc = document.querySelector("#cmsProdDesc")?.value.trim() || "";
     const image = document.querySelector("#cmsProdImageVal")?.value || "assets/beantown/speaker-rental.jpg";
@@ -7034,7 +6945,7 @@ function bindCmsEvents() {
   document.querySelector("#cmsBundleForm")?.addEventListener("submit", (e) => {
     e.preventDefault();
     const title = document.querySelector("#cmsBundleTitle")?.value.trim();
-    const price = Number(document.querySelector("#cmsBundlePrice")?.value) || 0;
+    const price = 0;
     const label = document.querySelector("#cmsBundleLabel")?.value.trim() || "BUNDLE";
     const desc = document.querySelector("#cmsBundleDesc")?.value.trim() || "";
     const itemsRaw = document.querySelector("#cmsBundleItems")?.value.trim() || "";
@@ -7051,6 +6962,7 @@ function bindCmsEvents() {
           ...list[idx],
           title,
           price,
+          priceType: "quote",
           label,
           desc,
           items,
@@ -7063,6 +6975,7 @@ function bindCmsEvents() {
         id: newId,
         title,
         price,
+        priceType: "quote",
         label,
         desc,
         items,
@@ -7360,7 +7273,7 @@ function bindCmsEvents() {
 
   // Maintenance: Factory Reset
   document.querySelector("#cmsFactoryResetBtn")?.addEventListener("click", () => {
-    if (confirm("Reset everything to original factory defaults? This will restore the default 65 equipment items, 7 turnkey packages, and original promo codes.")) {
+    if (confirm("Reset everything to original factory defaults? This will restore the official rental catalog and quote-based event suggestions, and original promo codes.")) {
       localStorage.removeItem(CMS_STORAGE.PRODUCTS);
       localStorage.removeItem(CMS_STORAGE.BUNDLES);
       localStorage.removeItem(CMS_STORAGE.COUPONS);

@@ -6,7 +6,9 @@ Images in this folder were collected from the public Beantown Audio Rentals webs
 - Image files are from the site's observed `cdn.prod.website-files.com` assets.
 - The live homepage exposes its brand as a text wordmark, with no standalone downloadable logo. The supplied Beantown logo image from the user is cropped to its visible mark and converted to transparent black and white PNG variants for the header and dark footer.
 
-The product catalog continues to use the existing mockup product descriptions and prices. These photos are used as visual product/event imagery.
+The rental catalog in `catalog-data.js` was transcribed from the public service pages listed in each catalog item’s `sourceUrl`. Public prices are included only where the source page states an amount. Listings without a published rate use “Quote required”; they are not assigned mock prices. The public source describes five outdoor LED trailer sizes but does not publish their sizes or rates in page text, so that listing notes the omission and directs customers to request a quote.
+
+The app loads this same catalog from `public/assets/beantown/catalog-data.js` in its published copy. Product imagery remains visual/event imagery and does not imply a specific included model unless the listing description says so.
 
 ## Stock photos
 

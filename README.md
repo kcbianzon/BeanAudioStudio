@@ -31,8 +31,8 @@ For a local development server, use VS Code Live Server or any static HTTP serve
 - `script.js` — routing, catalog data, builder state, filtering and interactions
 - `assets/` — reserved for real client imagery later
 
-## Pricing data
+## Catalog and pricing data
 
-The mockup uses the publicly listed/reference prices gathered in the research phase for silent disco, outdoor movie packages and photo booths. Items without a public price are intentionally displayed as `Quote required`.
+`assets/beantown/catalog-data.js` contains the published rental listings from Beantown Audio Rentals service pages. The app includes public prices only where the original page states an amount; all other rates display as `Quote required`. Every catalog entry records its source page URL. The public LED trailer page says five sizes are available but omits size and rate details from its text, so the project records that limitation rather than inventing entries or prices.
 
-Before production launch, replace the demo catalog in `script.js` with the client's approved inventory, pricing rules, availability rules, delivery/setup fees, taxes, deposits and package definitions.
+Before production launch, confirm the quote-only rates, rental periods, availability, delivery/setup fees, taxes, deposits, and package definitions with the client.
