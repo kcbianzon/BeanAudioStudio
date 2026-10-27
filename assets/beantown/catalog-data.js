@@ -101,6 +101,14 @@ window.BEANTOWN_SOURCE_CATALOG = [
     ? "assets/beantown/line-array-speakers.png"
     : id === "audio-monitors"
     ? "assets/beantown/stage-monitor.png"
+    : id === "audio-cables-stands"
+    ? "assets/beantown/audio-cables-stands.png"
+    : id === "sub-thump18"
+    ? "assets/beantown/thump18s-subwoofer.jpg"
+    : id === "jbl-vrx-sub"
+    ? "assets/beantown/jbl-vrx-sub.jpg"
+    : id === "sub-ks212c"
+    ? "assets/beantown/qsc-ks212c-sub.jpg"
     : undefined,
   tone: category === "Microphones" ? "coral" : category === "DJ Equipment" ? "sky" : category === "Event Lighting" ? "lavender" : category === "Photo Booths" ? "peach" : "lime",
 }));
