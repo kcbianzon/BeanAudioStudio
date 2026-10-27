@@ -12214,12 +12214,15 @@ body.is-cms-view #app {
 }
 
 
-/* Audio Package & Speaker images: zoom out to fit whole frame (not cut) on pure white background */
+/* Audio Package, Speaker & Subwoofer images: zoom out to fit whole frame (not cut) on pure white background */
 .product-media.audio-pkg-media,
 .product-media:has(img[src*="audio-package"]),
 .product-media:has(img[src*="line-array"]),
 .product-media:has(img[src*="stage-monitor"]),
 .product-media:has(img[src*="audio-cables"]),
+.product-media:has(img[src*="thump18s"]),
+.product-media:has(img[src*="jbl-vrx"]),
+.product-media:has(img[src*="qsc-ks212c"]),
 .product-media:has(.audio-pkg-img) {
   background: #ffffff !important;
   background-image: none !important;
@@ -12229,7 +12232,10 @@ body.is-cms-view #app {
 .product-photo[src*="audio-package"],
 .product-photo[src*="line-array"],
 .product-photo[src*="stage-monitor"],
-.product-photo[src*="audio-cables"] {
+.product-photo[src*="audio-cables"],
+.product-photo[src*="thump18s"],
+.product-photo[src*="jbl-vrx"],
+.product-photo[src*="qsc-ks212c"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 14px 16px !important;
@@ -12240,55 +12246,31 @@ body.is-cms-view #app {
 .product-card:hover .product-photo[src*="audio-package"],
 .product-card:hover .product-photo[src*="line-array"],
 .product-card:hover .product-photo[src*="stage-monitor"],
-.product-card:hover .product-photo[src*="audio-cables"] {
-  transform: scale(1.04) !important;
-}
-
-/* Subwoofers: zoom out to fit whole frame on sleek studio black background */
-.product-media.sub-dark-media,
-.product-media:has(img[src*="thump18s"]),
-.product-media:has(img[src*="jbl-vrx"]),
-.product-media:has(img[src*="qsc-ks212c"]),
-.product-media:has(.sub-dark-img) {
-  background: #000000 !important;
-  background-image: none !important;
-}
-
-.product-photo.sub-dark-img,
-.product-photo[src*="thump18s"],
-.product-photo[src*="jbl-vrx"],
-.product-photo[src*="qsc-ks212c"] {
-  object-fit: contain !important;
-  object-position: center !important;
-  padding: 14px 16px !important;
-  box-sizing: border-box !important;
-}
-
-.product-card:hover .product-photo.sub-dark-img,
+.product-card:hover .product-photo[src*="audio-cables"],
 .product-card:hover .product-photo[src*="thump18s"],
 .product-card:hover .product-photo[src*="jbl-vrx"],
 .product-card:hover .product-photo[src*="qsc-ks212c"] {
   transform: scale(1.04) !important;
 }
 
-/* Also ensure quote equipment cards and cart drawer use contain */
+/* Also ensure quote equipment cards and cart drawer use contain + white bg */
 .q-equip-thumb:has(img[src*="audio-package"]),
 .q-equip-thumb:has(img[src*="line-array"]),
 .q-equip-thumb:has(img[src*="stage-monitor"]),
-.q-equip-thumb:has(img[src*="audio-cables"]) {
-  background: #ffffff !important;
-}
-
+.q-equip-thumb:has(img[src*="audio-cables"]),
 .q-equip-thumb:has(img[src*="thump18s"]),
 .q-equip-thumb:has(img[src*="jbl-vrx"]),
 .q-equip-thumb:has(img[src*="qsc-ks212c"]) {
-  background: #000000 !important;
+  background: #ffffff !important;
 }
 
 .q-equip-thumb img[src*="audio-package"],
 .q-equip-thumb img[src*="line-array"],
 .q-equip-thumb img[src*="stage-monitor"],
-.q-equip-thumb img[src*="audio-cables"] {
+.q-equip-thumb img[src*="audio-cables"],
+.q-equip-thumb img[src*="thump18s"],
+.q-equip-thumb img[src*="jbl-vrx"],
+.q-equip-thumb img[src*="qsc-ks212c"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 10px !important;
@@ -12296,27 +12278,10 @@ body.is-cms-view #app {
   background: #ffffff !important;
 }
 
-.q-equip-thumb img[src*="thump18s"],
-.q-equip-thumb img[src*="jbl-vrx"],
-.q-equip-thumb img[src*="qsc-ks212c"] {
-  object-fit: contain !important;
-  object-position: center !important;
-  padding: 8px !important;
-  box-sizing: border-box !important;
-  background: #000000 !important;
-}
-
 .cart-item-img[src*="audio-package"],
 .cart-item-img[src*="line-array"],
 .cart-item-img[src*="stage-monitor"],
-.cart-item-img[src*="audio-cables"] {
-  object-fit: contain !important;
-  object-position: center !important;
-  padding: 4px !important;
-  box-sizing: border-box !important;
-  background: #ffffff !important;
-}
-
+.cart-item-img[src*="audio-cables"],
 .cart-item-img[src*="thump18s"],
 .cart-item-img[src*="jbl-vrx"],
 .cart-item-img[src*="qsc-ks212c"] {
@@ -12324,5 +12289,5 @@ body.is-cms-view #app {
   object-position: center !important;
   padding: 4px !important;
   box-sizing: border-box !important;
-  background: #000000 !important;
+  background: #ffffff !important;
 }

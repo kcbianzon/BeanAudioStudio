@@ -212,13 +212,13 @@ const BEANTOWN_ASSETS = [
 ];
 
 function loadCmsProducts() {
-  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-27-public-catalog-v3") {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-27-public-catalog-v4") {
     // Replace the earlier mock catalog once so all product names, descriptions,
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
     localStorage.removeItem(CMS_STORAGE.COUPONS);
-    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-27-public-catalog-v3");
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-27-public-catalog-v4");
   }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
@@ -239,13 +239,13 @@ function loadCmsProducts() {
             p.image = "assets/beantown/audio-cables-stands.png";
           }
           if (p.id === "sub-thump18") {
-            p.image = "assets/beantown/thump18s-subwoofer.jpg";
+            p.image = "assets/beantown/thump18s-subwoofer.png";
           }
           if (p.id === "jbl-vrx-sub") {
-            p.image = "assets/beantown/jbl-vrx-sub.jpg";
+            p.image = "assets/beantown/jbl-vrx-sub.png";
           }
           if (p.id === "sub-ks212c") {
-            p.image = "assets/beantown/qsc-ks212c-sub.jpg";
+            p.image = "assets/beantown/qsc-ks212c-sub.png";
           }
         });
         return parsed;
@@ -978,13 +978,13 @@ function productImage(p) {
     return "assets/beantown/audio-cables-stands.png";
   }
   if (p && p.id === "sub-thump18") {
-    return "assets/beantown/thump18s-subwoofer.jpg";
+    return "assets/beantown/thump18s-subwoofer.png";
   }
   if (p && p.id === "jbl-vrx-sub") {
-    return "assets/beantown/jbl-vrx-sub.jpg";
+    return "assets/beantown/jbl-vrx-sub.png";
   }
   if (p && p.id === "sub-ks212c") {
-    return "assets/beantown/qsc-ks212c-sub.jpg";
+    return "assets/beantown/qsc-ks212c-sub.png";
   }
   if (p && p.image) return p.image;
   if (p.category === "Special Effects" && p.id.startsWith("cold-spark")) {
@@ -1064,16 +1064,13 @@ function productCard(p) {
     p.id === "powered-speakers" ||
     p.id === "audio-monitors" ||
     p.id === "audio-cables-stands" ||
-    (image && (image.includes("audio-package") || image.includes("line-array") || image.includes("stage-monitor") || image.includes("audio-cables")))
-  );
-  const isContainDark = (
     p.id === "sub-thump18" ||
     p.id === "jbl-vrx-sub" ||
     p.id === "sub-ks212c" ||
-    (image && (image.includes("thump18s") || image.includes("jbl-vrx") || image.includes("qsc-ks212c")))
+    (image && (image.includes("audio-package") || image.includes("line-array") || image.includes("stage-monitor") || image.includes("audio-cables") || image.includes("thump18s") || image.includes("jbl-vrx") || image.includes("qsc-ks212c")))
   );
-  const mediaClass = isContainWhite ? "audio-pkg-media" : isContainDark ? "sub-dark-media" : (p.tone || "");
-  const photoClass = isContainWhite ? "audio-pkg-img" : isContainDark ? "sub-dark-img" : "";
+  const mediaClass = isContainWhite ? "audio-pkg-media" : (p.tone || "");
+  const photoClass = isContainWhite ? "audio-pkg-img" : "";
   return `<article class="product-card reveal"><div class="product-media has-image ${mediaClass}"><img class="product-photo ${photoClass}" src="${image}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer"></div><div class="product-meta"><span class="badge">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">${productPriceText(p)}</span><button class="text-btn add-product-btn ${quantity ? "is-added" : ""}" data-add="${p.id}" aria-label="${quantity ? `${quantity} added. Add another ${p.name}` : `Add ${p.name} to my setup`}">${quantity ? `Added · ${quantity} +` : "Add to setup +"}</button></div></div></article>`;
 }
 // Client stories — rotating half-moon wheel.
