@@ -96,5 +96,5 @@ window.BEANTOWN_SOURCE_CATALOG = [
   priceType,
   tag,
   image: (id === "small-audio" || id === "medium-audio" || id === "large-audio") ? "assets/beantown/audio-package.png" : undefined,
-  tone: (id === "small-audio" || id === "medium-audio" || id === "large-audio") ? "" : (category === "Microphones" ? "coral" : category === "DJ Equipment" ? "sky" : category === "Event Lighting" ? "lavender" : category === "Photo Booths" ? "peach" : "lime"),
+  tone: category === "Microphones" ? "coral" : category === "DJ Equipment" ? "sky" : category === "Event Lighting" ? "lavender" : category === "Photo Booths" ? "peach" : "lime",
 }));
