@@ -109,6 +109,16 @@ window.BEANTOWN_SOURCE_CATALOG = [
     ? "assets/beantown/jbl-vrx-sub.png"
     : id === "sub-ks212c"
     ? "assets/beantown/qsc-ks212c-sub.png"
+    : id === "sub-kw181"
+    ? "assets/beantown/qsc-kw181-sub.png"
+    : id === "sub-prx618"
+    ? "assets/beantown/jbl-prx618-sub.png"
+    : id === "qlxd-handheld"
+    ? "assets/beantown/wireless-handheld-mic.png"
+    : id === "shure-sm58"
+    ? "assets/beantown/wired-handheld-mic.png"
+    : id === "qlxd-lavalier"
+    ? "assets/beantown/lavalier-clip-mic.png"
     : undefined,
   tone: category === "Microphones" ? "coral" : category === "DJ Equipment" ? "sky" : category === "Event Lighting" ? "lavender" : category === "Photo Booths" ? "peach" : "lime",
 }));

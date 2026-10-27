@@ -212,13 +212,13 @@ const BEANTOWN_ASSETS = [
 ];
 
 function loadCmsProducts() {
-  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-27-public-catalog-v4") {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-28-public-catalog-v5") {
     // Replace the earlier mock catalog once so all product names, descriptions,
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
     localStorage.removeItem(CMS_STORAGE.COUPONS);
-    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-27-public-catalog-v4");
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-28-public-catalog-v5");
   }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
@@ -246,6 +246,21 @@ function loadCmsProducts() {
           }
           if (p.id === "sub-ks212c") {
             p.image = "assets/beantown/qsc-ks212c-sub.png";
+          }
+          if (p.id === "sub-kw181") {
+            p.image = "assets/beantown/qsc-kw181-sub.png";
+          }
+          if (p.id === "sub-prx618") {
+            p.image = "assets/beantown/jbl-prx618-sub.png";
+          }
+          if (p.id === "qlxd-handheld") {
+            p.image = "assets/beantown/wireless-handheld-mic.png";
+          }
+          if (p.id === "shure-sm58") {
+            p.image = "assets/beantown/wired-handheld-mic.png";
+          }
+          if (p.id === "qlxd-lavalier") {
+            p.image = "assets/beantown/lavalier-clip-mic.png";
           }
         });
         return parsed;
@@ -986,6 +1001,21 @@ function productImage(p) {
   if (p && p.id === "sub-ks212c") {
     return "assets/beantown/qsc-ks212c-sub.png";
   }
+  if (p && p.id === "sub-kw181") {
+    return "assets/beantown/qsc-kw181-sub.png";
+  }
+  if (p && p.id === "sub-prx618") {
+    return "assets/beantown/jbl-prx618-sub.png";
+  }
+  if (p && p.id === "qlxd-handheld") {
+    return "assets/beantown/wireless-handheld-mic.png";
+  }
+  if (p && p.id === "shure-sm58") {
+    return "assets/beantown/wired-handheld-mic.png";
+  }
+  if (p && p.id === "qlxd-lavalier") {
+    return "assets/beantown/lavalier-clip-mic.png";
+  }
   if (p && p.image) return p.image;
   if (p.category === "Special Effects" && p.id.startsWith("cold-spark")) {
     return "assets/beantown/cold-sparklers.webp";
@@ -1067,7 +1097,24 @@ function productCard(p) {
     p.id === "sub-thump18" ||
     p.id === "jbl-vrx-sub" ||
     p.id === "sub-ks212c" ||
-    (image && (image.includes("audio-package") || image.includes("line-array") || image.includes("stage-monitor") || image.includes("audio-cables") || image.includes("thump18s") || image.includes("jbl-vrx") || image.includes("qsc-ks212c")))
+    p.id === "sub-kw181" ||
+    p.id === "sub-prx618" ||
+    p.id === "qlxd-handheld" ||
+    p.id === "shure-sm58" ||
+    p.id === "qlxd-lavalier" ||
+    (image && (
+      image.includes("audio-package") ||
+      image.includes("line-array") ||
+      image.includes("stage-monitor") ||
+      image.includes("audio-cables") ||
+      image.includes("thump18s") ||
+      image.includes("jbl-vrx") ||
+      image.includes("qsc-ks212c") ||
+      image.includes("kw181") ||
+      image.includes("prx618") ||
+      image.includes("handheld") ||
+      image.includes("lavalier")
+    ))
   );
   const mediaClass = isContainWhite ? "audio-pkg-media" : (p.tone || "");
   const photoClass = isContainWhite ? "audio-pkg-img" : "";
