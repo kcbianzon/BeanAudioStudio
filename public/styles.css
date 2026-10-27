@@ -12227,6 +12227,10 @@ body.is-cms-view #app {
 .product-media:has(img[src*="prx618"]),
 .product-media:has(img[src*="handheld"]),
 .product-media:has(img[src*="lavalier"]),
+.product-media:has(img[src*="countryman"]),
+.product-media:has(img[src*="push-to-talk"]),
+.product-media:has(img[src*="in-ear"]),
+.product-media:has(img[src*="single-mic"]),
 .product-media:has(.audio-pkg-img) {
   background: #ffffff !important;
   background-image: none !important;
@@ -12243,7 +12247,11 @@ body.is-cms-view #app {
 .product-photo[src*="kw181"],
 .product-photo[src*="prx618"],
 .product-photo[src*="handheld"],
-.product-photo[src*="lavalier"] {
+.product-photo[src*="lavalier"],
+.product-photo[src*="countryman"],
+.product-photo[src*="push-to-talk"],
+.product-photo[src*="in-ear"],
+.product-photo[src*="single-mic"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 14px 16px !important;
@@ -12261,7 +12269,11 @@ body.is-cms-view #app {
 .product-card:hover .product-photo[src*="kw181"],
 .product-card:hover .product-photo[src*="prx618"],
 .product-card:hover .product-photo[src*="handheld"],
-.product-card:hover .product-photo[src*="lavalier"] {
+.product-card:hover .product-photo[src*="lavalier"],
+.product-card:hover .product-photo[src*="countryman"],
+.product-card:hover .product-photo[src*="push-to-talk"],
+.product-card:hover .product-photo[src*="in-ear"],
+.product-card:hover .product-photo[src*="single-mic"] {
   transform: scale(1.04) !important;
 }
 
@@ -12276,7 +12288,11 @@ body.is-cms-view #app {
 .q-equip-thumb:has(img[src*="kw181"]),
 .q-equip-thumb:has(img[src*="prx618"]),
 .q-equip-thumb:has(img[src*="handheld"]),
-.q-equip-thumb:has(img[src*="lavalier"]) {
+.q-equip-thumb:has(img[src*="lavalier"]),
+.q-equip-thumb:has(img[src*="countryman"]),
+.q-equip-thumb:has(img[src*="push-to-talk"]),
+.q-equip-thumb:has(img[src*="in-ear"]),
+.q-equip-thumb:has(img[src*="single-mic"]) {
   background: #ffffff !important;
 }
 
@@ -12290,7 +12306,11 @@ body.is-cms-view #app {
 .q-equip-thumb img[src*="kw181"],
 .q-equip-thumb img[src*="prx618"],
 .q-equip-thumb img[src*="handheld"],
-.q-equip-thumb img[src*="lavalier"] {
+.q-equip-thumb img[src*="lavalier"],
+.q-equip-thumb img[src*="countryman"],
+.q-equip-thumb img[src*="push-to-talk"],
+.q-equip-thumb img[src*="in-ear"],
+.q-equip-thumb img[src*="single-mic"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 10px !important;
@@ -12308,7 +12328,11 @@ body.is-cms-view #app {
 .cart-item-img[src*="kw181"],
 .cart-item-img[src*="prx618"],
 .cart-item-img[src*="handheld"],
-.cart-item-img[src*="lavalier"] {
+.cart-item-img[src*="lavalier"],
+.cart-item-img[src*="countryman"],
+.cart-item-img[src*="push-to-talk"],
+.cart-item-img[src*="in-ear"],
+.cart-item-img[src*="single-mic"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 4px !important;

@@ -212,13 +212,13 @@ const BEANTOWN_ASSETS = [
 ];
 
 function loadCmsProducts() {
-  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-28-public-catalog-v5") {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-28-public-catalog-v6") {
     // Replace the earlier mock catalog once so all product names, descriptions,
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
     localStorage.removeItem(CMS_STORAGE.COUPONS);
-    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-28-public-catalog-v5");
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-28-public-catalog-v6");
   }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
@@ -261,6 +261,18 @@ function loadCmsProducts() {
           }
           if (p.id === "qlxd-lavalier") {
             p.image = "assets/beantown/lavalier-clip-mic.png";
+          }
+          if (p.id === "countryman-headset") {
+            p.image = "assets/beantown/countryman-headset-mic.png";
+          }
+          if (p.id === "ptt-mic") {
+            p.image = "assets/beantown/push-to-talk-mic.png";
+          }
+          if (p.id === "iem") {
+            p.image = "assets/beantown/in-ear-monitors.png";
+          }
+          if (p.id === "mic-single-package") {
+            p.image = "assets/beantown/single-mic-setup.png";
           }
         });
         return parsed;
@@ -1016,6 +1028,18 @@ function productImage(p) {
   if (p && p.id === "qlxd-lavalier") {
     return "assets/beantown/lavalier-clip-mic.png";
   }
+  if (p && p.id === "countryman-headset") {
+    return "assets/beantown/countryman-headset-mic.png";
+  }
+  if (p && p.id === "ptt-mic") {
+    return "assets/beantown/push-to-talk-mic.png";
+  }
+  if (p && p.id === "iem") {
+    return "assets/beantown/in-ear-monitors.png";
+  }
+  if (p && p.id === "mic-single-package") {
+    return "assets/beantown/single-mic-setup.png";
+  }
   if (p && p.image) return p.image;
   if (p.category === "Special Effects" && p.id.startsWith("cold-spark")) {
     return "assets/beantown/cold-sparklers.webp";
@@ -1102,6 +1126,10 @@ function productCard(p) {
     p.id === "qlxd-handheld" ||
     p.id === "shure-sm58" ||
     p.id === "qlxd-lavalier" ||
+    p.id === "countryman-headset" ||
+    p.id === "ptt-mic" ||
+    p.id === "iem" ||
+    p.id === "mic-single-package" ||
     (image && (
       image.includes("audio-package") ||
       image.includes("line-array") ||
@@ -1113,7 +1141,11 @@ function productCard(p) {
       image.includes("kw181") ||
       image.includes("prx618") ||
       image.includes("handheld") ||
-      image.includes("lavalier")
+      image.includes("lavalier") ||
+      image.includes("countryman") ||
+      image.includes("push-to-talk") ||
+      image.includes("in-ear") ||
+      image.includes("single-mic")
     ))
   );
   const mediaClass = isContainWhite ? "audio-pkg-media" : (p.tone || "");

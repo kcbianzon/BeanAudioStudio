@@ -119,6 +119,14 @@ window.BEANTOWN_SOURCE_CATALOG = [
     ? "assets/beantown/wired-handheld-mic.png"
     : id === "qlxd-lavalier"
     ? "assets/beantown/lavalier-clip-mic.png"
+    : id === "countryman-headset"
+    ? "assets/beantown/countryman-headset-mic.png"
+    : id === "ptt-mic"
+    ? "assets/beantown/push-to-talk-mic.png"
+    : id === "iem"
+    ? "assets/beantown/in-ear-monitors.png"
+    : id === "mic-single-package"
+    ? "assets/beantown/single-mic-setup.png"
     : undefined,
   tone: category === "Microphones" ? "coral" : category === "DJ Equipment" ? "sky" : category === "Event Lighting" ? "lavender" : category === "Photo Booths" ? "peach" : "lime",
 }));
