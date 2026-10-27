@@ -209,16 +209,18 @@ const BEANTOWN_ASSETS = [
   { file: "69667bc57423e463b288c0ea_Screenshot-2025-03-25-at-1-21-51-PM-p-800.png", label: "Live Stage Production Snapshot 1" },
   { file: "69667bc6a8aed9344088bb03_Screenshot-2025-01-16-at-1-24-21-PM-p-800.png", label: "Live Stage Production Snapshot 2" },
   { file: "69667bc7f36d1b7365e11751_Screenshot-2025-01-16-at-1-28-51-PM-p-800.png", label: "Live Stage Production Snapshot 3" },
+  { file: "presentation-setup.png", label: "Presentation Dual Wireless Setup" },
+  { file: "live-performance-package.jpg", label: "Full Live Performance Audio Package" },
 ];
 
 function loadCmsProducts() {
-  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-28-public-catalog-v6") {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-28-public-catalog-v7") {
     // Replace the earlier mock catalog once so all product names, descriptions,
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
     localStorage.removeItem(CMS_STORAGE.COUPONS);
-    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-28-public-catalog-v6");
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-28-public-catalog-v7");
   }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
@@ -273,6 +275,12 @@ function loadCmsProducts() {
           }
           if (p.id === "mic-single-package") {
             p.image = "assets/beantown/single-mic-setup.png";
+          }
+          if (p.id === "mic-presentation-package") {
+            p.image = "assets/beantown/presentation-setup.png";
+          }
+          if (p.id === "mic-live-package") {
+            p.image = "assets/beantown/live-performance-package.jpg";
           }
         });
         return parsed;
@@ -1040,6 +1048,12 @@ function productImage(p) {
   if (p && p.id === "mic-single-package") {
     return "assets/beantown/single-mic-setup.png";
   }
+  if (p && p.id === "mic-presentation-package") {
+    return "assets/beantown/presentation-setup.png";
+  }
+  if (p && p.id === "mic-live-package") {
+    return "assets/beantown/live-performance-package.jpg";
+  }
   if (p && p.image) return p.image;
   if (p.category === "Special Effects" && p.id.startsWith("cold-spark")) {
     return "assets/beantown/cold-sparklers.webp";
@@ -1130,6 +1144,7 @@ function productCard(p) {
     p.id === "ptt-mic" ||
     p.id === "iem" ||
     p.id === "mic-single-package" ||
+    p.id === "mic-presentation-package" ||
     (image && (
       image.includes("audio-package") ||
       image.includes("line-array") ||
@@ -1145,11 +1160,13 @@ function productCard(p) {
       image.includes("countryman") ||
       image.includes("push-to-talk") ||
       image.includes("in-ear") ||
-      image.includes("single-mic")
+      image.includes("single-mic") ||
+      image.includes("presentation-setup")
     ))
   );
-  const mediaClass = isContainWhite ? "audio-pkg-media" : (p.tone || "");
-  const photoClass = isContainWhite ? "audio-pkg-img" : "";
+  const isLivePkg = p.id === "mic-live-package" || (image && image.includes("live-performance"));
+  const mediaClass = isLivePkg ? "is-live-package" : (isContainWhite ? "audio-pkg-media" : (p.tone || ""));
+  const photoClass = isLivePkg ? "is-live-photo" : (isContainWhite ? "audio-pkg-img" : "");
   return `<article class="product-card reveal"><div class="product-media has-image ${mediaClass}"><img class="product-photo ${photoClass}" src="${image}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer"></div><div class="product-meta"><span class="badge">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">${productPriceText(p)}</span><button class="text-btn add-product-btn ${quantity ? "is-added" : ""}" data-add="${p.id}" aria-label="${quantity ? `${quantity} added. Add another ${p.name}` : `Add ${p.name} to my setup`}">${quantity ? `Added · ${quantity} +` : "Add to setup +"}</button></div></div></article>`;
 }
 // Client stories — rotating half-moon wheel.
