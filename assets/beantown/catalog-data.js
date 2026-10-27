@@ -95,6 +95,12 @@ window.BEANTOWN_SOURCE_CATALOG = [
   price,
   priceType,
   tag,
-  image: (id === "small-audio" || id === "medium-audio" || id === "large-audio") ? "assets/beantown/audio-package.png" : undefined,
+  image: (id === "small-audio" || id === "medium-audio" || id === "large-audio")
+    ? "assets/beantown/audio-package.png"
+    : id === "powered-speakers"
+    ? "assets/beantown/line-array-speakers.png"
+    : id === "audio-monitors"
+    ? "assets/beantown/stage-monitor.png"
+    : undefined,
   tone: category === "Microphones" ? "coral" : category === "DJ Equipment" ? "sky" : category === "Event Lighting" ? "lavender" : category === "Photo Booths" ? "peach" : "lime",
 }));

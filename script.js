@@ -212,13 +212,13 @@ const BEANTOWN_ASSETS = [
 ];
 
 function loadCmsProducts() {
-  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-27-public-catalog-v1") {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-27-public-catalog-v2") {
     // Replace the earlier mock catalog once so all product names, descriptions,
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
     localStorage.removeItem(CMS_STORAGE.COUPONS);
-    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-27-public-catalog-v1");
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-27-public-catalog-v2");
   }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
@@ -228,6 +228,12 @@ function loadCmsProducts() {
         parsed.forEach((p) => {
           if (p.id === "small-audio" || p.id === "medium-audio" || p.id === "large-audio") {
             p.image = "assets/beantown/audio-package.png";
+          }
+          if (p.id === "powered-speakers") {
+            p.image = "assets/beantown/line-array-speakers.png";
+          }
+          if (p.id === "audio-monitors") {
+            p.image = "assets/beantown/stage-monitor.png";
           }
         });
         return parsed;
@@ -950,6 +956,12 @@ function productImage(p) {
   if (p && (p.id === "small-audio" || p.id === "medium-audio" || p.id === "large-audio")) {
     return "assets/beantown/audio-package.png";
   }
+  if (p && p.id === "powered-speakers") {
+    return "assets/beantown/line-array-speakers.png";
+  }
+  if (p && p.id === "audio-monitors") {
+    return "assets/beantown/stage-monitor.png";
+  }
   if (p && p.image) return p.image;
   if (p.category === "Special Effects" && p.id.startsWith("cold-spark")) {
     return "assets/beantown/cold-sparklers.webp";
@@ -1021,9 +1033,16 @@ function bundleImage(bundle) {
 function productCard(p) {
   const image = productImage(p);
   const quantity = state.selected[p.id] || 0;
-  const isAudioPkg = p.id === "small-audio" || p.id === "medium-audio" || p.id === "large-audio" || (image && image.includes("audio-package"));
-  const mediaClass = isAudioPkg ? "audio-pkg-media" : (p.tone || "");
-  const photoClass = isAudioPkg ? "audio-pkg-img" : "";
+  const isContainWhite = (
+    p.id === "small-audio" ||
+    p.id === "medium-audio" ||
+    p.id === "large-audio" ||
+    p.id === "powered-speakers" ||
+    p.id === "audio-monitors" ||
+    (image && (image.includes("audio-package") || image.includes("line-array") || image.includes("stage-monitor")))
+  );
+  const mediaClass = isContainWhite ? "audio-pkg-media" : (p.tone || "");
+  const photoClass = isContainWhite ? "audio-pkg-img" : "";
   return `<article class="product-card reveal"><div class="product-media has-image ${mediaClass}"><img class="product-photo ${photoClass}" src="${image}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer"></div><div class="product-meta"><span class="badge">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">${productPriceText(p)}</span><button class="text-btn add-product-btn ${quantity ? "is-added" : ""}" data-add="${p.id}" aria-label="${quantity ? `${quantity} added. Add another ${p.name}` : `Add ${p.name} to my setup`}">${quantity ? `Added · ${quantity} +` : "Add to setup +"}</button></div></div></article>`;
 }
 // Client stories — rotating half-moon wheel.

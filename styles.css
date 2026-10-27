@@ -12214,16 +12214,20 @@ body.is-cms-view #app {
 }
 
 
-/* Audio Package image: zoom out to fit whole frame (not cut) on pure white background */
+/* Audio Package & Speaker images: zoom out to fit whole frame (not cut) on pure white background */
 .product-media.audio-pkg-media,
 .product-media:has(img[src*="audio-package"]),
+.product-media:has(img[src*="line-array"]),
+.product-media:has(img[src*="stage-monitor"]),
 .product-media:has(.audio-pkg-img) {
   background: #ffffff !important;
   background-image: none !important;
 }
 
 .product-photo.audio-pkg-img,
-.product-photo[src*="audio-package"] {
+.product-photo[src*="audio-package"],
+.product-photo[src*="line-array"],
+.product-photo[src*="stage-monitor"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 14px 16px !important;
@@ -12231,16 +12235,22 @@ body.is-cms-view #app {
 }
 
 .product-card:hover .product-photo.audio-pkg-img,
-.product-card:hover .product-photo[src*="audio-package"] {
+.product-card:hover .product-photo[src*="audio-package"],
+.product-card:hover .product-photo[src*="line-array"],
+.product-card:hover .product-photo[src*="stage-monitor"] {
   transform: scale(1.04) !important;
 }
 
-/* Also ensure quote equipment cards and cart drawer use contain + white bg for audio packages */
-.q-equip-thumb:has(img[src*="audio-package"]) {
+/* Also ensure quote equipment cards and cart drawer use contain + white bg */
+.q-equip-thumb:has(img[src*="audio-package"]),
+.q-equip-thumb:has(img[src*="line-array"]),
+.q-equip-thumb:has(img[src*="stage-monitor"]) {
   background: #ffffff !important;
 }
 
-.q-equip-thumb img[src*="audio-package"] {
+.q-equip-thumb img[src*="audio-package"],
+.q-equip-thumb img[src*="line-array"],
+.q-equip-thumb img[src*="stage-monitor"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 10px !important;
@@ -12248,7 +12258,9 @@ body.is-cms-view #app {
   background: #ffffff !important;
 }
 
-.cart-item-img[src*="audio-package"] {
+.cart-item-img[src*="audio-package"],
+.cart-item-img[src*="line-array"],
+.cart-item-img[src*="stage-monitor"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 4px !important;
