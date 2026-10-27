@@ -130,7 +130,7 @@ window.BEANTOWN_SOURCE_CATALOG = [
     : id === "mic-presentation-package"
     ? "assets/beantown/presentation-setup.png"
     : id === "mic-live-package"
-    ? "assets/beantown/live-performance-package.jpg"
+    ? "assets/beantown/live-performance-package-v2.jpg"
     : undefined,
   tone: category === "Microphones" ? "coral" : category === "DJ Equipment" ? "sky" : category === "Event Lighting" ? "lavender" : category === "Photo Booths" ? "peach" : "lime",
 }));

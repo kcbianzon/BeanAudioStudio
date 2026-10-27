@@ -210,17 +210,17 @@ const BEANTOWN_ASSETS = [
   { file: "69667bc6a8aed9344088bb03_Screenshot-2025-01-16-at-1-24-21-PM-p-800.png", label: "Live Stage Production Snapshot 2" },
   { file: "69667bc7f36d1b7365e11751_Screenshot-2025-01-16-at-1-28-51-PM-p-800.png", label: "Live Stage Production Snapshot 3" },
   { file: "presentation-setup.png", label: "Presentation Dual Wireless Setup" },
-  { file: "live-performance-package.jpg", label: "Full Live Performance Audio Package" },
+  { file: "live-performance-package-v2.jpg", label: "Full Live Performance Audio Package (Updated)" },
 ];
 
 function loadCmsProducts() {
-  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-28-public-catalog-v8") {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-28-public-catalog-v9") {
     // Replace the earlier mock catalog once so all product names, descriptions,
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
     localStorage.removeItem(CMS_STORAGE.COUPONS);
-    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-28-public-catalog-v8");
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-28-public-catalog-v9");
   }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
@@ -280,7 +280,7 @@ function loadCmsProducts() {
             p.image = "assets/beantown/presentation-setup.png";
           }
           if (p.id === "mic-live-package") {
-            p.image = "assets/beantown/live-performance-package.jpg";
+            p.image = "assets/beantown/live-performance-package-v2.jpg";
           }
         });
         return parsed;
@@ -1052,7 +1052,7 @@ function productImage(p) {
     return "assets/beantown/presentation-setup.png";
   }
   if (p && p.id === "mic-live-package") {
-    return "assets/beantown/live-performance-package.jpg";
+    return "assets/beantown/live-performance-package-v2.jpg";
   }
   if (p && p.image) return p.image;
   if (p.category === "Special Effects" && p.id.startsWith("cold-spark")) {
