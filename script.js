@@ -1021,7 +1021,10 @@ function bundleImage(bundle) {
 function productCard(p) {
   const image = productImage(p);
   const quantity = state.selected[p.id] || 0;
-  return `<article class="product-card reveal"><div class="product-media has-image ${p.tone || ""}"><img class="product-photo" src="${image}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer"></div><div class="product-meta"><span class="badge">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">${productPriceText(p)}</span><button class="text-btn add-product-btn ${quantity ? "is-added" : ""}" data-add="${p.id}" aria-label="${quantity ? `${quantity} added. Add another ${p.name}` : `Add ${p.name} to my setup`}">${quantity ? `Added · ${quantity} +` : "Add to setup +"}</button></div></div></article>`;
+  const isAudioPackage = p.id === "small-audio" || p.id === "medium-audio" || p.id === "large-audio";
+  const mediaClass = isAudioPackage ? "is-white-bg is-audio-package" : (p.tone || "");
+  const photoClass = isAudioPackage ? "is-contained" : "";
+  return `<article class="product-card reveal" data-product-id="${p.id}"><div class="product-media has-image ${mediaClass}"><img class="product-photo ${photoClass}" src="${image}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer"></div><img class="product-photo" src="${image}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer"></div><div class="product-meta"><span class="badge">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">${productPriceText(p)}</span><button class="text-btn add-product-btn ${quantity ? "is-added" : ""}" data-add="${p.id}" aria-label="${quantity ? `${quantity} added. Add another ${p.name}` : `Add ${p.name} to my setup`}">${quantity ? `Added · ${quantity} +` : "Add to setup +"}</button></div></div></article>`;
 }
 // Client stories — rotating half-moon wheel.
 // SAMPLE COPY: these quotes are placeholders for the mockup. Replace them with approved client reviews

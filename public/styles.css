@@ -12212,3 +12212,68 @@ body.is-cms-view #app {
     border-radius: 14px 14px 0 0 !important;
   }
 }
+
+/* Audio Package White Background & Contained Zoom-out */
+.product-media.is-white-bg,
+.product-media.is-audio-package,
+.product-card[data-product-id="small-audio"] .product-media,
+.product-card[data-product-id="medium-audio"] .product-media,
+.product-card[data-product-id="large-audio"] .product-media,
+.product-media:has(img[src*="audio-package"]) {
+  background: #ffffff !important;
+  background-image: none !important;
+  border-bottom: 1.5px solid #ece8de !important;
+}
+
+.product-photo.is-contained,
+.product-media.is-white-bg .product-photo,
+.product-media.is-audio-package .product-photo,
+.product-card[data-product-id="small-audio"] .product-photo,
+.product-card[data-product-id="medium-audio"] .product-photo,
+.product-card[data-product-id="large-audio"] .product-photo,
+.product-media:has(img[src*="audio-package"]) .product-photo {
+  object-fit: contain !important;
+  object-position: center !important;
+  padding: 16px 20px !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 100% !important;
+  transition: transform 0.4s ease !important;
+}
+
+.product-card:hover .product-photo.is-contained,
+.product-card:hover .product-media.is-audio-package .product-photo,
+.product-card:hover .product-media:has(img[src*="audio-package"]) .product-photo {
+  transform: scale(1.04) !important;
+}
+
+/* Equipment cards in Quote Step 4 */
+.q-equip-thumb:has(img[src*="audio-package"]),
+.q-equip-card[data-builder-gear="small-audio"] .q-equip-thumb,
+.q-equip-card[data-builder-gear="medium-audio"] .q-equip-thumb,
+.q-equip-card[data-builder-gear="large-audio"] .q-equip-thumb {
+  background: #ffffff !important;
+}
+
+.q-equip-thumb:has(img[src*="audio-package"]) img,
+.q-equip-card[data-builder-gear="small-audio"] .q-equip-thumb img,
+.q-equip-card[data-builder-gear="medium-audio"] .q-equip-thumb img,
+.q-equip-card[data-builder-gear="large-audio"] .q-equip-thumb img {
+  object-fit: contain !important;
+  padding: 8px !important;
+  box-sizing: border-box !important;
+}
+
+.q-rec-item:has(img[src*="audio-package"]) img {
+  object-fit: contain !important;
+  background: #ffffff !important;
+  padding: 4px !important;
+  box-sizing: border-box !important;
+}
+
+.cart-item-img[src*="audio-package"] {
+  object-fit: contain !important;
+  background: #ffffff !important;
+  padding: 4px !important;
+  box-sizing: border-box !important;
+}
