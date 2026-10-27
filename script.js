@@ -214,13 +214,13 @@ const BEANTOWN_ASSETS = [
 ];
 
 function loadCmsProducts() {
-  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-28-public-catalog-v9") {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-28-public-catalog-v10") {
     // Replace the earlier mock catalog once so all product names, descriptions,
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
     localStorage.removeItem(CMS_STORAGE.COUPONS);
-    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-28-public-catalog-v9");
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-28-public-catalog-v10");
   }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
@@ -281,6 +281,12 @@ function loadCmsProducts() {
           }
           if (p.id === "mic-live-package") {
             p.image = "assets/beantown/live-performance-package-v2.jpg";
+          }
+          // Restore prices if previously quote-only (0)
+          const sourceMatch = (typeof BEANTOWN_SOURCE_CATALOG !== "undefined" ? BEANTOWN_SOURCE_CATALOG : []).find((s) => s.id === p.id);
+          if (sourceMatch && (!p.price || p.priceType === "quote")) {
+            p.price = sourceMatch.price;
+            p.priceType = sourceMatch.priceType;
           }
         });
         return parsed;
