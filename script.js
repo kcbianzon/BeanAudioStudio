@@ -1,680 +1,4 @@
-const DEFAULT_PRODUCTS = [
-  // --- AUDIO & SPEAKERS ---
-  {
-    id: "small-audio",
-    name: "Small Event Speaker Package",
-    category: "Audio & Speakers",
-    price: 199,
-    priceType: "starting",
-    desc: "2 powered speakers with tripod stands, wired or wireless Shure microphone, and small audio mixer. Perfect for up to 50 guests, speeches, ceremonies, and background music.",
-    tag: "Popular",
-    tone: "lime",
-  },
-  {
-    id: "medium-audio",
-    name: "Medium Event Speaker Package",
-    category: "Audio & Speakers",
-    price: 349,
-    priceType: "starting",
-    desc: "4 powered speakers, tripod stands, Shure wireless microphone system, and 16-channel mixer. Built for 50–150 guests, wedding receptions, and corporate panels.",
-    tag: "Most popular",
-    tone: "lime",
-  },
-  {
-    id: "large-audio",
-    name: "Large Event Line Array System",
-    category: "Audio & Speakers",
-    price: 880,
-    priceType: "starting",
-    desc: "JBL VRX constant curvature line array modules, high-power subwoofers, digital mixing console, and on-site audio engineer. Designed for 150+ guests, concerts, and festivals.",
-    tag: "Concert grade",
-    tone: "lime",
-  },
-  {
-    id: "qsc-k12",
-    name: "QSC K12.2 Powered 12″ Loudspeaker",
-    category: "Audio & Speakers",
-    price: 65,
-    priceType: "fixed",
-    desc: "2000-watt Class-D active loudspeaker with advanced DSP presets. Pristine vocal clarity and room-filling output for mains or stage monitors.",
-    tag: "Pro audio",
-    tone: "lime",
-  },
-  {
-    id: "qsc-k10",
-    name: "QSC K10.2 Powered 10″ Loudspeaker",
-    category: "Audio & Speakers",
-    price: 55,
-    priceType: "fixed",
-    desc: "2000-watt compact active speaker. Excellent clarity in a lightweight footprint for meetings, ceremonies, and acoustic sets.",
-    tag: "Compact",
-    tone: "lime",
-  },
-  {
-    id: "jbl-vrx932",
-    name: "JBL VRX932LA Line Array Module",
-    category: "Audio & Speakers",
-    price: 150,
-    priceType: "fixed",
-    desc: "Constant curvature line array element with Differential Drive woofer and neodymium compression drivers for large audience coverage.",
-    tag: "Line array",
-    tone: "lime",
-  },
-
-  // --- SUBWOOFER RENTALS ---
-  {
-    id: "sub-kw181",
-    name: "QSC KW181 18″ Powered Subwoofer",
-    category: "Subwoofers",
-    price: 95,
-    priceType: "fixed",
-    desc: "1000-watt Class-D 18-inch birch subwoofer. Deep, punchy low-end reinforcement for DJs, live bands, and dance floors.",
-    tag: "Heavy bass",
-    tone: "gold",
-  },
-  {
-    id: "sub-ks212c",
-    name: "QSC KS212C Cardioid Subwoofer",
-    category: "Subwoofers",
-    price: 120,
-    priceType: "fixed",
-    desc: "Dual 12-inch active cardioid subwoofer. Keeps bass directional toward the crowd with 15dB less noise behind the stage—great for sound-sensitive venues.",
-    tag: "Cardioid tech",
-    tone: "gold",
-  },
-  {
-    id: "sub-prx618",
-    name: "JBL PRX 618S 18″ Powered Subwoofer",
-    category: "Subwoofers",
-    price: 85,
-    priceType: "fixed",
-    desc: "Compact 1000W 18″ active subwoofer delivering clean, resonant low-end for mobile DJs, private parties, and medium halls.",
-    tag: "Portable bass",
-    tone: "gold",
-  },
-  {
-    id: "sub-thump18",
-    name: "Mackie Thump18S 18″ Subwoofer",
-    category: "Subwoofers",
-    price: 75,
-    priceType: "fixed",
-    desc: "Solid 1200W peak low-end punch for parties, school functions, and cost-effective bass extension.",
-    tag: "Budget friendly",
-    tone: "gold",
-  },
-
-  // --- MICROPHONES ---
-  {
-    id: "qlxd-handheld",
-    name: "Shure QLX-D Wireless Handheld Mic",
-    category: "Microphones",
-    price: 65,
-    priceType: "fixed",
-    desc: "Digital 24-bit wireless microphone with Shure Beta 58A or SM58 capsule. Pristine RF stability, zero interference, and all-day battery.",
-    tag: "Industry standard",
-    tone: "coral",
-  },
-  {
-    id: "qlxd-lavalier",
-    name: "Shure QLX-D Wireless Lapel / Lavalier",
-    category: "Microphones",
-    price: 65,
-    priceType: "fixed",
-    desc: "Discreet bodypack transmitter with cardioid lavalier clip-on microphone. Ideal for keynote speakers, wedding officiants, and presenters.",
-    tag: "Hands-free",
-    tone: "coral",
-  },
-  {
-    id: "countryman-headset",
-    name: "Countryman E6 Directional Earset Mic",
-    category: "Microphones",
-    price: 50,
-    priceType: "fixed",
-    desc: "Ultra-miniature, skin-tone earset microphone delivering studio-grade vocal reproduction without blocking the speaker's face.",
-    tag: "Broadcast quality",
-    tone: "coral",
-  },
-  {
-    id: "shure-sm58",
-    name: "Shure SM58 / Beta 58A Wired Mic",
-    category: "Microphones",
-    price: 20,
-    priceType: "fixed",
-    desc: "The legendary dynamic vocal microphone. Includes 25ft XLR cable and heavy-duty tripod boom stand. Bulletproof reliability.",
-    tag: "Legendary",
-    tone: "coral",
-  },
-  {
-    id: "ptt-mic",
-    name: "Push-To-Talk (PTT) Conference Mic",
-    category: "Microphones",
-    price: 35,
-    priceType: "fixed",
-    desc: "Gooseneck tabletop conference microphone with LED indicator and momentary/latching talk switch for panels and meetings.",
-    tag: "Conference",
-    tone: "coral",
-  },
-  {
-    id: "iem",
-    name: "Shure PSM900 Wireless In-Ear Monitors",
-    category: "Microphones",
-    price: 75,
-    priceType: "fixed",
-    desc: "Professional wireless bodypack IEM system with sound-isolating earphones. Clean, personalized stage monitoring for singers and musicians.",
-    tag: "Stage monitoring",
-    tone: "coral",
-  },
-
-  // --- AUDIO MIXERS ---
-  {
-    id: "mixer-touchmix",
-    name: "QSC TouchMix-16 Digital Mixer",
-    category: "Audio Mixers",
-    price: 85,
-    priceType: "fixed",
-    desc: "16-input compact digital touchscreen mixer with channel processing, instrument/vocal wizard presets, USB multi-track recording, and iPad Wi-Fi control.",
-    tag: "Touchscreen",
-    tone: "peach",
-  },
-  {
-    id: "mixer-x32",
-    name: "Behringer X32 32-Channel Digital Console",
-    category: "Audio Mixers",
-    price: 150,
-    priceType: "fixed",
-    desc: "32 mic preamps, 25 motorized faders, integrated effects rack, and flexible routing. The go-to digital console for full band shows and galas.",
-    tag: "Full console",
-    tone: "peach",
-  },
-  {
-    id: "mixer-x32-compact",
-    name: "Behringer X32 Compact Digital Mixer",
-    category: "Audio Mixers",
-    price: 110,
-    priceType: "fixed",
-    desc: "16 mic preamps, 17 motorized faders, and complete X32 power in a compact chassis. Ideal for FOH and monitor mixing in tight spaces.",
-    tag: "Compact digital",
-    tone: "peach",
-  },
-  {
-    id: "mixer-sq7",
-    name: "Allen & Heath SQ-7 32-Channel Console",
-    category: "Audio Mixers",
-    price: 295,
-    priceType: "fixed",
-    desc: "Flagship 96kHz XCVI FPGA digital mixer with 33 faders, custom soft keys, ultra-low latency, and touring-grade audio quality.",
-    tag: "Tour grade",
-    tone: "peach",
-  },
-  {
-    id: "mixer-mackie1402",
-    name: "Mackie 1402-VLZ3 Compact Analog Mixer",
-    category: "Audio Mixers",
-    price: 45,
-    priceType: "fixed",
-    desc: "Ultra-low-noise 14-channel analog mixer with 6 XDR2 mic preamps and durable steel chassis. Simple, reliable, and user-friendly.",
-    tag: "Analog workhorse",
-    tone: "peach",
-  },
-
-  // --- DJ EQUIPMENT ---
-  {
-    id: "dj-basic-pkg",
-    name: "Basic DJ Package (Up to 50 Guests)",
-    category: "DJ Equipment",
-    price: 299,
-    priceType: "starting",
-    desc: "Pioneer DJ controller, heavy-duty laptop stand, 2 powered speakers, and all connecting cables. Great for house parties and lounge sets.",
-    tag: "Turnkey DJ",
-    tone: "sky",
-  },
-  {
-    id: "dj-standard-pkg",
-    name: "Standard DJ Package (50–150 Guests)",
-    category: "DJ Equipment",
-    price: 449,
-    priceType: "starting",
-    desc: "4-channel controller or dual CDJ setup, 2 powered tops, 1 subwoofer, Scrim Werks facade booth, and wireless mic. Perfect for weddings and dances.",
-    tag: "Wedding favorite",
-    tone: "sky",
-  },
-  {
-    id: "dj-pro-pkg",
-    name: "Pro Club DJ Package (150+ Guests)",
-    category: "DJ Equipment",
-    price: 699,
-    priceType: "starting",
-    desc: "Dual CDJ-3000s, DJM-900NXS2 mixer, 4 powered speakers with dual 18″ subs, Scrim Werks facade, and dance lighting package.",
-    tag: "Festival ready",
-    tone: "sky",
-  },
-  {
-    id: "cdj-3000",
-    name: "Pioneer CDJ-3000 DJ Multi-Player",
-    category: "DJ Equipment",
-    price: 125,
-    priceType: "fixed",
-    desc: "Pioneer's flagship media player with 9-inch HD touchscreen, advanced MPU processor, Pro DJ Link, and uncompressed 96kHz/32-bit audio.",
-    tag: "Club standard",
-    tone: "sky",
-  },
-  {
-    id: "cdj-2000nxs2",
-    name: "Pioneer CDJ-2000NXS2 Multi-Player",
-    category: "DJ Equipment",
-    price: 95,
-    priceType: "fixed",
-    desc: "Industry-standard pro DJ player with 7-inch touch display, 8 hot cues, slip mode, and high-res audio playback.",
-    tag: "Industry pro",
-    tone: "sky",
-  },
-  {
-    id: "djm-900nxs2",
-    name: "Pioneer DJM-900NXS2 4-Channel Mixer",
-    category: "DJ Equipment",
-    price: 95,
-    priceType: "fixed",
-    desc: "Touring-standard 4-channel DJ mixer with 64-bit mixing processor, dual USB soundcards, Sound Color FX, and Beat FX.",
-    tag: "Club mixer",
-    tone: "sky",
-  },
-  {
-    id: "ddj-1000srt",
-    name: "Pioneer DDJ-1000SRT 4-Channel Controller",
-    category: "DJ Equipment",
-    price: 90,
-    priceType: "fixed",
-    desc: "Full-size club-style jog wheels with on-jog color display, Magvel fader, and seamless plug-and-play mapping for Serato DJ Pro.",
-    tag: "Serato pro",
-    tone: "sky",
-  },
-  {
-    id: "djm-s9",
-    name: "Pioneer DJM-S9 2-Channel Battle Mixer",
-    category: "DJ Equipment",
-    price: 75,
-    priceType: "fixed",
-    desc: "High-performance scratch mixer with Magvel Pro crossfader, multi-color performance pads, and dual USB ports for seamless DJ handoffs.",
-    tag: "Turntablist",
-    tone: "sky",
-  },
-  {
-    id: "rane-72",
-    name: "Rane SEVENTY-TWO 2-Channel DJ Mixer",
-    category: "DJ Equipment",
-    price: 85,
-    priceType: "fixed",
-    desc: "Solid steel construction, 4.3-inch color touchscreen, dual Flex FX engines, and MAG FOUR faders for elite battle DJs.",
-    tag: "Heavy duty",
-    tone: "sky",
-  },
-  {
-    id: "technics-1200",
-    name: "Technics SL-1200MK2 Turntable",
-    category: "DJ Equipment",
-    price: 75,
-    priceType: "fixed",
-    desc: "The timeless direct-drive turntable with quartz motor, precision pitch control, and Ortofon DJ cartridge. (Available individually or as a pair).",
-    tag: "Analog vinyl",
-    tone: "sky",
-  },
-  {
-    id: "dj-facade",
-    name: "Scrim Werks Pro DJ Facade",
-    category: "DJ Equipment",
-    price: 50,
-    priceType: "fixed",
-    desc: "Collapsible 4-panel aluminum DJ facade with translucent white scrims. Conceals cables and equipment; looks incredible when backlit with uplights.",
-    tag: "Clean look",
-    tone: "sky",
-  },
-
-  // --- VIDEO & DISPLAYS ---
-  {
-    id: "tv-65",
-    name: "Samsung 65″ 4K UHD Smart TV",
-    category: "Video & Displays",
-    price: 250,
-    priceType: "fixed",
-    desc: "Commercial 4K UHD display on a sleek motorized height-adjustable rolling truss stand with HDMI cables and casting support.",
-    tag: "4K display",
-    tone: "peach",
-  },
-  {
-    id: "tv-75",
-    name: "Samsung 75″ 4K UHD Smart TV",
-    category: "Video & Displays",
-    price: 350,
-    priceType: "fixed",
-    desc: "High-impact 75-inch 4K UHD presentation screen on heavy-duty motorized truss cart. Crystal-clear visuals for conference rooms and keynote overflow.",
-    tag: "Large format",
-    tone: "peach",
-  },
-  {
-    id: "laser-projector",
-    name: "Sony Laser Projector (5,000+ Lumens)",
-    category: "Video & Displays",
-    price: 175,
-    priceType: "fixed",
-    desc: "Crisp laser projection with instant on/off, high color accuracy, and flexible throw distance for conference halls and banquet ballrooms.",
-    tag: "Laser tech",
-    tone: "peach",
-  },
-  {
-    id: "fastfold-screen",
-    name: "Fastfold Screen with Black Dress Kit",
-    category: "Video & Displays",
-    price: 150,
-    priceType: "fixed",
-    desc: "Professional 100″ to 150″ front/rear projection screen with snap-on aluminum frame and full velvet blackout drape surround.",
-    tag: "Conferences",
-    tone: "peach",
-  },
-  {
-    id: "video-switcher",
-    name: "Multi-Input HDMI Video Switcher",
-    category: "Video & Displays",
-    price: 75,
-    priceType: "fixed",
-    desc: "Seamless video switcher with preview/program multiview, picture-in-picture, and clean transitions between presenter laptops and video feeds.",
-    tag: "Seamless",
-    tone: "peach",
-  },
-
-  // --- LED VIDEO WALLS ---
-  {
-    id: "led-12",
-    name: "Indoor LED Video Wall — 12 × 7 ft",
-    category: "LED Video Walls",
-    price: 1150,
-    priceType: "starting",
-    desc: "Ultra-fine 2.67mm pixel pitch LED wall. Includes NovaStar VX1000 processor, ground rigging, 2 powered speakers, audio mixer, and Shure wireless mic.",
-    tag: "Turnkey package",
-    tone: "periwinkle",
-  },
-  {
-    id: "led-16",
-    name: "Indoor LED Video Wall — 16 × 9 ft",
-    category: "LED Video Walls",
-    price: 1450,
-    priceType: "starting",
-    desc: "Full-scale 16:9 cinematic LED video wall (2.67mm pitch). Includes NovaStar video processor, sound reinforcement package, and certified lead technician.",
-    tag: "Cinematic scale",
-    tone: "periwinkle",
-  },
-  {
-    id: "led-custom",
-    name: "Custom Modular LED Wall Configuration",
-    category: "LED Video Walls",
-    price: 1850,
-    priceType: "starting",
-    desc: "Tailored LED displays in curved, pillar, banner, or backdrop layouts. 2.6mm, 2.9mm, or 3.9mm pixel pitch with ground-support truss or crank stands.",
-    tag: "Bespoke design",
-    tone: "periwinkle",
-  },
-  {
-    id: "led-trailer",
-    name: "Mobile Outdoor LED Video Wall Trailer",
-    category: "LED Video Walls",
-    price: 2600,
-    priceType: "starting",
-    desc: "Turnkey hydraulic-lift outdoor mobile LED trailer. Daylight visible (3.91mm pitch), wind and rain resistant, with built-in sound system and generator support.",
-    tag: "Outdoor mobile",
-    tone: "periwinkle",
-  },
-
-  // --- OUTDOOR MOVIES ---
-  {
-    id: "movie-12",
-    name: "Outdoor Movie Package — 12 ft",
-    category: "Outdoor Movies",
-    price: 549,
-    priceType: "fixed",
-    desc: "12-foot inflatable screen, Sony laser projector, 2 powered speakers, audio mixer, laptop/DVD player, and delivery/setup. Perfect for 10–30 guests.",
-    tag: "Backyard favorite",
-    tone: "orange",
-  },
-  {
-    id: "movie-16",
-    name: "Outdoor Movie Package — 16 ft",
-    category: "Outdoor Movies",
-    price: 749,
-    priceType: "fixed",
-    desc: "16-foot inflatable movie screen with high-brightness Sony laser projector, sound package, and full setup. Ideal for school nights, parks, and up to 75 guests.",
-    tag: "School & community",
-    tone: "orange",
-  },
-  {
-    id: "movie-26",
-    name: "Outdoor Movie Package — 26 ft",
-    category: "Outdoor Movies",
-    price: 899,
-    priceType: "fixed",
-    desc: "26-foot community-scale outdoor cinema. High-lumen laser projector, dual amplified speakers, mixer, and on-site setup for 100–150+ guests.",
-    tag: "Community scale",
-    tone: "orange",
-  },
-  {
-    id: "movie-40",
-    name: "Outdoor Movie Package — 40 ft",
-    category: "Outdoor Movies",
-    price: 1899,
-    priceType: "fixed",
-    desc: "Colossal 40-foot inflatable cinema screen for city festivals, university fields, and large outdoor crowds. Complete with high-power sound and technician.",
-    tag: "Festival scale",
-    tone: "orange",
-  },
-
-  // --- PHOTO BOOTHS ---
-  {
-    id: "ipad-mirror",
-    name: "iPad Mirror Photo Booth",
-    category: "Photo Booths",
-    price: 799,
-    priceType: "starting",
-    desc: "Interactive beauty mirror photo booth with beauty ring lighting, custom animated overlays, and instant SMS/AirDrop/email sharing.",
-    tag: "From $799",
-    tone: "blue",
-  },
-  {
-    id: "magic-air",
-    name: "Magic Mirror Air Photo Booth",
-    category: "Photo Booths",
-    price: 1399,
-    priceType: "starting",
-    desc: "Sleek full-length interactive mirror booth with next-generation touch animations, social-media sharing, fun props, and on-site attendant.",
-    tag: "From $1,399",
-    tone: "blue",
-  },
-  {
-    id: "magic-frame",
-    name: "Magic Mirror + Frame Photo Booth",
-    category: "Photo Booths",
-    price: 1699,
-    priceType: "starting",
-    desc: "Ornate gold or silver framed full-length mirror booth with instant high-gloss prints, custom guest signature animations, and dedicated attendant.",
-    tag: "From $1,699",
-    tone: "blue",
-  },
-  {
-    id: "photo-360",
-    name: "360 Video Photo Booth Platform",
-    category: "Photo Booths",
-    price: 1499,
-    priceType: "starting",
-    desc: "Motorized 360-degree rotating arm capturing slow-motion 4K video with studio lighting, custom audio overlay, and instant sharing station.",
-    tag: "From $1,499",
-    tone: "blue",
-  },
-
-  // --- SILENT DISCO ---
-  {
-    id: "silent-50",
-    name: "Silent Disco — 50 Headphones",
-    category: "Silent Disco",
-    price: 500,
-    priceType: "fixed",
-    desc: "50 glowing 3-channel LED wireless headphones, 3 multi-frequency RF transmitters, audio cables, and charging equipment.",
-    tag: "Fixed price",
-    tone: "mint",
-  },
-  {
-    id: "silent-100",
-    name: "Silent Disco — 100 Headphones",
-    category: "Silent Disco",
-    price: 900,
-    priceType: "fixed",
-    desc: "100 3-channel wireless headphones with 3 transmitters. Ideal for college socials, rooftop parties, and weddings with quiet hours.",
-    tag: "Most popular",
-    tone: "mint",
-  },
-  {
-    id: "silent-150",
-    name: "Silent Disco — 150 Headphones",
-    category: "Silent Disco",
-    price: 1200,
-    priceType: "fixed",
-    desc: "150 glowing headphones and 3 transmitters for campus dances, fraternity/sorority events, and private club nights.",
-    tag: "Fixed price",
-    tone: "mint",
-  },
-  {
-    id: "silent-200",
-    name: "Silent Disco — 200 Headphones",
-    category: "Silent Disco",
-    price: 1800,
-    priceType: "fixed",
-    desc: "200 headphones with long-range transmitters. Delivers a zero-noise-complaint dance party for public parks and outdoor celebrations.",
-    tag: "Fixed price",
-    tone: "mint",
-  },
-  {
-    id: "silent-300",
-    name: "Silent Disco — 300 Headphones",
-    category: "Silent Disco",
-    price: 2500,
-    priceType: "fixed",
-    desc: "300 headphones and commercial transmitters for festivals, town celebrations, and large corporate entertainment.",
-    tag: "Fixed price",
-    tone: "mint",
-  },
-
-  // --- EVENT LIGHTING ---
-  {
-    id: "uplights-6",
-    name: "Wireless Battery Uplights (Pack of 6)",
-    category: "Event Lighting",
-    price: 150,
-    priceType: "fixed",
-    desc: "Chauvet Freedom Par H9 IP battery-powered RGBAW+UV uplights. 100% wireless with smartphone/remote control for walls, columns, and accent lighting.",
-    tag: "Wireless battery",
-    tone: "lavender",
-  },
-  {
-    id: "uplights-12",
-    name: "Wireless Battery Uplights (Pack of 12)",
-    category: "Event Lighting",
-    price: 275,
-    priceType: "fixed",
-    desc: "12-pack of wireless Chauvet Freedom Par uplights in rolling charging road case. Full room color transformation with warm white or custom hues.",
-    tag: "Full room pack",
-    tone: "lavender",
-  },
-  {
-    id: "moving-heads",
-    name: "Moving Head Stage Light Fixtures (Pair)",
-    category: "Event Lighting",
-    price: 120,
-    priceType: "fixed",
-    desc: "Pair of intelligent DMX moving head spotlight fixtures with gobos, motorized focus, pan/tilt movement, and color prism effects.",
-    tag: "Dynamic FX",
-    tone: "lavender",
-  },
-  {
-    id: "pinspot-pack",
-    name: "Chauvet EZPin Battery Pinspots (Pack of 4)",
-    category: "Event Lighting",
-    price: 80,
-    priceType: "fixed",
-    desc: "Magnetic battery-powered warm white pinspots for cake tables, floral centerpieces, and architectural highlights.",
-    tag: "Pinspotting",
-    tone: "lavender",
-  },
-  {
-    id: "light-bar",
-    name: "LED Stage Wash Light Bar",
-    category: "Event Lighting",
-    price: 65,
-    priceType: "fixed",
-    desc: "High-output linear LED bar delivering smooth color washes across stages, drapes, and backdrops.",
-    tag: "Stage wash",
-    tone: "lavender",
-  },
-  {
-    id: "followspot",
-    name: "LED Followspot with Stand",
-    category: "Event Lighting",
-    price: 110,
-    priceType: "fixed",
-    desc: "Precision LED spotlight with smooth manual iris, color wheel, and adjustable stand for tracking keynote speakers and performers.",
-    tag: "Keynote spotlight",
-    tone: "lavender",
-  },
-
-  // --- SPECIAL EFFECTS (FX) ---
-  {
-    id: "cold-spark-2",
-    name: "Cold Sparkler Machines (2 Units)",
-    category: "Special Effects",
-    price: 350,
-    priceType: "starting",
-    desc: "2 indoor-safe cold spark fountain machines with wireless remote, powder granules, and setup. Cool to the touch, non-flammable, and zero smoke.",
-    tag: "100% indoor safe",
-    tone: "yellow",
-  },
-  {
-    id: "cold-spark-4",
-    name: "Cold Sparkler Machines (4 Units)",
-    category: "Special Effects",
-    price: 650,
-    priceType: "starting",
-    desc: "4 cold spark machines with DMX synchronized control, extra refill cycles, and technician support. Spectacular for grand entrances and stage shows.",
-    tag: "Grand entrance",
-    tone: "yellow",
-  },
-  {
-    id: "dry-ice-cloud",
-    name: "Dry Ice “Dancing on a Cloud” Machine",
-    category: "Special Effects",
-    price: 295,
-    priceType: "starting",
-    desc: "Professional dry ice low-lying fog machine creating a thick, dreamy cloud that hugs the floor without rising or triggering fire alarms. Essential for wedding first dances.",
-    tag: "Wedding favorite",
-    tone: "yellow",
-  },
-
-  // --- LIVE STREAMING ---
-  {
-    id: "stream-basic",
-    name: "Live Streaming — Basic (1 Camera)",
-    category: "Live Streaming",
-    price: 621,
-    priceType: "starting",
-    desc: "1 × 4K camera, streaming laptop, QSC digital audio mixer, HDMI switcher, and local HD recording for town halls, webinars, and ceremonies.",
-    tag: "Single camera",
-    tone: "sky",
-  },
-  {
-    id: "stream-pro",
-    name: "Live Streaming — Pro (3 Cameras)",
-    category: "Live Streaming",
-    price: 1250,
-    priceType: "starting",
-    desc: "3 × 4K camera multi-angle broadcast setup, video switcher, dedicated stream technician, pristine audio integration, and recording archive.",
-    tag: "Broadcast multi-cam",
-    tone: "sky",
-  },
-];
+const DEFAULT_PRODUCTS = window.BEANTOWN_SOURCE_CATALOG || [];
 
 const DEFAULT_BUNDLES = [
   {
@@ -813,12 +137,20 @@ const DEFAULT_BUNDLES = [
   },
 ];
 
+// The original site quotes most AV rentals individually. These bundles are
+// mockup suggestions only, so do not present their old demo totals as rates.
+for (const bundle of DEFAULT_BUNDLES) {
+  bundle.price = 0;
+  bundle.priceType = "quote";
+}
+
 
 // ==========================================================================
 // CMS PERSISTENT DATA LAYER & ASSET CATALOG
 // ==========================================================================
 const CMS_STORAGE = {
   PRODUCTS: "beantown_cms_products",
+  CATALOG_VERSION: "beantown_cms_catalog_version",
   BUNDLES: "beantown_cms_bundles",
   COUPONS: "beantown_cms_coupons",
   SETTINGS: "beantown_cms_settings",
@@ -986,6 +318,13 @@ const BEANTOWN_ASSETS = [
 ];
 
 function loadCmsProducts() {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-27-public-catalog-v1") {
+    // Replace the earlier mock catalog once so all product names, descriptions,
+    // and rates come from the source website. Later CMS edits remain persistent.
+    localStorage.removeItem(CMS_STORAGE.PRODUCTS);
+    localStorage.removeItem(CMS_STORAGE.BUNDLES);
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-27-public-catalog-v1");
+  }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
     if (raw) {
@@ -1209,50 +548,53 @@ const SERVICE_TIERS = [
   {
     id: "pickup",
     title: "Self Pickup & Return",
-    badge: "FREE · $0",
+    badge: "Quote required",
     price: 0,
-    desc: "Pick up and return directly at our Boston warehouse with pre-tested road cases and quick setup walk-through.",
+    priceType: "quote",
+    desc: "Self-pickup is available for select rentals. Confirm availability and any fees when requesting a quote.",
   },
   {
     id: "delivery-setup",
     title: "Delivery, Setup & Breakdown",
-    badge: "+$150",
-    price: 150,
-    desc: "Our crew delivers to your venue, sets up and soundchecks all equipment, and returns after the event for strike.",
+    badge: "Quote required",
+    price: 0,
+    priceType: "quote",
+    desc: "Delivery and setup are available. Confirm the service scope and price when requesting a quote.",
   },
   {
     id: "full-tech",
     title: "Full On-Site Technician Support",
-    badge: "+$350",
-    price: 350,
-    desc: "Includes delivery, full rigging/setup, a dedicated on-site AV engineer to operate your show, and post-event breakdown.",
+    badge: "Quote required",
+    price: 0,
+    priceType: "quote",
+    desc: "On-site technical support is available for select rentals. Confirm staffing and price when requesting a quote.",
   },
 ];
 
 const DURATION_OPTIONS = [
   {
     id: "1-day",
-    label: "1 Day / Single Event",
-    shortLabel: "1 Day (1.0×)",
+    label: "Single event",
+    shortLabel: "Single event",
     multiplier: 1,
-    badge: "Standard Rate",
-    desc: "Standard 24-hour event rental window.",
+    badge: "Quote confirmed",
+    desc: "Rental period and availability are confirmed in your quote.",
   },
   {
     id: "2-days",
-    label: "2 Days / Weekend",
-    shortLabel: "2 Days (1.5×)",
-    multiplier: 1.5,
-    badge: "Save 25% on Day 2",
-    desc: "Ideal for rehearsal dinner + wedding day or 2-day conferences (1.5× daily equipment rate).",
+    label: "Weekend / 2 days",
+    shortLabel: "Weekend / 2 days",
+    multiplier: 1,
+    badge: "Quote confirmed",
+    desc: "Weekend availability and pricing are confirmed in your quote.",
   },
   {
     id: "3-days",
-    label: "3+ Days / Multi-Day",
-    shortLabel: "3+ Days (2.0×)",
-    multiplier: 2,
-    badge: "Save 33%+ Extended",
-    desc: "Multi-day festival, campus week, or extended corporate production (2.0× daily equipment rate).",
+    label: "Multi-day event",
+    shortLabel: "Multi-day event",
+    multiplier: 1,
+    badge: "Quote confirmed",
+    desc: "Multi-day availability and pricing are confirmed in your quote.",
   },
 ];
 
@@ -1436,6 +778,9 @@ function productPriceText(p) {
   if (p.priceType === "starting") return `From ${money(p.price)}`;
   return money(p.price);
 }
+function bundlePriceText(bundle) {
+  return bundle.priceType === "quote" ? "Quote required" : money(bundle.price);
+}
 function productMatchesCategory(p, cat) {
   return (
     cat === "All" ||
@@ -1533,7 +878,7 @@ function sanitizeSelectedProducts() {
   for (const [id, rawQty] of Object.entries(state.selected)) {
     const product = products.find((p) => p.id === id);
     const qty = Math.min(99, Math.max(0, Math.round(Number(rawQty) || 0)));
-    if (product && typeof product.price === "number" && product.price > 0 && qty > 0) {
+    if (product && ((typeof product.price === "number" && product.price > 0) || product.priceType === "quote") && qty > 0) {
       cleaned[id] = qty;
     }
   }
@@ -1634,6 +979,7 @@ function calculateQuoteTotals() {
   const durationSurcharge = equipmentDurationTotal - equipmentBaseSubtotal;
   const serviceOption = SERVICE_TIERS.find((s) => s.id === state.serviceTier) || SERVICE_TIERS[0];
   const serviceFee = lineItems.length > 0 ? serviceOption.price : 0;
+  const quoteRequired = lineItems.some(({ product }) => product.priceType === "quote") || (lineItems.length > 0 && serviceOption.priceType === "quote");
 
   // Loophole-free coupon discount math
   let appliedCoupon = null;
@@ -1682,6 +1028,7 @@ function calculateQuoteTotals() {
     equipmentDurationTotal,
     serviceOption,
     serviceFee,
+    quoteRequired,
     coupon: appliedCoupon,
     discountAmount,
     baseGrandTotal,
