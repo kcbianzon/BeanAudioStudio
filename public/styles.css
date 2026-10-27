@@ -12212,3 +12212,46 @@ body.is-cms-view #app {
     border-radius: 14px 14px 0 0 !important;
   }
 }
+
+
+/* Audio Package image: zoom out to fit whole frame (not cut) on pure white background */
+.product-media.audio-pkg-media,
+.product-media:has(img[src*="audio-package"]),
+.product-media:has(.audio-pkg-img) {
+  background: #ffffff !important;
+  background-image: none !important;
+}
+
+.product-photo.audio-pkg-img,
+.product-photo[src*="audio-package"] {
+  object-fit: contain !important;
+  object-position: center !important;
+  padding: 14px 16px !important;
+  box-sizing: border-box !important;
+}
+
+.product-card:hover .product-photo.audio-pkg-img,
+.product-card:hover .product-photo[src*="audio-package"] {
+  transform: scale(1.04) !important;
+}
+
+/* Also ensure quote equipment cards and cart drawer use contain + white bg for audio packages */
+.q-equip-thumb:has(img[src*="audio-package"]) {
+  background: #ffffff !important;
+}
+
+.q-equip-thumb img[src*="audio-package"] {
+  object-fit: contain !important;
+  object-position: center !important;
+  padding: 10px !important;
+  box-sizing: border-box !important;
+  background: #ffffff !important;
+}
+
+.cart-item-img[src*="audio-package"] {
+  object-fit: contain !important;
+  object-position: center !important;
+  padding: 4px !important;
+  box-sizing: border-box !important;
+  background: #ffffff !important;
+}
