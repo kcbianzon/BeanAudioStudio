@@ -12232,6 +12232,8 @@ body.is-cms-view #app {
 .product-media:has(img[src*="in-ear"]),
 .product-media:has(img[src*="single-mic"]),
 .product-media:has(img[src*="presentation-setup"]),
+.product-media:has(img[src*="behringer-x32"]),
+.product-media:has(img[src*="allen-heath-sq7"]),
 .product-media:has(.audio-pkg-img) {
   background: #ffffff !important;
   background-image: none !important;
@@ -12253,7 +12255,9 @@ body.is-cms-view #app {
 .product-photo[src*="push-to-talk"],
 .product-photo[src*="in-ear"],
 .product-photo[src*="single-mic"],
-.product-photo[src*="presentation-setup"] {
+.product-photo[src*="presentation-setup"],
+.product-photo[src*="behringer-x32"],
+.product-photo[src*="allen-heath-sq7"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 14px 16px !important;
@@ -12276,7 +12280,9 @@ body.is-cms-view #app {
 .product-card:hover .product-photo[src*="push-to-talk"],
 .product-card:hover .product-photo[src*="in-ear"],
 .product-card:hover .product-photo[src*="single-mic"],
-.product-card:hover .product-photo[src*="presentation-setup"] {
+.product-card:hover .product-photo[src*="presentation-setup"],
+.product-card:hover .product-photo[src*="behringer-x32"],
+.product-card:hover .product-photo[src*="allen-heath-sq7"] {
   transform: scale(1.04) !important;
 }
 
@@ -12296,7 +12302,9 @@ body.is-cms-view #app {
 .q-equip-thumb:has(img[src*="push-to-talk"]),
 .q-equip-thumb:has(img[src*="in-ear"]),
 .q-equip-thumb:has(img[src*="single-mic"]),
-.q-equip-thumb:has(img[src*="presentation-setup"]) {
+.q-equip-thumb:has(img[src*="presentation-setup"]),
+.q-equip-thumb:has(img[src*="behringer-x32"]),
+.q-equip-thumb:has(img[src*="allen-heath-sq7"]) {
   background: #ffffff !important;
 }
 
@@ -12315,7 +12323,9 @@ body.is-cms-view #app {
 .q-equip-thumb img[src*="push-to-talk"],
 .q-equip-thumb img[src*="in-ear"],
 .q-equip-thumb img[src*="single-mic"],
-.q-equip-thumb img[src*="presentation-setup"] {
+.q-equip-thumb img[src*="presentation-setup"],
+.q-equip-thumb img[src*="behringer-x32"],
+.q-equip-thumb img[src*="allen-heath-sq7"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 10px !important;
@@ -12338,7 +12348,9 @@ body.is-cms-view #app {
 .cart-item-img[src*="push-to-talk"],
 .cart-item-img[src*="in-ear"],
 .cart-item-img[src*="single-mic"],
-.cart-item-img[src*="presentation-setup"] {
+.cart-item-img[src*="presentation-setup"],
+.cart-item-img[src*="behringer-x32"],
+.cart-item-img[src*="allen-heath-sq7"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 4px !important;
@@ -12346,21 +12358,17 @@ body.is-cms-view #app {
   background: #ffffff !important;
 }
 
-/* Seamless black studio stage presentation — Live Package & Digital Mixers */
+/* Seamless black studio stage presentation — Live Package */
 .product-media.is-black-frame,
 .product-media.is-live-package,
-.product-media:has(img[src*="live-performance"]),
-.product-media:has(img[src*="behringer-x32"]),
-.product-media:has(img[src*="allen-heath-sq7"]) {
+.product-media:has(img[src*="live-performance"]) {
   background: #000000 !important;
   background-image: none !important;
 }
 
 .product-photo.is-black-frame-photo,
 .product-photo.is-live-photo,
-.product-photo[src*="live-performance"],
-.product-photo[src*="behringer-x32"],
-.product-photo[src*="allen-heath-sq7"] {
+.product-photo[src*="live-performance"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 0 !important;
@@ -12369,21 +12377,13 @@ body.is-cms-view #app {
 
 .product-card:hover .product-photo.is-black-frame-photo,
 .product-card:hover .product-photo.is-live-photo,
-.product-card:hover .product-photo[src*="live-performance"],
-.product-card:hover .product-photo[src*="behringer-x32"],
-.product-card:hover .product-photo[src*="allen-heath-sq7"] {
+.product-card:hover .product-photo[src*="live-performance"] {
   transform: scale(1.04) !important;
 }
 
 .q-equip-thumb:has(img[src*="live-performance"]),
-.q-equip-thumb:has(img[src*="behringer-x32"]),
-.q-equip-thumb:has(img[src*="allen-heath-sq7"]),
 .q-equip-thumb img[src*="live-performance"],
-.q-equip-thumb img[src*="behringer-x32"],
-.q-equip-thumb img[src*="allen-heath-sq7"],
-.cart-item-img[src*="live-performance"],
-.cart-item-img[src*="behringer-x32"],
-.cart-item-img[src*="allen-heath-sq7"] {
+.cart-item-img[src*="live-performance"] {
   background: #000000 !important;
   object-fit: contain !important;
   object-position: center !important;

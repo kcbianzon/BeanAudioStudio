@@ -132,11 +132,11 @@ window.BEANTOWN_SOURCE_CATALOG = [
     : id === "mic-live-package"
     ? "assets/beantown/live-performance-package-v2.jpg"
     : id === "mixer-x32"
-    ? "assets/beantown/behringer-x32-mixer.jpg"
+    ? "assets/beantown/behringer-x32-mixer.png"
     : id === "mixer-x32-compact"
-    ? "assets/beantown/behringer-x32-compact.jpg"
+    ? "assets/beantown/behringer-x32-compact.png"
     : id === "mixer-sq7"
-    ? "assets/beantown/allen-heath-sq7-mixer.jpg"
+    ? "assets/beantown/allen-heath-sq7-mixer.png"
     : undefined,
   tone: category === "Microphones" ? "coral" : category === "DJ Equipment" ? "sky" : category === "Event Lighting" ? "lavender" : category === "Photo Booths" ? "peach" : "lime",
 }));
