@@ -233,13 +233,13 @@ const BEANTOWN_ASSETS = [
 ];
 
 function loadCmsProducts() {
-  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-28-public-catalog-v17") {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-29-public-catalog-v18") {
     // Replace the earlier mock catalog once so all product names, descriptions,
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
     localStorage.removeItem(CMS_STORAGE.COUPONS);
-    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-28-public-catalog-v17");
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-29-public-catalog-v18");
   }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
@@ -399,6 +399,51 @@ function loadCmsProducts() {
           }
           if (p.id === "stream-pro") {
             p.image = "assets/beantown/streaming-pro-package.png";
+          }
+          if (p.id === "followspot") {
+            p.image = "assets/beantown/followspot.png";
+          }
+          if (p.id === "moving-heads") {
+            p.image = "assets/beantown/moving-heads.png";
+          }
+          if (p.id === "light-bar") {
+            p.image = "assets/beantown/led-light-bar.png";
+          }
+          if (p.id === "pinspot-pack") {
+            p.image = "assets/beantown/chauvet-ezpin-pack.png";
+          }
+          if (p.id === "uplights-6") {
+            p.image = "assets/beantown/chauvet-freedom-par-h9.png";
+          }
+          if (p.id === "blacklight-fixtures") {
+            p.image = "assets/beantown/blacklight-fixtures.png";
+          }
+          if (p.id === "uplighting-package") {
+            p.image = "assets/beantown/basic-uplighting-package.png";
+          }
+          if (p.id === "dance-party-lighting") {
+            p.image = "assets/beantown/dance-party-lighting.png";
+          }
+          if (p.id === "wedding-lighting") {
+            p.image = "assets/beantown/wedding-lighting.png";
+          }
+          if (p.id === "stage-lighting") {
+            p.image = "assets/beantown/stage-lighting.png";
+          }
+          if (p.id === "outdoor-lighting") {
+            p.image = "assets/beantown/outdoor-lighting.png";
+          }
+          if (p.id === "cold-spark-2") {
+            p.image = "assets/beantown/cold-spark-basic.png";
+          }
+          if (p.id === "cold-spark-4") {
+            p.image = "assets/beantown/cold-spark-premium.png";
+          }
+          if (p.id === "cold-spark-ultimate") {
+            p.image = "assets/beantown/cold-spark-ultimate.png";
+          }
+          if (p.id === "dry-ice-cloud") {
+            p.image = "assets/beantown/dry-ice-cloud.png";
           }
           // Restore prices if previously quote-only (0)
           const sourceMatch = (typeof BEANTOWN_SOURCE_CATALOG !== "undefined" ? BEANTOWN_SOURCE_CATALOG : []).find((s) => s.id === p.id);
@@ -1277,6 +1322,51 @@ function productImage(p) {
   if (p && p.id === "stream-pro") {
     return "assets/beantown/streaming-pro-package.png";
   }
+  if (p && p.id === "followspot") {
+    return "assets/beantown/followspot.png";
+  }
+  if (p && p.id === "moving-heads") {
+    return "assets/beantown/moving-heads.png";
+  }
+  if (p && p.id === "light-bar") {
+    return "assets/beantown/led-light-bar.png";
+  }
+  if (p && p.id === "pinspot-pack") {
+    return "assets/beantown/chauvet-ezpin-pack.png";
+  }
+  if (p && p.id === "uplights-6") {
+    return "assets/beantown/chauvet-freedom-par-h9.png";
+  }
+  if (p && p.id === "blacklight-fixtures") {
+    return "assets/beantown/blacklight-fixtures.png";
+  }
+  if (p && p.id === "uplighting-package") {
+    return "assets/beantown/basic-uplighting-package.png";
+  }
+  if (p && p.id === "dance-party-lighting") {
+    return "assets/beantown/dance-party-lighting.png";
+  }
+  if (p && p.id === "wedding-lighting") {
+    return "assets/beantown/wedding-lighting.png";
+  }
+  if (p && p.id === "stage-lighting") {
+    return "assets/beantown/stage-lighting.png";
+  }
+  if (p && p.id === "outdoor-lighting") {
+    return "assets/beantown/outdoor-lighting.png";
+  }
+  if (p && p.id === "cold-spark-2") {
+    return "assets/beantown/cold-spark-basic.png";
+  }
+  if (p && p.id === "cold-spark-4") {
+    return "assets/beantown/cold-spark-premium.png";
+  }
+  if (p && p.id === "cold-spark-ultimate") {
+    return "assets/beantown/cold-spark-ultimate.png";
+  }
+  if (p && p.id === "dry-ice-cloud") {
+    return "assets/beantown/dry-ice-cloud.png";
+  }
   if (p && p.image) return p.image;
   if (p.category === "Special Effects" && p.id.startsWith("cold-spark")) {
     return "assets/beantown/cold-sparklers.webp";
@@ -1395,6 +1485,21 @@ function productCard(p) {
     p.id === "laser-projector" ||
     p.id === "fastfold-screen" ||
     p.id === "video-switcher" ||
+    p.id === "followspot" ||
+    p.id === "moving-heads" ||
+    p.id === "light-bar" ||
+    p.id === "pinspot-pack" ||
+    p.id === "uplights-6" ||
+    p.id === "blacklight-fixtures" ||
+    p.id === "uplighting-package" ||
+    p.id === "dance-party-lighting" ||
+    p.id === "wedding-lighting" ||
+    p.id === "stage-lighting" ||
+    p.id === "outdoor-lighting" ||
+    p.id === "cold-spark-2" ||
+    p.id === "cold-spark-4" ||
+    p.id === "cold-spark-ultimate" ||
+    p.id === "dry-ice-cloud" ||
     (image && (
       image.includes("audio-package") ||
       image.includes("line-array") ||
@@ -1445,7 +1550,20 @@ function productCard(p) {
       image.includes("led-wall") ||
       image.includes("outdoor-led-trailer") ||
       image.includes("streaming-basic") ||
-      image.includes("streaming-pro")
+      image.includes("streaming-pro") ||
+      image.includes("followspot") ||
+      image.includes("moving-heads") ||
+      image.includes("led-light-bar") ||
+      image.includes("blacklight-fixtures") ||
+      image.includes("chauvet-ezpin") ||
+      image.includes("chauvet-freedom") ||
+      image.includes("basic-uplighting") ||
+      image.includes("dance-party-lighting") ||
+      image.includes("wedding-lighting") ||
+      image.includes("stage-lighting") ||
+      image.includes("outdoor-lighting") ||
+      image.includes("cold-spark") ||
+      image.includes("dry-ice-cloud")
     ))
   );
   const isBlackFrame =

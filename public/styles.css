@@ -579,10 +579,12 @@ main {
 }
 
 .product-meta p {
-  font-size: 12px;
+  font-size: 12.5px;
+  line-height: 1.5;
   color: var(--muted);
   margin: 0 0 13px;
-  min-height: 36px
+  min-height: 36px;
+  white-space: pre-line;
 }
 
 .price-row {
@@ -5866,6 +5868,9 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 .product-grid.rentals-grid .product-meta p {
   flex-grow: 1;
   margin-bottom: 14px;
+  white-space: pre-line;
+  line-height: 1.5;
+  font-size: 12.5px;
 }
 
 .product-grid.rentals-grid .price-row {
@@ -5920,6 +5925,9 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 .product-grid.rentals-grid.is-list .product-meta p {
   flex-grow: 1;
   margin-bottom: 12px;
+  white-space: pre-line;
+  line-height: 1.5;
+  font-size: 13px;
 }
 
 .product-grid.rentals-grid.is-list .product-meta .price-row {
