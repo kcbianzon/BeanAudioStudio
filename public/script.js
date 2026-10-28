@@ -358,6 +358,30 @@ function loadCmsProducts() {
           if (p.id === "djm-s9") {
             p.image = "assets/beantown/pioneer-djm-s9.png";
           }
+          if (p.id === "video-basic-package") {
+            p.image = "assets/beantown/basic-video-package.png";
+          }
+          if (p.id === "video-mid-package") {
+            p.image = "assets/beantown/mid-video-package.png";
+          }
+          if (p.id === "video-large-package") {
+            p.image = "assets/beantown/large-video-package.png";
+          }
+          if (p.id === "tv-75") {
+            p.image = "assets/beantown/samsung-75-tv.png";
+          }
+          if (p.id === "tv-65") {
+            p.image = "assets/beantown/samsung-65-tv.png";
+          }
+          if (p.id === "laser-projector") {
+            p.image = "assets/beantown/hd-projector.png";
+          }
+          if (p.id === "fastfold-screen") {
+            p.image = "assets/beantown/fastfold-screen.png";
+          }
+          if (p.id === "video-switcher") {
+            p.image = "assets/beantown/video-switcher.png";
+          }
           // Restore prices if previously quote-only (0)
           const sourceMatch = (typeof BEANTOWN_SOURCE_CATALOG !== "undefined" ? BEANTOWN_SOURCE_CATALOG : []).find((s) => s.id === p.id);
           if (sourceMatch && (!p.price || p.priceType === "quote")) {
@@ -1193,6 +1217,30 @@ function productImage(p) {
   if (p && p.id === "djm-s9") {
     return "assets/beantown/pioneer-djm-s9.png";
   }
+  if (p && p.id === "video-basic-package") {
+    return "assets/beantown/basic-video-package.png";
+  }
+  if (p && p.id === "video-mid-package") {
+    return "assets/beantown/mid-video-package.png";
+  }
+  if (p && p.id === "video-large-package") {
+    return "assets/beantown/large-video-package.png";
+  }
+  if (p && p.id === "tv-75") {
+    return "assets/beantown/samsung-75-tv.png";
+  }
+  if (p && p.id === "tv-65") {
+    return "assets/beantown/samsung-65-tv.png";
+  }
+  if (p && p.id === "laser-projector") {
+    return "assets/beantown/hd-projector.png";
+  }
+  if (p && p.id === "fastfold-screen") {
+    return "assets/beantown/fastfold-screen.png";
+  }
+  if (p && p.id === "video-switcher") {
+    return "assets/beantown/video-switcher.png";
+  }
   if (p && p.image) return p.image;
   if (p.category === "Special Effects" && p.id.startsWith("cold-spark")) {
     return "assets/beantown/cold-sparklers.webp";
@@ -1303,6 +1351,14 @@ function productCard(p) {
     p.id === "cdj-2000nxs2" ||
     p.id === "ddj-1000srt" ||
     p.id === "djm-s9" ||
+    p.id === "video-basic-package" ||
+    p.id === "video-mid-package" ||
+    p.id === "video-large-package" ||
+    p.id === "tv-75" ||
+    p.id === "tv-65" ||
+    p.id === "laser-projector" ||
+    p.id === "fastfold-screen" ||
+    p.id === "video-switcher" ||
     (image && (
       image.includes("audio-package") ||
       image.includes("line-array") ||
@@ -1341,7 +1397,15 @@ function productCard(p) {
       image.includes("cdj-3000") ||
       image.includes("cdj-2000") ||
       image.includes("ddj-1000") ||
-      image.includes("djm-s9")
+      image.includes("djm-s9") ||
+      image.includes("basic-video") ||
+      image.includes("mid-video") ||
+      image.includes("large-video") ||
+      image.includes("samsung-75") ||
+      image.includes("samsung-65") ||
+      image.includes("hd-projector") ||
+      image.includes("fastfold-screen") ||
+      image.includes("video-switcher")
     ))
   );
   const isBlackFrame =

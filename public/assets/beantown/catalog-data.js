@@ -169,6 +169,22 @@ window.BEANTOWN_SOURCE_CATALOG = [
     ? "assets/beantown/pioneer-ddj-1000srt.png"
     : id === "djm-s9"
     ? "assets/beantown/pioneer-djm-s9.png"
+    : id === "video-basic-package"
+    ? "assets/beantown/basic-video-package.png"
+    : id === "video-mid-package"
+    ? "assets/beantown/mid-video-package.png"
+    : id === "video-large-package"
+    ? "assets/beantown/large-video-package.png"
+    : id === "tv-75"
+    ? "assets/beantown/samsung-75-tv.png"
+    : id === "tv-65"
+    ? "assets/beantown/samsung-65-tv.png"
+    : id === "laser-projector"
+    ? "assets/beantown/hd-projector.png"
+    : id === "fastfold-screen"
+    ? "assets/beantown/fastfold-screen.png"
+    : id === "video-switcher"
+    ? "assets/beantown/video-switcher.png"
     : undefined,
   tone: category === "Microphones" ? "coral" : category === "DJ Equipment" ? "sky" : category === "Event Lighting" ? "lavender" : category === "Photo Booths" ? "peach" : "lime",
 }));

@@ -12309,6 +12309,14 @@ body.is-cms-view #app {
 .product-media:has(img[src*="cdj-2000"]),
 .product-media:has(img[src*="ddj-1000"]),
 .product-media:has(img[src*="djm-s9"]),
+.product-media:has(img[src*="basic-video"]),
+.product-media:has(img[src*="mid-video"]),
+.product-media:has(img[src*="large-video"]),
+.product-media:has(img[src*="samsung-75"]),
+.product-media:has(img[src*="samsung-65"]),
+.product-media:has(img[src*="hd-projector"]),
+.product-media:has(img[src*="fastfold-screen"]),
+.product-media:has(img[src*="video-switcher"]),
 .product-media:has(.audio-pkg-img) {
   background: #ffffff !important;
   background-image: none !important;
@@ -12352,7 +12360,15 @@ body.is-cms-view #app {
 .product-photo[src*="cdj-3000"],
 .product-photo[src*="cdj-2000"],
 .product-photo[src*="ddj-1000"],
-.product-photo[src*="djm-s9"] {
+.product-photo[src*="djm-s9"],
+.product-photo[src*="basic-video"],
+.product-photo[src*="mid-video"],
+.product-photo[src*="large-video"],
+.product-photo[src*="samsung-75"],
+.product-photo[src*="samsung-65"],
+.product-photo[src*="hd-projector"],
+.product-photo[src*="fastfold-screen"],
+.product-photo[src*="video-switcher"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 14px 16px !important;
@@ -12397,7 +12413,15 @@ body.is-cms-view #app {
 .product-card:hover .product-photo[src*="cdj-3000"],
 .product-card:hover .product-photo[src*="cdj-2000"],
 .product-card:hover .product-photo[src*="ddj-1000"],
-.product-card:hover .product-photo[src*="djm-s9"] {
+.product-card:hover .product-photo[src*="djm-s9"],
+.product-card:hover .product-photo[src*="basic-video"],
+.product-card:hover .product-photo[src*="mid-video"],
+.product-card:hover .product-photo[src*="large-video"],
+.product-card:hover .product-photo[src*="samsung-75"],
+.product-card:hover .product-photo[src*="samsung-65"],
+.product-card:hover .product-photo[src*="hd-projector"],
+.product-card:hover .product-photo[src*="fastfold-screen"],
+.product-card:hover .product-photo[src*="video-switcher"] {
   transform: scale(1.04) !important;
 }
 
