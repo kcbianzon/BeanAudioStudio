@@ -12244,6 +12244,9 @@ body.is-cms-view #app {
 .product-media:has(img[src*="dj-facade"]),
 .product-media:has(img[src*="rane-seventy"]),
 .product-media:has(img[src*="rane-ttm"]),
+.product-media:has(img[src*="rane-sl4"]),
+.product-media:has(img[src*="djm-900"]),
+.product-media:has(img[src*="technics-sl"]),
 .product-media:has(.audio-pkg-img) {
   background: #ffffff !important;
   background-image: none !important;
@@ -12277,7 +12280,10 @@ body.is-cms-view #app {
 .product-photo[src*="scrim-werks"],
 .product-photo[src*="dj-facade"],
 .product-photo[src*="rane-seventy"],
-.product-photo[src*="rane-ttm"] {
+.product-photo[src*="rane-ttm"],
+.product-photo[src*="rane-sl4"],
+.product-photo[src*="djm-900"],
+.product-photo[src*="technics-sl"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 14px 16px !important;
@@ -12312,7 +12318,10 @@ body.is-cms-view #app {
 .product-card:hover .product-photo[src*="scrim-werks"],
 .product-card:hover .product-photo[src*="dj-facade"],
 .product-card:hover .product-photo[src*="rane-seventy"],
-.product-card:hover .product-photo[src*="rane-ttm"] {
+.product-card:hover .product-photo[src*="rane-ttm"],
+.product-card:hover .product-photo[src*="rane-sl4"],
+.product-card:hover .product-photo[src*="djm-900"],
+.product-card:hover .product-photo[src*="technics-sl"] {
   transform: scale(1.04) !important;
 }
 
@@ -12344,7 +12353,10 @@ body.is-cms-view #app {
 .q-equip-thumb:has(img[src*="scrim-werks"]),
 .q-equip-thumb:has(img[src*="dj-facade"]),
 .q-equip-thumb:has(img[src*="rane-seventy"]),
-.q-equip-thumb:has(img[src*="rane-ttm"]) {
+.q-equip-thumb:has(img[src*="rane-ttm"]),
+.q-equip-thumb:has(img[src*="rane-sl4"]),
+.q-equip-thumb:has(img[src*="djm-900"]),
+.q-equip-thumb:has(img[src*="technics-sl"]) {
   background: #ffffff !important;
 }
 
@@ -12375,7 +12387,10 @@ body.is-cms-view #app {
 .q-equip-thumb img[src*="scrim-werks"],
 .q-equip-thumb img[src*="dj-facade"],
 .q-equip-thumb img[src*="rane-seventy"],
-.q-equip-thumb img[src*="rane-ttm"] {
+.q-equip-thumb img[src*="rane-ttm"],
+.q-equip-thumb img[src*="rane-sl4"],
+.q-equip-thumb img[src*="djm-900"],
+.q-equip-thumb img[src*="technics-sl"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 10px !important;
@@ -12410,7 +12425,10 @@ body.is-cms-view #app {
 .cart-item-img[src*="scrim-werks"],
 .cart-item-img[src*="dj-facade"],
 .cart-item-img[src*="rane-seventy"],
-.cart-item-img[src*="rane-ttm"] {
+.cart-item-img[src*="rane-ttm"],
+.cart-item-img[src*="rane-sl4"],
+.cart-item-img[src*="djm-900"],
+.cart-item-img[src*="technics-sl"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 4px !important;

@@ -155,6 +155,12 @@ window.BEANTOWN_SOURCE_CATALOG = [
     ? "assets/beantown/rane-seventy-two-mixer.png"
     : id === "rane-ttm57sl"
     ? "assets/beantown/rane-ttm57sl-mixer.png"
+    : id === "rane-sl4"
+    ? "assets/beantown/rane-sl4-interface.png"
+    : id === "djm-900nxs"
+    ? "assets/beantown/pioneer-djm-900nxs.png"
+    : id === "technics-1200"
+    ? "assets/beantown/technics-sl-1200mk2.png"
     : undefined,
   tone: category === "Microphones" ? "coral" : category === "DJ Equipment" ? "sky" : category === "Event Lighting" ? "lavender" : category === "Photo Booths" ? "peach" : "lime",
 }));

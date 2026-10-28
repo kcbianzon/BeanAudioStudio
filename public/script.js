@@ -223,16 +223,19 @@ const BEANTOWN_ASSETS = [
   { file: "scrim-werks-dj-facade.png", label: "Scrim Werks Pro DJ Facade" },
   { file: "rane-seventy-two-mixer.png", label: "Rane SEVENTY-TWO DJ Mixer" },
   { file: "rane-ttm57sl-mixer.png", label: "Rane TTM 57SL DJ Mixer" },
+  { file: "rane-sl4-interface.png", label: "Rane SL4 Audio Interface" },
+  { file: "pioneer-djm-900nxs.png", label: "Pioneer DJM-900NXS DJ Mixer" },
+  { file: "technics-sl-1200mk2.png", label: "Technics SL-1200MK2 Pro Turntable" },
 ];
 
 function loadCmsProducts() {
-  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-28-public-catalog-v15") {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-28-public-catalog-v16") {
     // Replace the earlier mock catalog once so all product names, descriptions,
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
     localStorage.removeItem(CMS_STORAGE.COUPONS);
-    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-28-public-catalog-v15");
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-28-public-catalog-v16");
   }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
@@ -329,6 +332,15 @@ function loadCmsProducts() {
           }
           if (p.id === "rane-ttm57sl") {
             p.image = "assets/beantown/rane-ttm57sl-mixer.png";
+          }
+          if (p.id === "rane-sl4") {
+            p.image = "assets/beantown/rane-sl4-interface.png";
+          }
+          if (p.id === "djm-900nxs") {
+            p.image = "assets/beantown/pioneer-djm-900nxs.png";
+          }
+          if (p.id === "technics-1200") {
+            p.image = "assets/beantown/technics-sl-1200mk2.png";
           }
           // Restore prices if previously quote-only (0)
           const sourceMatch = (typeof BEANTOWN_SOURCE_CATALOG !== "undefined" ? BEANTOWN_SOURCE_CATALOG : []).find((s) => s.id === p.id);
@@ -1144,6 +1156,15 @@ function productImage(p) {
   if (p && p.id === "rane-ttm57sl") {
     return "assets/beantown/rane-ttm57sl-mixer.png";
   }
+  if (p && p.id === "rane-sl4") {
+    return "assets/beantown/rane-sl4-interface.png";
+  }
+  if (p && p.id === "djm-900nxs") {
+    return "assets/beantown/pioneer-djm-900nxs.png";
+  }
+  if (p && p.id === "technics-1200") {
+    return "assets/beantown/technics-sl-1200mk2.png";
+  }
   if (p && p.image) return p.image;
   if (p.category === "Special Effects" && p.id.startsWith("cold-spark")) {
     return "assets/beantown/cold-sparklers.webp";
@@ -1247,6 +1268,9 @@ function productCard(p) {
     p.id === "dj-facade" ||
     p.id === "rane-72" ||
     p.id === "rane-ttm57sl" ||
+    p.id === "rane-sl4" ||
+    p.id === "djm-900nxs" ||
+    p.id === "technics-1200" ||
     (image && (
       image.includes("audio-package") ||
       image.includes("line-array") ||
@@ -1275,7 +1299,10 @@ function productCard(p) {
       image.includes("scrim-werks") ||
       image.includes("dj-facade") ||
       image.includes("rane-seventy") ||
-      image.includes("rane-ttm")
+      image.includes("rane-ttm") ||
+      image.includes("rane-sl4") ||
+      image.includes("djm-900") ||
+      image.includes("technics-sl")
     ))
   );
   const isBlackFrame =
