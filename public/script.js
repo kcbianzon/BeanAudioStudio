@@ -211,16 +211,19 @@ const BEANTOWN_ASSETS = [
   { file: "69667bc7f36d1b7365e11751_Screenshot-2025-01-16-at-1-28-51-PM-p-800.png", label: "Live Stage Production Snapshot 3" },
   { file: "presentation-setup.png", label: "Presentation Dual Wireless Setup" },
   { file: "live-performance-package-v2.jpg", label: "Full Live Performance Audio Package (Updated)" },
+  { file: "behringer-x32-mixer.jpg", label: "Behringer X32 Digital Mixer" },
+  { file: "behringer-x32-compact.jpg", label: "Behringer X32 Compact Digital Mixer" },
+  { file: "allen-heath-sq7-mixer.jpg", label: "Allen & Heath SQ-7 32-Channel Mixer" },
 ];
 
 function loadCmsProducts() {
-  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-28-public-catalog-v10") {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-28-public-catalog-v11") {
     // Replace the earlier mock catalog once so all product names, descriptions,
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
     localStorage.removeItem(CMS_STORAGE.COUPONS);
-    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-28-public-catalog-v10");
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-28-public-catalog-v11");
   }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
@@ -281,6 +284,15 @@ function loadCmsProducts() {
           }
           if (p.id === "mic-live-package") {
             p.image = "assets/beantown/live-performance-package-v2.jpg";
+          }
+          if (p.id === "mixer-x32") {
+            p.image = "assets/beantown/behringer-x32-mixer.jpg";
+          }
+          if (p.id === "mixer-x32-compact") {
+            p.image = "assets/beantown/behringer-x32-compact.jpg";
+          }
+          if (p.id === "mixer-sq7") {
+            p.image = "assets/beantown/allen-heath-sq7-mixer.jpg";
           }
           // Restore prices if previously quote-only (0)
           const sourceMatch = (typeof BEANTOWN_SOURCE_CATALOG !== "undefined" ? BEANTOWN_SOURCE_CATALOG : []).find((s) => s.id === p.id);
@@ -1060,6 +1072,15 @@ function productImage(p) {
   if (p && p.id === "mic-live-package") {
     return "assets/beantown/live-performance-package-v2.jpg";
   }
+  if (p && p.id === "mixer-x32") {
+    return "assets/beantown/behringer-x32-mixer.jpg";
+  }
+  if (p && p.id === "mixer-x32-compact") {
+    return "assets/beantown/behringer-x32-compact.jpg";
+  }
+  if (p && p.id === "mixer-sq7") {
+    return "assets/beantown/allen-heath-sq7-mixer.jpg";
+  }
   if (p && p.image) return p.image;
   if (p.category === "Special Effects" && p.id.startsWith("cold-spark")) {
     return "assets/beantown/cold-sparklers.webp";
@@ -1170,9 +1191,18 @@ function productCard(p) {
       image.includes("presentation-setup")
     ))
   );
-  const isLivePkg = p.id === "mic-live-package" || (image && image.includes("live-performance"));
-  const mediaClass = isLivePkg ? "is-live-package" : (isContainWhite ? "audio-pkg-media" : (p.tone || ""));
-  const photoClass = isLivePkg ? "is-live-photo" : (isContainWhite ? "audio-pkg-img" : "");
+  const isBlackFrame =
+    p.id === "mic-live-package" ||
+    p.id === "mixer-x32" ||
+    p.id === "mixer-x32-compact" ||
+    p.id === "mixer-sq7" ||
+    (image && (
+      image.includes("live-performance") ||
+      image.includes("behringer-x32") ||
+      image.includes("allen-heath-sq7")
+    ));
+  const mediaClass = isBlackFrame ? "is-black-frame is-live-package" : (isContainWhite ? "audio-pkg-media" : (p.tone || ""));
+  const photoClass = isBlackFrame ? "is-black-frame-photo is-live-photo" : (isContainWhite ? "audio-pkg-img" : "");
   return `<article class="product-card reveal"><div class="product-media has-image ${mediaClass}"><img class="product-photo ${photoClass}" src="${image}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer"></div><div class="product-meta"><span class="badge">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">${productPriceText(p)}</span><button class="text-btn add-product-btn ${quantity ? "is-added" : ""}" data-add="${p.id}" aria-label="${quantity ? `${quantity} added. Add another ${p.name}` : `Add ${p.name} to my setup`}">${quantity ? `Added · ${quantity} +` : "Add to setup +"}</button></div></div></article>`;
 }
 // Client stories — rotating half-moon wheel.

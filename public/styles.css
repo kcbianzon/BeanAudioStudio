@@ -12346,29 +12346,44 @@ body.is-cms-view #app {
   background: #ffffff !important;
 }
 
-/* Live Performance Package — Seamless black studio stage presentation */
+/* Seamless black studio stage presentation — Live Package & Digital Mixers */
+.product-media.is-black-frame,
 .product-media.is-live-package,
-.product-media:has(img[src*="live-performance"]) {
+.product-media:has(img[src*="live-performance"]),
+.product-media:has(img[src*="behringer-x32"]),
+.product-media:has(img[src*="allen-heath-sq7"]) {
   background: #000000 !important;
   background-image: none !important;
 }
 
+.product-photo.is-black-frame-photo,
 .product-photo.is-live-photo,
-.product-photo[src*="live-performance"] {
+.product-photo[src*="live-performance"],
+.product-photo[src*="behringer-x32"],
+.product-photo[src*="allen-heath-sq7"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 0 !important;
   box-sizing: border-box !important;
 }
 
+.product-card:hover .product-photo.is-black-frame-photo,
 .product-card:hover .product-photo.is-live-photo,
-.product-card:hover .product-photo[src*="live-performance"] {
+.product-card:hover .product-photo[src*="live-performance"],
+.product-card:hover .product-photo[src*="behringer-x32"],
+.product-card:hover .product-photo[src*="allen-heath-sq7"] {
   transform: scale(1.04) !important;
 }
 
 .q-equip-thumb:has(img[src*="live-performance"]),
+.q-equip-thumb:has(img[src*="behringer-x32"]),
+.q-equip-thumb:has(img[src*="allen-heath-sq7"]),
 .q-equip-thumb img[src*="live-performance"],
-.cart-item-img[src*="live-performance"] {
+.q-equip-thumb img[src*="behringer-x32"],
+.q-equip-thumb img[src*="allen-heath-sq7"],
+.cart-item-img[src*="live-performance"],
+.cart-item-img[src*="behringer-x32"],
+.cart-item-img[src*="allen-heath-sq7"] {
   background: #000000 !important;
   object-fit: contain !important;
   object-position: center !important;
