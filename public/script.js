@@ -382,6 +382,24 @@ function loadCmsProducts() {
           if (p.id === "video-switcher") {
             p.image = "assets/beantown/video-switcher.png";
           }
+          if (p.id === "led-12") {
+            p.image = "assets/beantown/led-wall-12ft-package.png";
+          }
+          if (p.id === "led-16") {
+            p.image = "assets/beantown/led-wall-16ft-package.png";
+          }
+          if (p.id === "led-custom") {
+            p.image = "assets/beantown/led-wall-custom.png";
+          }
+          if (p.id === "led-trailer") {
+            p.image = "assets/beantown/outdoor-led-trailer.png";
+          }
+          if (p.id === "stream-basic") {
+            p.image = "assets/beantown/streaming-basic-package.png";
+          }
+          if (p.id === "stream-pro") {
+            p.image = "assets/beantown/streaming-pro-package.png";
+          }
           // Restore prices if previously quote-only (0)
           const sourceMatch = (typeof BEANTOWN_SOURCE_CATALOG !== "undefined" ? BEANTOWN_SOURCE_CATALOG : []).find((s) => s.id === p.id);
           if (sourceMatch && (!p.price || p.priceType === "quote")) {
@@ -1241,6 +1259,24 @@ function productImage(p) {
   if (p && p.id === "video-switcher") {
     return "assets/beantown/video-switcher.png";
   }
+  if (p && p.id === "led-12") {
+    return "assets/beantown/led-wall-12ft-package.png";
+  }
+  if (p && p.id === "led-16") {
+    return "assets/beantown/led-wall-16ft-package.png";
+  }
+  if (p && p.id === "led-custom") {
+    return "assets/beantown/led-wall-custom.png";
+  }
+  if (p && p.id === "led-trailer") {
+    return "assets/beantown/outdoor-led-trailer.png";
+  }
+  if (p && p.id === "stream-basic") {
+    return "assets/beantown/streaming-basic-package.png";
+  }
+  if (p && p.id === "stream-pro") {
+    return "assets/beantown/streaming-pro-package.png";
+  }
   if (p && p.image) return p.image;
   if (p.category === "Special Effects" && p.id.startsWith("cold-spark")) {
     return "assets/beantown/cold-sparklers.webp";
@@ -1405,7 +1441,11 @@ function productCard(p) {
       image.includes("samsung-65") ||
       image.includes("hd-projector") ||
       image.includes("fastfold-screen") ||
-      image.includes("video-switcher")
+      image.includes("video-switcher") ||
+      image.includes("led-wall") ||
+      image.includes("outdoor-led-trailer") ||
+      image.includes("streaming-basic") ||
+      image.includes("streaming-pro")
     ))
   );
   const isBlackFrame =

@@ -12317,6 +12317,10 @@ body.is-cms-view #app {
 .product-media:has(img[src*="hd-projector"]),
 .product-media:has(img[src*="fastfold-screen"]),
 .product-media:has(img[src*="video-switcher"]),
+.product-media:has(img[src*="led-wall"]),
+.product-media:has(img[src*="outdoor-led-trailer"]),
+.product-media:has(img[src*="streaming-basic"]),
+.product-media:has(img[src*="streaming-pro"]),
 .product-media:has(.audio-pkg-img) {
   background: #ffffff !important;
   background-image: none !important;
@@ -12368,7 +12372,11 @@ body.is-cms-view #app {
 .product-photo[src*="samsung-65"],
 .product-photo[src*="hd-projector"],
 .product-photo[src*="fastfold-screen"],
-.product-photo[src*="video-switcher"] {
+.product-photo[src*="video-switcher"],
+.product-photo[src*="led-wall"],
+.product-photo[src*="outdoor-led-trailer"],
+.product-photo[src*="streaming-basic"],
+.product-photo[src*="streaming-pro"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 14px 16px !important;
@@ -12421,7 +12429,11 @@ body.is-cms-view #app {
 .product-card:hover .product-photo[src*="samsung-65"],
 .product-card:hover .product-photo[src*="hd-projector"],
 .product-card:hover .product-photo[src*="fastfold-screen"],
-.product-card:hover .product-photo[src*="video-switcher"] {
+.product-card:hover .product-photo[src*="video-switcher"],
+.product-card:hover .product-photo[src*="led-wall"],
+.product-card:hover .product-photo[src*="outdoor-led-trailer"],
+.product-card:hover .product-photo[src*="streaming-basic"],
+.product-card:hover .product-photo[src*="streaming-pro"] {
   transform: scale(1.04) !important;
 }
 

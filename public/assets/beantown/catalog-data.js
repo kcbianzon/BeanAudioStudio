@@ -185,6 +185,18 @@ window.BEANTOWN_SOURCE_CATALOG = [
     ? "assets/beantown/fastfold-screen.png"
     : id === "video-switcher"
     ? "assets/beantown/video-switcher.png"
+    : id === "led-12"
+    ? "assets/beantown/led-wall-12ft-package.png"
+    : id === "led-16"
+    ? "assets/beantown/led-wall-16ft-package.png"
+    : id === "led-custom"
+    ? "assets/beantown/led-wall-custom.png"
+    : id === "led-trailer"
+    ? "assets/beantown/outdoor-led-trailer.png"
+    : id === "stream-basic"
+    ? "assets/beantown/streaming-basic-package.png"
+    : id === "stream-pro"
+    ? "assets/beantown/streaming-pro-package.png"
     : undefined,
   tone: category === "Microphones" ? "coral" : category === "DJ Equipment" ? "sky" : category === "Event Lighting" ? "lavender" : category === "Photo Booths" ? "peach" : "lime",
 }));
