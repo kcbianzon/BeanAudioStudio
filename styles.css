@@ -12234,6 +12234,9 @@ body.is-cms-view #app {
 .product-media:has(img[src*="presentation-setup"]),
 .product-media:has(img[src*="behringer-x32"]),
 .product-media:has(img[src*="allen-heath-sq7"]),
+.product-media:has(img[src*="qsc-touchmix"]),
+.product-media:has(img[src*="mackie-1402"]),
+.product-media:has(img[src*="yamaha-mg10xu"]),
 .product-media:has(.audio-pkg-img) {
   background: #ffffff !important;
   background-image: none !important;
@@ -12257,7 +12260,10 @@ body.is-cms-view #app {
 .product-photo[src*="single-mic"],
 .product-photo[src*="presentation-setup"],
 .product-photo[src*="behringer-x32"],
-.product-photo[src*="allen-heath-sq7"] {
+.product-photo[src*="allen-heath-sq7"],
+.product-photo[src*="qsc-touchmix"],
+.product-photo[src*="mackie-1402"],
+.product-photo[src*="yamaha-mg10xu"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 14px 16px !important;
@@ -12282,7 +12288,10 @@ body.is-cms-view #app {
 .product-card:hover .product-photo[src*="single-mic"],
 .product-card:hover .product-photo[src*="presentation-setup"],
 .product-card:hover .product-photo[src*="behringer-x32"],
-.product-card:hover .product-photo[src*="allen-heath-sq7"] {
+.product-card:hover .product-photo[src*="allen-heath-sq7"],
+.product-card:hover .product-photo[src*="qsc-touchmix"],
+.product-card:hover .product-photo[src*="mackie-1402"],
+.product-card:hover .product-photo[src*="yamaha-mg10xu"] {
   transform: scale(1.04) !important;
 }
 
@@ -12304,7 +12313,10 @@ body.is-cms-view #app {
 .q-equip-thumb:has(img[src*="single-mic"]),
 .q-equip-thumb:has(img[src*="presentation-setup"]),
 .q-equip-thumb:has(img[src*="behringer-x32"]),
-.q-equip-thumb:has(img[src*="allen-heath-sq7"]) {
+.q-equip-thumb:has(img[src*="allen-heath-sq7"]),
+.q-equip-thumb:has(img[src*="qsc-touchmix"]),
+.q-equip-thumb:has(img[src*="mackie-1402"]),
+.q-equip-thumb:has(img[src*="yamaha-mg10xu"]) {
   background: #ffffff !important;
 }
 
@@ -12325,7 +12337,10 @@ body.is-cms-view #app {
 .q-equip-thumb img[src*="single-mic"],
 .q-equip-thumb img[src*="presentation-setup"],
 .q-equip-thumb img[src*="behringer-x32"],
-.q-equip-thumb img[src*="allen-heath-sq7"] {
+.q-equip-thumb img[src*="allen-heath-sq7"],
+.q-equip-thumb img[src*="qsc-touchmix"],
+.q-equip-thumb img[src*="mackie-1402"],
+.q-equip-thumb img[src*="yamaha-mg10xu"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 10px !important;
@@ -12350,7 +12365,10 @@ body.is-cms-view #app {
 .cart-item-img[src*="single-mic"],
 .cart-item-img[src*="presentation-setup"],
 .cart-item-img[src*="behringer-x32"],
-.cart-item-img[src*="allen-heath-sq7"] {
+.cart-item-img[src*="allen-heath-sq7"],
+.cart-item-img[src*="qsc-touchmix"],
+.cart-item-img[src*="mackie-1402"],
+.cart-item-img[src*="yamaha-mg10xu"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 4px !important;

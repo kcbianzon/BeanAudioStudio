@@ -137,6 +137,12 @@ window.BEANTOWN_SOURCE_CATALOG = [
     ? "assets/beantown/behringer-x32-compact.png"
     : id === "mixer-sq7"
     ? "assets/beantown/allen-heath-sq7-mixer.png"
+    : id === "mixer-touchmix"
+    ? "assets/beantown/qsc-touchmix-16.png"
+    : id === "mixer-mackie1402"
+    ? "assets/beantown/mackie-1402-vlz3.png"
+    : id === "mixer-yamaha-mg10xu"
+    ? "assets/beantown/yamaha-mg10xu.png"
     : undefined,
   tone: category === "Microphones" ? "coral" : category === "DJ Equipment" ? "sky" : category === "Event Lighting" ? "lavender" : category === "Photo Booths" ? "peach" : "lime",
 }));
