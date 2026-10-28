@@ -12237,6 +12237,9 @@ body.is-cms-view #app {
 .product-media:has(img[src*="qsc-touchmix"]),
 .product-media:has(img[src*="mackie-1402"]),
 .product-media:has(img[src*="yamaha-mg10xu"]),
+.product-media:has(img[src*="basic-dj"]),
+.product-media:has(img[src*="standard-dj"]),
+.product-media:has(img[src*="pro-dj"]),
 .product-media:has(.audio-pkg-img) {
   background: #ffffff !important;
   background-image: none !important;
@@ -12263,7 +12266,10 @@ body.is-cms-view #app {
 .product-photo[src*="allen-heath-sq7"],
 .product-photo[src*="qsc-touchmix"],
 .product-photo[src*="mackie-1402"],
-.product-photo[src*="yamaha-mg10xu"] {
+.product-photo[src*="yamaha-mg10xu"],
+.product-photo[src*="basic-dj"],
+.product-photo[src*="standard-dj"],
+.product-photo[src*="pro-dj"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 14px 16px !important;
@@ -12291,7 +12297,10 @@ body.is-cms-view #app {
 .product-card:hover .product-photo[src*="allen-heath-sq7"],
 .product-card:hover .product-photo[src*="qsc-touchmix"],
 .product-card:hover .product-photo[src*="mackie-1402"],
-.product-card:hover .product-photo[src*="yamaha-mg10xu"] {
+.product-card:hover .product-photo[src*="yamaha-mg10xu"],
+.product-card:hover .product-photo[src*="basic-dj"],
+.product-card:hover .product-photo[src*="standard-dj"],
+.product-card:hover .product-photo[src*="pro-dj"] {
   transform: scale(1.04) !important;
 }
 
@@ -12316,7 +12325,10 @@ body.is-cms-view #app {
 .q-equip-thumb:has(img[src*="allen-heath-sq7"]),
 .q-equip-thumb:has(img[src*="qsc-touchmix"]),
 .q-equip-thumb:has(img[src*="mackie-1402"]),
-.q-equip-thumb:has(img[src*="yamaha-mg10xu"]) {
+.q-equip-thumb:has(img[src*="yamaha-mg10xu"]),
+.q-equip-thumb:has(img[src*="basic-dj"]),
+.q-equip-thumb:has(img[src*="standard-dj"]),
+.q-equip-thumb:has(img[src*="pro-dj"]) {
   background: #ffffff !important;
 }
 
@@ -12340,7 +12352,10 @@ body.is-cms-view #app {
 .q-equip-thumb img[src*="allen-heath-sq7"],
 .q-equip-thumb img[src*="qsc-touchmix"],
 .q-equip-thumb img[src*="mackie-1402"],
-.q-equip-thumb img[src*="yamaha-mg10xu"] {
+.q-equip-thumb img[src*="yamaha-mg10xu"],
+.q-equip-thumb img[src*="basic-dj"],
+.q-equip-thumb img[src*="standard-dj"],
+.q-equip-thumb img[src*="pro-dj"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 10px !important;
@@ -12368,7 +12383,10 @@ body.is-cms-view #app {
 .cart-item-img[src*="allen-heath-sq7"],
 .cart-item-img[src*="qsc-touchmix"],
 .cart-item-img[src*="mackie-1402"],
-.cart-item-img[src*="yamaha-mg10xu"] {
+.cart-item-img[src*="yamaha-mg10xu"],
+.cart-item-img[src*="basic-dj"],
+.cart-item-img[src*="standard-dj"],
+.cart-item-img[src*="pro-dj"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 4px !important;

@@ -217,16 +217,19 @@ const BEANTOWN_ASSETS = [
   { file: "qsc-touchmix-16.png", label: "QSC TouchMix-16 Digital Mixer" },
   { file: "mackie-1402-vlz3.png", label: "Mackie 1402-VLZ3 Mixer" },
   { file: "yamaha-mg10xu.png", label: "Yamaha MG10XU Mixer" },
+  { file: "basic-dj-package.png", label: "Basic DJ Package (Up to 50 Guests)" },
+  { file: "standard-dj-package.png", label: "Standard DJ Package (50-150 Guests)" },
+  { file: "pro-dj-package.png", label: "Pro DJ Package (150+ Guests)" },
 ];
 
 function loadCmsProducts() {
-  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-28-public-catalog-v13") {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-28-public-catalog-v14") {
     // Replace the earlier mock catalog once so all product names, descriptions,
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
     localStorage.removeItem(CMS_STORAGE.COUPONS);
-    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-28-public-catalog-v13");
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-28-public-catalog-v14");
   }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
@@ -305,6 +308,15 @@ function loadCmsProducts() {
           }
           if (p.id === "mixer-yamaha-mg10xu") {
             p.image = "assets/beantown/yamaha-mg10xu.png";
+          }
+          if (p.id === "dj-basic-pkg") {
+            p.image = "assets/beantown/basic-dj-package.png";
+          }
+          if (p.id === "dj-standard-pkg") {
+            p.image = "assets/beantown/standard-dj-package.png";
+          }
+          if (p.id === "dj-pro-pkg") {
+            p.image = "assets/beantown/pro-dj-package.png";
           }
           // Restore prices if previously quote-only (0)
           const sourceMatch = (typeof BEANTOWN_SOURCE_CATALOG !== "undefined" ? BEANTOWN_SOURCE_CATALOG : []).find((s) => s.id === p.id);
@@ -1102,6 +1114,15 @@ function productImage(p) {
   if (p && p.id === "mixer-yamaha-mg10xu") {
     return "assets/beantown/yamaha-mg10xu.png";
   }
+  if (p && p.id === "dj-basic-pkg") {
+    return "assets/beantown/basic-dj-package.png";
+  }
+  if (p && p.id === "dj-standard-pkg") {
+    return "assets/beantown/standard-dj-package.png";
+  }
+  if (p && p.id === "dj-pro-pkg") {
+    return "assets/beantown/pro-dj-package.png";
+  }
   if (p && p.image) return p.image;
   if (p.category === "Special Effects" && p.id.startsWith("cold-spark")) {
     return "assets/beantown/cold-sparklers.webp";
@@ -1199,6 +1220,9 @@ function productCard(p) {
     p.id === "mixer-touchmix" ||
     p.id === "mixer-mackie1402" ||
     p.id === "mixer-yamaha-mg10xu" ||
+    p.id === "dj-basic-pkg" ||
+    p.id === "dj-standard-pkg" ||
+    p.id === "dj-pro-pkg" ||
     (image && (
       image.includes("audio-package") ||
       image.includes("line-array") ||
@@ -1220,7 +1244,10 @@ function productCard(p) {
       image.includes("allen-heath-sq7") ||
       image.includes("qsc-touchmix") ||
       image.includes("mackie-1402") ||
-      image.includes("yamaha-mg10xu")
+      image.includes("yamaha-mg10xu") ||
+      image.includes("basic-dj") ||
+      image.includes("standard-dj") ||
+      image.includes("pro-dj")
     ))
   );
   const isBlackFrame =

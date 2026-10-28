@@ -143,6 +143,12 @@ window.BEANTOWN_SOURCE_CATALOG = [
     ? "assets/beantown/mackie-1402-vlz3.png"
     : id === "mixer-yamaha-mg10xu"
     ? "assets/beantown/yamaha-mg10xu.png"
+    : id === "dj-basic-pkg"
+    ? "assets/beantown/basic-dj-package.png"
+    : id === "dj-standard-pkg"
+    ? "assets/beantown/standard-dj-package.png"
+    : id === "dj-pro-pkg"
+    ? "assets/beantown/pro-dj-package.png"
     : undefined,
   tone: category === "Microphones" ? "coral" : category === "DJ Equipment" ? "sky" : category === "Event Lighting" ? "lavender" : category === "Photo Booths" ? "peach" : "lime",
 }));
