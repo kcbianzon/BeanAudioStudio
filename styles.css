@@ -12247,6 +12247,13 @@ body.is-cms-view #app {
 .product-media:has(img[src*="rane-sl4"]),
 .product-media:has(img[src*="djm-900"]),
 .product-media:has(img[src*="technics-sl"]),
+.product-media:has(img[src*="pioneer-cdj"]),
+.product-media:has(img[src*="pioneer-ddj"]),
+.product-media:has(img[src*="pioneer-djm-s9"]),
+.product-media:has(img[src*="cdj-3000"]),
+.product-media:has(img[src*="cdj-2000"]),
+.product-media:has(img[src*="ddj-1000"]),
+.product-media:has(img[src*="djm-s9"]),
 .product-media:has(.audio-pkg-img) {
   background: #ffffff !important;
   background-image: none !important;
@@ -12283,7 +12290,14 @@ body.is-cms-view #app {
 .product-photo[src*="rane-ttm"],
 .product-photo[src*="rane-sl4"],
 .product-photo[src*="djm-900"],
-.product-photo[src*="technics-sl"] {
+.product-photo[src*="technics-sl"],
+.product-photo[src*="pioneer-cdj"],
+.product-photo[src*="pioneer-ddj"],
+.product-photo[src*="pioneer-djm-s9"],
+.product-photo[src*="cdj-3000"],
+.product-photo[src*="cdj-2000"],
+.product-photo[src*="ddj-1000"],
+.product-photo[src*="djm-s9"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 14px 16px !important;
@@ -12321,7 +12335,14 @@ body.is-cms-view #app {
 .product-card:hover .product-photo[src*="rane-ttm"],
 .product-card:hover .product-photo[src*="rane-sl4"],
 .product-card:hover .product-photo[src*="djm-900"],
-.product-card:hover .product-photo[src*="technics-sl"] {
+.product-card:hover .product-photo[src*="technics-sl"],
+.product-card:hover .product-photo[src*="pioneer-cdj"],
+.product-card:hover .product-photo[src*="pioneer-ddj"],
+.product-card:hover .product-photo[src*="pioneer-djm-s9"],
+.product-card:hover .product-photo[src*="cdj-3000"],
+.product-card:hover .product-photo[src*="cdj-2000"],
+.product-card:hover .product-photo[src*="ddj-1000"],
+.product-card:hover .product-photo[src*="djm-s9"] {
   transform: scale(1.04) !important;
 }
 
@@ -12356,7 +12377,14 @@ body.is-cms-view #app {
 .q-equip-thumb:has(img[src*="rane-ttm"]),
 .q-equip-thumb:has(img[src*="rane-sl4"]),
 .q-equip-thumb:has(img[src*="djm-900"]),
-.q-equip-thumb:has(img[src*="technics-sl"]) {
+.q-equip-thumb:has(img[src*="technics-sl"]),
+.q-equip-thumb:has(img[src*="pioneer-cdj"]),
+.q-equip-thumb:has(img[src*="pioneer-ddj"]),
+.q-equip-thumb:has(img[src*="pioneer-djm-s9"]),
+.q-equip-thumb:has(img[src*="cdj-3000"]),
+.q-equip-thumb:has(img[src*="cdj-2000"]),
+.q-equip-thumb:has(img[src*="ddj-1000"]),
+.q-equip-thumb:has(img[src*="djm-s9"]) {
   background: #ffffff !important;
 }
 
@@ -12390,7 +12418,14 @@ body.is-cms-view #app {
 .q-equip-thumb img[src*="rane-ttm"],
 .q-equip-thumb img[src*="rane-sl4"],
 .q-equip-thumb img[src*="djm-900"],
-.q-equip-thumb img[src*="technics-sl"] {
+.q-equip-thumb img[src*="technics-sl"],
+.q-equip-thumb img[src*="pioneer-cdj"],
+.q-equip-thumb img[src*="pioneer-ddj"],
+.q-equip-thumb img[src*="pioneer-djm-s9"],
+.q-equip-thumb img[src*="cdj-3000"],
+.q-equip-thumb img[src*="cdj-2000"],
+.q-equip-thumb img[src*="ddj-1000"],
+.q-equip-thumb img[src*="djm-s9"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 10px !important;
@@ -12428,7 +12463,14 @@ body.is-cms-view #app {
 .cart-item-img[src*="rane-ttm"],
 .cart-item-img[src*="rane-sl4"],
 .cart-item-img[src*="djm-900"],
-.cart-item-img[src*="technics-sl"] {
+.cart-item-img[src*="technics-sl"],
+.cart-item-img[src*="pioneer-cdj"],
+.cart-item-img[src*="pioneer-ddj"],
+.cart-item-img[src*="pioneer-djm-s9"],
+.cart-item-img[src*="cdj-3000"],
+.cart-item-img[src*="cdj-2000"],
+.cart-item-img[src*="ddj-1000"],
+.cart-item-img[src*="djm-s9"] {
   object-fit: contain !important;
   object-position: center !important;
   padding: 4px !important;

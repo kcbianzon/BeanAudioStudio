@@ -161,6 +161,14 @@ window.BEANTOWN_SOURCE_CATALOG = [
     ? "assets/beantown/pioneer-djm-900nxs.png"
     : id === "technics-1200"
     ? "assets/beantown/technics-sl-1200mk2.png"
+    : id === "cdj-3000"
+    ? "assets/beantown/pioneer-cdj-3000.png"
+    : id === "cdj-2000nxs2"
+    ? "assets/beantown/pioneer-cdj-2000nxs2.png"
+    : id === "ddj-1000srt"
+    ? "assets/beantown/pioneer-ddj-1000srt.png"
+    : id === "djm-s9"
+    ? "assets/beantown/pioneer-djm-s9.png"
     : undefined,
   tone: category === "Microphones" ? "coral" : category === "DJ Equipment" ? "sky" : category === "Event Lighting" ? "lavender" : category === "Photo Booths" ? "peach" : "lime",
 }));
