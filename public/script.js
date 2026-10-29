@@ -186,6 +186,9 @@ const BEANTOWN_ASSETS = [
   { file: "photo-booth-360.jpg", label: "360 Video Photo Booth Platform" },
   { file: "69667bc3b2d970f7c3028354_MAGIC-PB-p-800.jpeg", label: "Magic Mirror Interactive Photo Booth" },
   { file: "cold-sparklers.webp", label: "Cold Sparklers Machine" },
+  { file: "cold-spark-basic-package.png", label: "Basic Sparkler Package (2 Machines)" },
+  { file: "cold-spark-premium-package.png", label: "Premium Sparkler Package (4 Machines)" },
+  { file: "cold-spark-ultimate-package.png", label: "Ultimate Sparkler Package (6 Machines)" },
   { file: "event-lighting.webp", label: "Smart Wireless Up-Lighting & Spotlights" },
   { file: "event-stage.jpg", label: "Staging Platform & Audio Truss Rig" },
   { file: "event-display.jpg", label: "Commercial 75-inch 4K Confidence Display" },
@@ -233,13 +236,13 @@ const BEANTOWN_ASSETS = [
 ];
 
 function loadCmsProducts() {
-  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-29-public-catalog-v18") {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-29-public-catalog-v19") {
     // Replace the earlier mock catalog once so all product names, descriptions,
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
     localStorage.removeItem(CMS_STORAGE.COUPONS);
-    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-29-public-catalog-v18");
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-29-public-catalog-v19");
   }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
@@ -434,13 +437,13 @@ function loadCmsProducts() {
             p.image = "assets/beantown/outdoor-lighting.png";
           }
           if (p.id === "cold-spark-2") {
-            p.image = "assets/beantown/cold-spark-basic.png";
+            p.image = "assets/beantown/cold-spark-basic-package.png";
           }
           if (p.id === "cold-spark-4") {
-            p.image = "assets/beantown/cold-spark-premium.png";
+            p.image = "assets/beantown/cold-spark-premium-package.png";
           }
           if (p.id === "cold-spark-ultimate") {
-            p.image = "assets/beantown/cold-spark-ultimate.png";
+            p.image = "assets/beantown/cold-spark-ultimate-package.png";
           }
           if (p.id === "dry-ice-cloud") {
             p.image = "assets/beantown/dry-ice-cloud.png";
@@ -1356,13 +1359,13 @@ function productImage(p) {
     return "assets/beantown/outdoor-lighting.png";
   }
   if (p && p.id === "cold-spark-2") {
-    return "assets/beantown/cold-spark-basic.png";
+    return "assets/beantown/cold-spark-basic-package.png";
   }
   if (p && p.id === "cold-spark-4") {
-    return "assets/beantown/cold-spark-premium.png";
+    return "assets/beantown/cold-spark-premium-package.png";
   }
   if (p && p.id === "cold-spark-ultimate") {
-    return "assets/beantown/cold-spark-ultimate.png";
+    return "assets/beantown/cold-spark-ultimate-package.png";
   }
   if (p && p.id === "dry-ice-cloud") {
     return "assets/beantown/dry-ice-cloud.png";
