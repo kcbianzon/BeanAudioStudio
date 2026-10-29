@@ -241,6 +241,8 @@ window.BEANTOWN_SOURCE_CATALOG = [
     ? "assets/beantown/photo-360.png"
     : id === "silent-50" || id === "silent-100" || id === "silent-150" || id === "silent-200" || id === "silent-300"
     ? "assets/beantown/silent-disco-headphones.png"
+    : id === "movie-12" || id === "movie-16" || id === "movie-26" || id === "movie-40" || category === "Outdoor Movies"
+    ? "assets/beantown/inflatable-movie-screen.png"
     : undefined,
   tone: category === "Microphones" ? "coral" : category === "DJ Equipment" ? "sky" : category === "Event Lighting" ? "lavender" : category === "Photo Booths" ? "peach" : "lime",
 }));
