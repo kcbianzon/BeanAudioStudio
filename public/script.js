@@ -195,6 +195,9 @@ const BEANTOWN_ASSETS = [
   { file: "photo-frame.png", label: "Magic Mirror with Frame Photo Booth" },
   { file: "photo-360.png", label: "360 Photo Booth" },
   { file: "silent-disco-headphones.png", label: "Silent Disco Multi-Channel LED Headphones" },
+  { file: "audio-package-small.png", label: "Small Audio Package (2 Speakers on Tripods)" },
+  { file: "audio-package-medium.png", label: "Medium Audio Package (4 Speakers on Tripods)" },
+  { file: "audio-package-large.png", label: "Large Audio Package (Concert Line Array & Subs)" },
   { file: "event-lighting.webp", label: "Smart Wireless Up-Lighting & Spotlights" },
   { file: "event-stage.jpg", label: "Staging Platform & Audio Truss Rig" },
   { file: "event-display.jpg", label: "Commercial 75-inch 4K Confidence Display" },
@@ -242,13 +245,13 @@ const BEANTOWN_ASSETS = [
 ];
 
 function loadCmsProducts() {
-  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-29-public-catalog-v22") {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-29-public-catalog-v23") {
     // Replace the earlier mock catalog once so all product names, descriptions,
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
     localStorage.removeItem(CMS_STORAGE.COUPONS);
-    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-29-public-catalog-v22");
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-29-public-catalog-v23");
   }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
@@ -256,8 +259,14 @@ function loadCmsProducts() {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
         parsed.forEach((p) => {
-          if (p.id === "small-audio" || p.id === "medium-audio" || p.id === "large-audio") {
-            p.image = "assets/beantown/audio-package.png";
+          if (p.id === "small-audio") {
+            p.image = "assets/beantown/audio-package-small.png";
+          }
+          if (p.id === "medium-audio") {
+            p.image = "assets/beantown/audio-package-medium.png";
+          }
+          if (p.id === "large-audio") {
+            p.image = "assets/beantown/audio-package-large.png";
           }
           if (p.id === "powered-speakers") {
             p.image = "assets/beantown/line-array-speakers.png";
@@ -1193,8 +1202,14 @@ function syncSetupCount() {
   link?.setAttribute("aria-label", `My setup, ${count} item${count === 1 ? "" : "s"}`);
 }
 function productImage(p) {
-  if (p && (p.id === "small-audio" || p.id === "medium-audio" || p.id === "large-audio")) {
-    return "assets/beantown/audio-package.png";
+  if (p && p.id === "small-audio") {
+    return "assets/beantown/audio-package-small.png";
+  }
+  if (p && p.id === "medium-audio") {
+    return "assets/beantown/audio-package-medium.png";
+  }
+  if (p && p.id === "large-audio") {
+    return "assets/beantown/audio-package-large.png";
   }
   if (p && p.id === "powered-speakers") {
     return "assets/beantown/line-array-speakers.png";

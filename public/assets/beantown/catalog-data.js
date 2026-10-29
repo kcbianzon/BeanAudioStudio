@@ -95,8 +95,12 @@ window.BEANTOWN_SOURCE_CATALOG = [
   price,
   priceType,
   tag,
-  image: (id === "small-audio" || id === "medium-audio" || id === "large-audio")
-    ? "assets/beantown/audio-package.png"
+  image: id === "small-audio"
+    ? "assets/beantown/audio-package-small.png"
+    : id === "medium-audio"
+    ? "assets/beantown/audio-package-medium.png"
+    : id === "large-audio"
+    ? "assets/beantown/audio-package-large.png"
     : id === "powered-speakers"
     ? "assets/beantown/line-array-speakers.png"
     : id === "audio-monitors"
