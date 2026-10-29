@@ -189,6 +189,7 @@ const BEANTOWN_ASSETS = [
   { file: "cold-spark-basic-package.png", label: "Basic Sparkler Package (2 Machines)" },
   { file: "cold-spark-premium-package.png", label: "Premium Sparkler Package (4 Machines)" },
   { file: "cold-spark-ultimate-package.png", label: "Ultimate Sparkler Package (6 Machines)" },
+  { file: "dry-ice-cloud.png", label: "Dry Ice Machine — Dancing on a Cloud" },
   { file: "event-lighting.webp", label: "Smart Wireless Up-Lighting & Spotlights" },
   { file: "event-stage.jpg", label: "Staging Platform & Audio Truss Rig" },
   { file: "event-display.jpg", label: "Commercial 75-inch 4K Confidence Display" },
@@ -236,13 +237,13 @@ const BEANTOWN_ASSETS = [
 ];
 
 function loadCmsProducts() {
-  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-29-public-catalog-v19") {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-29-public-catalog-v20") {
     // Replace the earlier mock catalog once so all product names, descriptions,
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
     localStorage.removeItem(CMS_STORAGE.COUPONS);
-    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-29-public-catalog-v19");
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-29-public-catalog-v20");
   }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
