@@ -194,6 +194,7 @@ const BEANTOWN_ASSETS = [
   { file: "photo-magic-mirror.png", label: "Magic Mirror Photo Booth" },
   { file: "photo-frame.png", label: "Magic Mirror with Frame Photo Booth" },
   { file: "photo-360.png", label: "360 Photo Booth" },
+  { file: "silent-disco-headphones.png", label: "Silent Disco Multi-Channel LED Headphones" },
   { file: "event-lighting.webp", label: "Smart Wireless Up-Lighting & Spotlights" },
   { file: "event-stage.jpg", label: "Staging Platform & Audio Truss Rig" },
   { file: "event-display.jpg", label: "Commercial 75-inch 4K Confidence Display" },
@@ -241,13 +242,13 @@ const BEANTOWN_ASSETS = [
 ];
 
 function loadCmsProducts() {
-  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-29-public-catalog-v21") {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-29-public-catalog-v22") {
     // Replace the earlier mock catalog once so all product names, descriptions,
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
     localStorage.removeItem(CMS_STORAGE.COUPONS);
-    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-29-public-catalog-v21");
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-29-public-catalog-v22");
   }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
@@ -464,6 +465,9 @@ function loadCmsProducts() {
           }
           if (p.id === "photo-360") {
             p.image = "assets/beantown/photo-360.png";
+          }
+          if (p.id.startsWith("silent-") || p.category === "Silent Disco") {
+            p.image = "assets/beantown/silent-disco-headphones.png";
           }
           // Restore prices if previously quote-only (0)
           const sourceMatch = (typeof BEANTOWN_SOURCE_CATALOG !== "undefined" ? BEANTOWN_SOURCE_CATALOG : []).find((s) => s.id === p.id);
@@ -1399,6 +1403,9 @@ function productImage(p) {
   if (p && p.id === "photo-360") {
     return "assets/beantown/photo-360.png";
   }
+  if (p && (p.id.startsWith("silent-") || p.category === "Silent Disco")) {
+    return "assets/beantown/silent-disco-headphones.png";
+  }
   if (p && p.image) return p.image;
   if (p.category === "Special Effects" && p.id.startsWith("cold-spark")) {
     return "assets/beantown/cold-sparklers.webp";
@@ -1536,6 +1543,8 @@ function productCard(p) {
     p.id === "photo-magic-mirror" ||
     p.id === "photo-frame" ||
     p.id === "photo-360" ||
+    p.id.startsWith("silent-") ||
+    p.category === "Silent Disco" ||
     (image && (
       image.includes("audio-package") ||
       image.includes("line-array") ||
@@ -1603,7 +1612,9 @@ function productCard(p) {
       image.includes("photo-ipad-mirror") ||
       image.includes("photo-magic-mirror") ||
       image.includes("photo-frame") ||
-      image.includes("photo-360")
+      image.includes("photo-360") ||
+      image.includes("silent-disco-headphones") ||
+      image.includes("headphones")
     ))
   );
   const isBlackFrame =

@@ -235,6 +235,8 @@ window.BEANTOWN_SOURCE_CATALOG = [
     ? "assets/beantown/photo-frame.png"
     : id === "photo-360"
     ? "assets/beantown/photo-360.png"
+    : id === "silent-50" || id === "silent-100" || id === "silent-150" || id === "silent-200" || id === "silent-300"
+    ? "assets/beantown/silent-disco-headphones.png"
     : undefined,
   tone: category === "Microphones" ? "coral" : category === "DJ Equipment" ? "sky" : category === "Event Lighting" ? "lavender" : category === "Photo Booths" ? "peach" : "lime",
 }));
