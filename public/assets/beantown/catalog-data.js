@@ -227,6 +227,14 @@ window.BEANTOWN_SOURCE_CATALOG = [
     ? "assets/beantown/cold-spark-ultimate-package.png"
     : id === "dry-ice-cloud"
     ? "assets/beantown/dry-ice-cloud.png"
+    : id === "photo-ipad-mirror"
+    ? "assets/beantown/photo-ipad-mirror.png"
+    : id === "photo-magic-mirror"
+    ? "assets/beantown/photo-magic-mirror.png"
+    : id === "photo-frame"
+    ? "assets/beantown/photo-frame.png"
+    : id === "photo-360"
+    ? "assets/beantown/photo-360.png"
     : undefined,
   tone: category === "Microphones" ? "coral" : category === "DJ Equipment" ? "sky" : category === "Event Lighting" ? "lavender" : category === "Photo Booths" ? "peach" : "lime",
 }));

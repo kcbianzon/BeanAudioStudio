@@ -190,6 +190,10 @@ const BEANTOWN_ASSETS = [
   { file: "cold-spark-premium-package.png", label: "Premium Sparkler Package (4 Machines)" },
   { file: "cold-spark-ultimate-package.png", label: "Ultimate Sparkler Package (6 Machines)" },
   { file: "dry-ice-cloud.png", label: "Dry Ice Machine — Dancing on a Cloud" },
+  { file: "photo-ipad-mirror.png", label: "iPad Mirror Photo Booth" },
+  { file: "photo-magic-mirror.png", label: "Magic Mirror Photo Booth" },
+  { file: "photo-frame.png", label: "Magic Mirror with Frame Photo Booth" },
+  { file: "photo-360.png", label: "360 Photo Booth" },
   { file: "event-lighting.webp", label: "Smart Wireless Up-Lighting & Spotlights" },
   { file: "event-stage.jpg", label: "Staging Platform & Audio Truss Rig" },
   { file: "event-display.jpg", label: "Commercial 75-inch 4K Confidence Display" },
@@ -237,13 +241,13 @@ const BEANTOWN_ASSETS = [
 ];
 
 function loadCmsProducts() {
-  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-29-public-catalog-v20") {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-29-public-catalog-v21") {
     // Replace the earlier mock catalog once so all product names, descriptions,
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
     localStorage.removeItem(CMS_STORAGE.COUPONS);
-    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-29-public-catalog-v20");
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-29-public-catalog-v21");
   }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
@@ -448,6 +452,18 @@ function loadCmsProducts() {
           }
           if (p.id === "dry-ice-cloud") {
             p.image = "assets/beantown/dry-ice-cloud.png";
+          }
+          if (p.id === "photo-ipad-mirror") {
+            p.image = "assets/beantown/photo-ipad-mirror.png";
+          }
+          if (p.id === "photo-magic-mirror") {
+            p.image = "assets/beantown/photo-magic-mirror.png";
+          }
+          if (p.id === "photo-frame") {
+            p.image = "assets/beantown/photo-frame.png";
+          }
+          if (p.id === "photo-360") {
+            p.image = "assets/beantown/photo-360.png";
           }
           // Restore prices if previously quote-only (0)
           const sourceMatch = (typeof BEANTOWN_SOURCE_CATALOG !== "undefined" ? BEANTOWN_SOURCE_CATALOG : []).find((s) => s.id === p.id);
@@ -1371,6 +1387,18 @@ function productImage(p) {
   if (p && p.id === "dry-ice-cloud") {
     return "assets/beantown/dry-ice-cloud.png";
   }
+  if (p && p.id === "photo-ipad-mirror") {
+    return "assets/beantown/photo-ipad-mirror.png";
+  }
+  if (p && p.id === "photo-magic-mirror") {
+    return "assets/beantown/photo-magic-mirror.png";
+  }
+  if (p && p.id === "photo-frame") {
+    return "assets/beantown/photo-frame.png";
+  }
+  if (p && p.id === "photo-360") {
+    return "assets/beantown/photo-360.png";
+  }
   if (p && p.image) return p.image;
   if (p.category === "Special Effects" && p.id.startsWith("cold-spark")) {
     return "assets/beantown/cold-sparklers.webp";
@@ -1504,6 +1532,10 @@ function productCard(p) {
     p.id === "cold-spark-4" ||
     p.id === "cold-spark-ultimate" ||
     p.id === "dry-ice-cloud" ||
+    p.id === "photo-ipad-mirror" ||
+    p.id === "photo-magic-mirror" ||
+    p.id === "photo-frame" ||
+    p.id === "photo-360" ||
     (image && (
       image.includes("audio-package") ||
       image.includes("line-array") ||
@@ -1567,7 +1599,11 @@ function productCard(p) {
       image.includes("stage-lighting") ||
       image.includes("outdoor-lighting") ||
       image.includes("cold-spark") ||
-      image.includes("dry-ice-cloud")
+      image.includes("dry-ice-cloud") ||
+      image.includes("photo-ipad-mirror") ||
+      image.includes("photo-magic-mirror") ||
+      image.includes("photo-frame") ||
+      image.includes("photo-360")
     ))
   );
   const isBlackFrame =
