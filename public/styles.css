@@ -12676,7 +12676,7 @@ body.is-cms-view #app {
   justify-content: center;
   overflow: hidden;
   isolation: isolate;
-  background: #f6f5f4;
+  background: #F7F6F4;
 }
 .hero.hero-equipment::before { display: none; }
 .hero-equipment .hero-copy { width: min(100%, 720px); z-index: 2; }
@@ -12728,3 +12728,8 @@ body.is-cms-view #app {
   .hero-equipment .hero-cta .btn { min-width: 0; min-height: 50px; font-size: 14px; }
   .hero-equipment-image { width: 48vw; }
 }
+
+/* Site canvas color */
+:root { --bg: #F7F6F4; }
+body::before { display: none; }
+.topbar { background: rgba(247, 246, 244, .94) !important; }
