@@ -1948,162 +1948,39 @@ function home() {
     <img class="hero-equipment-image hero-equipment-right" src="assets/beantown/hero-movie-rig.png" alt="" aria-hidden="true">
   </section>
   <div class="marquee"><div class="marquee-track"><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span><b>•</b><span>Live Streaming</span><b>•</b><span>Outdoor Movies</span><b>•</b><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span></div></div>
-  <section class="experience-journey" data-experience-journey>
-    <div class="experience-stage">
-      <div class="experience-center-anchor">
-        <span class="eyebrow">WHAT ARE YOU RENTING?</span>
-        <h2 class="experience-main-title">Start with the<br><span class="experience-word">experience</span>.</h2>
-        <p class="experience-subcopy">Scroll to explore the possibilities — from room-filling sound to full-scale visual production.</p>
-      </div>
-
-
-      <div class="tile-reveal-canvas" aria-label="Interactive equipment collage">
-        <!-- WAVE 1: Sound & Picture Collage -->
-        <a href="#rentals?cat=Audio" class="reveal-tile tile-primary tone-gold" data-tile data-step="0"
-           data-start="0.02" data-peak-start="0.18" data-peak-end="0.40" data-end="0.54"
-           data-enter-x="-54" data-enter-y="2" data-enter-rot="-12" data-enter-scale="0.75"
-           data-target-x="-27" data-target-y="1" data-target-rot="-3.5" data-target-scale="1"
-           data-exit-x="-54" data-exit-y="2" data-exit-rot="-10" data-exit-scale="0.75"
-           data-drift-x="1.0" data-drift-y="-0.8" data-drift-rot="1.0">
-          <span class="tile-media"><img src="assets/beantown/speaker-rental.jpg" alt="Audio rentals" loading="lazy"></span>
-          <div class="tile-body">
-            <span class="tile-tag">01 / SOUND</span>
-            <h3>Audio</h3>
-            <p>Speakers, mics, mixers &amp; live PA.</p>
-            <span class="tile-cta">Explore →</span>
-          </div>
-        </a>
-
-        <a href="#rentals?cat=Audio" class="reveal-tile tile-secondary tone-lime" data-tile data-step="0"
-           data-start="0.04" data-peak-start="0.20" data-peak-end="0.42" data-end="0.56"
-           data-enter-x="-58" data-enter-y="-35" data-enter-rot="10" data-enter-scale="0.72"
-           data-target-x="-38" data-target-y="-25" data-target-rot="3.5" data-target-scale="0.96"
-           data-exit-x="-58" data-exit-y="-35" data-exit-rot="8" data-exit-scale="0.72"
-           data-drift-x="-1.0" data-drift-y="-0.8" data-drift-rot="-1.0">
-          <span class="tile-media"><img src="assets/beantown/concert-audio.webp" alt="PA speakers" loading="lazy"></span>
-          <div class="tile-caption"><strong>PA speakers</strong><span>Full, room-filling sound</span></div>
-        </a>
-
-        <a href="#rentals?cat=Video%20%26%20Displays" class="reveal-tile tile-secondary tone-sky" data-tile data-step="1"
-           data-start="0.06" data-peak-start="0.22" data-peak-end="0.44" data-end="0.58"
-           data-enter-x="58" data-enter-y="-35" data-enter-rot="-10" data-enter-scale="0.72"
-           data-target-x="38" data-target-y="-25" data-target-rot="-4.0" data-target-scale="0.96"
-           data-exit-x="58" data-exit-y="-35" data-exit-rot="-8" data-exit-scale="0.72"
-           data-drift-x="1.0" data-drift-y="-0.8" data-drift-rot="1.0">
-          <span class="tile-media"><img src="assets/beantown/projector-screen.jpg" alt="Projection" loading="lazy"></span>
-          <div class="tile-caption"><strong>Projection</strong><span>Make the picture bigger</span></div>
-        </a>
-
-        <a href="#rentals?cat=Microphones" class="reveal-tile tile-secondary tone-coral" data-tile data-step="0"
-           data-start="0.08" data-peak-start="0.24" data-peak-end="0.46" data-end="0.60"
-           data-enter-x="-58" data-enter-y="38" data-enter-rot="10" data-enter-scale="0.72"
-           data-target-x="-38" data-target-y="26" data-target-rot="4.0" data-target-scale="0.96"
-           data-exit-x="-58" data-exit-y="38" data-exit-rot="8" data-exit-scale="0.72"
-           data-drift-x="-1.0" data-drift-y="0.8" data-drift-rot="-1.0">
-          <span class="tile-media"><img src="assets/beantown/microphone-rentals.jpeg" alt="Microphones" loading="lazy"></span>
-          <div class="tile-caption"><strong>Microphones</strong><span>Ready for every voice</span></div>
-        </a>
-
-        <a href="#rentals?cat=Video%20%26%20Displays" class="reveal-tile tile-primary tone-peach" data-tile data-step="1"
-           data-start="0.10" data-peak-start="0.26" data-peak-end="0.48" data-end="0.62"
-           data-enter-x="54" data-enter-y="-2" data-enter-rot="12" data-enter-scale="0.75"
-           data-target-x="27" data-target-y="-1" data-target-rot="3.5" data-target-scale="1"
-           data-exit-x="54" data-exit-y="-2" data-exit-rot="10" data-exit-scale="0.75"
-           data-drift-x="1.0" data-drift-y="0.8" data-drift-rot="-1.0">
-          <span class="tile-media"><img src="assets/beantown/event-display.jpg" alt="Video &amp; Displays" loading="lazy"></span>
-          <div class="tile-body">
-            <span class="tile-tag">02 / PICTURE</span>
-            <h3>Video</h3>
-            <p>4K TVs, laser projection &amp; switching.</p>
-            <span class="tile-cta">Explore →</span>
-          </div>
-        </a>
-
-        <a href="#rentals?cat=Video%20%26%20Displays" class="reveal-tile tile-secondary tone-lavender" data-tile data-step="1"
-           data-start="0.12" data-peak-start="0.28" data-peak-end="0.50" data-end="0.64"
-           data-enter-x="58" data-enter-y="38" data-enter-rot="-10" data-enter-scale="0.72"
-           data-target-x="38" data-target-y="26" data-target-rot="-3.5" data-target-scale="0.96"
-           data-exit-x="58" data-exit-y="38" data-exit-rot="-8" data-exit-scale="0.72"
-           data-drift-x="1.0" data-drift-y="0.8" data-drift-rot="1.0">
-          <span class="tile-media"><img src="assets/beantown/live-streaming.jpg" alt="Event displays" loading="lazy"></span>
-          <div class="tile-caption"><strong>Event displays</strong><span>Clear, vivid presentation</span></div>
-        </a>
-
-        <!-- WAVE 2: Moments & Full Visual Production Collage -->
-        <a href="#rentals?cat=Experiences" class="reveal-tile tile-primary tone-mint" data-tile data-step="2"
-           data-start="0.44" data-peak-start="0.60" data-peak-end="0.82" data-end="0.96"
-           data-enter-x="-54" data-enter-y="2" data-enter-rot="12" data-enter-scale="0.75"
-           data-target-x="-27" data-target-y="1" data-target-rot="3.5" data-target-scale="1"
-           data-exit-x="-54" data-exit-y="2" data-exit-rot="10" data-exit-scale="0.75"
-           data-drift-x="-1.0" data-drift-y="0.8" data-drift-rot="1.0">
-          <span class="tile-media"><img src="assets/beantown/photo-booth-360.jpg" alt="Experiences" loading="lazy"></span>
-          <div class="tile-body">
-            <span class="tile-tag">03 / MOMENTS</span>
-            <h3>Experiences</h3>
-            <p>Silent disco, outdoor cinema &amp; booths.</p>
-            <span class="tile-cta">Explore →</span>
-          </div>
-        </a>
-
-        <a href="#rentals?cat=Experiences" class="reveal-tile tile-secondary tone-gold" data-tile data-step="2"
-           data-start="0.46" data-peak-start="0.62" data-peak-end="0.84" data-end="0.97"
-           data-enter-x="-58" data-enter-y="-35" data-enter-rot="-10" data-enter-scale="0.72"
-           data-target-x="-38" data-target-y="-25" data-target-rot="-3.5" data-target-scale="0.96"
-           data-exit-x="-58" data-exit-y="-35" data-exit-rot="-8" data-exit-scale="0.72"
-           data-drift-x="-1.0" data-drift-y="-0.8" data-drift-rot="-1.0">
-          <span class="tile-media"><img src="assets/beantown/headphones.jpg" alt="Silent disco" loading="lazy"></span>
-          <div class="tile-caption"><strong>Silent disco</strong><span>Three channels, one dance floor</span></div>
-        </a>
-
-        <a href="#rentals?cat=Outdoor%20Movies" class="reveal-tile tile-secondary tone-coral" data-tile data-step="2"
-           data-start="0.48" data-peak-start="0.64" data-peak-end="0.86" data-end="0.98"
-           data-enter-x="58" data-enter-y="-35" data-enter-rot="10" data-enter-scale="0.72"
-           data-target-x="38" data-target-y="-25" data-target-rot="4.0" data-target-scale="0.96"
-           data-exit-x="58" data-exit-y="-35" data-exit-rot="8" data-exit-scale="0.72"
-           data-drift-x="1.0" data-drift-y="-0.8" data-drift-rot="1.0">
-          <span class="tile-media"><img src="assets/beantown/outdoor-movie.jpg" alt="Outdoor cinema" loading="lazy"></span>
-          <div class="tile-caption"><strong>Outdoor cinema</strong><span>Big-screen nights outside</span></div>
-        </a>
-
-        <a href="#rentals?cat=LED%20Walls" class="reveal-tile tile-primary tone-periwinkle" data-tile data-step="3"
-           data-start="0.50" data-peak-start="0.66" data-peak-end="0.88" data-end="0.99"
-           data-enter-x="54" data-enter-y="-2" data-enter-rot="-12" data-enter-scale="0.75"
-           data-target-x="27" data-target-y="-1" data-target-rot="-3.5" data-target-scale="1"
-           data-exit-x="54" data-exit-y="-2" data-exit-rot="-10" data-exit-scale="0.75"
-           data-drift-x="1.0" data-drift-y="-0.8" data-drift-rot="-1.0">
-          <span class="tile-media"><img src="assets/beantown/led-wall-roses.webp" alt="LED Walls" loading="lazy"></span>
-          <div class="tile-body">
-            <span class="tile-tag">04 / LED WALLS</span>
-            <h3>LED Walls</h3>
-            <p>High-impact visuals for stages &amp; launches.</p>
-            <span class="tile-cta">Explore →</span>
-          </div>
-        </a>
-
-        <a href="#rentals?cat=LED%20Walls" class="reveal-tile tile-secondary tone-lavender" data-tile data-step="3"
-           data-start="0.52" data-peak-start="0.68" data-peak-end="0.90" data-end="1.00"
-           data-enter-x="-58" data-enter-y="38" data-enter-rot="-10" data-enter-scale="0.72"
-           data-target-x="-38" data-target-y="26" data-target-rot="-3.5" data-target-scale="0.96"
-           data-exit-x="-58" data-exit-y="38" data-exit-rot="-8" data-exit-scale="0.72"
-           data-drift-x="-1.0" data-drift-y="0.8" data-drift-rot="1.0">
-          <span class="tile-media"><img src="assets/beantown/69667bc33d884d697701e4c1_Led-Wall.png" alt="LED stage walls" loading="lazy"></span>
-          <div class="tile-caption"><strong>LED walls</strong><span>Bright, high-impact visuals</span></div>
-        </a>
-
-        <a href="#rentals?cat=LED%20Walls" class="reveal-tile tile-secondary tone-lime" data-tile data-step="3"
-           data-start="0.54" data-peak-start="0.70" data-peak-end="0.92" data-end="1.02"
-           data-enter-x="58" data-enter-y="38" data-enter-rot="10" data-enter-scale="0.72"
-           data-target-x="38" data-target-y="26" data-target-rot="3.5" data-target-scale="0.96"
-           data-exit-x="58" data-exit-y="38" data-exit-rot="8" data-exit-scale="0.72"
-           data-drift-x="1.0" data-drift-y="0.8" data-drift-rot="-1.0">
-          <span class="tile-media"><img src="assets/beantown/69667bc5bf1882f6695ff917_V-SHAPE-LED-WALL-p-800.jpg" alt="Modular screens" loading="lazy"></span>
-          <div class="tile-caption"><strong>Modular screens</strong><span>Shape the stage your way</span></div>
-        </a>
-      </div>
-
-      <a href="#rentals" class="experience-cta-pill" data-journey-cta>View rentals <span>→</span></a>
-
+  <section class="experience-categories" aria-labelledby="experience-categories-title">
+    <h2 id="experience-categories-title">Start with the experience</h2>
+    <div class="experience-category-grid">
+      <article class="experience-category-card">
+        <h3><a href="#rentals?cat=Audio%20%26%20Sound">Audio &amp; sound</a></h3>
+        <img src="assets/beantown/experience-audio.png" alt="" loading="lazy">
+        <nav class="experience-category-links" aria-label="Audio and sound rentals">
+          <a href="#rentals?cat=Audio%20%26%20Speakers">Speakers &amp; PA</a><a href="#rentals?cat=Subwoofers">Subwoofers</a><a href="#rentals?cat=Microphones">Microphones</a><a href="#rentals?cat=Audio%20Mixers">Audio Mixers</a><a href="#rentals?cat=DJ%20Equipment">DJ Equipment</a>
+        </nav>
+      </article>
+      <article class="experience-category-card">
+        <h3><a href="#rentals?cat=Video%20%26%20Visuals">Video &amp; Visuals</a></h3>
+        <img src="assets/beantown/experience-video.png" alt="" loading="lazy">
+        <nav class="experience-category-links" aria-label="Video and visual rentals">
+          <a href="#rentals?cat=Video%20%26%20Displays">Displays &amp; Projectors</a><a href="#rentals?cat=LED%20Video%20Walls">LED Video Walls</a><a href="#rentals?cat=Live%20Streaming">Live Streaming</a>
+        </nav>
+      </article>
+      <article class="experience-category-card">
+        <h3><a href="#rentals?cat=Lighting%20%26%20FX">Lighting &amp; FX</a></h3>
+        <img src="assets/beantown/experience-lighting.png" alt="" loading="lazy">
+        <nav class="experience-category-links" aria-label="Lighting and effects rentals">
+          <a href="#rentals?cat=Event%20Lighting">Event Lighting</a><a href="#rentals?cat=Special%20Effects">Special Effects</a>
+        </nav>
+      </article>
+      <article class="experience-category-card experience-category-movie">
+        <h3><a href="#rentals?cat=Event%20Experiences">Event Experiences</a></h3>
+        <img src="assets/beantown/experience-movie.png" alt="" loading="lazy">
+        <nav class="experience-category-links" aria-label="Event experience rentals">
+          <a href="#rentals?cat=Photo%20Booths">Photo Booths</a><a href="#rentals?cat=Silent%20Disco">Silent Disco</a><a href="#rentals?cat=Outdoor%20Movies">Outdoor Movies</a>
+        </nav>
+      </article>
     </div>
+    <a href="#rentals?cat=All" class="btn btn-dark experience-categories-cta">View all rentals</a>
   </section>
   <section class="section"><div class="section-head"><div><span class="eyebrow">EVENT BUNDLES</span><h2>Start with<br>the occasion.</h2></div><a class="btn btn-light" href="#bundles">View all bundles →</a></div><div class="bundle-grid">${bundles
     .slice(0, 3)
