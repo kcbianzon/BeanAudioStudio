@@ -12759,3 +12759,15 @@ body::before { display: none; }
   .experience-category-links { bottom: 18px; gap: 8px 16px; opacity: 1; visibility: visible; }
 }
 @media (prefers-reduced-motion: reduce) { .experience-category-links { transition: none; } }
+
+/* Compact desktop experience section */
+@media (min-width: 701px) {
+  .experience-categories { max-width: 920px; padding: 32px 0 28px; }
+  .experience-categories h2 { margin-bottom: 22px; font-size: clamp(30px, 3vw, 40px); }
+  .experience-category-grid { gap: 18px 24px; }
+  .experience-category-card { aspect-ratio: auto; height: clamp(190px, calc((100svh - 300px) / 2), 250px); }
+  .experience-category-card h3 { margin-top: 14px; font-size: clamp(18px, 1.5vw, 21px); }
+  .experience-category-card img { inset: 23% 0 auto; height: 54%; }
+  .experience-category-links { bottom: 10px; gap: 5px 12px; }
+  .experience-categories-cta.btn { margin-top: 18px; min-height: 44px; }
+}
