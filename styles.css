@@ -12771,3 +12771,36 @@ body::before { display: none; }
   .experience-category-links { bottom: 10px; gap: 5px 12px; }
   .experience-categories-cta.btn { margin-top: 18px; min-height: 44px; }
 }
+
+/* Experience category carousel */
+.experience-categories { position: relative; width: 100vw; max-width: none; margin-left: calc(50% - 50vw); padding: clamp(48px, 5vw, 85px) 0 60px; }
+.experience-categories h2 { margin: 0 20px clamp(35px, 4vw, 70px); font-size: clamp(32px, 3.1vw, 48px); }
+.experience-carousel { position: relative; }
+.experience-category-grid { --carousel-inset: clamp(58px, 7.8vw, 160px); display: flex; gap: clamp(24px, 4vw, 80px); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: var(--carousel-inset); padding: 4px var(--carousel-inset); scrollbar-width: none; }
+.experience-category-grid::-webkit-scrollbar { display: none; }
+.experience-category-card { flex: 0 0 min(36vw, 710px); height: clamp(320px, 38vw, 450px); min-height: 0; aspect-ratio: auto; scroll-snap-align: start; transition: opacity .25s ease; }
+.experience-category-card.is-outside { opacity: .42; }
+.experience-category-card h3 { margin-top: 22px; font-size: clamp(20px, 1.6vw, 26px); }
+.experience-category-card img { inset: 20% 0 auto; height: 65%; }
+.experience-category-links { bottom: 22px; gap: 8px clamp(10px, 1.4vw, 22px); }
+.experience-carousel-arrow { position: absolute; z-index: 3; top: 50%; transform: translateY(-50%); width: 48px; height: 56px; display: grid; place-items: center; padding: 0; border: 0; background: transparent; color: #111; cursor: pointer; }
+.experience-carousel-arrow svg { width: 29px; height: 29px; }
+.experience-carousel-arrow:hover { color: #a87600; }
+.experience-carousel-arrow:focus-visible { outline: 2px solid #a87600; outline-offset: 2px; }
+.experience-carousel-arrow:disabled { opacity: .25; cursor: default; }
+.experience-carousel-prev { left: clamp(4px, 2vw, 40px); }
+.experience-carousel-next { right: clamp(4px, 2vw, 40px); }
+.experience-categories-cta.btn { margin-top: 35px; min-height: 50px; }
+@media (max-width: 700px) {
+  .experience-categories { padding: 58px 0 65px; }
+  .experience-categories h2 { margin-bottom: 30px; }
+  .experience-category-grid { --carousel-inset: 36px; gap: 18px; }
+  .experience-category-card { flex-basis: 78vw; height: 350px; }
+  .experience-category-card h3 { margin-top: 18px; }
+  .experience-category-card img { inset: 20% 0 auto; height: 58%; }
+  .experience-category-links { bottom: 18px; gap: 8px 12px; }
+  .experience-carousel-arrow { width: 36px; }
+  .experience-carousel-prev { left: 0; }
+  .experience-carousel-next { right: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .experience-category-card { transition: none; } }

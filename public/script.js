@@ -1950,7 +1950,9 @@ function home() {
   <div class="marquee"><div class="marquee-track"><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span><b>•</b><span>Live Streaming</span><b>•</b><span>Outdoor Movies</span><b>•</b><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span></div></div>
   <section class="experience-categories" aria-labelledby="experience-categories-title">
     <h2 id="experience-categories-title">Start with the experience</h2>
-    <div class="experience-category-grid">
+    <div class="experience-carousel">
+      <button class="experience-carousel-arrow experience-carousel-prev" type="button" data-experience-prev aria-label="Previous rental categories" aria-controls="experience-category-track"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4 7 12l8 8"/></svg></button>
+      <div class="experience-category-grid" id="experience-category-track" role="region" aria-label="Rental categories" tabindex="0">
       <article class="experience-category-card">
         <h3><a href="#rentals?cat=Audio%20%26%20Sound">Audio &amp; sound</a></h3>
         <img src="assets/beantown/experience-audio.png" alt="" loading="lazy">
@@ -1979,6 +1981,8 @@ function home() {
           <a href="#rentals?cat=Photo%20Booths">Photo Booths</a><a href="#rentals?cat=Silent%20Disco">Silent Disco</a><a href="#rentals?cat=Outdoor%20Movies">Outdoor Movies</a>
         </nav>
       </article>
+    </div>
+      <button class="experience-carousel-arrow experience-carousel-next" type="button" data-experience-next aria-label="Next rental categories" aria-controls="experience-category-track"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 4 8 8-8 8"/></svg></button>
     </div>
     <a href="#rentals?cat=All" class="btn btn-dark experience-categories-cta">View all rentals</a>
   </section>
@@ -4020,6 +4024,7 @@ function render(options = {}) {
   syncNavigation();
   observePageMotion();
   initExperienceJourney();
+  initExperienceCarousel();
   initTestimonialWheel();
   bind();
   if (options.preserveScroll) {
@@ -5646,6 +5651,41 @@ function updateExperienceJourney(now = performance.now(), immediate = false) {
   return Math.abs(targetScrollY - journeySmoothedScrollY) >= 0.15;
 }
 
+
+function updateExperienceCarousel() {
+  const section = document.querySelector('.experience-categories');
+  const track = section?.querySelector('.experience-category-grid');
+  if (!track) return;
+  const bounds = track.getBoundingClientRect();
+  const inset = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+  track.querySelectorAll('.experience-category-card').forEach((card) => {
+    const rect = card.getBoundingClientRect();
+    const visible = Math.max(0, Math.min(rect.right, bounds.right - inset) - Math.max(rect.left, bounds.left + inset));
+    card.classList.toggle('is-outside', visible / rect.width < .9);
+  });
+  section.querySelector('[data-experience-prev]').disabled = track.scrollLeft <= 2;
+  section.querySelector('[data-experience-next]').disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+}
+
+function initExperienceCarousel() {
+  const section = document.querySelector('.experience-categories');
+  const track = section?.querySelector('.experience-category-grid');
+  if (!track) return;
+  const move = (direction) => {
+    const cards = Array.from(track.querySelectorAll('.experience-category-card'));
+    const rect = track.getBoundingClientRect();
+    const inset = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+    const positions = cards.map((card) => track.scrollLeft + card.getBoundingClientRect().left - rect.left - inset);
+    const nearest = positions.reduce((best, pos, index) => Math.abs(pos - track.scrollLeft) < Math.abs(positions[best] - track.scrollLeft) ? index : best, 0);
+    const target = Math.max(0, Math.min(cards.length - 1, nearest + direction));
+    track.scrollTo({ left: positions[target], behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  };
+  section.querySelector('[data-experience-prev]').addEventListener('click', () => move(-1));
+  section.querySelector('[data-experience-next]').addEventListener('click', () => move(1));
+  track.addEventListener('scroll', updateExperienceCarousel, { passive: true });
+  updateExperienceCarousel();
+}
+
 function initExperienceJourney() {
   const section = document.querySelector("[data-experience-journey]");
   if (!section) {
@@ -5722,6 +5762,7 @@ function queueFloatingStoryUpdate() {
 window.addEventListener("scroll", queueFloatingStoryUpdate, { passive: true });
 window.addEventListener("resize", () => {
   initExperienceJourney();
+  updateExperienceCarousel();
   queueFloatingStoryUpdate();
 });
 
