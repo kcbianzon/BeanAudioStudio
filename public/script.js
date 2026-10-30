@@ -3021,7 +3021,7 @@ function renderDateAndLocationStep() {
             <div class="q-time-picker-block" title="Click clock to expand phone alarm scroll time picker">
               <div class="q-analog-clock-wrap" role="button" tabindex="0" aria-label="Analog clock - click to expand phone alarm scroll picker">
                 <svg viewBox="0 0 130 130" class="q-analog-clock-svg" aria-label="Clock face">
-                  <circle cx="65" cy="65" r="60" fill="#efefef" />
+                  <circle cx="65" cy="65" r="60" fill="#f0efea" />
                   ${clockNumbersSvg}
                   <circle cx="65" cy="65" r="3.5" fill="#1e1e1e" />
                   <line
@@ -5934,7 +5934,7 @@ function renderCmsLogin() {
       </button>
 
       <div class="cms-login-security">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#bbbbbb" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#63d5ba" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
         <span>Only approved, verified admins can edit the website.</span>
       </div>
     </section>
@@ -6006,7 +6006,7 @@ function renderCmsDashboard() {
         <button type="button" class="${currentTab === "quotes" ? "active" : ""}" data-cms-tab="quotes">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           Quote Requests
-          ${newQuotesCount > 0 ? `<span class="cms-nav-badge" style="background:#9b9b9b;color:#242424">${newQuotesCount} NEW</span>` : `<span class="cms-nav-badge">${quotes.length}</span>`}
+          ${newQuotesCount > 0 ? `<span class="cms-nav-badge" style="background:#22c55e;color:#052e16">${newQuotesCount} NEW</span>` : `<span class="cms-nav-badge">${quotes.length}</span>`}
         </button>
         <button type="button" class="${currentTab === "analytics" ? "active" : ""}" data-cms-tab="analytics">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
@@ -6159,8 +6159,8 @@ function renderCmsOverview() {
               <tbody>
                 ${recentQuotes.map((q) => `
                   <tr>
-                    <td><strong>${escapeHtml(q.id)}</strong><br><small style="color:#898989">${new Date(q.createdAt).toLocaleDateString()}</small></td>
-                    <td><strong>${escapeHtml(q.contactName)}</strong><br><small style="color:#898989">${escapeHtml(q.organization || q.contactEmail)}</small></td>
+                    <td><strong>${escapeHtml(q.id)}</strong><br><small style="color:#788ba8">${new Date(q.createdAt).toLocaleDateString()}</small></td>
+                    <td><strong>${escapeHtml(q.contactName)}</strong><br><small style="color:#788ba8">${escapeHtml(q.organization || q.contactEmail)}</small></td>
                     <td>${escapeHtml(q.eventType)}</td>
                     <td><strong>${q.quoteRequired ? "Quote required" : `$${Number(q.grandTotal).toLocaleString()}`}</strong></td>
                     <td><span class="cms-badge ${q.status === "New" ? "gold" : q.status === "Confirmed" ? "green" : "blue"}">${escapeHtml(q.status || "New")}</span></td>
@@ -6171,7 +6171,7 @@ function renderCmsOverview() {
             </table>
           </div>
         ` : `
-          <p style="color:#a0a0a0;padding:20px 0;text-align:center">No quote inquiries received yet.</p>
+          <p style="color:#8fa2bf;padding:20px 0;text-align:center">No quote inquiries received yet.</p>
         `}
       </section>
 
@@ -6182,25 +6182,25 @@ function renderCmsOverview() {
             <p class="cms-eyebrow">SYSTEM INTEGRITY</p>
             <h2>Site health &amp; connections</h2>
           </div>
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#959595" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#6e9bcc" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
 
         <div style="display:grid;gap:12px;margin-top:10px">
-          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(160, 160, 160,.1);font-size:12.5px">
-            <span style="color:#afafaf">Persistent Catalog Database</span>
-            <strong style="color:#b0b0b0">✓ Synced (${products.length} items)</strong>
+          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(137,162,201,.1);font-size:12.5px">
+            <span style="color:#9cb1d0">Persistent Catalog Database</span>
+            <strong style="color:#41d3a2">✓ Synced (${products.length} items)</strong>
           </div>
-          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(160, 160, 160,.1);font-size:12.5px">
-            <span style="color:#afafaf">Notification Dispatch</span>
-            <strong style="color:#b0b0b0">✓ ${escapeHtml(loadCmsSettings().notificationEmail || "kcbianzon@gmail.com")}</strong>
+          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(137,162,201,.1);font-size:12.5px">
+            <span style="color:#9cb1d0">Notification Dispatch</span>
+            <strong style="color:#41d3a2">✓ ${escapeHtml(loadCmsSettings().notificationEmail || "kcbianzon@gmail.com")}</strong>
           </div>
-          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(160, 160, 160,.1);font-size:12.5px">
-            <span style="color:#afafaf">Local Asset Library</span>
-            <strong style="color:#b0b0b0">✓ Ready (${BEANTOWN_ASSETS.length} photos)</strong>
+          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(137,162,201,.1);font-size:12.5px">
+            <span style="color:#9cb1d0">Local Asset Library</span>
+            <strong style="color:#41d3a2">✓ Ready (${BEANTOWN_ASSETS.length} photos)</strong>
           </div>
-          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(160, 160, 160,.1);font-size:12.5px">
-            <span style="color:#afafaf">Coupon Math Engine</span>
-            <strong style="color:#b0b0b0">✓ Loophole-free active</strong>
+          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(137,162,201,.1);font-size:12.5px">
+            <span style="color:#9cb1d0">Coupon Math Engine</span>
+            <strong style="color:#41d3a2">✓ Loophole-free active</strong>
           </div>
         </div>
 
@@ -6305,16 +6305,16 @@ function renderCmsCatalog() {
                 </td>
                 <td>
                   <strong>${escapeHtml(p.name)}</strong>
-                  <br><small style="color:#828282;font-family:monospace">${escapeHtml(p.id)}</small>
+                  <br><small style="color:#7184a5;font-family:monospace">${escapeHtml(p.id)}</small>
                 </td>
                 <td><span class="cms-badge blue">${escapeHtml(p.category)}</span></td>
                 <td>
                   <strong>${productPriceText(p)}</strong>
                 </td>
                 <td>
-                  ${p.tag ? `<span class="cms-badge ${p.tone || "lime"}">${escapeHtml(p.tag)}</span>` : '<span style="color:#6f6f6f">—</span>'}
+                  ${p.tag ? `<span class="cms-badge ${p.tone || "lime"}">${escapeHtml(p.tag)}</span>` : '<span style="color:#5f7191">—</span>'}
                 </td>
-                <td style="max-width:280px;color:#afafaf;font-size:12px;line-height:1.4">
+                <td style="max-width:280px;color:#9cb1d0;font-size:12px;line-height:1.4">
                   ${escapeHtml(p.desc.length > 90 ? p.desc.slice(0, 90) + "…" : p.desc)}
                 </td>
                 <td style="text-align:right">
@@ -6354,25 +6354,25 @@ function renderCmsBundles() {
       ${bundles.map((b) => `
         <article class="cms-panel" style="display:flex;flex-direction:column;gap:12px;padding:18px">
           <div style="display:flex;gap:14px;align-items:flex-start">
-            <img src="${bundleImage(b)}" alt="${escapeHtml(b.title)}" style="width:72px;height:54px;object-fit:cover;border-radius:8px;background:#090909">
+            <img src="${bundleImage(b)}" alt="${escapeHtml(b.title)}" style="width:72px;height:54px;object-fit:cover;border-radius:8px;background:#050914">
             <div style="flex:1;min-width:0">
               <span class="cms-badge purple">${escapeHtml(b.label || "BUNDLE")}</span>
               <h3 style="margin:4px 0 0;font-size:15px;color:#ffffff">${escapeHtml(b.title)}</h3>
-              <strong style="color:#b0b0b0;font-size:16px">$${Number(b.price).toLocaleString()}</strong>
+              <strong style="color:#72baff;font-size:16px">$${Number(b.price).toLocaleString()}</strong>
             </div>
           </div>
 
-          <p style="color:#afafaf;font-size:12px;margin:0;line-height:1.5">${escapeHtml(b.desc)}</p>
+          <p style="color:#9cb1d0;font-size:12px;margin:0;line-height:1.5">${escapeHtml(b.desc)}</p>
 
-          <div style="border-top:1px solid rgba(160, 160, 160,.1);padding-top:10px;margin-top:auto">
-            <small style="color:#828282;font-weight:750;letter-spacing:0.06em;text-transform:uppercase">INCLUDED GEAR:</small>
-            <ul style="margin:6px 0 0 16px;padding:0;color:#d0d0d0;font-size:11.5px;line-height:1.6">
+          <div style="border-top:1px solid rgba(137,162,201,.1);padding-top:10px;margin-top:auto">
+            <small style="color:#7184a5;font-weight:750;letter-spacing:0.06em;text-transform:uppercase">INCLUDED GEAR:</small>
+            <ul style="margin:6px 0 0 16px;padding:0;color:#c0d2eb;font-size:11.5px;line-height:1.6">
               ${(b.items || []).slice(0, 4).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
-              ${(b.items || []).length > 4 ? `<li style="color:#828282">+${b.items.length - 4} more items</li>` : ""}
+              ${(b.items || []).length > 4 ? `<li style="color:#7184a5">+${b.items.length - 4} more items</li>` : ""}
             </ul>
           </div>
 
-          <div style="display:flex;gap:8px;margin-top:12px;border-top:1px solid rgba(160, 160, 160,.1);padding-top:12px">
+          <div style="display:flex;gap:8px;margin-top:12px;border-top:1px solid rgba(137,162,201,.1);padding-top:12px">
             <button type="button" class="cms-secondary-btn" style="flex:1" data-cms-edit-bundle="${escapeHtml(b.id)}">Edit Bundle</button>
             <button type="button" class="cms-icon-btn delete" data-cms-delete-bundle="${escapeHtml(b.id)}" title="Delete bundle">
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
@@ -6419,20 +6419,20 @@ function renderCmsCoupons() {
             ${coupons.map((c) => `
               <tr>
                 <td>
-                  <strong style="font-family:'Space Grotesk',Inter,monospace;font-size:13px;letter-spacing:0.06em;color:#ffffff;background:rgba(136, 136, 136,0.15);padding:4px 8px;border-radius:6px;border:1px solid rgba(136, 136, 136,0.3)">
+                  <strong style="font-family:'Space Grotesk',Inter,monospace;font-size:13px;letter-spacing:0.06em;color:#ffffff;background:rgba(56,148,255,0.15);padding:4px 8px;border-radius:6px;border:1px solid rgba(56,148,255,0.3)">
                     ${escapeHtml(c.code)}
                   </strong>
                 </td>
                 <td>
-                  <strong style="color:#9b9b9b;font-size:14px">
+                  <strong style="color:#22c55e;font-size:14px">
                     ${c.type === "percent" ? `${c.value}% OFF` : `$${c.value} OFF`}
                   </strong>
-                  <br><small style="color:#898989">${c.type === "percent" ? "Percentage discount" : "Fixed dollar reduction"}</small>
+                  <br><small style="color:#788ba8">${c.type === "percent" ? "Percentage discount" : "Fixed dollar reduction"}</small>
                 </td>
-                <td>${c.minOrder ? `$${Number(c.minOrder).toLocaleString()} min` : '<span style="color:#898989">No min</span>'}</td>
-                <td>${c.expiryDate ? escapeHtml(c.expiryDate) : '<span style="color:#898989">Never</span>'}</td>
-                <td style="color:#d6d6d6;max-width:220px">${escapeHtml(c.description || "Promo code")}</td>
-                <td><strong>${c.usageCount || 0}</strong> <small style="color:#898989">times used</small></td>
+                <td>${c.minOrder ? `$${Number(c.minOrder).toLocaleString()} min` : '<span style="color:#788ba8">No min</span>'}</td>
+                <td>${c.expiryDate ? escapeHtml(c.expiryDate) : '<span style="color:#788ba8">Never</span>'}</td>
+                <td style="color:#c5d8f2;max-width:220px">${escapeHtml(c.description || "Promo code")}</td>
+                <td><strong>${c.usageCount || 0}</strong> <small style="color:#788ba8">times used</small></td>
                 <td>
                   <button type="button" class="cms-badge ${c.active !== false ? "green" : "red"}" data-cms-toggle-coupon="${escapeHtml(c.id)}" style="cursor:pointer;border:none">
                     ${c.active !== false ? "✓ ACTIVE" : "PAUSED"}
@@ -6499,28 +6499,28 @@ function renderCmsQuotes() {
                 <tr>
                   <td>
                     <strong>${escapeHtml(q.id)}</strong>
-                    <br><small style="color:#898989">${new Date(q.createdAt).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}</small>
+                    <br><small style="color:#788ba8">${new Date(q.createdAt).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}</small>
                   </td>
                   <td>
                     <strong>${escapeHtml(q.contactName)}</strong>
-                    ${q.organization ? `<br><small style="color:#b0b0b0">${escapeHtml(q.organization)}</small>` : ""}
-                    <br><small style="color:#898989">${escapeHtml(q.contactEmail)} · ${escapeHtml(q.contactPhone)}</small>
+                    ${q.organization ? `<br><small style="color:#72baff">${escapeHtml(q.organization)}</small>` : ""}
+                    <br><small style="color:#788ba8">${escapeHtml(q.contactEmail)} · ${escapeHtml(q.contactPhone)}</small>
                   </td>
                   <td>
                     <strong>${escapeHtml(q.eventType)}</strong>
-                    <br><small style="color:#898989">${escapeHtml(q.date)} · ${escapeHtml(q.venue)}</small>
+                    <br><small style="color:#788ba8">${escapeHtml(q.date)} · ${escapeHtml(q.venue)}</small>
                   </td>
                   <td>
-                    <small style="color:#d6d6d6">${escapeHtml(q.duration)}</small>
-                    <br><small style="color:#898989">${escapeHtml(q.serviceTier)}</small>
+                    <small style="color:#c5d8f2">${escapeHtml(q.duration)}</small>
+                    <br><small style="color:#788ba8">${escapeHtml(q.serviceTier)}</small>
                   </td>
                   <td>
                     <strong>${(q.items || []).reduce((sum, item) => sum + (Number(item.qty) || 1), 0)} units</strong>
-                    <br><small style="color:#898989">${(q.items || []).length} items</small>
+                    <br><small style="color:#788ba8">${(q.items || []).length} items</small>
                   </td>
                   <td>
                     <strong style="font-size:15px;color:#ffffff">${q.quoteRequired ? "Quote required" : `$${Number(q.grandTotal).toLocaleString()}`}</strong>
-                    ${q.discountAmount > 0 ? `<br><small style="color:#9b9b9b">Saved $${q.discountAmount} (${escapeHtml(q.couponCode)})</small>` : ""}
+                    ${q.discountAmount > 0 ? `<br><small style="color:#22c55e">Saved $${q.discountAmount} (${escapeHtml(q.couponCode)})</small>` : ""}
                   </td>
                   <td>
                     <select class="cms-select" data-cms-quote-status="${escapeHtml(q.id)}" style="padding:4px 8px;font-size:11px">
@@ -6548,7 +6548,7 @@ function renderCmsQuotes() {
       </section>
     ` : `
       <section class="cms-panel" style="text-align:center;padding:48px 20px">
-        <p style="color:#a0a0a0;font-size:14px;margin:0">No quote requests recorded yet. Submissions from #quote will appear here automatically.</p>
+        <p style="color:#8fa2bf;font-size:14px;margin:0">No quote requests recorded yet. Submissions from #quote will appear here automatically.</p>
       </section>
     `}
   </div>`;
@@ -6670,9 +6670,9 @@ function renderCmsAnalytics() {
           }).join("");
         })()}
 
-        <div style="margin-top:24px;padding:14px;background:rgba(255, 255, 255,0.02);border-radius:10px;border:1px solid rgba(160, 160, 160,0.1)">
-          <small style="color:#898989;font-weight:750;letter-spacing:0.08em;text-transform:uppercase">PIPELINE STATUS OVERVIEW:</small>
-          <div style="display:flex;gap:16px;margin-top:8px;font-size:12.5px;color:#d6d6d6">
+        <div style="margin-top:24px;padding:14px;background:rgba(255,255,255,0.02);border-radius:10px;border:1px solid rgba(137,162,201,0.1)">
+          <small style="color:#788ba8;font-weight:750;letter-spacing:0.08em;text-transform:uppercase">PIPELINE STATUS OVERVIEW:</small>
+          <div style="display:flex;gap:16px;margin-top:8px;font-size:12.5px;color:#c5d8f2">
             <span>🟡 <strong>${quotes.filter(q => q.status === "New").length}</strong> New</span>
             <span>🔵 <strong>${quotes.filter(q => q.status === "Reviewed").length}</strong> Reviewed</span>
             <span>🟢 <strong>${quotes.filter(q => q.status === "Confirmed").length}</strong> Confirmed</span>
@@ -6719,7 +6719,7 @@ function renderCmsSettings() {
 
         <label class="cms-label">Quote Dispatch Notification Email
           <input type="email" id="cmsSettingsNotificationEmail" class="cms-input" value="${escapeHtml(s.notificationEmail || "kcbianzon@gmail.com")}" required>
-          <small style="color:#898989;font-size:10px;text-transform:none">All customer quotes submitted via the website are automatically dispatched to this inbox.</small>
+          <small style="color:#788ba8;font-size:10px;text-transform:none">All customer quotes submitted via the website are automatically dispatched to this inbox.</small>
         </label>
 
         <label class="cms-label">Warehouse &amp; Service Hub
@@ -6765,29 +6765,29 @@ function renderCmsMaintenance() {
       <article class="cms-panel">
         <span class="cms-stat-icon green"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span>
         <h2 style="font-size:15px;color:#ffffff;margin:8px 0 4px">Equipment &amp; Bundles Database</h2>
-        <p style="color:#a0a0a0;font-size:12px;margin:0 0 12px;line-height:1.5">${products.length} catalog items and ${bundles.length} turnkey packages loaded and persisted.</p>
-        <span style="color:#b0b0b0;font-size:11.5px;font-weight:750">✓ Synchronized</span>
+        <p style="color:#8fa2bf;font-size:12px;margin:0 0 12px;line-height:1.5">${products.length} catalog items and ${bundles.length} turnkey packages loaded and persisted.</p>
+        <span style="color:#41d3a2;font-size:11.5px;font-weight:750">✓ Synchronized</span>
       </article>
 
       <article class="cms-panel">
         <span class="cms-stat-icon blue"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
         <h2 style="font-size:15px;color:#ffffff;margin:8px 0 4px">Admin Security &amp; Access</h2>
-        <p style="color:#a0a0a0;font-size:12px;margin:0 0 12px;line-height:1.5">Owner account restricted to ${escapeHtml(settings.notificationEmail || "kcbianzon@gmail.com")}.</p>
-        <span style="color:#b0b0b0;font-size:11.5px;font-weight:750">✓ Protected</span>
+        <p style="color:#8fa2bf;font-size:12px;margin:0 0 12px;line-height:1.5">Owner account restricted to ${escapeHtml(settings.notificationEmail || "kcbianzon@gmail.com")}.</p>
+        <span style="color:#41d3a2;font-size:11.5px;font-weight:750">✓ Protected</span>
       </article>
 
       <article class="cms-panel">
         <span class="cms-stat-icon purple"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span>
         <h2 style="font-size:15px;color:#ffffff;margin:8px 0 4px">Image Engine &amp; Asset Library</h2>
-        <p style="color:#a0a0a0;font-size:12px;margin:0 0 12px;line-height:1.5">Client-side canvas compressor &amp; ${BEANTOWN_ASSETS.length} local event photos ready.</p>
-        <span style="color:#b0b0b0;font-size:11.5px;font-weight:750">✓ Operational</span>
+        <p style="color:#8fa2bf;font-size:12px;margin:0 0 12px;line-height:1.5">Client-side canvas compressor &amp; ${BEANTOWN_ASSETS.length} local event photos ready.</p>
+        <span style="color:#41d3a2;font-size:11.5px;font-weight:750">✓ Operational</span>
       </article>
 
       <article class="cms-panel">
         <span class="cms-stat-icon orange"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
         <h2 style="font-size:15px;color:#ffffff;margin:8px 0 4px">Quote Email Dispatch Bridge</h2>
-        <p style="color:#a0a0a0;font-size:12px;margin:0 0 12px;line-height:1.5">Direct FormSubmit bridge routing submissions to ${escapeHtml(settings.notificationEmail || "kcbianzon@gmail.com")}.</p>
-        <span style="color:#b0b0b0;font-size:11.5px;font-weight:750">✓ Connected</span>
+        <p style="color:#8fa2bf;font-size:12px;margin:0 0 12px;line-height:1.5">Direct FormSubmit bridge routing submissions to ${escapeHtml(settings.notificationEmail || "kcbianzon@gmail.com")}.</p>
+        <span style="color:#41d3a2;font-size:11.5px;font-weight:750">✓ Connected</span>
       </article>
     </div>
 
@@ -6799,7 +6799,7 @@ function renderCmsMaintenance() {
           <h2>Export &amp; import complete website data</h2>
         </div>
       </div>
-      <p style="color:#a0a0a0;font-size:13px;line-height:1.6;margin:0 0 20px">
+      <p style="color:#8fa2bf;font-size:13px;line-height:1.6;margin:0 0 20px">
         Download a complete JSON snapshot containing all equipment products, bundles, active coupons, customer quote requests, and store settings. You can transfer this backup to another machine or restore it anytime.
       </p>
 
@@ -6889,15 +6889,15 @@ function renderCmsProductModal() {
           </label>
 
           <!-- Photo Selector -->
-          <div class="cms-field-full" style="border:1px solid rgba(160, 160, 160,.14);border-radius:12px;padding:16px;background:rgba(15, 15, 15,.5)">
+          <div class="cms-field-full" style="border:1px solid rgba(137,162,201,.14);border-radius:12px;padding:16px;background:rgba(8,16,32,.5)">
             <label class="cms-label" style="margin-bottom:10px">Equipment Picture</label>
 
             <!-- Image Preview Box -->
             <div style="display:flex;gap:16px;align-items:center;margin-bottom:14px">
-              <img id="cmsProdPreviewImg" src="${currentImg}" alt="Preview" style="width:96px;height:72px;object-fit:cover;border-radius:8px;border:1px solid rgba(160, 160, 160,.2);background:#090909">
+              <img id="cmsProdPreviewImg" src="${currentImg}" alt="Preview" style="width:96px;height:72px;object-fit:cover;border-radius:8px;border:1px solid rgba(137,162,201,.2);background:#050914">
               <div style="flex:1">
-                <strong style="font-size:12px;color:#e3e3e3">Current Selected Photo</strong>
-                <p id="cmsProdImgLabel" style="margin:4px 0 0;font-size:11px;color:#898989;word-break:break-all">${escapeHtml(currentImg.slice(0, 60))}${currentImg.length > 60 ? "..." : ""}</p>
+                <strong style="font-size:12px;color:#d8e5f6">Current Selected Photo</strong>
+                <p id="cmsProdImgLabel" style="margin:4px 0 0;font-size:11px;color:#788ba8;word-break:break-all">${escapeHtml(currentImg.slice(0, 60))}${currentImg.length > 60 ? "..." : ""}</p>
               </div>
             </div>
 
@@ -7057,8 +7057,8 @@ function renderCmsCouponModal() {
             <input type="text" id="cmsCouponDesc" class="cms-input" value="${escapeHtml(c.description || "")}" placeholder="e.g. $50 off first event rental">
           </label>
 
-          <label style="display:flex;align-items:center;gap:10px;color:#d6d6d6;font-size:12.5px;cursor:pointer;margin-top:6px">
-            <input type="checkbox" id="cmsCouponActive" ${c.active !== false ? "checked" : ""} style="width:16px;height:16px;accent-color:#9b9b9b">
+          <label style="display:flex;align-items:center;gap:10px;color:#c5d8f2;font-size:12.5px;cursor:pointer;margin-top:6px">
+            <input type="checkbox" id="cmsCouponActive" ${c.active !== false ? "checked" : ""} style="width:16px;height:16px;accent-color:#22c55e">
             <span><strong>Coupon is Active</strong> (Can be redeemed immediately on quote builder)</span>
           </label>
         </div>
@@ -7082,30 +7082,30 @@ function renderCmsQuoteDetailModal() {
         <div>
           <span class="cms-eyebrow">QUOTE INQUIRY RECEIPT · REF ${escapeHtml(q.id)}</span>
           <h2>${escapeHtml(q.eventName || q.eventType)}</h2>
-          <small style="color:#898989">Received ${new Date(q.createdAt).toLocaleString()}</small>
+          <small style="color:#788ba8">Received ${new Date(q.createdAt).toLocaleString()}</small>
         </div>
         <button type="button" class="cms-icon-btn" id="cmsCloseQuoteModal">✕</button>
       </div>
 
       <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:12px;margin-bottom:18px">
-        <div style="background:rgba(255, 255, 255,0.02);padding:12px;border-radius:8px;border:1px solid rgba(160, 160, 160,.1)">
-          <small style="color:#898989;font-weight:750">CLIENT CONTACT</small>
+        <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;border:1px solid rgba(137,162,201,.1)">
+          <small style="color:#788ba8;font-weight:750">CLIENT CONTACT</small>
           <strong style="display:block;margin:4px 0 2px;color:#ffffff">${escapeHtml(q.contactName)}</strong>
-          <small style="color:#afafaf;display:block">${escapeHtml(q.contactEmail)}</small>
-          <small style="color:#afafaf;display:block">${escapeHtml(q.contactPhone)}</small>
+          <small style="color:#9cb1d0;display:block">${escapeHtml(q.contactEmail)}</small>
+          <small style="color:#9cb1d0;display:block">${escapeHtml(q.contactPhone)}</small>
         </div>
 
-        <div style="background:rgba(255, 255, 255,0.02);padding:12px;border-radius:8px;border:1px solid rgba(160, 160, 160,.1)">
-          <small style="color:#898989;font-weight:750">EVENT SCHEDULE</small>
+        <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;border:1px solid rgba(137,162,201,.1)">
+          <small style="color:#788ba8;font-weight:750">EVENT SCHEDULE</small>
           <strong style="display:block;margin:4px 0 2px;color:#ffffff">${escapeHtml(q.date)}</strong>
-          <small style="color:#afafaf;display:block">${escapeHtml(q.venue)} · ${escapeHtml(q.guests || "Not set")} guests</small>
-          <small style="color:#afafaf;display:block">${escapeHtml(q.location)}</small>
+          <small style="color:#9cb1d0;display:block">${escapeHtml(q.venue)} · ${escapeHtml(q.guests || "Not set")} guests</small>
+          <small style="color:#9cb1d0;display:block">${escapeHtml(q.location)}</small>
         </div>
 
-        <div style="background:rgba(255, 255, 255,0.02);padding:12px;border-radius:8px;border:1px solid rgba(160, 160, 160,.1)">
-          <small style="color:#898989;font-weight:750">PRODUCTION CREW</small>
+        <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;border:1px solid rgba(137,162,201,.1)">
+          <small style="color:#788ba8;font-weight:750">PRODUCTION CREW</small>
           <strong style="display:block;margin:4px 0 2px;color:#ffffff">${escapeHtml(q.serviceTier)}</strong>
-          <small style="color:#afafaf;display:block">${escapeHtml(q.duration)}</small>
+          <small style="color:#9cb1d0;display:block">${escapeHtml(q.duration)}</small>
         </div>
       </div>
 
@@ -7134,37 +7134,37 @@ function renderCmsQuoteDetailModal() {
       </div>
 
       <!-- Financial Totals -->
-      <div style="background:rgba(15, 15, 15,.7);border:1px solid rgba(160, 160, 160,.14);border-radius:10px;padding:14px;display:grid;gap:8px;margin-bottom:18px">
-        <div style="display:flex;justify-content:space-between;color:#afafaf;font-size:12.5px">
+      <div style="background:rgba(8,16,32,.7);border:1px solid rgba(137,162,201,.14);border-radius:10px;padding:14px;display:grid;gap:8px;margin-bottom:18px">
+        <div style="display:flex;justify-content:space-between;color:#9cb1d0;font-size:12.5px">
           <span>Equipment Subtotal</span>
           <strong>$${Number(q.baseSubtotal).toLocaleString()}</strong>
         </div>
         ${q.durationSurcharge > 0 ? `
-          <div style="display:flex;justify-content:space-between;color:#afafaf;font-size:12.5px">
+          <div style="display:flex;justify-content:space-between;color:#9cb1d0;font-size:12.5px">
             <span>Duration Adjustment</span>
             <strong>+$${Number(q.durationSurcharge).toLocaleString()}</strong>
           </div>
         ` : ""}
-        <div style="display:flex;justify-content:space-between;color:#afafaf;font-size:12.5px">
+        <div style="display:flex;justify-content:space-between;color:#9cb1d0;font-size:12.5px">
           <span>Delivery &amp; Crew Fee</span>
           <strong>${q.serviceFee === 0 ? "Free / Self Pickup" : `+$${Number(q.serviceFee).toLocaleString()}`}</strong>
         </div>
         ${q.discountAmount > 0 ? `
-          <div style="display:flex;justify-content:space-between;color:#9b9b9b;font-size:12.5px">
+          <div style="display:flex;justify-content:space-between;color:#22c55e;font-size:12.5px">
             <span>Promo Discount (${escapeHtml(q.couponCode || "COUPON")})</span>
             <strong>-$${Number(q.discountAmount).toLocaleString()}</strong>
           </div>
         ` : ""}
-        <div style="display:flex;justify-content:space-between;color:#ffffff;font-size:16px;border-top:1px solid rgba(160, 160, 160,.14);padding-top:8px">
+        <div style="display:flex;justify-content:space-between;color:#ffffff;font-size:16px;border-top:1px solid rgba(137,162,201,.14);padding-top:8px">
           <span>GRAND TOTAL</span>
-          <strong style="color:#b0b0b0">${q.quoteRequired ? "Quote required" : `$${Number(q.grandTotal).toLocaleString()}`}</strong>
+          <strong style="color:#72baff">${q.quoteRequired ? "Quote required" : `$${Number(q.grandTotal).toLocaleString()}`}</strong>
         </div>
       </div>
 
       ${q.notes ? `
-        <div style="background:rgba(255, 255, 255,0.02);padding:12px;border-radius:8px;border:1px solid rgba(160, 160, 160,.1);margin-bottom:18px">
-          <small style="color:#898989;font-weight:750">CLIENT SPECIAL REQUESTS &amp; LOGISTICS NOTES:</small>
-          <p style="margin:4px 0 0;color:#dedede;font-size:12.5px;line-height:1.5">${escapeHtml(q.notes)}</p>
+        <div style="background:rgba(255,255,255,0.02);padding:12px;border-radius:8px;border:1px solid rgba(137,162,201,.1);margin-bottom:18px">
+          <small style="color:#788ba8;font-weight:750">CLIENT SPECIAL REQUESTS &amp; LOGISTICS NOTES:</small>
+          <p style="margin:4px 0 0;color:#d0e0f8;font-size:12.5px;line-height:1.5">${escapeHtml(q.notes)}</p>
         </div>
       ` : ""}
 
