@@ -1941,7 +1941,7 @@ function home() {
   <section class="hero hero-equipment reveal">
     <img class="hero-equipment-image hero-equipment-left" src="assets/beantown/hero-stage-rig.png" alt="" aria-hidden="true">
     <div class="hero-copy">
-      <h1 class="hero-headline">YOUR EVENT.<br>YOUR SETUP.</h1>
+      <h1 class="hero-headline" id="heroHeadline" aria-label="Your event. Your setup."><span class="hero-title-line" data-type-text="YOUR EVENT." data-accent-start="5">YOUR <span class="hero-title-highlight">EVENT.</span></span><br><span class="hero-title-line" data-type-text="YOUR SETUP." data-accent-start="5">YOUR <span class="hero-title-highlight">SETUP.</span></span></h1>
       <p>Rent speakers, screens, streaming gear, photo booths and complete event systems — then build your exact experience before you request a quote.</p>
       <div class="hero-cta"><button type="button" class="btn btn-dark" data-open-cart>Build your setup</button><a class="btn btn-light" href="#rentals">Explore rentals</a></div>
     </div>
