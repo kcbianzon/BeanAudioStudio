@@ -12808,3 +12808,6 @@ body::before { display: none; }
 /* Marquee colors */
 .marquee { background: #3C3838; border-color: #3C3838; }
 .marquee-track span, .marquee-track b { color: #fff; }
+
+/* Bring event bundles closer to the experience carousel. */
+.experience-categories + .section { padding-top: clamp(36px, 4vw, 52px); }
