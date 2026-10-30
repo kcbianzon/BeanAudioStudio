@@ -12804,3 +12804,7 @@ body::before { display: none; }
   .experience-carousel-next { right: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .experience-category-card { transition: none; } }
+
+/* Marquee colors */
+.marquee { background: #3C3838; border-color: #3C3838; }
+.marquee-track span, .marquee-track b { color: #fff; }
