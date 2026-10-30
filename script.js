@@ -1998,7 +1998,17 @@ function home() {
           )}</ul><div class="bundle-foot"><span class="bundle-price">${bundlePriceText(b)}</span><button class="btn btn-dark btn-small" data-bundle="${b.id}">View bundle →</button></div></div></article>`,
     )
     .join("")}</div></section>
-  <section class="section"><div class="feature-panel dark"><div><span class="eyebrow">PLAN THE SETUP WITH CONFIDENCE</span><h3>Build it<br>before you book it.</h3><p>Choose your event and requested items. Public rates appear where listed; other prices are confirmed by quote.</p></div><div class="stat-row"><div class="stat"><strong>24/7</strong><span>CONFIGURE ANYTIME</span></div><div class="stat"><strong>01</strong><span>EVENT BUILDER</span></div><div class="stat"><strong>∞</strong><span>COMBINATIONS</span></div></div></div></section>
+  <section class="why-beantown" aria-labelledby="why-beantown-title">
+    <h2 id="why-beantown-title">Why Beantown?</h2>
+    <div class="why-beantown-grid">
+      <article class="why-beantown-item"><img src="assets/beantown/why-speakers.png" alt="" loading="lazy"><h3>Sound That Sets the Mood</h3><p>Speakers and audio equipment for speeches, celebrations and everything in between.</p></article>
+      <article class="why-beantown-item"><img src="assets/beantown/why-lighting.png" alt="" loading="lazy"><h3>Light Up the Moment</h3><p>Event lighting to set the tone, highlight the action and bring your space to life.</p></article>
+      <article class="why-beantown-item"><img src="assets/beantown/why-screen.png" alt="" loading="lazy"><h3>Go Big on Screen</h3><p>LED screens for presentations, event visuals and moments everyone should see.</p></article>
+      <article class="why-beantown-item"><img src="assets/beantown/why-microphone.png" alt="" loading="lazy"><h3>Every Voice. Every Beat.</h3><p>Microphones and headphones for hosts, performers and immersive listening.</p></article>
+      <article class="why-beantown-item"><img src="assets/beantown/why-movie.png" alt="" loading="lazy"><h3>Movie Nights, Reimagined</h3><p>Inflatable screens for outdoor films, watch parties and larger-than-life viewing.</p></article>
+      <article class="why-beantown-item"><img src="assets/beantown/why-dj.png" alt="" loading="lazy"><h3>Bring the Party</h3><p>DJ setups and rental gear to put music at the heart of your celebration.</p></article>
+    </div>
+  </section>
   ${faqSection()}
  </div>`;
 }
