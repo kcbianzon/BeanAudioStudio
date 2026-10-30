@@ -1999,7 +1999,6 @@ function home() {
     )
     .join("")}</div></section>
   <section class="section"><div class="feature-panel dark"><div><span class="eyebrow">PLAN THE SETUP WITH CONFIDENCE</span><h3>Build it<br>before you book it.</h3><p>Choose your event and requested items. Public rates appear where listed; other prices are confirmed by quote.</p></div><div class="stat-row"><div class="stat"><strong>24/7</strong><span>CONFIGURE ANYTIME</span></div><div class="stat"><strong>01</strong><span>EVENT BUILDER</span></div><div class="stat"><strong>∞</strong><span>COMBINATIONS</span></div></div></div></section>
-  ${testimonialSection()}
   ${faqSection()}
  </div>`;
 }
@@ -4025,7 +4024,6 @@ function render(options = {}) {
   observePageMotion();
   initExperienceJourney();
   initExperienceCarousel();
-  initTestimonialWheel();
   bind();
   if (options.preserveScroll) {
     window.requestAnimationFrame(() => {
