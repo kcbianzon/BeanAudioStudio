@@ -2063,22 +2063,11 @@ function rentalsResultsGridMarkup(list) {
 
 function rentals() {
   const list = filteredProducts();
-  const selectedTotalCount = Object.values(state.selected).reduce((sum, n) => sum + n, 0);
   const hasActiveFilters =
     state.category !== "All" ||
     state.search.trim() !== "" ||
-    state.priceType !== "all" ||
     state.minPrice !== "" ||
-    state.maxPrice !== "" ||
-    state.onlyPopular ||
-    state.onlySelected;
-
-  const priceTypeOptions = [
-    { id: "all", label: "Any" },
-    { id: "fixed", label: "Fixed" },
-    { id: "starting", label: "Packages" },
-    { id: "quote", label: "Quote" },
-  ];
+    state.maxPrice !== "";
 
   return `<div class="page">
     <div class="page-hero">
@@ -2168,33 +2157,10 @@ function rentals() {
           </div>
 
           <div class="sidebar-filter-section">
-            <span class="sidebar-section-label">PRICING TYPE</span>
-            <div class="sidebar-Option-pills" role="group" aria-label="Pricing type">
-              ${priceTypeOptions.map((opt) => `<button type="button" class="sidebar-mini-pill ${state.priceType === opt.id ? "active" : ""}" data-price-type="${opt.id}">${opt.label}</button>`).join("")}
-            </div>
-          </div>
-
-          <div class="sidebar-filter-section">
             <span class="sidebar-section-label">PRICE RANGE</span>
             <div class="sidebar-range-row">
               <input id="rentalMinPrice" type="number" min="0" step="10" placeholder="Min" value="${escapeHtml(state.minPrice)}" aria-label="Minimum price">
               <input id="rentalMaxPrice" type="number" min="0" step="10" placeholder="Max" value="${escapeHtml(state.maxPrice)}" aria-label="Maximum price">
-            </div>
-          </div>
-
-          <div class="sidebar-filter-section">
-            <span class="sidebar-section-label">EXTRAS</span>
-            <div class="sidebar-checks">
-              <label class="sidebar-check-label">
-                <input type="checkbox" id="filterPopular" ${state.onlyPopular ? "checked" : ""}>
-                <span class="sidebar-check-box" aria-hidden="true"></span>
-                <span>Popular &amp; featured</span>
-              </label>
-              <label class="sidebar-check-label">
-                <input type="checkbox" id="filterSelected" ${state.onlySelected ? "checked" : ""}>
-                <span class="sidebar-check-box" aria-hidden="true"></span>
-                <span>Added to my setup (${selectedTotalCount})</span>
-              </label>
             </div>
           </div>
 
@@ -4351,11 +4317,8 @@ function bind() {
     const hasActive =
       state.category !== "All" ||
       state.search.trim() !== "" ||
-      state.priceType !== "all" ||
       state.minPrice !== "" ||
-      state.maxPrice !== "" ||
-      state.onlyPopular ||
-      state.onlySelected;
+      state.maxPrice !== "";
     if (clearBtn) clearBtn.disabled = !hasActive;
     observePageMotion();
     grid.querySelectorAll("[data-add]").forEach((b) =>
