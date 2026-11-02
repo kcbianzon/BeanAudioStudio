@@ -4035,7 +4035,18 @@ function render(options = {}) {
   initExperienceJourney();
   initExperienceCarousel();
   bind();
-  if (options.preserveScroll) {
+  if (options.scrollToRentals && hash === "rentals") {
+    // Keep the user at the top of the rentals results instead of letting the
+    // old scroll offset land in the footer when the list gets shorter.
+    window.requestAnimationFrame(() => {
+      const isStacked = window.matchMedia("(max-width: 820px)").matches;
+      const target = isStacked
+        ? document.querySelector(".rentals-main-area")
+        : document.querySelector(".rentals-catalog");
+      if (target) target.scrollIntoView({ block: "start", behavior: "instant" });
+      else window.scrollTo({ top: 0, behavior: "instant" });
+    });
+  } else if (options.preserveScroll) {
     window.requestAnimationFrame(() => {
       const previousScrollBehavior =
         document.documentElement.style.scrollBehavior;
@@ -4343,13 +4354,13 @@ function bind() {
         state.maxPrice = "";
         state.onlyPopular = false;
         state.onlySelected = false;
-        render({ preserveScroll: true });
+        render({ scrollToRentals: true });
       }),
     );
     countHeader.querySelectorAll("[data-cat]").forEach((b) =>
       b.addEventListener("click", () => {
         state.category = b.dataset.cat;
-        render({ preserveScroll: true });
+        render({ scrollToRentals: true });
       }),
     );
   };
@@ -4357,7 +4368,7 @@ function bind() {
   document.querySelectorAll("[data-cat]").forEach((b) =>
     b.addEventListener("click", () => {
       state.category = b.dataset.cat;
-      render({ preserveScroll: true });
+      render({ scrollToRentals: true });
     }),
   );
   document.querySelector("#rentalSearch")?.addEventListener("input", (e) => {
@@ -4371,7 +4382,7 @@ function bind() {
   document.querySelectorAll("[data-price-type]").forEach((b) =>
     b.addEventListener("click", () => {
       state.priceType = b.dataset.priceType;
-      render({ preserveScroll: true });
+      render({ scrollToRentals: true });
     }),
   );
   document.querySelector("#rentalMinPrice")?.addEventListener("input", (e) => {
@@ -4384,11 +4395,11 @@ function bind() {
   });
   document.querySelector("#filterPopular")?.addEventListener("change", (e) => {
     state.onlyPopular = e.target.checked;
-    render({ preserveScroll: true });
+    render({ scrollToRentals: true });
   });
   document.querySelector("#filterSelected")?.addEventListener("change", (e) => {
     state.onlySelected = e.target.checked;
-    render({ preserveScroll: true });
+    render({ scrollToRentals: true });
   });
   document.querySelector("#rentalSort")?.addEventListener("change", (e) => {
     state.sortBy = e.target.value;
@@ -4409,7 +4420,7 @@ function bind() {
       state.maxPrice = "";
       state.onlyPopular = false;
       state.onlySelected = false;
-      render({ preserveScroll: true });
+      render({ scrollToRentals: true });
     }),
   );
   document.querySelector("[data-apply-filters]")?.addEventListener("click", () => {
