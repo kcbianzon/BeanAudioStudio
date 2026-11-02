@@ -914,6 +914,7 @@ const app = document.getElementById("app");
 const toast = document.getElementById("toast");
 let pageRevealObserver;
 let lastRenderedPage = null;
+let lastSidebarScrollTop = 0;
 
 function escapeHtml(value) {
   return String(value ?? "").replace(/[&<>\"']/g, (character) => ({
@@ -3985,6 +3986,11 @@ function quote() {
 
 function render(options = {}) {
   const previousScroll = window.scrollY;
+  // The rentals filter panel scrolls on its own; remember where it was so a
+  // re-render does not send the panel back to the top.
+  const currentSb = document.querySelector(".rentals-sidebar");
+  if (currentSb) lastSidebarScrollTop = currentSb.scrollTop;
+  const previousSidebarScroll = lastSidebarScrollTop || 0;
   const hash = getHash();
   const routeChanged = lastRenderedPage !== null && lastRenderedPage !== hash;
 
@@ -4035,16 +4041,24 @@ function render(options = {}) {
   initExperienceJourney();
   initExperienceCarousel();
   bind();
+  const restoredSidebar = app.querySelector(".rentals-sidebar");
+  if (restoredSidebar) {
+    if (previousSidebarScroll) restoredSidebar.scrollTop = previousSidebarScroll;
+    restoredSidebar.addEventListener("scroll", () => {
+      lastSidebarScrollTop = restoredSidebar.scrollTop;
+    }, { passive: true });
+  }
   if (options.scrollToRentals && hash === "rentals") {
-    // Keep the user at the top of the rentals results instead of letting the
-    // old scroll offset land in the footer when the list gets shorter.
     window.requestAnimationFrame(() => {
       const isStacked = window.matchMedia("(max-width: 820px)").matches;
-      const target = isStacked
-        ? document.querySelector(".rentals-main-area")
-        : document.querySelector(".rentals-catalog");
-      if (target) target.scrollIntoView({ block: "start", behavior: "instant" });
-      else window.scrollTo({ top: 0, behavior: "instant" });
+      if (!isStacked) {
+        // Desktop: align products at the top while panel stays alongside
+        const target = document.querySelector(".rentals-catalog");
+        if (target) target.scrollIntoView({ block: "start", behavior: "instant" });
+      }
+      // Re-assert sidebar scroll position so the panel never resets to top
+      const sb = document.querySelector(".rentals-sidebar");
+      if (sb && previousSidebarScroll) sb.scrollTop = previousSidebarScroll;
     });
   } else if (options.preserveScroll) {
     window.requestAnimationFrame(() => {
@@ -4053,6 +4067,8 @@ function render(options = {}) {
       document.documentElement.style.scrollBehavior = "auto";
       window.scrollTo(0, previousScroll);
       document.documentElement.style.scrollBehavior = previousScrollBehavior;
+      const sb = document.querySelector(".rentals-sidebar");
+      if (sb && previousSidebarScroll) sb.scrollTop = previousSidebarScroll;
     });
   } else {
     window.scrollTo(0, 0);
