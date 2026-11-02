@@ -2606,7 +2606,7 @@ h1, h2, h3, h4, .brand-copy strong, .btn, .category-card > strong {
   margin: 76px calc(50% - 50vw) 0;
   padding: 16px 0;
   border: 0;
-  background: #ffe89c;
+  background: #363333;
 }
 .marquee-track { font-size: 14px; letter-spacing: .1em; }
 .marquee-track span { opacity: 1; }
@@ -12803,10 +12803,10 @@ body.is-cms-view #app {
 }
 @media (prefers-reduced-motion: reduce) { .experience-category-card { transition: none; } }
 
-/* Marquee colors — warm gold/amber (#f6c84b) & coral-orange (#ff5a36) */
-.marquee { background: #ffe89c; border-block: 1px solid #f0e0b7; }
-.marquee-track span { color: var(--ink); font-weight: 900; }
-.marquee-track b { color: var(--accent-2); }
+/* Charcoal black marquee with white text */
+.marquee { background: #363333 !important; border-block: 1px solid #363333 !important; border-color: #363333 !important; }
+.marquee-track span { color: #ffffff !important; font-weight: 900; }
+.marquee-track b { color: #ffffff !important; }
 
 /* Bring event bundles closer to the experience carousel. */
 .experience-categories + .section { padding-top: clamp(36px, 4vw, 52px); }
