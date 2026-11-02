@@ -12833,3 +12833,12 @@ body.is-cms-view #app {
   .why-beantown-item:nth-child(n) { border-right: 0; border-bottom: 1px solid #d9d8d5; padding: 28px 20px 36px; }
   .why-beantown-item:last-child { border-bottom: 0; }
 }
+
+
+/* Site canvas color #F7F6F4 */
+:root { --bg: #F7F6F4; }
+html, body { background: #F7F6F4 !important; background-image: none !important; }
+body::before { display: none !important; }
+.topbar { background: rgba(247, 246, 244, .94) !important; }
+.opening-sequence { background: #F7F6F4 !important; }
+.hero.hero-equipment { background: #F7F6F4; }
