@@ -5704,7 +5704,7 @@ function initExperienceCarousel() {
 
   let isPaused = false;
   let autoTimer = null;
-  const AUTO_ROTATE_MS = 3200;
+  const AUTO_ROTATE_MS = 4000;
 
   const startAutoRotate = () => {
     if (autoTimer) window.clearInterval(autoTimer);
@@ -5729,17 +5729,10 @@ function initExperienceCarousel() {
     move(1, true);
     startAutoRotate();
   });
-  section.addEventListener('pointerenter', pauseAutoRotate);
-  section.addEventListener('pointerleave', resumeAutoRotate);
-  section.addEventListener('focusin', pauseAutoRotate);
-  section.addEventListener('focusout', (e) => {
-    if (!section.contains(e.relatedTarget)) resumeAutoRotate();
+  track.querySelectorAll('.experience-category-card').forEach((card) => {
+    card.addEventListener('mouseenter', pauseAutoRotate);
+    card.addEventListener('mouseleave', resumeAutoRotate);
   });
-  section.addEventListener('touchstart', pauseAutoRotate, { passive: true });
-  section.addEventListener('touchend', () => {
-    resumeAutoRotate();
-    startAutoRotate();
-  }, { passive: true });
 
   track.addEventListener('scroll', updateExperienceCarousel, { passive: true });
   updateExperienceCarousel();
