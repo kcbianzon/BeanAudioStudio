@@ -3388,27 +3388,6 @@ function renderReviewAndSubmitStep(totals) {
           </table>
         </div>
 
-        <!-- Coupon Code Input Box -->
-        <div class="q-coupon-box">
-          <div class="q-coupon-row">
-            <div class="q-coupon-input-wrap">
-              <svg class="q-coupon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-              <input type="text" id="quoteCouponInput" class="q-coupon-input" placeholder="Promo code (e.g. WELCOME50, BEANTOWN10)" value="${escapeHtml(state.couponCode || "")}" autocomplete="off">
-            </div>
-            <button type="button" class="btn btn-dark btn-small" id="applyCouponBtn">Apply Code</button>
-          </div>
-          ${totals.coupon ? `
-            <div class="q-coupon-applied-pill">
-              <span>✓ <strong>${escapeHtml(totals.coupon.code)}</strong> applied: ${totals.coupon.type === "percent" ? `${totals.coupon.value}% off` : `${totals.coupon.value} off`} (${escapeHtml(totals.coupon.description || "Discount")})</span>
-              <button type="button" class="q-coupon-remove-btn" id="removeCouponBtn" title="Remove promo code">×</button>
-            </div>
-          ` : (state.couponError ? `
-            <div class="q-coupon-error-pill">
-              <span>${escapeHtml(state.couponError)}</span>
-            </div>
-          ` : "")}
-        </div>
-
         <div class="q-financial-summary">
           <div class="q-fin-row">
             <span>Equipment Base Subtotal (${totals.totalUnits} ${totals.totalUnits === 1 ? "unit" : "units"} · 1-Day Base Rate)</span>
@@ -5461,65 +5440,6 @@ function bind() {
         item.setAttribute("aria-expanded", isOpen ? "true" : "false");
       }
     });
-  });
-
-  // Coupon Code Application in Step 6
-  document.querySelector("#quoteCouponInput")?.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      document.querySelector("#applyCouponBtn")?.click();
-    }
-  });
-
-  document.querySelector("#applyCouponBtn")?.addEventListener("click", () => {
-    const input = document.querySelector("#quoteCouponInput");
-    const code = (input?.value || "").trim().toUpperCase();
-    if (!code) {
-      state.couponError = "Please enter a coupon code.";
-      render({ preserveScroll: true });
-      return;
-    }
-    const coupons = loadCmsCoupons();
-    const found = coupons.find((c) => c.code.toUpperCase() === code);
-    if (!found) {
-      state.couponError = `Code "${code}" is invalid. Please check spelling.`;
-      state.appliedCoupon = null;
-      render({ preserveScroll: true });
-      return;
-    }
-    if (found.active === false) {
-      state.couponError = `Coupon "${code}" is currently inactive.`;
-      state.appliedCoupon = null;
-      render({ preserveScroll: true });
-      return;
-    }
-    if (found.expiryDate && new Date(found.expiryDate + "T23:59:59") < new Date()) {
-      state.couponError = `Coupon "${code}" expired on ${found.expiryDate}.`;
-      state.appliedCoupon = null;
-      render({ preserveScroll: true });
-      return;
-    }
-    const totals = calculateQuoteTotals();
-    const minReq = Number(found.minOrder) || 0;
-    if (minReq > 0 && totals.equipmentDurationTotal < minReq) {
-      state.couponError = `Coupon "${code}" requires minimum equipment rental of ${minReq.toLocaleString()} (current: ${totals.equipmentDurationTotal.toLocaleString()}).`;
-      state.appliedCoupon = null;
-      render({ preserveScroll: true });
-      return;
-    }
-    state.appliedCoupon = found;
-    state.couponCode = found.code;
-    state.couponError = "";
-    showToast(`Promo code ${found.code} applied!`);
-    render({ preserveScroll: true });
-  });
-
-  document.querySelector("#removeCouponBtn")?.addEventListener("click", () => {
-    state.appliedCoupon = null;
-    state.couponCode = "";
-    state.couponError = "";
-    showToast("Promo code removed.");
-    render({ preserveScroll: true });
   });
 
   // If in CMS view, bind executive CMS events
