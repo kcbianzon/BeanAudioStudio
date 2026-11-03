@@ -1206,14 +1206,7 @@ function syncSetupCount() {
   const badge = document.querySelector("#setupCount");
   if (badge) badge.textContent = String(count);
   const link = document.querySelector("#setupLink");
-  const caption = link?.querySelector(".setup-caption");
-  if (caption) caption.textContent = count > 0 ? "My setup" : "Add setup";
-  link?.setAttribute("aria-label", count > 0 ? `My setup, ${count} item${count === 1 ? "" : "s"}` : "Add setup items");
-  document.querySelectorAll("[data-quote-action]").forEach((cta) => {
-    const label = cta.matches("[data-quote-action-label]") ? cta : cta.querySelector("[data-quote-action-label]");
-    if (label) label.textContent = count > 0 ? "Get a Quote" : "Add setup";
-    cta.setAttribute("href", count > 0 ? "#quote" : "#rentals");
-  });
+  link?.setAttribute("aria-label", `My setup, ${count} item${count === 1 ? "" : "s"}`);
 }
 function productImage(p) {
   if (p && p.id === "small-audio") {
@@ -3630,7 +3623,7 @@ function renderEmptyQuoteGate() {
         </p>
 
         <div class="quote-gate-actions">
-          <a href="#rentals" class="btn btn-dark">Add setup <span>→</span></a>
+          <a href="#rentals" class="btn btn-dark">Browse Rentals &amp; Add to Cart <span>→</span></a>
           <a href="#bundles" class="btn btn-light">Explore Event Bundles</a>
         </div>
       </div>
@@ -4270,12 +4263,12 @@ function updateCartDrawer() {
         </div>
         <h3 class="cart-empty-title">Your setup is empty.</h3>
         <p class="cart-empty-desc">Add speakers, lighting, screens, or event bundles and they will appear here.</p>
-        <button type="button" class="cart-continue-btn" data-cart-continue>Add setup</button>
+        <button type="button" class="cart-continue-btn" data-cart-continue>Continue ordering</button>
       </div>
     `;
     footerEl.innerHTML = `
-      <button type="button" class="cart-proceed-btn" id="cartProceedBtn" data-cart-proceed>
-        Add setup
+      <button type="button" class="cart-proceed-btn" id="cartProceedBtn" data-cart-proceed disabled>
+        Proceed
       </button>
     `;
   } else {
@@ -4346,8 +4339,7 @@ function initCartDrawer() {
   // Topbar setup/cart button
   document.querySelector("#setupLink")?.addEventListener("click", (e) => {
     e.preventDefault();
-    const count = Object.values(state.selected).reduce((sum, q) => sum + q, 0);
-    location.hash = count > 0 ? "#quote" : "#rentals";
+    openCartDrawer();
   });
 
   // Delegated events for drawer body and footer
@@ -4395,8 +4387,7 @@ function initCartDrawer() {
         location.hash = "#quote";
         showToast("Setup loaded! Finalize your event details below.");
       } else {
-        closeCartDrawer();
-        location.hash = "#rentals";
+        showToast("Your setup is empty. Add items first!");
       }
       return;
     }
