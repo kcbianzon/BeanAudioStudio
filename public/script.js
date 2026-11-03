@@ -2323,7 +2323,7 @@ function aboutUsPage() {
               </blockquote>
               <div class="about12-author">
                 <img 
-                  src="assets/beantown/calvin-reid.jpg" 
+                  src="assets/beantown/calvin-reid.jpg?v=20261104"
                   alt="Calvin Reid" 
                   class="about12-avatar"
                   loading="lazy"
