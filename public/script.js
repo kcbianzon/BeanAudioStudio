@@ -5319,7 +5319,7 @@ function bind() {
       if (totals.coupon) {
         emailPayload["Promo Code Applied"] = `${totals.coupon.code} (-${money(totals.discountAmount)})`;
       }
-      await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(recipientEmail)}`, {
+      const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(recipientEmail)}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -5327,8 +5327,16 @@ function bind() {
         },
         body: JSON.stringify(emailPayload),
       });
-    } catch {
-      // Even if offline or blocked by adblockers in local testing, complete the quote receipt smoothly
+      const result = await response.json();
+      if (!response.ok || (result.success !== true && result.success !== "true")) {
+        throw new Error(result.message || "FormSubmit did not accept the quote request.");
+      }
+    } catch (error) {
+      console.error("Quote email submission failed", error);
+      state.isSubmittingQuote = false;
+      state.quoteError = "We couldn't send your quote request. Please try again, or email info@beantownaudiorentals.com for help.";
+      render({ preserveScroll: true });
+      return;
     }
 
     // Record to CMS persistent quote history
