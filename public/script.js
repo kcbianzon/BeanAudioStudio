@@ -4022,6 +4022,22 @@ function bindGetQuoteForm() {
   });
 }
 
+function submitQuoteWithNativeFormSubmit(payload, recipientEmail) {
+  const fallbackForm = document.createElement("form");
+  fallbackForm.method = "POST";
+  fallbackForm.action = `https://formsubmit.co/${encodeURIComponent(recipientEmail)}`;
+  fallbackForm.hidden = true;
+  Object.entries(payload).forEach(([name, value]) => {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = name;
+    input.value = String(value ?? "");
+    fallbackForm.appendChild(input);
+  });
+  document.body.appendChild(fallbackForm);
+  HTMLFormElement.prototype.submit.call(fallbackForm);
+}
+
 function render(options = {}) {
   const previousScroll = window.scrollY;
   // The rentals filter panel scrolls on its own; remember where it was so a
@@ -5313,13 +5329,14 @@ function bind() {
     emailPayload["ESTIMATED GRAND TOTAL"] = totalPriceText(totals);
     emailPayload["Additional Event Notes"] = state.eventNotes || "None";
 
+    const settings = loadCmsSettings();
+    const recipientEmail = settings.notificationEmail || "kcbianzon@gmail.com";
+    if (totals.coupon) {
+      emailPayload["Promo Code Applied"] = `${totals.coupon.code} (-${money(totals.discountAmount)})`;
+    }
+    let response;
     try {
-      const settings = loadCmsSettings();
-      const recipientEmail = settings.notificationEmail || "kcbianzon@gmail.com";
-      if (totals.coupon) {
-        emailPayload["Promo Code Applied"] = `${totals.coupon.code} (-${money(totals.discountAmount)})`;
-      }
-      const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(recipientEmail)}`, {
+      response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(recipientEmail)}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -5327,12 +5344,24 @@ function bind() {
         },
         body: JSON.stringify(emailPayload),
       });
-      const result = await response.json();
-      if (!response.ok || (result.success !== true && result.success !== "true")) {
-        throw new Error(result.message || "FormSubmit did not accept the quote request.");
-      }
     } catch (error) {
-      console.error("Quote email submission failed", error);
+      console.warn("Quote AJAX submission failed; retrying with a standard form post", error);
+      submitQuoteWithNativeFormSubmit(emailPayload, recipientEmail);
+      return;
+    }
+    let result;
+    try {
+      result = await response.json();
+    } catch {
+      result = null;
+    }
+    if (!response.ok) {
+      console.warn("Quote AJAX submission returned an HTTP error; retrying with a standard form post", response.status);
+      submitQuoteWithNativeFormSubmit(emailPayload, recipientEmail);
+      return;
+    }
+    if (result?.success !== true && result?.success !== "true") {
+      console.error("Quote email submission was rejected", result);
       state.isSubmittingQuote = false;
       state.quoteError = "We couldn't send your quote request. Please try again, or email info@beantownaudiorentals.com for help.";
       render({ preserveScroll: true });
