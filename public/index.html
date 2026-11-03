@@ -65,12 +65,12 @@
             <button class="icon-btn" id="searchBtn" aria-label="Search rentals">
               ⌕
             </button>
-            <button class="setup-link" id="setupLink" type="button" aria-label="My setup">
+            <button class="setup-link" id="setupLink" type="button" aria-label="Add setup items">
               <svg class="setup-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Zm4 0a3 3 0 0 1 6 0" /></svg>
-              <span class="setup-caption">My setup</span><b id="setupCount">0</b>
+              <span class="setup-caption">Add setup</span><b id="setupCount">0</b>
             </button>
-            <a class="btn btn-dark btn-small" href="#get-quote"
-              >Get a Quote <span>↗</span></a
+            <a class="btn btn-dark btn-small" data-quote-action href="#rentals"
+              ><span data-quote-action-label>Add setup</span> <span>↗</span></a
             >
             <button
               class="menu-btn"
@@ -88,7 +88,7 @@
           <a href="#bundles">Event Bundles</a>
           <a href="#about">About Us</a>
           <a href="#services">Services</a>
-          <a href="#get-quote">Get a Quote</a>
+          <a href="#rentals" data-quote-action data-quote-action-label>Add setup</a>
         </div>
       </header>
 
@@ -177,6 +177,6 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script src="assets/beantown/catalog-data.js?v=20261029-inflatable-movie-v24"></script>
-    <script src="script.js?v=20261104-formsubmit-fallback"></script>
+    <script src="script.js?v=20261104-web3forms"></script>
   </body>
 </html>

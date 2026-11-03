@@ -1,4 +1,6 @@
 const DEFAULT_PRODUCTS = window.BEANTOWN_SOURCE_CATALOG || [];
+// Public client-side key from Web3Forms; delivery goes to the inbox linked to this key.
+const WEB3FORMS_ACCESS_KEY = "f285afef-347a-4087-998d-98a4309ad914";
 
 const DEFAULT_BUNDLES = [
   {
@@ -1204,7 +1206,14 @@ function syncSetupCount() {
   const badge = document.querySelector("#setupCount");
   if (badge) badge.textContent = String(count);
   const link = document.querySelector("#setupLink");
-  link?.setAttribute("aria-label", `My setup, ${count} item${count === 1 ? "" : "s"}`);
+  const caption = link?.querySelector(".setup-caption");
+  if (caption) caption.textContent = count > 0 ? "My setup" : "Add setup";
+  link?.setAttribute("aria-label", count > 0 ? `My setup, ${count} item${count === 1 ? "" : "s"}` : "Add setup items");
+  document.querySelectorAll("[data-quote-action]").forEach((cta) => {
+    const label = cta.matches("[data-quote-action-label]") ? cta : cta.querySelector("[data-quote-action-label]");
+    if (label) label.textContent = count > 0 ? "Get a Quote" : "Add setup";
+    cta.setAttribute("href", count > 0 ? "#quote" : "#rentals");
+  });
 }
 function productImage(p) {
   if (p && p.id === "small-audio") {
@@ -3451,7 +3460,7 @@ function renderReviewAndSubmitStep(totals) {
 
     <!-- Contact & Automated Quote Submission Form -->
     <form id="quoteBuilderForm" class="q-contact-card">
-      <input type="text" name="_honey" id="quoteHoney" style="display:none" tabindex="-1" autocomplete="off">
+      <input type="checkbox" name="botcheck" id="quoteHoney" style="display:none" tabindex="-1" autocomplete="off">
       <div class="q-subblock-head">
         <div>
           <span class="eyebrow orange">YOUR CONTACT DETAILS</span>
@@ -3621,7 +3630,7 @@ function renderEmptyQuoteGate() {
         </p>
 
         <div class="quote-gate-actions">
-          <a href="#rentals" class="btn btn-dark">Browse Rentals &amp; Add to Cart <span>→</span></a>
+          <a href="#rentals" class="btn btn-dark">Add setup <span>→</span></a>
           <a href="#bundles" class="btn btn-light">Explore Event Bundles</a>
         </div>
       </div>
@@ -3959,10 +3968,10 @@ function getQuoteFormPage() {
       <h1>Get a Quote</h1>
       <p>Tell us about your event and what you need. We’ll review the details and follow up with a tailored quote.</p>
     </div>
-    <form id="getQuoteForm" class="get-quote-form" action="https://formsubmit.co/kcbianzon@gmail.com" method="POST">
-      <input type="hidden" name="_template" value="table" />
-      <input type="hidden" name="_subject" value="New Quote Request" />
-      <input type="hidden" name="_replyto" value="" />
+    <form id="getQuoteForm" class="get-quote-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="${escapeHtml(WEB3FORMS_ACCESS_KEY)}" />
+      <input type="hidden" name="subject" value="New Beantown AV Quote Request" />
+      <input type="hidden" name="from_name" value="Beantown Audio Rentals Quote Request" />
       <section class="get-quote-section" aria-labelledby="quoteCustomerHeading">
         <div class="get-quote-section-head"><span class="get-quote-number">01</span><div><h2 id="quoteCustomerHeading">Customer information</h2><p>How can we reach you?</p></div></div>
         <div class="get-quote-fields">
@@ -3987,11 +3996,30 @@ function getQuoteFormPage() {
           <label class="get-quote-field get-quote-wide">Additional message / special requests<textarea name="Additional Message / Special Requests" rows="4" maxlength="3000" placeholder="Anything else we should know about your event?"></textarea></label>
         </div>
       </section>
-      <div class="get-quote-honeypot" aria-hidden="true"><label>Website<input name="_honey" type="text" tabindex="-1" autocomplete="off" /></label></div>
+      <div class="get-quote-honeypot" aria-hidden="true"><label>Website<input name="botcheck" type="checkbox" tabindex="-1" autocomplete="off" /></label></div>
       <div class="get-quote-actions"><p>Fields marked * are required.</p><button class="btn btn-dark" type="submit">Submit Quote Request <span aria-hidden="true">→</span></button></div>
       <p id="getQuoteStatus" class="get-quote-status" role="status" aria-live="polite" hidden></p>
     </form>
   </div>`;
+}
+
+async function sendWeb3FormsSubmission(payload) {
+  if (!WEB3FORMS_ACCESS_KEY) {
+    throw new Error("The Web3Forms access key has not been configured yet.");
+  }
+  const response = await fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({ ...payload, access_key: WEB3FORMS_ACCESS_KEY }),
+  });
+  const result = await response.json();
+  if (!response.ok || result.success !== true) {
+    throw new Error(result.message || result.body?.message || "Web3Forms did not accept the quote request.");
+  }
+  return result;
 }
 
 function bindGetQuoteForm() {
@@ -3999,7 +4027,8 @@ function bindGetQuoteForm() {
   if (!form) return;
   const status = document.querySelector("#getQuoteStatus");
   const button = form.querySelector('button[type="submit"]');
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
     if (button.disabled) return;
     status.hidden = true;
     if (!form.reportValidity()) return;
@@ -4014,28 +4043,34 @@ function bindGetQuoteForm() {
       event.preventDefault();
       return;
     }
-    form.elements._subject.value = `New Quote Request - ${values.fullName}`;
-    form.elements._replyto.value = values.email;
+    if (!WEB3FORMS_ACCESS_KEY) {
+      status.textContent = "Quote email is not configured yet. Please contact us directly while we finish setup.";
+      status.className = "get-quote-status is-error";
+      status.hidden = false;
+      return;
+    }
+    form.elements.subject.value = `New Quote Request - ${values.fullName}`;
     status.textContent = "Sending your quote request...";
     status.className = "get-quote-status";
     status.hidden = false;
+    button.disabled = true;
+    try {
+      const payload = Object.fromEntries(new FormData(form));
+      payload.email = values.email;
+      payload.replyto = values.email;
+      payload.botcheck = "";
+      const result = await sendWeb3FormsSubmission(payload);
+      status.textContent = result.message || "Your quote request was sent. We'll follow up shortly.";
+      status.className = "get-quote-status is-success";
+      form.reset();
+    } catch (error) {
+      console.error("Get a Quote submission failed", error);
+      status.textContent = "We couldn't send your quote request. Please try again, or email info@beantownaudiorentals.com for help.";
+      status.className = "get-quote-status is-error";
+    } finally {
+      button.disabled = false;
+    }
   });
-}
-
-function submitQuoteWithNativeFormSubmit(payload, recipientEmail) {
-  const fallbackForm = document.createElement("form");
-  fallbackForm.method = "POST";
-  fallbackForm.action = `https://formsubmit.co/${encodeURIComponent(recipientEmail)}`;
-  fallbackForm.hidden = true;
-  Object.entries(payload).forEach(([name, value]) => {
-    const input = document.createElement("input");
-    input.type = "hidden";
-    input.name = name;
-    input.value = String(value ?? "");
-    fallbackForm.appendChild(input);
-  });
-  document.body.appendChild(fallbackForm);
-  HTMLFormElement.prototype.submit.call(fallbackForm);
 }
 
 function render(options = {}) {
@@ -4235,12 +4270,12 @@ function updateCartDrawer() {
         </div>
         <h3 class="cart-empty-title">Your setup is empty.</h3>
         <p class="cart-empty-desc">Add speakers, lighting, screens, or event bundles and they will appear here.</p>
-        <button type="button" class="cart-continue-btn" data-cart-continue>Continue ordering</button>
+        <button type="button" class="cart-continue-btn" data-cart-continue>Add setup</button>
       </div>
     `;
     footerEl.innerHTML = `
-      <button type="button" class="cart-proceed-btn" id="cartProceedBtn" data-cart-proceed disabled>
-        Proceed
+      <button type="button" class="cart-proceed-btn" id="cartProceedBtn" data-cart-proceed>
+        Add setup
       </button>
     `;
   } else {
@@ -4311,7 +4346,8 @@ function initCartDrawer() {
   // Topbar setup/cart button
   document.querySelector("#setupLink")?.addEventListener("click", (e) => {
     e.preventDefault();
-    openCartDrawer();
+    const count = Object.values(state.selected).reduce((sum, q) => sum + q, 0);
+    location.hash = count > 0 ? "#quote" : "#rentals";
   });
 
   // Delegated events for drawer body and footer
@@ -4359,7 +4395,8 @@ function initCartDrawer() {
         location.hash = "#quote";
         showToast("Setup loaded! Finalize your event details below.");
       } else {
-        showToast("Your setup is empty. Add items first!");
+        closeCartDrawer();
+        location.hash = "#rentals";
       }
       return;
     }
@@ -5258,8 +5295,6 @@ function bind() {
     const nameVal = (document.querySelector("#contactNameInput")?.value || state.contactName).trim();
     const emailVal = (document.querySelector("#contactEmailInput")?.value || state.contactEmail).trim();
     const phoneVal = (document.querySelector("#contactPhoneInput")?.value || state.contactPhone).trim();
-    const honeyVal = document.querySelector("#quoteHoney")?.value || "";
-
     if (!nameVal || !emailVal) {
       state.quoteError = "Please provide your full name and email address.";
       render({ preserveScroll: true });
@@ -5289,11 +5324,11 @@ function bind() {
       .join("\n");
 
     const emailPayload = {
-      _subject: `New Beantown AV Quote [${refCode}]: ${state.eventType} - ${state.contactName} (${totalPriceText(totals)})`,
-      _template: "table",
-      _captcha: "false",
-      _honey: honeyVal,
-      _replyto: state.contactEmail,
+      subject: `New Beantown AV Quote [${refCode}]: ${state.eventType} - ${state.contactName} (${totalPriceText(totals)})`,
+      from_name: "Beantown Audio Rentals Quote Request",
+      email: state.contactEmail,
+      replyto: state.contactEmail,
+      botcheck: "",
       "Quote Reference": refCode,
       "Client Name": state.contactName,
       "Client Email": state.contactEmail,
@@ -5328,40 +5363,19 @@ function bind() {
       totals.serviceOption.priceType === "quote" ? "Quote required" : totals.serviceFee === 0 ? "$0" : `+${money(totals.serviceFee)} (${totals.serviceOption.title})`;
     emailPayload["ESTIMATED GRAND TOTAL"] = totalPriceText(totals);
     emailPayload["Additional Event Notes"] = state.eventNotes || "None";
-
-    const settings = loadCmsSettings();
-    const recipientEmail = settings.notificationEmail || "kcbianzon@gmail.com";
     if (totals.coupon) {
       emailPayload["Promo Code Applied"] = `${totals.coupon.code} (-${money(totals.discountAmount)})`;
     }
-    let response;
+    if (!WEB3FORMS_ACCESS_KEY) {
+      state.isSubmittingQuote = false;
+      state.quoteError = "Quote email is not configured yet. Please contact us directly while we finish setup.";
+      render({ preserveScroll: true });
+      return;
+    }
     try {
-      response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(recipientEmail)}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(emailPayload),
-      });
+      await sendWeb3FormsSubmission(emailPayload);
     } catch (error) {
-      console.warn("Quote AJAX submission failed; retrying with a standard form post", error);
-      submitQuoteWithNativeFormSubmit(emailPayload, recipientEmail);
-      return;
-    }
-    let result;
-    try {
-      result = await response.json();
-    } catch {
-      result = null;
-    }
-    if (!response.ok) {
-      console.warn("Quote AJAX submission returned an HTTP error; retrying with a standard form post", response.status);
-      submitQuoteWithNativeFormSubmit(emailPayload, recipientEmail);
-      return;
-    }
-    if (result?.success !== true && result?.success !== "true") {
-      console.error("Quote email submission was rejected", result);
+      console.error("Quote email submission failed", error);
       state.isSubmittingQuote = false;
       state.quoteError = "We couldn't send your quote request. Please try again, or email info@beantownaudiorentals.com for help.";
       render({ preserveScroll: true });
@@ -5425,7 +5439,7 @@ function bind() {
       grandTotal: totals.grandTotal,
     };
     render();
-    showToast("Quote sent to kcbianzon@gmail.com!");
+    showToast("Quote request sent!");
   });
 
   document.querySelector("[data-print-quote]")?.addEventListener("click", () => {
@@ -6354,8 +6368,8 @@ function renderCmsOverview() {
             <strong style="color:#41d3a2">✓ Synced (${products.length} items)</strong>
           </div>
           <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(137,162,201,.1);font-size:12.5px">
-            <span style="color:#9cb1d0">Notification Dispatch</span>
-            <strong style="color:#41d3a2">✓ ${escapeHtml(loadCmsSettings().notificationEmail || "kcbianzon@gmail.com")}</strong>
+            <span style="color:#9cb1d0">Quote Email Service</span>
+            <strong style="color:${WEB3FORMS_ACCESS_KEY ? "#41d3a2" : "#e3af54"}">${WEB3FORMS_ACCESS_KEY ? "✓ Web3Forms configured" : "⚠ Access key required"}</strong>
           </div>
           <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(137,162,201,.1);font-size:12.5px">
             <span style="color:#9cb1d0">Local Asset Library</span>
@@ -6855,7 +6869,7 @@ function renderCmsSettings() {
       <div>
         <p class="cms-eyebrow">STORE CONFIGURATION</p>
         <h1>Business info &amp; notifications</h1>
-        <p>Update company contact information, operating hours, and quote dispatch email without code changes.</p>
+        <p>Update company contact information, operating hours, and the CMS owner email.</p>
       </div>
     </div>
 
@@ -6880,9 +6894,9 @@ function renderCmsSettings() {
           <input type="email" id="cmsSettingsPublicEmail" class="cms-input" value="${escapeHtml(s.email || "info@beantownaudiorentals.com")}" required>
         </label>
 
-        <label class="cms-label">Quote Dispatch Notification Email
+        <label class="cms-label">CMS Owner / Admin Email
           <input type="email" id="cmsSettingsNotificationEmail" class="cms-input" value="${escapeHtml(s.notificationEmail || "kcbianzon@gmail.com")}" required>
-          <small style="color:#788ba8;font-size:10px;text-transform:none">All customer quotes submitted via the website are automatically dispatched to this inbox.</small>
+          <small style="color:#788ba8;font-size:10px;text-transform:none">This controls CMS access. Quote notifications go to the inbox linked to the Web3Forms access key.</small>
         </label>
 
         <label class="cms-label">Warehouse &amp; Service Hub
@@ -6948,9 +6962,9 @@ function renderCmsMaintenance() {
 
       <article class="cms-panel">
         <span class="cms-stat-icon orange"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
-        <h2 style="font-size:15px;color:#ffffff;margin:8px 0 4px">Quote Email Dispatch Bridge</h2>
-        <p style="color:#8fa2bf;font-size:12px;margin:0 0 12px;line-height:1.5">Direct FormSubmit bridge routing submissions to ${escapeHtml(settings.notificationEmail || "kcbianzon@gmail.com")}.</p>
-        <span style="color:#41d3a2;font-size:11.5px;font-weight:750">✓ Connected</span>
+        <h2 style="font-size:15px;color:#ffffff;margin:8px 0 4px">Web3Forms Quote Delivery</h2>
+        <p style="color:#8fa2bf;font-size:12px;margin:0 0 12px;line-height:1.5">Quote requests go to the inbox linked to the Web3Forms access key.</p>
+        <span style="color:${WEB3FORMS_ACCESS_KEY ? "#41d3a2" : "#e3af54"};font-size:11.5px;font-weight:750">${WEB3FORMS_ACCESS_KEY ? "✓ Key configured" : "⚠ Access key required"}</span>
       </article>
     </div>
 
