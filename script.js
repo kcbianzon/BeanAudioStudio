@@ -3950,6 +3950,92 @@ function quote() {
   </div>`;
 }
 
+function getQuoteFormPage() {
+  const today = new Date();
+  const localToday = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+  return `<div class="page get-quote-page">
+    <div class="get-quote-intro">
+      <span class="eyebrow">LET'S PLAN YOUR EVENT</span>
+      <h1>Get a Quote</h1>
+      <p>Tell us about your event and what you need. We’ll review the details and follow up with a tailored quote.</p>
+    </div>
+    <form id="getQuoteForm" class="get-quote-form" novalidate>
+      <section class="get-quote-section" aria-labelledby="quoteCustomerHeading">
+        <div class="get-quote-section-head"><span class="get-quote-number">01</span><div><h2 id="quoteCustomerHeading">Customer information</h2><p>How can we reach you?</p></div></div>
+        <div class="get-quote-fields">
+          <label class="get-quote-field"><span>Full name <b aria-hidden="true">*</b></span><input name="fullName" type="text" autocomplete="name" maxlength="100" required placeholder="Your full name" /></label>
+          <label class="get-quote-field"><span>Email address <b aria-hidden="true">*</b></span><input name="email" type="email" autocomplete="email" maxlength="254" required placeholder="you@example.com" /></label>
+          <label class="get-quote-field"><span>Phone number <b aria-hidden="true">*</b></span><input name="phone" type="tel" autocomplete="tel" maxlength="30" required placeholder="Your phone number" /></label>
+        </div>
+      </section>
+      <section class="get-quote-section" aria-labelledby="quoteEventHeading">
+        <div class="get-quote-section-head"><span class="get-quote-number">02</span><div><h2 id="quoteEventHeading">Event information</h2><p>Help us understand the occasion.</p></div></div>
+        <div class="get-quote-fields">
+          <label class="get-quote-field">Event type<select name="eventType"><option value="">Select an event type</option><option>Wedding</option><option>Corporate</option><option>Concert</option><option>Birthday</option><option>Other</option></select></label>
+          <label class="get-quote-field"><span>Event date <b aria-hidden="true">*</b></span><input name="eventDate" type="date" min="${localToday}" required /></label>
+          <label class="get-quote-field">Event location / venue<input name="eventLocation" type="text" maxlength="200" placeholder="Venue or city" /></label>
+          <label class="get-quote-field">Number of guests<input name="guests" type="number" min="1" max="100000" step="1" inputmode="numeric" placeholder="Estimated guest count" /></label>
+        </div>
+      </section>
+      <section class="get-quote-section" aria-labelledby="quoteDetailsHeading">
+        <div class="get-quote-section-head"><span class="get-quote-number">03</span><div><h2 id="quoteDetailsHeading">Quotation details</h2><p>Share the gear and support you have in mind.</p></div></div>
+        <div class="get-quote-fields">
+          <label class="get-quote-field get-quote-wide">Equipment or services needed<textarea name="equipment" rows="4" maxlength="2000" placeholder="For example: speakers, microphones, lighting, screens, delivery, and setup"></textarea></label>
+          <label class="get-quote-field get-quote-wide">Additional message / special requests<textarea name="message" rows="4" maxlength="3000" placeholder="Anything else we should know about your event?"></textarea></label>
+        </div>
+      </section>
+      <div class="get-quote-honeypot" aria-hidden="true"><label>Website<input name="website" type="text" tabindex="-1" autocomplete="off" /></label></div>
+      <div class="get-quote-actions"><p>Fields marked * are required.</p><button class="btn btn-dark" type="submit">Submit Quote Request <span aria-hidden="true">→</span></button></div>
+      <p id="getQuoteStatus" class="get-quote-status" role="status" aria-live="polite" hidden></p>
+    </form>
+  </div>`;
+}
+
+function bindGetQuoteForm() {
+  const form = document.querySelector("#getQuoteForm");
+  if (!form) return;
+  const status = document.querySelector("#getQuoteStatus");
+  const button = form.querySelector('button[type="submit"]');
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (button.disabled) return;
+    status.hidden = true;
+    if (!form.reportValidity()) return;
+    const values = Object.fromEntries(new FormData(form));
+    values.fullName = String(values.fullName || "").trim();
+    values.email = String(values.email || "").trim();
+    values.phone = String(values.phone || "").trim();
+    if (values.fullName.length < 2 || values.phone.replace(/\D/g, "").length < 7) {
+      status.textContent = "Please enter your full name and a valid phone number.";
+      status.className = "get-quote-status is-error";
+      status.hidden = false;
+      return;
+    }
+    status.textContent = "Sending your quote request...";
+    status.className = "get-quote-status";
+    status.hidden = false;
+    button.disabled = true;
+    try {
+      const response = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      if (!response.ok) throw new Error("Quote request was not accepted");
+      const result = await response.json();
+      if (!result.accepted) throw new Error("Quote request was not accepted");
+      status.textContent = "Your quote request has been submitted successfully! We will contact you soon.";
+      status.className = "get-quote-status is-success";
+      form.reset();
+    } catch (error) {
+      status.textContent = "Unable to send your quote request. Please try again.";
+      status.className = "get-quote-status is-error";
+    } finally {
+      button.disabled = false;
+    }
+  });
+}
+
 function render(options = {}) {
   const previousScroll = window.scrollY;
   // The rentals filter panel scrolls on its own; remember where it was so a
@@ -3986,6 +4072,7 @@ function render(options = {}) {
     setTimeout(() => openCartDrawer(), 60);
   }
   if (hash === "quote") view = quote();
+  if (hash === "get-quote") view = getQuoteFormPage();
   app.innerHTML = view;
   lastRenderedPage = hash;
   const pageRoot = app.querySelector(":scope > .page");
@@ -4303,6 +4390,7 @@ function addProduct(id, delta = 1, options = {}) {
 }
 
 function bind() {
+  bindGetQuoteForm();
   const refreshRentalsInPlace = () => {
     const grid = document.querySelector("#rentalsProductGrid");
     const countHeader = document.querySelector("#rentalsCountTitle");

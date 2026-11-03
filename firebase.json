@@ -1,6 +1,12 @@
 {
+  "functions": {
+    "source": "functions"
+  },
   "hosting": {
     "public": "public",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      { "source": "/api/quote", "function": { "functionId": "submitQuote", "region": "us-central1" } }
+    ]
   }
 }
