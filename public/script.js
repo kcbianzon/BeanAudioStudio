@@ -1950,7 +1950,6 @@ function home() {
     </div>
     <img class="hero-equipment-image hero-equipment-right" src="assets/beantown/hero-movie-rig.png" alt="" aria-hidden="true">
   </section>
-  <div class="marquee"><div class="marquee-track"><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span><b>•</b><span>Live Streaming</span><b>•</b><span>Outdoor Movies</span><b>•</b><span>Audio</span><b>•</b><span>Video</span><b>•</b><span>LED Walls</span><b>•</b><span>Silent Disco</span><b>•</b><span>Photo Booths</span></div></div>
   <section class="experience-categories" aria-labelledby="experience-categories-title">
     <h2 id="experience-categories-title">Start with the experience</h2>
     <div class="experience-carousel">
