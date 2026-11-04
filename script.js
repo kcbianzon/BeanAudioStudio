@@ -1130,6 +1130,20 @@ let supabaseCartSyncTimer = null;
 async function syncCartToSupabase(sessionId, selectedItems) {
   if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY || !sessionId) return;
   try {
+    if (!selectedItems || Object.keys(selectedItems).length === 0) {
+      await fetch(
+        `${SUPABASE_URL}/rest/v1/guest_carts?session_id=eq.${encodeURIComponent(sessionId)}`,
+        {
+          method: "DELETE",
+          headers: {
+            apikey: SUPABASE_PUBLISHABLE_KEY,
+            Prefer: "return=minimal",
+            "x-session-id": sessionId,
+          },
+        },
+      );
+      return;
+    }
     await fetch(`${SUPABASE_URL}/rest/v1/guest_carts?on_conflict=session_id`, {
       method: "POST",
       headers: {
@@ -1147,6 +1161,27 @@ async function syncCartToSupabase(sessionId, selectedItems) {
   } catch {
     // Non-blocking if offline or before table is created
   }
+}
+
+function clearCompletedQuoteCart() {
+  state.selected = {};
+  state.appliedCoupon = null;
+  state.couponCode = "";
+  state.couponError = "";
+  state.bundle = null;
+  const sessionId = getGuestSessionId();
+  try {
+    if (typeof sessionStorage !== "undefined") {
+      sessionStorage.removeItem(GUEST_CART_STORAGE_PREFIX + sessionId);
+    }
+    if (typeof localStorage !== "undefined") {
+      localStorage.removeItem("beantown-selected-products");
+    }
+  } catch {}
+  clearTimeout(supabaseCartSyncTimer);
+  syncCartToSupabase(sessionId, {});
+  syncSetupCount();
+  updateCartDrawer();
 }
 
 async function hydrateCartFromSupabase() {
@@ -4269,6 +4304,7 @@ function bindGetQuoteForm() {
       status.textContent = result.message || "Your quote request was sent. We'll follow up shortly.";
       status.className = "get-quote-status is-success";
       form.reset();
+      clearCompletedQuoteCart();
     } catch (error) {
       console.error("Get a Quote submission failed", error);
       status.textContent = "We couldn't send your quote request. Please try again, or email info@beantownaudiorentals.com for help.";
@@ -5648,6 +5684,7 @@ function bind() {
       serviceFee: totals.serviceFee,
       grandTotal: totals.grandTotal,
     };
+    clearCompletedQuoteCart();
     render();
     showToast("Quote request sent!");
   });
@@ -6154,7 +6191,12 @@ document.addEventListener("pointerout", (event) => {
 });
 
 window.addEventListener("hashchange", () => {
-  if (getHash() !== "builder") state.builderStep = 1;
+  const nextHash = getHash();
+  if (nextHash !== "builder") state.builderStep = 1;
+  if (nextHash !== "quote" && state.submittedQuote) {
+    state.submittedQuote = null;
+    state.quoteStep = 1;
+  }
   render();
 });
 
