@@ -1500,6 +1500,32 @@ function bundleImage(bundle) {
 }
 
 const expandedRentalDescriptions = new Set();
+let rentalCardAlignmentFrame = 0;
+
+function alignMobileRentalCards() {
+  cancelAnimationFrame(rentalCardAlignmentFrame);
+  rentalCardAlignmentFrame = requestAnimationFrame(() => {
+    const grid = document.getElementById("rentalsProductGrid");
+    if (!grid) return;
+    const cards = Array.from(grid.querySelectorAll(".product-card"));
+    const properties = ["--rental-title-height", "--rental-tag-height", "--rental-price-height", "--rental-card-height"];
+    cards.forEach((card) => properties.forEach((property) => card.style.removeProperty(property)));
+    if (!window.matchMedia("(max-width: 820px)").matches || grid.classList.contains("is-list")) return;
+
+    // Measure the collapsed layout so an open description cannot enlarge its neighbor.
+    const expanded = cards.filter((card) => card.classList.contains("is-description-expanded"));
+    expanded.forEach((card) => card.classList.remove("is-description-expanded"));
+    const columns = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+    const rows = [];
+    for (let i = 0; i < cards.length; i += columns) rows.push(cards.slice(i, i + columns));
+    const slots = [["h3", "--rental-title-height"], [".badge", "--rental-tag-height"], [".price", "--rental-price-height"]];
+    const measurements = rows.map((row) => slots.map(([selector]) => Math.max(...row.map((card) => card.querySelector(selector).getBoundingClientRect().height))));
+    rows.forEach((row, index) => slots.forEach(([, property], slot) => row.forEach((card) => card.style.setProperty(property, `${measurements[index][slot]}px`))));
+    const heights = rows.map((row) => Math.max(...row.map((card) => card.getBoundingClientRect().height)));
+    rows.forEach((row, index) => row.forEach((card) => card.style.setProperty("--rental-card-height", `${heights[index]}px`)));
+    expanded.forEach((card) => card.classList.add("is-description-expanded"));
+  });
+}
 
 function productCard(p) {
   const image = productImage(p);
@@ -4157,6 +4183,7 @@ function render(options = {}) {
   observePageMotion();
   initExperienceJourney();
   initExperienceCarousel();
+  alignMobileRentalCards();
   bind();
   const restoredSidebar = app.querySelector(".rentals-sidebar");
   if (restoredSidebar) {
@@ -4301,11 +4328,6 @@ function updateCartDrawer() {
         <button type="button" class="cart-continue-btn" data-cart-continue>Continue ordering</button>
       </div>
     `;
-    footerEl.innerHTML = `
-      <button type="button" class="cart-proceed-btn" id="cartProceedBtn" data-cart-proceed disabled>
-        Proceed
-      </button>
-    `;
   } else {
     bodyEl.innerHTML = lineItems
       .map(({ product, qty, lineSubtotal }) => `
@@ -4338,12 +4360,13 @@ function updateCartDrawer() {
       `)
       .join("");
 
-    footerEl.innerHTML = `
-      <button type="button" class="cart-proceed-btn" id="cartProceedBtn" data-cart-proceed>
-        Proceed
-      </button>
-    `;
   }
+  footerEl.innerHTML = `
+    <div class="cart-footer-actions">
+      <button type="button" class="cart-proceed-btn" id="cartProceedBtn" data-cart-proceed ${lineItems.length ? "" : "disabled"}>Proceed</button>
+      <button type="button" class="cart-add-more-btn" data-cart-continue>Add more</button>
+    </div>
+  `;
 }
 
 function initCartDrawer() {
@@ -4465,6 +4488,7 @@ function bind() {
     }
     const list = filteredProducts();
     grid.innerHTML = rentalsResultsGridMarkup(list);
+    alignMobileRentalCards();
     countHeader.innerHTML = `<strong>${list.length}</strong> <span>${list.length === 1 ? "rental" : "rentals"}</span>${state.category !== "All" ? ` <span class="rentals-active-chip">${escapeHtml(state.category)} <button type="button" data-cat="All" aria-label="Remove category filter">×</button></span>` : ""}`;
     const mobileCount = document.querySelector("#mobileRentalsCount");
     if (mobileCount) mobileCount.textContent = list.length;
@@ -5510,6 +5534,9 @@ function bind() {
   }
 
 }
+
+window.addEventListener("resize", alignMobileRentalCards, { passive: true });
+document.fonts?.ready.then(alignMobileRentalCards);
 
 document.addEventListener("click", (event) => {
   const toggle = event.target.closest("[data-toggle-description]");
