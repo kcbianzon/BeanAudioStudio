@@ -2026,6 +2026,13 @@ function home() {
       <a class="ebf-cta" href="#bundles">Browse Event Bundles</a>
     </div>
     <div class="ebf-visual" aria-hidden="true">
+      <svg class="ebf-clip-svg" width="0" height="0" aria-hidden="true" focusable="false">
+        <defs>
+          <clipPath id="ebf-slant-mobile" clipPathUnits="objectBoundingBox">
+            <path d="M 0.37,0 L 1,0 L 1,1 L 0.05,1 Q 0.005,1 0.028,0.89 L 0.29,0.08 Q 0.32,0 0.37,0 Z" />
+          </clipPath>
+        </defs>
+      </svg>
       <div class="ebf-photo"><img src="assets/beantown/event-bundles-stage.jpg" alt="" loading="lazy"></div>
       <img class="ebf-speaker" src="assets/beantown/event-bundles-speaker.png" alt="" loading="lazy">
       <ul class="ebf-icons">
