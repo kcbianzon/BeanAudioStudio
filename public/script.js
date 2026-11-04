@@ -2018,18 +2018,24 @@ function home() {
     </div>
     <a href="#rentals?cat=All" class="btn btn-dark experience-categories-cta">View all rentals</a>
   </section>
-  <section class="section"><div class="section-head"><div><span class="eyebrow">EVENT BUNDLES</span><h2>Start with<br>the occasion.</h2></div><a class="btn btn-light" href="#bundles">View all bundles →</a></div><div class="bundle-grid">${bundles
-    .slice(0, 3)
-    .map(
-      (b) =>
-        `<article class="bundle-card reveal"><div class="bundle-top ${b.tone} has-bundle-image" style="--bundle-image:url('${bundleImage(b)}')"><span class="eyebrow">${b.label}</span><h3>${b.title}</h3></div><div class="bundle-body"><p style="margin:0;color:var(--muted);font-size:13px">${b.desc}</p><ul>${b.items
-          .slice(0, 3)
-          .map((i) => `<li>${i}</li>`)
-          .join(
-            "",
-          )}</ul><div class="bundle-foot"><span class="bundle-price">${bundlePriceText(b)}</span><button class="btn btn-dark btn-small" data-bundle="${b.id}">View bundle →</button></div></div></article>`,
-    )
-    .join("")}</div></section>
+  <section class="event-bundles-feature reveal" aria-labelledby="event-bundles-title">
+    <div class="ebf-copy">
+      <h2 id="event-bundles-title">Event Bundles</h2>
+      <p>We offer complete event bundles designed around the occasion. From weddings and corporate conferences to concerts and live performances, we combine professional audio, video, lighting, staging, and event technology to create a seamless experience from start to finish.</p>
+      <p>Our team works with you to match the right equipment and services to your event's size, venue, and needs. Every bundle is carefully prepared, tested, and supported by our experienced crew so you can focus on your event while we handle the production.</p>
+      <a class="ebf-cta" href="#bundles">Browse Event Bundles</a>
+    </div>
+    <div class="ebf-visual" aria-hidden="true">
+      <div class="ebf-photo"><img src="assets/beantown/event-bundles-stage.jpg" alt="" loading="lazy"></div>
+      <img class="ebf-speaker" src="assets/beantown/event-bundles-speaker.png" alt="" loading="lazy">
+      <ul class="ebf-icons">
+        <li><span class="ebf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg></span>Audio</li>
+        <li><span class="ebf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m16 10 6-3v10l-6-3"/></svg></span>Video</li>
+        <li><span class="ebf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg></span>Lighting</li>
+        <li><span class="ebf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18M5 4v17M19 4v17M5 8h14"/><path d="m5 4 3 4 3-4 3 4 3-4"/><path d="M3 21h4M17 21h4"/></svg></span>Staging</li>
+      </ul>
+    </div>
+  </section>
   <section class="why-beantown" aria-labelledby="why-beantown-title">
     <h2 id="why-beantown-title">Why Beantown?</h2>
     <div class="why-beantown-grid">
