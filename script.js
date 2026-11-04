@@ -2,6 +2,46 @@ const DEFAULT_PRODUCTS = window.BEANTOWN_SOURCE_CATALOG || [];
 // Public client-side key from Web3Forms; delivery goes to the inbox linked to this key.
 const WEB3FORMS_ACCESS_KEY = "f285afef-347a-4087-998d-98a4309ad914";
 
+// Supabase configuration for isolated anonymous guest carts ("My setup") & quote storage
+const SUPABASE_URL = "https://kaalrpvxvvjnvqjqkevt.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_6yqy5UBgafUlbBt3-Is9SA_ydvzQQnC";
+const GUEST_SESSION_STORAGE_KEY = "beantown_guest_session_id";
+const GUEST_CART_STORAGE_PREFIX = "beantown_guest_cart_";
+
+function generateGuestUuid() {
+  if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
+    return crypto.randomUUID();
+  }
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+
+function getGuestSessionId() {
+  try {
+    // Remove legacy shared localStorage key so tabs/users never share an old cart
+    if (typeof localStorage !== "undefined") {
+      localStorage.removeItem("beantown-selected-products");
+    }
+    if (typeof sessionStorage !== "undefined") {
+      let sessionId = sessionStorage.getItem(GUEST_SESSION_STORAGE_KEY);
+      if (!sessionId) {
+        sessionId = generateGuestUuid();
+        sessionStorage.setItem(GUEST_SESSION_STORAGE_KEY, sessionId);
+      }
+      return sessionId;
+    }
+  } catch {
+    // Fallback in-memory session ID if storage is blocked
+  }
+  if (!window.__beantownFallbackSessionId) {
+    window.__beantownFallbackSessionId = generateGuestUuid();
+  }
+  return window.__beantownFallbackSessionId;
+}
+
 const DEFAULT_BUNDLES = [
   {
     id: "wedding",
@@ -614,6 +654,35 @@ function saveCmsQuote(quoteRecord) {
   } catch (e) {
     console.error("Failed to record quote to CMS history", e);
   }
+  syncQuoteToSupabase(quoteRecord);
+}
+
+async function syncQuoteToSupabase(quoteRecord) {
+  if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY || !quoteRecord) return;
+  const sessionId = getGuestSessionId();
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/quote_requests`, {
+      method: "POST",
+      headers: {
+        apikey: SUPABASE_PUBLISHABLE_KEY,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+        "x-session-id": sessionId,
+      },
+      body: JSON.stringify({
+        quote_id: String(quoteRecord.id || Date.now()),
+        session_id: sessionId,
+        customer_name: String(quoteRecord.contactName || quoteRecord.name || ""),
+        customer_email: String(quoteRecord.contactEmail || quoteRecord.email || ""),
+        customer_phone: String(quoteRecord.contactPhone || quoteRecord.phone || ""),
+        event_type: String(quoteRecord.eventType || ""),
+        event_date: String(quoteRecord.date || ""),
+        payload: quoteRecord,
+      }),
+    });
+  } catch {
+    // Non-blocking if offline or before table is created
+  }
 }
 
 function updateCmsQuoteStatus(id, newStatus) {
@@ -1023,7 +1092,10 @@ function filteredProducts() {
 }
 function loadSelection() {
   try {
-    const saved = localStorage.getItem("beantown-selected-products");
+    const sessionId = getGuestSessionId();
+    const saved = typeof sessionStorage !== "undefined"
+      ? sessionStorage.getItem(GUEST_CART_STORAGE_PREFIX + sessionId)
+      : null;
     if (saved === null) return {};
     const parsed = JSON.parse(saved);
     return Object.fromEntries(
@@ -1053,10 +1125,79 @@ function sanitizeSelectedProducts() {
   return cleaned;
 }
 
+let supabaseCartSyncTimer = null;
+
+async function syncCartToSupabase(sessionId, selectedItems) {
+  if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY || !sessionId) return;
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/guest_carts?on_conflict=session_id`, {
+      method: "POST",
+      headers: {
+        apikey: SUPABASE_PUBLISHABLE_KEY,
+        "Content-Type": "application/json",
+        Prefer: "resolution=merge-duplicates,return=minimal",
+        "x-session-id": sessionId,
+      },
+      body: JSON.stringify({
+        session_id: sessionId,
+        items: selectedItems,
+        updated_at: new Date().toISOString(),
+      }),
+    });
+  } catch {
+    // Non-blocking if offline or before table is created
+  }
+}
+
+async function hydrateCartFromSupabase() {
+  if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) return;
+  const sessionId = getGuestSessionId();
+  if (!sessionId) return;
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/guest_carts?session_id=eq.${encodeURIComponent(sessionId)}&select=items&limit=1`,
+      {
+        headers: {
+          apikey: SUPABASE_PUBLISHABLE_KEY,
+          Accept: "application/json",
+          "x-session-id": sessionId,
+        },
+      },
+    );
+    if (!res.ok) return;
+    const rows = await res.json();
+    if (!Array.isArray(rows) || !rows[0] || !rows[0].items || typeof rows[0].items !== "object") return;
+    const remoteItems = rows[0].items;
+    if (Object.keys(state.selected || {}).length === 0 && Object.keys(remoteItems).length > 0) {
+      state.selected = remoteItems;
+      sanitizeSelectedProducts();
+      try {
+        sessionStorage.setItem(GUEST_CART_STORAGE_PREFIX + sessionId, JSON.stringify(state.selected));
+      } catch {}
+      syncSetupCount();
+      updateCartDrawer();
+      render({ preserveScroll: true });
+    }
+  } catch {
+    // Non-blocking fallback
+  }
+}
+
 function saveSelection() {
   sanitizeSelectedProducts();
-  try { localStorage.setItem("beantown-selected-products", JSON.stringify(state.selected)); }
-  catch { /* Keep the in-memory builder usable when storage is unavailable. */ }
+  const sessionId = getGuestSessionId();
+  try {
+    if (typeof sessionStorage !== "undefined") {
+      sessionStorage.setItem(GUEST_CART_STORAGE_PREFIX + sessionId, JSON.stringify(state.selected));
+    }
+  } catch {
+    /* Keep the in-memory builder usable when storage is unavailable. */
+  }
+  clearTimeout(supabaseCartSyncTimer);
+  const snapshot = { ...state.selected };
+  supabaseCartSyncTimer = setTimeout(() => {
+    syncCartToSupabase(sessionId, snapshot);
+  }, 180);
 }
 
 function parseDurationText(text) {
@@ -6019,6 +6160,7 @@ window.addEventListener("hashchange", () => {
 
 initCartDrawer();
 render();
+hydrateCartFromSupabase();
 queueFloatingStoryUpdate();
 runOpeningSequence();
 
