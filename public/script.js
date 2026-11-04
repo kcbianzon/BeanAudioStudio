@@ -4137,8 +4137,9 @@ function render(options = {}) {
 }
 
 function syncNavigation() {
-  const currentHash = getHash();
-  document.querySelectorAll(".desktop-nav a, #mobileMenu a").forEach((link) => {
+  const route = getHash();
+  const currentHash = route === "builder" || route === "cart" ? "rentals" : route;
+  document.querySelectorAll(".desktop-nav a, #mobileBottomNav a").forEach((link) => {
     const targetHash = link.getAttribute("href")?.split("?")[0];
     const isCurrent = targetHash === `#${currentHash}`;
     link.classList.toggle("active", isCurrent);
@@ -5448,32 +5449,9 @@ function bind() {
 
 }
 
-const mobileMenu = document.getElementById("mobileMenu");
-document
-  .getElementById("menuBtn")
-  ?.addEventListener(
-    "click",
-    () =>
-      {
-        const isOpen = mobileMenu.style.display !== "flex";
-        mobileMenu.style.display = isOpen ? "flex" : "none";
-        document.getElementById("menuBtn")?.setAttribute("aria-expanded", String(isOpen));
-      },
-  );
-mobileMenu
-  ?.querySelectorAll("a")
-  .forEach((a) =>
-    a.addEventListener("click", () => {
-      mobileMenu.style.display = "none";
-      document.getElementById("menuBtn")?.setAttribute("aria-expanded", "false");
-    }),
-  );
-
 document.addEventListener("keydown", (event) => {
   if (event.key !== "Escape") return;
   if (searchOverlay) searchOverlay.hidden = true;
-  if (mobileMenu) mobileMenu.style.display = "none";
-  document.getElementById("menuBtn")?.setAttribute("aria-expanded", "false");
 });
 
 const searchOverlay = document.getElementById("searchOverlay");
