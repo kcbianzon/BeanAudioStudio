@@ -2062,6 +2062,56 @@ function rentalsResultsGridMarkup(list) {
   return list.map(productCard).join("");
 }
 
+function selectRentalCategory(category) {
+  state.category = category;
+  if (getHash() === "rentals") {
+    const params = getHashParams();
+    if (category === "All") params.delete("cat");
+    else params.set("cat", category);
+    const query = params.toString();
+    history.replaceState(null, "", `#rentals${query ? `?${query}` : ""}`);
+  }
+  render({ scrollToRentals: true });
+}
+
+function mobileRentalControls(list) {
+  return `<div class="mobile-rentals-controls">
+    <div class="mobile-rentals-categories" role="group" aria-label="Filter rentals by category">
+      ${RENTAL_CATEGORY_GROUPS.map((group) => {
+        const label = group.group === "Event Experiences" ? "Event Experience" : group.group;
+        const category = ({ Audio: "Audio & Sound", Experiences: "Event Experiences", "LED Walls": "LED Video Walls" })[state.category] || state.category;
+        const active = category === group.group || group.items.some((item) => item.id === category);
+        return `<div class="mobile-rentals-category ${active ? "is-active" : ""}">
+          <select data-rental-category aria-label="${group.group} categories">
+            <option value="" disabled ${!active ? "selected" : ""}>${label}</option>
+            <option value="${group.group}" ${category === group.group ? "selected" : ""}>All ${group.group}</option>
+            ${group.items.map((item) => `<option value="${item.id}" ${category === item.id ? "selected" : ""}>${item.label}</option>`).join("")}
+          </select>
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg>
+        </div>`;
+      }).join("")}
+    </div>
+    <div class="mobile-rentals-toolbar">
+      <button class="mobile-rentals-all" type="button" data-reset-filters aria-label="Show all rental equipment and clear filters">All rentals <span id="mobileRentalsCount" aria-live="polite">${list.length}</span></button>
+      <select class="mobile-rentals-sort" data-rental-sort aria-label="Sort rentals">
+        <option value="recommended" ${state.sortBy === "recommended" ? "selected" : ""}>Recommended</option>
+        <option value="price-asc" ${state.sortBy === "price-asc" ? "selected" : ""}>Price: Low to High</option>
+        <option value="price-desc" ${state.sortBy === "price-desc" ? "selected" : ""}>Price: High to Low</option>
+        <option value="name-asc" ${state.sortBy === "name-asc" ? "selected" : ""}>Name: A to Z</option>
+      </select>
+      <div class="mobile-rentals-view" role="group" aria-label="Catalog layout view">
+        <button type="button" data-view-mode="grid" class="${state.viewMode === "grid" ? "active" : ""}" aria-label="Grid view" aria-pressed="${state.viewMode === "grid"}"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="2" y="2" width="4.5" height="4.5" rx=".6"/><rect x="9.5" y="2" width="4.5" height="4.5" rx=".6"/><rect x="2" y="9.5" width="4.5" height="4.5" rx=".6"/><rect x="9.5" y="9.5" width="4.5" height="4.5" rx=".6"/></svg>Grid</button>
+        <button type="button" data-view-mode="list" class="${state.viewMode === "list" ? "active" : ""}" aria-label="List view" aria-pressed="${state.viewMode === "list"}"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 4h10M3 8h10M3 12h10"/></svg>List</button>
+      </div>
+      <div class="mobile-rentals-search">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg>
+        <input id="mobileRentalSearch" data-rental-search type="search" aria-label="Search rental equipment" value="${escapeHtml(state.search)}" placeholder="Search…" autocomplete="off">
+        <button type="button" data-clear-search aria-label="Clear search" ${!state.search ? "hidden" : ""}>×</button>
+      </div>
+    </div>
+  </div>`;
+}
+
 function rentals() {
   const list = filteredProducts();
   const hasActiveFilters =
@@ -2070,13 +2120,14 @@ function rentals() {
     state.minPrice !== "" ||
     state.maxPrice !== "";
 
-  return `<div class="page">
+  return `<div class="page rentals-page">
     <div class="page-hero">
-      <div><span class="eyebrow">RENTAL CATALOG</span><h1>Everything<br>you can add.</h1></div>
+      <div><span class="eyebrow">RENTAL CATALOG</span><h1>Everything<br> you can add.</h1></div>
       <p>Explore all rental listings. Public prices are shown where the original site publishes them; other rentals are quote-based.</p>
     </div>
 
     <section class="rentals-catalog" aria-label="Rental inventory">
+      ${mobileRentalControls(list)}
       <div class="rentals-topbar">
         <div class="rentals-count-title" id="rentalsCountTitle">
           <strong>${list.length}</strong> <span>${list.length === 1 ? "rental" : "rentals"}</span>
@@ -2094,7 +2145,7 @@ function rentals() {
             </button>
           </div>
           <div class="rentals-sort-box">
-            <select id="rentalSort" class="rentals-sort-select" aria-label="Sort rentals">
+            <select id="rentalSort" data-rental-sort class="rentals-sort-select" aria-label="Sort rentals">
               <option value="recommended" ${state.sortBy === "recommended" ? "selected" : ""}>Recommended</option>
               <option value="price-asc" ${state.sortBy === "price-asc" ? "selected" : ""}>Price: Low to High</option>
               <option value="price-desc" ${state.sortBy === "price-desc" ? "selected" : ""}>Price: High to Low</option>
@@ -2109,7 +2160,7 @@ function rentals() {
           <div class="sidebar-filter-section">
             <label class="sidebar-section-label" for="rentalSearch">SEARCH</label>
             <div class="sidebar-search-field">
-              <input id="rentalSearch" type="text" value="${escapeHtml(state.search)}" placeholder="Equipment, model, brand…" autocomplete="off">
+              <input id="rentalSearch" data-rental-search type="text" value="${escapeHtml(state.search)}" placeholder="Equipment, model, brand…" autocomplete="off">
               ${state.search ? `<button type="button" class="sidebar-search-clear" data-clear-search aria-label="Clear search">×</button>` : ""}
             </div>
           </div>
@@ -4053,6 +4104,7 @@ function render(options = {}) {
   const previousSidebarScroll = lastSidebarScrollTop || 0;
   const hash = getHash();
   const routeChanged = lastRenderedPage !== null && lastRenderedPage !== hash;
+  document.body.classList.toggle("is-rentals-view", ["rentals", "builder", "cart"].includes(hash));
 
   if (hash === "admin" || hash === "cms") {
     document.body.classList.add("is-cms-view");
@@ -4410,6 +4462,9 @@ function bind() {
     const list = filteredProducts();
     grid.innerHTML = rentalsResultsGridMarkup(list);
     countHeader.innerHTML = `<strong>${list.length}</strong> <span>${list.length === 1 ? "rental" : "rentals"}</span>${state.category !== "All" ? ` <span class="rentals-active-chip">${escapeHtml(state.category)} <button type="button" data-cat="All" aria-label="Remove category filter">×</button></span>` : ""}`;
+    const mobileCount = document.querySelector("#mobileRentalsCount");
+    if (mobileCount) mobileCount.textContent = list.length;
+    document.querySelectorAll(".mobile-rentals-search [data-clear-search]").forEach((button) => { button.hidden = !state.search; });
     const clearBtn = document.querySelector(".sidebar-btn-clear");
     const hasActive =
       state.category !== "All" ||
@@ -4430,31 +4485,34 @@ function bind() {
         state.maxPrice = "";
         state.onlyPopular = false;
         state.onlySelected = false;
-        render({ scrollToRentals: true });
+        selectRentalCategory("All");
       }),
     );
     countHeader.querySelectorAll("[data-cat]").forEach((b) =>
       b.addEventListener("click", () => {
-        state.category = b.dataset.cat;
-        render({ scrollToRentals: true });
+        selectRentalCategory(b.dataset.cat);
       }),
     );
   };
 
   document.querySelectorAll("[data-cat]").forEach((b) =>
     b.addEventListener("click", () => {
-      state.category = b.dataset.cat;
-      render({ scrollToRentals: true });
+      selectRentalCategory(b.dataset.cat);
     }),
   );
-  document.querySelector("#rentalSearch")?.addEventListener("input", (e) => {
+  document.querySelectorAll("[data-rental-category]").forEach((select) =>
+    select.addEventListener("change", (e) => selectRentalCategory(e.target.value)),
+  );
+  document.querySelectorAll("[data-rental-search]").forEach((input) => input.addEventListener("input", (e) => {
     state.search = e.target.value;
+    document.querySelectorAll("[data-rental-search]").forEach((field) => { if (field !== e.target) field.value = state.search; });
     refreshRentalsInPlace();
-  });
-  document.querySelector("[data-clear-search]")?.addEventListener("click", () => {
+  }));
+  document.querySelectorAll("[data-clear-search]").forEach((button) => button.addEventListener("click", () => {
     state.search = "";
-    render({ preserveScroll: true });
-  });
+    document.querySelectorAll("[data-rental-search]").forEach((field) => { field.value = ""; });
+    refreshRentalsInPlace();
+  }));
   document.querySelectorAll("[data-price-type]").forEach((b) =>
     b.addEventListener("click", () => {
       state.priceType = b.dataset.priceType;
@@ -4477,10 +4535,10 @@ function bind() {
     state.onlySelected = e.target.checked;
     render({ scrollToRentals: true });
   });
-  document.querySelector("#rentalSort")?.addEventListener("change", (e) => {
+  document.querySelectorAll("[data-rental-sort]").forEach((select) => select.addEventListener("change", (e) => {
     state.sortBy = e.target.value;
     render({ preserveScroll: true });
-  });
+  }));
   document.querySelectorAll("[data-view-mode]").forEach((b) =>
     b.addEventListener("click", () => {
       state.viewMode = b.dataset.viewMode;
@@ -4496,7 +4554,7 @@ function bind() {
       state.maxPrice = "";
       state.onlyPopular = false;
       state.onlySelected = false;
-      render({ scrollToRentals: true });
+      selectRentalCategory("All");
     }),
   );
   document.querySelector("[data-apply-filters]")?.addEventListener("click", () => {
