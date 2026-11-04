@@ -5797,7 +5797,7 @@ function initExperienceCarousel() {
   const section = document.querySelector('.experience-categories');
   const track = section?.querySelector('.experience-category-grid');
   if (!track) return;
-  const move = (direction, wrap = false) => {
+  const move = (direction) => {
     const cards = Array.from(track.querySelectorAll('.experience-category-card'));
     if (!cards.length) return;
     const rect = track.getBoundingClientRect();
@@ -5805,67 +5805,23 @@ function initExperienceCarousel() {
     const positions = cards.map((card) => track.scrollLeft + card.getBoundingClientRect().left - rect.left - inset);
     const nearest = positions.reduce((best, pos, index) => Math.abs(pos - track.scrollLeft) < Math.abs(positions[best] - track.scrollLeft) ? index : best, 0);
     const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
-    const atEnd = track.scrollLeft >= maxScroll - 4 || nearest >= cards.length - 1;
-    const atStart = track.scrollLeft <= 4 || nearest <= 0;
-    let targetLeft;
-    if (direction > 0 && atEnd) {
-      if (!wrap) return;
-      targetLeft = positions[0] ?? 0;
-    } else if (direction < 0 && atStart) {
-      if (!wrap) return;
-      targetLeft = maxScroll;
-    } else {
-      const target = Math.max(0, Math.min(cards.length - 1, nearest + direction));
-      targetLeft = Math.min(maxScroll, Math.max(0, positions[target]));
-    }
+    const target = Math.max(0, Math.min(cards.length - 1, nearest + direction));
+    const targetLeft = Math.min(maxScroll, Math.max(0, positions[target]));
     track.scrollTo({
       left: targetLeft,
       behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
     });
   };
 
-  let isPaused = false;
-  let autoTimer = null;
-  const AUTO_ROTATE_MS = 4000;
-
-  const startAutoRotate = () => {
-    if (autoTimer) window.clearInterval(autoTimer);
-    autoTimer = window.setInterval(() => {
-      if (isPaused || document.hidden || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      if (!document.body.contains(track)) {
-        window.clearInterval(autoTimer);
-        return;
-      }
-      move(1, true);
-    }, AUTO_ROTATE_MS);
-  };
-
-  const pauseAutoRotate = () => { isPaused = true; };
-  const resumeAutoRotate = () => { isPaused = false; };
-
   section.querySelector('[data-experience-prev]')?.addEventListener('click', () => {
     move(-1);
-    startAutoRotate();
   });
   section.querySelector('[data-experience-next]')?.addEventListener('click', () => {
-    move(1, true);
-    startAutoRotate();
-  });
-  track.querySelectorAll('.experience-category-card').forEach((card) => {
-    card.addEventListener('mouseenter', pauseAutoRotate);
-    card.addEventListener('mouseleave', resumeAutoRotate);
+    move(1);
   });
 
   track.addEventListener('scroll', updateExperienceCarousel, { passive: true });
   updateExperienceCarousel();
-  startAutoRotate();
-
-  experienceCarouselCleanup = () => {
-    if (autoTimer) {
-      window.clearInterval(autoTimer);
-      autoTimer = null;
-    }
-  };
 }
 
 function initExperienceJourney() {
