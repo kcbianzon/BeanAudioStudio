@@ -1499,9 +1499,13 @@ function bundleImage(bundle) {
   return `assets/beantown/${photo}`;
 }
 
+const expandedRentalDescriptions = new Set();
+
 function productCard(p) {
   const image = productImage(p);
   const quantity = state.selected[p.id] || 0;
+  const descriptionExpanded = expandedRentalDescriptions.has(p.id);
+  const descriptionId = `rental-description-${encodeURIComponent(p.id)}`;
   const isContainWhite = (
     p.id === "small-audio" ||
     p.id === "medium-audio" ||
@@ -1647,7 +1651,7 @@ function productCard(p) {
     (image && image.includes("live-performance"));
   const mediaClass = isBlackFrame ? "is-black-frame is-live-package" : (isContainWhite ? "audio-pkg-media" : (p.tone || ""));
   const photoClass = isBlackFrame ? "is-black-frame-photo is-live-photo" : (isContainWhite ? "audio-pkg-img" : "");
-  return `<article class="product-card reveal"><div class="product-media has-image ${mediaClass}"><img class="product-photo ${photoClass}" src="${image}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer"></div><div class="product-meta"><span class="badge">${p.tag}</span><h3>${p.name}</h3><p>${p.desc}</p><div class="price-row"><span class="price">${productPriceText(p)}</span><button class="text-btn add-product-btn ${quantity ? "is-added" : ""}" data-add="${p.id}" aria-label="${quantity ? `${quantity} added. Add another ${p.name}` : `Add ${p.name} to my setup`}">${quantity ? `Added · ${quantity} +` : "Add to setup +"}</button></div></div></article>`;
+  return `<article class="product-card reveal ${descriptionExpanded ? "is-description-expanded" : ""}"><div class="product-media has-image ${mediaClass}"><img class="product-photo ${photoClass}" src="${image}" alt="${p.name}" loading="lazy" referrerpolicy="no-referrer"></div><div class="product-meta"><span class="badge">${p.tag}</span><h3>${p.name}</h3><div class="product-description-wrap"><p id="${descriptionId}">${p.desc}</p><button type="button" class="product-description-toggle" data-toggle-description="${escapeHtml(p.id)}" aria-expanded="${descriptionExpanded}" aria-controls="${descriptionId}" aria-label="${escapeHtml(`${descriptionExpanded ? "Hide" : "Show"} full description for ${p.name}`)}"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg></button></div><div class="price-row"><span class="price">${productPriceText(p)}</span><button class="text-btn add-product-btn ${quantity ? "is-added" : ""}" data-add="${p.id}" aria-label="${quantity ? `${quantity} added. Add another ${p.name}` : `Add ${p.name} to my setup`}">${quantity ? `Added · ${quantity} +` : "Add to setup +"}</button></div></div></article>`;
 }
 // Client stories — rotating half-moon wheel.
 // SAMPLE COPY: these quotes are placeholders for the mockup. Replace them with approved client reviews
@@ -5506,6 +5510,20 @@ function bind() {
   }
 
 }
+
+document.addEventListener("click", (event) => {
+  const toggle = event.target.closest("[data-toggle-description]");
+  if (!toggle) return;
+  const card = toggle.closest(".product-card");
+  const product = products.find((item) => item.id === toggle.dataset.toggleDescription);
+  if (!card || !product) return;
+  const expanded = toggle.getAttribute("aria-expanded") !== "true";
+  if (expanded) expandedRentalDescriptions.add(product.id);
+  else expandedRentalDescriptions.delete(product.id);
+  card.classList.toggle("is-description-expanded", expanded);
+  toggle.setAttribute("aria-expanded", String(expanded));
+  toggle.setAttribute("aria-label", `${expanded ? "Hide" : "Show"} full description for ${product.name}`);
+});
 
 document.addEventListener("keydown", (event) => {
   if (event.key !== "Escape") return;
