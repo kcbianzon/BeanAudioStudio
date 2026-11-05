@@ -4849,14 +4849,14 @@ function bind() {
         saveSelection();
         syncSetupCount();
         updateCartDrawer();
-        if (match.id === "wedding") state.eventType = "Wedding Event";
-        else if (match.id === "corporate") state.eventType = "Corporate Conference";
-        else if (match.id === "concert") state.eventType = "Concert & Live Performance";
-        else if (match.id === "school") state.eventType = "School Dance & Social";
-        else if (match.id === "party") state.eventType = "Private Party & DJ";
-        else if (match.id === "movie") state.eventType = "Outdoor Movie Night";
-        else if (match.id === "special-fx") state.eventType = "Special FX Celebration";
-        else state.eventType = match.title;
+      if (match.id === "wedding") state.eventType = "Wedding Event";
+      else if (match.id === "corporate") state.eventType = "Corporate Event";
+      else if (match.id === "concert") state.eventType = "Concert";
+      else if (match.id === "school") state.eventType = "School Event";
+      else if (match.id === "party") state.eventType = "Private Party";
+      else if (match.id === "movie") state.eventType = "Outdoor Movie";
+      else if (match.id === "special-fx") state.eventType = "Special FX Celebration";
+      else state.eventType = match.title;
         state.submittedQuote = null;
         state.quoteStep = 1; // Always route to Step 1 (Event Type) first
         if (location.hash === "#quote" || location.hash === "quote") {
@@ -4985,11 +4985,11 @@ function bind() {
       syncSetupCount();
       updateCartDrawer();
       if (match.id === "wedding") state.eventType = "Wedding Event";
-      else if (match.id === "corporate") state.eventType = "Corporate Conference";
-      else if (match.id === "concert") state.eventType = "Concert & Live Performance";
-      else if (match.id === "school") state.eventType = "School Dance & Social";
-      else if (match.id === "party") state.eventType = "Private Party & DJ";
-      else if (match.id === "movie") state.eventType = "Outdoor Movie Night";
+      else if (match.id === "corporate") state.eventType = "Corporate Event";
+      else if (match.id === "concert") state.eventType = "Concert";
+      else if (match.id === "school") state.eventType = "School Event";
+      else if (match.id === "party") state.eventType = "Private Party";
+      else if (match.id === "movie") state.eventType = "Outdoor Movie";
       else if (match.id === "special-fx") state.eventType = "Special FX Celebration";
       else state.eventType = match.title;
       const input = document.querySelector("#quoteEventTypeInput");

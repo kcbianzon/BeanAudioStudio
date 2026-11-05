@@ -7545,8 +7545,23 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
 
 .q-bundle-strip {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 12px;
+}
+@media (max-width: 900px) {
+  .q-bundle-strip {
+    display: flex !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 12px !important;
+    padding-bottom: 10px !important;
+    scroll-snap-type: x mandatory;
+  }
+  .q-bundle-mini {
+    flex: 0 0 250px !important;
+    min-width: 250px !important;
+    scroll-snap-align: start;
+  }
 }
 
 .q-bundle-mini {

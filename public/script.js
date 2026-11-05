@@ -2467,7 +2467,7 @@ function bundleDetail(id) {
     (total, { product, quantity }) => total + (product.price || 0) * quantity,
     0,
   );
-  return `<div class="page"><div class="bundle-detail-head"><a class="text-btn" href="#bundles">← All bundles</a><div class="bundle-detail-layout"><div><span class="eyebrow">${bundle.label} PACKAGE</span><h1>${bundle.title}</h1><p>${bundle.desc}</p></div><div class="bundle-detail-price"><span class="eyebrow">PACKAGE PRICE</span><strong>${bundlePriceText(bundle)}</strong></div></div></div><div class="bundle-detail-wrap"><section class="bundle-detail-main"><div class="detail-section-head"><div><span class="eyebrow">WHAT’S INCLUDED</span><h2>Your package, item by item.</h2></div><span class="detail-lock">${included.reduce((s, x) => s + x.quantity, 0)} Total Units</span></div><div class="bundle-included-list">${included.map(({ product, quantity }) => `<div class="bundle-included-item"><div><strong>${quantity} × ${product.name}</strong><span>${product.category} · ${productPriceText(product)} · ${product.desc}</span></div><strong>${productPriceText(product)}</strong></div>`).join("")}</div><div class="bundle-detail-actions"><button type="button" class="btn btn-dark" data-launch-bundle="${bundle.id}" data-launch-step="5">Request this bundle →</button><button type="button" class="btn btn-light" data-open-cart>View in Cart →</button></div></section><aside class="bundle-detail-summary"><span class="eyebrow">TRANSPARENT MATH</span><div class="detail-total"><span>Itemized equipment sum</span><strong>${money(knownTotal)}</strong></div><div class="detail-total"><span>Package total</span><strong>${bundlePriceText(bundle)}</strong></div><p>Package contents and pricing are confirmed with your event quote.</p></aside></div></div>`;
+  return `<div class="page"><div class="bundle-detail-head"><a class="text-btn" href="#bundles">← All bundles</a><div class="bundle-detail-layout"><div><span class="eyebrow">${bundle.label} PACKAGE</span><h1>${bundle.title}</h1><p>${bundle.desc}</p></div><div class="bundle-detail-price"><span class="eyebrow">PACKAGE PRICE</span><strong>${bundlePriceText(bundle)}</strong></div></div></div><div class="bundle-detail-wrap"><section class="bundle-detail-main"><div class="detail-section-head"><div><span class="eyebrow">WHAT’S INCLUDED</span><h2>Your package, item by item.</h2></div><span class="detail-lock">${included.reduce((s, x) => s + x.quantity, 0)} Total Units</span></div><div class="bundle-included-list">${included.map(({ product, quantity }) => `<div class="bundle-included-item"><div><strong>${quantity} × ${product.name}</strong><span>${product.category} · ${productPriceText(product)} · ${product.desc}</span></div><strong>${productPriceText(product)}</strong></div>`).join("")}</div><div class="bundle-detail-actions"><button type="button" class="btn btn-dark" data-launch-bundle="${bundle.id}" data-launch-step="1">Request this bundle →</button><button type="button" class="btn btn-light" data-open-cart>View in Cart →</button></div></section><aside class="bundle-detail-summary"><span class="eyebrow">TRANSPARENT MATH</span><div class="detail-total"><span>Itemized equipment sum</span><strong>${money(knownTotal)}</strong></div><div class="detail-total"><span>Package total</span><strong>${bundlePriceText(bundle)}</strong></div><p>Package contents and pricing are confirmed with your event quote.</p></aside></div></div>`;
 }
 
 function aboutUsPage() {
@@ -3434,8 +3434,6 @@ function renderDateAndLocationStep() {
 }
 
 function renderEquipmentStep(totals) {
-  const recIds = eventRecommendations[state.eventType] || eventRecommendations.Wedding;
-  const recProducts = recIds.map((id) => products.find((p) => p.id === id)).filter(Boolean);
   const categories = [
     "All",
     "Audio & Speakers",
@@ -3455,98 +3453,55 @@ function renderEquipmentStep(totals) {
 
   return `<div class="q-step-panel">
     <div class="q-step-head">
-      <span class="eyebrow orange">STEP 04 OF 05 · BUILD YOUR EQUIPMENT &amp; PRODUCTION</span>
-      <h2>Choose your packages, gear &amp; crew support.</h2>
-      <p>Start with a turnkey event bundle or add individual items below. Every item updates your itemized quote calculation in real time.</p>
+      <span class="eyebrow orange">STEP 04 OF 05 · SELECT EQUIPMENT &amp; CREW</span>
+      <h2>Choose your equipment &amp; crew support.</h2>
+      <p>Browse our complete rental inventory, adjust quantities, and select your delivery and technical crew tier. Every item updates your itemized quote calculation in real time.</p>
     </div>
 
-    <!-- 1. Turnkey Starter Bundles -->
+    <!-- 1. Full Rental Catalog -->
     <div class="q-subblock">
       <div class="q-subblock-head">
         <div>
-          <span class="eyebrow">TURNKEY PACKAGES</span>
-          <h3>1. Quick-Load an Event Setup Suggestion</h3>
+          <span class="eyebrow">EQUIPMENT INVENTORY (${products.length} ITEMS)</span>
+          <h3>1. Browse &amp; Add Any Individual Equipment</h3>
         </div>
         ${totals.uniqueCount > 0 ? `<button type="button" class="q-clear-all-btn" data-clear-all-equipment>Clear all selected gear (${totals.totalUnits})</button>` : ""}
       </div>
-      <div class="q-bundle-strip">
-        ${bundles
-          .map((b) => {
-            const isMatched = totals.matchedBundle && totals.matchedBundle.id === b.id;
-            return `<div class="q-bundle-mini ${isMatched ? "is-active" : ""}">
-              <div class="q-bundle-mini-top">
-                <span class="eyebrow">${escapeHtml(b.label)}</span>
-                <strong>${bundlePriceText(b)}</strong>
-              </div>
-              <h4>${escapeHtml(b.title)}</h4>
-              <p>${escapeHtml(b.desc)}</p>
-              <button type="button" class="btn ${isMatched ? "btn-dark" : "btn-light"} btn-small" data-apply-bundle="${b.id}">
-                ${isMatched ? "✓ Loaded in Setup" : "Load Package"}
-              </button>
-            </div>`;
-          })
-          .join("")}
-      </div>
-    </div>
-
-    <!-- 2. Recommended for Selected Event Type -->
-    <div class="q-subblock">
-      <div class="q-subblock-head">
-        <div>
-          <span class="eyebrow">TAILORED FOR ${escapeHtml(state.eventType.toUpperCase())}</span>
-          <h3>2. Recommended Gear for Your ${escapeHtml(state.eventType)}</h3>
-        </div>
-        <button type="button" class="text-btn" data-add-all-recommended>Add all recommended +</button>
-      </div>
-      <div class="q-rec-grid">
-        ${recProducts
-          .map((p) => {
-            const qty = state.selected[p.id] || 0;
-            return `<div class="q-rec-item ${qty > 0 ? "is-selected" : ""}">
-              <img src="${productImage(p)}" alt="${escapeHtml(p.name)}" loading="lazy">
-              <div class="q-rec-info">
-                <strong>${escapeHtml(p.name)}</strong>
-                <span>${escapeHtml(p.category)} · <b>${productPriceText(p)}</b></span>
-              </div>
-              <div class="q-stepper">
-                <button type="button" class="q-step-btn" data-minus="${p.id}" ${qty === 0 ? "disabled" : ""} aria-label="Decrease ${escapeHtml(p.name)}">−</button>
-                <span class="q-step-val">${qty}</span>
-                <button type="button" class="q-step-btn q-step-plus" data-plus="${p.id}" aria-label="Increase ${escapeHtml(p.name)}">+</button>
-              </div>
-            </div>`;
-          })
-          .join("")}
-      </div>
-    </div>
-
-    <!-- 3. Full Rental Catalog -->
-    <div class="q-subblock">
-      <div class="q-subblock-head">
-        <div>
-          <span class="eyebrow">FULL RENTAL INVENTORY (${products.length} ITEMS)</span>
-          <h3>3. Browse &amp; Add Any Individual Equipment</h3>
-        </div>
-      </div>
 
       <div class="q-catalog-controls">
-        <div class="q-catalog-search">
-          <input id="builderCatalogSearch" type="text" class="input" placeholder="Search speakers, Shure mics, LED walls, 360 photo booth, cold sparks..." value="${escapeHtml(state.builderSearch)}">
-          <label class="q-selected-toggle">
-            <input type="checkbox" id="builderOnlySelectedToggle" ${state.builderOnlySelected ? "checked" : ""}>
-            <span>Show selected only (${totals.uniqueCount})</span>
-          </label>
+        <div class="q-catalog-search-row">
+          <div class="q-catalog-search-wrap">
+            <svg class="q-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input id="builderCatalogSearch" type="text" class="input q-builder-search-input" placeholder="Search speakers, microphones, DJ gear, displays, lighting..." value="${escapeHtml(state.builderSearch)}">
+            ${state.builderSearch ? `<button type="button" class="q-search-clear-btn" id="builderClearSearchBtn" aria-label="Clear search">?</button>` : ""}
+          </div>
+          <button type="button" class="q-selected-filter-btn ${state.builderOnlySelected ? "is-active" : ""}" id="builderSelectedFilterBtn" aria-pressed="${Boolean(state.builderOnlySelected)}">
+            <span class="q-selected-star">?</span>
+            <span>Show selected only</span>
+            <span class="q-selected-badge">${totals.uniqueCount}</span>
+          </button>
         </div>
-        <div class="q-cat-pills">
-          ${categories
-            .map((cat) => {
-              const count =
-                cat === "All"
-                  ? products.length
-                  : products.filter((p) => p.category === cat).length;
-              return `<button type="button" class="q-cat-pill ${state.builderCategory === cat ? "is-active" : ""}" data-builder-cat="${escapeHtml(cat)}">${escapeHtml(cat)} <span>${count}</span></button>`;
-            })
-            .join("")}
+
+        <div class="q-cat-pills-bar">
+          <div class="q-cat-pills">
+            ${categories
+              .map((cat) => {
+                const count =
+                  cat === "All"
+                    ? products.length
+                    : products.filter((p) => p.category === cat || productMatchesCategory(p, cat)).length;
+                return `<button type="button" class="q-cat-pill ${state.builderCategory === cat ? "is-active" : ""}" data-builder-cat="${escapeHtml(cat)}">${escapeHtml(cat)} <span>${count}</span></button>`;
+              })
+              .join("")}
+          </div>
         </div>
+
+        ${(state.builderCategory !== "All" || state.builderSearch || state.builderOnlySelected) ? `
+          <div class="q-catalog-status-bar">
+            <span>Showing <strong>${builderCatalogItems().length}</strong> ${builderCatalogItems().length === 1 ? "rental" : "rentals"}${state.builderCategory !== "All" ? ` in <em>${escapeHtml(state.builderCategory)}</em>` : ""}${state.builderSearch ? ` matching "<em>${escapeHtml(state.builderSearch)}</em>"` : ""}${state.builderOnlySelected ? " (selected only)" : ""}</span>
+            <button type="button" class="text-btn q-reset-catalog-btn" data-builder-reset-catalog>Reset filters ?</button>
+          </div>
+        ` : ""}
       </div>
 
       <div class="q-equip-grid" id="quoteCatalogGrid">
@@ -3554,12 +3509,12 @@ function renderEquipmentStep(totals) {
       </div>
     </div>
 
-    <!-- 4. Delivery, Setup & Technician Tier -->
+    <!-- 2. Delivery, Setup & Technician Tier -->
     <div class="q-subblock">
       <div class="q-subblock-head">
         <div>
           <span class="eyebrow">LOGISTICS &amp; ON-SITE CREW</span>
-          <h3>4. Delivery, Setup &amp; Technician Support</h3>
+          <h3>2. Delivery, Setup &amp; Technician Support</h3>
         </div>
       </div>
       <div class="q-service-tier-grid">
@@ -3986,6 +3941,33 @@ function quote() {
               </div>
             </button>`;
           }).join("")}
+        
+      <!-- 3. Optional: Quick-Load an Event Setup Suggestion -->
+      <div class="q-clean-section q-quick-load-section">
+        <div class="q-venue-header-row">
+          <div>
+            <h3 class="q-venue-main-title">Optional: Quick-Load an Event Setup Suggestion</h3>
+            <span class="q-venue-sub-text">Want a head start? Click any package below to preload recommended equipment into your quote:</span>
+          </div>
+          ${totals.uniqueCount > 0 ? `<button type="button" class="q-clear-all-btn" data-clear-all-equipment>Clear loaded gear (${totals.totalUnits})</button>` : ""}
+        </div>
+        <div class="q-bundle-strip">
+          ${bundles
+            .map((b) => {
+              const isMatched = totals.matchedBundle && totals.matchedBundle.id === b.id;
+              return `<div class="q-bundle-mini ${isMatched ? "is-active" : ""}">
+                <div class="q-bundle-mini-top">
+                  <span class="eyebrow">${escapeHtml(b.label)}</span>
+                  <strong>${bundlePriceText(b)}</strong>
+                </div>
+                <h4>${escapeHtml(b.title)}</h4>
+                <p>${escapeHtml(b.desc)}</p>
+                <button type="button" class="btn ${isMatched ? "btn-dark" : "btn-light"} btn-small" data-apply-bundle="${b.id}">
+                  ${isMatched ? "✓ Loaded in Setup" : "Load Package"}
+                </button>
+              </div>`;
+            })
+            .join("")}
         </div>
       </div>
     </div>`;
@@ -4861,21 +4843,22 @@ function bind() {
   document.querySelectorAll("[data-launch-bundle]").forEach((btn) =>
     btn.addEventListener("click", () => {
       const bId = btn.dataset.launchBundle;
-      const targetStep = Number(btn.dataset.launchStep) || 1;
       const match = bundles.find((x) => x.id === bId);
       if (match) {
         state.selected = { ...match.included };
         saveSelection();
         syncSetupCount();
         updateCartDrawer();
-        if (match.id === "movie") state.eventType = "Outdoor Movie";
-        else if (match.id === "wedding") state.eventType = "Wedding";
-        else if (match.id === "concert") state.eventType = "Concert";
-        else if (match.id === "school") state.eventType = "School Event";
-        else if (match.id === "corporate") state.eventType = "Corporate Event";
-        else state.eventType = "Private Party";
+      if (match.id === "wedding") state.eventType = "Wedding Event";
+      else if (match.id === "corporate") state.eventType = "Corporate Event";
+      else if (match.id === "concert") state.eventType = "Concert";
+      else if (match.id === "school") state.eventType = "School Event";
+      else if (match.id === "party") state.eventType = "Private Party";
+      else if (match.id === "movie") state.eventType = "Outdoor Movie";
+      else if (match.id === "special-fx") state.eventType = "Special FX Celebration";
+      else state.eventType = match.title;
         state.submittedQuote = null;
-        state.quoteStep = targetStep;
+        state.quoteStep = 1; // Always route to Step 1 (Event Type) first
         if (location.hash === "#quote" || location.hash === "quote") {
           render();
         } else {
@@ -4992,25 +4975,41 @@ function bind() {
     });
   });
 
-  // Apply Starter Bundle in Step 1 or Step 5
+  // Apply Starter Bundle in Step 1
   document.querySelectorAll("[data-apply-bundle]").forEach((btn) =>
     btn.addEventListener("click", () => {
       const match = bundles.find((x) => x.id === btn.dataset.applyBundle);
       if (!match) return;
       state.selected = { ...match.included };
       saveSelection();
+      syncSetupCount();
+      updateCartDrawer();
+      if (match.id === "wedding") state.eventType = "Wedding Event";
+      else if (match.id === "corporate") state.eventType = "Corporate Event";
+      else if (match.id === "concert") state.eventType = "Concert";
+      else if (match.id === "school") state.eventType = "School Event";
+      else if (match.id === "party") state.eventType = "Private Party";
+      else if (match.id === "movie") state.eventType = "Outdoor Movie";
+      else if (match.id === "special-fx") state.eventType = "Special FX Celebration";
+      else state.eventType = match.title;
+      const input = document.querySelector("#quoteEventTypeInput");
+      if (input) input.value = state.eventType;
       render({ preserveScroll: true });
-      showToast(`Loaded ${match.title} (${bundlePriceText(match)})`);
+      showToast(`Loaded ${match.title} into your setup`);
     }),
   );
 
   // Clear all equipment
-  document.querySelector("[data-clear-all-equipment]")?.addEventListener("click", () => {
-    state.selected = {};
-    saveSelection();
-    render({ preserveScroll: true });
-    showToast("Cleared all equipment from setup");
-  });
+  document.querySelectorAll("[data-clear-all-equipment]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.selected = {};
+      saveSelection();
+      syncSetupCount();
+      updateCartDrawer();
+      render({ preserveScroll: true });
+      showToast("Cleared all equipment from setup");
+    }),
+  );
 
   // Add all recommended for current event type
   document.querySelector("[data-add-all-recommended]")?.addEventListener("click", () => {
@@ -5508,6 +5507,14 @@ function bind() {
   document.querySelector("#builderCatalogSearch")?.addEventListener("input", (e) => {
     state.builderSearch = e.target.value;
     refreshBuilderCatalogInPlace();
+  });
+  document.querySelector("#builderClearSearchBtn")?.addEventListener("click", () => {
+    state.builderSearch = "";
+    render({ preserveScroll: true });
+  });
+  document.querySelector("#builderSelectedFilterBtn")?.addEventListener("click", () => {
+    state.builderOnlySelected = !state.builderOnlySelected;
+    render({ preserveScroll: true });
   });
   document.querySelector("#builderOnlySelectedToggle")?.addEventListener("change", (e) => {
     state.builderOnlySelected = e.target.checked;
