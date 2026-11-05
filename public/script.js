@@ -3992,7 +3992,7 @@ function quote() {
 
       <!-- 1. Estimated Audience Size (Outside the Box) -->
       <div class="q-clean-section">
-        <h3 class="q-clean-section-title">Estimated Audience Size</h3>
+        <h3 class="q-clean-section-title"><label for="quoteGuestExact">Estimated Audience Size</label></h3>
         <div class="q-clean-input-wrap">
           <input
             id="quoteGuestExact"
@@ -4032,7 +4032,7 @@ function quote() {
             }
           ].map((v) => {
             const isSelected = state.venue === v.id || (v.id === "Outdoor & Indoor" && state.venue === "Indoor + Outdoor");
-            return `<button type="button" class="q-venue-card ${isSelected ? "is-active" : ""}" data-select-venue="${escapeHtml(v.id)}">
+            return `<button type="button" class="q-venue-card ${isSelected ? "is-active" : ""}" data-select-venue="${escapeHtml(v.id)}" aria-pressed="${isSelected}">
               <div class="q-venue-card-body">
                 <h4 class="q-venue-title">${escapeHtml(v.title)}</h4>
                 <p class="q-venue-desc">${escapeHtml(v.sub)}</p>
@@ -4047,13 +4047,13 @@ function quote() {
 
       <!-- 3. Rental duration (Outside the Box) -->
       <div class="q-clean-section">
-        <h3 class="q-clean-section-title">Rental duration</h3>
+        <h3 class="q-clean-section-title"><label for="quoteDurationInput">Rental duration</label></h3>
         <div class="q-clean-input-wrap">
           <input
             type="text"
             id="quoteDurationInput"
             class="q-clean-big-input"
-            placeholder="Type your rental duration or number of days (e.g. 1 day"
+            placeholder="e.g. 1 day"
             value="${escapeHtml(state.customDurationText || "")}"
             autocomplete="off"
           />
@@ -4083,7 +4083,8 @@ function quote() {
     ? "Flexible Date"
     : `${dateRangeStr}${timeRangeStr}`;
 
-  return `<div class="page q-builder-page${step === 1 ? " q-builder-event-step" : ""}">
+  const stepClass = step === 1 ? "q-builder-event-step" : step === 2 ? "q-builder-guest-step" : "";
+  return `<div class="page q-builder-page ${stepClass}">
     <header class="q-hero">
       <div>
         <span class="eyebrow orange">BUILD MY EVENT · LIVE QUOTE CALCULATOR</span>
@@ -5022,7 +5023,7 @@ function bind() {
     state.guests = Number.isFinite(val) && val > 0 ? val : null;
   });
   document.querySelector("#quoteGuestExact")?.addEventListener("change", () => {
-    render({ preserveScroll: true });
+    if (!window.matchMedia("(max-width: 768px)").matches) render({ preserveScroll: true });
   });
 
   document.querySelectorAll("[data-select-venue]").forEach((btn) =>
@@ -5036,7 +5037,7 @@ function bind() {
     state.customDurationText = e.target.value;
   });
   document.querySelector("#quoteDurationInput")?.addEventListener("change", () => {
-    render({ preserveScroll: true });
+    if (!window.matchMedia("(max-width: 768px)").matches) render({ preserveScroll: true });
   });
 
   // Step 3: Interactive Calendar & Date Controls
