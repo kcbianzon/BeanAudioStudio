@@ -907,10 +907,9 @@ const state = {
   dateFlexible: false,
   eventTimeWindow: "Evening (5:00 PM – 11:00 PM)",
   calendarYear: _nowInit.getFullYear(),
-  calendarMonth: 9, // October (0-indexed)
-  calendarYear: 2026,
-  startDate: "2026-10-11",
-  endDate: "2026-10-15",
+  calendarMonth: _nowInit.getMonth(),
+  startDate: "",
+  endDate: "",
   startTime: "Start Time",
   endTime: "End Time",
   activeTimeTarget: "start",
@@ -2931,6 +2930,16 @@ function parseTimeString(str) {
   return { hour: h, minute: m, ampm };
 }
 
+function localDateKey(date = new Date()) {
+  return [String(date.getFullYear()).padStart(4, "0"), String(date.getMonth() + 1).padStart(2, "0"), String(date.getDate()).padStart(2, "0")].join("-");
+}
+
+function isBookableDate(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value) || value < localDateKey()) return false;
+  const date = new Date(value + "T00:00:00");
+  return !Number.isNaN(date.getTime()) && localDateKey(date) === value;
+}
+
 function formatReadableDate(isoDate) {
   if (!isoDate) return "";
   const parts = isoDate.split("-").map(Number);
@@ -3020,8 +3029,15 @@ function renderDateAndLocationStep() {
     "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December",
   ];
-  const year = state.calendarYear || 2026;
-  const month = state.calendarMonth !== undefined ? state.calendarMonth : 9;
+  const now = new Date();
+  const today = localDateKey(now);
+  if (new Date(state.calendarYear, state.calendarMonth + 1, 0) < new Date(now.getFullYear(), now.getMonth(), 1)) {
+    state.calendarYear = now.getFullYear();
+    state.calendarMonth = now.getMonth();
+  }
+  const year = state.calendarYear;
+  const month = state.calendarMonth;
+  const isCurrentMonth = year === now.getFullYear() && month === now.getMonth();
   const monthName = `${monthNames[month]} ${year}`;
 
   const firstDay = new Date(year, month, 1).getDay();
@@ -3055,7 +3071,7 @@ function renderDateAndLocationStep() {
     }
 
     cells.push(
-      `<button type="button" class="${cellClass}" data-cal-date="${iso}">
+      `<button type="button" class="${cellClass}" data-cal-date="${iso}" ${iso < today ? "disabled" : ""}>
         <span class="q-cell-text">${d}</span>
       </button>`
     );
@@ -3117,7 +3133,7 @@ function renderDateAndLocationStep() {
         <!-- Left: Calendar with connected range selection -->
         <div class="q-schedule-cal-col">
           <div class="q-cal-pill-header">
-            <button type="button" class="q-cal-circle-btn" data-cal-prev aria-label="Previous month">‹</button>
+            <button type="button" class="q-cal-circle-btn" data-cal-prev aria-label="Previous month" ${isCurrentMonth ? "disabled" : ""}>‹</button>
             <span class="q-cal-month-title">${monthName}</span>
             <button type="button" class="q-cal-circle-btn" data-cal-next aria-label="Next month">›</button>
           </div>
@@ -5025,6 +5041,8 @@ function bind() {
 
   // Step 3: Interactive Calendar & Date Controls
   document.querySelector("[data-cal-prev]")?.addEventListener("click", () => {
+    const now = new Date();
+    if (new Date(state.calendarYear, state.calendarMonth, 1) <= new Date(now.getFullYear(), now.getMonth(), 1)) return;
     state.calendarMonth -= 1;
     if (state.calendarMonth < 0) {
       state.calendarMonth = 11;
@@ -5044,7 +5062,8 @@ function bind() {
   document.querySelectorAll("[data-cal-date]").forEach((btn) =>
     btn.addEventListener("click", () => {
       const clickedIso = btn.dataset.calDate;
-      if (!state.isSelectingRange || (state.startDate && state.endDate && state.startDate !== state.endDate && !state.isSelectingRange)) {
+      if (!isBookableDate(clickedIso)) return;
+      if (!state.isSelectingRange || !isBookableDate(state.startDate)) {
         state.startDate = clickedIso;
         state.endDate = clickedIso;
         state.date = clickedIso;
@@ -5066,30 +5085,35 @@ function bind() {
   );
 
   // Direct Date Inputs (Start Date and End Date)
-  document.querySelector("#quoteStartDateInput")?.addEventListener("input", (e) => {
-    state.startDate = e.target.value.trim();
-    state.date = state.startDate;
-  });
   document.querySelector("#quoteStartDateInput")?.addEventListener("change", (e) => {
     const val = e.target.value.trim();
+    if (val && !isBookableDate(val)) {
+      e.target.value = state.startDate;
+      showToast("Enter a valid start date today or later (YYYY-MM-DD).");
+      return;
+    }
     state.startDate = val;
     state.date = val;
+    state.isSelectingRange = false;
+    if (!val || state.endDate < val) state.endDate = "";
     if (val) {
       state.dateFlexible = false;
-      const parts = val.split("-").map(Number);
-      if (parts.length === 3 && !parts.some(Number.isNaN)) {
-        state.calendarYear = parts[0];
-        state.calendarMonth = parts[1] - 1;
-      }
+      const [year, month] = val.split("-").map(Number);
+      state.calendarYear = year;
+      state.calendarMonth = month - 1;
     }
     setTimeout(() => render({ preserveScroll: true }), 0);
   });
 
-  document.querySelector("#quoteEndDateInput")?.addEventListener("input", (e) => {
-    state.endDate = e.target.value.trim();
-  });
   document.querySelector("#quoteEndDateInput")?.addEventListener("change", (e) => {
-    state.endDate = e.target.value.trim();
+    const val = e.target.value.trim();
+    if (val && (!isBookableDate(val) || val < state.startDate)) {
+      e.target.value = state.endDate;
+      showToast("Enter a valid end date on or after today and the start date.");
+      return;
+    }
+    state.endDate = val;
+    state.isSelectingRange = false;
     setTimeout(() => render({ preserveScroll: true }), 0);
   });
 

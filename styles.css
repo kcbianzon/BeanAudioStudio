@@ -10712,7 +10712,7 @@ body.is-cms-view #app {
   transition: all 0.15s ease;
 }
 
-.q-cal-circle-btn:hover {
+.q-cal-circle-btn:hover:not(:disabled) {
   background: var(--accent, #dfad2a);
   color: #111111;
 }
@@ -10772,8 +10772,14 @@ body.is-cms-view #app {
   transition: all 0.15s ease;
 }
 
-.q-new-cal-cell:hover:not(.is-empty) .q-cell-text {
+.q-new-cal-cell:hover:not(.is-empty, :disabled) .q-cell-text {
   background: #ecebe6;
+}
+
+.q-cal-circle-btn:disabled,
+.q-new-cal-cell:disabled {
+  opacity: .4;
+  cursor: not-allowed;
 }
 
 .q-new-cal-cell.is-range-start .q-cell-text,
