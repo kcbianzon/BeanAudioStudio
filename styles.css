@@ -13180,7 +13180,7 @@ body::before { display: none !important; }
     color: #fff;
   }
 
-  .q-builder-event-step .q-plan-sidebar {
+  .q-builder-page .q-plan-sidebar {
     display: none;
   }
   .q-builder-event-step .q-step-nav-footer {
