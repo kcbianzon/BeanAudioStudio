@@ -897,6 +897,7 @@ const _nowInit = new Date();
 const state = {
   builderStep: 1,
   quoteStep: 1,
+  quoteEstimateExpanded: false,
   eventType: "",
   guests: null,
   guestBracket: "51–150",
@@ -3982,7 +3983,7 @@ function quote() {
           }).join("")}
         </div>
       </div>
-      <button type="button" class="q-mobile-estimate-jump" data-scroll-estimate aria-controls="quoteEstimate" aria-label="View quote estimate below">
+      <button type="button" class="q-mobile-estimate-toggle" aria-controls="quoteEstimate" aria-expanded="${state.quoteEstimateExpanded}">
         <span>${totalPriceText(totals)}</span>
         <span class="q-mobile-estimate-icon" aria-hidden="true">
           <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 6 4 4 4-4"/></svg>
@@ -4129,7 +4130,7 @@ function quote() {
       </div>
 
       <!-- Right / Sticky Live Plan & Calculation Sidebar -->
-      <aside class="q-plan-sidebar" id="quoteEstimate" tabindex="-1" aria-label="Live event plan and quote total">
+      <aside class="q-plan-sidebar" id="quoteEstimate" aria-label="Live event plan and quote total">
         <div class="q-plan-total-box">
           <span class="eyebrow">ESTIMATED TOTAL</span>
           <strong class="q-plan-grand">${totalPriceText(totals)}</strong>
@@ -4689,7 +4690,25 @@ function addProduct(id, delta = 1, options = {}) {
   showToast(delta > 0 ? `${product?.name || "Rental"} added to your setup` : `${product?.name || "Rental"} removed`);
 }
 
+const mobileEstimateLayout = window.matchMedia("(max-width: 768px)");
+
+function placeQuoteEstimate() {
+  const toggle = document.querySelector(".q-mobile-estimate-toggle");
+  const estimate = document.getElementById("quoteEstimate");
+  if (!toggle || !estimate) return;
+
+  // Move the existing panel so its controls and live totals stay in sync.
+  if (mobileEstimateLayout.matches) {
+    toggle.after(estimate);
+  } else {
+    toggle.closest(".q-workspace").after(estimate);
+  }
+}
+
+mobileEstimateLayout.addEventListener("change", placeQuoteEstimate);
+
 function bind() {
+  placeQuoteEstimate();
   bindGetQuoteForm();
   const refreshRentalsInPlace = () => {
     const grid = document.querySelector("#rentalsProductGrid");
@@ -4809,7 +4828,10 @@ function bind() {
   document
     .querySelectorAll("[data-plus]")
     .forEach((b) =>
-      b.addEventListener("click", () => addProduct(b.dataset.plus, 1)),
+      b.addEventListener("click", () => {
+        const inlineEstimate = Boolean(b.closest(".q-step-panel #quoteEstimate"));
+        addProduct(b.dataset.plus, 1, { silentCart: inlineEstimate });
+      }),
     );
   document
     .querySelectorAll("[data-minus]")
@@ -4959,11 +4981,9 @@ function bind() {
   });
 
   // Step 1: Select Event Type & Input
-  document.querySelector("[data-scroll-estimate]")?.addEventListener("click", () => {
-    const estimate = document.getElementById("quoteEstimate");
-    if (!estimate) return;
-    estimate.focus({ preventScroll: true });
-    estimate.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  document.querySelector(".q-mobile-estimate-toggle")?.addEventListener("click", (event) => {
+    state.quoteEstimateExpanded = !state.quoteEstimateExpanded;
+    event.currentTarget.setAttribute("aria-expanded", String(state.quoteEstimateExpanded));
   });
   document.querySelectorAll("[data-select-event]").forEach((btn) =>
     btn.addEventListener("click", () => {
