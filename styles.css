@@ -13076,10 +13076,6 @@ body::before { display: none !important; }
 .cart-footer-actions button:focus-visible { outline: 2px solid #3c3838; outline-offset: 3px; }
 .cart-drawer-footer { padding-bottom: max(20px, env(safe-area-inset-bottom, 0px)); }
 
-.q-mobile-estimate-toggle {
-  display: none;
-}
-
 @media (max-width: 768px) {
   #app .q-builder-event-step {
     padding: 24px 14px 32px !important;
@@ -13184,44 +13180,8 @@ body::before { display: none !important; }
     color: #fff;
   }
 
-  .q-builder-event-step .q-mobile-estimate-toggle {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    width: 100%;
-    min-height: 60px;
-    margin-top: 12px;
-    padding: 12px 14px;
-    border: 0;
-    border-radius: 14px;
-    background: #191919;
-    color: #fff;
-    text-align: left;
-    font-size: 16px;
-    font-weight: 750;
-    text-transform: capitalize;
-  }
-  .q-mobile-estimate-icon {
-    display: grid;
-    place-items: center;
-    flex: 0 0 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: #f1c54e;
-    color: #191919;
-  }
-  .q-mobile-estimate-toggle[aria-expanded="true"] .q-mobile-estimate-icon svg {
-    transform: rotate(180deg);
-  }
-  .q-mobile-estimate-toggle[aria-expanded="false"] + .q-plan-sidebar {
+  .q-builder-event-step .q-plan-sidebar {
     display: none;
-  }
-  .q-mobile-estimate-toggle + .q-plan-sidebar {
-    padding: 12px;
-    border-radius: 14px;
-    box-shadow: none;
   }
   .q-builder-event-step .q-step-nav-footer {
     margin-top: 10px;
