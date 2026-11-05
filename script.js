@@ -2996,10 +2996,10 @@ function renderBuilderCatalogGridMarkup() {
     .map((p) => {
       const qty = state.selected[p.id] || 0;
       const lineTotal = (p.price || 0) * qty;
-      return `<article class="q-equip-card ${qty > 0 ? "is-selected" : ""}">
+      return `<article class="q-equip-card ${qty > 0 ? "is-selected" : ""}" data-card-id="${p.id}">
         <div class="q-equip-thumb">
           <img src="${productImage(p)}" alt="${escapeHtml(p.name)}" loading="lazy">
-          ${qty > 0 ? `<span class="q-equip-qty-badge">${qty} in setup</span>` : ""}
+          ${qty > 0 ? `<span class="q-equip-qty-badge">✓ ${qty} in setup</span>` : ""}
         </div>
         <div class="q-equip-body">
           <div class="q-equip-meta">
@@ -3009,14 +3009,21 @@ function renderBuilderCatalogGridMarkup() {
           <h4>${escapeHtml(p.name)}</h4>
           <p>${escapeHtml(p.desc)}</p>
           <div class="q-equip-foot">
-            <div class="q-stepper">
-              <button type="button" class="q-step-btn" data-minus="${p.id}" ${qty === 0 ? "disabled" : ""} aria-label="Decrease ${escapeHtml(p.name)}">−</button>
-              <span class="q-step-val">${qty}</span>
-              <button type="button" class="q-step-btn q-step-plus" data-plus="${p.id}" aria-label="Increase ${escapeHtml(p.name)}">+</button>
-            </div>
-            <div class="q-equip-subtotal">
-              ${qty > 0 ? `<span>Subtotal: <strong>${money(lineTotal)}</strong></span>` : `<button type="button" class="q-quick-add-btn" data-plus="${p.id}">Add +</button>`}
-            </div>
+            ${qty > 0 ? `
+              <div class="q-stepper">
+                <button type="button" class="q-step-btn" data-minus="${p.id}" aria-label="Decrease ${escapeHtml(p.name)}">−</button>
+                <span class="q-step-val">${qty}</span>
+                <button type="button" class="q-step-btn q-step-plus" data-plus="${p.id}" aria-label="Increase ${escapeHtml(p.name)}">+</button>
+              </div>
+              <div class="q-equip-subtotal">
+                <span>Subtotal: <strong>${p.priceType === "quote" ? "Quote" : money(lineTotal)}</strong></span>
+              </div>
+            ` : `
+              <button type="button" class="q-equip-add-btn" data-plus="${p.id}">+ Add to Setup</button>
+              <div class="q-equip-subtotal">
+                <span class="q-unit-hint">${productPriceText(p)}</span>
+              </div>
+            `}
           </div>
         </div>
       </article>`;
@@ -3906,7 +3913,7 @@ function quote() {
         <p>Tell us what you're planning below, or select from our optional quick presets.</p>
       </div>
 
-      <!-- 1. What type of event (Outside the Box - Clean Minimalist) -->
+      <!-- 1. What type of event (Clean Minimalist input) -->
       <div class="q-clean-section">
         <h3 class="q-clean-section-title"><label for="quoteEventTypeInput">What type of event</label></h3>
         <div class="q-clean-input-wrap">
@@ -3941,7 +3948,9 @@ function quote() {
               </div>
             </button>`;
           }).join("")}
-        
+        </div>
+      </div>
+
       <!-- 3. Optional: Quick-Load an Event Setup Suggestion -->
       <div class="q-clean-section q-quick-load-section">
         <div class="q-venue-header-row">
@@ -3951,18 +3960,18 @@ function quote() {
           </div>
           ${totals.uniqueCount > 0 ? `<button type="button" class="q-clear-all-btn" data-clear-all-equipment>Clear loaded gear (${totals.totalUnits})</button>` : ""}
         </div>
-        <div class="q-bundle-strip">
+        <div class="q-bundle-grid-step1">
           ${bundles
             .map((b) => {
               const isMatched = totals.matchedBundle && totals.matchedBundle.id === b.id;
-              return `<div class="q-bundle-mini ${isMatched ? "is-active" : ""}">
-                <div class="q-bundle-mini-top">
-                  <span class="eyebrow">${escapeHtml(b.label)}</span>
-                  <strong>${bundlePriceText(b)}</strong>
+              return `<div class="q-bundle-mini-card ${isMatched ? "is-active" : ""}">
+                <div class="q-bundle-mini-head">
+                  <span class="q-bundle-badge">${escapeHtml(b.label)}</span>
+                  <span class="q-bundle-price">${bundlePriceText(b)}</span>
                 </div>
-                <h4>${escapeHtml(b.title)}</h4>
-                <p>${escapeHtml(b.desc)}</p>
-                <button type="button" class="btn ${isMatched ? "btn-dark" : "btn-light"} btn-small" data-apply-bundle="${b.id}">
+                <h4 class="q-bundle-title">${escapeHtml(b.title)}</h4>
+                <p class="q-bundle-desc">${escapeHtml(b.desc)}</p>
+                <button type="button" class="btn ${isMatched ? "btn-dark" : "btn-light"} btn-small q-bundle-btn" data-apply-bundle="${b.id}">
                   ${isMatched ? "✓ Loaded in Setup" : "Load Package"}
                 </button>
               </div>`;
@@ -4666,7 +4675,7 @@ function addProduct(id, delta = 1, options = {}) {
   render({ preserveScroll: true });
   updateCartDrawer();
   const product = products.find((item) => item.id === id);
-  if (delta > 0 && !options.silentCart) {
+  if (delta > 0 && !options.silentCart && getHash() !== "quote") {
     openCartDrawer();
   }
   showToast(delta > 0 ? `${product?.name || "Rental"} added to your setup` : `${product?.name || "Rental"} removed`);

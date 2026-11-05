@@ -8567,18 +8567,30 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   gap: 12px;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1120px) {
   .q-progress-nav {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .q-main-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) 310px;
+    gap: 18px;
   }
   .q-plan-sidebar {
-    position: static;
+    position: sticky;
+    top: 92px;
   }
   .q-equip-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 820px) {
+  .q-main-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .q-plan-sidebar {
+    position: static;
   }
 }
 
@@ -13639,4 +13651,155 @@ body::before { display: none !important; }
   .ebf-icon { width: 40px; height: 40px; }
   .ebf-icon svg { width: 21px; height: 21px; }
   .ebf-icons li { font-size: 13px; }
+}
+
+
+/* ==========================================================================
+   QUOTE STEP 1: QUICK-LOAD SUGGESTION GRID & CATALOG CARD ENHANCEMENTS
+   ========================================================================== */
+.q-bundle-grid-step1 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1100px) {
+  .q-bundle-grid-step1 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+
+@media (max-width: 620px) {
+  .q-bundle-grid-step1 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+}
+
+@media (max-width: 440px) {
+  .q-bundle-grid-step1 {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+.q-bundle-mini-card {
+  padding: 18px 16px;
+  border-radius: 18px;
+  border: 1.5px solid var(--line, #ddd8ce);
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.q-bundle-mini-card:hover {
+  border-color: #dfad2a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(45, 37, 17, 0.05);
+}
+
+.q-bundle-mini-card.is-active {
+  border-color: var(--ink, #111111);
+  background: #fffdf5;
+  box-shadow: 0 0 0 1.5px var(--ink, #111111) inset;
+}
+
+.q-bundle-mini-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.q-bundle-badge {
+  font-family: 'Space Grotesk', Inter, sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink, #111111);
+}
+
+.q-bundle-price {
+  font-family: 'Space Grotesk', Inter, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #777777;
+}
+
+.q-bundle-title {
+  margin: 0;
+  font-family: 'Space Grotesk', Inter, sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--ink, #111111);
+  line-height: 1.25;
+}
+
+.q-bundle-desc {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #555555;
+  flex-grow: 1;
+}
+
+.q-bundle-btn {
+  width: 100%;
+  justify-content: center;
+  border-radius: 10px;
+  min-height: 40px;
+  margin-top: 6px;
+}
+
+/* Step 4: Catalog Card Add Button & Unit Hint */
+.q-equip-add-btn {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--ink, #111111);
+  background: var(--ink, #111111);
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q-equip-add-btn:hover {
+  background: #333333;
+  transform: translateY(-1px);
+}
+
+.q-unit-hint {
+  font-size: 12px;
+  font-weight: 600;
+  color: #888888;
+}
+
+/* Ensure Side-by-Side Alignment on Laptops & Desktops (>= 820px) */
+@media (min-width: 820px) {
+  .q-main-layout {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 340px !important;
+    gap: 24px !important;
+    align-items: start !important;
+  }
+  .q-plan-sidebar {
+    position: sticky !important;
+    top: 92px !important;
+    display: flex !important;
+  }
 }
