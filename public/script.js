@@ -3947,7 +3947,7 @@ function quote() {
 
       <!-- 1. What type of event (Outside the Box - Clean Minimalist) -->
       <div class="q-clean-section">
-        <h3 class="q-clean-section-title">What type of event</h3>
+        <h3 class="q-clean-section-title"><label for="quoteEventTypeInput">What type of event</label></h3>
         <div class="q-clean-input-wrap">
           <input
             type="text"
@@ -3970,18 +3970,24 @@ function quote() {
           ${EVENT_TYPE_CARDS.map((card) => {
             const current = (state.eventType || "").trim().toLowerCase();
             const isSelected = current && (current === card.id.toLowerCase() || current === card.title.toLowerCase());
-            return `<button type="button" class="q-event-clean-card ${isSelected ? "is-active" : ""}" data-select-event="${escapeHtml(card.id)}">
+            return `<button type="button" class="q-event-clean-card ${isSelected ? "is-active" : ""}" data-select-event="${escapeHtml(card.id)}" aria-pressed="${Boolean(isSelected)}">
               <div class="q-event-clean-body">
                 <span class="q-event-clean-code">${escapeHtml(card.code)}</span>
                 <h4 class="q-event-clean-title">${escapeHtml(card.title)}</h4>
               </div>
               <div class="q-event-clean-foot">
-                <span class="q-venue-pill ${isSelected ? "is-selected" : ""}">${isSelected ? "Selected" : "Select"}</span>
+                <span class="q-venue-pill ${isSelected ? "is-selected" : ""}" aria-hidden="true">${isSelected ? "Selected" : "Select"}</span>
               </div>
             </button>`;
           }).join("")}
         </div>
       </div>
+      <button type="button" class="q-mobile-estimate-jump" data-scroll-estimate aria-controls="quoteEstimate" aria-label="View quote estimate below">
+        <span>${totalPriceText(totals)}</span>
+        <span class="q-mobile-estimate-icon" aria-hidden="true">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 6 4 4 4-4"/></svg>
+        </span>
+      </button>
     </div>`;
   } else if (step === 2) {
     stepContent = `<div class="q-step-panel">
@@ -4083,7 +4089,7 @@ function quote() {
     ? "Flexible Date"
     : `${dateRangeStr}${timeRangeStr}`;
 
-  return `<div class="page q-builder-page">
+  return `<div class="page q-builder-page${step === 1 ? " q-builder-event-step" : ""}">
     <header class="q-hero">
       <div>
         <span class="eyebrow orange">BUILD MY EVENT · LIVE QUOTE CALCULATOR</span>
@@ -4123,7 +4129,7 @@ function quote() {
       </div>
 
       <!-- Right / Sticky Live Plan & Calculation Sidebar -->
-      <aside class="q-plan-sidebar" aria-label="Live event plan and quote total">
+      <aside class="q-plan-sidebar" id="quoteEstimate" tabindex="-1" aria-label="Live event plan and quote total">
         <div class="q-plan-total-box">
           <span class="eyebrow">ESTIMATED TOTAL</span>
           <strong class="q-plan-grand">${totalPriceText(totals)}</strong>
@@ -4133,7 +4139,7 @@ function quote() {
         <div class="q-plan-meta-list">
           <button type="button" class="q-plan-meta-row" data-goto-step="1">
             <span>01 · EVENT</span>
-            <strong>${escapeHtml(state.eventType || "Not set yet")}</strong>
+            <strong id="quotePlanEventType">${escapeHtml(state.eventType || "Not set yet")}</strong>
           </button>
           <button type="button" class="q-plan-meta-row" data-goto-step="2">
             <span>02 · GUESTS</span>
@@ -4953,6 +4959,12 @@ function bind() {
   });
 
   // Step 1: Select Event Type & Input
+  document.querySelector("[data-scroll-estimate]")?.addEventListener("click", () => {
+    const estimate = document.getElementById("quoteEstimate");
+    if (!estimate) return;
+    estimate.focus({ preventScroll: true });
+    estimate.scrollIntoView({ block: "start", behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  });
   document.querySelectorAll("[data-select-event]").forEach((btn) =>
     btn.addEventListener("click", () => {
       const cardId = btn.dataset.selectEvent;
@@ -4965,6 +4977,8 @@ function bind() {
   );
   document.querySelector("#quoteEventTypeInput")?.addEventListener("input", (e) => {
     state.eventType = e.target.value;
+    const planEvent = document.getElementById("quotePlanEventType");
+    if (planEvent) planEvent.textContent = state.eventType || "Not set yet";
     const typed = e.target.value.trim().toLowerCase();
     document.querySelectorAll("[data-select-event]").forEach((btn) => {
       const cardId = btn.dataset.selectEvent;
@@ -4974,15 +4988,13 @@ function bind() {
         (card && card.title.toLowerCase() === typed)
       ));
       btn.classList.toggle("is-active", isMatch);
+      btn.setAttribute("aria-pressed", String(isMatch));
       const pill = btn.querySelector(".q-venue-pill");
       if (pill) {
         pill.textContent = isMatch ? "Selected" : "Select";
         pill.classList.toggle("is-selected", isMatch);
       }
     });
-  });
-  document.querySelector("#quoteEventTypeInput")?.addEventListener("change", () => {
-    render({ preserveScroll: true });
   });
 
   // Apply Starter Bundle in Step 1 or Step 5

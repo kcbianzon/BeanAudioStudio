@@ -13076,6 +13076,154 @@ body::before { display: none !important; }
 .cart-footer-actions button:focus-visible { outline: 2px solid #3c3838; outline-offset: 3px; }
 .cart-drawer-footer { padding-bottom: max(20px, env(safe-area-inset-bottom, 0px)); }
 
+.q-mobile-estimate-jump {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  #app .q-builder-event-step {
+    padding: 24px 14px 32px !important;
+    background: #f1eee7;
+  }
+
+  .q-builder-event-step .q-hero {
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+    padding-bottom: 12px !important;
+  }
+
+  .q-builder-event-step .q-hero .eyebrow { display: none; }
+  #app .q-builder-event-step .q-hero h1 {
+    margin: 0;
+    font-size: clamp(23px, 6vw, 32px) !important;
+  }
+  #app .q-builder-event-step .q-hero p { font-size: 11px !important; }
+  .q-builder-event-step .q-progress-nav { margin-bottom: 10px !important; }
+  .q-builder-event-step .q-progress-step {
+    min-height: 38px;
+    padding: 5px 8px !important;
+    border-radius: 7px !important;
+  }
+  .q-builder-event-step .q-progress-step .q-step-label { font-size: 10px !important; }
+  .q-builder-event-step .q-progress-step .q-step-num {
+    width: 18px !important;
+    height: 18px !important;
+    font-size: 9px !important;
+  }
+
+  .q-builder-event-step .q-step-panel {
+    padding: 14px !important;
+    background: #fff;
+  }
+  .q-builder-event-step .q-step-head {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+  }
+  #app .q-builder-event-step .q-step-head h2 {
+    font-size: clamp(17px, 4.8vw, 23px) !important;
+    line-height: 1.2;
+  }
+  #app .q-builder-event-step .q-step-head p { font-size: 11px !important; }
+  .q-builder-event-step .q-clean-section { margin-top: 14px; }
+  #app .q-builder-event-step .q-clean-section-title,
+  #app .q-builder-event-step .q-venue-main-title { font-size: 13px !important; }
+  .q-builder-event-step .q-venue-header-row {
+    flex-direction: row !important;
+    align-items: baseline !important;
+    margin-bottom: 8px !important;
+  }
+  .q-builder-event-step .q-venue-sub-text {
+    font-size: 9px !important;
+    text-align: right;
+  }
+  .q-builder-event-step .q-clean-big-input {
+    min-height: 44px;
+    padding: 8px 10px !important;
+    font-size: 16px !important;
+  }
+  .q-builder-event-step .q-clean-big-input::placeholder { font-size: 11px; }
+
+  .q-builder-event-step .q-event-clean-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+  }
+  .q-builder-event-step .q-event-clean-card {
+    position: relative;
+    min-height: 58px;
+    padding: 8px 23px 8px 9px !important;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: none;
+  }
+  .q-builder-event-step .q-event-clean-body { margin: 0; }
+  .q-builder-event-step .q-event-clean-code { font-size: 9px; margin-bottom: 4px; }
+  #app .q-builder-event-step .q-event-clean-title {
+    font-size: 12px;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+  .q-builder-event-step .q-event-clean-foot {
+    position: absolute;
+    right: 6px;
+    bottom: 8px;
+  }
+  .q-builder-event-step .q-event-clean-foot .q-venue-pill {
+    display: grid;
+    place-items: center;
+    width: 14px;
+    height: 14px;
+    padding: 0;
+    border: 0;
+    background: #ddd;
+    font-size: 0;
+  }
+  .q-builder-event-step .q-event-clean-foot .q-venue-pill.is-selected { background: #3c3838; }
+  .q-builder-event-step .q-venue-pill.is-selected::after {
+    content: "✓";
+    font-size: 9px;
+    color: #fff;
+  }
+
+  .q-builder-event-step .q-mobile-estimate-jump {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    min-height: 60px;
+    margin-top: 12px;
+    padding: 12px 14px;
+    border: 0;
+    border-radius: 14px;
+    background: #191919;
+    color: #fff;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 750;
+    text-transform: capitalize;
+  }
+  .q-mobile-estimate-icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #f1c54e;
+    color: #191919;
+  }
+  .q-builder-event-step .q-step-nav-footer {
+    margin-top: 10px;
+    padding: 8px !important;
+    border-radius: 12px;
+  }
+  .q-builder-event-step .q-step-nav-footer .btn {
+    min-height: 44px;
+    font-size: 11px !important;
+  }
+  .q-builder-event-step .q-step-indicator { display: none; }
+}
+
 /* Give the mobile hero copy, actions and equipment their own space. */
 @media (max-width: 820px) {
   #app .hero.hero-equipment {
