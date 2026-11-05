@@ -3356,7 +3356,7 @@ function renderDateAndLocationStep() {
 
             <div class="q-venue-toggle-row">
               <button type="button" class="q-venue-manual-link" data-toggle-manual-location>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12H3m9-9-9 9 9 9"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12H3m9-9-9 9 9 9"/></svg>
                 Enter address manually
               </button>
             </div>
@@ -3409,7 +3409,10 @@ function renderDateAndLocationStep() {
             </div>
 
             <div class="q-venue-toggle-row">
-              <button type="button" class="q-venue-btn-dark" data-toggle-manual-location>Back to live map search</button>
+              <button type="button" class="q-venue-manual-link" data-toggle-manual-location>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12H3m9-9-9 9 9 9"/></svg>
+                Back to live map search
+              </button>
             </div>
           </div>
         `}
