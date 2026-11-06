@@ -2996,7 +2996,9 @@ function renderBuilderCatalogGridMarkup() {
     .map((p) => {
       const qty = state.selected[p.id] || 0;
       const lineTotal = (p.price || 0) * qty;
-      return `<article class="q-equip-card ${qty > 0 ? "is-selected" : ""}" data-card-id="${p.id}">
+      const descriptionExpanded = expandedRentalDescriptions.has(p.id);
+      const descriptionId = `quote-equipment-description-${encodeURIComponent(p.id)}`;
+      return `<article class="q-equip-card ${qty > 0 ? "is-selected" : ""} ${descriptionExpanded ? "is-description-expanded" : ""}" data-card-id="${p.id}">
         <div class="q-equip-thumb">
           <img src="${productImage(p)}" alt="${escapeHtml(p.name)}" loading="lazy">
           ${qty > 0 ? `<span class="q-equip-qty-badge">✓ ${qty} in setup</span>` : ""}
@@ -3004,10 +3006,14 @@ function renderBuilderCatalogGridMarkup() {
         <div class="q-equip-body">
           <div class="q-equip-meta">
             <span class="q-equip-cat">${escapeHtml(p.category)}</span>
-            <span class="q-equip-unit-price">${productPriceText(p)}</span>
           </div>
           <h4>${escapeHtml(p.name)}</h4>
-          <p>${escapeHtml(p.desc)}</p>
+          <div class="q-equip-description">
+            <p id="${descriptionId}">${escapeHtml(p.desc)}</p>
+            <button type="button" class="q-equip-description-toggle" data-toggle-description="${escapeHtml(p.id)}" aria-controls="${descriptionId}" aria-expanded="${descriptionExpanded}" aria-label="${escapeHtml(`${descriptionExpanded ? "Hide" : "Show"} full description for ${p.name}`)}">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg>
+            </button>
+          </div>
           <div class="q-equip-foot">
             ${qty > 0 ? `
               <div class="q-stepper">
@@ -3019,9 +3025,9 @@ function renderBuilderCatalogGridMarkup() {
                 <span>Subtotal: <strong>${p.priceType === "quote" ? "Quote" : money(lineTotal)}</strong></span>
               </div>
             ` : `
-              <button type="button" class="q-equip-add-btn" data-plus="${p.id}">+ Add to Setup</button>
+              <button type="button" class="q-equip-add-btn" data-plus="${p.id}">Add to Setup <span aria-hidden="true">+</span></button>
               <div class="q-equip-subtotal">
-                <span class="q-unit-hint">${productPriceText(p)}</span>
+                <span>Rate: <strong>${productPriceText(p)}</strong></span>
               </div>
             `}
           </div>
@@ -3458,9 +3464,8 @@ function renderEquipmentStep(totals) {
     "Live Streaming",
   ];
 
-  return `<div class="q-step-panel">
+  return `<div class="q-step-panel q-equipment-panel">
     <div class="q-step-head">
-      <span class="eyebrow orange">STEP 04 OF 05 · SELECT EQUIPMENT &amp; CREW</span>
       <h2>Choose your equipment &amp; crew support.</h2>
       <p>Browse our complete rental inventory, adjust quantities, and select your delivery and technical crew tier. Every item updates your itemized quote calculation in real time.</p>
     </div>
@@ -3469,8 +3474,7 @@ function renderEquipmentStep(totals) {
     <div class="q-subblock">
       <div class="q-subblock-head">
         <div>
-          <span class="eyebrow">EQUIPMENT INVENTORY (${products.length} ITEMS)</span>
-          <h3>1. Browse &amp; Add Any Individual Equipment</h3>
+          <h3>Browse &amp; Add Any Individual Equipment</h3>
         </div>
         ${totals.uniqueCount > 0 ? `<button type="button" class="q-clear-all-btn" data-clear-all-equipment>Clear all selected gear (${totals.totalUnits})</button>` : ""}
       </div>
@@ -3480,25 +3484,18 @@ function renderEquipmentStep(totals) {
           <div class="q-catalog-search-wrap">
             <svg class="q-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             <input id="builderCatalogSearch" type="text" class="input q-builder-search-input" placeholder="Search speakers, microphones, DJ gear, displays, lighting..." value="${escapeHtml(state.builderSearch)}">
-            ${state.builderSearch ? `<button type="button" class="q-search-clear-btn" id="builderClearSearchBtn" aria-label="Clear search">?</button>` : ""}
+            ${state.builderSearch ? `<button type="button" class="q-search-clear-btn" id="builderClearSearchBtn" aria-label="Clear search">×</button>` : ""}
           </div>
           <button type="button" class="q-selected-filter-btn ${state.builderOnlySelected ? "is-active" : ""}" id="builderSelectedFilterBtn" aria-pressed="${Boolean(state.builderOnlySelected)}">
-            <span class="q-selected-star">?</span>
             <span>Show selected only</span>
             <span class="q-selected-badge">${totals.uniqueCount}</span>
           </button>
         </div>
 
-        <div class="q-cat-pills-bar">
+        <div class="q-cat-pills-bar" role="region" aria-label="Equipment categories" tabindex="0">
           <div class="q-cat-pills">
             ${categories
-              .map((cat) => {
-                const count =
-                  cat === "All"
-                    ? products.length
-                    : products.filter((p) => p.category === cat || productMatchesCategory(p, cat)).length;
-                return `<button type="button" class="q-cat-pill ${state.builderCategory === cat ? "is-active" : ""}" data-builder-cat="${escapeHtml(cat)}">${escapeHtml(cat)} <span>${count}</span></button>`;
-              })
+              .map((cat) => `<button type="button" class="q-cat-pill ${state.builderCategory === cat ? "is-active" : ""}" data-builder-cat="${escapeHtml(cat)}" aria-pressed="${state.builderCategory === cat}">${escapeHtml(cat)}</button>`)
               .join("")}
           </div>
         </div>
@@ -3506,12 +3503,12 @@ function renderEquipmentStep(totals) {
         ${(state.builderCategory !== "All" || state.builderSearch || state.builderOnlySelected) ? `
           <div class="q-catalog-status-bar">
             <span>Showing <strong>${builderCatalogItems().length}</strong> ${builderCatalogItems().length === 1 ? "rental" : "rentals"}${state.builderCategory !== "All" ? ` in <em>${escapeHtml(state.builderCategory)}</em>` : ""}${state.builderSearch ? ` matching "<em>${escapeHtml(state.builderSearch)}</em>"` : ""}${state.builderOnlySelected ? " (selected only)" : ""}</span>
-            <button type="button" class="text-btn q-reset-catalog-btn" data-builder-reset-catalog>Reset filters ?</button>
+            <button type="button" class="text-btn q-reset-catalog-btn" data-builder-reset-catalog>Reset filters</button>
           </div>
         ` : ""}
       </div>
 
-      <div class="q-equip-grid" id="quoteCatalogGrid">
+      <div class="q-equip-grid" id="quoteCatalogGrid" role="region" aria-label="Equipment catalog" tabindex="0">
         ${renderBuilderCatalogGridMarkup()}
       </div>
     </div>
@@ -3520,18 +3517,15 @@ function renderEquipmentStep(totals) {
     <div class="q-subblock">
       <div class="q-subblock-head">
         <div>
-          <span class="eyebrow">LOGISTICS &amp; ON-SITE CREW</span>
-          <h3>2. Delivery, Setup &amp; Technician Support</h3>
+          <h3>Delivery, Setup &amp; Technician Support</h3>
         </div>
       </div>
       <div class="q-service-tier-grid">
         ${SERVICE_TIERS.map(
-          (tier) => `<button type="button" class="q-tier-card ${state.serviceTier === tier.id ? "is-active" : ""}" data-service-tier="${tier.id}">
-            <div class="q-tier-top">
-              <strong>${escapeHtml(tier.title)}</strong>
-              <span class="q-tier-badge">${escapeHtml(tier.badge)}</span>
-            </div>
+          (tier) => `<button type="button" class="q-tier-card ${state.serviceTier === tier.id ? "is-active" : ""}" data-service-tier="${tier.id}" aria-pressed="${state.serviceTier === tier.id}">
+            <strong class="q-tier-title">${escapeHtml(tier.title)}</strong>
             <p>${escapeHtml(tier.desc)}</p>
+            <span class="q-tier-badge">${escapeHtml(tier.badge)}</span>
           </button>`
         ).join("")}
       </div>
@@ -4080,7 +4074,7 @@ function quote() {
     ? "Flexible Date"
     : `${dateRangeStr}${timeRangeStr}`;
 
-  const stepClass = step === 1 ? "q-builder-event-step" : step === 2 ? "q-builder-guest-step" : "";
+  const stepClass = { 1: "q-builder-event-step", 2: "q-builder-guest-step", 4: "q-builder-equipment-step" }[step] || "";
   return `<div class="page q-builder-page ${stepClass}">
     <header class="q-hero">
       <div>
@@ -4331,6 +4325,10 @@ function bindGetQuoteForm() {
 
 function render(options = {}) {
   const previousScroll = window.scrollY;
+  const categoryBar = app.querySelector(".q-equipment-panel .q-cat-pills-bar");
+  const categoryScroll = categoryBar?.scrollLeft || 0;
+  const sameCategory = categoryBar?.querySelector(".is-active")?.dataset.builderCat === state.builderCategory;
+  const equipmentScroll = sameCategory ? app.querySelector("#quoteCatalogGrid")?.scrollTop || 0 : 0;
   // The rentals filter panel scrolls on its own; remember where it was so a
   // re-render does not send the panel back to the top.
   const currentSb = document.querySelector(".rentals-sidebar");
@@ -4368,6 +4366,12 @@ function render(options = {}) {
   if (hash === "quote") view = quote();
   if (hash === "get-quote") view = getQuoteFormPage();
   app.innerHTML = view;
+  if (options.preserveScroll) {
+    const nextCategoryBar = app.querySelector(".q-equipment-panel .q-cat-pills-bar");
+    const nextEquipmentGrid = app.querySelector("#quoteCatalogGrid");
+    if (nextCategoryBar) nextCategoryBar.scrollLeft = categoryScroll;
+    if (nextEquipmentGrid) nextEquipmentGrid.scrollTop = equipmentScroll;
+  }
   lastRenderedPage = hash;
   const pageRoot = app.querySelector(":scope > .page");
   if (routeChanged && pageRoot && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -5779,7 +5783,7 @@ document.fonts?.ready.then(alignMobileRentalCards);
 document.addEventListener("click", (event) => {
   const toggle = event.target.closest("[data-toggle-description]");
   if (!toggle) return;
-  const card = toggle.closest(".product-card");
+  const card = toggle.closest(".product-card, .q-equip-card");
   const product = products.find((item) => item.id === toggle.dataset.toggleDescription);
   if (!card || !product) return;
   const expanded = toggle.getAttribute("aria-expanded") !== "true";
