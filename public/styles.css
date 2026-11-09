@@ -14655,16 +14655,16 @@ body::before { display: none !important; }
   .q-review-panel .q-fin-row.is-grand strong { justify-self: end; max-width: 100%; font-size: 12px; }
 
   .q-review-panel .q-contact-card { padding-top: 20px; }
-  #app .q-review-panel .q-contact-card .q-subblock-head h3 { font-size: 14px; }
-  .q-review-panel .q-contact-card .q-subblock-head { margin-bottom: 18px; }
-  .q-review-panel .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 16px 12px; }
-  .q-review-panel .field { min-width: 0; gap: 6px; }
-  #app .q-review-panel .field label { margin: 0; font-size: 10px; line-height: 1.4; letter-spacing: normal; text-transform: none; }
+  #app .q-review-panel .q-contact-card .q-subblock-head h3 { font-size: 18px; text-decoration: underline; text-underline-offset: 3px; }
+  .q-review-panel .q-contact-card .q-subblock-head { margin-bottom: 30px; }
+  .q-review-panel .form-grid { grid-template-columns: minmax(0, 1fr) !important; gap: 22px; }
+  .q-review-panel .field { min-width: 0; gap: 8px; }
+  #app .q-review-panel .field label { margin: 0; color: #888; font-size: 12px; line-height: 1.4; letter-spacing: normal; text-transform: none; }
   .q-review-panel .field .input,
-  .q-review-panel .field .textarea { width: 100%; min-width: 0; min-height: 44px; padding: 8px 9px; border-color: #ccc; border-radius: 6px; font-size: 16px; }
+  .q-review-panel .field .textarea { width: 100%; min-width: 0; min-height: 44px; padding: 10px 14px; border-color: #c5c5c5; border-radius: 10px; font-size: 16px; }
   .q-review-panel .field input::placeholder,
-  .q-review-panel .field textarea::placeholder { font-size: 10px; }
-  .q-review-panel .field .textarea { min-height: 120px; }
+  .q-review-panel .field textarea::placeholder { color: #aaa; font-size: 11px; }
+  .q-review-panel .field .textarea { min-height: 140px; }
   .q-review-panel .q-payment-section { margin-top: 22px; padding-top: 18px; }
   #app .q-review-panel .q-review-payment-heading { margin-bottom: 12px; font-size: 13px; text-transform: none; }
   .q-review-panel .q-review-payment-heading span { display: inline-block; font-size: 9px; }
