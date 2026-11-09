@@ -793,15 +793,16 @@ const SERVICE_TIERS = [
     priceType: "quote",
     desc: "Delivery and setup are available. Confirm the service scope and price when requesting a quote.",
   },
-  {
-    id: "full-tech",
-    title: "Full On-Site Technician Support",
-    badge: "Quote required",
-    price: 0,
-    priceType: "quote",
-    desc: "On-site technical support is available for select rentals. Confirm staffing and price when requesting a quote.",
-  },
 ];
+
+const TECH_SUPPORT_OPTION = {
+  id: "full-tech",
+  title: "Full On-Site Technician Support",
+  badge: "+$1,000",
+  price: 1000,
+  priceType: "fixed",
+  desc: "Dedicated on-site AV technician from setup and soundcheck through event breakdown. Optional add-on compatible with any delivery option.",
+};
 
 const DURATION_OPTIONS = [
   {
@@ -903,6 +904,7 @@ const state = {
   venue: "Indoor",
   duration: "1-day",
   serviceTier: "delivery-setup",
+  techSupport: false,
   date: "",
   dateFlexible: false,
   eventTimeWindow: "Evening (5:00 PM – 11:00 PM)",
@@ -1168,6 +1170,7 @@ function clearCompletedQuoteCart() {
   state.couponCode = "";
   state.couponError = "";
   state.bundle = null;
+  state.techSupport = false;
   const sessionId = getGuestSessionId();
   try {
     if (typeof sessionStorage !== "undefined") {
@@ -1319,6 +1322,8 @@ function calculateQuoteTotals() {
   const durationSurcharge = equipmentDurationTotal - equipmentBaseSubtotal;
   const serviceOption = SERVICE_TIERS.find((s) => s.id === state.serviceTier) || SERVICE_TIERS[0];
   const serviceFee = lineItems.length > 0 ? serviceOption.price : 0;
+  const techSupportSelected = Boolean(state.techSupport);
+  const techSupportFee = lineItems.length > 0 && techSupportSelected ? TECH_SUPPORT_OPTION.price : 0;
   const quoteRequired = lineItems.some(({ product }) => product.priceType === "quote") || (lineItems.length > 0 && serviceOption.priceType === "quote");
 
   // Loophole-free coupon discount math
@@ -1342,8 +1347,8 @@ function calculateQuoteTotals() {
     }
   }
 
-  const baseGrandTotal = equipmentDurationTotal + serviceFee;
-  const grandTotal = Math.max(0, (equipmentDurationTotal - discountAmount) + serviceFee);
+  const baseGrandTotal = equipmentDurationTotal + serviceFee + techSupportFee;
+  const grandTotal = Math.max(0, (equipmentDurationTotal - discountAmount) + serviceFee + techSupportFee);
 
   // Check if current selection matches a bundle exactly
   let matchedBundle = null;
@@ -1368,6 +1373,9 @@ function calculateQuoteTotals() {
     equipmentDurationTotal,
     serviceOption,
     serviceFee,
+    techSupportSelected,
+    techSupportOption: TECH_SUPPORT_OPTION,
+    techSupportFee,
     quoteRequired,
     coupon: appliedCoupon,
     discountAmount,
@@ -3515,21 +3523,61 @@ function renderEquipmentStep(totals) {
       </div>
     </div>
 
-    <!-- 2. Delivery, Setup & Technician Tier -->
+    <!-- 2. Delivery & Setup + Optional On-Site Technician -->
     <div class="q-subblock">
       <div class="q-subblock-head">
         <div>
+<<<<<<< HEAD
           <h3>Delivery, Setup &amp; Technician Support</h3>
+=======
+          <span class="eyebrow">LOGISTICS &amp; DELIVERY</span>
+          <h3>2. Delivery &amp; Setup</h3>
+>>>>>>> ce60f4c (Separate Full On-Site Technician Support as optional +$1,000 add-on in Step 4)
         </div>
       </div>
-      <div class="q-service-tier-grid">
+      <div class="q-service-tier-grid q-service-tier-grid-2">
         ${SERVICE_TIERS.map(
           (tier) => `<button type="button" class="q-tier-card ${state.serviceTier === tier.id ? "is-active" : ""}" data-service-tier="${tier.id}" aria-pressed="${state.serviceTier === tier.id}">
+<<<<<<< HEAD
             <strong class="q-tier-title">${escapeHtml(tier.title)}</strong>
+=======
+            <div class="q-tier-top">
+              <strong>${escapeHtml(tier.title)}</strong>
+              <span class="q-tier-badge">${escapeHtml(tier.badge)}</span>
+            </div>
+>>>>>>> ce60f4c (Separate Full On-Site Technician Support as optional +$1,000 add-on in Step 4)
             <p>${escapeHtml(tier.desc)}</p>
             <span class="q-tier-badge">${escapeHtml(tier.badge)}</span>
           </button>`
         ).join("")}
+      </div>
+
+      <div class="q-tech-addon-block">
+        <div class="q-tech-addon-header">
+          <span class="eyebrow">OPTIONAL CREW ADD-ON</span>
+          <h4>Optional: On-Site Technician Support</h4>
+        </div>
+        <button
+          type="button"
+          class="q-tier-card q-tech-addon-card ${state.techSupport ? "is-active" : ""}"
+          data-toggle-tech-support
+          aria-pressed="${Boolean(state.techSupport)}"
+        >
+          <div class="q-tech-addon-main">
+            <span class="q-tech-check ${state.techSupport ? "is-checked" : ""}" aria-hidden="true">${state.techSupport ? "✓" : "+"}</span>
+            <div class="q-tech-copy">
+              <div class="q-tier-top">
+                <strong>${escapeHtml(TECH_SUPPORT_OPTION.title)}</strong>
+                <span class="q-tier-badge q-tier-badge-price">${escapeHtml(TECH_SUPPORT_OPTION.badge)}</span>
+              </div>
+              <p>${escapeHtml(TECH_SUPPORT_OPTION.desc)}</p>
+            </div>
+          </div>
+          <div class="q-tech-addon-foot">
+            <span class="q-tech-status">${state.techSupport ? "✓ Included in quote (+$1,000)" : "Optional add-on — click to add (+$1,000)"}</span>
+            <span class="q-venue-pill ${state.techSupport ? "is-selected" : ""}">${state.techSupport ? "Selected" : "Add +$1,000"}</span>
+          </div>
+        </button>
       </div>
     </div>
   </div>`;
@@ -3584,6 +3632,7 @@ function renderReviewAndSubmitStep(totals) {
       <div class="q-review-meta-card">
         <span>DELIVERY &amp; CREW</span>
           <strong>${escapeHtml(totals.serviceOption.title)} (Quote required)</strong>
+          <small>${totals.techSupportSelected ? `Full On-Site Technician Support (+${money(totals.techSupportFee)})` : "Optional On-Site Technician: Not selected"}</small>
           <button type="button" class="q-meta-edit" data-goto-step="4">Edit</button>
       </div>
     </div>
@@ -3653,8 +3702,12 @@ function renderReviewAndSubmitStep(totals) {
             </div>
           ` : ""}
           <div class="q-fin-row">
-            <span>Delivery, Setup &amp; Production Crew (${escapeHtml(totals.serviceOption.title)})</span>
+            <span>Delivery &amp; Setup (${escapeHtml(totals.serviceOption.title)})</span>
             <strong>${totals.serviceOption.priceType === "quote" ? "Quote required" : totals.serviceFee === 0 ? "$0" : `+${money(totals.serviceFee)}`}</strong>
+          </div>
+          <div class="q-fin-row ${totals.techSupportSelected ? "is-tech-active" : ""}">
+            <span>Optional: Full On-Site Technician Support</span>
+            <strong class="${totals.techSupportSelected ? "" : "q-fin-muted"}">${totals.techSupportSelected ? `+${money(totals.techSupportFee)}` : "Not selected ($0)"}</strong>
           </div>
           ${totals.discountAmount > 0 ? `
             <div class="q-fin-row q-fin-discount">
@@ -3662,10 +3715,16 @@ function renderReviewAndSubmitStep(totals) {
               <strong class="q-discount-val">-${money(totals.discountAmount)}</strong>
             </div>
           ` : ""}
+          ${totals.quoteRequired && totals.techSupportFee > 0 && totals.grandTotal > 0 ? `
+            <div class="q-fin-row is-listed-subtotal">
+              <span>Listed Equipment + On-Site Technician Total</span>
+              <strong>${money(totals.grandTotal)}</strong>
+            </div>
+          ` : ""}
           <div class="q-fin-row is-grand">
             <div>
               <span>ESTIMATED GRAND TOTAL</span>
-              <small>Publicly listed prices shown; unpriced items confirmed by quote.</small>
+              <small>${totals.techSupportSelected ? "Publicly listed prices &amp; $1,000 technician shown; delivery &amp; unpriced items confirmed by quote." : "Publicly listed prices shown; unpriced items confirmed by quote."}</small>
             </div>
             <strong>${totalPriceText(totals)}</strong>
           </div>
@@ -3673,8 +3732,8 @@ function renderReviewAndSubmitStep(totals) {
       ` : `
         <div class="q-empty-warning">
           <strong>No equipment items selected yet!</strong>
-          <p>Please go to Step 05 to select an event bundle or individual equipment items so we can calculate your quote.</p>
-          <button type="button" class="btn btn-dark btn-small" data-goto-step="5">Choose Equipment Now →</button>
+          <p>Please go to Step 04 to select an event bundle or individual equipment items so we can calculate your quote.</p>
+          <button type="button" class="btn btn-dark btn-small" data-goto-step="4">Choose Equipment Now →</button>
         </div>
       `}
     </div>
@@ -3757,7 +3816,7 @@ function renderSubmittedReceipt(receipt) {
           <div class="q-review-meta-card"><span>GUESTS &amp; SETTING</span><strong>${receipt.guests} Guests · ${escapeHtml(receipt.venue)}</strong><small>${escapeHtml(receipt.durationLabel)}</small></div>
           <div class="q-review-meta-card"><span>DATE &amp; TIME</span><strong>${escapeHtml(receipt.eventDate)}</strong><small>${escapeHtml(receipt.eventTimeWindow)}</small></div>
           <div class="q-review-meta-card"><span>LOCATION</span><strong>${escapeHtml(receipt.eventLocation)}</strong></div>
-          <div class="q-review-meta-card"><span>DELIVERY &amp; PAYMENT</span><strong>${escapeHtml(receipt.serviceTitle)}</strong><small>Payment Pref: ${escapeHtml(receipt.paymentMethod)}</small></div>
+          <div class="q-review-meta-card"><span>DELIVERY &amp; PAYMENT</span><strong>${escapeHtml(receipt.serviceTitle)}</strong><small>${receipt.techSupportSelected ? `On-Site Technician: +${money(receipt.techSupportFee)} · ` : ""}Payment Pref: ${escapeHtml(receipt.paymentMethod)}</small></div>
         </div>
 
         <div class="q-review-table-card" style="margin-top:24px">
@@ -3808,9 +3867,21 @@ function renderSubmittedReceipt(receipt) {
               </div>
             ` : ""}
             <div class="q-fin-row">
-              <span>Delivery, Setup &amp; Crew (${escapeHtml(receipt.serviceTitle)})</span>
-              <strong>${receipt.quoteRequired ? "Quote required" : receipt.serviceFee === 0 ? "$0" : `+${money(receipt.serviceFee)}`}</strong>
+              <span>Delivery &amp; Setup (${escapeHtml(receipt.serviceTitle)})</span>
+              <strong>${receipt.servicePriceType === "quote" || (receipt.quoteRequired && receipt.serviceFee === 0) ? "Quote required" : receipt.serviceFee === 0 ? "$0" : `+${money(receipt.serviceFee)}`}</strong>
             </div>
+            ${receipt.techSupportSelected ? `
+              <div class="q-fin-row is-tech-active">
+                <span>Full On-Site Technician Support</span>
+                <strong>+${money(receipt.techSupportFee)}</strong>
+              </div>
+            ` : ""}
+            ${receipt.quoteRequired && receipt.techSupportFee > 0 && receipt.grandTotal > 0 ? `
+              <div class="q-fin-row is-listed-subtotal">
+                <span>Listed Equipment + On-Site Technician Total</span>
+                <strong>${money(receipt.grandTotal)}</strong>
+              </div>
+            ` : ""}
             <div class="q-fin-row is-grand">
               <span>ESTIMATED GRAND TOTAL</span>
               <strong>${receipt.quoteRequired ? "Quote required" : money(receipt.grandTotal)}</strong>
@@ -4121,7 +4192,7 @@ function quote() {
         <div class="q-plan-total-box">
           <span class="eyebrow">ESTIMATED TOTAL</span>
           <strong class="q-plan-grand">${totalPriceText(totals)}</strong>
-          <span class="q-plan-sub">${totals.uniqueCount} ${totals.uniqueCount === 1 ? "item" : "items"} (${totals.totalUnits} ${totals.totalUnits === 1 ? "unit" : "units"}) · ${escapeHtml(totals.durationOption.shortLabel)}</span>
+          <span class="q-plan-sub">${totals.uniqueCount} ${totals.uniqueCount === 1 ? "item" : "items"} (${totals.totalUnits} ${totals.totalUnits === 1 ? "unit" : "units"}) · ${escapeHtml(totals.durationOption.shortLabel)}${totals.techSupportSelected ? ` · +${money(totals.techSupportFee)} On-Site Tech` : ""}</span>
         </div>
 
         <div class="q-plan-meta-list">
@@ -4139,7 +4210,7 @@ function quote() {
           </button>
           <button type="button" class="q-plan-meta-row" data-goto-step="4">
             <span>04 · CREW</span>
-            <strong>${escapeHtml(totals.serviceOption.title)}</strong>
+            <strong>${escapeHtml(totals.serviceOption.title)}${totals.techSupportSelected ? ` + On-Site Tech (+${money(totals.techSupportFee)})` : ""}</strong>
           </button>
         </div>
 
@@ -4170,7 +4241,7 @@ function quote() {
             </ul>
           ` : `
             <div class="q-plan-empty">
-              No equipment selected yet. Choose a bundle or add items in Step 05.
+              No equipment selected yet. Choose a bundle or add items in Step 04.
             </div>
           `}
         </div>
@@ -4190,10 +4261,22 @@ function quote() {
             <span>${escapeHtml(totals.serviceOption.title)}</span>
             <strong>${totals.serviceOption.priceType === "quote" ? "Quote required" : totals.serviceFee === 0 ? "$0" : `+${money(totals.serviceFee)}`}</strong>
           </div>
+          ${totals.techSupportSelected ? `
+            <div class="q-math-line is-tech-addon">
+              <span>Full On-Site Technician</span>
+              <strong>+${money(totals.techSupportFee)}</strong>
+            </div>
+          ` : ""}
           ${totals.discountAmount > 0 ? `
             <div class="q-math-line is-discount">
               <span>Promo (${escapeHtml(totals.coupon.code)})</span>
               <strong>-${money(totals.discountAmount)}</strong>
+            </div>
+          ` : ""}
+          ${totals.quoteRequired && totals.techSupportFee > 0 && totals.grandTotal > 0 ? `
+            <div class="q-math-line is-listed-subtotal">
+              <span>Listed Items + Tech Total</span>
+              <strong>${money(totals.grandTotal)}</strong>
             </div>
           ` : ""}
           <div class="q-math-line is-total">
@@ -4202,8 +4285,8 @@ function quote() {
           </div>
         </div>
 
-        ${step < 6
-          ? `<button type="button" class="btn btn-dark" style="width:100%" data-goto-step="6">Review Full Quote →</button>`
+        ${step < 5
+          ? `<button type="button" class="btn btn-dark" style="width:100%" data-goto-step="5">Review Full Quote →</button>`
           : `<a href="#quoteBuilderForm" class="btn btn-dark" style="width:100%">Complete &amp; Send Quote ↓</a>`}
       </aside>
     </div>
@@ -5555,6 +5638,12 @@ function bind() {
       render({ preserveScroll: true });
     }),
   );
+  document.querySelectorAll("[data-toggle-tech-support]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      state.techSupport = !state.techSupport;
+      render({ preserveScroll: true });
+    }),
+  );
 
   // Step 6: Contact Inputs, Payment Method, and Automated Email Submission to kcbianzon@gmail.com
   document.querySelector("#contactNameInput")?.addEventListener("input", (e) => {
@@ -5586,7 +5675,7 @@ function bind() {
     e.preventDefault();
     const totals = calculateQuoteTotals();
     if (totals.lineItems.length === 0) {
-      state.quoteError = "Please select at least one equipment item or package in Step 05 before submitting your quote.";
+      state.quoteError = "Please select at least one equipment item or package in Step 04 before submitting your quote.";
       render({ preserveScroll: true });
       return;
     }
@@ -5641,7 +5730,8 @@ function bind() {
       "Event Time Window": state.eventTimeWindow,
       "Event Location": effectiveLocation,
       "Rental Duration": totals.durationOption.label,
-      "Delivery & Support Tier": `${totals.serviceOption.title} (${totals.serviceOption.priceType === "quote" ? "Quote required" : totals.serviceFee === 0 ? "$0" : money(totals.serviceFee)})`,
+      "Delivery & Setup": `${totals.serviceOption.title} (${totals.serviceOption.priceType === "quote" ? "Quote required" : totals.serviceFee === 0 ? "$0" : money(totals.serviceFee)})`,
+      "Full On-Site Technician Support": totals.techSupportSelected ? `Included (+${money(totals.techSupportFee)})` : "Not selected ($0)",
       "Preferred Payment Method": state.paymentMethod,
       "Total Selected Equipment": `${totals.uniqueCount} unique items (${totals.totalUnits} total units)`,
       "Complete Itemized Equipment Breakdown": itemizedSummaryLines,
@@ -5658,8 +5748,12 @@ function bind() {
         ? `+${money(totals.durationSurcharge)} (${totals.durationOption.shortLabel})`
         : "$0 (no public duration adjustment listed)";
     emailPayload["Adjusted Equipment Subtotal"] = money(totals.equipmentDurationTotal);
-    emailPayload["Delivery, Setup & Tech Support Fee"] =
+    emailPayload["Delivery & Setup Fee"] =
       totals.serviceOption.priceType === "quote" ? "Quote required" : totals.serviceFee === 0 ? "$0" : `+${money(totals.serviceFee)} (${totals.serviceOption.title})`;
+    emailPayload["On-Site Technician Support Fee"] = totals.techSupportSelected ? `+${money(totals.techSupportFee)}` : "$0 (not selected)";
+    if (totals.techSupportSelected && totals.grandTotal > 0) {
+      emailPayload["Listed Items + Tech Total"] = money(totals.grandTotal);
+    }
     emailPayload["ESTIMATED GRAND TOTAL"] = totalPriceText(totals);
     emailPayload["Additional Event Notes"] = state.eventNotes || "None";
     if (totals.coupon) {
@@ -5695,8 +5789,10 @@ function bind() {
       venue: state.venue,
       date: effectiveDate,
       location: effectiveLocation,
-      serviceTier: totals.serviceOption.title,
-      serviceFee: totals.serviceFee,
+      serviceTier: `${totals.serviceOption.title}${totals.techSupportSelected ? ` + Full On-Site Technician (+${money(totals.techSupportFee)})` : ""}`,
+      serviceFee: totals.serviceFee + totals.techSupportFee,
+      techSupport: totals.techSupportSelected,
+      techSupportFee: totals.techSupportFee,
       duration: totals.durationOption.label,
       items: totals.lineItems.map((item) => ({ id: item.product.id, name: item.product.name, qty: item.qty, price: item.unitPrice, subtotal: item.lineSubtotal })),
       baseSubtotal: totals.equipmentBaseSubtotal,
@@ -5728,6 +5824,9 @@ function bind() {
       eventLocation: effectiveLocation,
       durationLabel: totals.durationOption.label,
       serviceTitle: totals.serviceOption.title,
+      servicePriceType: totals.serviceOption.priceType,
+      techSupportSelected: totals.techSupportSelected,
+      techSupportFee: totals.techSupportFee,
       quoteRequired: totals.quoteRequired,
       paymentMethod: state.paymentMethod,
       lineItems: totals.lineItems,
@@ -7519,10 +7618,21 @@ function renderCmsQuoteDetailModal() {
             <strong>+$${Number(q.durationSurcharge).toLocaleString()}</strong>
           </div>
         ` : ""}
-        <div style="display:flex;justify-content:space-between;color:#9cb1d0;font-size:12.5px">
-          <span>Delivery &amp; Crew Fee</span>
-          <strong>${q.serviceFee === 0 ? "Free / Self Pickup" : `+$${Number(q.serviceFee).toLocaleString()}`}</strong>
-        </div>
+        ${Number(q.techSupportFee) > 0 ? `
+          <div style="display:flex;justify-content:space-between;color:#9cb1d0;font-size:12.5px">
+            <span>Delivery &amp; Setup</span>
+            <strong>Quote required</strong>
+          </div>
+          <div style="display:flex;justify-content:space-between;color:#72baff;font-size:12.5px">
+            <span>Full On-Site Technician Support</span>
+            <strong>+$${Number(q.techSupportFee).toLocaleString()}</strong>
+          </div>
+        ` : `
+          <div style="display:flex;justify-content:space-between;color:#9cb1d0;font-size:12.5px">
+            <span>Delivery &amp; Crew Fee</span>
+            <strong>${q.serviceFee === 0 ? "Quote required / Self Pickup" : `+$${Number(q.serviceFee).toLocaleString()}`}</strong>
+          </div>
+        `}
         ${q.discountAmount > 0 ? `
           <div style="display:flex;justify-content:space-between;color:#22c55e;font-size:12.5px">
             <span>Promo Discount (${escapeHtml(q.couponCode || "COUPON")})</span>

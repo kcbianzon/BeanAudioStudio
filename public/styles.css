@@ -7236,6 +7236,10 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   gap: 12px;
 }
 
+.q-service-tier-grid.q-service-tier-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .q-tier-top {
   display: flex;
   align-items: center;
@@ -7266,6 +7270,121 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   font-size: 12.5px;
   line-height: 1.5;
   color: var(--muted);
+}
+
+.q-tech-addon-block {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--line);
+}
+
+.q-tech-addon-header {
+  margin-bottom: 12px;
+}
+
+.q-tech-addon-header .eyebrow {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.q-tech-addon-header h4 {
+  margin: 0;
+  font-family: 'Sora', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.q-tech-addon-card {
+  width: 100%;
+  gap: 14px;
+}
+
+.q-tech-addon-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  width: 100%;
+}
+
+.q-tech-check {
+  flex: 0 0 26px;
+  width: 26px;
+  height: 26px;
+  margin-top: 1px;
+  border-radius: 8px;
+  border: 1.5px solid #c8b06b;
+  background: #ffffff;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+  transition: all 0.18s ease;
+}
+
+.q-tech-check.is-checked {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--accent);
+}
+
+.q-tech-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.q-tier-badge-price {
+  font-size: 12.5px;
+  padding: 5px 11px;
+  letter-spacing: 0.01em;
+}
+
+.q-tech-addon-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding-top: 12px;
+  border-top: 1px solid rgba(45, 37, 17, 0.08);
+}
+
+.q-tech-status {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.q-tech-addon-card.is-active .q-tech-status {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.q-fin-row.is-tech-active strong,
+.q-math-line.is-tech-addon strong {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.q-fin-muted {
+  color: var(--muted) !important;
+  font-weight: 600;
+}
+
+.q-fin-row.is-listed-subtotal {
+  padding-top: 8px;
+  border-top: 1px dashed var(--line);
+  font-weight: 700;
+}
+
+.q-math-line.is-listed-subtotal {
+  margin-top: 2px;
+  padding-top: 7px;
+  border-top: 1px dashed var(--line);
+  color: var(--ink);
+  font-weight: 600;
 }
 
 /* Step 3: Calendar & Date */
@@ -8615,9 +8734,13 @@ body small { color: var(--muted); font-size: 13px; font-weight: 500; }
   }
   .q-starter-callout,
   .q-submit-bar,
-  .q-step-nav-footer {
+  .q-step-nav-footer,
+  .q-tech-addon-foot {
     flex-direction: column;
     align-items: stretch;
+  }
+  .q-tech-addon-foot .q-venue-pill {
+    align-self: flex-start;
   }
 }
 
