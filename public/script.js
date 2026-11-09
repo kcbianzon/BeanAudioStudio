@@ -3527,25 +3527,13 @@ function renderEquipmentStep(totals) {
     <div class="q-subblock">
       <div class="q-subblock-head">
         <div>
-<<<<<<< HEAD
-          <h3>Delivery, Setup &amp; Technician Support</h3>
-=======
-          <span class="eyebrow">LOGISTICS &amp; DELIVERY</span>
-          <h3>2. Delivery &amp; Setup</h3>
->>>>>>> ce60f4c (Separate Full On-Site Technician Support as optional +$1,000 add-on in Step 4)
+          <h3>Delivery &amp; Setup</h3>
         </div>
       </div>
       <div class="q-service-tier-grid q-service-tier-grid-2">
         ${SERVICE_TIERS.map(
           (tier) => `<button type="button" class="q-tier-card ${state.serviceTier === tier.id ? "is-active" : ""}" data-service-tier="${tier.id}" aria-pressed="${state.serviceTier === tier.id}">
-<<<<<<< HEAD
             <strong class="q-tier-title">${escapeHtml(tier.title)}</strong>
-=======
-            <div class="q-tier-top">
-              <strong>${escapeHtml(tier.title)}</strong>
-              <span class="q-tier-badge">${escapeHtml(tier.badge)}</span>
-            </div>
->>>>>>> ce60f4c (Separate Full On-Site Technician Support as optional +$1,000 add-on in Step 4)
             <p>${escapeHtml(tier.desc)}</p>
             <span class="q-tier-badge">${escapeHtml(tier.badge)}</span>
           </button>`
@@ -3567,7 +3555,7 @@ function renderEquipmentStep(totals) {
             <span class="q-tech-check ${state.techSupport ? "is-checked" : ""}" aria-hidden="true">${state.techSupport ? "✓" : "+"}</span>
             <div class="q-tech-copy">
               <div class="q-tier-top">
-                <strong>${escapeHtml(TECH_SUPPORT_OPTION.title)}</strong>
+                <strong class="q-tier-title">${escapeHtml(TECH_SUPPORT_OPTION.title)}</strong>
                 <span class="q-tier-badge q-tier-badge-price">${escapeHtml(TECH_SUPPORT_OPTION.badge)}</span>
               </div>
               <p>${escapeHtml(TECH_SUPPORT_OPTION.desc)}</p>

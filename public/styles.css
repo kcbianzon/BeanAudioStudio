@@ -14119,6 +14119,45 @@ body::before { display: none !important; }
   color: #f6c84b;
 }
 
+.q-equipment-panel .q-tech-addon-block {
+  border-top: 1px solid #deddda;
+}
+
+.q-equipment-panel .q-tech-addon-card {
+  min-height: auto;
+  gap: 14px;
+}
+
+.q-equipment-panel .q-tech-addon-card:hover {
+  border-color: #777;
+  background: #fff;
+}
+
+.q-equipment-panel .q-tech-addon-card.is-active {
+  background: #f9f8f6;
+}
+
+.q-equipment-panel .q-tech-copy .q-tier-top .q-tier-badge {
+  align-self: center;
+  margin-top: 0;
+}
+
+.q-equipment-panel .q-tech-check {
+  border-color: var(--equipment-line);
+  color: #3c3838;
+}
+
+.q-equipment-panel .q-tech-check.is-checked {
+  border-color: #3c3838;
+  background: #3c3838;
+  color: #f6c84b;
+}
+
+.q-equipment-panel .q-tech-addon-foot .q-venue-pill.is-selected {
+  background: #3c3838;
+  color: #fff;
+}
+
 .q-builder-equipment-step .q-step-nav-footer {
   border-color: #aaa7a2;
   border-radius: 22px;
