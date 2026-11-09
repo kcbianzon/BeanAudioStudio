@@ -3641,7 +3641,7 @@ function renderReviewAndSubmitStep(totals) {
     <div class="q-review-table-card">
       <div class="q-review-table-head">
         <div>
-          <h3>Selected Rentals (${totals.uniqueCount} ${totals.uniqueCount === 1 ? "item" : "items"} · ${totals.totalUnits} total ${totals.totalUnits === 1 ? "unit" : "units"})</h3>
+          <h3>Selected Rentals<span class="q-review-rental-count"> (${totals.uniqueCount} ${totals.uniqueCount === 1 ? "item" : "items"} · ${totals.totalUnits} total ${totals.totalUnits === 1 ? "unit" : "units"})</span></h3>
         </div>
         <button type="button" class="btn btn-light btn-small" data-goto-step="4">+ Add / Modify Gear</button>
       </div>
@@ -3664,8 +3664,8 @@ function renderReviewAndSubmitStep(totals) {
               ${totals.lineItems
                 .map(
                   (item, idx) => `<tr>
-                    <td class="q-td-num">${String(idx + 1).padStart(2, "0")}</td>
-                    <td>
+                    <td class="q-td-num q-review-index">${String(idx + 1).padStart(2, "0")}</td>
+                    <td class="q-review-equipment">
                       <div class="q-review-item">
                         <img src="${productImage(item.product)}" alt="" loading="lazy">
                         <div>
@@ -3674,16 +3674,16 @@ function renderReviewAndSubmitStep(totals) {
                         </div>
                       </div>
                     </td>
-                    <td><span class="q-td-cat">${escapeHtml(item.product.category)}</span></td>
-                    <td>${productPriceText(item.product)}</td>
-                    <td>
+                    <td class="q-review-category"><span class="q-td-cat">${escapeHtml(item.product.category)}</span></td>
+                    <td class="q-review-unit-price">${productPriceText(item.product)}</td>
+                    <td class="q-review-quantity">
                       <div class="q-stepper q-stepper-inline">
                         <button type="button" class="q-step-btn" data-minus="${item.product.id}" aria-label="Decrease ${escapeHtml(item.product.name)}">−</button>
                         <span class="q-step-val">${item.qty}</span>
                         <button type="button" class="q-step-btn q-step-plus" data-plus="${item.product.id}" aria-label="Increase ${escapeHtml(item.product.name)}">+</button>
                       </div>
                     </td>
-                    <td class="is-right"><strong>${item.product.priceType === "quote" ? "Quote" : money(item.lineSubtotal)}</strong></td>
+                    <td class="is-right q-review-subtotal"><strong>${item.product.priceType === "quote" ? "Quote" : money(item.lineSubtotal)}</strong></td>
                   </tr>`
                 )
                 .join("")}
@@ -3749,7 +3749,7 @@ function renderReviewAndSubmitStep(totals) {
       <input type="checkbox" name="botcheck" id="quoteHoney" style="display:none" tabindex="-1" autocomplete="off">
       <div class="q-subblock-head">
         <div>
-          <h3>Your Contact Details</h3>
+          <h3>Your Contact<span class="q-review-contact-detail"> Details</span></h3>
         </div>
       </div>
 
@@ -4459,6 +4459,11 @@ function render(options = {}) {
   if (hash === "quote") view = quote();
   if (hash === "get-quote") view = getQuoteFormPage();
   app.innerHTML = view;
+  const reviewProgress = app.querySelector(".q-builder-review-step .q-progress-nav");
+  if (reviewProgress && window.matchMedia("(max-width: 768px)").matches) {
+    // Keep the active final step visible within the mobile progress strip.
+    reviewProgress.scrollLeft = reviewProgress.scrollWidth;
+  }
   if (options.preserveScroll) {
     const nextCategoryBar = app.querySelector(".q-equipment-panel .q-cat-pills-bar");
     const nextEquipmentGrid = app.querySelector("#quoteCatalogGrid");
