@@ -13381,67 +13381,67 @@ body::before { display: none !important; }
 .cart-drawer-footer { padding-bottom: max(20px, env(safe-area-inset-bottom, 0px)); }
 
 @media (max-width: 768px) {
-  #app :is(.q-builder-event-step, .q-builder-guest-step) {
+  #app :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) {
     padding: 24px 14px 32px !important;
     background: #f1eee7;
   }
 
-  :is(.q-builder-event-step, .q-builder-guest-step) .q-hero {
+  :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-hero {
     gap: 8px !important;
     margin-bottom: 12px !important;
     padding-bottom: 12px !important;
   }
 
-  :is(.q-builder-event-step, .q-builder-guest-step) .q-hero .eyebrow { display: none; }
-  #app :is(.q-builder-event-step, .q-builder-guest-step) .q-hero h1 {
+  :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-hero .eyebrow { display: none; }
+  #app :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-hero h1 {
     margin: 0;
     font-size: clamp(23px, 6vw, 32px) !important;
   }
-  #app :is(.q-builder-event-step, .q-builder-guest-step) .q-hero p { font-size: 11px !important; }
-  :is(.q-builder-event-step, .q-builder-guest-step) .q-progress-nav { margin-bottom: 10px !important; }
-  :is(.q-builder-event-step, .q-builder-guest-step) .q-progress-step {
+  #app :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-hero p { font-size: 11px !important; }
+  :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-progress-nav { margin-bottom: 10px !important; }
+  :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-progress-step {
     min-height: 38px;
     padding: 5px 8px !important;
     border-radius: 7px !important;
   }
-  :is(.q-builder-event-step, .q-builder-guest-step) .q-progress-step .q-step-label { font-size: 10px !important; }
-  :is(.q-builder-event-step, .q-builder-guest-step) .q-progress-step .q-step-num {
+  :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-progress-step .q-step-label { font-size: 10px !important; }
+  :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-progress-step .q-step-num {
     width: 18px !important;
     height: 18px !important;
     font-size: 9px !important;
   }
 
-  :is(.q-builder-event-step, .q-builder-guest-step) .q-step-panel {
+  :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-step-panel {
     padding: 14px !important;
     background: #fff;
   }
-  :is(.q-builder-event-step, .q-builder-guest-step) .q-step-head {
+  :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-step-head {
     margin-bottom: 12px;
     padding-bottom: 12px;
   }
-  #app :is(.q-builder-event-step, .q-builder-guest-step) .q-step-head h2 {
+  #app :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-step-head h2 {
     font-size: clamp(17px, 4.8vw, 23px) !important;
     line-height: 1.2;
   }
-  #app :is(.q-builder-event-step, .q-builder-guest-step) .q-step-head p { font-size: 11px !important; }
-  :is(.q-builder-event-step, .q-builder-guest-step) .q-clean-section { margin-top: 14px; }
-  #app :is(.q-builder-event-step, .q-builder-guest-step) .q-clean-section-title,
-  #app :is(.q-builder-event-step, .q-builder-guest-step) .q-venue-main-title { font-size: 13px !important; }
-  :is(.q-builder-event-step, .q-builder-guest-step) .q-venue-header-row {
+  #app :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-step-head p { font-size: 11px !important; }
+  :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-clean-section { margin-top: 14px; }
+  #app :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-clean-section-title,
+  #app :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-venue-main-title { font-size: 13px !important; }
+  :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-venue-header-row {
     flex-direction: row !important;
     align-items: baseline !important;
     margin-bottom: 8px !important;
   }
-  :is(.q-builder-event-step, .q-builder-guest-step) .q-venue-sub-text {
+  :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-venue-sub-text {
     font-size: 9px !important;
     text-align: right;
   }
-  :is(.q-builder-event-step, .q-builder-guest-step) .q-clean-big-input {
+  :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-clean-big-input {
     min-height: 44px;
     padding: 8px 10px !important;
     font-size: 16px !important;
   }
-  :is(.q-builder-event-step, .q-builder-guest-step) .q-clean-big-input::placeholder { font-size: 11px; }
+  :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-clean-big-input::placeholder { font-size: 11px; }
 
   .q-builder-event-step .q-event-clean-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -13487,12 +13487,12 @@ body::before { display: none !important; }
   .q-builder-page .q-plan-sidebar {
     display: none;
   }
-  :is(.q-builder-event-step, .q-builder-guest-step) .q-step-nav-footer {
+  :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-step-nav-footer {
     margin-top: 10px;
     padding: 8px !important;
     border-radius: 12px;
   }
-  :is(.q-builder-event-step, .q-builder-guest-step) .q-step-nav-footer .btn {
+  :is(.q-builder-event-step, .q-builder-guest-step, .q-builder-equipment-step) .q-step-nav-footer .btn {
     min-height: 44px;
     font-size: 11px !important;
   }
@@ -13963,6 +13963,8 @@ body::before { display: none !important; }
 .q-equipment-panel .q-selected-filter-btn,
 .q-equipment-panel .q-catalog-status-bar { background: #f4f3f1; }
 .q-equipment-panel .q-selected-filter-btn.is-active { background: #3c3838; }
+.q-mobile-clear-filters { display: none; }
+.q-search-clear-btn[hidden] { display: none; }
 
 .q-equipment-panel .q-cat-pills-frame {
   min-width: 0;
@@ -14179,5 +14181,181 @@ body::before { display: none !important; }
 @media (max-width: 520px) {
   .q-equipment-panel .q-equip-grid {
     grid-template-columns: minmax(0, 1fr) !important;
+  }
+}
+
+/* Mobile Equipment & Crew layout. */
+@media (max-width: 768px) {
+  .q-builder-equipment-step .q-subblock-head {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  #app .q-builder-equipment-step .q-subblock-head h3 {
+    font-size: 14px;
+    line-height: 1.3;
+  }
+  .q-builder-equipment-step .q-clear-all-btn {
+    min-height: 36px;
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+  .q-builder-equipment-step .q-catalog-search-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+  }
+  .q-builder-equipment-step .q-catalog-search-wrap {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+  .q-builder-equipment-step .q-builder-search-input { font-size: 16px; }
+  .q-builder-equipment-step .q-builder-search-input::placeholder { font-size: 11px; }
+  .q-builder-equipment-step .q-selected-filter-btn {
+    justify-content: center;
+    min-width: 0;
+    min-height: 38px;
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+  .q-builder-equipment-step .q-mobile-clear-filters {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 6px 10px;
+    border: 1px solid #c9c7c3;
+    border-radius: 999px;
+    background: #fff;
+    color: #3c3838;
+    font-size: 10px;
+    cursor: pointer;
+  }
+  .q-builder-equipment-step .q-cat-pills-frame {
+    padding: 8px;
+    border-radius: 12px;
+  }
+  .q-builder-equipment-step .q-cat-pills { gap: 6px; }
+  .q-builder-equipment-step .q-cat-pill {
+    min-height: 32px;
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+  .q-builder-equipment-step .q-catalog-status-bar {
+    align-items: start;
+    flex-wrap: wrap;
+    padding: 8px;
+    font-size: 10px;
+  }
+  .q-builder-equipment-step .q-equip-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    max-height: min(580px, 70svh);
+    scrollbar-width: thin;
+  }
+  .q-builder-equipment-step .q-equip-card { border-radius: 14px; }
+  .q-builder-equipment-step .q-equip-thumb { height: 100px; }
+  .q-builder-equipment-step .q-equip-thumb img { object-fit: contain; }
+  .q-builder-equipment-step .q-equip-qty-badge {
+    top: 4px;
+    right: 4px;
+    padding: 3px 5px;
+    font-size: 8px;
+  }
+  .q-builder-equipment-step .q-equip-body { margin-inline: 7px; }
+  .q-builder-equipment-step .q-equip-cat {
+    padding: 3px 5px;
+    font-size: 8px;
+  }
+  #app .q-builder-equipment-step .q-equip-body h4 {
+    min-height: 2.5em;
+    font-size: 11px;
+    line-height: 1.25;
+    letter-spacing: -.02em;
+  }
+  .q-builder-equipment-step .q-equip-description { gap: 3px; }
+  #app .q-builder-equipment-step .q-equip-description p {
+    min-height: 2.8em;
+    font-size: 10px;
+    line-height: 1.4;
+    white-space: normal;
+    -webkit-line-clamp: 2;
+  }
+  #app .q-builder-equipment-step .is-description-expanded .q-equip-description p {
+    white-space: pre-line;
+  }
+  .q-builder-equipment-step .q-equip-description-toggle {
+    width: 24px;
+    height: 24px;
+  }
+  .q-builder-equipment-step .q-equip-foot {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .q-builder-equipment-step .q-equip-add-btn {
+    min-height: 36px;
+    padding: 6px;
+    font-size: 10px;
+  }
+  .q-builder-equipment-step .q-stepper { justify-content: space-between; }
+  .q-builder-equipment-step .q-stepper .q-step-btn {
+    width: 30px;
+    height: 32px;
+  }
+  .q-builder-equipment-step .q-equip-subtotal,
+  .q-builder-equipment-step .q-equip-subtotal strong { font-size: 10px; }
+  .q-builder-equipment-step .q-service-tier-grid-2 {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px !important;
+  }
+  .q-builder-equipment-step .q-tier-card {
+    padding: 10px !important;
+    border-radius: 12px !important;
+    gap: 8px;
+  }
+  .q-builder-equipment-step .q-tier-title {
+    font-size: 12px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+  #app .q-builder-equipment-step .q-tier-card p {
+    font-size: 10px;
+    line-height: 1.4;
+  }
+  .q-builder-equipment-step .q-tier-card .q-tier-badge {
+    padding: 4px 6px;
+    font-size: 8px;
+  }
+  .q-builder-equipment-step .q-tech-addon-block {
+    margin-top: 14px;
+    padding-top: 0;
+    border-top: 0;
+  }
+  .q-builder-equipment-step .q-tech-addon-header { display: none; }
+  .q-builder-equipment-step .q-tech-addon-card {
+    position: relative;
+    width: 100%;
+    padding-bottom: 42px !important;
+  }
+  .q-builder-equipment-step .q-tech-addon-main { gap: 8px; }
+  .q-builder-equipment-step .q-tech-check {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    font-size: 12px;
+  }
+  .q-builder-equipment-step .q-tech-copy .q-tier-badge {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+  }
+  .q-builder-equipment-step .q-tech-addon-foot { display: none; }
+  .q-builder-equipment-step .q-step-nav-footer {
+    display: grid !important;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+  .q-builder-equipment-step .q-step-indicator {
+    font-size: 9px !important;
+    text-align: center;
   }
 }

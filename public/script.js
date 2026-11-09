@@ -3491,13 +3491,14 @@ function renderEquipmentStep(totals) {
         <div class="q-catalog-search-row">
           <div class="q-catalog-search-wrap">
             <svg class="q-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input id="builderCatalogSearch" type="text" class="input q-builder-search-input" placeholder="Search speakers, microphones, DJ gear, displays, lighting..." value="${escapeHtml(state.builderSearch)}">
-            ${state.builderSearch ? `<button type="button" class="q-search-clear-btn" id="builderClearSearchBtn" aria-label="Clear search">×</button>` : ""}
+            <input id="builderCatalogSearch" type="text" class="input q-builder-search-input" aria-label="Search equipment" placeholder="Search speakers, microphones, DJ gear, displays, lighting..." value="${escapeHtml(state.builderSearch)}">
+            <button type="button" class="q-search-clear-btn" id="builderClearSearchBtn" aria-label="Clear search" ${state.builderSearch ? "" : "hidden"}>×</button>
           </div>
           <button type="button" class="q-selected-filter-btn ${state.builderOnlySelected ? "is-active" : ""}" id="builderSelectedFilterBtn" aria-pressed="${Boolean(state.builderOnlySelected)}">
             <span>Show selected only</span>
             <span class="q-selected-badge">${totals.uniqueCount}</span>
           </button>
+          <button type="button" class="q-mobile-clear-filters" data-builder-reset-catalog>Clear filters</button>
         </div>
 
         <div class="q-cat-pills-frame">
@@ -5575,6 +5576,8 @@ function bind() {
       return;
     }
     grid.innerHTML = renderBuilderCatalogGridMarkup();
+    const clearSearch = document.getElementById("builderClearSearchBtn");
+    if (clearSearch) clearSearch.hidden = !state.builderSearch;
     grid.querySelectorAll("[data-plus]").forEach((b) =>
       b.addEventListener("click", () => addProduct(b.dataset.plus, 1)),
     );
