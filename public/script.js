@@ -834,13 +834,24 @@ const DURATION_OPTIONS = [
 const PAYMENT_METHODS = [
   "ACH / Bank Transfer",
   "Credit / Debit Card",
+  "Company Check",
   "Zelle",
   "Venmo",
   "PayPal",
-  "Company Check",
   "Cash",
   "No preference yet",
 ];
+
+const PAYMENT_METHOD_ICONS = {
+  "ACH / Bank Transfer": '<path d="m3 9 9-6 9 6H3Zm2 3v6m5-6v6m4-6v6m5-6v6M3 21h18"/>',
+  "Credit / Debit Card": '<rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2 9h20M6 15h3m3 0h2"/>',
+  "Company Check": '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="m6 11 2 2 4-4m2 2h4M6 16h12"/>',
+  "Zelle": '<path d="M7 6h10L7 18h10M12 3v3m0 12v3"/>',
+  "Venmo": '<path d="m5 5 6 14h3l5-14M8 5l5 11"/>',
+  "PayPal": '<path d="m5 21 3-18h6a5 5 0 0 1 0 10H8m1 8 2-13h5a4 4 0 0 1 0 8h-6"/>',
+  "Cash": '<rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M5 9h1m12 6h1"/>',
+  "No preference yet": '<circle cx="12" cy="12" r="9"/><path d="M8 12h8m-4-4v8"/>',
+};
 
 const EVENT_TYPE_CARDS = [
   {
@@ -3583,46 +3594,46 @@ function renderReviewAndSubmitStep(totals) {
           ? (state.startDate === state.endDate ? formatReadableDate(state.startDate) : `${formatReadableDate(state.startDate)} – ${formatReadableDate(state.endDate)}`)
           : (state.date ? formatReadableDate(state.date) : "Date TBD"));
 
-  return `<div class="q-step-panel">
+  return `<div class="q-step-panel q-review-panel">
     <div class="q-step-head">
-      <span class="eyebrow orange">STEP 05 OF 05 · FINAL QUOTE BREAKDOWN &amp; SUBMISSION</span>
       <h2>Review your itemized quote &amp; send.</h2>
       <p>Every selected rental item, quantity, unit rate, duration adjustment, and delivery option is itemized below with zero hidden fees. Submit below to send your quote directly to our production desk.</p>
     </div>
 
     <!-- Event Configuration Summary -->
+    <h3 class="q-review-section-heading">Event details</h3>
     <div class="q-review-meta-grid">
       <div class="q-review-meta-card">
-        <span>EVENT OCCASION</span>
-        <strong>${escapeHtml(state.eventType)}</strong>
-        <button type="button" class="q-meta-edit" data-goto-step="1">Edit</button>
+        <span>Event Occasion</span>
+        <strong>${escapeHtml(state.eventType || "Not set yet")}</strong>
+        <button type="button" class="q-meta-edit" data-goto-step="1" aria-label="Edit event occasion">Edit</button>
       </div>
       <div class="q-review-meta-card">
-        <span>GUESTS &amp; VENUE</span>
-        <strong>${state.guests} Guests · ${escapeHtml(state.venue)}</strong>
-        <button type="button" class="q-meta-edit" data-goto-step="2">Edit</button>
+        <span>Guests &amp; Venue</span>
+        <strong>${state.guests ? `${state.guests} Guests` : "Guests not set"} · ${escapeHtml(state.venue)}</strong>
+        <button type="button" class="q-meta-edit" data-goto-step="2" aria-label="Edit guests and venue">Edit</button>
       </div>
       <div class="q-review-meta-card">
-        <span>RENTAL DURATION</span>
+        <span>Rental Duration</span>
         <strong>${escapeHtml(totals.durationOption.label)}</strong>
-        <button type="button" class="q-meta-edit" data-goto-step="2">Edit</button>
+        <button type="button" class="q-meta-edit" data-goto-step="2" aria-label="Edit rental duration">Edit</button>
       </div>
       <div class="q-review-meta-card">
-        <span>DATE &amp; SCHEDULE</span>
+        <span>Date &amp; Schedule</span>
         <strong>${escapeHtml(effectiveDate)}</strong>
         <small>${escapeHtml(effectiveTime)}</small>
-        <button type="button" class="q-meta-edit" data-goto-step="3">Edit</button>
+        <button type="button" class="q-meta-edit" data-goto-step="3" aria-label="Edit date and schedule">Edit</button>
       </div>
       <div class="q-review-meta-card">
-        <span>EVENT LOCATION</span>
+        <span>Event Location</span>
           <strong>${escapeHtml(effectiveLocation)}</strong>
-          <button type="button" class="q-meta-edit" data-goto-step="3">Edit</button>
+          <button type="button" class="q-meta-edit" data-goto-step="3" aria-label="Edit event location">Edit</button>
       </div>
       <div class="q-review-meta-card">
-        <span>DELIVERY &amp; CREW</span>
+        <span>Delivery &amp; Crew</span>
           <strong>${escapeHtml(totals.serviceOption.title)} (Quote required)</strong>
           <small>${totals.techSupportSelected ? `Full On-Site Technician Support (+${money(totals.techSupportFee)})` : "Optional On-Site Technician: Not selected"}</small>
-          <button type="button" class="q-meta-edit" data-goto-step="4">Edit</button>
+          <button type="button" class="q-meta-edit" data-goto-step="4" aria-label="Edit delivery and crew">Edit</button>
       </div>
     </div>
 
@@ -3630,23 +3641,23 @@ function renderReviewAndSubmitStep(totals) {
     <div class="q-review-table-card">
       <div class="q-review-table-head">
         <div>
-          <span class="eyebrow">COMPLETE ITEMIZED EQUIPMENT LIST</span>
           <h3>Selected Rentals (${totals.uniqueCount} ${totals.uniqueCount === 1 ? "item" : "items"} · ${totals.totalUnits} total ${totals.totalUnits === 1 ? "unit" : "units"})</h3>
         </div>
         <button type="button" class="btn btn-light btn-small" data-goto-step="4">+ Add / Modify Gear</button>
       </div>
 
+      <div class="q-review-rentals-body">
       ${totals.lineItems.length ? `
         <div class="q-table-scroll">
           <table class="q-itemized-table">
             <thead>
               <tr>
-                <th>#</th>
+                <th>No.</th>
                 <th>Equipment Item</th>
                 <th>Category</th>
-                <th>Unit Price</th>
+                <th>Price</th>
                 <th>Quantity</th>
-                <th class="is-right">Line Subtotal</th>
+                <th class="is-right">Subtotal</th>
               </tr>
             </thead>
             <tbody>
@@ -3655,8 +3666,13 @@ function renderReviewAndSubmitStep(totals) {
                   (item, idx) => `<tr>
                     <td class="q-td-num">${String(idx + 1).padStart(2, "0")}</td>
                     <td>
-                      <strong>${escapeHtml(item.product.name)}</strong>
-                      <span class="q-td-sub">${escapeHtml(item.product.tag || "")}</span>
+                      <div class="q-review-item">
+                        <img src="${productImage(item.product)}" alt="" loading="lazy">
+                        <div>
+                          <strong>${escapeHtml(item.product.name)}</strong>
+                          <span class="q-td-sub">${escapeHtml(item.product.tag || "")}</span>
+                        </div>
+                      </div>
                     </td>
                     <td><span class="q-td-cat">${escapeHtml(item.product.category)}</span></td>
                     <td>${productPriceText(item.product)}</td>
@@ -3725,6 +3741,7 @@ function renderReviewAndSubmitStep(totals) {
           <button type="button" class="btn btn-dark btn-small" data-goto-step="4">Choose Equipment Now →</button>
         </div>
       `}
+      </div>
     </div>
 
     <!-- Contact & Automated Quote Submission Form -->
@@ -3732,8 +3749,7 @@ function renderReviewAndSubmitStep(totals) {
       <input type="checkbox" name="botcheck" id="quoteHoney" style="display:none" tabindex="-1" autocomplete="off">
       <div class="q-subblock-head">
         <div>
-          <span class="eyebrow orange">YOUR CONTACT DETAILS</span>
-          <h3>Where should we send your official quote confirmation?</h3>
+          <h3>Your Contact Details</h3>
         </div>
       </div>
 
@@ -3765,10 +3781,13 @@ function renderReviewAndSubmitStep(totals) {
       </div>
 
       <div class="q-payment-section">
-        <span class="q-label">PREFERRED PAYMENT METHOD (NO PAYMENT REQUIRED TODAY)</span>
-        <div class="q-payment-grid">
+        <h3 class="q-review-payment-heading">Preferred Payment Method <span>(No payment required today)</span></h3>
+        <div class="q-payment-grid" role="group" aria-label="Preferred payment method">
           ${PAYMENT_METHODS.map(
-            (pm) => `<button type="button" class="q-pay-pill ${state.paymentMethod === pm ? "is-active" : ""}" data-payment-method="${escapeHtml(pm)}">${escapeHtml(pm)}</button>`
+            (pm) => `<button type="button" class="q-pay-pill ${state.paymentMethod === pm ? "is-active" : ""}" data-payment-method="${escapeHtml(pm)}" aria-pressed="${state.paymentMethod === pm}">
+              <svg class="q-payment-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${PAYMENT_METHOD_ICONS[pm]}</svg>
+              <span>${escapeHtml(pm)}</span>
+            </button>`
           ).join("")}
         </div>
       </div>
@@ -3781,7 +3800,7 @@ function renderReviewAndSubmitStep(totals) {
           <span>Submitting sends your requested setup to our production team so they can confirm availability and pricing.</span>
         </div>
         <button type="submit" class="btn btn-dark q-submit-btn" ${state.isSubmittingQuote ? "disabled" : ""}>
-          ${state.isSubmittingQuote ? "Sending Official Quote…" : `Submit Quote (${totalPriceText(totals)}) →`}
+          ${state.isSubmittingQuote ? "Sending Quote…" : "Submit Quote"}
         </button>
       </div>
     </form>
@@ -4136,7 +4155,7 @@ function quote() {
     ? "Flexible Date"
     : `${dateRangeStr}${timeRangeStr}`;
 
-  const stepClass = { 1: "q-builder-event-step", 2: "q-builder-guest-step", 4: "q-builder-equipment-step" }[step] || "";
+  const stepClass = { 1: "q-builder-event-step", 2: "q-builder-guest-step", 4: "q-builder-equipment-step", 5: "q-builder-review-step" }[step] || "";
   return `<div class="page q-builder-page ${stepClass}">
     <header class="q-hero">
       <div>
