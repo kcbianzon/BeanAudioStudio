@@ -3492,11 +3492,13 @@ function renderEquipmentStep(totals) {
           </button>
         </div>
 
-        <div class="q-cat-pills-bar" role="region" aria-label="Equipment categories" tabindex="0">
-          <div class="q-cat-pills">
-            ${categories
-              .map((cat) => `<button type="button" class="q-cat-pill ${state.builderCategory === cat ? "is-active" : ""}" data-builder-cat="${escapeHtml(cat)}" aria-pressed="${state.builderCategory === cat}">${escapeHtml(cat)}</button>`)
-              .join("")}
+        <div class="q-cat-pills-frame">
+          <div class="q-cat-pills-bar" role="region" aria-label="Equipment categories" tabindex="0">
+            <div class="q-cat-pills">
+              ${categories
+                .map((cat) => `<button type="button" class="q-cat-pill ${state.builderCategory === cat ? "is-active" : ""}" data-builder-cat="${escapeHtml(cat)}" aria-pressed="${state.builderCategory === cat}">${escapeHtml(cat)}</button>`)
+                .join("")}
+            </div>
           </div>
         </div>
 
