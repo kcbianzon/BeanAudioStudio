@@ -4458,6 +4458,22 @@ function render(options = {}) {
   }
   if (hash === "quote") view = quote();
   if (hash === "get-quote") view = getQuoteFormPage();
+  document.title =
+    hash === "rentals"
+      ? state.category && state.category !== "All"
+        ? `${state.category} Rentals in Boston | Beantown Audio Rentals`
+        : "AV Equipment Rentals Catalogue | Beantown Audio Rentals"
+      : hash === "bundles"
+      ? "Event AV Bundles & Packages | Beantown Audio Rentals"
+      : hash === "about"
+      ? "About Beantown Audio Rentals | Boston Event AV"
+      : hash === "services"
+      ? "Event Production & AV Services | Beantown Audio Rentals"
+      : hash === "get-quote"
+      ? "Contact & Request a Quote | Beantown Audio Rentals"
+      : hash === "quote"
+      ? "Build Your Event AV Quote | Beantown Audio Rentals"
+      : "Boston Audio Visual Rentals | Beantown Audio Rentals";
   app.innerHTML = view;
   const reviewProgress = app.querySelector(".q-builder-review-step .q-progress-nav");
   if (reviewProgress && window.matchMedia("(max-width: 768px)").matches) {

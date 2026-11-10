@@ -1,6 +1,115 @@
 {
   "hosting": {
     "public": "public",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "redirects": [
+      {
+        "regex": "(?i)^/(test-home|style-guide|home|index)/?$",
+        "destination": "/",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(about|about-us|faq|faqs)/?$",
+        "destination": "/#about",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(contact|contact-us|get-quote)/?$",
+        "destination": "/#get-quote",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(quote|request-quote|book)/?$",
+        "destination": "/#quote",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(rentals|equipment|catalog)/?$",
+        "destination": "/#rentals",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(bundles|packages|event-bundles)/?$",
+        "destination": "/#bundles",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/services/?$",
+        "destination": "/#services",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/services/(audio|speaker-rentals?)/?$",
+        "destination": "/#rentals?cat=Audio+%26+Speakers",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/services/subwoofer-rentals?/?$",
+        "destination": "/#rentals?cat=Subwoofers",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/services/microphone-rentals?/?$",
+        "destination": "/#rentals?cat=Microphones",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/services/audio-mixers?/?$",
+        "destination": "/#rentals?cat=Audio+Mixers",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/services/dj-equipment(?:-rentals?)?/?$",
+        "destination": "/#rentals?cat=DJ+Equipment",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/services/(video|tv-rentals?)/?$",
+        "destination": "/#rentals?cat=Video+%26+Displays",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/services/live-streaming/?$",
+        "destination": "/#rentals?cat=Live+Streaming",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/services/(indoor-?led-?wall|led-?trailers?|led-?walls?)/?$",
+        "destination": "/#rentals?cat=LED+Video+Walls",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/services/outdoor-movies?/?$",
+        "destination": "/#rentals?cat=Outdoor+Movies",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/services/photo-booths?/?$",
+        "destination": "/#rentals?cat=Photo+Booths",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/services/silent-disco/?$",
+        "destination": "/#rentals?cat=Silent+Disco",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/services/(event-)?lighting/?$",
+        "destination": "/#rentals?cat=Event+Lighting",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/services/(cold-sparklers?|cold-spark|dry-ice(?:-machine)?|special-(?:fx|effects))/?$",
+        "destination": "/#rentals?cat=Special+Effects",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/services/.+$",
+        "destination": "/#services",
+        "type": 301
+      }
+    ]
   }
 }
