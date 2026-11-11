@@ -11,13 +11,13 @@
         "type": 301
       },
       {
-        "regex": "(?i)^/(about|about-us|faq|faqs)/?$",
-        "destination": "/#about",
+        "regex": "(?i)^/(about-us|faq|faqs)/?$",
+        "destination": "/about",
         "type": 301
       },
       {
-        "regex": "(?i)^/(contact|contact-us|get-quote)/?$",
-        "destination": "/#get-quote",
+        "regex": "(?i)^/(contact-us|get-quote)/?$",
+        "destination": "/contact",
         "type": 301
       },
       {
@@ -36,78 +36,118 @@
         "type": 301
       },
       {
-        "regex": "(?i)^/services/?$",
-        "destination": "/#services",
+        "regex": "(?i)^/audio/?$",
+        "destination": "/services/audio",
         "type": 301
       },
       {
-        "regex": "(?i)^/services/(audio|speaker-rentals?)/?$",
-        "destination": "/#rentals?cat=Audio+%26+Speakers",
+        "regex": "(?i)^/video/?$",
+        "destination": "/services/video",
         "type": 301
       },
       {
-        "regex": "(?i)^/services/subwoofer-rentals?/?$",
-        "destination": "/#rentals?cat=Subwoofers",
+        "regex": "(?i)^/speaker-rentals?/?$",
+        "destination": "/services/speaker-rentals",
         "type": 301
       },
       {
-        "regex": "(?i)^/services/microphone-rentals?/?$",
-        "destination": "/#rentals?cat=Microphones",
+        "regex": "(?i)^/services/speaker-rental/?$",
+        "destination": "/services/speaker-rentals",
         "type": 301
       },
       {
-        "regex": "(?i)^/services/audio-mixers?/?$",
-        "destination": "/#rentals?cat=Audio+Mixers",
+        "regex": "(?i)^/dj-equipment(?:-rentals?)?/?$",
+        "destination": "/services/dj-equipment-rentals",
         "type": 301
       },
       {
-        "regex": "(?i)^/services/dj-equipment(?:-rentals?)?/?$",
-        "destination": "/#rentals?cat=DJ+Equipment",
+        "regex": "(?i)^/services/dj-equipment(?:-rental)?/?$",
+        "destination": "/services/dj-equipment-rentals",
         "type": 301
       },
       {
-        "regex": "(?i)^/services/(video|tv-rentals?)/?$",
-        "destination": "/#rentals?cat=Video+%26+Displays",
+        "regex": "(?i)^/projector-rentals?/?$",
+        "destination": "/services/projector-rentals",
         "type": 301
       },
       {
-        "regex": "(?i)^/services/live-streaming/?$",
-        "destination": "/#rentals?cat=Live+Streaming",
+        "regex": "(?i)^/services/projector-rental/?$",
+        "destination": "/services/projector-rentals",
         "type": 301
       },
       {
-        "regex": "(?i)^/services/(indoor-?led-?wall|led-?trailers?|led-?walls?)/?$",
-        "destination": "/#rentals?cat=LED+Video+Walls",
+        "regex": "(?i)^/services/subwoofer-rental/?$",
+        "destination": "/services/subwoofer-rentals",
         "type": 301
       },
       {
-        "regex": "(?i)^/services/outdoor-movies?/?$",
-        "destination": "/#rentals?cat=Outdoor+Movies",
+        "regex": "(?i)^/services/microphone-rental/?$",
+        "destination": "/services/microphone-rentals",
         "type": 301
       },
       {
-        "regex": "(?i)^/services/photo-booths?/?$",
-        "destination": "/#rentals?cat=Photo+Booths",
+        "regex": "(?i)^/services/audio-mixer/?$",
+        "destination": "/services/audio-mixers",
         "type": 301
       },
       {
-        "regex": "(?i)^/services/silent-disco/?$",
-        "destination": "/#rentals?cat=Silent+Disco",
+        "regex": "(?i)^/services/tv-rental/?$",
+        "destination": "/services/tv-rentals",
         "type": 301
       },
       {
-        "regex": "(?i)^/services/(event-)?lighting/?$",
-        "destination": "/#rentals?cat=Event+Lighting",
+        "regex": "(?i)^/services/(indoor-led-wall|led-?walls?)/?$",
+        "destination": "/services/indoorledwall",
         "type": 301
       },
       {
-        "regex": "(?i)^/services/(cold-sparklers?|cold-spark|dry-ice(?:-machine)?|special-(?:fx|effects))/?$",
-        "destination": "/#rentals?cat=Special+Effects",
+        "regex": "(?i)^/services/(?:led-trailers?|ledtrailer)/?$",
+        "destination": "/services/ledtrailers",
         "type": 301
       },
       {
-        "regex": "(?i)^/services/.+$",
-        "destination": "/#services",
+        "regex": "(?i)^/services/outdoor-movie/?$",
+        "destination": "/services/outdoor-movies",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(outdoor-movies?)/?$",
+        "destination": "/services/outdoor-movies",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/services/photo-booths/?$",
+        "destination": "/services/photo-booth",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/photo-booths?/?$",
+        "destination": "/services/photo-booth",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/silent-disco/?$",
+        "destination": "/services/silent-disco",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:services/)?lighting/?$",
+        "destination": "/services/event-lighting",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/services/(?:special-fx|special-effects|cold-sparkler|cold-spark)/?$",
+        "destination": "/services/cold-sparklers",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:special-fx|special-effects|cold-sparklers?)/?$",
+        "destination": "/services/cold-sparklers",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:dry-ice|dry-ice-machine)/?$",
+        "destination": "/services/dry-ice-machine",
         "type": 301
       }
     ]
