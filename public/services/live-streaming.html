@@ -31,6 +31,99 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": [
+        "LocalBusiness",
+        "Organization"
+      ],
+      "@id": "https://beantownaudiorentals.com/#organization",
+      "name": "Beantown Audio Rentals",
+      "description": "Boston audio visual, speaker, DJ equipment, laser projector, LED video wall, lighting, wireless mic, cold sparkler, dry ice, and photo booth rentals across Massachusetts and New England.",
+      "url": "https://beantownaudiorentals.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://beantownaudiorentals.com/favicon-512x512.png",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://beantownaudiorentals.com/assets/beantown/69667bc6a8aed9344088bb03_Screenshot-2025-01-16-at-1-24-21-PM-p-1600.png",
+      "telephone": "+1-978-601-5473",
+      "email": "info@beantownaudiorentals.com",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Boston",
+        "addressRegion": "MA",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 42.3601,
+        "longitude": -71.0589
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Boston"
+        },
+        {
+          "@type": "City",
+          "name": "Cambridge"
+        },
+        {
+          "@type": "City",
+          "name": "Somerville"
+        },
+        {
+          "@type": "City",
+          "name": "Brookline"
+        },
+        {
+          "@type": "City",
+          "name": "Newton"
+        },
+        {
+          "@type": "City",
+          "name": "Waltham"
+        },
+        {
+          "@type": "State",
+          "name": "Massachusetts"
+        },
+        {
+          "@type": "Place",
+          "name": "New England"
+        }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "08:00",
+          "closes": "20:00"
+        }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/beantownaudiorentals/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://beantownaudiorentals.com/#website",
+      "name": "Beantown Audio Rentals",
+      "url": "https://beantownaudiorentals.com/",
+      "publisher": {
+        "@id": "https://beantownaudiorentals.com/#organization"
+      }
+    },
+    {
       "@type": "BreadcrumbList",
       "itemListElement": [
         {
@@ -98,12 +191,14 @@
             "itemOffered": {
               "@type": "Product",
               "name": "Live Streaming Basic Package",
-              "image": "https://beantownaudiorentals.com/assets/beantown/streaming-basic-package.png",
+              "image": "https://beantownaudiorentals.com/assets/beantown/streaming-basic-package.jpg",
               "description": "• 1× Sony 4K Professional Broadcast Camera on fluid-head tripod • 1× Dedicated streaming workstation laptop with OBS / vMix software • 1× LiveMaster 4K multi-input video production switcher • 1× QSC TouchMix Digital Audio Mixer + Shure wireless microphone • Simultaneous HD live broadcast (YouTube, Zoom, Teams) + master recording • Ideal for: Remote webinars, hybrid town halls, panel interviews & virtual meetings",
               "offers": {
                 "@type": "Offer",
+                "url": "https://beantownaudiorentals.com/services/live-streaming",
                 "priceCurrency": "USD",
                 "price": "621",
+                "priceValidUntil": "2027-12-31",
                 "availability": "https://schema.org/InStock"
               }
             }
@@ -113,12 +208,14 @@
             "itemOffered": {
               "@type": "Product",
               "name": "Live Streaming Pro Package",
-              "image": "https://beantownaudiorentals.com/assets/beantown/streaming-pro-package.png",
+              "image": "https://beantownaudiorentals.com/assets/beantown/streaming-pro-package.jpg",
               "description": "• 3× Sony 4K Multi-Camera Production Rigs on heavy-duty fluid-head tripods • 1× LiveMaster Broadcast Video Switcher with hardware control surface • 1× QSC TouchMix-16 Digital Audio Mixer + dual Shure wireless mics • Dedicated live streaming & graphics playback workstation laptop • Includes: Broadcast SDI/HDMI cabling, audio sync delay & master recording • Ideal for: Major hybrid conferences, multi-speaker symposiums & live stage concerts",
               "offers": {
                 "@type": "Offer",
+                "url": "https://beantownaudiorentals.com/services/live-streaming",
                 "priceCurrency": "USD",
                 "price": "1250",
+                "priceValidUntil": "2027-12-31",
                 "availability": "https://schema.org/InStock"
               }
             }
@@ -128,12 +225,14 @@
             "itemOffered": {
               "@type": "Product",
               "name": "Video Switcher",
-              "image": "https://beantownaudiorentals.com/assets/beantown/video-switcher.png",
+              "image": "https://beantownaudiorentals.com/assets/beantown/video-switcher.jpg",
               "description": "• 1× 4-Channel Full HD / 4K Seamless Video Production Switcher • Picture-in-picture, split screen, wipe transitions & multiview output • USB webcam output for direct Zoom/Teams/YouTube streaming • Supports HDMI/SDI camera feeds, presentation laptops & graphics",
               "offers": {
                 "@type": "Offer",
+                "url": "https://beantownaudiorentals.com/services/live-streaming",
                 "priceCurrency": "USD",
                 "price": "75",
+                "priceValidUntil": "2027-12-31",
                 "availability": "https://schema.org/InStock"
               }
             }
@@ -147,8 +246,10 @@
               "description": "• 1× Shure QLX-D Wireless Lavalier (Clip-On) Microphone • Discrete miniature condenser capsule & wireless bodypack • Digital wireless receiver, clip, windscreen & audio patch cable • Ideal for: Keynote lectures, panel discussions, interviews & ceremonies",
               "offers": {
                 "@type": "Offer",
+                "url": "https://beantownaudiorentals.com/services/live-streaming",
                 "priceCurrency": "USD",
                 "price": "65",
+                "priceValidUntil": "2027-12-31",
                 "availability": "https://schema.org/InStock"
               }
             }
@@ -162,8 +263,10 @@
               "description": "• QSC TouchMix-16 Compact Digital Mixer • 16 inputs (12 XLR + 4 combo), touchscreen interface & workflow wizards • Multi-track USB direct recording & wireless tablet mixing • Ideal for: Bands, corporate hybrid events, weddings & mobile production rigs",
               "offers": {
                 "@type": "Offer",
+                "url": "https://beantownaudiorentals.com/services/live-streaming",
                 "priceCurrency": "USD",
                 "price": "85",
+                "priceValidUntil": "2027-12-31",
                 "availability": "https://schema.org/InStock"
               }
             }
@@ -190,7 +293,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/styles.css?v=20261111-seo-landing" />
+    <link rel="stylesheet" href="/styles.css?v=20261112-seo-boost" />
   </head>
   <body class="seo-static-page">
     <div class="site-shell">
@@ -254,7 +357,7 @@
         <article class="seo-item-card">
           <div>
             <div class="seo-item-thumb">
-              <img src="/assets/beantown/streaming-basic-package.png" alt="Live Streaming Basic Package rental in Boston" loading="lazy" />
+              <img src="/assets/beantown/streaming-basic-package.jpg" alt="Live Streaming Basic Package rental in Boston" loading="lazy" decoding="async" />
               <span class="seo-item-tag">Streaming package</span>
             </div>
             <h3>Live Streaming Basic Package</h3>
@@ -273,7 +376,7 @@
         <article class="seo-item-card">
           <div>
             <div class="seo-item-thumb">
-              <img src="/assets/beantown/streaming-pro-package.png" alt="Live Streaming Pro Package rental in Boston" loading="lazy" />
+              <img src="/assets/beantown/streaming-pro-package.jpg" alt="Live Streaming Pro Package rental in Boston" loading="lazy" decoding="async" />
               <span class="seo-item-tag">Streaming package</span>
             </div>
             <h3>Live Streaming Pro Package</h3>
@@ -292,7 +395,7 @@
         <article class="seo-item-card">
           <div>
             <div class="seo-item-thumb">
-              <img src="/assets/beantown/video-switcher.png" alt="Video Switcher rental in Boston" loading="lazy" />
+              <img src="/assets/beantown/video-switcher.jpg" alt="Video Switcher rental in Boston" loading="lazy" decoding="async" />
               <span class="seo-item-tag">Video equipment</span>
             </div>
             <h3>Video Switcher</h3>
@@ -311,7 +414,7 @@
         <article class="seo-item-card">
           <div>
             <div class="seo-item-thumb">
-              <img src="/assets/beantown/lavalier-clip-mic.png" alt="Lavalier (Clip-On) Microphone rental in Boston" loading="lazy" />
+              <img src="/assets/beantown/lavalier-clip-mic.png" alt="Lavalier (Clip-On) Microphone rental in Boston" loading="lazy" decoding="async" />
               <span class="seo-item-tag">Microphone</span>
             </div>
             <h3>Lavalier (Clip-On) Microphone</h3>
@@ -330,7 +433,7 @@
         <article class="seo-item-card">
           <div>
             <div class="seo-item-thumb">
-              <img src="/assets/beantown/qsc-touchmix-16.png" alt="QSC TouchMix-16 rental in Boston" loading="lazy" />
+              <img src="/assets/beantown/qsc-touchmix-16.png" alt="QSC TouchMix-16 rental in Boston" loading="lazy" decoding="async" />
               <span class="seo-item-tag">Audio mixer</span>
             </div>
             <h3>QSC TouchMix-16</h3>
@@ -352,6 +455,7 @@
         <section class="seo-guide-box" aria-labelledby="guideHeading">
           <h2 id="guideHeading">Zero-Lag Hybrid Broadcasts for Universities &amp; Corporate Town Halls</h2>
           <p>Remote attendees notice bad audio or blurry webcam video within five seconds. Our Boston live streaming packages pair optical Sony 4K cameras on fluid-head tripods with direct board-mixed wireless microphones and hardware LiveMaster video switching—sending broadcast clarity to global teams.</p>
+
           <div class="seo-areas-pill-row" aria-label="Boston and New England service areas">
             <span class="seo-area-pill">Boston Back Bay &amp; Seaport</span>
             <span class="seo-area-pill">Cambridge &amp; Somerville</span>
@@ -386,7 +490,7 @@
           </div>
           <div class="seo-related-grid">
           <a class="seo-related-chip" href="/services/microphone-rentals">Microphones →</a>
-          <a class="seo-related-chip" href="/services/video">Video Equipment →</a>
+          <a class="seo-related-chip" href="/video">Video Equipment →</a>
           <a class="seo-related-chip" href="/services/audio-mixers">Audio Mixers →</a>
           <a class="seo-related-chip" href="/services/tv-rentals">TV Rentals →</a>
           </div>
@@ -418,7 +522,7 @@
         </div>
         <div class="footer-seo-strip">
           <span class="footer-seo-label">Boston &amp; New England Rental Guides</span>
-          <div class="footer-seo-links"><a href="/services/speaker-rentals">Speaker Rentals</a><a href="/services/audio">Audio Packages</a><a href="/services/dj-equipment-rentals">DJ Equipment</a><a href="/services/projector-rentals">Projector Rentals</a><a href="/services/cold-sparklers">Cold Sparklers</a><a href="/services/dry-ice-machine">Dry Ice Cloud</a><a href="/services/microphone-rentals">Microphones</a><a href="/services/subwoofer-rentals">Subwoofers</a><a href="/services/audio-mixers">Audio Mixers</a><a href="/services/video">Video Equipment</a><a href="/services/tv-rentals">TV Rentals</a><a href="/services/indoorledwall">Indoor LED Walls</a><a href="/services/ledtrailers">LED Trailers</a><a href="/services/live-streaming">Live Streaming</a><a href="/services/outdoor-movies">Outdoor Movies</a><a href="/services/photo-booth">Photo Booths</a><a href="/services/silent-disco">Silent Disco</a><a href="/services/event-lighting">Event Lighting</a><a href="/services">All Services</a><a href="/about">About Beantown</a><a href="/contact">Contact &amp; Quote</a></div>
+          <div class="footer-seo-links"><a href="/services/speaker-rentals">Speaker Rentals</a><a href="/audio">Audio Equipment</a><a href="/services/dj-equipment-rentals">DJ Equipment</a><a href="/services/projector-rentals">Projector Rentals</a><a href="/services/cold-sparklers">Cold Sparklers</a><a href="/services/dry-ice-machine">Dry Ice Cloud</a><a href="/services/microphone-rentals">Microphones</a><a href="/services/subwoofer-rentals">Subwoofers</a><a href="/services/audio-mixers">Audio Mixers</a><a href="/video">Video Equipment</a><a href="/services/tv-rentals">TV Rentals</a><a href="/services/indoorledwall">Indoor LED Walls</a><a href="/services/ledtrailers">LED Trailers</a><a href="/services/live-streaming">Live Streaming</a><a href="/services/outdoor-movies">Outdoor Movies</a><a href="/services/photo-booth">Photo Booths</a><a href="/services/silent-disco">Silent Disco</a><a href="/services/event-lighting">Event Lighting</a><a href="/services/wedding-av-rentals">Wedding AV</a><a href="/services/corporate-av-rentals">Corporate AV</a><a href="/services">All Services</a><a href="/about">About Beantown</a><a href="/contact">Contact &amp; Quote</a></div>
         </div>
         <div class="footer-bottom">
           <span>© 2026 Beantown Audio Rentals · Boston, Massachusetts</span><span>Rental selections and final pricing are confirmed with your quote. · <a href="/#admin" class="footer-admin-link">Admin CMS</a></span>

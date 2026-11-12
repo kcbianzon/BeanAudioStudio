@@ -15075,3 +15075,50 @@ body::before { display: none !important; }
     padding: 22px 14px 96px;
   }
 }
+.hero-copy h1 .hero-seo-subtitle {
+  display: block;
+  margin-top: 14px;
+  font-family: "Inter", sans-serif;
+  font-size: clamp(13px, 1.35vw, 17px);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #4b4942;
+  background: none !important;
+  -webkit-text-fill-color: #4b4942 !important;
+}
+.seo-phone-pill:hover {
+  background: #111216;
+  color: #ffffff;
+}
+.seo-compare-wrap {
+  margin-top: 22px;
+  overflow-x: auto;
+  border-radius: 16px;
+  border: 1px solid rgba(41, 40, 32, 0.12);
+}
+.seo-compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  font-size: 14px;
+  text-align: left;
+}
+.seo-compare-table th,
+.seo-compare-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(41, 40, 32, 0.08);
+  vertical-align: top;
+}
+.seo-compare-table th {
+  background: #faf6ee;
+  font-weight: 700;
+  color: #111216;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.seo-compare-table tr:last-child td {
+  border-bottom: none;
+}

@@ -36,13 +36,33 @@
         "type": 301
       },
       {
-        "regex": "(?i)^/audio/?$",
-        "destination": "/services/audio",
+        "regex": "(?i)^/services/audio/?$",
+        "destination": "/audio",
         "type": 301
       },
       {
-        "regex": "(?i)^/video/?$",
-        "destination": "/services/video",
+        "regex": "(?i)^/services/video/?$",
+        "destination": "/video",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:services/)?(?:wedding|wedding-av|weddings)/?$",
+        "destination": "/services/wedding-av-rentals",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:services/)?(?:corporate|corporate-av)/?$",
+        "destination": "/services/corporate-av-rentals",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:services/)?party-speakers?/?$",
+        "destination": "/services/speaker-rentals",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:services/)?audiovisual-rentals?/?$",
+        "destination": "/services",
         "type": 301
       },
       {
@@ -149,6 +169,44 @@
         "regex": "(?i)^/(?:dry-ice|dry-ice-machine)/?$",
         "destination": "/services/dry-ice-machine",
         "type": 301
+      }
+    ],
+    "headers": [
+      {
+        "source": "/assets/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=2592000, immutable"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(png|jpg|jpeg|webp|svg|ico)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=2592000"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(css|js)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=86400"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(xml|txt|webmanifest)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600"
+          }
+        ]
       }
     ]
   }

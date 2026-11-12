@@ -31,6 +31,99 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": [
+        "LocalBusiness",
+        "Organization"
+      ],
+      "@id": "https://beantownaudiorentals.com/#organization",
+      "name": "Beantown Audio Rentals",
+      "description": "Boston audio visual, speaker, DJ equipment, laser projector, LED video wall, lighting, wireless mic, cold sparkler, dry ice, and photo booth rentals across Massachusetts and New England.",
+      "url": "https://beantownaudiorentals.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://beantownaudiorentals.com/favicon-512x512.png",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://beantownaudiorentals.com/assets/beantown/69667bc6a8aed9344088bb03_Screenshot-2025-01-16-at-1-24-21-PM-p-1600.png",
+      "telephone": "+1-978-601-5473",
+      "email": "info@beantownaudiorentals.com",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Boston",
+        "addressRegion": "MA",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 42.3601,
+        "longitude": -71.0589
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Boston"
+        },
+        {
+          "@type": "City",
+          "name": "Cambridge"
+        },
+        {
+          "@type": "City",
+          "name": "Somerville"
+        },
+        {
+          "@type": "City",
+          "name": "Brookline"
+        },
+        {
+          "@type": "City",
+          "name": "Newton"
+        },
+        {
+          "@type": "City",
+          "name": "Waltham"
+        },
+        {
+          "@type": "State",
+          "name": "Massachusetts"
+        },
+        {
+          "@type": "Place",
+          "name": "New England"
+        }
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "08:00",
+          "closes": "20:00"
+        }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/beantownaudiorentals/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://beantownaudiorentals.com/#website",
+      "name": "Beantown Audio Rentals",
+      "url": "https://beantownaudiorentals.com/",
+      "publisher": {
+        "@id": "https://beantownaudiorentals.com/#organization"
+      }
+    },
+    {
       "@type": "BreadcrumbList",
       "itemListElement": [
         {
@@ -98,12 +191,14 @@
             "itemOffered": {
               "@type": "Product",
               "name": "Outdoor LED Video Wall Trailer (5 Sizes)",
-              "image": "https://beantownaudiorentals.com/assets/beantown/outdoor-led-trailer.png",
+              "image": "https://beantownaudiorentals.com/assets/beantown/outdoor-led-trailer.jpg",
               "description": "• Mobile Trailer-Mounted Outdoor LED Video Wall (5 screen sizes) • High-brightness 3.91 mm pixel pitch visible in direct full sunlight • Fully IP65 weather-resistant construction (wind-rated up to 45 mph) • Hydraulic mast lift with 360-degree screen rotation • Optional onboard whisper generator & integrated horn audio system • Ideal for: Outdoor festivals, stadium broadcasts, parades & community rallies",
               "offers": {
                 "@type": "Offer",
+                "url": "https://beantownaudiorentals.com/services/ledtrailers",
                 "priceCurrency": "USD",
                 "price": "2600",
+                "priceValidUntil": "2027-12-31",
                 "availability": "https://schema.org/InStock"
               }
             }
@@ -113,12 +208,14 @@
             "itemOffered": {
               "@type": "Product",
               "name": "16′ × 9′ 2.67 mm LED Wall Package",
-              "image": "https://beantownaudiorentals.com/assets/beantown/led-wall-16ft-package.png",
+              "image": "https://beantownaudiorentals.com/assets/beantown/led-wall-16ft-package.jpg",
               "description": "• 16′ × 9′ Cinema-Grade 2.67 mm Indoor LED Video Wall • 1× NovaStar VX1000 All-in-One video processor with ultra-low latency • 2× High-output powered PA speakers + tripod stands + audio console • 1× Shure wireless handheld microphone system • Includes: Full ground-support structure, delivery, setup & teardown • Ideal for: Corporate keynotes, main-stage concerts, conventions (300+ guests)",
               "offers": {
                 "@type": "Offer",
+                "url": "https://beantownaudiorentals.com/services/ledtrailers",
                 "priceCurrency": "USD",
                 "price": "1450",
+                "priceValidUntil": "2027-12-31",
                 "availability": "https://schema.org/InStock"
               }
             }
@@ -128,12 +225,14 @@
             "itemOffered": {
               "@type": "Product",
               "name": "12′ × 7′ 2.67 mm LED Wall Package",
-              "image": "https://beantownaudiorentals.com/assets/beantown/led-wall-12ft-package.png",
+              "image": "https://beantownaudiorentals.com/assets/beantown/led-wall-12ft-package.jpg",
               "description": "• 12′ × 7′ Ultra-Fine 2.67 mm Indoor LED Video Wall • 1× NovaStar VX1000 All-in-One LED video processor & scaler • 2× Powered 12″ PA speakers on tripod stands + audio mixer • 1× Shure wireless handheld microphone system • Includes: Delivery, ground-support trussing, setup & tech check • Ideal for: Indoor trade shows, galas, wedding stages, panels (100–350 guests)",
               "offers": {
                 "@type": "Offer",
+                "url": "https://beantownaudiorentals.com/services/ledtrailers",
                 "priceCurrency": "USD",
                 "price": "1150",
+                "priceValidUntil": "2027-12-31",
                 "availability": "https://schema.org/InStock"
               }
             }
@@ -147,8 +246,10 @@
               "description": "• 6–8× Scalable Line Array Speakers + high-output subwoofers • Multi-channel digital audio console with motorized faders • Shure QLX-D professional wireless microphone system • Full stage monitor wedge package & stage cabling • Includes: Dedicated on-site audio technician support • Ideal for: Concerts, corporate keynotes, festivals (150+ guests)",
               "offers": {
                 "@type": "Offer",
+                "url": "https://beantownaudiorentals.com/services/ledtrailers",
                 "priceCurrency": "USD",
                 "price": "880",
+                "priceValidUntil": "2027-12-31",
                 "availability": "https://schema.org/InStock"
               }
             }
@@ -175,7 +276,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/styles.css?v=20261111-seo-landing" />
+    <link rel="stylesheet" href="/styles.css?v=20261112-seo-boost" />
   </head>
   <body class="seo-static-page">
     <div class="site-shell">
@@ -239,7 +340,7 @@
         <article class="seo-item-card">
           <div>
             <div class="seo-item-thumb">
-              <img src="/assets/beantown/outdoor-led-trailer.png" alt="Outdoor LED Video Wall Trailer (5 Sizes) rental in Boston" loading="lazy" />
+              <img src="/assets/beantown/outdoor-led-trailer.jpg" alt="Outdoor LED Video Wall Trailer (5 Sizes) rental in Boston" loading="lazy" decoding="async" />
               <span class="seo-item-tag">Outdoor LED trailer</span>
             </div>
             <h3>Outdoor LED Video Wall Trailer (5 Sizes)</h3>
@@ -258,7 +359,7 @@
         <article class="seo-item-card">
           <div>
             <div class="seo-item-thumb">
-              <img src="/assets/beantown/led-wall-16ft-package.png" alt="16′ × 9′ 2.67 mm LED Wall Package rental in Boston" loading="lazy" />
+              <img src="/assets/beantown/led-wall-16ft-package.jpg" alt="16′ × 9′ 2.67 mm LED Wall Package rental in Boston" loading="lazy" decoding="async" />
               <span class="seo-item-tag">LED wall package</span>
             </div>
             <h3>16′ × 9′ 2.67 mm LED Wall Package</h3>
@@ -277,7 +378,7 @@
         <article class="seo-item-card">
           <div>
             <div class="seo-item-thumb">
-              <img src="/assets/beantown/led-wall-12ft-package.png" alt="12′ × 7′ 2.67 mm LED Wall Package rental in Boston" loading="lazy" />
+              <img src="/assets/beantown/led-wall-12ft-package.jpg" alt="12′ × 7′ 2.67 mm LED Wall Package rental in Boston" loading="lazy" decoding="async" />
               <span class="seo-item-tag">LED wall package</span>
             </div>
             <h3>12′ × 7′ 2.67 mm LED Wall Package</h3>
@@ -296,7 +397,7 @@
         <article class="seo-item-card">
           <div>
             <div class="seo-item-thumb">
-              <img src="/assets/beantown/audio-package-large.png" alt="Large Audio Package rental in Boston" loading="lazy" />
+              <img src="/assets/beantown/audio-package-large.png" alt="Large Audio Package rental in Boston" loading="lazy" decoding="async" />
               <span class="seo-item-tag">Audio package</span>
             </div>
             <h3>Large Audio Package</h3>
@@ -318,6 +419,7 @@
         <section class="seo-guide-box" aria-labelledby="guideHeading">
           <h2 id="guideHeading">Bring Giant Daylight-Bright Video Anywhere in New England</h2>
           <p>Unlike inflatable screens that require sunset to watch, our high-brightness mobile LED video wall trailers command crisp, full-color visibility at noon under direct summer sun—setting up swiftly on city plazas, campus greens, marathon finish lines, and festival grounds.</p>
+
           <div class="seo-areas-pill-row" aria-label="Boston and New England service areas">
             <span class="seo-area-pill">Boston Back Bay &amp; Seaport</span>
             <span class="seo-area-pill">Cambridge &amp; Somerville</span>
@@ -384,7 +486,7 @@
         </div>
         <div class="footer-seo-strip">
           <span class="footer-seo-label">Boston &amp; New England Rental Guides</span>
-          <div class="footer-seo-links"><a href="/services/speaker-rentals">Speaker Rentals</a><a href="/services/audio">Audio Packages</a><a href="/services/dj-equipment-rentals">DJ Equipment</a><a href="/services/projector-rentals">Projector Rentals</a><a href="/services/cold-sparklers">Cold Sparklers</a><a href="/services/dry-ice-machine">Dry Ice Cloud</a><a href="/services/microphone-rentals">Microphones</a><a href="/services/subwoofer-rentals">Subwoofers</a><a href="/services/audio-mixers">Audio Mixers</a><a href="/services/video">Video Equipment</a><a href="/services/tv-rentals">TV Rentals</a><a href="/services/indoorledwall">Indoor LED Walls</a><a href="/services/ledtrailers">LED Trailers</a><a href="/services/live-streaming">Live Streaming</a><a href="/services/outdoor-movies">Outdoor Movies</a><a href="/services/photo-booth">Photo Booths</a><a href="/services/silent-disco">Silent Disco</a><a href="/services/event-lighting">Event Lighting</a><a href="/services">All Services</a><a href="/about">About Beantown</a><a href="/contact">Contact &amp; Quote</a></div>
+          <div class="footer-seo-links"><a href="/services/speaker-rentals">Speaker Rentals</a><a href="/audio">Audio Equipment</a><a href="/services/dj-equipment-rentals">DJ Equipment</a><a href="/services/projector-rentals">Projector Rentals</a><a href="/services/cold-sparklers">Cold Sparklers</a><a href="/services/dry-ice-machine">Dry Ice Cloud</a><a href="/services/microphone-rentals">Microphones</a><a href="/services/subwoofer-rentals">Subwoofers</a><a href="/services/audio-mixers">Audio Mixers</a><a href="/video">Video Equipment</a><a href="/services/tv-rentals">TV Rentals</a><a href="/services/indoorledwall">Indoor LED Walls</a><a href="/services/ledtrailers">LED Trailers</a><a href="/services/live-streaming">Live Streaming</a><a href="/services/outdoor-movies">Outdoor Movies</a><a href="/services/photo-booth">Photo Booths</a><a href="/services/silent-disco">Silent Disco</a><a href="/services/event-lighting">Event Lighting</a><a href="/services/wedding-av-rentals">Wedding AV</a><a href="/services/corporate-av-rentals">Corporate AV</a><a href="/services">All Services</a><a href="/about">About Beantown</a><a href="/contact">Contact &amp; Quote</a></div>
         </div>
         <div class="footer-bottom">
           <span>© 2026 Beantown Audio Rentals · Boston, Massachusetts</span><span>Rental selections and final pricing are confirmed with your quote. · <a href="/#admin" class="footer-admin-link">Admin CMS</a></span>
