@@ -36,33 +36,13 @@
         "type": 301
       },
       {
-        "regex": "(?i)^/services/audio/?$",
-        "destination": "/audio",
+        "regex": "(?i)^/audio/?$",
+        "destination": "/services/audio",
         "type": 301
       },
       {
-        "regex": "(?i)^/services/video/?$",
-        "destination": "/video",
-        "type": 301
-      },
-      {
-        "regex": "(?i)^/(?:services/)?(?:wedding|wedding-av|weddings)/?$",
-        "destination": "/services/wedding-av-rentals",
-        "type": 301
-      },
-      {
-        "regex": "(?i)^/(?:services/)?(?:corporate|corporate-av)/?$",
-        "destination": "/services/corporate-av-rentals",
-        "type": 301
-      },
-      {
-        "regex": "(?i)^/(?:services/)?party-speakers?/?$",
-        "destination": "/services/speaker-rentals",
-        "type": 301
-      },
-      {
-        "regex": "(?i)^/(?:services/)?audiovisual-rentals?/?$",
-        "destination": "/services",
+        "regex": "(?i)^/video/?$",
+        "destination": "/services/video",
         "type": 301
       },
       {
