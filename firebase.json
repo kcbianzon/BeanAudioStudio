@@ -61,6 +61,21 @@
         "type": 301
       },
       {
+        "regex": "(?i)^/(?:audiovisual-rentals?|av-rentals?|av-equipment|audio-visual-equipment-rental)/?$",
+        "destination": "/services",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:hire-speakers?|guest-speaker-hire)/?$",
+        "destination": "/services/speaker-rentals",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:services/)?(?:conference-mic-rentals?|mic-rentals?)/?$",
+        "destination": "/services/microphone-rentals",
+        "type": 301
+      },
+      {
         "regex": "(?i)^/dj-equipment(?:-rentals?)?/?$",
         "destination": "/services/dj-equipment-rentals",
         "type": 301
