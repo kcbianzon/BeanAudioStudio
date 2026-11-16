@@ -10,7 +10,7 @@ const vm = require("vm");
 
 const ROOT = path.resolve(__dirname, "..");
 const PUBLIC_DIR = path.join(ROOT, "public");
-const CSS_VERSION = "20261116-seo-invisible";
+const CSS_VERSION = "20261116-about-320p";
 const DOMAIN = "https://beantownaudiorentals.com";
 const WEB3FORMS_KEY = "f285afef-347a-4087-998d-98a4309ad914";
 const OG_IMAGE = `${DOMAIN}/assets/beantown/69667bc6a8aed9344088bb03_Screenshot-2025-01-16-at-1-24-21-PM-p-1600.png`;
@@ -988,7 +988,7 @@ ${marker}
 }
 .seo-directory-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   gap: 18px;
 }
 .seo-directory-card {
@@ -1028,6 +1028,24 @@ ${marker}
 @media (max-width: 768px) {
   .seo-main {
     padding: 22px 14px 96px;
+  }
+}
+@media (max-width: 400px) {
+  .seo-main {
+    padding: 16px 10px 96px;
+  }
+  .seo-hero,
+  .seo-guide-box,
+  .seo-item-card,
+  .seo-faq-item {
+    padding: 18px 14px;
+    border-radius: 18px;
+  }
+  .seo-cta-row .btn,
+  .seo-phone-pill {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
   }
 }
 `;
