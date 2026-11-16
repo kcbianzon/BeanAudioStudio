@@ -288,13 +288,13 @@ const BEANTOWN_ASSETS = [
 ];
 
 function loadCmsProducts() {
-  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-10-29-public-catalog-v24") {
+  if (typeof localStorage !== "undefined" && localStorage.getItem(CMS_STORAGE.CATALOG_VERSION) !== "2026-11-16-public-catalog-v26") {
     // Replace the earlier mock catalog once so all product names, descriptions,
     // and rates come from the source website. Later CMS edits remain persistent.
     localStorage.removeItem(CMS_STORAGE.PRODUCTS);
     localStorage.removeItem(CMS_STORAGE.BUNDLES);
     localStorage.removeItem(CMS_STORAGE.COUPONS);
-    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-10-29-public-catalog-v24");
+    localStorage.setItem(CMS_STORAGE.CATALOG_VERSION, "2026-11-16-public-catalog-v26");
   }
   try {
     const raw = typeof localStorage !== "undefined" ? localStorage.getItem(CMS_STORAGE.PRODUCTS) : null;
@@ -420,46 +420,46 @@ function loadCmsProducts() {
             p.image = "assets/beantown/pioneer-djm-s9.png";
           }
           if (p.id === "video-basic-package") {
-            p.image = "assets/beantown/basic-video-package.png";
+            p.image = "assets/beantown/basic-video-package.jpg";
           }
           if (p.id === "video-mid-package") {
-            p.image = "assets/beantown/mid-video-package.png";
+            p.image = "assets/beantown/mid-video-package.jpg";
           }
           if (p.id === "video-large-package") {
-            p.image = "assets/beantown/large-video-package.png";
+            p.image = "assets/beantown/large-video-package.jpg";
           }
           if (p.id === "tv-75") {
-            p.image = "assets/beantown/samsung-75-tv.png";
+            p.image = "assets/beantown/samsung-75-tv.jpg";
           }
           if (p.id === "tv-65") {
-            p.image = "assets/beantown/samsung-65-tv.png";
+            p.image = "assets/beantown/samsung-65-tv.jpg";
           }
           if (p.id === "laser-projector") {
-            p.image = "assets/beantown/hd-projector.png";
+            p.image = "assets/beantown/hd-projector.jpg";
           }
           if (p.id === "fastfold-screen") {
-            p.image = "assets/beantown/fastfold-screen.png";
+            p.image = "assets/beantown/fastfold-screen.jpg";
           }
           if (p.id === "video-switcher") {
-            p.image = "assets/beantown/video-switcher.png";
+            p.image = "assets/beantown/video-switcher.jpg";
           }
           if (p.id === "led-12") {
-            p.image = "assets/beantown/led-wall-12ft-package.png";
+            p.image = "assets/beantown/led-wall-12ft-package.jpg";
           }
           if (p.id === "led-16") {
-            p.image = "assets/beantown/led-wall-16ft-package.png";
+            p.image = "assets/beantown/led-wall-16ft-package.jpg";
           }
           if (p.id === "led-custom") {
-            p.image = "assets/beantown/led-wall-custom.png";
+            p.image = "assets/beantown/led-wall-custom.jpg";
           }
           if (p.id === "led-trailer") {
-            p.image = "assets/beantown/outdoor-led-trailer.png";
+            p.image = "assets/beantown/outdoor-led-trailer.jpg";
           }
           if (p.id === "stream-basic") {
-            p.image = "assets/beantown/streaming-basic-package.png";
+            p.image = "assets/beantown/streaming-basic-package.jpg";
           }
           if (p.id === "stream-pro") {
-            p.image = "assets/beantown/streaming-pro-package.png";
+            p.image = "assets/beantown/streaming-pro-package.jpg";
           }
           if (p.id === "followspot") {
             p.image = "assets/beantown/followspot.png";
@@ -1521,46 +1521,46 @@ function productImage(p) {
     return "assets/beantown/pioneer-djm-s9.png";
   }
   if (p && p.id === "video-basic-package") {
-    return "assets/beantown/basic-video-package.png";
+    return "assets/beantown/basic-video-package.jpg";
   }
   if (p && p.id === "video-mid-package") {
-    return "assets/beantown/mid-video-package.png";
+    return "assets/beantown/mid-video-package.jpg";
   }
   if (p && p.id === "video-large-package") {
-    return "assets/beantown/large-video-package.png";
+    return "assets/beantown/large-video-package.jpg";
   }
   if (p && p.id === "tv-75") {
-    return "assets/beantown/samsung-75-tv.png";
+    return "assets/beantown/samsung-75-tv.jpg";
   }
   if (p && p.id === "tv-65") {
-    return "assets/beantown/samsung-65-tv.png";
+    return "assets/beantown/samsung-65-tv.jpg";
   }
   if (p && p.id === "laser-projector") {
-    return "assets/beantown/hd-projector.png";
+    return "assets/beantown/hd-projector.jpg";
   }
   if (p && p.id === "fastfold-screen") {
-    return "assets/beantown/fastfold-screen.png";
+    return "assets/beantown/fastfold-screen.jpg";
   }
   if (p && p.id === "video-switcher") {
-    return "assets/beantown/video-switcher.png";
+    return "assets/beantown/video-switcher.jpg";
   }
   if (p && p.id === "led-12") {
-    return "assets/beantown/led-wall-12ft-package.png";
+    return "assets/beantown/led-wall-12ft-package.jpg";
   }
   if (p && p.id === "led-16") {
-    return "assets/beantown/led-wall-16ft-package.png";
+    return "assets/beantown/led-wall-16ft-package.jpg";
   }
   if (p && p.id === "led-custom") {
-    return "assets/beantown/led-wall-custom.png";
+    return "assets/beantown/led-wall-custom.jpg";
   }
   if (p && p.id === "led-trailer") {
-    return "assets/beantown/outdoor-led-trailer.png";
+    return "assets/beantown/outdoor-led-trailer.jpg";
   }
   if (p && p.id === "stream-basic") {
-    return "assets/beantown/streaming-basic-package.png";
+    return "assets/beantown/streaming-basic-package.jpg";
   }
   if (p && p.id === "stream-pro") {
-    return "assets/beantown/streaming-pro-package.png";
+    return "assets/beantown/streaming-pro-package.jpg";
   }
   if (p && p.id === "followspot") {
     return "assets/beantown/followspot.png";
@@ -2166,13 +2166,13 @@ function faqSection() {
 function home() {
   return `<div class="page">
   <section class="hero hero-equipment reveal">
-    <img class="hero-equipment-image hero-equipment-left" src="assets/beantown/hero-stage-rig.png" alt="" aria-hidden="true">
+    <img class="hero-equipment-image hero-equipment-left" src="assets/beantown/hero-stage-rig.png" alt="Beantown Audio Rentals Boston stage PA speaker system and LED lighting rig" fetchpriority="high" decoding="async">
     <div class="hero-copy">
       <h1 class="hero-headline" id="heroHeadline" aria-label="Your event. Your setup."><span class="hero-title-line" data-type-text="YOUR EVENT." data-accent-start="5">YOUR <span class="hero-title-highlight">EVENT.</span></span><br><span class="hero-title-line" data-type-text="YOUR SETUP." data-accent-start="5">YOUR <span class="hero-title-highlight">SETUP.</span></span></h1>
       <p>Rent speakers, screens, streaming gear, photo booths and complete event systems — then build your exact experience before you request a quote.</p>
       <div class="hero-cta"><button type="button" class="btn btn-dark" data-open-cart>Build your setup</button><a class="btn btn-light" href="#rentals">Explore rentals</a></div>
     </div>
-    <img class="hero-equipment-image hero-equipment-right" src="assets/beantown/hero-movie-rig.png" alt="" aria-hidden="true">
+    <img class="hero-equipment-image hero-equipment-right" src="assets/beantown/hero-movie-rig.png" alt="Boston outdoor inflatable movie screen, laser projector and event sound system rental" fetchpriority="high" decoding="async">
   </section>
   <section class="experience-categories" aria-labelledby="experience-categories-title">
     <h2 id="experience-categories-title">Start with the experience</h2>
@@ -2181,28 +2181,28 @@ function home() {
       <div class="experience-category-grid" id="experience-category-track" role="region" aria-label="Rental categories" tabindex="0">
       <article class="experience-category-card">
         <h3><a href="#rentals?cat=Audio%20%26%20Sound">Audio &amp; sound</a></h3>
-        <img src="assets/beantown/experience-audio.png" alt="" loading="lazy">
+        <img src="assets/beantown/experience-audio.png" alt="Audio equipment, powered PA speakers, microphones and DJ gear rentals in Boston MA" loading="lazy" decoding="async">
         <nav class="experience-category-links" aria-label="Audio and sound rentals">
           <a href="#rentals?cat=Audio%20%26%20Speakers">Speakers &amp; PA</a><a href="#rentals?cat=Subwoofers">Subwoofers</a><a href="#rentals?cat=Microphones">Microphones</a><a href="#rentals?cat=Audio%20Mixers">Audio Mixers</a><a href="#rentals?cat=DJ%20Equipment">DJ Equipment</a>
         </nav>
       </article>
       <article class="experience-category-card">
         <h3><a href="#rentals?cat=Video%20%26%20Visuals">Video &amp; Visuals</a></h3>
-        <img src="assets/beantown/experience-video.png" alt="" loading="lazy">
+        <img src="assets/beantown/experience-video.png" alt="HD laser projectors, 4K TV displays, LED video walls and live streaming rentals in Massachusetts" loading="lazy" decoding="async">
         <nav class="experience-category-links" aria-label="Video and visual rentals">
           <a href="#rentals?cat=Video%20%26%20Displays">Displays &amp; Projectors</a><a href="#rentals?cat=LED%20Video%20Walls">LED Video Walls</a><a href="#rentals?cat=Live%20Streaming">Live Streaming</a>
         </nav>
       </article>
       <article class="experience-category-card">
         <h3><a href="#rentals?cat=Lighting%20%26%20FX">Lighting &amp; FX</a></h3>
-        <img src="assets/beantown/experience-lighting.png" alt="" loading="lazy">
+        <img src="assets/beantown/experience-lighting.png" alt="Wireless event uplighting, stage lights, cold sparkler machines and dry ice fog rentals" loading="lazy" decoding="async">
         <nav class="experience-category-links" aria-label="Lighting and effects rentals">
           <a href="#rentals?cat=Event%20Lighting">Event Lighting</a><a href="#rentals?cat=Special%20Effects">Special Effects</a>
         </nav>
       </article>
       <article class="experience-category-card experience-category-movie">
         <h3><a href="#rentals?cat=Event%20Experiences">Event Experiences</a></h3>
-        <img src="assets/beantown/experience-movie.png" alt="" loading="lazy">
+        <img src="assets/beantown/experience-movie.png" alt="Photo booths, silent disco headphones and inflatable outdoor movie screen rentals in Boston" loading="lazy" decoding="async">
         <nav class="experience-category-links" aria-label="Event experience rentals">
           <a href="#rentals?cat=Photo%20Booths">Photo Booths</a><a href="#rentals?cat=Silent%20Disco">Silent Disco</a><a href="#rentals?cat=Outdoor%20Movies">Outdoor Movies</a>
         </nav>
@@ -2227,8 +2227,8 @@ function home() {
           </clipPath>
         </defs>
       </svg>
-      <div class="ebf-photo"><img src="assets/beantown/event-bundles-stage.jpg" alt="" loading="lazy"></div>
-      <img class="ebf-speaker" src="assets/beantown/event-bundles-speaker.png" alt="" loading="lazy">
+      <div class="ebf-photo"><img src="assets/beantown/event-bundles-stage.jpg" alt="Boston live event audio, stage lighting and LED screen production bundle" loading="lazy" decoding="async"></div>
+      <img class="ebf-speaker" src="assets/beantown/event-bundles-speaker.png" alt="Commercial powered PA speaker system for Boston event audio bundles" loading="lazy" decoding="async">
       <ul class="ebf-icons">
         <li><span class="ebf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg></span>Audio</li>
         <li><span class="ebf-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m16 10 6-3v10l-6-3"/></svg></span>Video</li>
@@ -2240,12 +2240,12 @@ function home() {
   <section class="why-beantown" aria-labelledby="why-beantown-title">
     <h2 id="why-beantown-title">Why Beantown?</h2>
     <div class="why-beantown-grid">
-      <article class="why-beantown-item"><img src="assets/beantown/why-speakers.png" alt="" loading="lazy"><h3>Sound That Sets the Mood</h3><p>Speakers and audio equipment for speeches, celebrations and everything in between.</p></article>
-      <article class="why-beantown-item"><img src="assets/beantown/why-lighting.png" alt="" loading="lazy"><h3>Light Up the Moment</h3><p>Event lighting to set the tone, highlight the action and bring your space to life.</p></article>
-      <article class="why-beantown-item"><img src="assets/beantown/why-screen.png" alt="" loading="lazy"><h3>Go Big on Screen</h3><p>LED screens for presentations, event visuals and moments everyone should see.</p></article>
-      <article class="why-beantown-item"><img src="assets/beantown/why-microphone.png" alt="" loading="lazy"><h3>Every Voice. Every Beat.</h3><p>Microphones and headphones for hosts, performers and immersive listening.</p></article>
-      <article class="why-beantown-item"><img src="assets/beantown/why-movie.png" alt="" loading="lazy"><h3>Movie Nights, Reimagined</h3><p>Inflatable screens for outdoor films, watch parties and larger-than-life viewing.</p></article>
-      <article class="why-beantown-item"><img src="assets/beantown/why-dj.png" alt="" loading="lazy"><h3>Bring the Party</h3><p>DJ setups and rental gear to put music at the heart of your celebration.</p></article>
+      <article class="why-beantown-item"><img src="assets/beantown/why-speakers.png" alt="Powered PA speaker and subwoofer rentals in Boston Massachusetts" loading="lazy" decoding="async"><h3>Sound That Sets the Mood</h3><p>Speakers and audio equipment for speeches, celebrations and everything in between.</p></article>
+      <article class="why-beantown-item"><img src="assets/beantown/why-lighting.png" alt="Wireless event uplighting and cold sparkler machine rentals" loading="lazy" decoding="async"><h3>Light Up the Moment</h3><p>Event lighting to set the tone, highlight the action and bring your space to life.</p></article>
+      <article class="why-beantown-item"><img src="assets/beantown/why-screen.png" alt="Indoor LED video screens and HD laser projector rentals" loading="lazy" decoding="async"><h3>Go Big on Screen</h3><p>LED screens for presentations, event visuals and moments everyone should see.</p></article>
+      <article class="why-beantown-item"><img src="assets/beantown/why-microphone.png" alt="Wireless handheld, lavalier and push-to-talk conference microphone rentals" loading="lazy" decoding="async"><h3>Every Voice. Every Beat.</h3><p>Microphones and headphones for hosts, performers and immersive listening.</p></article>
+      <article class="why-beantown-item"><img src="assets/beantown/why-movie.png" alt="Inflatable outdoor movie screen rental Boston" loading="lazy" decoding="async"><h3>Movie Nights, Reimagined</h3><p>Inflatable screens for outdoor films, watch parties and larger-than-life viewing.</p></article>
+      <article class="why-beantown-item"><img src="assets/beantown/why-dj.png" alt="Pioneer CDJ-3000, Technics 1200 turntables and DJ board rentals" loading="lazy" decoding="async"><h3>Bring the Party</h3><p>DJ setups and rental gear to put music at the heart of your celebration.</p></article>
     </div>
   </section>
   ${faqSection()}

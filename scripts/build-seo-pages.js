@@ -10,7 +10,7 @@ const vm = require("vm");
 
 const ROOT = path.resolve(__dirname, "..");
 const PUBLIC_DIR = path.join(ROOT, "public");
-const CSS_VERSION = "20261111-seo-landing";
+const CSS_VERSION = "20261116-seo-invisible";
 const DOMAIN = "https://beantownaudiorentals.com";
 const WEB3FORMS_KEY = "f285afef-347a-4087-998d-98a4309ad914";
 const OG_IMAGE = `${DOMAIN}/assets/beantown/69667bc6a8aed9344088bb03_Screenshot-2025-01-16-at-1-24-21-PM-p-1600.png`;
@@ -55,9 +55,10 @@ const SERVICE_PAGES = [
     navLabel: "Speaker Rentals",
     categoryLabel: "Audio & Speakers",
     hashCategory: "Audio & Speakers",
-    title: "Speaker Rental Boston | Powered PA Systems & Event Audio | Beantown Audio Rentals",
+    title: "Speaker Rental Boston | Party & Event PA Sound Systems From $65 | Beantown Audio Rentals",
     description:
-      "Rent powered PA speakers, line array sound systems, stage monitors, and full event speaker packages in Boston & New England. Clear event audio with delivery, setup, and soundcheck.",
+      "Rent powered PA speakers & party sound systems in Boston & Massachusetts from $65/day. Small to 500+ guest concert line array speaker rentals with stands, Bluetooth & delivery.",
+    altNames: ["Boston Speaker Rental", "PA Speaker Rental Massachusetts", "Party Speaker Rental Near Me"],
     h1: "Speaker Rentals in Boston & New England",
     lead: "Crystal-clear powered PA speakers, line arrays, and full audio packages for weddings, corporate panels, concerts, and private celebrations—delivered, set up, and soundchecked across Greater Boston.",
     heroBullets: [
@@ -89,13 +90,15 @@ const SERVICE_PAGES = [
   },
   {
     slug: "audio",
-    urlPath: "/services/audio",
+    outFile: "audio.html",
+    urlPath: "/audio",
     navLabel: "Audio Packages",
     categoryLabel: "Complete Sound Systems",
     hashCategory: "Audio & Speakers",
-    title: "Audio Equipment Rental Boston | Complete Event Sound Packages | Beantown Audio Rentals",
+    title: "Audio Equipment Rental Boston | PA Sound System & Audio Rentals | Beantown Audio Rentals",
     description:
-      "Full-service audio equipment rental near you in Boston & New England. Turnkey PA sound packages, wireless mics, subwoofers & digital mixers delivered and tested for any crowd.",
+      "Full-service audio equipment & audio system rentals in Boston & Massachusetts from $65–$199. Turnkey PA speaker packages, wireless mics, subwoofers & mixers near you.",
+    altNames: ["Audio Equipment Rental Near Me", "Boston Audio System Rental", "Audio Visual Equipment Rental Massachusetts"],
     h1: "Boston Audio Equipment Rental & Sound Packages",
     lead: "Turnkey sound packages combining powered speakers, wireless Shure microphones, mixers, and cabling—engineered for reliable clarity in hotel ballrooms, tents, auditoriums, and outdoor venues.",
     heroBullets: [
@@ -127,9 +130,10 @@ const SERVICE_PAGES = [
     navLabel: "DJ Equipment",
     categoryLabel: "DJ Equipment",
     hashCategory: "DJ Equipment",
-    title: "DJ Equipment Rental Boston | CDJ-3000, Mixers & DJ Packages | Beantown Audio Rentals",
+    title: "DJ Equipment Rental Boston | Rent DJ Boards, CDJ-3000 & Mixers | Beantown Audio Rentals",
     description:
-      "Rent Pioneer CDJ-3000s, DJM-900NXS, Technics 1200 turntables, Rane battle mixers, DDJ controllers & complete DJ speaker packages in Boston & New England.",
+      "Rent Pioneer CDJ-3000s, DJM-900NXS, Technics 1200 turntables, DDJ boards, Rane battle mixers & complete DJ speaker packages in Boston & Massachusetts from $50.",
+    altNames: ["Rent DJ Equipment Boston", "Rent a DJ Board Boston", "CDJ-3000 Rental Massachusetts"],
     h1: "DJ Equipment Rentals in Boston",
     lead: "Club-standard Pioneer DJ CDJ-3000s, DJM-900NXS & DJM-S9 mixers, Technics SL-1200MK2 turntables, DDJ-1000SRT controllers, and turnkey DJ sound packages for weddings, clubs, and private parties.",
     heroBullets: [
@@ -195,9 +199,10 @@ const SERVICE_PAGES = [
     navLabel: "Cold Sparklers",
     categoryLabel: "Special Effects",
     hashCategory: "Special Effects",
-    title: "Cold Sparklers & Cold Spark Machine Rental Boston | Beantown Audio Rentals",
+    title: "Cold Spark Machine & Cold Sparklers Rental Boston | Indoor Safe | Beantown Audio Rentals",
     description:
-      "Rent indoor-safe ColorKey Dazzler FX cold sparkler machines in Boston & Massachusetts for wedding grand entrances, first dances & concerts. No smoke, cool sparks.",
+      "Rent indoor-safe ColorKey cold spark machines & cold sparklers in Boston & Massachusetts from $350 for wedding grand entrances, first dances & concerts. No smoke, cool sparks.",
+    altNames: ["Cold Spark Machine Rental Boston", "Cold Spark Rental Massachusetts", "Cold Sparklers Rental"],
     h1: "Cold Sparkler & Cold Spark Machine Rentals in Boston",
     lead: "Create unforgettable indoor-safe spark fountains up to 15 feet high for grand entrances, first dances, and concert drops—zero smoke, zero open flame, and no pyrotechnic permit required.",
     heroBullets: [
@@ -231,7 +236,8 @@ const SERVICE_PAGES = [
     hashCategory: "Special Effects",
     title: "Dry Ice Machine Rental Boston | Dancing on a Cloud Fog | Beantown Audio Rentals",
     description:
-      "Rent commercial Chauvet Nimbus dry ice machines for 'Dancing on a Cloud' wedding first dances & theatrical entrances in Boston & New England. Low-lying fog that won't trip alarms.",
+      "Rent commercial Chauvet Nimbus dry ice machines ($295) for Dancing on a Cloud wedding first dances & theatrical entrances in Boston & MA. Low-lying fog that won't trip alarms.",
+    altNames: ["Dry Ice Machine Rental Massachusetts", "Dancing on a Cloud Fog Rental Boston"],
     h1: "Dry Ice Cloud Machine Rentals in Boston",
     lead: "Produce dense, thick, snowy-white low-lying fog that blankets the dance floor for your wedding first dance or theatrical stage cue—staying strictly low to the floor without rising.",
     heroBullets: [
@@ -263,9 +269,10 @@ const SERVICE_PAGES = [
     navLabel: "Microphones",
     categoryLabel: "Microphones",
     hashCategory: "Microphones",
-    title: "Microphone Rental Boston | Wireless Conference, Lavalier & Event Mics | Beantown Audio Rentals",
+    title: "Microphone Rental Boston | Wireless, Lavalier & Push-to-Talk Mics | Beantown Audio Rentals",
     description:
-      "Rent Shure QLX-D digital wireless handhelds, clip-on lavaliers, Countryman headsets, SM58 vocal mics, push-to-talk conference mics & IEMs in Boston & MA.",
+      "Rent Shure QLX-D wireless handheld & clip-on lavalier mics, Countryman headsets, SM58s & push-to-talk (PTT) conference microphones in Boston & Massachusetts from $20.",
+    altNames: ["Push to Talk Mic Rental", "Rent Microphone Boston", "Wireless Conference Microphone Rental"],
     h1: "Wireless & Conference Microphone Rentals in Boston",
     lead: "Dependable RF clarity with Shure QLX-D digital wireless handhelds, discreet clip-on lavaliers, Countryman headsets, push-to-talk podium/conference mics, and live in-ear monitor systems.",
     heroBullets: [
@@ -351,13 +358,15 @@ const SERVICE_PAGES = [
   },
   {
     slug: "video",
-    urlPath: "/services/video",
+    outFile: "video.html",
+    urlPath: "/video",
     navLabel: "Video Equipment",
     categoryLabel: "Video & Displays",
     hashCategory: "Video & Displays",
-    title: "Video Equipment Rental Boston | Displays, Projectors & AV Switchers | Beantown Audio Rentals",
+    title: "Video & Audio Visual Equipment Rental Boston | Displays & Projectors | Beantown Audio Rentals",
     description:
-      "Rent commercial 4K Samsung TVs, laser HD projectors, Fast-Fold screens, video switchers & complete conference video packages in Boston & New England.",
+      "Rent commercial 4K Samsung TVs, HD laser projectors ($175+), Fast-Fold screens, video switchers & complete audio visual equipment packages in Boston & Massachusetts.",
+    altNames: ["Audio Visual Equipment Rental Massachusetts", "Event Video Equipment Rental Boston"],
     h1: "Video Equipment & Display Rentals in Boston",
     lead: "Complete presentation video packages—combining bright laser projectors, Fast-Fold screens with black velvet dress kits, rolling 65″ & 75″ 4K displays, and seamless multi-input switchers.",
     heroBullets: [
@@ -1027,7 +1036,79 @@ ${marker}
   if (idx !== -1) {
     current = current.slice(0, idx).trimEnd() + "\n";
   }
-  fs.writeFileSync(cssPath, current + "\n" + seoCss.trim() + "\n", "utf8");
+  const finalCss = current + "\n" + seoCss.trim() + "\n";
+  fs.writeFileSync(cssPath, finalCss, "utf8");
+  fs.writeFileSync(path.join(PUBLIC_DIR, "styles.css"), finalCss, "utf8");
+}
+
+function organizationSchemaNode() {
+  return {
+    "@type": ["LocalBusiness", "Organization"],
+    "@id": `${DOMAIN}/#organization`,
+    name: "Beantown Audio Rentals",
+    alternateName: "Beantown Audio Visual",
+    description:
+      "Boston & Massachusetts audio visual equipment rentals: powered PA speakers, DJ equipment, wireless & push-to-talk microphones, HD laser projectors, LED video walls, lighting, cold sparklers, dry ice machines, silent disco & photo booths.",
+    url: `${DOMAIN}/`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${DOMAIN}/favicon-512x512.png`,
+      width: 512,
+      height: 512,
+    },
+    image: OG_IMAGE,
+    telephone: "+1-978-601-5473",
+    email: "info@beantownaudiorentals.com",
+    priceRange: "$$",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Boston",
+      addressRegion: "MA",
+      addressCountry: "US",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 42.3601,
+      longitude: -71.0589,
+    },
+    areaServed: [
+      { "@type": "City", name: "Boston" },
+      { "@type": "City", name: "Cambridge" },
+      { "@type": "City", name: "Somerville" },
+      { "@type": "City", name: "Brookline" },
+      { "@type": "City", name: "Newton" },
+      { "@type": "City", name: "Waltham" },
+      { "@type": "State", name: "Massachusetts" },
+      { "@type": "Place", name: "New England" },
+    ],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ],
+        opens: "08:00",
+        closes: "20:00",
+      },
+    ],
+    sameAs: ["https://www.instagram.com/beantownaudiorentals/"],
+  };
+}
+
+function websiteSchemaNode() {
+  return {
+    "@type": "WebSite",
+    "@id": `${DOMAIN}/#website`,
+    name: "Beantown Audio Rentals",
+    url: `${DOMAIN}/`,
+    publisher: { "@id": `${DOMAIN}/#organization` },
+  };
 }
 
 function commonHeadTags({ title, description, canonicalUrl, jsonLdObj }) {
@@ -1248,6 +1329,8 @@ function renderServicePage(spec) {
   const schemaGraph = {
     "@context": "https://schema.org",
     "@graph": [
+      organizationSchemaNode(),
+      websiteSchemaNode(),
       {
         "@type": "BreadcrumbList",
         itemListElement: [
@@ -1260,6 +1343,7 @@ function renderServicePage(spec) {
         "@type": "Service",
         "@id": `${canonicalUrl}#service`,
         name: spec.h1,
+        ...(Array.isArray(spec.altNames) && spec.altNames.length ? { alternateName: spec.altNames } : {}),
         description: spec.description,
         url: canonicalUrl,
         serviceType: spec.categoryLabel,
@@ -1286,8 +1370,10 @@ function renderServicePage(spec) {
                 typeof item.price === "number" && item.price > 0
                   ? {
                       "@type": "Offer",
+                      url: canonicalUrl,
                       priceCurrency: "USD",
                       price: String(item.price),
+                      priceValidUntil: "2027-12-31",
                       availability: "https://schema.org/InStock",
                     }
                   : undefined,
@@ -1444,9 +1530,9 @@ ${CART_SYNC_SCRIPT}
   </body>
 </html>
 `;
-  const relOut = path.join("services", `${spec.slug}.html`);
-  fs.mkdirSync(path.join(PUBLIC_DIR, "services"), { recursive: true });
-  fs.mkdirSync(path.join(ROOT, "services"), { recursive: true });
+  const relOut = spec.outFile || path.join("services", `${spec.slug}.html`);
+  fs.mkdirSync(path.join(PUBLIC_DIR, path.dirname(relOut)), { recursive: true });
+  fs.mkdirSync(path.join(ROOT, path.dirname(relOut)), { recursive: true });
   fs.writeFileSync(path.join(PUBLIC_DIR, relOut), html, "utf8");
   fs.writeFileSync(path.join(ROOT, relOut), html, "utf8");
 }
@@ -1456,6 +1542,8 @@ function renderServicesDirectory() {
   const schemaGraph = {
     "@context": "https://schema.org",
     "@graph": [
+      organizationSchemaNode(),
+      websiteSchemaNode(),
       {
         "@type": "BreadcrumbList",
         itemListElement: [
@@ -1469,6 +1557,7 @@ function renderServicesDirectory() {
         url: canonicalUrl,
         description: "Full directory of Boston audio, speaker, DJ equipment, projector, LED wall, lighting, cold sparklers, and photo booth rentals.",
         isPartOf: { "@id": `${DOMAIN}/#website` },
+        mainEntity: { "@id": `${DOMAIN}/#organization` },
       },
     ],
   };
@@ -1545,6 +1634,8 @@ function renderAboutPage() {
   const schemaGraph = {
     "@context": "https://schema.org",
     "@graph": [
+      organizationSchemaNode(),
+      websiteSchemaNode(),
       {
         "@type": "BreadcrumbList",
         itemListElement: [
@@ -1643,6 +1734,8 @@ function renderContactPage() {
   const schemaGraph = {
     "@context": "https://schema.org",
     "@graph": [
+      organizationSchemaNode(),
+      websiteSchemaNode(),
       {
         "@type": "BreadcrumbList",
         itemListElement: [
@@ -1774,6 +1867,377 @@ ${CART_SYNC_SCRIPT}
   fs.writeFileSync(path.join(ROOT, "contact.html"), html, "utf8");
 }
 
+function renderHomepage() {
+  const homeTitle = "Boston Audio Visual & Speaker Rentals | Audio Equipment MA | Beantown Audio Rentals";
+  const homeDesc =
+    "Boston & Massachusetts audio visual equipment rentals: powered PA speakers from $65, DJ equipment, wireless & push-to-talk mics, HD laser projectors, LED walls, uplighting, silent disco & cold sparklers.";
+  const org = organizationSchemaNode();
+  org.hasOfferCatalog = {
+    "@type": "OfferCatalog",
+    name: "Boston AV & Event Equipment Rentals",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Speaker, Microphone & DJ Equipment Rentals",
+          url: `${DOMAIN}/services/speaker-rentals`,
+          description:
+            "Powered PA speaker rentals, subwoofer rentals, Shure QLX-D wireless & push-to-talk microphones, digital audio mixers, Pioneer CDJ-3000s, and turnkey DJ packages.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Audio Equipment & Sound System Rentals",
+          url: `${DOMAIN}/audio`,
+          description:
+            "Turnkey Small ($199+), Medium ($349+), and Large ($880+) PA sound system packages delivered and soundchecked across Boston and Massachusetts.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Projector, 4K TV & LED Video Wall Rentals",
+          url: `${DOMAIN}/services/projector-rentals`,
+          description:
+            "Commercial HD laser projectors, Fast-Fold screens, Samsung 65-inch & 75-inch TVs, indoor 2.67mm LED walls, outdoor mobile LED trailers, and live streaming.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Event Lighting & Special Effects",
+          url: `${DOMAIN}/services/cold-sparklers`,
+          description:
+            "Wireless battery LED uplights, stage wash lighting, indoor-safe cold sparkler machines, and dry ice Dancing on a Cloud fog machines.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Silent Disco, Photo Booths & Outdoor Movies",
+          url: `${DOMAIN}/services/silent-disco`,
+          description:
+            "3-channel wireless silent disco packs (50–300 headphones), Magic Mirror & 360 photo booths, and 12ft–40ft inflatable outdoor movie screens.",
+        },
+      },
+    ],
+  };
+
+  const schemaGraph = {
+    "@context": "https://schema.org",
+    "@graph": [
+      org,
+      websiteSchemaNode(),
+      {
+        "@type": "FAQPage",
+        "@id": `${DOMAIN}/#faq`,
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "What equipment is available in your Boston rental inventory?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Our Boston rental inventory includes small, medium, and large PA audio packages; powered speakers and subwoofers; Shure wireless and push-to-talk microphones; Behringer and Allen & Heath mixers; Pioneer DJ CDJs and packages; HD laser projectors, Samsung 65-inch and 75-inch 4K TVs, indoor 2.67mm LED walls, and outdoor LED trailers; inflatable outdoor movie screens; 360 and Magic Mirror photo booths; 50–300 silent disco headphone packs; wireless uplighting; cold sparklers; dry ice machines; and live streaming kits.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Do you handle delivery, setup, soundcheck, and pickup?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes. We provide turnkey delivery, cabling, room tuning, soundcheck, and pickup across Greater Boston and all of New England, plus self-pickup options for compact gear and dedicated on-site technician support.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Are Cold Sparklers and Dry Ice fog safe for indoor Boston venues?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Yes. Our Cold Sparkler machines use non-pyrotechnic composite granules with cool sparks, no open flame, and virtually no smoke, while Dry Ice machines keep chilled white fog strictly low to the floor.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What areas in Massachusetts and New England do you service?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "We cover Boston proper (Back Bay, Seaport, Downtown, South End, Fenway), Cambridge, Somerville, Brookline, Newton, Waltham, Worcester, Cape Cod, Providence RI, Southern NH, and New England.",
+            },
+          },
+        ],
+      },
+    ],
+  };
+
+  const footerSeoLinks = [
+    ...SERVICE_PAGES.map((p) => `<a href="${p.urlPath}">${escapeHtml(p.navLabel)}</a>`),
+    `<a href="/services">All Services</a>`,
+    `<a href="/about">About Beantown</a>`,
+    `<a href="/contact">Contact &amp; Quote</a>`,
+  ].join("\n            ");
+
+  // Exact visual parity with home() in script.js + openingSequence curtain (0 visual changes)
+  const html = `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>${escapeHtml(homeTitle)}</title>
+    <meta name="description" content="${escapeHtml(homeDesc)}" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="google-site-verification" content="mNQFNo1Zx3hTSlkyXoKHWQBBHWDKJ_Ns4Z5Bcfgvmzo" />
+    <link rel="canonical" href="${DOMAIN}/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Beantown Audio Rentals" />
+    <meta property="og:url" content="${DOMAIN}/" />
+    <meta property="og:title" content="${escapeHtml(homeTitle)}" />
+    <meta property="og:description" content="${escapeHtml(homeDesc)}" />
+    <meta property="og:image" content="${escapeHtml(OG_IMAGE)}" />
+    <meta property="og:image:alt" content="Beantown Audio Rentals stage LED video wall, lighting, and sound equipment in Boston" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="${escapeHtml(homeTitle)}" />
+    <meta name="twitter:description" content="${escapeHtml(homeDesc)}" />
+    <meta name="twitter:image" content="${escapeHtml(OG_IMAGE)}" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <script type="application/ld+json">
+${JSON.stringify(schemaGraph, null, 2)}
+    </script>
+    <link rel="preload" as="image" href="assets/beantown/hero-stage-rig.png" />
+    <link rel="preload" as="image" href="assets/beantown/hero-movie-rig.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css?v=${CSS_VERSION}" />
+  </head>
+  <body class="intro-pending">
+    <div class="site-shell">
+      <div class="opening-sequence" id="openingSequence" aria-hidden="true"><div class="opening-lockup"><span class="opening-fixed">YOUR</span><span class="opening-changing" id="openingWord">EVENT</span></div></div>
+      <header class="topbar">
+        <div class="nav-wrap">
+          <a class="brand" href="#home" aria-label="Beantown AV home">
+            <img class="brand-logo" src="assets/beantown/beantown-logo.png" alt="Beantown Audio Rentals" />
+          </a>
+
+          <nav class="desktop-nav" aria-label="Primary navigation">
+            <a href="#rentals">Rentals</a>
+            <a href="#bundles">Event Bundles</a>
+            <a href="#about">About Us</a>
+            <a href="#services">Services</a>
+          </nav>
+
+          <div class="nav-actions">
+            <button class="icon-btn" id="searchBtn" aria-label="Search rentals">
+              ⌕
+            </button>
+            <button class="setup-link" id="setupLink" type="button" aria-label="My setup">
+              <svg class="setup-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Zm4 0a3 3 0 0 1 6 0" /></svg>
+              <span class="setup-caption">My setup</span><b id="setupCount">0</b>
+            </button>
+            <a class="btn btn-dark btn-small" href="#quote">Get a Quote <span>↗</span></a>
+          </div>
+        </div>
+      </header>
+
+      <main id="app">
+        <div class="page">
+          <section class="hero hero-equipment reveal">
+            <img class="hero-equipment-image hero-equipment-left" src="assets/beantown/hero-stage-rig.png" alt="Beantown Audio Rentals Boston stage PA speaker system and LED lighting rig" fetchpriority="high" decoding="async" />
+            <div class="hero-copy">
+              <h1 class="hero-headline" id="heroHeadline" aria-label="Your event. Your setup."><span class="hero-title-line" data-type-text="YOUR EVENT." data-accent-start="5">YOUR <span class="hero-title-highlight">EVENT.</span></span><br /><span class="hero-title-line" data-type-text="YOUR SETUP." data-accent-start="5">YOUR <span class="hero-title-highlight">SETUP.</span></span></h1>
+              <p>Rent speakers, screens, streaming gear, photo booths and complete event systems — then build your exact experience before you request a quote.</p>
+              <div class="hero-cta"><button type="button" class="btn btn-dark" data-open-cart>Build your setup</button><a class="btn btn-light" href="#rentals">Explore rentals</a></div>
+            </div>
+            <img class="hero-equipment-image hero-equipment-right" src="assets/beantown/hero-movie-rig.png" alt="Boston outdoor inflatable movie screen, laser projector and event sound system rental" fetchpriority="high" decoding="async" />
+          </section>
+          <section class="experience-categories" aria-labelledby="experience-categories-title">
+            <h2 id="experience-categories-title">Start with the experience</h2>
+            <div class="experience-carousel">
+              <div class="experience-category-grid" id="experience-category-track" role="region" aria-label="Rental categories" tabindex="0">
+                <article class="experience-category-card">
+                  <h3><a href="#rentals?cat=Audio%20%26%20Sound">Audio &amp; sound</a></h3>
+                  <img src="assets/beantown/experience-audio.png" alt="Audio equipment, powered PA speakers, microphones and DJ gear rentals in Boston MA" loading="lazy" decoding="async" />
+                  <nav class="experience-category-links" aria-label="Audio and sound rentals">
+                    <a href="#rentals?cat=Audio%20%26%20Speakers">Speakers &amp; PA</a><a href="#rentals?cat=Subwoofers">Subwoofers</a><a href="#rentals?cat=Microphones">Microphones</a><a href="#rentals?cat=Audio%20Mixers">Audio Mixers</a><a href="#rentals?cat=DJ%20Equipment">DJ Equipment</a>
+                  </nav>
+                </article>
+                <article class="experience-category-card">
+                  <h3><a href="#rentals?cat=Video%20%26%20Visuals">Video &amp; Visuals</a></h3>
+                  <img src="assets/beantown/experience-video.png" alt="HD laser projectors, 4K TV displays, LED video walls and live streaming rentals in Massachusetts" loading="lazy" decoding="async" />
+                  <nav class="experience-category-links" aria-label="Video and visual rentals">
+                    <a href="#rentals?cat=Video%20%26%20Displays">Displays &amp; Projectors</a><a href="#rentals?cat=LED%20Video%20Walls">LED Video Walls</a><a href="#rentals?cat=Live%20Streaming">Live Streaming</a>
+                  </nav>
+                </article>
+                <article class="experience-category-card">
+                  <h3><a href="#rentals?cat=Lighting%20%26%20FX">Lighting &amp; FX</a></h3>
+                  <img src="assets/beantown/experience-lighting.png" alt="Wireless event uplighting, stage lights, cold sparkler machines and dry ice fog rentals" loading="lazy" decoding="async" />
+                  <nav class="experience-category-links" aria-label="Lighting and effects rentals">
+                    <a href="#rentals?cat=Event%20Lighting">Event Lighting</a><a href="#rentals?cat=Special%20Effects">Special Effects</a>
+                  </nav>
+                </article>
+                <article class="experience-category-card experience-category-movie">
+                  <h3><a href="#rentals?cat=Event%20Experiences">Event Experiences</a></h3>
+                  <img src="assets/beantown/experience-movie.png" alt="Photo booths, silent disco headphones and inflatable outdoor movie screen rentals in Boston" loading="lazy" decoding="async" />
+                  <nav class="experience-category-links" aria-label="Event experience rentals">
+                    <a href="#rentals?cat=Photo%20Booths">Photo Booths</a><a href="#rentals?cat=Silent%20Disco">Silent Disco</a><a href="#rentals?cat=Outdoor%20Movies">Outdoor Movies</a>
+                  </nav>
+                </article>
+              </div>
+            </div>
+            <a href="#rentals?cat=All" class="btn btn-dark experience-categories-cta">View all rentals</a>
+          </section>
+          <section class="event-bundles-feature reveal" aria-labelledby="event-bundles-title">
+            <div class="ebf-copy">
+              <h2 id="event-bundles-title">Event Bundles</h2>
+              <p>We offer complete event bundles designed around the occasion. From weddings and corporate conferences to concerts and live performances, we combine professional audio, video, lighting, staging, and event technology to create a seamless experience from start to finish.</p>
+              <p>Our team works with you to match the right equipment and services to your event's size, venue, and needs. Every bundle is carefully prepared, tested, and supported by our experienced crew so you can focus on your event while we handle the production.</p>
+              <a class="ebf-cta" href="#bundles">Browse Event Bundles</a>
+            </div>
+            <div class="ebf-visual" aria-hidden="true">
+              <div class="ebf-photo"><img src="assets/beantown/event-bundles-stage.jpg" alt="Boston live event audio, stage lighting and LED screen production bundle" loading="lazy" decoding="async" /></div>
+              <img class="ebf-speaker" src="assets/beantown/event-bundles-speaker.png" alt="Commercial powered PA speaker system for Boston event audio bundles" loading="lazy" decoding="async" />
+            </div>
+          </section>
+          <section class="why-beantown" aria-labelledby="why-beantown-title">
+            <h2 id="why-beantown-title">Why Beantown?</h2>
+            <div class="why-beantown-grid">
+              <article class="why-beantown-item"><img src="assets/beantown/why-speakers.png" alt="Powered PA speaker and subwoofer rentals in Boston Massachusetts" loading="lazy" decoding="async" /><h3>Sound That Sets the Mood</h3><p>Speakers and audio equipment for speeches, celebrations and everything in between.</p></article>
+              <article class="why-beantown-item"><img src="assets/beantown/why-lighting.png" alt="Wireless event uplighting and cold sparkler machine rentals" loading="lazy" decoding="async" /><h3>Light Up the Moment</h3><p>Event lighting to set the tone, highlight the action and bring your space to life.</p></article>
+              <article class="why-beantown-item"><img src="assets/beantown/why-screen.png" alt="Indoor LED video screens and HD laser projector rentals" loading="lazy" decoding="async" /><h3>Go Big on Screen</h3><p>LED screens for presentations, event visuals and moments everyone should see.</p></article>
+              <article class="why-beantown-item"><img src="assets/beantown/why-microphone.png" alt="Wireless handheld, lavalier and push-to-talk conference microphone rentals" loading="lazy" decoding="async" /><h3>Every Voice. Every Beat.</h3><p>Microphones and headphones for hosts, performers and immersive listening.</p></article>
+              <article class="why-beantown-item"><img src="assets/beantown/why-movie.png" alt="Inflatable outdoor movie screen rental Boston" loading="lazy" decoding="async" /><h3>Movie Nights, Reimagined</h3><p>Inflatable screens for outdoor films, watch parties and larger-than-life viewing.</p></article>
+              <article class="why-beantown-item"><img src="assets/beantown/why-dj.png" alt="Pioneer CDJ-3000, Technics 1200 turntables and DJ board rentals" loading="lazy" decoding="async" /><h3>Bring the Party</h3><p>DJ setups and rental gear to put music at the heart of your celebration.</p></article>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-grid">
+          <div>
+            <div class="brand footer-brand">
+              <img class="brand-logo" src="assets/beantown/beantown-logo-white.png" alt="Beantown Audio Rentals" />
+            </div>
+            <p class="muted">
+              Premium event technology, delivered without the stress.
+            </p>
+          </div>
+          <div>
+            <h4>Explore</h4>
+            <a href="#rentals">Rentals</a><a href="#bundles">Bundles</a><a href="/about">About Us</a>
+          </div>
+          <div>
+            <h4>Services</h4>
+            <a href="/services">All AV Services</a><a href="/services/speaker-rentals">Speaker Rentals</a><a href="/services/dj-equipment-rentals">DJ Equipment</a><a href="/services/projector-rentals">Projector Rentals</a>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <a href="/contact">Contact &amp; Free Quote</a><a href="mailto:info@beantownaudiorentals.com">info@beantownaudiorentals.com</a><a href="tel:+19786015473">(978) 601-5473</a>
+          </div>
+        </div>
+        <div class="footer-seo-strip">
+          <span class="footer-seo-label">Boston &amp; New England Rental Guides</span>
+          <div class="footer-seo-links">
+            ${footerSeoLinks}
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Beantown Audio Rentals · Boston, Massachusetts</span><span>Rental selections and final pricing are confirmed with your quote. · <a href="#admin" class="footer-admin-link">Admin CMS</a></span>
+        </div>
+      </footer>
+    </div>
+
+    <nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="Mobile navigation">
+      <a href="#home" class="mobile-bottom-link">
+        <span class="mobile-bottom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z"/></svg></span>
+        <span>Home</span>
+      </a>
+      <a href="#rentals" class="mobile-bottom-link">
+        <span class="mobile-bottom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><circle cx="12" cy="7" r="2"/><circle cx="12" cy="15" r="4"/><circle cx="12" cy="15" r="1" fill="currentColor" stroke="none"/></svg></span>
+        <span>Rentals</span>
+      </a>
+      <a href="#bundles" class="mobile-bottom-link">
+        <span class="mobile-bottom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="17" rx="3"/><path d="M7 2v6m10-6v6M3 10h18m-9 2 1.4 2.8 3.1.5-2.2 2.2.5 3-2.8-1.4-2.8 1.4.5-3-2.2-2.2 3.1-.5Z"/></svg></span>
+        <span>Bundles</span>
+      </a>
+      <a href="#about" class="mobile-bottom-link">
+        <span class="mobile-bottom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="4"/><path d="M2 20v-2a7 7 0 0 1 14 0v2a15 15 0 0 1-14 0Zm15-8a5 5 0 0 1 5 5v2a11 11 0 0 1-3 .7"/><path d="M17 3a4 4 0 0 1 0 8"/></svg></span>
+        <span>About</span>
+      </a>
+      <a href="#services" class="mobile-bottom-link">
+        <span class="mobile-bottom-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13v-2a9 9 0 0 1 18 0v2m0 4v1a4 4 0 0 1-4 4h-2"/><rect x="1" y="11" width="5" height="7" rx="2"/><rect x="18" y="11" width="5" height="7" rx="2"/><rect x="10" y="20" width="5" height="3" rx="1.5"/></svg></span>
+        <span>Services</span>
+      </a>
+    </nav>
+
+    <div class="search-overlay" id="searchOverlay" hidden>
+      <div class="search-panel">
+        <div class="search-head">
+          <div>
+            <span class="eyebrow">QUICK FIND</span>
+            <h2>Search rentals</h2>
+          </div>
+          <button class="icon-btn" id="closeSearch">×</button>
+        </div>
+        <input
+          id="searchInput"
+          class="search-input"
+          placeholder="Try “wireless mic”, “movie screen”, or “LED wall”"
+          autocomplete="off"
+        />
+        <div id="searchResults" class="search-results"></div>
+      </div>
+    </div>
+
+    <div class="cart-drawer-overlay" id="cartDrawerOverlay" aria-hidden="true">
+      <aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartDrawerTitle">
+        <header class="cart-drawer-head">
+          <div class="cart-drawer-title-wrap">
+            <h2 class="cart-drawer-title" id="cartDrawerTitle">Your Setup</h2>
+          </div>
+          <button class="cart-drawer-close" id="closeCartDrawer" type="button" aria-label="Close setup">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </header>
+
+        <div class="cart-drawer-body" id="cartDrawerBody"></div>
+        <footer class="cart-drawer-footer" id="cartDrawerFooter"></footer>
+      </aside>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="assets/beantown/catalog-data.js?v=${CSS_VERSION}"></script>
+    <script src="script.js?v=${CSS_VERSION}"></script>
+  </body>
+</html>
+`;
+  fs.writeFileSync(path.join(PUBLIC_DIR, "index.html"), html, "utf8");
+  fs.writeFileSync(path.join(ROOT, "index.html"), html, "utf8");
+}
+
+function cleanupMovedLegacyFiles() {
+  for (const stale of ["services/audio.html", "services/video.html"]) {
+    for (const base of [ROOT, PUBLIC_DIR]) {
+      const fp = path.join(base, stale);
+      if (fs.existsSync(fp)) fs.unlinkSync(fp);
+    }
+  }
+}
+
 function writeSitemap() {
   const today = new Date().toISOString().slice(0, 10);
   const urls = [
@@ -1783,7 +2247,7 @@ function writeSitemap() {
     { loc: `${DOMAIN}/contact`, priority: "0.8", freq: "monthly" },
     ...SERVICE_PAGES.map((p) => ({
       loc: `${DOMAIN}${p.urlPath}`,
-      priority: ["speaker-rentals", "dj-equipment-rentals", "projector-rentals", "cold-sparklers", "indoorledwall"].includes(p.slug) ? "0.9" : "0.8",
+      priority: ["speaker-rentals", "audio", "dj-equipment-rentals", "projector-rentals", "cold-sparklers", "indoorledwall", "microphone-rentals"].includes(p.slug) ? "0.9" : "0.8",
       freq: "weekly",
     })),
   ];
@@ -1819,11 +2283,13 @@ function exportHomepageFooterAndCatalogChecks() {
   console.log(`Checked ${CATALOG.length} catalog products (missing assets: ${missing})`);
 }
 
+cleanupMovedLegacyFiles();
 ensureSeoStyles();
 SERVICE_PAGES.forEach(renderServicePage);
 renderServicesDirectory();
 renderAboutPage();
 renderContactPage();
+renderHomepage();
 writeSitemap();
 exportHomepageFooterAndCatalogChecks();
-console.log(`Built ${SERVICE_PAGES.length + 3} static SEO pages cleanly!`);
+console.log(`Built ${SERVICE_PAGES.length + 4} static SEO pages cleanly!`);

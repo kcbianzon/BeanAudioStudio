@@ -36,13 +36,18 @@
         "type": 301
       },
       {
-        "regex": "(?i)^/audio/?$",
-        "destination": "/services/audio",
+        "regex": "(?i)^/services/audio/?$",
+        "destination": "/audio",
         "type": 301
       },
       {
-        "regex": "(?i)^/video/?$",
-        "destination": "/services/video",
+        "regex": "(?i)^/services/video/?$",
+        "destination": "/video",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:audio-equipment|sound-system-rentals?|audio-rentals?)/?$",
+        "destination": "/audio",
         "type": 301
       },
       {
@@ -76,8 +81,23 @@
         "type": 301
       },
       {
+        "regex": "(?i)^/subwoofer-rentals?/?$",
+        "destination": "/services/subwoofer-rentals",
+        "type": 301
+      },
+      {
         "regex": "(?i)^/services/subwoofer-rental/?$",
         "destination": "/services/subwoofer-rentals",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/microphone-rentals?/?$",
+        "destination": "/services/microphone-rentals",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:push-to-talk-mic|wireless-mics?|wireless-microphones?|conference-mics?)/?$",
+        "destination": "/services/microphone-rentals",
         "type": 301
       },
       {
@@ -86,8 +106,18 @@
         "type": 301
       },
       {
+        "regex": "(?i)^/audio-mixers?/?$",
+        "destination": "/services/audio-mixers",
+        "type": 301
+      },
+      {
         "regex": "(?i)^/services/audio-mixer/?$",
         "destination": "/services/audio-mixers",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/tv-rentals?/?$",
+        "destination": "/services/tv-rentals",
         "type": 301
       },
       {
@@ -96,13 +126,28 @@
         "type": 301
       },
       {
+        "regex": "(?i)^/(?:indoorledwall|indoor-led-wall|led-?walls?|video-walls?)/?$",
+        "destination": "/services/indoorledwall",
+        "type": 301
+      },
+      {
         "regex": "(?i)^/services/(indoor-led-wall|led-?walls?)/?$",
         "destination": "/services/indoorledwall",
         "type": 301
       },
       {
+        "regex": "(?i)^/(?:ledtrailers?|led-trailers?|mobile-led-wall|outdoor-led-trailer)/?$",
+        "destination": "/services/ledtrailers",
+        "type": 301
+      },
+      {
         "regex": "(?i)^/services/(?:led-trailers?|ledtrailer)/?$",
         "destination": "/services/ledtrailers",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:live-streaming|livestreaming|livestream)/?$",
+        "destination": "/services/live-streaming",
         "type": 301
       },
       {
@@ -132,6 +177,11 @@
       },
       {
         "regex": "(?i)^/(?:services/)?lighting/?$",
+        "destination": "/services/event-lighting",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:event-lighting|uplighting)/?$",
         "destination": "/services/event-lighting",
         "type": 301
       },

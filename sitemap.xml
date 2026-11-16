@@ -31,10 +31,10 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://beantownaudiorentals.com/services/audio</loc>
+    <loc>https://beantownaudiorentals.com/audio</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://beantownaudiorentals.com/services/dj-equipment-rentals</loc>
@@ -64,7 +64,7 @@
     <loc>https://beantownaudiorentals.com/services/microphone-rentals</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://beantownaudiorentals.com/services/subwoofer-rentals</loc>
@@ -79,7 +79,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://beantownaudiorentals.com/services/video</loc>
+    <loc>https://beantownaudiorentals.com/video</loc>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

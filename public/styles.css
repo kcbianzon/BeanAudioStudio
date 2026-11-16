@@ -3263,8 +3263,8 @@ body { background: #fff !important; background-image: none !important; }
 .opening-character { display: inline-block; animation: opening-char-in .62s cubic-bezier(.2,.8,.2,1) both; }
 .opening-sequence.is-switching .opening-character { animation-name: opening-char-out; animation-duration: .4s; animation-delay: calc(var(--opening-index, 0) * 24ms) !important; }
 .opening-sequence.is-second .opening-character { animation-name: opening-char-in; }
-.opening-sequence.is-complete { visibility: hidden; opacity: 0; }
-.intro-pending .site-shell > :not(.opening-sequence) { visibility: hidden; opacity: 0; }
+.opening-sequence.is-complete { visibility: hidden; opacity: 0; pointer-events: none; }
+.intro-pending .site-shell > :not(.opening-sequence) { pointer-events: none; }
 .site-entering .topbar, .site-entering #app, .site-entering .footer {
   animation: site-soft-arrive 1s cubic-bezier(.2,.75,.2,1) both;
 }
@@ -3306,7 +3306,7 @@ body { background: #fff !important; background-image: none !important; }
 
 /* Keep the opening aligned with the live headline and let both meet cleanly. */
 .opening-lockup { position: fixed; left: 50%; top: 50%; margin: 0; transform: translate(-50%, -50%); font-size: clamp(64px,9.5vw,124px); line-height: .92; }
-.intro-pending .topbar, .intro-pending #app, .intro-pending .footer { visibility: hidden; opacity: 0; }
+.intro-pending .topbar, .intro-pending #app, .intro-pending .footer { pointer-events: none; }
 .site-entering .topbar, .site-entering .footer { animation: site-soft-arrive .72s cubic-bezier(.2,.75,.2,1) both; }
 .site-entering #app { animation: none; }
 .site-entering #app .hero-copy > .eyebrow { animation: hero-content-arrive .62s .16s cubic-bezier(.2,.8,.2,1) both; }
