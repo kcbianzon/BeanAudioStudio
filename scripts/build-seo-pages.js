@@ -10,7 +10,7 @@ const vm = require("vm");
 
 const ROOT = path.resolve(__dirname, "..");
 const PUBLIC_DIR = path.join(ROOT, "public");
-const CSS_VERSION = "20261116-about-320p";
+const CSS_VERSION = "20261118-seo-push";
 const DOMAIN = "https://beantownaudiorentals.com";
 const WEB3FORMS_KEY = "f285afef-347a-4087-998d-98a4309ad914";
 const OG_IMAGE = `${DOMAIN}/assets/beantown/69667bc6a8aed9344088bb03_Screenshot-2025-01-16-at-1-24-21-PM-p-1600.png`;
@@ -68,9 +68,9 @@ const SERVICE_PAGES = [
     ],
     categoryFilter: "Audio & Speakers",
     guideHeading: "Choosing the Right Event Speaker Rental in Boston",
-    guideParagraphs: [
-      "Whether you are hosting an intimate Back Bay cocktail reception, a corporate keynote in the Seaport District, or an outdoor concert on a college quad, sizing your PA system cleanly prevents muddy speech or distorted highs. Our Small Audio Package handles speeches and ambient playback for up to 50 guests, while our Medium and Large Line Array systems scale seamlessly with subwoofers and wireless Shure QLX-D microphones.",
-      "Need to hire speakers for an event quickly? Every speaker rental includes heavy-duty tripod stands, balanced XLR cabling, and optional delivery, setup, soundcheck, or dedicated on-site audio engineer support throughout Boston, Cambridge, Somerville, Brookline, and New England.",
+    guideHtmlParagraphs: [
+      `Whether you are hosting an intimate Back Bay cocktail reception, a corporate keynote in the Seaport District, or an outdoor concert on a college quad, sizing your PA system cleanly prevents muddy speech or distorted highs. Our Small Audio Package handles speeches and ambient playback for up to 50 guests, while our <a href="/audio">complete Medium and Large Audio Packages</a> scale seamlessly with <a href="/services/subwoofer-rentals">powered 18&Prime; subwoofers</a> and <a href="/services/microphone-rentals">Shure QLX-D wireless microphones</a>.`,
+      `Need to hire speakers for an event quickly? Every speaker rental includes heavy-duty tripod stands, balanced XLR cabling, and optional delivery, setup, soundcheck, or dedicated on-site audio engineer support—and pairs cleanly with our <a href="/services/dj-equipment-rentals">Boston DJ equipment rentals</a> and <a href="/services/audio-mixers">digital mixers</a> across Boston, Cambridge, Somerville, Brookline, and New England.`,
     ],
     related: ["subwoofer-rentals", "microphone-rentals", "audio-mixers", "dj-equipment-rentals", "audio"],
     faqs: [
@@ -108,9 +108,9 @@ const SERVICE_PAGES = [
     ],
     productIds: ["small-audio", "medium-audio", "large-audio", "powered-speakers", "audio-monitors", "audio-cables-stands", "sub-kw181", "qlxd-handheld"],
     guideHeading: "Turnkey Audio Rentals Without the Technical Guesswork",
-    guideParagraphs: [
-      "Searching for audio equipment rental near you shouldn't mean piecing together dozens of unfamiliar cables and amplifiers. Our tiered Boston audio rental packages match the exact acoustic demands of hotel ballrooms, rooftop lounges, university halls, and outdoor tents.",
-      "Every audio system is tested prior to dispatch and can be customized inside our interactive quote builder with extra wireless handheld mics, lavaliers, stage monitors, or 18-inch powered subwoofers.",
+    guideHtmlParagraphs: [
+      `Searching for audio equipment rental near you shouldn't mean piecing together dozens of unfamiliar cables and amplifiers. Our tiered Boston <a href="/services/speaker-rentals">PA speaker &amp; audio packages</a> ($199–$880+) match the exact acoustic demands of hotel ballrooms, rooftop lounges, university halls, and outdoor tents across Massachusetts and Rhode Island.`,
+      `Every audio system is tested prior to dispatch and can be customized inside our interactive quote builder with extra <a href="/services/microphone-rentals">wireless &amp; delegate conference mics</a>, <a href="/services/audio-mixers">X32 / SQ-7 mixers</a>, stage monitors, or <a href="/services/subwoofer-rentals">18-inch powered subwoofers</a>.`,
     ],
     related: ["speaker-rentals", "microphone-rentals", "subwoofer-rentals", "audio-mixers", "event-lighting"],
     faqs: [
@@ -143,9 +143,9 @@ const SERVICE_PAGES = [
     ],
     categoryFilter: "DJ Equipment",
     guideHeading: "Rent a DJ Board, Turntables, or Full Club Rig in Boston",
-    guideParagraphs: [
-      "Whether you are flying in a touring club artist with an exact Pioneer CDJ-3000 and DJM-900NXS technical rider, hosting a vinyl set on Technics SL-1200MK2 direct-drive turntables, or planning to rent a DJ board with powered speakers for a private celebration, every unit arrives firmware-updated, clean, and road-ready.",
-      "Need sound and dance floor energy in one streamlined booking? Our Basic, Standard, and Pro DJ Packages bundle controllers/CDJs, powered QSC/PA tops, 18-inch subwoofers, and a sleek Scrim Werks facade.",
+    guideHtmlParagraphs: [
+      `Whether you are flying in a touring club artist with an exact Pioneer CDJ-3000 and DJM-900NXS technical rider, hosting a vinyl set on Technics SL-1200MK2 direct-drive turntables, or planning to rent a DJ board with <a href="/services/speaker-rentals">powered speakers</a> for a private celebration, every unit arrives firmware-updated, clean, and road-ready.`,
+      `Need sound and dance floor energy in one streamlined booking? Our Basic, Standard, and Pro DJ Packages bundle controllers or CDJs, powered QSC PA tops, <a href="/services/subwoofer-rentals">18-inch subwoofers</a>, <a href="/services/microphone-rentals">wireless microphones</a>, and a sleek Scrim Werks facade—or pair with <a href="/services/event-lighting">event uplighting</a> and <a href="/services/silent-disco">silent disco headphones</a>.`,
     ],
     related: ["subwoofer-rentals", "event-lighting", "cold-sparklers", "speaker-rentals", "silent-disco"],
     faqs: [
@@ -178,9 +178,9 @@ const SERVICE_PAGES = [
     ],
     productIds: ["laser-projector", "fastfold-screen", "video-basic-package", "video-mid-package", "video-switcher", "movie-16"],
     guideHeading: "High-Brightness Boston Projector Rentals Built for Real Venues",
-    guideParagraphs: [
-      "Low-cost office projectors wash out immediately under ballroom chandeliers or daytime windows. Our Boston projector rental inventory uses 4,500 to 6,000+ lumen commercial laser light engines so spreadsheets, brand decks, wedding slideshows, and keynote videos stay sharp and readable from every table.",
-      "Choose an individual HD Laser Projector with a 120-inch Fast-Fold screen, or book our turnkey Basic or Mid-Size Video Packages including presentation stands, long-run HDMI kits, wireless clickers, and multi-input video switchers.",
+    guideHtmlParagraphs: [
+      `Low-cost office projectors wash out immediately under ballroom chandeliers or daytime windows. Our Boston projector rental inventory uses 4,500 to 6,000+ lumen commercial laser light engines so spreadsheets, brand decks, wedding slideshows, and keynote videos stay sharp and readable from every table.`,
+      `Choose an individual HD Laser Projector with a 120-inch Fast-Fold screen, or book our turnkey Basic or Mid-Size <a href="/services/video">video packages</a> including presentation stands, wireless slide clickers, <a href="/services/tv-rentals">65-inch &amp; 75-inch 4K TVs</a>, <a href="/services/indoorledwall">indoor LED video walls</a>, or <a href="/services/outdoor-movies">inflatable outdoor movie screens</a>.`,
     ],
     related: ["video", "tv-rentals", "indoorledwall", "outdoor-movies", "microphone-rentals"],
     faqs: [
@@ -213,9 +213,9 @@ const SERVICE_PAGES = [
     ],
     productIds: ["cold-spark-2", "cold-spark-4", "cold-spark-ultimate", "dry-ice-cloud"],
     guideHeading: "Safe, High-Impact Cold Spark Machines for Boston Weddings & Galas",
-    guideParagraphs: [
-      "Traditional pyrotechnics are banned inside virtually every Boston hotel, museum, and historic ballroom. Our ColorKey Dazzler FX cold sparkler machines heat special composite granules to create a brilliant, photography-ready gold spark fountain without open combustion or heavy lingering smoke.",
-      "Every Boston cold spark rental package includes sealed titanium granule refills, synchronized wireless remote or DMX firing control, power/DMX cabling, and optional certified on-site technician operation timed to your DJ or band cues.",
+    guideHtmlParagraphs: [
+      `Traditional pyrotechnics are banned inside virtually every Boston hotel, museum, and historic ballroom. Our ColorKey Dazzler FX cold sparkler machines heat special composite granules to create a brilliant, photography-ready gold spark fountain without open combustion or heavy lingering smoke.`,
+      `Every Boston cold spark rental package includes sealed titanium granule refills, synchronized wireless remote or DMX firing control, and optional certified on-site operation—often paired with our <a href="/services/dry-ice-machine">Dancing on a Cloud dry ice machine</a>, <a href="/services/event-lighting">wireless uplighting</a>, and <a href="/services/dj-equipment-rentals">DJ equipment packages</a>.`,
     ],
     related: ["dry-ice-machine", "event-lighting", "dj-equipment-rentals", "photo-booth"],
     faqs: [
@@ -270,28 +270,32 @@ const SERVICE_PAGES = [
     navLabel: "Microphones",
     categoryLabel: "Microphones",
     hashCategory: "Microphones",
-    title: "Microphone & Push-to-Talk Mic Rental Boston | Beantown",
+    title: "Microphone, PTT & Delegate Mic Rental Boston | Beantown",
     description:
-      "Rent Shure QLX-D wireless handheld & clip-on lavalier mics, Countryman headsets, SM58s & push-to-talk (PTT) conference microphones in Boston & Massachusetts from $20.",
-    altNames: ["Push to Talk Mic Rental", "Conference Mic Rental Boston", "Rent Microphone Boston"],
-    h1: "Wireless & Conference Microphone Rentals in Boston",
-    lead: "Dependable RF clarity with Shure QLX-D digital wireless handhelds, discreet clip-on lavaliers, Countryman headsets, push-to-talk podium/conference mics, and live in-ear monitor systems.",
+      "Rent Shure QLX-D wireless handheld & lavalier mics, Countryman headsets, push-to-talk (PTT) & conference delegate microphones from $20 across Boston, MA & RI.",
+    altNames: ["Delegate Mic Rental", "Push to Talk Mic Rental", "Conference Mic Rental Boston", "Microphone Rentals Boston"],
+    h1: "Wireless, Conference & Delegate Microphone Rentals in Boston",
+    lead: "Dependable RF clarity with Shure QLX-D digital wireless handhelds, discreet clip-on lavaliers, Countryman headsets, push-to-talk (PTT) delegate conference mics, and in-ear monitors.",
     heroBullets: [
       "Shure QLX-D AES-256 digital wireless handheld & clip-on lavalier systems",
-      "Countryman earset mics & Push-to-Talk (PTT) conference table mics",
+      "Push-to-Talk (PTT) conference table & delegate microphones ($35)",
       "Single mic, Dual presentation & 4–6 mic Live Performance bundles",
     ],
     categoryFilter: "Microphones",
-    guideHeading: "Zero-Dropout Wireless Audio for Keynotes, Panels & Ceremonies",
-    guideParagraphs: [
-      "Downtown Boston RF spectrum is notoriously crowded around convention halls, universities, and Back Bay hotels. That is why our wireless fleet centers on professional Shure QLX-D 24-bit digital systems rather than consumer UHF kits—giving keynote presenters, wedding officiants, and Q&A moderators rock-solid reception.",
-      "Rent individual conference mics, lavalier packs, and In-Ear Monitors (IEMs), or add one of our pre-paired Single, Presentation, or Live Performance microphone packages directly to your quote.",
+    guideHeading: "Zero-Dropout Wireless, Push-to-Talk & Delegate Mic Audio",
+    guideHtmlParagraphs: [
+      `Downtown Boston RF spectrum is notoriously crowded around convention halls, universities, and Back Bay hotels. That is why our fleet centers on professional Shure QLX-D 24-bit digital wireless mics and weighted gooseneck <strong>push-to-talk (PTT) &amp; conference delegate microphones</strong>—keeping boardroom tables, panel discussions, municipal hearings, and keynote Q&amp;As crystal clear.`,
+      `Rent individual delegate mics, wireless handhelds, clip-on lavaliers, and In-Ear Monitors (IEMs), or pair them directly with our <a href="/services/audio-mixers">digital audio mixers</a>, <a href="/audio">PA sound packages</a>, and <a href="/services/live-streaming">4K live streaming kits</a>.`,
     ],
     related: ["speaker-rentals", "audio-mixers", "live-streaming", "audio"],
     faqs: [
       {
+        q: "Do you offer push-to-talk and conference delegate mic rentals?",
+        a: "Yes. Our Push-to-Talk (PTT) & Conference Delegate gooseneck desk microphones ($35) feature weighted non-slip bases and balanced XLR outputs—ideal for panel tables, boardrooms, summit delegates, and controlled announcements across Boston, MA, and Rhode Island.",
+      },
+      {
         q: "Which microphone is best for a conference panel or keynote speaker?",
-        a: "Our Presentation Setup pairs two Shure QLX-D wireless lavalier or Countryman headset mics with a dual receiver and compact mixer for hands-free corporate talks, while Wireless Handhelds excel for audience Q&A.",
+        a: "Our Presentation Setup pairs two Shure QLX-D wireless lavalier or Countryman headset mics with a dual receiver and compact mixer for hands-free corporate talks, while Wireless Handhelds and PTT Delegate Mics excel for panel tables and audience Q&A.",
       },
       {
         q: "Do microphone rentals include stands, receivers, and XLR cables?",
@@ -511,23 +515,33 @@ const SERVICE_PAGES = [
     navLabel: "Outdoor Movies",
     categoryLabel: "Outdoor Movies",
     hashCategory: "Outdoor Movies",
-    title: "Outdoor Inflatable Movie Screen Rental Boston | Beantown",
+    title: "Inflatable Movie Screen & Projector Rental | MA & RI",
     description:
-      "Rent 12ft ($549), 16ft ($749), 26ft ($899) & 40ft ($1,899) inflatable outdoor movie screens in Boston & MA with laser projector, PA speakers & blower included.",
-    h1: "Outdoor Inflatable Movie Screen Rentals in Boston",
-    lead: "Everything needed for magic under the stars—turnkey 12-foot, 16-foot, 26-foot, and massive 40-foot inflatable cinema packages with HD laser projector, powered PA sound, media player, and quiet blower.",
+      "Complete inflatable outdoor movie screen rentals with HD laser projector & PA speakers in Boston, MA & Rhode Island (RI): 12ft ($549), 16ft ($749), 26ft ($899) & 40ft ($1,899).",
+    altNames: ["Inflatable Movie Screen With Projector and Speakers Rental", "Inflatable Movie Screen Rental RI", "Outdoor Movie Screen Rental Massachusetts"],
+    h1: "Outdoor Inflatable Movie Screen, Projector & Speaker Rentals (MA & RI)",
+    lead: "Complete outdoor cinema packages including inflatable screen, bright HD laser projector, powered PA speakers, media player, and quiet blower—delivered across Boston, Massachusetts, and Rhode Island.",
     heroBullets: [
-      "Transparent turnkey rates: 12ft ($549), 16ft ($749), 26ft ($899) & 40ft ($1,899)",
-      "Commercial high-output HD laser projectors & booming outdoor speakers",
-      "Built for backyard movie nights, schools, town parks & drive-in events",
+      "Complete screen + projector + speakers bundles: 12ft ($549), 16ft ($749), 26ft ($899) & 40ft ($1,899)",
+      "Commercial high-output HD laser projectors & booming outdoor PA speakers",
+      "Turnkey delivery & setup across Boston, MA, Providence & Newport, RI",
     ],
     categoryFilter: "Outdoor Movies",
-    guideHeading: "Published Pricing for Backyard, School & Town Movie Nights",
-    guideParagraphs: [
-      "Planning a neighborhood movie night, PTO fundraiser, or town summer screening? Every Beantown inflatable outdoor movie package arrives complete with a widescreen 16:9 screen, ultra-quiet continuous blower, high-brightness HD laser projector, outdoor PA speakers on stands, heavy-duty ground stakes/tethers, and HDMI/Blu-ray connectivity.",
+    guideHeading: "All-in-One Screen, Projector & Speaker Packages Across MA & RI",
+    guideHtmlParagraphs: [
+      `Planning a backyard movie night, school PTO fundraiser, campus quad screening, or town summer movie series in Massachusetts or Rhode Island? Every Beantown <strong>inflatable movie screen with projector and speakers rental</strong> arrives complete with a widescreen 16:9 inflatable screen, ultra-quiet continuous blower, bright <a href="/services/projector-rentals">HD laser movie projector</a>, <a href="/services/speaker-rentals">outdoor PA speakers</a> on tripod stands, heavy-duty stakes/tethers, and HDMI/Blu-ray connectivity.`,
+      `Hosting a daytime outdoor festival or sunny afternoon tailgate in Boston or Providence, RI? Check out our sunlight-visible <a href="/services/ledtrailers">mobile outdoor LED screen trailers</a>, or add <a href="/services/silent-disco">silent disco headphones</a> for late-night audio after quiet-hour curfews.`,
     ],
     related: ["ledtrailers", "projector-rentals", "silent-disco", "speaker-rentals"],
     faqs: [
+      {
+        q: "Does the inflatable movie screen rental include a projector and speakers?",
+        a: "Yes! Every 12ft ($549), 16ft ($749), 26ft ($899), and 40ft ($1,899) package is a complete inflatable movie screen, HD laser projector, and powered PA speaker setup—plus mixer, quiet air blower, media player, and cabling.",
+      },
+      {
+        q: "Do you deliver inflatable movie screen rentals to Rhode Island (RI) and Massachusetts?",
+        a: "Yes. We deliver, set up, test, and tear down outdoor movie screen packages throughout Greater Boston, all of Massachusetts, and Rhode Island including Providence, Warwick, Cranston, and Newport.",
+      },
       {
         q: "How many guests can each inflatable movie screen size hold?",
         a: "Our 12ft screen ($549) fits 10–30 guests for backyard birthdays, the 16ft ($749) fits up to 75 guests, the 26ft ($899) serves 100–150+ community attendees, and the 40ft Megascreen ($1,899) powers 500+ park or drive-in crowds.",
@@ -1385,6 +1399,7 @@ function renderServicePage(spec) {
           { "@type": "City", name: "Somerville" },
           { "@type": "City", name: "Brookline" },
           { "@type": "State", name: "Massachusetts" },
+          { "@type": "State", name: "Rhode Island" },
           { "@type": "Place", name: "New England" },
         ],
         hasOfferCatalog: {
@@ -1511,7 +1526,7 @@ ${itemsHtml}
 
         <section class="seo-guide-box" aria-labelledby="guideHeading">
           <h2 id="guideHeading">${escapeHtml(spec.guideHeading)}</h2>
-          ${spec.guideParagraphs.map((p) => `<p>${escapeHtml(p)}</p>`).join("\n          ")}
+          ${(Array.isArray(spec.guideHtmlParagraphs) ? spec.guideHtmlParagraphs.map((p) => `<p>${p}</p>`) : (spec.guideParagraphs || []).map((p) => `<p>${escapeHtml(p)}</p>`)).join("\n          ")}
           <div class="seo-areas-pill-row" aria-label="Boston and New England service areas">
             <span class="seo-area-pill">Boston Back Bay &amp; Seaport</span>
             <span class="seo-area-pill">Cambridge &amp; Somerville</span>
@@ -1687,9 +1702,9 @@ function renderAboutPage() {
 <html lang="en">
   <head>
 ${commonHeadTags({
-  title: "About Beantown Audio Rentals | Boston AV Company",
+  title: "Best Audio Visual Rentals in Boston | Beantown Audio",
   description:
-    "Meet Beantown Audio Rentals—Boston's trusted audio, lighting, LED video wall, DJ gear & event production partner serving Greater Boston, Massachusetts, and New England.",
+    "About Beantown Audio Rentals—founded on clean, shop-tested speakers, DJ gear, wireless & delegate mics, projectors, LED walls & event production across Boston, MA, RI & New England.",
   canonicalUrl,
   jsonLdObj: schemaGraph,
 })}
@@ -1706,11 +1721,11 @@ ${commonHeader({ active: "about" })}
         </nav>
 
         <section class="seo-hero">
-          <span class="seo-hero-eyebrow">ABOUT BEANTOWN AUDIO RENTALS</span>
-          <h1>Reliable Event Technology Across Boston &amp; New England</h1>
-          <p class="seo-hero-lead">We built Beantown Audio Rentals around a straightforward standard: clean, commercial-grade audio, lighting, and video gear tested before every show—backed by responsive Boston technicians who keep load-in calm and on schedule.</p>
+          <span class="seo-hero-eyebrow">BOSTON · NEW ENGLAND · EVENT AV</span>
+          <h1>Best Audio Visual Rentals in Boston</h1>
+          <p class="seo-hero-lead">At Beantown Audio Rentals, great events start with clean sound, bright visuals, simple pricing, and experienced local technicians who keep your load-in calm across Greater Boston, Massachusetts, Rhode Island, and New England.</p>
           <ul class="seo-hero-bullets">
-            <li>Pre-tested Shure wireless, QSC, Pioneer DJ, Chauvet &amp; NovaStar LED systems</li>
+            <li>Pre-tested Shure QLX-D wireless, QSC, JBL, Pioneer DJ, Chauvet &amp; NovaStar LED systems</li>
             <li>Same-week availability &amp; dependable setup windows for hotels, campuses &amp; private venues</li>
             <li>Clear written quotes for pickup, turnkey delivery/setup, or dedicated on-site techs</li>
           </ul>
@@ -1721,16 +1736,19 @@ ${commonHeader({ active: "about" })}
         </section>
 
         <section class="seo-guide-box">
-          <h2>Why Event Planners, Venues &amp; Hosts Trust Beantown</h2>
-          <p>From corporate town halls in Boston's Seaport District and university commencements in Cambridge to Back Bay ballroom weddings, outdoor movie nights, and multi-channel silent discos across New England, every rental starts with listening to your room, guest count, and run-of-show.</p>
-          <p>Every microphone, powered speaker, projector, LED cabinet, and power cable undergoes bench inspection between events so cables tape flat, wireless channels stay lock-tight, and presentations launch without technical hiccups. Need guidance sizing an acoustic system or checking ballroom ceiling height? Reach us daily at <a href="tel:+19786015473">(978) 601-5473</a> or <a href="mailto:info@beantownaudiorentals.com">info@beantownaudiorentals.com</a>.</p>
+          <h2>Our Story &amp; Event Production Philosophy</h2>
+          <p>Beantown Audio Rentals was founded to replace confusing technical jargon and unreliable rental gear with tested, commercial-grade equipment and transparent support. Whether you are planning a corporate town hall in Boston's Seaport, a panel or commencement in Cambridge, a Back Bay ballroom wedding, a block party in Somerville, or an outdoor movie screening in Massachusetts or Rhode Island, we treat every show—big or small—with the same precision.</p>
+          <p>“An event feels calm when someone has already met its worst day. At Beantown, we prepare for every variable so your event runs effortlessly.” — Calvin Reid, Founder</p>
+          <p>Our inventory covers complete <a href="/audio">PA audio systems</a>, <a href="/services/speaker-rentals">powered speakers</a>, <a href="/services/subwoofer-rentals">18&Prime; subwoofers</a>, <a href="/services/microphone-rentals">wireless &amp; delegate push-to-talk microphones</a>, <a href="/services/audio-mixers">Behringer X32 &amp; Allen &amp; Heath digital mixers</a>, <a href="/services/dj-equipment-rentals">Pioneer CDJ-3000s &amp; DJ packages</a>, <a href="/services/projector-rentals">HD laser projectors &amp; Fast-Fold screens</a>, <a href="/services/tv-rentals">65&Prime; &amp; 75&Prime; 4K TV displays</a>, <a href="/services/indoorledwall">indoor 2.67mm LED video walls</a>, <a href="/services/ledtrailers">outdoor LED trailers</a>, <a href="/services/outdoor-movies">inflatable movie screens with projector &amp; speakers</a>, <a href="/services/photo-booth">360 &amp; Magic Mirror photo booths</a>, <a href="/services/silent-disco">silent disco packs</a>, <a href="/services/event-lighting">wireless uplighting</a>, <a href="/services/cold-sparklers">indoor-safe cold sparklers</a>, <a href="/services/dry-ice-machine">dry ice cloud fog</a>, and <a href="/services/live-streaming">multi-camera live streaming kits</a>.</p>
+          <p>Every microphone, powered speaker, projector, LED cabinet, and cable undergoes bench inspection between events so cables tape flat and shows run on time. Need guidance sizing your venue or booking delivery? Call or text our Boston desk daily at <a href="tel:+19786015473">(978) 601-5473</a> or email <a href="mailto:info@beantownaudiorentals.com">info@beantownaudiorentals.com</a>.</p>
           <div class="seo-areas-pill-row">
-            <span class="seo-area-pill">Boston Proper</span>
+            <span class="seo-area-pill">Boston Proper &amp; Seaport</span>
             <span class="seo-area-pill">Cambridge &amp; Somerville</span>
             <span class="seo-area-pill">Brookline &amp; Newton</span>
             <span class="seo-area-pill">North &amp; South Shore MA</span>
             <span class="seo-area-pill">Worcester &amp; Cape Cod</span>
-            <span class="seo-area-pill">Providence RI &amp; Southern NH</span>
+            <span class="seo-area-pill">Providence &amp; Newport, RI</span>
+            <span class="seo-area-pill">Southern New Hampshire</span>
           </div>
         </section>
 
@@ -1742,7 +1760,7 @@ ${commonHeader({ active: "about" })}
             </div>
           </div>
           <div class="seo-related-grid">
-            ${SERVICE_PAGES.slice(0, 8)
+            ${SERVICE_PAGES.slice(0, 12)
               .map((p) => `<a class="seo-related-chip" href="${p.urlPath}">${escapeHtml(p.navLabel)} →</a>`)
               .join("\n            ")}
           </div>
@@ -1907,31 +1925,61 @@ function renderHomepage() {
       category: "Rentals & Inventory",
       question: "What equipment is available in your Boston rental inventory?",
       answer:
-        "The rental catalog includes small, medium, and large audio packages; speakers and subwoofers; microphone packages and equipment; audio mixers; DJ packages and individual DJ gear; video packages, Samsung 65-inch and 75-inch TVs, and indoor LED wall packages; five outdoor LED trailer sizes; four outdoor movie screen sizes; photo booths; silent disco packages for 50–300 headphones; lighting fixtures and packages; cold spark packages; a dry ice machine; and basic and pro live-streaming packages.",
+        "The rental catalog includes small, medium, and large audio packages; speakers and subwoofers; microphone packages and equipment; audio mixers; DJ packages and individual DJ gear; video packages, Samsung 65-inch and 75-inch TVs, and indoor LED wall packages; five outdoor LED trailer sizes; four outdoor movie screen sizes; photo booths; silent disco packages for 50–300 headphones; lighting fixtures and packages; cold spark packages; a dry ice machine; and basic and pro live-streaming packages. Published rates appear only on the outdoor movie, photo booth, and silent disco listings; other rentals require a quote.",
     },
     {
       category: "Delivery & Setup",
       question: "Do you handle delivery, setup, soundcheck, and pickup?",
       answer:
-        "Yes, we provide full turnkey service throughout Greater Boston and all of New England. Our experienced technicians arrive well before your event begins, manage all load-in, run and tape clean cabling, tune the system for your room acoustics, and conduct a complete soundcheck and microphone walkthrough with you or your speaker.",
+        "Yes, we provide full turnkey service throughout Greater Boston and all of New England. Our experienced technicians arrive well before your event begins, manage all load-in, run and tape clean cabling, tune the system for your room acoustics, and conduct a complete soundcheck and microphone walkthrough with you or your speaker. At the end of your event, we return for prompt, quiet teardown. For select compact equipment (such as small PA speakers or silent disco packs), convenient self-pickup and return is also available with straightforward setup guides and on-call telephone support.",
+    },
+    {
+      category: "Pricing & Quotes",
+      question: "How does pricing work, and are there any surprise fees?",
+      answer:
+        "The original site publishes rates for outdoor movie packages ($549–$1,899), photo booths (starting at $799, $1,399, $1,699, and $1,499 by listing), and silent disco packages ($500–$2,500). Other rental pages ask customers to request pricing. The project marks those listings as quote required and does not estimate rates, rental periods, delivery, or setup fees.",
     },
     {
       category: "On-Site Support",
       question: "Can we have an on-site technician or sound engineer manage our show?",
       answer:
-        "Absolutely. In addition to delivery and setup, you can book dedicated Beantown AV technicians and FOH audio engineers to stay on-site for the duration of your event.",
+        "Absolutely. In addition to delivery and setup, you can book dedicated Beantown AV technicians and FOH audio engineers to stay on-site for the duration of your event. We handle live mic mixing, volume adjustments, background music transitions, presentation slide advancing, video cueing, camera switching, and immediate troubleshooting so that you and your team can focus entirely on your guests.",
+    },
+    {
+      category: "Venue & Power",
+      question: "What power and venue accommodations do you need?",
+      answer:
+        "Most standard audio setups, 4K TVs, wireless uplights, and projectors operate reliably on standard 120V 15A or 20A wall circuits within 50 feet of the stage area. For high-draw production—like large-scale modular LED video walls, high-power sub arrays, or outdoor park/field screenings—we calculate exact amperage loads in advance and can supply ultra-quiet commercial generator rentals and power distribution boxes. We will gladly coordinate directly with your venue manager or coordinator to review load-in docks, elevator clearance, and power availability.",
+    },
+    {
+      category: "Booking Lead Time",
+      question: "How far in advance should we reserve our rentals?",
+      answer:
+        "We recommend booking 2 to 4 weeks in advance, especially for busy Friday and Saturday dates during peak wedding and graduation seasons (May through October) and corporate holiday galas (November–December). That said, we maintain a deep Boston inventory and do our best to accommodate short-notice, same-week, and emergency rentals whenever equipment and crew are available. Call or text us directly at (978) 601-5473 for urgent requests.",
+    },
+    {
+      category: "Weather & Outdoor",
+      question: "What is your policy for outdoor events and inclement weather?",
+      answer:
+        "Outdoor events are a specialty—from park movie nights to outdoor weddings and athletic watch parties. For safety, electronic gear (speakers, non-waterproof lighting, laser projectors, and indoor LED panels) must be situated under a watertight tent, pavilion, or covered structure in case of precipitation. Our mobile outdoor LED video wall trailers are fully weatherproof and wind-rated up to 35 mph. If severe rain or wind threatens an open-air event, we work with you up to 24–48 hours in advance to adapt the schedule or transition to an indoor backup space.",
     },
     {
       category: "Special FX & Safety",
       question: "Are Cold Sparklers and Dry Ice fog safe for indoor Boston venues?",
       answer:
-        "Yes, both effects are 100% venue-friendly and safe for indoor use. Our Cold Sparkler machines utilize a non-pyrotechnic titanium/zirconium composite granule that produces a brilliant spark fountain that remains cool to the touch, generates zero open flame, and produces virtually no smoke.",
+        "Yes, both effects are 100% venue-friendly and safe for indoor use. Our Cold Sparkler machines utilize a non-pyrotechnic titanium/zirconium composite granule that produces a brilliant spark fountain that remains cool to the touch, generates zero open flame, and produces virtually no smoke. Our Dry Ice machines use solid carbon dioxide and hot water to generate dense, chilled white fog that strictly hugs the floor at ankle height (“Dancing on a Cloud”) and dissipates naturally without rising or triggering optical venue fire alarms.",
     },
     {
       category: "Service Area",
       question: "What areas in Massachusetts and New England do you service?",
       answer:
-        "Our primary service area covers Boston proper (Back Bay, Seaport, Downtown, South End, Fenway, Dorchester, Charlestown), Cambridge, Somerville, Brookline, Newton, Waltham, Quincy, Worcester, Cape Cod, Providence RI, and Southern New Hampshire.",
+        "Our primary service area covers Boston proper (Back Bay, Seaport, Downtown, South End, Fenway, Dorchester, Charlestown), Cambridge, Somerville, Brookline, Newton, Waltham, Quincy, and communities throughout Greater Boston and Route 128 / I-95. We also regularly deliver across Massachusetts (Worcester, the North Shore, South Shore, Cape Cod & the Islands), Rhode Island (Providence, Newport), and Southern New Hampshire. Inquire about events across broader New England.",
+    },
+    {
+      category: "Payment & Terms",
+      question: "What payment methods do you accept, and how do deposits work?",
+      answer:
+        "We accept all major credit cards, debit cards, ACH bank transfers, and corporate checks. A deposit secures your equipment and dates on our delivery schedule, with the remaining balance due prior to load-in or upon delivery. Direct invoicing and net-30 vendor billing are available for verified universities, municipal departments, and corporate partners.",
     },
   ];
   const org = organizationSchemaNode();
@@ -2000,40 +2048,14 @@ function renderHomepage() {
       {
         "@type": "FAQPage",
         "@id": `${DOMAIN}/#faq`,
-        mainEntity: [
-          {
-            "@type": "Question",
-            name: "What equipment is available in your Boston rental inventory?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Our Boston rental inventory includes small, medium, and large PA audio packages; powered speakers and subwoofers; Shure wireless and push-to-talk microphones; Behringer and Allen & Heath mixers; Pioneer DJ CDJs and packages; HD laser projectors, Samsung 65-inch and 75-inch 4K TVs, indoor 2.67mm LED walls, and outdoor LED trailers; inflatable outdoor movie screens; 360 and Magic Mirror photo booths; 50–300 silent disco headphone packs; wireless uplighting; cold sparklers; dry ice machines; and live streaming kits.",
-            },
+        mainEntity: homeFaqs.map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: f.answer,
           },
-          {
-            "@type": "Question",
-            name: "Do you handle delivery, setup, soundcheck, and pickup?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Yes. We provide turnkey delivery, cabling, room tuning, soundcheck, and pickup across Greater Boston and all of New England, plus self-pickup options for compact gear and dedicated on-site technician support.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "Are Cold Sparklers and Dry Ice fog safe for indoor Boston venues?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "Yes. Our Cold Sparkler machines use non-pyrotechnic composite granules with cool sparks, no open flame, and virtually no smoke, while Dry Ice machines keep chilled white fog strictly low to the floor.",
-            },
-          },
-          {
-            "@type": "Question",
-            name: "What areas in Massachusetts and New England do you service?",
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: "We cover Boston proper (Back Bay, Seaport, Downtown, South End, Fenway), Cambridge, Somerville, Brookline, Newton, Waltham, Worcester, Cape Cod, Providence RI, Southern NH, and New England.",
-            },
-          },
-        ],
+        })),
       },
     ],
   };

@@ -211,6 +211,56 @@
         "type": 301
       },
       {
+        "regex": "(?i)^/(?:reviews|testimonials|gallery|equipment-list)/?$",
+        "destination": "/about",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:speaker-rental-boston|boston-speaker-rentals?)/?$",
+        "destination": "/services/speaker-rentals",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:dj-rental|dj-gear-rental)/?$",
+        "destination": "/services/dj-equipment-rentals",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:projector-rental-boston|projector-and-screen-rental)/?$",
+        "destination": "/services/projector-rentals",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:services/)?(?:delegate-mic-rentals?|ptt-mic-rentals?|push-to-talk-mic-rentals?)/?$",
+        "destination": "/services/microphone-rentals",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:services/)?(?:cold-spark-machine-rentals?|cold-spark-rentals?)/?$",
+        "destination": "/services/cold-sparklers",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:services/)?(?:dry-ice-machine-rentals?|dancing-on-a-cloud(?:-rental)?)/?$",
+        "destination": "/services/dry-ice-machine",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:services/)?outdoor-movie-screen-rentals?/?$",
+        "destination": "/services/outdoor-movies",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:services/)?photo-booth-rentals?/?$",
+        "destination": "/services/photo-booth",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:services/)?silent-disco-rentals?/?$",
+        "destination": "/services/silent-disco",
+        "type": 301
+      },
+      {
         "regex": "(?i)^/(?:dry-ice|dry-ice-machine)/?$",
         "destination": "/services/dry-ice-machine",
         "type": 301
