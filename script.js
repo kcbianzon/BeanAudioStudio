@@ -4468,9 +4468,9 @@ function render(options = {}) {
       : hash === "about"
       ? "About Beantown Audio Rentals | Boston Event AV"
       : hash === "services"
-      ? "Event Production & AV Services | Beantown Audio Rentals"
+      ? "AV Rental Boston | Audio Visual Equipment | Beantown"
       : hash === "get-quote"
-      ? "Contact & Request a Quote | Beantown Audio Rentals"
+      ? "Contact & Free AV Quote | Beantown Audio Rentals Boston"
       : hash === "quote"
       ? "Build Your Event AV Quote | Beantown Audio Rentals"
       : "Boston Audio Visual Rentals | Beantown Audio Rentals";

@@ -95,11 +95,11 @@ const SERVICE_PAGES = [
     navLabel: "Audio Packages",
     categoryLabel: "Complete Sound Systems",
     hashCategory: "Audio & Speakers",
-    title: "Audio Equipment Rental Boston | PA Systems | Beantown",
+    title: "Audio Equipment & Audio System Rental Boston | Beantown",
     description:
-      "Full-service audio equipment & audio system rentals in Boston & Massachusetts from $65–$199. Turnkey PA speaker packages, wireless mics, subwoofers & mixers near you.",
-    altNames: ["Audio Equipment Rental Near Me", "Boston Audio System Rental", "Audio Visual Equipment Rental Massachusetts"],
-    h1: "Boston Audio Equipment Rental & Sound Packages",
+      "Full-service audio equipment & audio system rentals in Boston, MA from $65–$199: turnkey PA speaker packages, wireless & delegate mics, subwoofers & mixers.",
+    altNames: ["Audio Equipment Rental Near Me", "Audio System Rental Boston", "Boston Audio System Rental", "Audio Visual Equipment Rental Massachusetts"],
+    h1: "Audio Equipment & Audio System Rentals in Boston",
     lead: "Turnkey sound packages combining powered speakers, wireless Shure microphones, mixers, and cabling—engineered for reliable clarity in hotel ballrooms, tents, auditoriums, and outdoor venues.",
     heroBullets: [
       "Small (up to 50), Medium (50–150) & Large (150+) complete audio packages",
@@ -109,10 +109,10 @@ const SERVICE_PAGES = [
     productIds: ["small-audio", "medium-audio", "large-audio", "powered-speakers", "audio-monitors", "audio-cables-stands", "sub-kw181", "qlxd-handheld"],
     guideHeading: "Turnkey Audio Rentals Without the Technical Guesswork",
     guideHtmlParagraphs: [
-      `Searching for audio equipment rental near you shouldn't mean piecing together dozens of unfamiliar cables and amplifiers. Our tiered Boston <a href="/services/speaker-rentals">PA speaker &amp; audio packages</a> ($199–$880+) match the exact acoustic demands of hotel ballrooms, rooftop lounges, university halls, and outdoor tents across Massachusetts and Rhode Island.`,
-      `Every audio system is tested prior to dispatch and can be customized inside our interactive quote builder with extra <a href="/services/microphone-rentals">wireless &amp; delegate conference mics</a>, <a href="/services/audio-mixers">X32 / SQ-7 mixers</a>, stage monitors, or <a href="/services/subwoofer-rentals">18-inch powered subwoofers</a>.`,
+      `Searching for audio equipment or an audio system rental near you shouldn't mean piecing together dozens of unfamiliar cables and amplifiers. Our tiered Boston <a href="/services/speaker-rentals">PA speaker &amp; audio packages</a> ($199–$880+) match the exact acoustic demands of hotel ballrooms, corporate venues, university halls, and outdoor tents across Massachusetts and Rhode Island.`,
+      `Every audio system is tested prior to dispatch and can be customized inside our interactive quote builder with extra <a href="/services/microphone-rentals">wireless &amp; delegate conference mics</a>, <a href="/services/audio-mixers">X32 / SQ-7 mixers</a>, stage monitors, <a href="/services/subwoofer-rentals">18-inch powered subwoofers</a>, or <a href="/services/corporate-events">corporate event AV support</a>.`,
     ],
-    related: ["speaker-rentals", "microphone-rentals", "subwoofer-rentals", "audio-mixers", "event-lighting"],
+    related: ["speaker-rentals", "microphone-rentals", "corporate-events", "subwoofer-rentals", "audio-mixers"],
     faqs: [
       {
         q: "What comes inside a turnkey Beantown audio rental package?",
@@ -182,7 +182,7 @@ const SERVICE_PAGES = [
       `Low-cost office projectors wash out immediately under ballroom chandeliers or daytime windows. Our Boston projector rental inventory uses 4,500 to 6,000+ lumen commercial laser light engines so spreadsheets, brand decks, wedding slideshows, and keynote videos stay sharp and readable from every table.`,
       `Choose an individual HD Laser Projector with a 120-inch Fast-Fold screen, or book our turnkey Basic or Mid-Size <a href="/services/video">video packages</a> including presentation stands, wireless slide clickers, <a href="/services/tv-rentals">65-inch &amp; 75-inch 4K TVs</a>, <a href="/services/indoorledwall">indoor LED video walls</a>, or <a href="/services/outdoor-movies">inflatable outdoor movie screens</a>.`,
     ],
-    related: ["video", "tv-rentals", "indoorledwall", "outdoor-movies", "microphone-rentals"],
+    related: ["corporate-events", "video", "tv-rentals", "indoorledwall", "outdoor-movies", "microphone-rentals"],
     faqs: [
       {
         q: "Do your Boston projector rentals include a screen and Mac/PC HDMI cables?",
@@ -270,24 +270,24 @@ const SERVICE_PAGES = [
     navLabel: "Microphones",
     categoryLabel: "Microphones",
     hashCategory: "Microphones",
-    title: "Microphone, PTT & Delegate Mic Rental Boston | Beantown",
+    title: "Delegate, PTT & Conference Mic Rental Boston | Beantown",
     description:
-      "Rent Shure QLX-D wireless handheld & lavalier mics, Countryman headsets, push-to-talk (PTT) & conference delegate microphones from $20 across Boston, MA & RI.",
-    altNames: ["Delegate Mic Rental", "Push to Talk Mic Rental", "Conference Mic Rental Boston", "Microphone Rentals Boston"],
-    h1: "Wireless, Conference & Delegate Microphone Rentals in Boston",
-    lead: "Dependable RF clarity with Shure QLX-D digital wireless handhelds, discreet clip-on lavaliers, Countryman headsets, push-to-talk (PTT) delegate conference mics, and in-ear monitors.",
+      "Rent delegate mics, push-to-talk (PTT) conference table mics & Shure QLX-D wireless handhelds or lavaliers ($20+) across Boston, MA & RI with delivery & setup.",
+    altNames: ["Delegate Mic Rental", "Push to Talk Mic Rental", "Conference Mic Rental", "Conference Mic Rental Boston", "Microphone Rentals Boston"],
+    h1: "Delegate, Push-to-Talk & Conference Microphone Rentals in Boston",
+    lead: "Rent Shure QLX-D digital wireless handhelds, clip-on lavaliers, Countryman headsets, and push-to-talk (PTT) delegate conference microphones from $20—pre-tested for zero RF interference across Boston, MA, and Rhode Island.",
     heroBullets: [
-      "Shure QLX-D AES-256 digital wireless handheld & clip-on lavalier systems",
       "Push-to-Talk (PTT) conference table & delegate microphones ($35)",
-      "Single mic, Dual presentation & 4–6 mic Live Performance bundles",
+      "Shure QLX-D AES-256 digital wireless handheld & clip-on lavalier systems",
+      "Single mic, Dual presentation ($120) & 4–6 mic Live Performance ($220) bundles",
     ],
     categoryFilter: "Microphones",
     guideHeading: "Zero-Dropout Wireless, Push-to-Talk & Delegate Mic Audio",
     guideHtmlParagraphs: [
-      `Downtown Boston RF spectrum is notoriously crowded around convention halls, universities, and Back Bay hotels. That is why our fleet centers on professional Shure QLX-D 24-bit digital wireless mics and weighted gooseneck <strong>push-to-talk (PTT) &amp; conference delegate microphones</strong>—keeping boardroom tables, panel discussions, municipal hearings, and keynote Q&amp;As crystal clear.`,
-      `Rent individual delegate mics, wireless handhelds, clip-on lavaliers, and In-Ear Monitors (IEMs), or pair them directly with our <a href="/services/audio-mixers">digital audio mixers</a>, <a href="/audio">PA sound packages</a>, and <a href="/services/live-streaming">4K live streaming kits</a>.`,
+      `Downtown Boston RF spectrum is crowded around convention halls, universities, and Back Bay hotels. Whether you need a weighted gooseneck <strong>delegate mic rental</strong> or <strong>push-to-talk (PTT) conference microphone</strong> for panel tables, municipal hearings, and summits, or Shure QLX-D wireless lavaliers and handhelds for keynotes, every unit ships pre-coordinated and bench-tested.`,
+      `Rent single delegate or wireless microphones ($20–$75) or full multi-mic bundles—and pair them directly with our <a href="/services/corporate-events">corporate meetings AV support</a>, <a href="/services/audio-mixers">digital audio mixers</a>, <a href="/audio">PA sound packages</a>, and <a href="/services/live-streaming">4K live streaming kits</a>.`,
     ],
-    related: ["speaker-rentals", "audio-mixers", "live-streaming", "audio"],
+    related: ["corporate-events", "speaker-rentals", "audio-mixers", "live-streaming", "audio"],
     faqs: [
       {
         q: "Do you offer push-to-talk and conference delegate mic rentals?",
@@ -413,7 +413,7 @@ const SERVICE_PAGES = [
     guideParagraphs: [
       "Need sharp, bright 4K monitors without draping projection throws across a crowded booth or bright atrium? Our Samsung 65-inch and 75-inch commercial TV rentals wheel effortlessly into position with concealed cable stands, crystal-clear HDR10+ color, and hassle-free HDMI/USB playback.",
     ],
-    related: ["video", "projector-rentals", "indoorledwall", "live-streaming"],
+    related: ["corporate-events", "video", "projector-rentals", "indoorledwall", "live-streaming"],
     faqs: [
       {
         q: "Do your 65″ and 75″ TV rentals include the rolling floor stand?",
@@ -443,7 +443,7 @@ const SERVICE_PAGES = [
       "Projectors struggle in glass-walled Boston venues, daytime ballrooms, and vibrant concert productions. A high-contrast 2.67mm indoor LED wall delivers rich blacks, vivid motion graphics, and zero shadows when speakers walk in front of the screen.",
       "Every indoor LED wall package scales cleanly with optional custom curves, portrait totems, stage risers, and live camera IMAG feeds.",
     ],
-    related: ["ledtrailers", "video", "live-streaming", "event-lighting", "speaker-rentals"],
+    related: ["corporate-events", "ledtrailers", "video", "live-streaming", "event-lighting", "speaker-rentals"],
     faqs: [
       {
         q: "What pixel pitch is best for an indoor ballroom conference or gala?",
@@ -501,7 +501,7 @@ const SERVICE_PAGES = [
     guideParagraphs: [
       "Remote attendees notice bad audio or blurry webcam video within five seconds. Our Boston live streaming packages pair optical Sony 4K cameras on fluid-head tripods with direct board-mixed wireless microphones and hardware LiveMaster video switching—sending broadcast clarity to global teams.",
     ],
-    related: ["microphone-rentals", "video", "audio-mixers", "tv-rentals"],
+    related: ["corporate-events", "microphone-rentals", "video", "audio-mixers", "tv-rentals"],
     faqs: [
       {
         q: "What platforms do your live streaming setups support?",
@@ -640,6 +640,56 @@ const SERVICE_PAGES = [
       {
         q: "Are your wireless uplights truly cord-free during an event?",
         a: "Yes. Our Chauvet Freedom Par wireless LED uplights run up to 20 hours on internal lithium batteries, letting us tuck them cleanly beside pillars, drapery, and tent legs without tripping hazards.",
+      },
+    ],
+  },
+  {
+    slug: "corporate-events",
+    urlPath: "/services/corporate-events",
+    navLabel: "Corporate Event AV",
+    categoryLabel: "Corporate Meetings & Event AV",
+    hashCategory: "Video & Displays",
+    title: "Corporate Event AV & Meetings Support Boston, MA",
+    description:
+      "Corporate event AV & meetings support in Boston, MA: wireless & delegate mics, PA speakers, laser projectors, 4K TVs, LED walls, streaming & on-site techs.",
+    altNames: ["Corporate Event AV Boston MA", "Corporate Meetings AV Support Boston MA", "Corporate Conference AV Rental Boston"],
+    h1: "Corporate Event AV & Corporate Meetings Support in Boston, MA",
+    lead: "Turnkey corporate event AV and full meetings AV support across Boston, MA, Cambridge, and Seaport hotels—combining QSC PA audio, Shure QLX-D & PTT delegate microphones, 4K TVs, laser projectors, 2.67mm LED walls, hybrid live streaming, and dedicated on-site technicians.",
+    heroBullets: [
+      "Complete audio, display, microphone & Zoom/Teams hybrid broadcast packages",
+      "Experienced with BCEC, Hynes Convention Center, Seaport & Kendall Square venues",
+      "Pre-tested gear, clean taped cabling, COI readiness & dedicated FOH engineers",
+    ],
+    productIds: [
+      "medium-audio",
+      "presentation-mic-setup",
+      "ptt-mic",
+      "qlxd-lavalier",
+      "laser-projector",
+      "fastfold-screen",
+      "tv-75",
+      "led-12",
+      "stream-basic",
+      "stream-pro",
+    ],
+    guideHeading: "Dependable AV Production for Boston Corporate Meetings & Conferences",
+    guideHtmlParagraphs: [
+      `Corporate planners, executive assistants, and event teams need corporate meetings AV support in Boston, MA that arrives early, coordinates cleanly with hotel or convention center loading docks, and eliminates audio dropouts or blank presentation screens. From executive boardroom Q&amp;As in Back Bay and Cambridge to 300-person town halls and trade show booths at BCEC or Hynes, our crew delivers, sets up, and runs technical rehearsal well before doors open.`,
+      `Build custom corporate support with our <a href="/services/microphone-rentals">delegate push-to-talk &amp; wireless lavalier microphones</a>, <a href="/audio">PA sound packages</a>, <a href="/services/projector-rentals">high-lumen laser projectors</a>, <a href="/services/tv-rentals">65&Prime; &amp; 75&Prime; 4K booth TVs</a>, <a href="/services/indoorledwall">seamless 2.67mm indoor LED video walls</a>, and <a href="/services/live-streaming">multi-camera hybrid streaming systems</a>—or <a href="/contact">request a written corporate quote</a> directly from our Boston desk.`,
+    ],
+    related: ["microphone-rentals", "audio", "projector-rentals", "tv-rentals", "indoorledwall", "live-streaming"],
+    faqs: [
+      {
+        q: "Do you provide dedicated on-site AV technicians for corporate meetings in Boston, MA?",
+        a: "Yes. You can book certified Beantown on-site AV technicians and audio engineers to manage morning setup, presenter mic checks, slide and laptop switching, Q&A panel levels, hybrid Zoom/Teams audio feeds, and quiet post-event strike.",
+      },
+      {
+        q: "Which microphones do you recommend for corporate panels and keynote speakers?",
+        a: "We recommend our Presentation Package ($120) with two Shure QLX-D wireless lavalier or handheld mics for keynotes, paired with our Push-to-Talk (PTT) Conference Delegate gooseneck microphones ($35 each) for multi-speaker roundtables and town-hall Q&As.",
+      },
+      {
+        q: "Can you deliver to Seaport, Downtown Boston, Back Bay hotels, and Kendall Square?",
+        a: "Yes. We routinely deliver and set up corporate AV across Downtown Boston, Seaport District, Back Bay, Financial District, Cambridge/Kendall Square, Waltham, Burlington, and Greater New England, and accept corporate cards, ACH, and approved Net-30 invoicing.",
       },
     ],
   },
@@ -1081,7 +1131,7 @@ function organizationSchemaNode() {
     name: "Beantown Audio Rentals",
     alternateName: "Beantown Audio Visual",
     description:
-      "Boston & Massachusetts audio visual equipment rentals: powered PA speakers, DJ equipment, wireless & push-to-talk microphones, HD laser projectors, LED video walls, lighting, cold sparklers, dry ice machines, silent disco & photo booths.",
+      "Boston & Massachusetts audio visual equipment rentals: powered PA speakers, DJ equipment, wireless & push-to-talk delegate microphones, corporate event AV, HD laser projectors, LED video walls, lighting, cold sparklers, dry ice machines, silent disco & photo booths.",
     url: `${DOMAIN}/`,
     logo: {
       "@type": "ImageObject",
@@ -1093,6 +1143,8 @@ function organizationSchemaNode() {
     telephone: "+1-978-601-5473",
     email: "info@beantownaudiorentals.com",
     priceRange: "$$",
+    currenciesAccepted: "USD",
+    paymentAccepted: "Cash, Credit Card, Debit Card, ACH Bank Transfer, Corporate Check",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Boston",
@@ -1105,14 +1157,29 @@ function organizationSchemaNode() {
       longitude: -71.0589,
     },
     areaServed: [
+      { "@type": "Country", name: "United States" },
       { "@type": "City", name: "Boston" },
       { "@type": "City", name: "Cambridge" },
       { "@type": "City", name: "Somerville" },
       { "@type": "City", name: "Brookline" },
       { "@type": "City", name: "Newton" },
       { "@type": "City", name: "Waltham" },
+      { "@type": "City", name: "Worcester" },
+      { "@type": "City", name: "Providence" },
       { "@type": "State", name: "Massachusetts" },
+      { "@type": "State", name: "Rhode Island" },
+      { "@type": "State", name: "New Hampshire" },
       { "@type": "Place", name: "New England" },
+    ],
+    knowsAbout: [
+      "Corporate Event AV Production",
+      "Audio Equipment Rental",
+      "Delegate & Push-to-Talk Microphone Rental",
+      "Speaker & PA System Rental",
+      "DJ Equipment Rental",
+      "LED Video Wall Rental",
+      "Inflatable Outdoor Movie Screen Rental",
+      "Hybrid Live Streaming Support",
     ],
     openingHoursSpecification: [
       {
@@ -1140,6 +1207,7 @@ function websiteSchemaNode() {
     "@id": `${DOMAIN}/#website`,
     name: "Beantown Audio Rentals",
     url: `${DOMAIN}/`,
+    inLanguage: "en-US",
     publisher: { "@id": `${DOMAIN}/#organization` },
   };
 }
@@ -1151,7 +1219,13 @@ function commonHeadTags({ title, description, canonicalUrl, jsonLdObj }) {
     <meta name="description" content="${escapeHtml(description)}" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="google-site-verification" content="mNQFNo1Zx3hTSlkyXoKHWQBBHWDKJ_Ns4Z5Bcfgvmzo" />
+    <meta name="geo.region" content="US-MA" />
+    <meta name="geo.placename" content="Boston, Massachusetts" />
+    <meta name="geo.position" content="42.3601;-71.0589" />
+    <meta name="ICBM" content="42.3601, -71.0589" />
     <link rel="canonical" href="${escapeHtml(canonicalUrl)}" />
+    <link rel="alternate" hreflang="en-US" href="${escapeHtml(canonicalUrl)}" />
+    <link rel="alternate" hreflang="x-default" href="${escapeHtml(canonicalUrl)}" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Beantown Audio Rentals" />
@@ -1475,7 +1549,7 @@ function renderServicePage(spec) {
     .join("\n          ");
 
   const html = `<!doctype html>
-<html lang="en">
+<html lang="en-US">
   <head>
 ${commonHeadTags({
   title: spec.title,
@@ -1619,12 +1693,12 @@ function renderServicesDirectory() {
   ).join("\n");
 
   const html = `<!doctype html>
-<html lang="en">
+<html lang="en-US">
   <head>
 ${commonHeadTags({
-  title: "Boston AV & Audio Visual Rentals | Beantown Audio",
+  title: "AV Rental Boston | Audio Visual Equipment | Beantown",
   description:
-    "Full-service Boston & MA audio visual equipment rentals: speakers, DJ gear, laser projectors, LED walls, wireless & push-to-talk mics, uplighting, silent disco & cold sparklers.",
+    "Full-service AV rental in Boston, MA: corporate event AV, audio systems, speakers, delegate mics, DJ gear, 4K TVs, laser projectors, LED walls, uplighting & FX.",
   canonicalUrl,
   jsonLdObj: schemaGraph,
 })}
@@ -1642,8 +1716,8 @@ ${commonHeader({ active: "services" })}
 
         <section class="seo-hero">
           <span class="seo-hero-eyebrow">BOSTON &amp; NEW ENGLAND EVENT PRODUCTION</span>
-          <h1>Audio, Video, Lighting &amp; Event Rentals</h1>
-          <p class="seo-hero-lead">Explore every AV category we deliver, install, and support across Boston, Cambridge, Somerville, Massachusetts, and New England—from single speaker pickups to 40-foot outdoor cinema nights and 2.67mm LED stages.</p>
+          <h1>AV Rental Boston &amp; Audio Visual Equipment Directory</h1>
+          <p class="seo-hero-lead">Explore every commercial AV rental category we deliver, install, and support across Boston, Cambridge, Somerville, Massachusetts, and Rhode Island—from <a href="/services/corporate-events">corporate meetings AV support</a> and <a href="/services/microphone-rentals">delegate mics</a> to 40-foot outdoor cinema nights and 2.67mm LED stages.</p>
           <div class="seo-cta-row">
             <a class="btn seo-btn-gold" href="/#rentals">Browse Interactive Catalog <span>→</span></a>
             <a class="btn btn-dark" href="/contact">Request Custom Quote <span>↗</span></a>
@@ -1699,12 +1773,12 @@ function renderAboutPage() {
   };
 
   const html = `<!doctype html>
-<html lang="en">
+<html lang="en-US">
   <head>
 ${commonHeadTags({
-  title: "Best Audio Visual Rentals in Boston | Beantown Audio",
+  title: "About Beantown Audio Rentals | Boston Event AV",
   description:
-    "About Beantown Audio Rentals—founded on clean, shop-tested speakers, DJ gear, wireless & delegate mics, projectors, LED walls & event production across Boston, MA, RI & New England.",
+    "About Beantown Audio Rentals in Boston, MA: shop-tested PA audio systems, speakers, DJ gear, delegate mics, corporate meetings AV support, LED walls & event production.",
   canonicalUrl,
   jsonLdObj: schemaGraph,
 })}
@@ -1722,7 +1796,7 @@ ${commonHeader({ active: "about" })}
 
         <section class="seo-hero">
           <span class="seo-hero-eyebrow">BOSTON · NEW ENGLAND · EVENT AV</span>
-          <h1>Best Audio Visual Rentals in Boston</h1>
+          <h1>About Beantown Audio Rentals — Boston Event AV</h1>
           <p class="seo-hero-lead">At Beantown Audio Rentals, great events start with clean sound, bright visuals, simple pricing, and experienced local technicians who keep your load-in calm across Greater Boston, Massachusetts, Rhode Island, and New England.</p>
           <ul class="seo-hero-bullets">
             <li>Pre-tested Shure QLX-D wireless, QSC, JBL, Pioneer DJ, Chauvet &amp; NovaStar LED systems</li>
@@ -1739,7 +1813,7 @@ ${commonHeader({ active: "about" })}
           <h2>Our Story &amp; Event Production Philosophy</h2>
           <p>Beantown Audio Rentals was founded to replace confusing technical jargon and unreliable rental gear with tested, commercial-grade equipment and transparent support. Whether you are planning a corporate town hall in Boston's Seaport, a panel or commencement in Cambridge, a Back Bay ballroom wedding, a block party in Somerville, or an outdoor movie screening in Massachusetts or Rhode Island, we treat every show—big or small—with the same precision.</p>
           <p>“An event feels calm when someone has already met its worst day. At Beantown, we prepare for every variable so your event runs effortlessly.” — Calvin Reid, Founder</p>
-          <p>Our inventory covers complete <a href="/audio">PA audio systems</a>, <a href="/services/speaker-rentals">powered speakers</a>, <a href="/services/subwoofer-rentals">18&Prime; subwoofers</a>, <a href="/services/microphone-rentals">wireless &amp; delegate push-to-talk microphones</a>, <a href="/services/audio-mixers">Behringer X32 &amp; Allen &amp; Heath digital mixers</a>, <a href="/services/dj-equipment-rentals">Pioneer CDJ-3000s &amp; DJ packages</a>, <a href="/services/projector-rentals">HD laser projectors &amp; Fast-Fold screens</a>, <a href="/services/tv-rentals">65&Prime; &amp; 75&Prime; 4K TV displays</a>, <a href="/services/indoorledwall">indoor 2.67mm LED video walls</a>, <a href="/services/ledtrailers">outdoor LED trailers</a>, <a href="/services/outdoor-movies">inflatable movie screens with projector &amp; speakers</a>, <a href="/services/photo-booth">360 &amp; Magic Mirror photo booths</a>, <a href="/services/silent-disco">silent disco packs</a>, <a href="/services/event-lighting">wireless uplighting</a>, <a href="/services/cold-sparklers">indoor-safe cold sparklers</a>, <a href="/services/dry-ice-machine">dry ice cloud fog</a>, and <a href="/services/live-streaming">multi-camera live streaming kits</a>.</p>
+          <p>Our inventory covers complete <a href="/audio">PA audio systems</a>, <a href="/services/speaker-rentals">powered speakers</a>, <a href="/services/subwoofer-rentals">18&Prime; subwoofers</a>, <a href="/services/microphone-rentals">wireless &amp; delegate push-to-talk microphones</a>, <a href="/services/corporate-events">corporate meetings AV support</a>, <a href="/services/audio-mixers">Behringer X32 &amp; Allen &amp; Heath digital mixers</a>, <a href="/services/dj-equipment-rentals">Pioneer CDJ-3000s &amp; DJ packages</a>, <a href="/services/projector-rentals">HD laser projectors &amp; Fast-Fold screens</a>, <a href="/services/tv-rentals">65&Prime; &amp; 75&Prime; 4K TV displays</a>, <a href="/services/indoorledwall">indoor 2.67mm LED video walls</a>, <a href="/services/ledtrailers">outdoor LED trailers</a>, <a href="/services/outdoor-movies">inflatable movie screens with projector &amp; speakers</a>, <a href="/services/photo-booth">360 &amp; Magic Mirror photo booths</a>, <a href="/services/silent-disco">silent disco packs</a>, <a href="/services/event-lighting">wireless uplighting</a>, <a href="/services/cold-sparklers">indoor-safe cold sparklers</a>, <a href="/services/dry-ice-machine">dry ice cloud fog</a>, and <a href="/services/live-streaming">multi-camera live streaming kits</a>.</p>
           <p>Every microphone, powered speaker, projector, LED cabinet, and cable undergoes bench inspection between events so cables tape flat and shows run on time. Need guidance sizing your venue or booking delivery? Call or text our Boston desk daily at <a href="tel:+19786015473">(978) 601-5473</a> or email <a href="mailto:info@beantownaudiorentals.com">info@beantownaudiorentals.com</a>.</p>
           <div class="seo-areas-pill-row">
             <span class="seo-area-pill">Boston Proper &amp; Seaport</span>
@@ -1760,7 +1834,7 @@ ${commonHeader({ active: "about" })}
             </div>
           </div>
           <div class="seo-related-grid">
-            ${SERVICE_PAGES.slice(0, 12)
+            ${SERVICE_PAGES
               .map((p) => `<a class="seo-related-chip" href="${p.urlPath}">${escapeHtml(p.navLabel)} →</a>`)
               .join("\n            ")}
           </div>
@@ -1802,7 +1876,7 @@ function renderContactPage() {
   };
 
   const html = `<!doctype html>
-<html lang="en">
+<html lang="en-US">
   <head>
 ${commonHeadTags({
   title: "Contact & Free AV Quote | Beantown Audio Rentals Boston",
@@ -1917,9 +1991,9 @@ ${CART_SYNC_SCRIPT}
 }
 
 function renderHomepage() {
-  const homeTitle = "Boston Audio Visual & Speaker Rentals | Beantown Audio";
+  const homeTitle = "Boston Audio Visual Rentals | Beantown Audio Rentals";
   const homeDesc =
-    "Boston & Massachusetts audio visual equipment rentals: powered PA speakers from $65, DJ equipment, wireless & push-to-talk mics, HD laser projectors, LED walls, uplighting, silent disco & cold sparklers.";
+    "Boston & MA audio visual & audio system rentals: powered speakers from $65, DJ gear, wireless & delegate mics, corporate event AV, projectors, LED walls & FX.";
   const homeFaqs = [
     {
       category: "Rentals & Inventory",
@@ -2011,10 +2085,40 @@ function renderHomepage() {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
+          name: "Corporate Event AV & Corporate Meetings AV Support",
+          url: `${DOMAIN}/services/corporate-events`,
+          description:
+            "Turnkey corporate meetings AV support in Boston, MA: BCEC & Hynes booths, hotel conferences, QSC PA audio, delegate & Shure wireless mics, laser projectors, LED walls & hybrid live streaming.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Delegate, PTT & Conference Microphone Rentals",
+          url: `${DOMAIN}/services/microphone-rentals`,
+          description:
+            "Shure QLX-D wireless handheld & lavalier mics, Countryman headsets, push-to-talk (PTT) conference delegate desk mics ($35), and presentation mic bundles.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
           name: "Projector, 4K TV & LED Video Wall Rentals",
           url: `${DOMAIN}/services/projector-rentals`,
           description:
             "Commercial HD laser projectors, Fast-Fold screens, Samsung 65-inch & 75-inch TVs, indoor 2.67mm LED walls, outdoor mobile LED trailers, and live streaming.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Inflatable Outdoor Movie Screen With Projector & Speakers (MA & RI)",
+          url: `${DOMAIN}/services/outdoor-movies`,
+          description:
+            "Complete 12ft ($549), 16ft ($749), 26ft ($899) & 40ft ($1,899) inflatable movie screens with HD laser projector and PA speakers delivered across Massachusetts and Rhode Island.",
         },
       },
       {
@@ -2031,10 +2135,10 @@ function renderHomepage() {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Silent Disco, Photo Booths & Outdoor Movies",
+          name: "Silent Disco, Photo Booths & DJ Equipment",
           url: `${DOMAIN}/services/silent-disco`,
           description:
-            "3-channel wireless silent disco packs (50–300 headphones), Magic Mirror & 360 photo booths, and 12ft–40ft inflatable outdoor movie screens.",
+            "3-channel wireless silent disco packs (50–300 headphones), Magic Mirror & 360 photo booths, and Pioneer CDJ-3000 & Technics 1200 DJ gear.",
         },
       },
     ],
@@ -2069,7 +2173,7 @@ function renderHomepage() {
 
   // Exact visual parity with home() in script.js + openingSequence curtain (0 visual changes)
   const html = `<!doctype html>
-<html lang="en">
+<html lang="en-US">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -2077,7 +2181,13 @@ function renderHomepage() {
     <meta name="description" content="${escapeHtml(homeDesc)}" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="google-site-verification" content="mNQFNo1Zx3hTSlkyXoKHWQBBHWDKJ_Ns4Z5Bcfgvmzo" />
+    <meta name="geo.region" content="US-MA" />
+    <meta name="geo.placename" content="Boston, Massachusetts" />
+    <meta name="geo.position" content="42.3601;-71.0589" />
+    <meta name="ICBM" content="42.3601, -71.0589" />
     <link rel="canonical" href="${DOMAIN}/" />
+    <link rel="alternate" hreflang="en-US" href="${DOMAIN}/" />
+    <link rel="alternate" hreflang="x-default" href="${DOMAIN}/" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Beantown Audio Rentals" />
@@ -2371,7 +2481,7 @@ function writeSitemap() {
       }
       return {
         loc: `${DOMAIN}${p.urlPath}`,
-        priority: ["speaker-rentals", "audio", "dj-equipment-rentals", "projector-rentals", "cold-sparklers", "indoorledwall", "microphone-rentals"].includes(p.slug) ? "0.9" : "0.8",
+        priority: ["speaker-rentals", "audio", "dj-equipment-rentals", "projector-rentals", "cold-sparklers", "indoorledwall", "microphone-rentals", "corporate-events", "outdoor-movies"].includes(p.slug) ? "0.9" : "0.8",
         freq: "weekly",
         images: imgs,
       };

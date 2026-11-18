@@ -6,7 +6,7 @@
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "redirects": [
       {
-        "regex": "(?i)^/(test-home|style-guide|home|index)/?$",
+        "regex": "(?i)^/(?:test-home|style-guide|home|index(?:\\.html)?)/?$",
         "destination": "/",
         "type": 301
       },
@@ -258,6 +258,26 @@
       {
         "regex": "(?i)^/(?:services/)?silent-disco-rentals?/?$",
         "destination": "/services/silent-disco",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:corporate-events?|corporate-av|corporate-event-av|corporate-meetings(?:-av)?|corporate-av-boston|corporate-meetings-av-support)/?$",
+        "destination": "/services/corporate-events",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:services/(?:corporate-event|corporate-av|corporate-event-av|corporate-meetings(?:-av)?)|service/corporate-events?)/?$",
+        "destination": "/services/corporate-events",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:audiovisual-rentals?|av-rentals?|av-rental-boston|boston-av-rental|av-equipment|audio-visual-equipment-rental)/?$",
+        "destination": "/services",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:audio-system-rentals?|sound-equipment-rentals?|sound-system-rentals?)/?$",
+        "destination": "/audio",
         "type": 301
       },
       {
