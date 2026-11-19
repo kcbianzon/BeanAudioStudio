@@ -55,36 +55,41 @@ const SERVICE_PAGES = [
     navLabel: "Speaker Rentals",
     categoryLabel: "Audio & Speakers",
     hashCategory: "Audio & Speakers",
-    title: "Speaker Rental Boston | PA Systems From $65 | Beantown AV",
+    title: "Speaker & Party Speaker Rental Boston | From $65",
     description:
-      "Rent powered PA speakers & party sound systems in Boston & Massachusetts from $65/day. Small to 500+ guest concert line array speaker rentals with stands, Bluetooth & delivery.",
-    altNames: ["Boston Speaker Rental", "PA Speaker Rental Massachusetts", "Hire Speakers for Events", "Guest Speaker Hire Boston"],
-    h1: "Speaker Rentals in Boston & New England",
-    lead: "Crystal-clear powered PA speakers, line arrays, and full audio packages for weddings, corporate panels, concerts, and private celebrations—delivered, set up, and soundchecked across Greater Boston.",
+      "Rent powered PA & party speakers from $65/day near you in Boston, MA & RI. Hire Bluetooth party speakers, Small–Large PA sound systems & subs with delivery.",
+    altNames: ["Boston Speaker Rental", "Rent Party Speakers Near Me", "Hire a Speaker Boston", "PA Speaker Rental Massachusetts", "Speaker Rental RI"],
+    h1: "Speaker & Party Speaker Rentals in Boston, MA & RI",
+    lead: "Rent powered PA speakers, Bluetooth party speakers, concert line arrays, and complete sound systems from $65/day—delivered, set up, and soundchecked across Boston, Massachusetts, and Rhode Island.",
     heroBullets: [
-      "Powered 12″ & 15″ PA speakers, concert line arrays & stage monitors",
-      "Packages scaled from 30-guest speeches to 500+ attendee main stages",
-      "White-glove delivery, cabling, room tuning & pickup across MA, RI & NH",
+      "Powered 12″ & 15″ PA speakers ($65), stage monitors ($55) & line arrays",
+      "Party speaker packages scaled from 30-guest backyards to 500+ attendees",
+      "DIY self-pickup or full delivery, cabling & soundcheck across MA, RI & NH",
     ],
     categoryFilter: "Audio & Speakers",
-    guideHeading: "Choosing the Right Event Speaker Rental in Boston",
+    guideHeading: "How to Choose the Right Speaker or Party Sound Rental (Boston & RI)",
     guideHtmlParagraphs: [
-      `Whether you are hosting an intimate Back Bay cocktail reception, a corporate keynote in the Seaport District, or an outdoor concert on a college quad, sizing your PA system cleanly prevents muddy speech or distorted highs. Our Small Audio Package handles speeches and ambient playback for up to 50 guests, while our <a href="/audio">complete Medium and Large Audio Packages</a> scale seamlessly with <a href="/services/subwoofer-rentals">powered 18&Prime; subwoofers</a> and <a href="/services/microphone-rentals">Shure QLX-D wireless microphones</a>.`,
-      `Need to hire speakers for an event quickly? Every speaker rental includes heavy-duty tripod stands, balanced XLR cabling, and optional delivery, setup, soundcheck, or dedicated on-site audio engineer support—and pairs cleanly with our <a href="/services/dj-equipment-rentals">Boston DJ equipment rentals</a> and <a href="/services/audio-mixers">digital mixers</a> across Boston, Cambridge, Somerville, Brookline, and New England.`,
+      `When you need to <strong>hire a speaker</strong> or <strong>rent party speakers near you</strong> in Greater Boston or Rhode Island, start with your guest count and room size. Our single powered PA speakers ($65) or Small Audio Package ($199+, 2 speakers + mixer + mic) cover backyard parties, cocktail hours, and speeches up to 50 guests cleanly via Bluetooth or 3.5mm/XLR.`,
+      `For 50–150 guests (weddings, graduation parties, corporate receptions), step up to our <a href="/audio">Medium Audio Package ($349+)</a> with four tops and optional <a href="/services/subwoofer-rentals">powered 18&Prime; subwoofers</a> ($75+). Large 150–500+ attendee dances and outdoor concerts pair our Large Line Array package ($880+) with <a href="/services/microphone-rentals">Shure QLX-D wireless &amp; delegate mics</a>, <a href="/services/dj-equipment-rentals">DJ gear</a>, and <a href="/services/audio-mixers">digital mixers</a>—with full service into <a href="/services/rhode-island-av-rentals">Providence, Newport &amp; Warwick, RI</a>.`,
+      `Every speaker rental includes heavy-duty tripod stands, surge-protected power cords, and balanced XLR/Bluetooth/laptop interconnect cabling. Choose budget-friendly self-pickup or turnkey delivery, clean taped cabling, room EQ tuning, and pickup after your event.`,
     ],
-    related: ["subwoofer-rentals", "microphone-rentals", "audio-mixers", "dj-equipment-rentals", "audio"],
+    related: ["audio", "subwoofer-rentals", "microphone-rentals", "rhode-island-av-rentals", "dj-equipment-rentals", "audio-mixers"],
     faqs: [
+      {
+        q: "How much does it cost to rent party speakers or PA speakers in Boston?",
+        a: "Individual powered 12″ and 15″ PA speakers start at $65/day, stage monitors start at $55, and full turnkey sound packages with stands, cables, mixer, and wireless mics start at $199 (Small), $349 (Medium), and $880 (Large Line Array).",
+      },
       {
         q: "How many speakers do I need to rent for 100 to 200 guests?",
         a: "For 50–150 guests (weddings, corporate town halls, receptions), we recommend our Medium Audio Package with four powered speakers on stands plus optional subwoofer support. For 150+ guests or live concerts, our Large Audio Package with line arrays and subs ensures even front-to-back coverage.",
       },
       {
         q: "Do your Boston speaker rentals include delivery, stands, and cables?",
-        a: "Yes. Every speaker rental includes tripod stands, power cords, and XLR/Bluetooth interconnect cabling. You can choose pickup, white-glove delivery with setup and soundcheck, or full on-site technician operation.",
+        a: "Yes. Every speaker rental includes tripod stands, power cords, and XLR/Bluetooth interconnect cabling. You can choose self-pickup, white-glove delivery with setup and soundcheck across MA & RI, or full on-site technician operation.",
       },
       {
         q: "Can I connect a phone, laptop, or DJ controller to your PA speakers?",
-        a: "Yes. All audio packages include a compatible mixer with Bluetooth, AUX/3.5mm, RCA, and XLR inputs so phones, laptops, microphones, and DJ controllers plug right in without extra adapters.",
+        a: "Yes. All audio packages include a mixer with Bluetooth, AUX/3.5mm, RCA, and XLR inputs so iPhones, Androids, laptops, microphones, and DJ controllers plug right in without extra adapters.",
       },
     ],
   },
@@ -97,30 +102,35 @@ const SERVICE_PAGES = [
     hashCategory: "Audio & Speakers",
     title: "Audio Equipment & Audio System Rental Boston | Beantown",
     description:
-      "Full-service audio equipment & audio system rentals in Boston, MA from $65–$199: turnkey PA speaker packages, wireless & delegate mics, subwoofers & mixers.",
-    altNames: ["Audio Equipment Rental Near Me", "Audio System Rental Boston", "Boston Audio System Rental", "Audio Visual Equipment Rental Massachusetts"],
-    h1: "Audio Equipment & Audio System Rentals in Boston",
-    lead: "Turnkey sound packages combining powered speakers, wireless Shure microphones, mixers, and cabling—engineered for reliable clarity in hotel ballrooms, tents, auditoriums, and outdoor venues.",
+      "Sound system rental for events & audio equipment rental in Boston ($65–$199+): PA speaker packages, subs, wireless & delegate mics delivered across MA & RI.",
+    altNames: ["Audio Equipment Rental Near Me", "Sound System Rental for Events", "Audio System Rental Boston", "Audio Visual Equipment Rental Massachusetts"],
+    h1: "Audio Equipment & Sound System Rentals for Events in Boston",
+    lead: "Turnkey sound system rentals for events combining powered PA speakers, Shure wireless microphones, mixers, and cabling—engineered for weddings, corporate summits, parties, and outdoor venues across MA & RI.",
     heroBullets: [
-      "Small (up to 50), Medium (50–150) & Large (150+) complete audio packages",
-      "Clean, shop-tested sound systems with redundant cables & adapters",
-      "Flexible self-pickup or full New England delivery, tuning & teardown",
+      "Small (up to 50), Medium (50–150) & Large (150+) complete event sound systems",
+      "Shop-tested PA gear with stands, Bluetooth/AUX input & redundant XLR cables",
+      "Self-pickup savings or full Boston, Massachusetts & Rhode Island delivery & setup",
     ],
     productIds: ["small-audio", "medium-audio", "large-audio", "powered-speakers", "audio-monitors", "audio-cables-stands", "sub-kw181", "qlxd-handheld"],
-    guideHeading: "Turnkey Audio Rentals Without the Technical Guesswork",
+    guideHeading: "Turnkey Sound System Rental for Events Without Technical Guesswork",
     guideHtmlParagraphs: [
-      `Searching for audio equipment or an audio system rental near you shouldn't mean piecing together dozens of unfamiliar cables and amplifiers. Our tiered Boston <a href="/services/speaker-rentals">PA speaker &amp; audio packages</a> ($199–$880+) match the exact acoustic demands of hotel ballrooms, corporate venues, university halls, and outdoor tents across Massachusetts and Rhode Island.`,
-      `Every audio system is tested prior to dispatch and can be customized inside our interactive quote builder with extra <a href="/services/microphone-rentals">wireless &amp; delegate conference mics</a>, <a href="/services/audio-mixers">X32 / SQ-7 mixers</a>, stage monitors, <a href="/services/subwoofer-rentals">18-inch powered subwoofers</a>, or <a href="/services/corporate-events">corporate event AV support</a>.`,
+      `Searching for audio equipment or a <strong>sound system rental for events</strong> near you shouldn't mean piecing together unfamiliar cables and amplifiers. Our tiered Boston <a href="/services/speaker-rentals">PA speaker &amp; audio packages</a> ($199–$880+) arrive pre-configured: Small Audio handles up to 50 guests, Medium Audio covers 50–150 guests across hotel ballrooms and tented receptions, and Large Audio adds concert line arrays and subs for 150–500+ attendees.`,
+      `Every system is bench-tested prior to dispatch and customizes cleanly with <a href="/services/microphone-rentals">Shure QLX-D wireless &amp; delegate conference mics</a>, <a href="/services/audio-mixers">X32 / SQ-7 consoles</a>, stage monitors, <a href="/services/subwoofer-rentals">18-inch cardioid subwoofers</a>, <a href="/services/corporate-events">corporate meetings AV support</a>, or full <a href="/services/rhode-island-av-rentals">Rhode Island audio delivery</a>.`,
+      `On a tight schedule? Choose fast self-pickup for compact speaker &amp; mic kits or schedule our Boston crew for early load-in, taped cabling, room tuning, soundcheck, and post-event pickup.`,
     ],
-    related: ["speaker-rentals", "microphone-rentals", "corporate-events", "subwoofer-rentals", "audio-mixers"],
+    related: ["speaker-rentals", "microphone-rentals", "corporate-events", "rhode-island-av-rentals", "subwoofer-rentals", "audio-mixers"],
     faqs: [
       {
-        q: "What comes inside a turnkey Beantown audio rental package?",
-        a: "Our Small, Medium, and Large Audio Packages include powered PA speakers, heavy-duty tripod stands, wireless Shure microphones, an audio mixer with Bluetooth/laptop hookups, and all required XLR, power, and surge protection gear.",
+        q: "What comes inside a turnkey Beantown sound system rental package?",
+        a: "Our Small, Medium, and Large Audio Packages include powered PA speakers, heavy-duty tripod stands, Shure wireless microphones, an audio mixer with Bluetooth/laptop hookups, and all required XLR, power, and surge protection gear.",
       },
       {
-        q: "Do you service Cambridge, Somerville, and greater New England?",
-        a: "Yes. We deliver across all Boston neighborhoods, Cambridge, Somerville, Brookline, Newton, Waltham, Worcester, Cape Cod, Providence RI, and Southern New Hampshire.",
+        q: "Can we pick up compact audio equipment ourselves or book full delivery?",
+        a: "Both options are available. Small PA speaker packages, wireless mic kits, and mixers can be picked up directly, or our crew delivers, sets up, runs soundcheck, and handles teardown across Boston, MA, and Rhode Island.",
+      },
+      {
+        q: "Do you service Cambridge, Somerville, Massachusetts, and Rhode Island?",
+        a: "Yes. We deliver across all Boston neighborhoods, Cambridge, Somerville, Brookline, Newton, Waltham, Worcester, Cape Cod, Providence & Newport RI, and Southern New Hampshire.",
       },
     ],
   },
@@ -144,14 +154,19 @@ const SERVICE_PAGES = [
     categoryFilter: "DJ Equipment",
     guideHeading: "Rent a DJ Board, Turntables, or Full Club Rig in Boston",
     guideHtmlParagraphs: [
-      `Whether you are flying in a touring club artist with an exact Pioneer CDJ-3000 and DJM-900NXS technical rider, hosting a vinyl set on Technics SL-1200MK2 direct-drive turntables, or planning to rent a DJ board with <a href="/services/speaker-rentals">powered speakers</a> for a private celebration, every unit arrives firmware-updated, clean, and road-ready.`,
-      `Need sound and dance floor energy in one streamlined booking? Our Basic, Standard, and Pro DJ Packages bundle controllers or CDJs, powered QSC PA tops, <a href="/services/subwoofer-rentals">18-inch subwoofers</a>, <a href="/services/microphone-rentals">wireless microphones</a>, and a sleek Scrim Werks facade—or pair with <a href="/services/event-lighting">event uplighting</a> and <a href="/services/silent-disco">silent disco headphones</a>.`,
+      `Whether you are flying in a touring club artist with an exact Pioneer CDJ-3000 and DJM-900NXS technical rider, hosting a vinyl set on Technics SL-1200MK2 direct-drive turntables, or planning to <strong>rent DJ equipment</strong> with <a href="/services/speaker-rentals">powered party speakers</a> for a private celebration, every unit arrives firmware-updated, clean, and road-ready.`,
+      `Need sound, lighting, and dance floor energy in one streamlined booking? Our Basic ($299+), Standard ($499+), and Pro ($699+) DJ Packages bundle controllers or CDJs, powered QSC PA tops, <a href="/services/subwoofer-rentals">18-inch subwoofers</a>, <a href="/services/microphone-rentals">wireless microphones</a>, and a sleek Scrim Werks facade—or pair with <a href="/services/event-lighting">event uplighting</a>, <a href="/services/cold-sparklers">cold sparklers</a>, and <a href="/services/silent-disco">silent disco headphones</a>.`,
+      `We support clubs, weddings, hotel ballrooms, campus formals, and private events throughout Boston, Cambridge, Somerville, and <a href="/services/rhode-island-av-rentals">Providence &amp; Newport, Rhode Island</a>.`,
     ],
-    related: ["subwoofer-rentals", "event-lighting", "cold-sparklers", "speaker-rentals", "silent-disco"],
+    related: ["subwoofer-rentals", "event-lighting", "cold-sparklers", "speaker-rentals", "silent-disco", "rhode-island-av-rentals"],
     faqs: [
       {
         q: "Do you rent individual Pioneer CDJ-3000 players and club mixers separately?",
-        a: "Yes. You can rent single CDJ-3000 or CDJ-2000NXS2 decks, DJM-900NXS, DJM-S9, Rane SEVENTY-TWO, or DDJ-1000SRT units individually or paired with a full PA and subwoofer setup.",
+        a: "Yes. You can rent single CDJ-3000 or CDJ-2000NXS2 decks, DJM-900NXS, DJM-S9, Rane SEVENTY-TWO, or DDJ-1000SRT controllers individually or paired with a full PA and subwoofer setup.",
+      },
+      {
+        q: "Can I rent a DJ setup with speakers and a wireless mic included?",
+        a: "Yes. Our Basic, Standard, and Pro DJ Packages include speakers, stands, controller or CDJ rig, wireless microphone, and facade—and you can add 18-inch subwoofers or wireless uplighting in one quote.",
       },
       {
         q: "Are slipmats, Pro DJ Link Ethernet cables, and RCA/XLR cables included?",
@@ -214,18 +229,22 @@ const SERVICE_PAGES = [
     productIds: ["cold-spark-2", "cold-spark-4", "cold-spark-ultimate", "dry-ice-cloud"],
     guideHeading: "Safe, High-Impact Cold Spark Machines for Boston Weddings & Galas",
     guideHtmlParagraphs: [
-      `Traditional pyrotechnics are banned inside virtually every Boston hotel, museum, and historic ballroom. Our ColorKey Dazzler FX cold sparkler machines heat special composite granules to create a brilliant, photography-ready gold spark fountain without open combustion or heavy lingering smoke.`,
-      `Every Boston cold spark rental package includes sealed titanium granule refills, synchronized wireless remote or DMX firing control, and optional certified on-site operation—often paired with our <a href="/services/dry-ice-machine">Dancing on a Cloud dry ice machine</a>, <a href="/services/event-lighting">wireless uplighting</a>, and <a href="/services/dj-equipment-rentals">DJ equipment packages</a>.`,
+      `Traditional pyrotechnics are banned inside virtually every Boston hotel, museum, and historic ballroom. Our ColorKey Dazzler FX cold sparkler machines heat special titanium/zirconium composite granules to create a brilliant, photography-ready gold spark fountain up to 15 feet high with zero open combustion and minimal lingering smoke.`,
+      `Every Boston <strong>cold spark machine rental</strong> package (Basic 2-unit $350+, Premium 4-unit $650+, Ultimate 6-unit $1,100+) includes sealed granule packets, wireless remote or DMX firing control, power/DMX cabling, and optional certified on-site technician cues—popular alongside our <a href="/services/dry-ice-machine">Dancing on a Cloud dry ice fog machine</a>, <a href="/services/event-lighting">wireless uplighting</a>, and <a href="/services/dj-equipment-rentals">DJ equipment packages</a> across Boston, MA, and <a href="/services/rhode-island-av-rentals">Rhode Island</a>.`,
     ],
-    related: ["dry-ice-machine", "event-lighting", "dj-equipment-rentals", "photo-booth"],
+    related: ["dry-ice-machine", "event-lighting", "dj-equipment-rentals", "photo-booth", "rhode-island-av-rentals"],
     faqs: [
       {
         q: "Are cold sparkler machines safe inside Boston hotels and wedding venues?",
-        a: "Yes. Cold spark fountains are non-pyrotechnic, cool to the touch moments after leaving the nozzle, produce zero flame, and emit virtually no smoke—making them approved at major Boston ballrooms and event halls.",
+        a: "Yes. Cold spark fountains are non-pyrotechnic, cool to the touch moments after leaving the nozzle, produce zero open flame, and emit virtually no smoke—making them widely approved at Boston ballrooms and reception halls.",
       },
       {
         q: "How many cold spark machines do we need?",
-        a: "Two machines (Basic Package) are ideal for framing a DJ booth or wedding sweetheart table entrance. Four to six machines (Premium or Ultimate Packages) create dramatic symmetrical stage walls for concerts, corporate awards, and grand ballrooms.",
+        a: "Two machines (Basic Package, $350+) are ideal for framing a DJ booth or wedding sweetheart table entrance. Four to six machines (Premium $650+ or Ultimate $1,100+) create dramatic symmetrical stage walls for concerts, corporate awards, and grand ballrooms.",
+      },
+      {
+        q: "Are cold spark granules and DMX triggering included in the rental?",
+        a: "Yes. Packages include composite titanium granule packets, power and DMX interconnect cables, and wireless cue control, with optional on-site operator sync for grand entrances and first dances.",
       },
     ],
   },
@@ -235,32 +254,36 @@ const SERVICE_PAGES = [
     navLabel: "Dry Ice Cloud",
     categoryLabel: "Special Effects",
     hashCategory: "Special Effects",
-    title: "Dry Ice Machine Rental Boston | Cloud Fog | Beantown",
+    title: "Dry Ice Fog Machine Rental Boston | Cloud FX | Beantown",
     description:
-      "Rent commercial Chauvet Nimbus dry ice machines ($295) for Dancing on a Cloud wedding first dances & theatrical entrances in Boston & MA. Low-lying fog that won't trip alarms.",
-    altNames: ["Dry Ice Machine Rental Massachusetts", "Dancing on a Cloud Fog Rental Boston"],
-    h1: "Dry Ice Cloud Machine Rentals in Boston",
-    lead: "Produce dense, thick, snowy-white low-lying fog that blankets the dance floor for your wedding first dance or theatrical stage cue—staying strictly low to the floor without rising.",
+      "Rent commercial Chauvet Nimbus dry ice fog machines ($295+) for wedding Dancing on a Cloud first dances & stage fog in Boston, MA & RI. Floor-hugging low fog.",
+    altNames: ["Dry Ice Fog Machine Rental", "Dry Ice Machine Rental Massachusetts", "Dancing on a Cloud Fog Rental Boston"],
+    h1: "Dry Ice Fog Machine Rentals in Boston (Dancing on a Cloud)",
+    lead: "Produce dense, snowy-white low-lying cloud fog that hugs the dance floor for your wedding first dance or theatrical stage cue—powered by commercial Chauvet Nimbus dry ice machines across MA & RI.",
     heroBullets: [
-      "Commercial Chauvet DJ Nimbus hot-water dry ice machines",
-      "Thick, clean ankle-height cloud that dissipates smoothly before rising",
-      "Ideal for wedding first dances, gala entrances & live theater in Boston",
+      "Commercial Chauvet DJ Nimbus hot-water dry ice fog machines ($295+)",
+      "Thick, clean ankle-height cloud that stays low without triggering alarms",
+      "Ideal for wedding first dances, gala entrances & theater in Boston & RI",
     ],
     productIds: ["dry-ice-cloud", "cold-spark-2", "wedding-lighting", "medium-audio"],
-    guideHeading: "Magical 'Dancing on a Cloud' Without Venue Alarm Worry",
-    guideParagraphs: [
-      "Unlike cheap oil-based foggers that create haze throughout the room and risk triggering optical smoke detectors, real CO2 dry ice fog is heavier than warm indoor air. It rolls gently off the Chauvet Nimbus unit and hugs the dance floor at shoe-to-knee level, creating effortless, cloud-like wedding photos.",
-      "Pair your dry ice cloud rental with wireless amber/warm-white uplighting or cold sparkler fountains for an unforgettable first dance reveal anywhere in Boston or New England.",
+    guideHeading: "Dancing on a Cloud Dry Ice Fog Without Venue Alarm Worry",
+    guideHtmlParagraphs: [
+      `Unlike glycol hazers or cheap Halloween foggers that fill ceilings and risk setting off venue smoke detectors, a real CO2 <strong>dry ice fog machine rental</strong> creates heavy chilled vapor that hugs the dance floor at ankle-to-knee level. It rolls cleanly out of our Chauvet Nimbus unit for romantic wedding first dances, sweet 16 entrances, and stage cues before dissipating cleanly.`,
+      `Pair your dry ice low-fog effect with <a href="/services/cold-sparklers">indoor-safe cold sparkler fountains</a>, <a href="/services/event-lighting">wireless amber/warm-white uplighting</a>, or <a href="/services/dj-equipment-rentals">complete DJ sound systems</a> across Greater Boston and <a href="/services/rhode-island-av-rentals">Rhode Island venues</a>.`,
     ],
-    related: ["cold-sparklers", "event-lighting", "photo-booth", "dj-equipment-rentals"],
+    related: ["cold-sparklers", "event-lighting", "photo-booth", "dj-equipment-rentals", "rhode-island-av-rentals"],
     faqs: [
       {
-        q: "Will a dry ice cloud machine trigger optical venue smoke detectors?",
-        a: "Dry ice machines create chilled water vapor/CO2 fog that stays low along the floor and dissipates before reaching ceiling sensors. Always confirm with your venue coordinator ahead of time.",
+        q: "Does the Chauvet Nimbus dry ice fog machine use solid CO2 dry ice?",
+        a: "Yes. True Dancing on a Cloud effects combine heated water with solid CO2 dry ice pellets/blocks to produce dense floor-hugging fog. Ask our Boston desk when booking if you would like delivery, pre-heating, and dry ice coordination handled for your venue.",
       },
       {
-        q: "How does timing work during a first dance?",
-        a: "When booked with setup or an on-site technician, we pre-heat the Nimbus tank discreetly before your grand entrance or first dance so thick white cloud fills the floor right on musical cue.",
+        q: "Will a dry ice fog machine trigger optical venue smoke detectors?",
+        a: "No when used normally indoors—real CO2 dry ice fog stays strictly low to the floor rather than rising into ceiling optical sensors. We still recommend confirming atmospheric FX with your venue coordinator in advance.",
+      },
+      {
+        q: "How does timing work during a wedding first dance?",
+        a: "When booked with setup or an on-site technician, we pre-heat the Nimbus tank discreetly before your grand entrance or first dance so thick white cloud fills the floor right on your DJ cue.",
       },
     ],
   },
@@ -287,7 +310,7 @@ const SERVICE_PAGES = [
       `Downtown Boston RF spectrum is crowded around convention halls, universities, and Back Bay hotels. Whether you need a weighted gooseneck <strong>delegate mic rental</strong> or <strong>push-to-talk (PTT) conference microphone</strong> for panel tables, municipal hearings, and summits, or Shure QLX-D wireless lavaliers and handhelds for keynotes, every unit ships pre-coordinated and bench-tested.`,
       `Rent single delegate or wireless microphones ($20–$75) or full multi-mic bundles—and pair them directly with our <a href="/services/corporate-events">corporate meetings AV support</a>, <a href="/services/audio-mixers">digital audio mixers</a>, <a href="/audio">PA sound packages</a>, and <a href="/services/live-streaming">4K live streaming kits</a>.`,
     ],
-    related: ["corporate-events", "speaker-rentals", "audio-mixers", "live-streaming", "audio"],
+    related: ["corporate-events", "speaker-rentals", "rhode-island-av-rentals", "audio-mixers", "live-streaming", "audio"],
     faqs: [
       {
         q: "Do you offer push-to-talk and conference delegate mic rentals?",
@@ -532,7 +555,7 @@ const SERVICE_PAGES = [
       `Planning a backyard movie night, school PTO fundraiser, campus quad screening, or town summer movie series in Massachusetts or Rhode Island? Every Beantown <strong>inflatable movie screen with projector and speakers rental</strong> arrives complete with a widescreen 16:9 inflatable screen, ultra-quiet continuous blower, bright <a href="/services/projector-rentals">HD laser movie projector</a>, <a href="/services/speaker-rentals">outdoor PA speakers</a> on tripod stands, heavy-duty stakes/tethers, and HDMI/Blu-ray connectivity.`,
       `Hosting a daytime outdoor festival or sunny afternoon tailgate in Boston or Providence, RI? Check out our sunlight-visible <a href="/services/ledtrailers">mobile outdoor LED screen trailers</a>, or add <a href="/services/silent-disco">silent disco headphones</a> for late-night audio after quiet-hour curfews.`,
     ],
-    related: ["ledtrailers", "projector-rentals", "silent-disco", "speaker-rentals"],
+    related: ["rhode-island-av-rentals", "ledtrailers", "projector-rentals", "silent-disco", "speaker-rentals"],
     faqs: [
       {
         q: "Does the inflatable movie screen rental include a projector and speakers?",
@@ -690,6 +713,57 @@ const SERVICE_PAGES = [
       {
         q: "Can you deliver to Seaport, Downtown Boston, Back Bay hotels, and Kendall Square?",
         a: "Yes. We routinely deliver and set up corporate AV across Downtown Boston, Seaport District, Back Bay, Financial District, Cambridge/Kendall Square, Waltham, Burlington, and Greater New England, and accept corporate cards, ACH, and approved Net-30 invoicing.",
+      },
+    ],
+  },
+  {
+    slug: "rhode-island-av-rentals",
+    urlPath: "/services/rhode-island-av-rentals",
+    navLabel: "Rhode Island AV",
+    categoryLabel: "Rhode Island · Providence · Newport",
+    hashCategory: "Audio & Speakers",
+    title: "Speaker, Mic & Event AV Rental Rhode Island | Beantown",
+    description:
+      "Rent PA speakers, party speakers, wireless & delegate mics, DJ gear & inflatable movie screens across Providence, Newport, Warwick & Cranston, RI ($65+).",
+    altNames: ["Microphone and Speaker Rental RI", "Speaker Rental Rhode Island", "Inflatable Movie Screen Rental RI", "AV Rental Providence RI"],
+    h1: "Speaker, Microphone & Event AV Rentals in Rhode Island (RI)",
+    lead: "Turnkey microphone and speaker rentals, inflatable movie screens, DJ setups, and event AV production delivered across Providence, Warwick, Cranston, Pawtucket, and Newport, RI from $65+.",
+    heroBullets: [
+      "Powered PA speakers ($65), complete audio packages ($199+) & 18″ subwoofers",
+      "Shure QLX-D wireless handhelds, lavaliers & PTT delegate conference mics ($20–$65)",
+      "12ft–40ft inflatable outdoor movie screens, silent disco & cold sparklers across RI",
+    ],
+    productIds: [
+      "small-audio",
+      "medium-audio",
+      "powered-speakers",
+      "qlxd-handheld",
+      "qlxd-lavalier",
+      "ptt-mic",
+      "presentation-mic-setup",
+      "movie-16",
+      "movie-26",
+      "silent-100",
+      "cold-spark-2",
+    ],
+    guideHeading: "Reliable Delivery Across Providence, Newport & All of Rhode Island",
+    guideHtmlParagraphs: [
+      `Planning a ceremony in Newport, a campus event near Brown University, RISD, or Providence College, a backyard movie night in Warwick or Cranston, or a corporate meeting downtown? Our team dispatches clean, pre-tested <strong>microphone and speaker rentals across Rhode Island</strong> via I-95 South—handling morning load-in, discreet cabling, RF coordination, and prompt teardown.`,
+      `Popular Rhode Island rentals include our turnkey <a href="/audio">Small and Medium PA Audio Packages</a> ($199–$349+), <a href="/services/microphone-rentals">Shure QLX-D wireless &amp; push-to-talk conference mics</a>, <a href="/services/outdoor-movies">all-in-one inflatable outdoor movie screens with projector &amp; speakers</a> ($549–$1,899), <a href="/services/silent-disco">quiet-curfew silent disco packs</a> for historic coastal venues, and <a href="/services/cold-sparklers">indoor-safe cold sparklers</a>.`,
+    ],
+    related: ["speaker-rentals", "microphone-rentals", "outdoor-movies", "audio", "corporate-events"],
+    faqs: [
+      {
+        q: "Do you deliver microphone and speaker rentals anywhere in Rhode Island?",
+        a: "Yes. We deliver, set up, soundcheck, and tear down across Providence, Warwick, Cranston, Pawtucket, East Greenwich, Bristol, Narragansett, Middletown, and Newport, RI.",
+      },
+      {
+        q: "Can we rent outdoor inflatable movie screens or silent disco packages in RI?",
+        a: "Yes. Our 12ft ($549), 16ft ($749), 26ft ($899), and 40ft ($1,899) inflatable outdoor movie screens include the HD laser projector and PA speakers, and our 3-channel wireless silent disco packages ($500–$2,500) work wonderfully at noise-restricted Newport estates.",
+      },
+      {
+        q: "How far ahead should we book Rhode Island event AV delivery?",
+        a: "We recommend reserving 2–3 weeks in advance for May–October weekends in Newport and Providence, though we handle urgent same-week requests whenever crew is open—call (978) 601-5473 to confirm availability.",
       },
     ],
   },
@@ -1945,6 +2019,12 @@ ${commonHeader({ active: "contact" })}
             <p id="contactFormStatus" class="get-quote-status" role="status" aria-live="polite" hidden></p>
           </form>
         </div>
+
+        <section class="seo-guide-box" aria-labelledby="contactDispatchHeading">
+          <h2 id="contactDispatchHeading">Boston &amp; New England Dispatch, Self-Pickup &amp; Event Coverage</h2>
+          <p>Our Boston production desk responds daily from 8:00 AM to 8:00 PM at <a href="tel:+19786015473">(978) 601-5473</a> and <a href="mailto:info@beantownaudiorentals.com">info@beantownaudiorentals.com</a>. Choose budget-friendly self-pickup for compact speaker and wireless microphone packages, white-glove delivery with setup and soundcheck across Massachusetts and Rhode Island, or full on-site technician support.</p>
+          <p>Popular quote bundles: <a href="/services/speaker-rentals">Speaker &amp; Party Speaker Rentals</a>, <a href="/services/corporate-events">Corporate Event AV Support</a>, <a href="/services/microphone-rentals">Delegate &amp; Wireless Mics</a>, <a href="/services/dj-equipment-rentals">DJ Gear</a>, <a href="/services/outdoor-movies">Outdoor Movie Screens</a>, and <a href="/services/rhode-island-av-rentals">Rhode Island AV Delivery</a>.</p>
+        </section>
       </main>
 
 ${commonFooter()}
@@ -1993,7 +2073,7 @@ ${CART_SYNC_SCRIPT}
 function renderHomepage() {
   const homeTitle = "Boston Audio Visual Rentals | Beantown Audio Rentals";
   const homeDesc =
-    "Boston & MA audio visual & audio system rentals: powered speakers from $65, DJ gear, wireless & delegate mics, corporate event AV, projectors, LED walls & FX.";
+    "Boston & RI audio visual & party speaker rentals from $65: sound systems, delegate mics, DJ gear, corporate AV, laser projectors, LED walls & dry ice fog.";
   const homeFaqs = [
     {
       category: "Rentals & Inventory",
@@ -2139,6 +2219,26 @@ function renderHomepage() {
           url: `${DOMAIN}/services/silent-disco`,
           description:
             "3-channel wireless silent disco packs (50–300 headphones), Magic Mirror & 360 photo booths, and Pioneer CDJ-3000 & Technics 1200 DJ gear.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Speaker, Microphone & Event AV Rentals in Rhode Island",
+          url: `${DOMAIN}/services/rhode-island-av-rentals`,
+          description:
+            "PA speakers, Shure wireless & delegate conference mics, DJ gear, and inflatable movie screens delivered across Providence, Newport, Warwick & Cranston, RI.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Dry Ice Cloud Fog Machine & DJ Equipment Rentals",
+          url: `${DOMAIN}/services/dry-ice-machine`,
+          description:
+            "Commercial Chauvet Nimbus dry ice fog machine rentals ($295+) and club-standard Pioneer CDJ-3000 & Turntable DJ packages.",
         },
       },
     ],
@@ -2481,7 +2581,7 @@ function writeSitemap() {
       }
       return {
         loc: `${DOMAIN}${p.urlPath}`,
-        priority: ["speaker-rentals", "audio", "dj-equipment-rentals", "projector-rentals", "cold-sparklers", "indoorledwall", "microphone-rentals", "corporate-events", "outdoor-movies"].includes(p.slug) ? "0.9" : "0.8",
+        priority: ["speaker-rentals", "audio", "dj-equipment-rentals", "projector-rentals", "cold-sparklers", "indoorledwall", "microphone-rentals", "corporate-events", "outdoor-movies", "rhode-island-av-rentals", "dry-ice-machine"].includes(p.slug) ? "0.9" : "0.8",
         freq: "weekly",
         images: imgs,
       };

@@ -241,7 +241,7 @@
         "type": 301
       },
       {
-        "regex": "(?i)^/(?:services/)?(?:dry-ice-machine-rentals?|dancing-on-a-cloud(?:-rental)?)/?$",
+        "regex": "(?i)^/(?:services/)?(?:dry-ice-machine-rentals?|dry-ice-fog-machine-rentals?|fog-machine-rentals?|dancing-on-a-cloud(?:-rental)?)/?$",
         "destination": "/services/dry-ice-machine",
         "type": 301
       },
@@ -276,8 +276,18 @@
         "type": 301
       },
       {
-        "regex": "(?i)^/(?:audio-system-rentals?|sound-equipment-rentals?|sound-system-rentals?)/?$",
+        "regex": "(?i)^/(?:audio-system-rentals?|sound-equipment-rentals?|sound-system-rentals?(?:-for-events)?)/?$",
         "destination": "/audio",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:party-speaker-rentals?|rent-party-speakers(?:-near-me)?)/?$",
+        "destination": "/services/speaker-rentals",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:rhode-island(?:-av-rentals?)?|ri-av-rentals?|providence-(?:av|speaker)-rentals?|services/ri-av-rentals?)/?$",
+        "destination": "/services/rhode-island-av-rentals",
         "type": 301
       },
       {
