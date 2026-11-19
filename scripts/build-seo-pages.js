@@ -1231,7 +1231,6 @@ function organizationSchemaNode() {
       longitude: -71.0589,
     },
     areaServed: [
-      { "@type": "Country", name: "United States" },
       { "@type": "City", name: "Boston" },
       { "@type": "City", name: "Cambridge" },
       { "@type": "City", name: "Somerville" },
@@ -1271,7 +1270,11 @@ function organizationSchemaNode() {
         closes: "20:00",
       },
     ],
-    sameAs: ["https://www.instagram.com/beantownaudiorentals/"],
+    hasMap: "https://www.google.com/maps/place/Beantown+Audio+Rentals/data=!3m1!4b1!4m6!3m5!1s0xab5b89bd69f2cde7:0xa498150b70272e9d!16s%2Fg%2F11x60lpprf",
+    sameAs: [
+      "https://maps.app.goo.gl/TQtX5n9hJMDVGFiXA",
+      "https://www.instagram.com/beantownaudiorentals/",
+    ],
   };
 }
 
