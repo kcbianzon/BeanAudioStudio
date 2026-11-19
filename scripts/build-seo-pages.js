@@ -1270,9 +1270,9 @@ function organizationSchemaNode() {
         closes: "20:00",
       },
     ],
-    hasMap: "https://www.google.com/maps/place/Beantown+Audio+Rentals/data=!3m1!4b1!4m6!3m5!1s0xab5b89bd69f2cde7:0xa498150b70272e9d!16s%2Fg%2F11x60lpprf",
+    hasMap: "https://www.google.com/maps/place/?q=place_id:ChIJXw44D_Tanw4RbnwolfVca-A",
     sameAs: [
-      "https://maps.app.goo.gl/TQtX5n9hJMDVGFiXA",
+      "https://www.google.com/maps/place/?q=place_id:ChIJXw44D_Tanw4RbnwolfVca-A",
       "https://www.instagram.com/beantownaudiorentals/",
     ],
   };
