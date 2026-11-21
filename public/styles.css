@@ -13223,8 +13223,8 @@ body.is-cms-view #app {
 .experience-category-card h3 a:focus-visible, .experience-category-links a:focus-visible { outline: 2px solid #a87600; outline-offset: 4px; }
 .experience-category-card img { position: absolute; inset: 20% 0 15%; width: 100%; height: 65%; object-fit: contain; padding: 0 29%; }
 .experience-category-movie img { padding-inline: 22%; }
-.experience-category-links { position: absolute; z-index: 2; bottom: 24px; left: 18px; right: 18px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px clamp(12px, 1.4vw, 23px); opacity: 0; visibility: hidden; transition: opacity .2s ease, visibility .2s ease; }
-.experience-category-card:hover .experience-category-links, .experience-category-card:focus-within .experience-category-links { opacity: 1; visibility: visible; }
+.experience-category-links { position: absolute; z-index: 2; bottom: 24px; left: 18px; right: 18px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px clamp(12px, 1.4vw, 23px); opacity: 0; pointer-events: none; transition: opacity .2s ease; }
+.experience-category-card:hover .experience-category-links, .experience-category-card:focus-within .experience-category-links { opacity: 1; pointer-events: auto; }
 .experience-category-links a { color: #161616; text-decoration: none; font-size: clamp(12px, .85vw, 14px); line-height: 1.3; }
 .experience-category-links a:hover { text-decoration: underline; }
 .experience-categories-cta.btn { margin-top: clamp(40px, 4vw, 64px); min-width: 195px; min-height: 50px; justify-content: center; border-radius: 10px; background: var(--ink); color: white; box-shadow: none; }

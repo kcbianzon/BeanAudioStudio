@@ -2180,31 +2180,31 @@ function home() {
       <button class="experience-carousel-arrow experience-carousel-prev" type="button" data-experience-prev aria-label="Previous rental categories" aria-controls="experience-category-track"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4 7 12l8 8"/></svg></button>
       <div class="experience-category-grid" id="experience-category-track" role="region" aria-label="Rental categories" tabindex="0">
       <article class="experience-category-card">
-        <h3><a href="#rentals?cat=Audio%20%26%20Sound">Audio &amp; sound</a></h3>
+        <h3><a href="/audio" data-spa-href="#rentals?cat=Audio%20%26%20Sound">Audio &amp; sound</a></h3>
         <img src="assets/beantown/experience-audio.png" alt="Audio equipment, powered PA speakers, microphones and DJ gear rentals in Boston MA" loading="lazy" decoding="async">
         <nav class="experience-category-links" aria-label="Audio and sound rentals">
-          <a href="#rentals?cat=Audio%20%26%20Speakers">Speakers &amp; PA</a><a href="#rentals?cat=Subwoofers">Subwoofers</a><a href="#rentals?cat=Microphones">Microphones</a><a href="#rentals?cat=Audio%20Mixers">Audio Mixers</a><a href="#rentals?cat=DJ%20Equipment">DJ Equipment</a>
+          <a href="/services/speaker-rentals" data-spa-href="#rentals?cat=Audio%20%26%20Speakers">Speakers &amp; PA</a><a href="/services/subwoofer-rentals" data-spa-href="#rentals?cat=Subwoofers">Subwoofers</a><a href="/microphone-rentals" data-spa-href="#rentals?cat=Microphones">Microphones</a><a href="/services/audio-mixers" data-spa-href="#rentals?cat=Audio%20Mixers">Audio Mixers</a><a href="/services/dj-equipment-rentals" data-spa-href="#rentals?cat=DJ%20Equipment">DJ Equipment</a>
         </nav>
       </article>
       <article class="experience-category-card">
-        <h3><a href="#rentals?cat=Video%20%26%20Visuals">Video &amp; Visuals</a></h3>
+        <h3><a href="/video" data-spa-href="#rentals?cat=Video%20%26%20Visuals">Video &amp; Visuals</a></h3>
         <img src="assets/beantown/experience-video.png" alt="HD laser projectors, 4K TV displays, LED video walls and live streaming rentals in Massachusetts" loading="lazy" decoding="async">
         <nav class="experience-category-links" aria-label="Video and visual rentals">
-          <a href="#rentals?cat=Video%20%26%20Displays">Displays &amp; Projectors</a><a href="#rentals?cat=LED%20Video%20Walls">LED Video Walls</a><a href="#rentals?cat=Live%20Streaming">Live Streaming</a>
+          <a href="/services/projector-rentals" data-spa-href="#rentals?cat=Video%20%26%20Displays">Displays &amp; Projectors</a><a href="/services/indoorledwall" data-spa-href="#rentals?cat=LED%20Video%20Walls">LED Video Walls</a><a href="/services/live-streaming" data-spa-href="#rentals?cat=Live%20Streaming">Live Streaming</a>
         </nav>
       </article>
       <article class="experience-category-card">
-        <h3><a href="#rentals?cat=Lighting%20%26%20FX">Lighting &amp; FX</a></h3>
+        <h3><a href="/services/event-lighting" data-spa-href="#rentals?cat=Lighting%20%26%20FX">Lighting &amp; FX</a></h3>
         <img src="assets/beantown/experience-lighting.png" alt="Wireless event uplighting, stage lights, cold sparkler machines and dry ice fog rentals" loading="lazy" decoding="async">
         <nav class="experience-category-links" aria-label="Lighting and effects rentals">
-          <a href="#rentals?cat=Event%20Lighting">Event Lighting</a><a href="#rentals?cat=Special%20Effects">Special Effects</a>
+          <a href="/services/event-lighting" data-spa-href="#rentals?cat=Event%20Lighting">Event Lighting</a><a href="/services/cold-sparklers" data-spa-href="#rentals?cat=Special%20Effects">Special Effects</a>
         </nav>
       </article>
       <article class="experience-category-card experience-category-movie">
-        <h3><a href="#rentals?cat=Event%20Experiences">Event Experiences</a></h3>
+        <h3><a href="/services" data-spa-href="#rentals?cat=Event%20Experiences">Event Experiences</a></h3>
         <img src="assets/beantown/experience-movie.png" alt="Photo booths, silent disco headphones and inflatable outdoor movie screen rentals in Boston" loading="lazy" decoding="async">
         <nav class="experience-category-links" aria-label="Event experience rentals">
-          <a href="#rentals?cat=Photo%20Booths">Photo Booths</a><a href="#rentals?cat=Silent%20Disco">Silent Disco</a><a href="#rentals?cat=Outdoor%20Movies">Outdoor Movies</a>
+          <a href="/services/photo-booth" data-spa-href="#rentals?cat=Photo%20Booths">Photo Booths</a><a href="/services/silent-disco" data-spa-href="#rentals?cat=Silent%20Disco">Silent Disco</a><a href="/services/outdoor-movies" data-spa-href="#rentals?cat=Outdoor%20Movies">Outdoor Movies</a>
         </nav>
       </article>
     </div>
@@ -6371,6 +6371,21 @@ document.addEventListener("pointerout", (event) => {
   const bundle = event.target instanceof Element ? event.target.closest(".bundle-card") : null;
   if (!bundle || bundle.contains(event.relatedTarget)) return;
   bundle.style.setProperty("--edge-proximity", "0");
+});
+
+document.addEventListener("click", (event) => {
+  if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  const link = event.target instanceof Element ? event.target.closest("a[data-spa-href]") : null;
+  if (!link) return;
+  const spaHref = link.getAttribute("data-spa-href");
+  if (spaHref && spaHref.startsWith("#")) {
+    event.preventDefault();
+    if (window.location.hash === spaHref) {
+      render();
+    } else {
+      window.location.hash = spaHref;
+    }
+  }
 });
 
 window.addEventListener("hashchange", () => {

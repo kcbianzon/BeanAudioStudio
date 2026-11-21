@@ -71,8 +71,8 @@
         "type": 301
       },
       {
-        "regex": "(?i)^/(?:services/)?(?:conference-mic-rentals?|mic-rentals?)/?$",
-        "destination": "/services/microphone-rentals",
+        "regex": "(?i)^/(?:services/)?(?:conference-mic-rentals?|mic-rentals?|delegate-mic-rentals?|ptt-mic-rentals?|push-to-talk-mic-rentals?|countryman-mic-rentals?)/?$",
+        "destination": "/microphone-rentals",
         "type": 301
       },
       {
@@ -106,18 +106,13 @@
         "type": 301
       },
       {
-        "regex": "(?i)^/microphone-rentals?/?$",
-        "destination": "/services/microphone-rentals",
+        "regex": "(?i)^/(?:microphone-rental|services/microphone-rentals?)/?$",
+        "destination": "/microphone-rentals",
         "type": 301
       },
       {
         "regex": "(?i)^/(?:push-to-talk-mic|wireless-mics?|wireless-microphones?|conference-mics?)/?$",
-        "destination": "/services/microphone-rentals",
-        "type": 301
-      },
-      {
-        "regex": "(?i)^/services/microphone-rental/?$",
-        "destination": "/services/microphone-rentals",
+        "destination": "/microphone-rentals",
         "type": 301
       },
       {
@@ -231,8 +226,8 @@
         "type": 301
       },
       {
-        "regex": "(?i)^/(?:services/)?(?:delegate-mic-rentals?|ptt-mic-rentals?|push-to-talk-mic-rentals?)/?$",
-        "destination": "/services/microphone-rentals",
+        "regex": "(?i)^/(?:wedding-av-rentals?|wedding-sound(?:-rentals?|-equipment-rentals?)?|wedding-audio-rentals?|rent-sound-equipment-for-weddings?|services/wedding-(?:sound|audio)-rentals?)/?$",
+        "destination": "/services/wedding-av-rentals",
         "type": 301
       },
       {
@@ -276,7 +271,7 @@
         "type": 301
       },
       {
-        "regex": "(?i)^/(?:audio-system-rentals?|sound-equipment-rentals?|sound-system-rentals?(?:-for-events)?)/?$",
+        "regex": "(?i)^/(?:audio-system-rentals?|sound-equipment-rentals?(?:-near-me)?|sound-system-rentals?(?:-for-events)?|pa-system-rentals?)/?$",
         "destination": "/audio",
         "type": 301
       },
