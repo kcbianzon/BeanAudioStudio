@@ -2036,7 +2036,7 @@ function faqSection() {
     {
       category: "Rentals & Inventory",
       question: "What equipment is available in your Boston rental inventory?",
-      answer: "The rental catalog includes small, medium, and large audio packages; speakers and subwoofers; microphone packages and equipment; audio mixers; DJ packages and individual DJ gear; video packages, Samsung 65-inch and 75-inch TVs, and indoor LED wall packages; five outdoor LED trailer sizes; four outdoor movie screen sizes; photo booths; silent disco packages for 50–300 headphones; lighting fixtures and packages; cold spark packages; a dry ice machine; and basic and pro live-streaming packages. Published rates appear only on the outdoor movie, photo booth, and silent disco listings; other rentals require a quote.",
+      answer: "Our Boston AV equipment rental inventory includes Small ($199+), Medium ($349+), and Large ($880+) PA sound system packages; powered speakers ($65) and 18-inch QSC & JBL subwoofers ($75–$150); Shure QLX-D wireless handheld & lavalier microphones ($65), Countryman earset headsets ($50), and push-to-talk (PTT) conference delegate mics ($35); Behringer X32 ($150), X32 Compact ($110), Allen & Heath SQ-7 ($295), and QSC TouchMix audio mixers; Pioneer CDJ-3000 ($125), DJM-900NXS ($95), Technics 1200 turntables, and complete DJ packages ($299+); 5,000+ lumen HD laser projectors ($175), 120-inch Fast-Fold screens ($150), Samsung 65-inch ($250) and 75-inch ($350) 4K TVs, indoor 2.67mm LED video walls ($1,150+), and outdoor mobile LED trailers ($2,600+); 12ft–40ft inflatable outdoor movie screens with projector and speakers ($549–$1,899); 360 and Magic Mirror photo booths ($799–$1,699+); 50–300 silent disco headphone packs ($500–$2,500); Chauvet wireless uplighting ($150/6), indoor-safe cold sparkler machines ($350+), Chauvet Nimbus dry ice cloud fog machines ($295+), and 4K live-streaming kits ($621+).",
     },
     {
       category: "Delivery & Setup",
@@ -2046,7 +2046,7 @@ function faqSection() {
     {
       category: "Pricing & Quotes",
       question: "How does pricing work, and are there any surprise fees?",
-      answer: "The original site publishes rates for outdoor movie packages ($549–$1,899), photo booths (starting at $799, $1,399, $1,699, and $1,499 by listing), and silent disco packages ($500–$2,500). Other rental pages ask customers to request pricing. The project marks those listings as quote required and does not estimate rates, rental periods, delivery, or setup fees.",
+      answer: "Every listing in our catalog shows transparent daily or starting rates—including powered PA speakers from $65, Small Audio packages from $199, push-to-talk delegate mics at $35, Behringer X32 digital mixers at $150, cold sparkler packages from $350, dry ice fog machines from $295, outdoor movie screen packages ($549–$1,899), photo booths ($799–$1,699+), and silent disco packages ($500–$2,500). Build your exact setup in our interactive Quote Builder and select self-pickup, turnkey delivery and setup, or full on-site technician support to receive a clear, itemized written quote with zero hidden fees.",
     },
     {
       category: "On-Site Support",

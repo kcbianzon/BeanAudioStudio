@@ -10,7 +10,7 @@ const vm = require("vm");
 
 const ROOT = path.resolve(__dirname, "..");
 const PUBLIC_DIR = path.join(ROOT, "public");
-const CSS_VERSION = "20261121-seo-push";
+const CSS_VERSION = "20261124-seo-push";
 const DOMAIN = "https://beantownaudiorentals.com";
 const WEB3FORMS_KEY = "f285afef-347a-4087-998d-98a4309ad914";
 const OG_IMAGE = `${DOMAIN}/assets/beantown/69667bc6a8aed9344088bb03_Screenshot-2025-01-16-at-1-24-21-PM-p-1600.png`;
@@ -67,11 +67,11 @@ const SERVICE_PAGES = [
       "DIY self-pickup or full delivery, cabling & soundcheck across MA, RI & NH",
     ],
     categoryFilter: "Audio & Speakers",
-    guideHeading: "How to Choose the Right Speaker or Party Sound Rental (Boston & RI)",
+    guideHeading: "How to Choose the Right Speaker or PA System Rental (Boston & RI)",
     guideHtmlParagraphs: [
-      `When you need to <strong>hire a speaker</strong> or <strong>rent party speakers near you</strong> in Greater Boston or Rhode Island, start with your guest count and room size. Our single powered PA speakers ($65) or Small Audio Package ($199+, 2 speakers + mixer + mic) cover backyard parties, cocktail hours, and speeches up to 50 guests cleanly via Bluetooth or 3.5mm/XLR.`,
-      `For 50–150 guests (weddings, graduation parties, corporate receptions), step up to our <a href="/audio">Medium Audio Package ($349+)</a> with four tops and optional <a href="/services/subwoofer-rentals">powered 18&Prime; subwoofers</a> ($75+). Large 150–500+ attendee dances and outdoor concerts pair our Large Line Array package ($880+) with <a href="/microphone-rentals">Shure QLX-D wireless &amp; delegate mics</a>, <a href="/services/dj-equipment-rentals">DJ gear</a>, and <a href="/services/audio-mixers">digital mixers</a>—with full service into <a href="/services/rhode-island-av-rentals">Providence, Newport &amp; Warwick, RI</a>.`,
-      `Every speaker rental includes heavy-duty tripod stands, surge-protected power cords, and balanced XLR/Bluetooth/laptop interconnect cabling. Choose budget-friendly self-pickup or turnkey delivery, clean taped cabling, room EQ tuning, and pickup after your event.`,
+      `When you need to <strong>rent speakers</strong>, book <strong>PA system rentals</strong>, or <strong>rent party speakers near you</strong> in Greater Boston, Massachusetts, or Rhode Island, start with your guest count and room acoustics. Our single powered PA speakers ($65/day) or Small Audio Package ($199+, 2 speakers + mixer + mic) cover backyard parties, cocktail hours, and conference speeches up to 50 guests cleanly via Bluetooth, 3.5mm AUX, or balanced XLR.`,
+      `For 50–150 guests (weddings, graduation parties, corporate receptions), step up to our <a href="/audio">Medium Audio Package ($349+)</a> with four tops and optional <a href="/services/subwoofer-rentals">powered 18&Prime; subwoofers</a> ($75+). Large 150–500+ attendee dances and outdoor concerts pair our Large Line Array PA system ($880+) with <a href="/microphone-rentals">Shure QLX-D wireless, Countryman &amp; delegate mics</a>, <a href="/services/dj-equipment-rentals">DJ gear</a>, and <a href="/services/audio-mixers">Behringer X32 digital mixers</a>—with full service into <a href="/services/rhode-island-av-rentals">Providence, Newport &amp; Warwick, RI</a>.`,
+      `Every <strong>speaker rental</strong> includes heavy-duty tripod stands, surge-protected power cords, and balanced XLR/Bluetooth/laptop interconnect cabling. Choose budget-friendly self-pickup or turnkey delivery, clean taped cabling, room EQ tuning, and pickup after your <a href="/services/wedding-av-rentals">wedding</a> or <a href="/services/corporate-events">corporate event</a>.`,
     ],
     related: ["audio", "subwoofer-rentals", "microphone-rentals", "rhode-island-av-rentals", "dj-equipment-rentals", "audio-mixers"],
     faqs: [
@@ -349,14 +349,24 @@ const SERVICE_PAGES = [
     ],
     categoryFilter: "Subwoofers",
     guideHeading: "Punchy Low-End Tuned for Clubs, Bands & Ballroom Dance Floors",
-    guideParagraphs: [
-      "Standard 12-inch or 15-inch PA tops handle speech well, but real concert warmth and dance floor energy come from dedicated subwoofers. Whether you need a compact Mackie Thump18S for a house party, a stage-friendly QSC KS212C cardioid sub that cancels rear spill in noise-sensitive wedding venues, or scalable JBL VRX concert sub arrays, we match the cabinet to your room.",
+    guideHtmlParagraphs: [
+      `Standard 12-inch or 15-inch PA tops handle speech well, but real concert warmth and dance-floor chest thump require dedicated low-frequency enclosures. Our Boston <strong>subwoofer rental</strong> fleet spans the compact 1200W Mackie Thump18S ($75) and JBL PRX618S ($85) for mobile DJs and house parties, the industry-standard 1000W QSC KW181 18-inch birch subwoofer ($95) for live bands and ballrooms, and the high-output JBL VRX918SP concert array subwoofer ($150) for large stages and festivals.`,
+      `Working inside a reverberant historic Boston ballroom, museum atrium, or hotel stage close to open vocal microphones? Rent our <strong>QSC KS212C dual 12-inch active cardioid subwoofer</strong> ($120), which focuses bass energy 15 dB tighter toward the dance floor while keeping the stage and rear walls remarkably quiet.`,
+      `Every powered subwoofer rental includes built-in digital crossover presets, threaded pole-mount cups for <a href="/services/speaker-rentals">powered PA tops</a>, power cords, and dual XLR link cables—ready to pair with our <a href="/services/dj-equipment-rentals">Pioneer CDJ &amp; DJ packages</a>, <a href="/audio">complete event sound systems</a>, <a href="/services/wedding-av-rentals">wedding reception audio</a>, and <a href="/services/audio-mixers">Behringer X32 mixers</a>.`,
     ],
-    related: ["speaker-rentals", "dj-equipment-rentals", "audio-mixers", "audio"],
+    related: ["speaker-rentals", "dj-equipment-rentals", "audio-mixers", "audio", "wedding-av-rentals"],
     faqs: [
       {
         q: "When should I rent a cardioid subwoofer like the QSC KS212C?",
-        a: "Cardioid subwoofers reduce rear bass radiation by 15 dB—ideal when DJs or live performers are close to a wall, beside sensitive stage mics, or in historic ballrooms with acoustic reverberation.",
+        a: "Cardioid subwoofers reduce rear bass radiation by 15 dB—ideal when DJs or live performers are close to a wall, beside sensitive stage mics, or in historic Boston ballrooms with strict acoustic reverberation limits.",
+      },
+      {
+        q: "How many 18-inch subwoofers do I need for 100 to 300 guests?",
+        a: "One 18-inch powered subwoofer (such as the QSC KW181 or JBL PRX618S) adds rich dance-floor warmth for 75–150 guests. For 150–300+ guests, hip-hop/EDM DJ sets, or outdoor tents where bass dissipates quickly, we recommend a matched pair of QSC KW181 or JBL VRX918SP subwoofers.",
+      },
+      {
+        q: "Do your subwoofer rentals include speaker poles and XLR crossover cables?",
+        a: "Yes. Every subwoofer rental includes power cabling, balanced XLR interconnects from your mixer or DJ controller, and a pole-mount shaft if you are mounting a powered top cabinet above the sub.",
       },
     ],
   },
@@ -366,26 +376,37 @@ const SERVICE_PAGES = [
     navLabel: "Audio Mixers",
     categoryLabel: "Audio Mixers",
     hashCategory: "Audio Mixers",
-    title: "Audio Mixer Rental Boston | X32 & SQ-7 | Beantown",
+    title: "Behringer X32 & Audio Mixer Rental Boston | From $40",
     description:
-      "Rent digital and analog mixing consoles in Boston from $40: Allen & Heath SQ-7 32-ch, Behringer X32, X32 Compact, QSC TouchMix-16, Mackie 1402-VLZ3 & Yamaha MG10XU.",
-    h1: "Digital & Analog Audio Mixer Rentals in Boston",
-    lead: "Scalable front-of-house and stage consoles from ultra-compact 10-channel Yamaha USB mixers up to 40-channel Behringer X32 and 96kHz Allen & Heath SQ-7 digital production desks.",
+      "Rent a Behringer X32 ($150), X32 Compact ($110), Allen & Heath SQ-7 ($295), QSC TouchMix-16 ($85) or Yamaha/Mackie audio mixer in Boston, MA & RI from $40.",
+    altNames: ["Behringer X32 Rental", "Behringer X32 Rental Boston", "Audio Mixer Rental Boston", "Allen & Heath SQ-7 Rental Massachusetts"],
+    h1: "Behringer X32, Allen & Heath SQ-7 & Audio Mixer Rentals in Boston",
+    lead: "Rent tour-grade digital and compact analog mixing consoles from $40/day—featuring the 40-input Behringer X32 ($150), Behringer X32 Compact ($110), 96kHz Allen & Heath SQ-7 ($295), QSC TouchMix-16 ($85), Mackie 1402-VLZ3 ($45), and Yamaha MG10XU ($40).",
     heroBullets: [
-      "Allen & Heath SQ-7, Behringer X32, X32 Compact & QSC TouchMix-16 digital desks",
-      "Mackie 1402-VLZ3 & Yamaha MG10XU compact analog & USB recording mixers",
-      "Motorized faders, remote iPad control & multi-track USB audio interfaces",
+      "Behringer X32 ($150) & X32 Compact ($110) with Midas preamps & motorized faders",
+      "Allen & Heath SQ-7 48-ch ($295) & QSC TouchMix-16 ($85) digital production desks",
+      "Mackie 1402-VLZ3 ($45) & Yamaha MG10XU ($40) compact analog/USB mixers",
     ],
     categoryFilter: "Audio Mixers",
-    guideHeading: "Clean Mixing Power From Breakout Rooms to Festival FOH",
-    guideParagraphs: [
-      "Complex live bands, corporate panels with multiple remote feeds, and broadcast productions need clean preamps, recallable scenes, and dedicated monitor buses. Rent standalone consoles or combine them with Shure wireless packages and technician engineering.",
+    guideHeading: "Behringer X32, SQ-7 & TouchMix Consoles From Breakouts to Festival FOH",
+    guideHtmlParagraphs: [
+      `When live sound engineers, touring bands, and corporate AV producers search for a <strong>Behringer X32 rental</strong> in Boston or Massachusetts, reliability and firmware readiness matter most. Our full-size <strong>Behringer X32 digital mixer</strong> ($150/day) delivers 32 Midas-designed programmable mic preamps, 25 motorized 100mm faders, 16 mix buses, onboard Klark Teknik FX, and a 32×32 USB multi-track recording interface—while the <strong>Behringer X32 Compact</strong> ($110/day) packs the same 40-input processing engine into a smaller FOH or monitor footprint.`,
+      `For high-specification broadcast, theater, and corporate symposiums, our flagship <strong>Allen &amp; Heath SQ-7</strong> ($295/day) provides 96kHz FPGA processing across 33 motorized faders and 32 onboard preamps, while the rack-friendly <strong>QSC TouchMix-16</strong> ($85/day) and compact <strong>Mackie 1402-VLZ3</strong> ($45) or <strong>Yamaha MG10XU</strong> ($40) make small <a href="/services/corporate-events">conference room sound systems</a> and hybrid Zoom/Teams feeds effortless.`,
+      `Rent standalone consoles in protective road cases for self-pickup, or bundle your mixer with <a href="/microphone-rentals">Shure QLX-D wireless, Countryman &amp; push-to-talk delegate mics</a>, <a href="/services/speaker-rentals">powered PA speakers &amp; stage monitors</a>, <a href="/services/subwoofer-rentals">QSC &amp; JBL subwoofers</a>, <a href="/services/live-streaming">4K live streaming kits</a>, and dedicated on-site FOH engineer support.`,
     ],
-    related: ["microphone-rentals", "speaker-rentals", "live-streaming", "subwoofer-rentals"],
+    related: ["microphone-rentals", "speaker-rentals", "corporate-events", "live-streaming", "subwoofer-rentals", "audio"],
     faqs: [
       {
-        q: "Can an on-site Beantown sound engineer run the X32 or SQ-7 console?",
-        a: "Yes. You can add Full On-Site Technician Support in Step 4 of our Quote Builder so a trained Boston FOH audio engineer runs soundcheck and mixes your entire program live.",
+        q: "What is included with a Behringer X32 or X32 Compact rental in Boston?",
+        a: "Every Behringer X32 ($150) and X32 Compact ($110) rental arrives bench-tested in a protective road case with power cord, main XLR output tails, and USB/Ethernet connectivity for iPad remote mixing and multi-track laptop recording.",
+      },
+      {
+        q: "Which mixer should I rent for a corporate panel or hybrid Zoom conference?",
+        a: "For 2–4 microphones plus laptop playback, the Yamaha MG10XU ($40) or Mackie 1402-VLZ3 ($45) provides clean preamps and plug-and-play USB audio. For 6–16 wireless or delegate microphones, the QSC TouchMix-16 ($85) or Behringer X32 Compact ($110) adds anti-feedback EQ, gate/compression per channel, and independent livestream bus mixes.",
+      },
+      {
+        q: "Can an on-site Beantown sound engineer set up and run the X32 or SQ-7 console?",
+        a: "Yes. You can add Full On-Site Technician Support in our Quote Builder so an experienced Boston FOH audio engineer handles load-in, room EQ, wireless RF coordination, soundcheck, and live show mixing.",
       },
     ],
   },
@@ -409,14 +430,19 @@ const SERVICE_PAGES = [
     ],
     categoryFilter: "Video & Displays",
     guideHeading: "Conference, Wedding & Trade Show Video Systems Across Boston",
-    guideParagraphs: [
-      "Clean event video means more than a single screen—it means seamless laptop switching, confidence monitors for presenters, and zero black frames between speakers. Our Boston video packages pair tested Samsung 4K displays, commercial laser projectors, and 4-channel seamless switchers ready for corporate keynotes, trade shows, and celebrations.",
+    guideHtmlParagraphs: [
+      `Clean event video and <strong>AV equipment rental</strong> mean more than a single screen—they mean seamless laptop switching, confidence monitors for keynote presenters, and zero black frames between speakers. Our tiered Boston video packages ($299–$899+) pair tested <a href="/services/tv-rentals">Samsung 65&Prime; &amp; 75&Prime; 4K UHD displays</a>, <a href="/services/projector-rentals">4,500–6,000+ lumen laser projectors &amp; Fast-Fold screens</a>, and 4-channel seamless video switchers.`,
+      `For bright glass-walled ballrooms, trade show floors at BCEC or Hynes, and outdoor festivals, scale up to our <a href="/services/indoorledwall">2.67mm fine-pitch indoor LED video walls</a> ($1,150+) or <a href="/services/ledtrailers">daylight-visible mobile LED screen trailers</a>, and integrate <a href="/services/live-streaming">Sony 4K multi-camera live streaming</a> and <a href="/audio">PA sound packages</a> in one turnkey delivery.`,
     ],
-    related: ["projector-rentals", "tv-rentals", "indoorledwall", "live-streaming"],
+    related: ["projector-rentals", "tv-rentals", "indoorledwall", "live-streaming", "corporate-events"],
     faqs: [
       {
         q: "Do your video packages allow switching cleanly between multiple laptops?",
-        a: "Yes. Adding our 4-channel seamless Video Switcher prevents desktop clutter and 'No Signal' screens on the main display while queuing the next presenter smoothly.",
+        a: "Yes. Adding our 4-channel seamless Video Switcher ($75) prevents desktop clutter and 'No Signal' screens on the main display while queuing PowerPoint, Keynote, and video playback across multiple laptops.",
+      },
+      {
+        q: "What is included in the Basic, Mid-Size, and Large Format Video Packages?",
+        a: "Our Basic Video Package ($299+) includes a 4,500-lumen HD projector, 80″ tripod screen, stand, HDMI kit, and wireless clicker for up to 40 guests. The Mid-Size Package ($499+) upgrades to a 6,000+ lumen laser projector, 120″ Fast-Fold dress-kit screen, and video switcher for 50–175 guests, while Large Format ($899+) scales to multiple 75″ 4K displays or LED walls with on-site video tech support.",
       },
     ],
   },
@@ -437,15 +463,24 @@ const SERVICE_PAGES = [
       "Fast delivery across Boston Convention Center (BCEC), Hynes & local venues",
     ],
     productIds: ["tv-75", "tv-65", "video-large-package", "video-switcher"],
-    guideHeading: "Effortless Booth Signage, Breakouts & Digital Displays",
-    guideParagraphs: [
-      "Need sharp, bright 4K monitors without draping projection throws across a crowded booth or bright atrium? Our Samsung 65-inch and 75-inch commercial TV rentals wheel effortlessly into position with concealed cable stands, crystal-clear HDR10+ color, and hassle-free HDMI/USB playback.",
+    guideHeading: "Effortless 4K Booth Signage, Breakouts & Stage Confidence Monitors",
+    guideHtmlParagraphs: [
+      `Need sharp, daylight-bright 4K monitors without draping long projector throws across a crowded trade show booth or sunlit hotel atrium? Our commercial <strong>Samsung 65-inch ($250) and 75-inch ($350) 4K UHD TV rentals</strong> wheel smoothly into position on heavy-duty locking floor stands with internal cable management, HDR10+ contrast, and plug-and-play HDMI, Apple AirPlay, or USB media looping.`,
+      `Exhibitors at the Boston Convention &amp; Exhibition Center (BCEC), Hynes Convention Center, Seaport hotel expos, and university career fairs routinely pair dual 75-inch 4K monitors with our <a href="/services/corporate-events">corporate event AV packages</a>, <a href="/microphone-rentals">wireless &amp; delegate microphones</a>, <a href="/services/speaker-rentals">compact powered PA speakers</a>, or step up to a <a href="/services/indoorledwall">seamless 12&prime;&times;7&prime; indoor LED video wall</a> for main-aisle impact.`,
     ],
     related: ["corporate-events", "video", "projector-rentals", "indoorledwall", "live-streaming"],
     faqs: [
       {
-        q: "Do your 65″ and 75″ TV rentals include the rolling floor stand?",
-        a: "Yes. Both the Samsung 65-inch and 75-inch TV rentals come complete with a heavy-duty rolling stand, power cord, remote control, and 25ft high-speed HDMI cable.",
+        q: "Do your 65″ and 75″ TV rentals include the rolling floor stand and HDMI cables?",
+        a: "Yes. Both the Samsung 65-inch ($250) and 75-inch ($350) 4K TV rentals include a commercial rolling floor stand with locking casters, adjustable mounting height, power cord, remote control, and a 25ft high-speed 4K HDMI cable.",
+      },
+      {
+        q: "Can we loop a promotional video from a USB drive or connect multiple TVs together?",
+        a: "Yes. Samsung 4K Smart displays support continuous USB MP4 video/image looping for unattended trade show booths, or you can add our 4-channel Video Switcher ($75) and HDMI distribution splitters to mirror a single laptop across 2 to 6 monitors simultaneously.",
+      },
+      {
+        q: "Do you deliver TV rentals directly to BCEC, Hynes Convention Center, and Boston hotels?",
+        a: "Yes. We provide timed delivery, stand assembly, video signal testing, and post-show strike across BCEC, Hynes, Seaport, Back Bay hotels, Cambridge, and Greater New England.",
       },
     ],
   },
@@ -467,15 +502,23 @@ const SERVICE_PAGES = [
     ],
     productIds: ["led-12", "led-16", "led-custom", "led-trailer"],
     guideHeading: "Outshine Ambient Lights With Seamless Modular LED Walls",
-    guideParagraphs: [
-      "Projectors struggle in glass-walled Boston venues, daytime ballrooms, and vibrant concert productions. A high-contrast 2.67mm indoor LED wall delivers rich blacks, vivid motion graphics, and zero shadows when speakers walk in front of the screen.",
-      "Every indoor LED wall package scales cleanly with optional custom curves, portrait totems, stage risers, and live camera IMAG feeds.",
+    guideHtmlParagraphs: [
+      `Projectors struggle in glass-walled Boston venues, daytime hotel ballrooms, and high-output concert productions. Our <strong>2.67mm fine-pitch indoor LED video wall rentals</strong> ($1,150+ for 12&prime;&times;7&prime;, $1,450+ for 16&prime;&times;9&prime;, $1,850+ for custom builds) deliver deep blacks, vivid 4K-scaled motion graphics, and zero shadows when keynote presenters walk directly in front of the stage.`,
+      `Every turnkey indoor LED wall package includes a NovaStar VX1000 all-in-one video processor and scaler, heavy-duty ground-support truss framing, 2 powered PA speakers on tripod stands, a <a href="/microphone-rentals">Shure wireless handheld microphone</a>, and full delivery, rigging, and calibration by our Boston LED technicians—ready to pair with <a href="/services/corporate-events">corporate general sessions</a>, <a href="/services/live-streaming">multi-camera IMAG live streaming</a>, and <a href="/services/event-lighting">stage wash lighting</a>.`,
     ],
     related: ["corporate-events", "ledtrailers", "video", "live-streaming", "event-lighting", "speaker-rentals"],
     faqs: [
       {
         q: "What pixel pitch is best for an indoor ballroom conference or gala?",
-        a: "Our 2.67mm fine-pitch indoor panels deliver razor-sharp text and video for guests seated as close as 8–10 feet away, ideal for Boston corporate keynotes, trade shows, and luxury wedding backdrops.",
+        a: "Our 2.67mm fine-pitch indoor panels deliver razor-sharp text, financial slides, and 1080p/4K video for guests seated as close as 8–10 feet away—ideal for Boston corporate keynotes, BCEC trade show booths, and luxury wedding backdrops.",
+      },
+      {
+        q: "What comes included with the 12′×7′ and 16′×9′ Indoor LED Wall packages?",
+        a: "Both turnkey packages include the 2.67mm modular LED cabinet array, NovaStar VX1000 processor with HDMI/SDI inputs, freestanding ground-support frame, 2 powered PA speakers, audio mixer, 1 Shure wireless handheld mic, delivery, setup, and teardown.",
+      },
+      {
+        q: "What power is required for an indoor LED video wall?",
+        a: "A 12′×7′ LED wall typically operates across two dedicated 120V 20A circuits, while a 16′×9′ or larger custom wall uses three 20A circuits or a venue 3-phase power drop. Our team coordinates power distribution directly with your Boston venue engineer.",
       },
     ],
   },
@@ -497,14 +540,19 @@ const SERVICE_PAGES = [
     ],
     productIds: ["led-trailer", "led-16", "led-12", "large-audio"],
     guideHeading: "Bring Giant Daylight-Bright Video Anywhere in New England",
-    guideParagraphs: [
-      "Unlike inflatable screens that require sunset to watch, our high-brightness mobile LED video wall trailers command crisp, full-color visibility at noon under direct summer sun—setting up swiftly on city plazas, campus greens, marathon finish lines, and festival grounds.",
+    guideHtmlParagraphs: [
+      `Unlike <a href="/services/outdoor-movies">inflatable outdoor movie screens</a> that require sunset to watch, our high-brightness <strong>3.91mm outdoor mobile LED video wall trailers</strong> ($2,600+ across 5 sizes) command crisp, full-color visibility at noon under direct summer sun—setting up in under 45 minutes on city plazas, campus quads, road-race finish lines, golf tournaments, and stadium tailgates.`,
+      `Each trailer features a 360-degree rotating hydraulic mast, IP65 rain-sealed outdoor cabinets rated for winds up to 45 mph, onboard NovaStar scaling, and optional whisper-quiet diesel/inverter generator power plus <a href="/services/speaker-rentals">high-output outdoor PA speakers</a> and <a href="/services/live-streaming">live camera broadcast switching</a> across Massachusetts, <a href="/services/rhode-island-av-rentals">Rhode Island</a>, and New England.`,
     ],
-    related: ["indoorledwall", "outdoor-movies", "speaker-rentals", "live-streaming"],
+    related: ["indoorledwall", "outdoor-movies", "speaker-rentals", "live-streaming", "rhode-island-av-rentals"],
     faqs: [
       {
         q: "Can LED video wall trailers run during sunny daytime hours and light rain?",
-        a: "Yes. High-nit outdoor 3.91mm panels cut through direct midday sunlight, and the IP65-rated cabinet structure operates safely in rain and winds up to 45 mph.",
+        a: "Yes. High-nit outdoor 3.91mm panels cut through direct midday sunlight without glare, and the IP65-rated cabinet structure operates safely in rain and winds up to 45 mph.",
+      },
+      {
+        q: "Do mobile LED trailers require venue shore power or include a generator?",
+        a: "Our mobile LED trailers can plug into standard venue 208V/240V shore power or arrive completely self-contained with a whisper-quiet onboard generator and integrated outdoor horn/PA audio system.",
       },
     ],
   },
@@ -526,14 +574,19 @@ const SERVICE_PAGES = [
     ],
     productIds: ["stream-basic", "stream-pro", "video-switcher", "qlxd-lavalier", "mixer-touchmix"],
     guideHeading: "Zero-Lag Hybrid Broadcasts for Universities & Corporate Town Halls",
-    guideParagraphs: [
-      "Remote attendees notice bad audio or blurry webcam video within five seconds. Our Boston live streaming packages pair optical Sony 4K cameras on fluid-head tripods with direct board-mixed wireless microphones and hardware LiveMaster video switching—sending broadcast clarity to global teams.",
+    guideHtmlParagraphs: [
+      `Remote attendees notice bad audio or blurry webcam video within five seconds. Our Boston <strong>live streaming equipment rentals</strong> ($621+ single-camera Basic, $1,250+ 3-camera Pro) pair optical Sony 4K broadcast cameras on fluid-head tripods with direct board-mixed <a href="/microphone-rentals">Shure QLX-D wireless &amp; push-to-talk delegate microphones</a>, a QSC TouchMix digital audio console, and a hardware LiveMaster 4K multi-input video switcher.`,
+      `Whether you are streaming a biotech investor town hall in Cambridge, a university commencement, a hybrid panel at a Seaport hotel, or a live concert, our OBS/vMix broadcast workstations send simultaneous 1080p/4K feeds to Zoom, Microsoft Teams, YouTube Live, Vimeo, and custom RTMP portals while recording a redundant local master file—backed by our full <a href="/services/corporate-events">corporate meetings AV support</a> and <a href="/services/audio-mixers">Behringer X32 / SQ-7 consoles</a>.`,
     ],
     related: ["corporate-events", "microphone-rentals", "video", "audio-mixers", "tv-rentals"],
     faqs: [
       {
         q: "What platforms do your live streaming setups support?",
-        a: "Our OBS/vMix workstations and hardware capture switchers output cleanly to Zoom, Microsoft Teams, YouTube Live, LinkedIn Live, Vimeo, and RTMP corporate portals while saving a clean master file.",
+        a: "Our OBS/vMix workstations and hardware capture switchers output cleanly to Zoom, Microsoft Teams, Webex, YouTube Live, LinkedIn Live, Vimeo, and custom corporate RTMP portals while saving a high-bitrate local master recording.",
+      },
+      {
+        q: "What is the difference between the Basic ($621+) and Pro ($1,250+) Live Streaming Packages?",
+        a: "The Basic Package ($621+) includes 1 Sony 4K broadcast camera on a tripod, a 4K switcher, QSC TouchMix mixer, Shure wireless mic, and streaming workstation laptop. The Pro Package ($1,250+) upgrades to 3 Sony 4K camera angles (wide, tight presenter, and panel/audience), dual wireless mics, QSC TouchMix-16 console, and multi-angle hardware switching.",
       },
     ],
   },
@@ -598,14 +651,19 @@ const SERVICE_PAGES = [
     ],
     categoryFilter: "Photo Booths",
     guideHeading: "360 Video Platforms & Interactive Mirrors Built for Sharing",
-    guideParagraphs: [
-      "Modern guests expect instant digital shares AND tangible keepsakes. Our Boston photo booth lineup spans sleek digital iPad Mirror booths, full-height interactive touchscreen Magic Mirrors with dye-sublimation 4×6 lab prints, and RGB-lit 360 revolving slow-motion video booths that turn every pose into social content.",
+    guideHtmlParagraphs: [
+      `Modern guests expect instant digital shares AND tangible keepsakes. Our Boston <strong>photo booth rental</strong> lineup spans sleek digital iPad Mirror booths ($799+) with beauty LED ring lights, full-height interactive touchscreen Magic Mirror booths ($1,399+) and ornate Vintage Framed Magic Mirrors ($1,699+) with DSLR strobes and unlimited 4&times;6 dye-sublimation prints, and RGB-lit <strong>360 revolving video photo booths</strong> ($1,499+) that capture slow-motion social reels for 3–4 guests at once.`,
+      `Every photo booth booking includes custom event logo or monogram overlays, a curated VIP party prop trunk, instant QR/AirDrop/SMS/email sharing, and complete online digital gallery access—perfect alongside our <a href="/services/wedding-av-rentals">wedding sound &amp; lighting packages</a>, <a href="/services/cold-sparklers">indoor-safe cold sparklers</a>, <a href="/services/dry-ice-machine">Dancing on a Cloud dry ice fog</a>, and <a href="/services/dj-equipment-rentals">Boston DJ equipment rentals</a>.`,
     ],
-    related: ["cold-sparklers", "dry-ice-machine", "event-lighting", "dj-equipment-rentals"],
+    related: ["wedding-av-rentals", "cold-sparklers", "dry-ice-machine", "event-lighting", "dj-equipment-rentals"],
     faqs: [
       {
         q: "How do guests receive photos or 360 slow-motion videos?",
-        a: "Guests share captures instantaneously on-site via QR code, AirDrop, SMS text, or email, plus optional unlimited high-speed 4×6 photo prints on our Magic Mirror packages.",
+        a: "Guests share captures instantaneously on-site via QR code, Apple AirDrop, SMS text, or email, plus unlimited high-speed 4×6 lab-quality photo prints on our Magic Mirror and Vintage Framed Mirror packages.",
+      },
+      {
+        q: "How much space and power does a 360 photo booth or Magic Mirror require?",
+        a: "We recommend an 8′×8′ to 10′×10′ flat floor area and access to a single standard 120V household outlet within 25 feet. Red carpet, velvet stanchions, and perimeter RGB LED lighting are included on select packages.",
       },
     ],
   },
@@ -627,10 +685,11 @@ const SERVICE_PAGES = [
     ],
     categoryFilter: "Silent Disco",
     guideHeading: "Beat Noise Ordinances With 3-Channel LED Headphone Parties",
-    guideParagraphs: [
-      "Hosting in a residential Back Bay brownstone, Cambridge rooftop, university quad, or a reception hall with strict 10 PM sound limits? Silent Disco packages let up to three live DJs or Spotify playlists broadcast simultaneously on glowing Red, Blue, and Green channels while the room outside stays whisper quiet.",
+    guideHtmlParagraphs: [
+      `Hosting in a residential Back Bay brownstone, Cambridge rooftop, university quad, or a historic reception hall with strict 10:00 PM sound limits? Our Boston <strong>silent disco headphone rentals</strong> ($500 for 50 headphones, $900 for 100, $1,200 for 150, $1,800 for 200, and $2,500 for 300) let up to three live DJs or Spotify playlists broadcast simultaneously on glowing Red, Blue, and Green channels while the room outside stays whisper quiet.`,
+      `Every package ships 100% pre-charged in organized transport cases with 3 long-range RF transmitters (up to 500-meter radius) and 3.5mm/RCA/XLR audio cables—popular for college orientations, <a href="/services/outdoor-movies">late-night outdoor movie screenings</a>, <a href="/services/wedding-av-rentals">wedding after-parties</a>, and <a href="/services/dj-equipment-rentals">multi-DJ battles</a> across Massachusetts and <a href="/services/rhode-island-av-rentals">Rhode Island</a>.`,
     ],
-    related: ["dj-equipment-rentals", "event-lighting", "outdoor-movies", "photo-booth"],
+    related: ["dj-equipment-rentals", "event-lighting", "outdoor-movies", "photo-booth", "wedding-av-rentals"],
     faqs: [
       {
         q: "How long do silent disco headphones stay charged during an event?",
@@ -660,14 +719,19 @@ const SERVICE_PAGES = [
     ],
     categoryFilter: "Event Lighting",
     guideHeading: "Sculpt Your Venue Color Palette With Wire-Free Architecture",
-    guideParagraphs: [
-      "Lighting instantly defines the mood of any Boston space—from warm candlelit amber across exposed brick walls and white wedding tents to synchronized moving-head club beams over a dance floor. Our IP65 weather-rated wireless Chauvet Freedom Par fixtures eliminate messy power cords along venue perimeters.",
+    guideHtmlParagraphs: [
+      `Lighting instantly defines the mood of any Boston space—from warm candlelit amber across exposed brick walls and white wedding tents to synchronized moving-head club beams over a dance floor. Our IP65 weather-rated wireless <strong>Chauvet Freedom Par H9 uplight rentals</strong> ($150 for 6 fixtures, $275 for Basic 8-light package) run up to 20 hours on internal batteries, eliminating messy power cords along venue perimeters.`,
+      `Need complete stage or reception illumination? Choose our Wedding Lighting Package ($450+ with 8 wireless uplights + 4 magnetic cake/centerpiece pinspots), Dance Party Lighting Package ($350+), or Stage Lighting Package ($550+ with dual lighting trees and DMX console)—and pair with <a href="/services/cold-sparklers">indoor-safe cold sparkler machines</a>, <a href="/services/dry-ice-machine">Dancing on a Cloud dry ice fog</a>, and <a href="/services/wedding-av-rentals">wedding sound systems</a>.`,
     ],
-    related: ["cold-sparklers", "dry-ice-machine", "dj-equipment-rentals", "photo-booth"],
+    related: ["wedding-av-rentals", "cold-sparklers", "dry-ice-machine", "dj-equipment-rentals", "photo-booth"],
     faqs: [
       {
         q: "Are your wireless uplights truly cord-free during an event?",
         a: "Yes. Our Chauvet Freedom Par wireless LED uplights run up to 20 hours on internal lithium batteries, letting us tuck them cleanly beside pillars, drapery, and tent legs without tripping hazards.",
+      },
+      {
+        q: "Can we customize the exact RGB+Amber+UV color of the wireless uplights?",
+        a: "Yes. Every Chauvet Freedom Par H9 fixture mixes Red, Green, Blue, Amber, White, and UV LEDs so you can lock in warm candlelit gold for dinner and switch to dynamic color fades for dancing via wireless remote or DMX.",
       },
     ],
   },
@@ -680,11 +744,11 @@ const SERVICE_PAGES = [
     title: "Corporate Event AV & Meetings Support Boston, MA",
     description:
       "Corporate event AV & meetings support in Boston, MA: wireless & delegate mics, PA speakers, laser projectors, 4K TVs, LED walls, streaming & on-site techs.",
-    altNames: ["Corporate Event AV Boston MA", "Corporate Meetings AV Support Boston MA", "Corporate Conference AV Rental Boston"],
+    altNames: ["Corporate Event AV Boston MA", "Corporate Meetings AV Support Boston MA", "Conference Room Sound Systems in MA", "Corporate Conference AV Rental Boston"],
     h1: "Corporate Event AV & Corporate Meetings Support in Boston, MA",
-    lead: "Turnkey corporate event AV and full meetings AV support across Boston, MA, Cambridge, and Seaport hotels—combining QSC PA audio, Shure QLX-D & PTT delegate microphones, 4K TVs, laser projectors, 2.67mm LED walls, hybrid live streaming, and dedicated on-site technicians.",
+    lead: "Turnkey corporate event AV, conference room sound systems in MA, and full meetings AV support across Boston, Cambridge, and Seaport hotels—combining QSC PA audio, Shure QLX-D & PTT delegate microphones, 4K TVs, laser projectors, 2.67mm LED walls, hybrid live streaming, and dedicated on-site technicians.",
     heroBullets: [
-      "Complete audio, display, microphone & Zoom/Teams hybrid broadcast packages",
+      "Complete conference room sound systems, display, mic & Zoom/Teams hybrid packages",
       "Experienced with BCEC, Hynes Convention Center, Seaport & Kendall Square venues",
       "Pre-tested gear, clean taped cabling, COI readiness & dedicated FOH engineers",
     ],
@@ -700,13 +764,17 @@ const SERVICE_PAGES = [
       "stream-basic",
       "stream-pro",
     ],
-    guideHeading: "Dependable AV Production for Boston Corporate Meetings & Conferences",
+    guideHeading: "Dependable AV & Conference Room Sound Systems Across Boston & MA",
     guideHtmlParagraphs: [
-      `Corporate planners, executive assistants, and event teams need corporate meetings AV support in Boston, MA that arrives early, coordinates cleanly with hotel or convention center loading docks, and eliminates audio dropouts or blank presentation screens. From executive boardroom Q&amp;As in Back Bay and Cambridge to 300-person town halls and trade show booths at BCEC or Hynes, our crew delivers, sets up, and runs technical rehearsal well before doors open.`,
-      `Build custom corporate support with our <a href="/microphone-rentals">delegate push-to-talk &amp; wireless lavalier microphones</a>, <a href="/audio">PA sound packages</a>, <a href="/services/projector-rentals">high-lumen laser projectors</a>, <a href="/services/tv-rentals">65&Prime; &amp; 75&Prime; 4K booth TVs</a>, <a href="/services/indoorledwall">seamless 2.67mm indoor LED video walls</a>, and <a href="/services/live-streaming">multi-camera hybrid streaming systems</a>—or <a href="/contact">request a written corporate quote</a> directly from our Boston desk.`,
+      `Corporate planners, executive assistants, and event teams searching for <strong>corporate event AV in Boston, MA</strong> or temporary <strong>conference room sound systems in MA</strong> need equipment that arrives early, coordinates cleanly with hotel or office building loading docks, and eliminates audio dropouts or blank presentation screens. From executive boardroom Q&amp;As in Back Bay and Kendall Square to 300-person town halls and trade show booths at BCEC or Hynes, our crew delivers, sets up, and runs technical rehearsal well before doors open.`,
+      `Build custom corporate meetings support with our <a href="/microphone-rentals">delegate push-to-talk ($35), Countryman earset ($50) &amp; Shure QLX-D wireless lavalier microphones ($65)</a>, <a href="/audio">Small and Medium PA sound packages</a>, <a href="/services/audio-mixers">Behringer X32 &amp; QSC TouchMix digital mixers</a>, <a href="/services/projector-rentals">high-lumen laser projectors</a>, <a href="/services/tv-rentals">65&Prime; &amp; 75&Prime; 4K rolling monitors</a>, <a href="/services/indoorledwall">seamless 2.67mm indoor LED video walls</a>, and <a href="/services/live-streaming">multi-camera hybrid streaming systems</a>—or <a href="/contact">request a written corporate quote</a> directly from our Boston desk.`,
     ],
-    related: ["microphone-rentals", "audio", "projector-rentals", "tv-rentals", "indoorledwall", "live-streaming"],
+    related: ["microphone-rentals", "audio", "audio-mixers", "projector-rentals", "tv-rentals", "indoorledwall", "live-streaming"],
     faqs: [
+      {
+        q: "Do you rent temporary conference room sound systems in MA for boardrooms and hotel meetings?",
+        a: "Yes. We configure low-profile conference room sound systems across Massachusetts—combining compact powered PA speakers, tabletop Push-to-Talk (PTT) delegate gooseneck microphones ($35), Shure QLX-D wireless lavaliers ($65), and USB digital mixers that feed crystal-clear room audio directly into Zoom and Microsoft Teams.",
+      },
       {
         q: "Do you provide dedicated on-site AV technicians for corporate meetings in Boston, MA?",
         a: "Yes. You can book certified Beantown on-site AV technicians and audio engineers to manage morning setup, presenter mic checks, slide and laptop switching, Q&A panel levels, hybrid Zoom/Teams audio feeds, and quiet post-event strike.",
@@ -1875,6 +1943,12 @@ ${commonHeader({ active: "services" })}
 ${cards}
           </div>
         </section>
+
+        <section class="seo-guide-box" aria-labelledby="avDirectoryGuideHeading">
+          <h2 id="avDirectoryGuideHeading">Full-Service AV Equipment Rental Across Boston, Massachusetts &amp; Rhode Island</h2>
+          <p>Searching for dependable <strong>AV equipment rental</strong> or <strong>AV rental in Boston</strong>? Beantown Audio Rentals supplies bench-tested commercial audio, video, lighting, staging, and special effects hardware from a single itemized quote builder. Whether you need a compact <a href="/audio">PA sound system rental</a> ($199+), individual <a href="/services/speaker-rentals">powered speakers</a> ($65), <a href="/microphone-rentals">Shure QLX-D wireless, Countryman &amp; push-to-talk delegate microphones</a> ($20–$65), or a <a href="/services/audio-mixers">Behringer X32 digital mixing console</a> ($150), every unit ships with stands, power drops, and redundant XLR/HDMI interconnects.</p>
+          <p>For large-scale visual and experiential productions, combine <a href="/services/projector-rentals">5,000+ lumen HD laser projectors &amp; Fast-Fold screens</a>, <a href="/services/tv-rentals">65&Prime; &amp; 75&Prime; 4K rolling TV monitors</a>, <a href="/services/indoorledwall">2.67mm fine-pitch indoor LED video walls</a>, <a href="/services/ledtrailers">daylight-visible mobile LED trailers</a>, <a href="/services/outdoor-movies">12ft–40ft inflatable outdoor movie screens with projector &amp; speakers</a>, <a href="/services/event-lighting">cord-free battery uplighting</a>, <a href="/services/cold-sparklers">indoor-safe cold sparkler fountains</a>, and <a href="/services/dry-ice-machine">Dancing on a Cloud dry ice low-fog machines</a>—backed by self-pickup or full delivery, setup, soundcheck, and on-site engineers across <a href="/services/corporate-events">Boston corporate meetings</a>, <a href="/services/wedding-av-rentals">New England weddings</a>, and <a href="/services/rhode-island-av-rentals">Rhode Island events</a>.</p>
+        </section>
       </main>
 
 ${commonFooter()}
@@ -2144,7 +2218,7 @@ function renderHomepage() {
       category: "Rentals & Inventory",
       question: "What equipment is available in your Boston rental inventory?",
       answer:
-        "The rental catalog includes small, medium, and large audio packages; speakers and subwoofers; microphone packages and equipment; audio mixers; DJ packages and individual DJ gear; video packages, Samsung 65-inch and 75-inch TVs, and indoor LED wall packages; five outdoor LED trailer sizes; four outdoor movie screen sizes; photo booths; silent disco packages for 50–300 headphones; lighting fixtures and packages; cold spark packages; a dry ice machine; and basic and pro live-streaming packages. Published rates appear only on the outdoor movie, photo booth, and silent disco listings; other rentals require a quote.",
+        "Our Boston AV equipment rental inventory includes Small ($199+), Medium ($349+), and Large ($880+) PA sound system packages; powered speakers ($65) and 18-inch QSC & JBL subwoofers ($75–$150); Shure QLX-D wireless handheld & lavalier microphones ($65), Countryman earset headsets ($50), and push-to-talk (PTT) conference delegate mics ($35); Behringer X32 ($150), X32 Compact ($110), Allen & Heath SQ-7 ($295), and QSC TouchMix audio mixers; Pioneer CDJ-3000 ($125), DJM-900NXS ($95), Technics 1200 turntables, and complete DJ packages ($299+); 5,000+ lumen HD laser projectors ($175), 120-inch Fast-Fold screens ($150), Samsung 65-inch ($250) and 75-inch ($350) 4K TVs, indoor 2.67mm LED video walls ($1,150+), and outdoor mobile LED trailers ($2,600+); 12ft–40ft inflatable outdoor movie screens with projector and speakers ($549–$1,899); 360 and Magic Mirror photo booths ($799–$1,699+); 50–300 silent disco headphone packs ($500–$2,500); Chauvet wireless uplighting ($150/6), indoor-safe cold sparkler machines ($350+), Chauvet Nimbus dry ice cloud fog machines ($295+), and 4K live-streaming kits ($621+).",
     },
     {
       category: "Delivery & Setup",
@@ -2156,7 +2230,7 @@ function renderHomepage() {
       category: "Pricing & Quotes",
       question: "How does pricing work, and are there any surprise fees?",
       answer:
-        "The original site publishes rates for outdoor movie packages ($549–$1,899), photo booths (starting at $799, $1,399, $1,699, and $1,499 by listing), and silent disco packages ($500–$2,500). Other rental pages ask customers to request pricing. The project marks those listings as quote required and does not estimate rates, rental periods, delivery, or setup fees.",
+        "Every listing in our catalog shows transparent daily or starting rates—including powered PA speakers from $65, Small Audio packages from $199, push-to-talk delegate mics at $35, Behringer X32 digital mixers at $150, cold sparkler packages from $350, dry ice fog machines from $295, outdoor movie screen packages ($549–$1,899), photo booths ($799–$1,699+), and silent disco packages ($500–$2,500). Build your exact setup in our interactive Quote Builder and select self-pickup, turnkey delivery and setup, or full on-site technician support to receive a clear, itemized written quote with zero hidden fees.",
     },
     {
       category: "On-Site Support",

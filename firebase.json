@@ -261,8 +261,13 @@
         "type": 301
       },
       {
-        "regex": "(?i)^/(?:services/(?:corporate-event|corporate-av|corporate-event-av|corporate-meetings(?:-av)?)|service/corporate-events?)/?$",
+        "regex": "(?i)^/(?:services/(?:corporate-event|corporate-av|corporate-event-av|corporate-meetings(?:-av)?)|service/corporate-events?|conference-room-sound-systems?(?:-in-ma)?)/?$",
         "destination": "/services/corporate-events",
+        "type": 301
+      },
+      {
+        "regex": "(?i)^/(?:services/)?(?:behringer-x32-rentals?|x32-rentals?|x32-mixer-rentals?|allen-heath-sq7-rentals?)/?$",
+        "destination": "/services/audio-mixers",
         "type": 301
       },
       {
