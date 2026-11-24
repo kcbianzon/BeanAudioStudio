@@ -40,7 +40,13 @@ function formatPrice(item) {
 function getItemsForPage(spec) {
   if (Array.isArray(spec.productIds)) {
     const byId = new Map(CATALOG.map((p) => [p.id, p]));
-    return spec.productIds.map((id) => byId.get(id)).filter(Boolean);
+    return spec.productIds.map((id) => {
+      const item = byId.get(id);
+      if (!item) {
+        throw new Error(`Missing productId "${id}" referenced in page "${spec.slug}"`);
+      }
+      return item;
+    });
   }
   if (spec.categoryFilter) {
     return CATALOG.filter((p) => p.category === spec.categoryFilter);
@@ -154,7 +160,7 @@ const SERVICE_PAGES = [
     categoryFilter: "DJ Equipment",
     guideHeading: "Rent a DJ Board, Turntables, or Full Club Rig in Boston",
     guideHtmlParagraphs: [
-      `Whether you are flying in a touring club artist with an exact Pioneer CDJ-3000 and DJM-900NXS technical rider, hosting a vinyl set on Technics SL-1200MK2 direct-drive turntables, or planning to <strong>rent DJ equipment</strong> with <a href="/services/speaker-rentals">powered party speakers</a> for a private celebration, every unit arrives firmware-updated, clean, and road-ready.`,
+      `Whether you need <strong>DJ equipment rental in Boston</strong> for a touring club artist with an exact Pioneer CDJ-3000 and DJM-900NXS technical rider, a vinyl set on Technics SL-1200MK2 direct-drive turntables, or a weekend <strong>DJ equipment rental</strong> with <a href="/services/speaker-rentals">powered party speakers</a> for a private celebration, every unit arrives firmware-updated, clean, and road-ready.`,
       `Need sound, lighting, and dance floor energy in one streamlined booking? Our Basic ($299+), Standard ($499+), and Pro ($699+) DJ Packages bundle controllers or CDJs, powered QSC PA tops, <a href="/services/subwoofer-rentals">18-inch subwoofers</a>, <a href="/microphone-rentals">wireless microphones</a>, and a sleek Scrim Werks facade—or pair with <a href="/services/event-lighting">event uplighting</a>, <a href="/services/cold-sparklers">cold sparklers</a>, and <a href="/services/silent-disco">silent disco headphones</a>.`,
       `We support clubs, weddings, hotel ballrooms, campus formals, and private events throughout Boston, Cambridge, Somerville, and <a href="/services/rhode-island-av-rentals">Providence &amp; Newport, Rhode Island</a>.`,
     ],
@@ -754,7 +760,7 @@ const SERVICE_PAGES = [
     ],
     productIds: [
       "medium-audio",
-      "presentation-mic-setup",
+      "mic-presentation-package",
       "ptt-mic",
       "qlxd-lavalier",
       "laser-projector",
@@ -813,7 +819,7 @@ const SERVICE_PAGES = [
       "qlxd-handheld",
       "qlxd-lavalier",
       "ptt-mic",
-      "presentation-mic-setup",
+      "mic-presentation-package",
       "movie-16",
       "movie-26",
       "silent-100",
@@ -865,10 +871,11 @@ const SERVICE_PAGES = [
       "dj-standard-pkg",
       "sub-ks212c",
       "wedding-lighting",
-      "uplight-6",
+      "uplights-6",
       "cold-spark-2",
       "dry-ice-cloud",
-      "mirror-booth",
+      "photo-magic-mirror",
+      "photo-360",
       "silent-100",
     ],
     guideHeading: "How to Rent Sound Equipment for a Wedding Without Audio Dropouts",
@@ -1375,6 +1382,7 @@ function organizationSchemaNode() {
       { "@type": "Place", name: "New England" },
     ],
     knowsAbout: [
+      "Audio Visual Equipment Rental Service",
       "Corporate Event AV Production",
       "Audio Equipment Rental",
       "Delegate & Push-to-Talk Microphone Rental",
@@ -1419,7 +1427,13 @@ function websiteSchemaNode() {
   };
 }
 
-function commonHeadTags({ title, description, canonicalUrl, jsonLdObj }) {
+function commonHeadTags({ title, description, canonicalUrl, jsonLdObj, ogImage, ogImageAlt, preloadImage }) {
+  const resolvedOgImage = ogImage || OG_IMAGE;
+  const resolvedOgImageAlt =
+    ogImageAlt || "Beantown Audio Rentals Boston event audio, LED video walls, and production gear";
+  const preloadTag = preloadImage
+    ? `\n    <link rel="preload" as="image" href="${escapeHtml(preloadImage)}" fetchpriority="high" />`
+    : "";
   return `    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>${escapeHtml(title)}</title>
@@ -1439,18 +1453,18 @@ function commonHeadTags({ title, description, canonicalUrl, jsonLdObj }) {
     <meta property="og:url" content="${escapeHtml(canonicalUrl)}" />
     <meta property="og:title" content="${escapeHtml(title)}" />
     <meta property="og:description" content="${escapeHtml(description)}" />
-    <meta property="og:image" content="${escapeHtml(OG_IMAGE)}" />
-    <meta property="og:image:alt" content="Beantown Audio Rentals Boston event audio, LED video walls, and production gear" />
+    <meta property="og:image" content="${escapeHtml(resolvedOgImage)}" />
+    <meta property="og:image:alt" content="${escapeHtml(resolvedOgImageAlt)}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(title)}" />
     <meta name="twitter:description" content="${escapeHtml(description)}" />
-    <meta name="twitter:image" content="${escapeHtml(OG_IMAGE)}" />
+    <meta name="twitter:image" content="${escapeHtml(resolvedOgImage)}" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="manifest" href="/site.webmanifest" />${preloadTag}
     <script type="application/ld+json">
 ${JSON.stringify(jsonLdObj, null, 2)}
     </script>
@@ -1661,6 +1675,7 @@ function renderServicePage(spec) {
         ...(Array.isArray(spec.altNames) && spec.altNames.length ? { alternateName: spec.altNames } : {}),
         description: spec.description,
         url: canonicalUrl,
+        image: items[0]?.image ? `${DOMAIN}/${items[0].image}` : OG_IMAGE,
         serviceType: spec.categoryLabel,
         provider: { "@id": `${DOMAIN}/#organization` },
         ...(numericPrices.length
@@ -1690,7 +1705,9 @@ function renderServicePage(spec) {
             "@type": "Offer",
             itemOffered: {
               "@type": "Product",
+              sku: item.id,
               name: item.name,
+              brand: { "@type": "Brand", name: "Beantown Audio Rentals" },
               image: `${DOMAIN}/${item.image}`,
               description: item.desc.replace(/\n/g, " "),
               offers:
@@ -1723,17 +1740,23 @@ function renderServicePage(spec) {
   };
 
   const itemsHtml = items
-    .map((item) => {
+    .map((item, idx) => {
       const bullets = item.desc
         .split("\n")
         .map((line) => line.replace(/^•\s*/, "").trim())
         .filter(Boolean)
         .slice(0, 4);
       const imgSrc = item.image ? `/${item.image}` : "/assets/beantown/event-production.jpg";
+      const imgLoadingAttrs =
+        idx === 0
+          ? 'width="640" height="480" fetchpriority="high" decoding="async"'
+          : idx < 3
+            ? 'width="640" height="480" decoding="async"'
+            : 'width="640" height="480" loading="lazy" decoding="async"';
       return `        <article class="seo-item-card">
           <div>
             <div class="seo-item-thumb">
-              <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(item.name)} rental in Boston" loading="lazy" />
+              <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(item.name)} rental in Boston" ${imgLoadingAttrs} />
               ${item.tag ? `<span class="seo-item-tag">${escapeHtml(item.tag)}</span>` : ""}
             </div>
             <h3>${escapeHtml(item.name)}</h3>
@@ -1763,6 +1786,11 @@ ${commonHeadTags({
   description: spec.description,
   canonicalUrl,
   jsonLdObj: schemaGraph,
+  ogImage: items[0]?.image ? `${DOMAIN}/${items[0].image}` : OG_IMAGE,
+  ogImageAlt: items[0]?.name
+    ? `${items[0].name} rental in Boston — Beantown Audio Rentals`
+    : undefined,
+  preloadImage: items[0]?.image ? `/${items[0].image}` : undefined,
 })}
   </head>
   <body class="seo-static-page">
@@ -1945,8 +1973,8 @@ ${cards}
         </section>
 
         <section class="seo-guide-box" aria-labelledby="avDirectoryGuideHeading">
-          <h2 id="avDirectoryGuideHeading">Full-Service AV Equipment Rental Across Boston, Massachusetts &amp; Rhode Island</h2>
-          <p>Searching for dependable <strong>AV equipment rental</strong> or <strong>AV rental in Boston</strong>? Beantown Audio Rentals supplies bench-tested commercial audio, video, lighting, staging, and special effects hardware from a single itemized quote builder. Whether you need a compact <a href="/audio">PA sound system rental</a> ($199+), individual <a href="/services/speaker-rentals">powered speakers</a> ($65), <a href="/microphone-rentals">Shure QLX-D wireless, Countryman &amp; push-to-talk delegate microphones</a> ($20–$65), or a <a href="/services/audio-mixers">Behringer X32 digital mixing console</a> ($150), every unit ships with stands, power drops, and redundant XLR/HDMI interconnects.</p>
+          <h2 id="avDirectoryGuideHeading">Full-Service Audio Visual Equipment Rental Service Across Boston, Massachusetts &amp; Rhode Island</h2>
+          <p>Searching for a dependable <strong>audio visual equipment rental service</strong>, <strong>AV equipment rental</strong>, or <strong>AV rental in Boston</strong>? Beantown Audio Rentals supplies bench-tested commercial audio, video, lighting, staging, and special effects hardware from a single itemized quote builder. Whether you need a compact <a href="/audio">PA sound system rental</a> ($199+), individual <a href="/services/speaker-rentals">powered speakers</a> ($65), <a href="/microphone-rentals">Shure QLX-D wireless, Countryman &amp; push-to-talk delegate microphones</a> ($20–$65), or a <a href="/services/audio-mixers">Behringer X32 digital mixing console</a> ($150), every unit ships with stands, power drops, and redundant XLR/HDMI interconnects.</p>
           <p>For large-scale visual and experiential productions, combine <a href="/services/projector-rentals">5,000+ lumen HD laser projectors &amp; Fast-Fold screens</a>, <a href="/services/tv-rentals">65&Prime; &amp; 75&Prime; 4K rolling TV monitors</a>, <a href="/services/indoorledwall">2.67mm fine-pitch indoor LED video walls</a>, <a href="/services/ledtrailers">daylight-visible mobile LED trailers</a>, <a href="/services/outdoor-movies">12ft–40ft inflatable outdoor movie screens with projector &amp; speakers</a>, <a href="/services/event-lighting">cord-free battery uplighting</a>, <a href="/services/cold-sparklers">indoor-safe cold sparkler fountains</a>, and <a href="/services/dry-ice-machine">Dancing on a Cloud dry ice low-fog machines</a>—backed by self-pickup or full delivery, setup, soundcheck, and on-site engineers across <a href="/services/corporate-events">Boston corporate meetings</a>, <a href="/services/wedding-av-rentals">New England weddings</a>, and <a href="/services/rhode-island-av-rentals">Rhode Island events</a>.</p>
         </section>
       </main>

@@ -216,7 +216,7 @@
         "type": 301
       },
       {
-        "regex": "(?i)^/(?:dj-rental|dj-gear-rental)/?$",
+        "regex": "(?i)^/(?:dj-rental|dj-gear-rental|dj-equipment-rentals?(?:-boston)?|boston-dj-equipment-rentals?)/?$",
         "destination": "/services/dj-equipment-rentals",
         "type": 301
       },
@@ -271,7 +271,7 @@
         "type": 301
       },
       {
-        "regex": "(?i)^/(?:audiovisual-rentals?|av-rentals?|av-rental-boston|boston-av-rental|av-equipment|audio-visual-equipment-rental)/?$",
+        "regex": "(?i)^/(?:audiovisual-rentals?|av-rentals?|av-rental-boston|boston-av-rental|av-equipment|audio-visual-equipment-rentals?(?:-services?)?)/?$",
         "destination": "/services",
         "type": 301
       },
