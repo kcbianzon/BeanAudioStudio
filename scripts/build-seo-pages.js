@@ -63,8 +63,8 @@ const SERVICE_PAGES = [
     hashCategory: "Audio & Speakers",
     title: "Speaker & Party Speaker Rental Boston | From $65",
     description:
-      "Rent powered PA & party speakers from $65/day near you in Boston, MA & RI. Hire Bluetooth party speakers, Small–Large PA sound systems & subs with delivery.",
-    altNames: ["Boston Speaker Rental", "Rent Party Speakers Near Me", "Hire a Speaker Boston", "PA Speaker Rental Massachusetts", "Speaker Rental RI"],
+      "Rent powered PA & party speakers from $65/day near you in Boston, MA & RI. QSC & JBL Bluetooth party speakers, Small–Large PA sound systems & subs with delivery.",
+    altNames: ["Boston Speaker Rental", "Rent Party Speakers Near Me", "Rent Speakers Boston, MA", "PA Speaker Rental Massachusetts", "Speaker Rental RI"],
     h1: "Speaker & Party Speaker Rentals in Boston, MA & RI",
     lead: "Rent powered PA speakers, Bluetooth party speakers, concert line arrays, and complete sound systems from $65/day—delivered, set up, and soundchecked across Boston, Massachusetts, and Rhode Island.",
     heroBullets: [
@@ -109,7 +109,7 @@ const SERVICE_PAGES = [
     title: "Audio Equipment & Audio System Rental Boston | Beantown",
     description:
       "Sound system rental for events & audio equipment rental in Boston ($65–$199+): PA speaker packages, subs, wireless & delegate mics delivered across MA & RI.",
-    altNames: ["Audio Equipment Rental Near Me", "Sound System Rental for Events", "Audio System Rental Boston", "Audio Visual Equipment Rental Massachusetts"],
+    altNames: ["Audio Equipment Rental Near Me", "Sound Equipment in MA", "Sound System Services in MA", "Sound System Rental for Events", "Audio System Rental Boston", "Event Equipment Rentals Boston, MA"],
     h1: "Audio Equipment & Sound System Rentals for Events in Boston",
     lead: "Turnkey sound system rentals for events combining powered PA speakers, Shure wireless microphones, mixers, and cabling—engineered for weddings, corporate summits, parties, and outdoor venues across MA & RI.",
     heroBullets: [
@@ -120,15 +120,19 @@ const SERVICE_PAGES = [
     productIds: ["small-audio", "medium-audio", "large-audio", "powered-speakers", "audio-monitors", "audio-cables-stands", "sub-kw181", "qlxd-handheld"],
     guideHeading: "Turnkey Sound System Rental for Events Without Technical Guesswork",
     guideHtmlParagraphs: [
-      `Searching for <strong>audio equipment rental</strong>, <strong>PA system rentals</strong>, or a <strong>sound system rental for events</strong> near you shouldn't mean piecing together unfamiliar cables and amplifiers. Our tiered Boston <a href="/services/speaker-rentals">PA speaker &amp; audio packages</a> ($199–$880+) arrive pre-configured: Small Audio handles up to 50 guests, Medium Audio covers 50–150 guests across hotel ballrooms and tented receptions, and Large Audio adds concert line arrays and subs for 150–500+ attendees.`,
+      `Searching for <strong>audio equipment rental near me</strong>, dependable <strong>sound equipment in MA</strong>, <strong>PA system rentals</strong>, or full-service <strong>sound system services in MA</strong> shouldn't mean piecing together unfamiliar cables and amplifiers. Our tiered Boston <a href="/services/speaker-rentals">PA speaker &amp; audio packages</a> ($199–$880+) arrive pre-configured: Small Audio handles up to 50 guests, Medium Audio covers 50–150 guests across hotel ballrooms and tented receptions, and Large Audio adds concert line arrays and subs for 150–500+ attendees.`,
       `Every sound system is bench-tested prior to dispatch and customizes cleanly with <a href="/microphone-rentals">Shure QLX-D wireless, Countryman &amp; delegate conference mics</a>, <a href="/services/audio-mixers">X32 / SQ-7 consoles</a>, stage monitors, <a href="/services/subwoofer-rentals">18-inch cardioid subwoofers</a>, <a href="/services/wedding-av-rentals">wedding ceremony &amp; reception sound</a>, <a href="/services/corporate-events">corporate meetings AV support</a>, or full <a href="/services/rhode-island-av-rentals">Rhode Island audio delivery</a>.`,
-      `On a tight schedule? Choose fast self-pickup for compact speaker &amp; mic kits or schedule our Boston crew for early load-in, taped cabling, room tuning, soundcheck, and post-event pickup.`,
+      `On a tight schedule? Choose fast self-pickup for compact speaker &amp; mic kits or schedule our Boston crew for early load-in, taped cabling, room tuning, soundcheck, and post-event pickup across Greater Boston and Massachusetts.`,
     ],
     related: ["speaker-rentals", "microphone-rentals", "wedding-av-rentals", "corporate-events", "rhode-island-av-rentals", "subwoofer-rentals", "audio-mixers"],
     faqs: [
       {
         q: "What comes inside a turnkey Beantown sound system rental package?",
         a: "Our Small, Medium, and Large Audio Packages include powered PA speakers, heavy-duty tripod stands, Shure wireless microphones, an audio mixer with Bluetooth/laptop hookups, and all required XLR, power, and surge protection gear.",
+      },
+      {
+        q: "Do you provide sound equipment in MA with full sound system setup and technician services?",
+        a: "Yes. We supply commercial sound equipment in MA and full-service sound system services in MA—including white-glove delivery, acoustic speaker placement, wireless microphone frequency coordination, digital mixing, soundcheck, and post-event teardown across Greater Boston, Cambridge, Somerville, Waltham, Worcester, Cape Cod, and all of Massachusetts.",
       },
       {
         q: "Can we pick up compact audio equipment ourselves or book full delivery?",
@@ -1335,6 +1339,27 @@ ${marker}
   fs.writeFileSync(path.join(PUBLIC_DIR, "styles.css"), finalCss, "utf8");
 }
 
+const US_ELIGIBLE_REGION = { "@type": "Country", name: "US" };
+
+function usAreaServedList() {
+  return [
+    { "@type": "City", name: "Boston", address: { "@type": "PostalAddress", addressLocality: "Boston", addressRegion: "MA", addressCountry: "US" } },
+    { "@type": "City", name: "Cambridge", address: { "@type": "PostalAddress", addressLocality: "Cambridge", addressRegion: "MA", addressCountry: "US" } },
+    { "@type": "City", name: "Somerville", address: { "@type": "PostalAddress", addressLocality: "Somerville", addressRegion: "MA", addressCountry: "US" } },
+    { "@type": "City", name: "Brookline", address: { "@type": "PostalAddress", addressLocality: "Brookline", addressRegion: "MA", addressCountry: "US" } },
+    { "@type": "City", name: "Newton", address: { "@type": "PostalAddress", addressLocality: "Newton", addressRegion: "MA", addressCountry: "US" } },
+    { "@type": "City", name: "Waltham", address: { "@type": "PostalAddress", addressLocality: "Waltham", addressRegion: "MA", addressCountry: "US" } },
+    { "@type": "City", name: "Quincy", address: { "@type": "PostalAddress", addressLocality: "Quincy", addressRegion: "MA", addressCountry: "US" } },
+    { "@type": "City", name: "Worcester", address: { "@type": "PostalAddress", addressLocality: "Worcester", addressRegion: "MA", addressCountry: "US" } },
+    { "@type": "City", name: "Providence", address: { "@type": "PostalAddress", addressLocality: "Providence", addressRegion: "RI", addressCountry: "US" } },
+    { "@type": "City", name: "Newport", address: { "@type": "PostalAddress", addressLocality: "Newport", addressRegion: "RI", addressCountry: "US" } },
+    { "@type": "State", name: "Massachusetts", address: { "@type": "PostalAddress", addressRegion: "MA", addressCountry: "US" } },
+    { "@type": "State", name: "Rhode Island", address: { "@type": "PostalAddress", addressRegion: "RI", addressCountry: "US" } },
+    { "@type": "State", name: "New Hampshire", address: { "@type": "PostalAddress", addressRegion: "NH", addressCountry: "US" } },
+    { "@type": "Country", name: "US" },
+  ];
+}
+
 function organizationSchemaNode() {
   return {
     "@type": ["LocalBusiness", "Organization"],
@@ -1360,6 +1385,7 @@ function organizationSchemaNode() {
       "@type": "PostalAddress",
       addressLocality: "Boston",
       addressRegion: "MA",
+      postalCode: "02108",
       addressCountry: "US",
     },
     geo: {
@@ -1367,22 +1393,12 @@ function organizationSchemaNode() {
       latitude: 42.3601,
       longitude: -71.0589,
     },
-    areaServed: [
-      { "@type": "City", name: "Boston" },
-      { "@type": "City", name: "Cambridge" },
-      { "@type": "City", name: "Somerville" },
-      { "@type": "City", name: "Brookline" },
-      { "@type": "City", name: "Newton" },
-      { "@type": "City", name: "Waltham" },
-      { "@type": "City", name: "Worcester" },
-      { "@type": "City", name: "Providence" },
-      { "@type": "State", name: "Massachusetts" },
-      { "@type": "State", name: "Rhode Island" },
-      { "@type": "State", name: "New Hampshire" },
-      { "@type": "Place", name: "New England" },
-    ],
+    areaServed: usAreaServedList(),
     knowsAbout: [
       "Audio Visual Equipment Rental Service",
+      "Event Equipment Rentals Boston, MA",
+      "Sound Equipment in MA",
+      "Sound System Services in MA",
       "Corporate Event AV Production",
       "Audio Equipment Rental",
       "Delegate & Push-to-Talk Microphone Rental",
@@ -1446,7 +1462,6 @@ function commonHeadTags({ title, description, canonicalUrl, jsonLdObj, ogImage, 
     <meta name="ICBM" content="42.3601, -71.0589" />
     <link rel="canonical" href="${escapeHtml(canonicalUrl)}" />
     <link rel="alternate" hreflang="en-US" href="${escapeHtml(canonicalUrl)}" />
-    <link rel="alternate" hreflang="x-default" href="${escapeHtml(canonicalUrl)}" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Beantown Audio Rentals" />
@@ -1686,23 +1701,17 @@ function renderServicePage(spec) {
                 lowPrice: String(Math.min(...numericPrices)),
                 highPrice: String(Math.max(...numericPrices)),
                 offerCount: String(numericPrices.length),
+                eligibleRegion: US_ELIGIBLE_REGION,
               },
             }
           : {}),
-        areaServed: [
-          { "@type": "City", name: "Boston" },
-          { "@type": "City", name: "Cambridge" },
-          { "@type": "City", name: "Somerville" },
-          { "@type": "City", name: "Brookline" },
-          { "@type": "State", name: "Massachusetts" },
-          { "@type": "State", name: "Rhode Island" },
-          { "@type": "Place", name: "New England" },
-        ],
+        areaServed: usAreaServedList(),
         hasOfferCatalog: {
           "@type": "OfferCatalog",
           name: spec.navLabel,
           itemListElement: items.map((item) => ({
             "@type": "Offer",
+            eligibleRegion: US_ELIGIBLE_REGION,
             itemOffered: {
               "@type": "Product",
               sku: item.id,
@@ -1719,6 +1728,7 @@ function renderServicePage(spec) {
                       price: String(item.price),
                       priceValidUntil: "2027-12-31",
                       availability: "https://schema.org/InStock",
+                      eligibleRegion: US_ELIGIBLE_REGION,
                     }
                   : undefined,
             },
@@ -1908,11 +1918,24 @@ function renderServicesDirectory() {
       },
       {
         "@type": "CollectionPage",
+        "@id": `${canonicalUrl}#collection`,
         name: "Boston Event AV & Equipment Rental Services",
         url: canonicalUrl,
+        inLanguage: "en-US",
         description: "Full directory of Boston audio, speaker, DJ equipment, projector, LED wall, lighting, cold sparklers, and photo booth rentals.",
         isPartOf: { "@id": `${DOMAIN}/#website` },
-        mainEntity: { "@id": `${DOMAIN}/#organization` },
+        about: { "@id": `${DOMAIN}/#organization` },
+        mainEntity: {
+          "@type": "ItemList",
+          name: "Boston & Massachusetts AV Rental Categories",
+          numberOfItems: SERVICE_PAGES.length,
+          itemListElement: SERVICE_PAGES.map((p, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            name: p.h1,
+            url: `${DOMAIN}${p.urlPath}`,
+          })),
+        },
       },
     ],
   };
@@ -1973,8 +1996,8 @@ ${cards}
         </section>
 
         <section class="seo-guide-box" aria-labelledby="avDirectoryGuideHeading">
-          <h2 id="avDirectoryGuideHeading">Full-Service Audio Visual Equipment Rental Service Across Boston, Massachusetts &amp; Rhode Island</h2>
-          <p>Searching for a dependable <strong>audio visual equipment rental service</strong>, <strong>AV equipment rental</strong>, or <strong>AV rental in Boston</strong>? Beantown Audio Rentals supplies bench-tested commercial audio, video, lighting, staging, and special effects hardware from a single itemized quote builder. Whether you need a compact <a href="/audio">PA sound system rental</a> ($199+), individual <a href="/services/speaker-rentals">powered speakers</a> ($65), <a href="/microphone-rentals">Shure QLX-D wireless, Countryman &amp; push-to-talk delegate microphones</a> ($20–$65), or a <a href="/services/audio-mixers">Behringer X32 digital mixing console</a> ($150), every unit ships with stands, power drops, and redundant XLR/HDMI interconnects.</p>
+          <h2 id="avDirectoryGuideHeading">Full-Service Audio Visual &amp; Event Equipment Rentals in Boston, MA &amp; Rhode Island</h2>
+          <p>Searching for a dependable <strong>audio visual equipment rental service</strong>, <strong>event equipment rentals in Boston, MA</strong>, <strong>AV equipment rental</strong>, or commercial <strong>sound equipment in MA</strong>? Beantown Audio Rentals supplies bench-tested commercial audio, video, lighting, staging, and special effects hardware from a single itemized quote builder. Whether you need turnkey <strong>sound system services in MA</strong> with a <a href="/audio">PA sound system rental</a> ($199+), individual <a href="/services/speaker-rentals">powered speakers</a> ($65), <a href="/microphone-rentals">Shure QLX-D wireless, Countryman &amp; push-to-talk delegate microphones</a> ($20–$65), or a <a href="/services/audio-mixers">Behringer X32 digital mixing console</a> ($150), every unit ships with stands, power drops, and redundant XLR/HDMI interconnects.</p>
           <p>For large-scale visual and experiential productions, combine <a href="/services/projector-rentals">5,000+ lumen HD laser projectors &amp; Fast-Fold screens</a>, <a href="/services/tv-rentals">65&Prime; &amp; 75&Prime; 4K rolling TV monitors</a>, <a href="/services/indoorledwall">2.67mm fine-pitch indoor LED video walls</a>, <a href="/services/ledtrailers">daylight-visible mobile LED trailers</a>, <a href="/services/outdoor-movies">12ft–40ft inflatable outdoor movie screens with projector &amp; speakers</a>, <a href="/services/event-lighting">cord-free battery uplighting</a>, <a href="/services/cold-sparklers">indoor-safe cold sparkler fountains</a>, and <a href="/services/dry-ice-machine">Dancing on a Cloud dry ice low-fog machines</a>—backed by self-pickup or full delivery, setup, soundcheck, and on-site engineers across <a href="/services/corporate-events">Boston corporate meetings</a>, <a href="/services/wedding-av-rentals">New England weddings</a>, and <a href="/services/rhode-island-av-rentals">Rhode Island events</a>.</p>
         </section>
       </main>
@@ -2464,7 +2487,6 @@ function renderHomepage() {
     <meta name="ICBM" content="42.3601, -71.0589" />
     <link rel="canonical" href="${DOMAIN}/" />
     <link rel="alternate" hreflang="en-US" href="${DOMAIN}/" />
-    <link rel="alternate" hreflang="x-default" href="${DOMAIN}/" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Beantown Audio Rentals" />

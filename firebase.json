@@ -271,12 +271,12 @@
         "type": 301
       },
       {
-        "regex": "(?i)^/(?:audiovisual-rentals?|av-rentals?|av-rental-boston|boston-av-rental|av-equipment|audio-visual-equipment-rentals?(?:-services?)?)/?$",
+        "regex": "(?i)^/(?:audiovisual-rentals?|av-rentals?|av-rental-boston|boston-av-rental|av-equipment|audio-visual-equipment-rentals?(?:-services?)?|event-equipment-rentals?(?:-boston(?:-ma)?)?)/?$",
         "destination": "/services",
         "type": 301
       },
       {
-        "regex": "(?i)^/(?:audio-system-rentals?|sound-equipment-rentals?(?:-near-me)?|sound-system-rentals?(?:-for-events)?|pa-system-rentals?)/?$",
+        "regex": "(?i)^/(?:audio-system-rentals?|sound-equipment-rentals?(?:-near-me)?|sound-equipment-in-ma|sound-system-services(?:-in-ma)?|sound-system-rentals?(?:-for-events)?|pa-system-rentals?)/?$",
         "destination": "/audio",
         "type": 301
       },
@@ -297,6 +297,19 @@
       }
     ],
     "headers": [
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "Content-Language",
+            "value": "en-US"
+          },
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          }
+        ]
+      },
       {
         "source": "/assets/**",
         "headers": [
