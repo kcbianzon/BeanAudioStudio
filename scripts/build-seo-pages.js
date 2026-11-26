@@ -11,7 +11,7 @@ const vm = require("vm");
 const ROOT = path.resolve(__dirname, "..");
 const PUBLIC_DIR = path.join(ROOT, "public");
 const CSS_VERSION = "20261124-seo-push";
-const DOMAIN = "https://beantownaudiorentals.com";
+const DOMAIN = "https://www.beantownaudiorentals.com";
 const WEB3FORMS_KEY = "f285afef-347a-4087-998d-98a4309ad914";
 const OG_IMAGE = `${DOMAIN}/assets/beantown/69667bc6a8aed9344088bb03_Screenshot-2025-01-16-at-1-24-21-PM-p-1600.png`;
 

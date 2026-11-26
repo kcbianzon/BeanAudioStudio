@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://beantownaudiorentals.com/sitemap.xml
+Sitemap: https://www.beantownaudiorentals.com/sitemap.xml
