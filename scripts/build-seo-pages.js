@@ -108,21 +108,32 @@ const SERVICE_PAGES = [
     hashCategory: "Audio & Speakers",
     title: "Audio Equipment & Audio System Rental Boston | Beantown",
     description:
-      "Sound system rental for events & audio equipment rental in Boston ($65–$199+): PA speaker packages, subs, wireless & delegate mics delivered across MA & RI.",
-    altNames: ["Audio Equipment Rental Near Me", "Sound Equipment in MA", "Sound System Services in MA", "Sound System Rental for Events", "Audio System Rental Boston", "Event Equipment Rentals Boston, MA"],
+      "Audio equipment rentals, PA system rentals & sound equipment rental in Boston ($65–$199+): speaker packages, subs & wireless mics delivered across MA & RI.",
+    altNames: [
+      "Audio Equipment Rentals",
+      "Audio Equipment Rental",
+      "Audio System Rental",
+      "PA System Rentals",
+      "Sound Equipment Rental",
+      "Audio Equipment Rental Near Me",
+      "Sound Equipment in MA",
+      "Sound System Services in MA",
+      "Audio-Visual Equipment Rental",
+      "Rent AV Equipment Near Me",
+    ],
     h1: "Audio Equipment & Sound System Rentals for Events in Boston",
-    lead: "Turnkey sound system rentals for events combining powered PA speakers, Shure wireless microphones, mixers, and cabling—engineered for weddings, corporate summits, parties, and outdoor venues across MA & RI.",
+    lead: "Turnkey audio equipment rentals, PA system rentals, and sound system rentals for events combining powered PA speakers, Shure wireless microphones, mixers, and cabling—engineered for weddings, corporate summits, parties, and outdoor venues across MA & RI.",
     heroBullets: [
       "Small (up to 50), Medium (50–150) & Large (150+) complete event sound systems",
       "Shop-tested PA gear with stands, Bluetooth/AUX input & redundant XLR cables",
       "Self-pickup savings or full Boston, Massachusetts & Rhode Island delivery & setup",
     ],
     productIds: ["small-audio", "medium-audio", "large-audio", "powered-speakers", "audio-monitors", "audio-cables-stands", "sub-kw181", "qlxd-handheld"],
-    guideHeading: "Turnkey Sound System Rental for Events Without Technical Guesswork",
+    guideHeading: "Turnkey Audio Equipment Rentals, PA System Rentals & Sound System Services in MA",
     guideHtmlParagraphs: [
-      `Searching for <strong>audio equipment rental near me</strong>, dependable <strong>sound equipment in MA</strong>, <strong>PA system rentals</strong>, or full-service <strong>sound system services in MA</strong> shouldn't mean piecing together unfamiliar cables and amplifiers. Our tiered Boston <a href="/services/speaker-rentals">PA speaker &amp; audio packages</a> ($199–$880+) arrive pre-configured: Small Audio handles up to 50 guests, Medium Audio covers 50–150 guests across hotel ballrooms and tented receptions, and Large Audio adds concert line arrays and subs for 150–500+ attendees.`,
-      `Every sound system is bench-tested prior to dispatch and customizes cleanly with <a href="/microphone-rentals">Shure QLX-D wireless, Countryman &amp; delegate conference mics</a>, <a href="/services/audio-mixers">X32 / SQ-7 consoles</a>, stage monitors, <a href="/services/subwoofer-rentals">18-inch cardioid subwoofers</a>, <a href="/services/wedding-av-rentals">wedding ceremony &amp; reception sound</a>, <a href="/services/corporate-events">corporate meetings AV support</a>, or full <a href="/services/rhode-island-av-rentals">Rhode Island audio delivery</a>.`,
-      `On a tight schedule? Choose fast self-pickup for compact speaker &amp; mic kits or schedule our Boston crew for early load-in, taped cabling, room tuning, soundcheck, and post-event pickup across Greater Boston and Massachusetts.`,
+      `Searching for <strong>audio equipment rentals</strong>, <strong>audio equipment rental near me</strong>, a <strong>sound equipment rental</strong>, <strong>PA system rentals</strong>, or an <strong>audio system rental</strong> in Greater Boston shouldn't mean piecing together unfamiliar cables and amplifiers. As a full-service <strong>audio-visual equipment rental</strong> provider offering turnkey <strong>sound system services in MA</strong>, our tiered Boston <a href="/services/speaker-rentals">PA speaker &amp; audio packages</a> ($199–$880+) arrive pre-configured: Small Audio handles up to 50 guests, Medium Audio covers 50–150 guests across hotel ballrooms and tented receptions, and Large Audio adds concert line arrays and subs for 150–500+ attendees.`,
+      `Every <strong>sound equipment rental</strong> and <strong>audio equipment rental</strong> is bench-tested prior to dispatch and customizes cleanly with <a href="/microphone-rentals">Shure QLX-D wireless, Countryman &amp; delegate conference mics</a>, <a href="/services/audio-mixers">Behringer X32 / Allen &amp; Heath SQ-7 consoles</a>, stage monitors, <a href="/services/subwoofer-rentals">18-inch cardioid subwoofers</a>, <a href="/services/wedding-av-rentals">renting sound equipment for a wedding</a>, <a href="/services/corporate-events">corporate meetings AV support</a>, or full <a href="/services/rhode-island-av-rentals">Rhode Island audio delivery</a>.`,
+      `Looking to <strong>rent AV equipment near me</strong> on a tight schedule? Choose fast self-pickup for compact speaker &amp; mic kits or schedule our Boston crew for early load-in, taped cabling, room tuning, soundcheck, and post-event pickup across Greater Boston and Massachusetts.`,
     ],
     related: ["speaker-rentals", "microphone-rentals", "wedding-av-rentals", "corporate-events", "rhode-island-av-rentals", "subwoofer-rentals", "audio-mixers"],
     faqs: [
@@ -1367,7 +1378,7 @@ function organizationSchemaNode() {
     name: "Beantown Audio Rentals",
     alternateName: "Beantown Audio Visual",
     description:
-      "Boston & Massachusetts audio visual equipment rentals: powered PA speakers, DJ equipment, wireless & push-to-talk delegate microphones, corporate event AV, HD laser projectors, LED video walls, lighting, cold sparklers, dry ice machines, silent disco & photo booths.",
+      "Boston & Massachusetts audio-visual equipment rental & sound system services in MA: audio equipment rentals, PA system rentals, powered speakers, DJ equipment, wireless & push-to-talk delegate microphones, corporate event AV, HD laser projectors, LED video walls, lighting, cold sparklers, dry ice machines, silent disco & photo booths.",
     url: `${DOMAIN}/`,
     logo: {
       "@type": "ImageObject",
@@ -1395,12 +1406,19 @@ function organizationSchemaNode() {
     },
     areaServed: usAreaServedList(),
     knowsAbout: [
+      "Audio-Visual Equipment Rental",
       "Audio Visual Equipment Rental Service",
+      "Rent AV Equipment Near Me",
+      "Audio Equipment Rentals",
+      "Audio Equipment Rental",
+      "Audio System Rental",
+      "PA System Rentals",
+      "Sound Equipment Rental",
+      "Rent Sound Equipment for Wedding",
       "Event Equipment Rentals Boston, MA",
       "Sound Equipment in MA",
       "Sound System Services in MA",
       "Corporate Event AV Production",
-      "Audio Equipment Rental",
       "Delegate & Push-to-Talk Microphone Rental",
       "Speaker & PA System Rental",
       "DJ Equipment Rental",
@@ -1904,6 +1922,28 @@ ${CART_SYNC_SCRIPT}
 
 function renderServicesDirectory() {
   const canonicalUrl = `${DOMAIN}/services`;
+  const servicesFaqs = [
+    {
+      q: "Where can I rent AV equipment near me in Boston and Massachusetts?",
+      a: "Beantown Audio Rentals provides same-week and scheduled audio-visual equipment rental across Greater Boston, Cambridge, Somerville, Waltham, Worcester, Cape Cod, Massachusetts, and Rhode Island. Choose self-pickup in Boston or turnkey delivery, setup, soundcheck, and teardown.",
+    },
+    {
+      q: "What is included in your audio-visual equipment rental service?",
+      a: "Our audio-visual equipment rental catalog covers powered PA speakers ($65+), Small–Large PA system rentals ($199–$880+), 18-inch subwoofers, Shure QLX-D wireless & push-to-talk delegate microphones ($20–$65), Behringer X32 & Allen & Heath SQ-7 digital mixers, Pioneer CDJ-3000 DJ gear, HD laser projectors, 65″–75″ 4K TVs, 2.67mm indoor LED video walls, mobile LED trailers, 12ft–40ft inflatable outdoor movie screens, wireless uplighting, cold sparklers, dry ice fog machines, silent disco headphones, and photo booths.",
+    },
+    {
+      q: "How much do audio equipment rentals and PA system rentals cost in Boston?",
+      a: "Individual powered speaker rentals start at $65/day, wired microphones start at $20, push-to-talk delegate mics are $35, Shure QLX-D wireless mics are $65, and complete PA system rentals with speakers, stands, mixer, and microphone start at $199 (Small Audio Package), $349 (Medium Audio Package), and $880 (Large Line Array Audio Package).",
+    },
+    {
+      q: "Do you offer sound system services in MA with delivery, setup, and on-site technicians?",
+      a: "Yes. Beyond standalone sound equipment rental, we provide complete sound system services in MA—including acoustic room planning, early load-in, taped cabling, wireless RF frequency coordination, digital mixing, soundcheck, and optional dedicated FOH audio engineers for the duration of your event.",
+    },
+    {
+      q: "Can I rent sound equipment for a wedding, corporate conference, or outdoor movie night in one package?",
+      a: "Yes. You can bundle wedding ceremony and reception sound systems with wireless mics, uplighting, cold sparklers, and dry ice cloud fog, or combine corporate conference room sound systems with delegate mics, laser projectors, LED video walls, and 4K hybrid live streaming in a single itemized quote.",
+    },
+  ];
   const schemaGraph = {
     "@context": "https://schema.org",
     "@graph": [
@@ -1919,10 +1959,10 @@ function renderServicesDirectory() {
       {
         "@type": "CollectionPage",
         "@id": `${canonicalUrl}#collection`,
-        name: "Boston Event AV & Equipment Rental Services",
+        name: "Boston Audio-Visual Equipment Rental & Event AV Services",
         url: canonicalUrl,
         inLanguage: "en-US",
-        description: "Full directory of Boston audio, speaker, DJ equipment, projector, LED wall, lighting, cold sparklers, and photo booth rentals.",
+        description: "Full directory of Boston audio-visual equipment rental, audio equipment rentals, PA system rentals, speaker rental, DJ gear, projectors, LED walls, lighting, cold sparklers, and photo booths.",
         isPartOf: { "@id": `${DOMAIN}/#website` },
         about: { "@id": `${DOMAIN}/#organization` },
         mainEntity: {
@@ -1936,6 +1976,17 @@ function renderServicesDirectory() {
             url: `${DOMAIN}${p.urlPath}`,
           })),
         },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: servicesFaqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: f.a,
+          },
+        })),
       },
     ],
   };
@@ -1996,9 +2047,28 @@ ${cards}
         </section>
 
         <section class="seo-guide-box" aria-labelledby="avDirectoryGuideHeading">
-          <h2 id="avDirectoryGuideHeading">Full-Service Audio Visual &amp; Event Equipment Rentals in Boston, MA &amp; Rhode Island</h2>
-          <p>Searching for a dependable <strong>audio visual equipment rental service</strong>, <strong>event equipment rentals in Boston, MA</strong>, <strong>AV equipment rental</strong>, or commercial <strong>sound equipment in MA</strong>? Beantown Audio Rentals supplies bench-tested commercial audio, video, lighting, staging, and special effects hardware from a single itemized quote builder. Whether you need turnkey <strong>sound system services in MA</strong> with a <a href="/audio">PA sound system rental</a> ($199+), individual <a href="/services/speaker-rentals">powered speakers</a> ($65), <a href="/microphone-rentals">Shure QLX-D wireless, Countryman &amp; push-to-talk delegate microphones</a> ($20–$65), or a <a href="/services/audio-mixers">Behringer X32 digital mixing console</a> ($150), every unit ships with stands, power drops, and redundant XLR/HDMI interconnects.</p>
-          <p>For large-scale visual and experiential productions, combine <a href="/services/projector-rentals">5,000+ lumen HD laser projectors &amp; Fast-Fold screens</a>, <a href="/services/tv-rentals">65&Prime; &amp; 75&Prime; 4K rolling TV monitors</a>, <a href="/services/indoorledwall">2.67mm fine-pitch indoor LED video walls</a>, <a href="/services/ledtrailers">daylight-visible mobile LED trailers</a>, <a href="/services/outdoor-movies">12ft–40ft inflatable outdoor movie screens with projector &amp; speakers</a>, <a href="/services/event-lighting">cord-free battery uplighting</a>, <a href="/services/cold-sparklers">indoor-safe cold sparkler fountains</a>, and <a href="/services/dry-ice-machine">Dancing on a Cloud dry ice low-fog machines</a>—backed by self-pickup or full delivery, setup, soundcheck, and on-site engineers across <a href="/services/corporate-events">Boston corporate meetings</a>, <a href="/services/wedding-av-rentals">New England weddings</a>, and <a href="/services/rhode-island-av-rentals">Rhode Island events</a>.</p>
+          <h2 id="avDirectoryGuideHeading">Full-Service Audio-Visual Equipment Rental &amp; Sound System Services in Boston, MA &amp; RI</h2>
+          <p>Looking to <strong>rent AV equipment near me</strong> or book a dependable <strong>audio-visual equipment rental</strong>, <strong>audio visual equipment rental service</strong>, or <strong>event equipment rentals in Boston, MA</strong>? Beantown Audio Rentals supplies bench-tested commercial <strong>audio equipment rentals</strong>, video displays, lighting, staging, and special effects hardware from a single itemized quote builder. Whether you need turnkey <strong>sound system services in MA</strong>, a complete <a href="/audio">PA system rental or audio system rental</a> ($199+), a standalone <a href="/services/speaker-rentals">speaker rental or sound equipment rental</a> ($65+), <a href="/microphone-rentals">Shure QLX-D wireless, Countryman &amp; push-to-talk delegate microphones</a> ($20–$65), or a <a href="/services/audio-mixers">Behringer X32 digital mixing console</a> ($150), every unit ships with stands, power drops, and redundant XLR/HDMI interconnects.</p>
+          <p>Planning to <a href="/services/wedding-av-rentals">rent sound equipment for a wedding</a> or stage a major corporate summit? Combine <a href="/services/projector-rentals">5,000+ lumen HD laser projectors &amp; Fast-Fold screens</a>, <a href="/services/tv-rentals">65&Prime; &amp; 75&Prime; 4K rolling TV monitors</a>, <a href="/services/indoorledwall">2.67mm fine-pitch indoor LED video walls</a>, <a href="/services/ledtrailers">daylight-visible mobile LED trailers</a>, <a href="/services/outdoor-movies">12ft–40ft inflatable outdoor movie screens with projector &amp; speakers</a>, <a href="/services/event-lighting">cord-free battery uplighting</a>, <a href="/services/cold-sparklers">indoor-safe cold sparkler fountains</a>, and <a href="/services/dry-ice-machine">Dancing on a Cloud dry ice low-fog machines</a>—backed by self-pickup or full delivery, setup, soundcheck, and on-site engineers across <a href="/services/corporate-events">Boston corporate meetings</a>, <a href="/services/wedding-av-rentals">New England weddings</a>, and <a href="/services/rhode-island-av-rentals">Rhode Island events</a>.</p>
+        </section>
+
+        <section aria-labelledby="servicesFaqHeading">
+          <div class="seo-section-head">
+            <div>
+              <span class="eyebrow">FREQUENTLY ASKED QUESTIONS</span>
+              <h2 id="servicesFaqHeading">Audio-Visual Equipment Rental &amp; Boston AV FAQs</h2>
+            </div>
+          </div>
+          <div class="seo-faq-list">
+            ${servicesFaqs
+              .map(
+                (f) => `<details class="seo-faq-item">
+              <summary>${escapeHtml(f.q)}</summary>
+              <p>${escapeHtml(f.a)}</p>
+            </details>`
+              )
+              .join("\n            ")}
+          </div>
         </section>
       </main>
 
@@ -2015,6 +2085,20 @@ ${CART_SYNC_SCRIPT}
 
 function renderAboutPage() {
   const canonicalUrl = `${DOMAIN}/about`;
+  const aboutFaqs = [
+    {
+      q: "What makes Beantown Audio Rentals different from national AV rental chains?",
+      a: "Unlike national broker chains that ship untested gear or hide setup fees, Beantown Audio Rentals is a local Boston audio-visual equipment rental team with transparent published daily rates—from $65 powered speaker rentals and $199 PA system rentals to turnkey wedding sound equipment, corporate conference room sound systems in MA, and 2.67mm LED video walls.",
+    },
+    {
+      q: "Where can I rent AV equipment near me with delivery across Massachusetts and Rhode Island?",
+      a: "We dispatch daily from Boston across Cambridge, Somerville, Brookline, Newton, Waltham, Quincy, Worcester, Cape Cod, Providence & Newport RI, and Southern New Hampshire—offering both budget-friendly self-pickup and full delivery, setup, soundcheck, and on-site technician operation.",
+    },
+    {
+      q: "Do you provide audio equipment rentals and sound system services in MA for both weddings and corporate events?",
+      a: "Yes. Couples rent sound equipment for weddings ($199+ PA systems, Shure wireless ceremony mics, wireless uplighting, cold sparklers, and dry ice cloud fog), while corporate planners book our conference room sound systems in MA, push-to-talk delegate mics, laser projectors, LED walls, and 4K hybrid live streaming.",
+    },
+  ];
   const schemaGraph = {
     "@context": "https://schema.org",
     "@graph": [
@@ -2032,6 +2116,17 @@ function renderAboutPage() {
         name: "About Beantown Audio Rentals",
         url: canonicalUrl,
         mainEntity: { "@id": `${DOMAIN}/#organization` },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: aboutFaqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: f.a,
+          },
+        })),
       },
     ],
   };
@@ -2077,8 +2172,8 @@ ${commonHeader({ active: "about" })}
           <h2>Our Story &amp; Event Production Philosophy</h2>
           <p>Beantown Audio Rentals was founded to replace confusing technical jargon and unreliable rental gear with tested, commercial-grade equipment and transparent support. Whether you are planning a corporate town hall in Boston's Seaport, a panel or commencement in Cambridge, a Back Bay ballroom wedding, a block party in Somerville, or an outdoor movie screening in Massachusetts or Rhode Island, we treat every show—big or small—with the same precision.</p>
           <p>“An event feels calm when someone has already met its worst day. At Beantown, we prepare for every variable so your event runs effortlessly.” — Calvin Reid, Founder</p>
-          <p>Our inventory covers complete <a href="/audio">PA audio systems</a>, <a href="/services/speaker-rentals">powered speakers</a>, <a href="/services/subwoofer-rentals">18&Prime; subwoofers</a>, <a href="/microphone-rentals">wireless &amp; delegate push-to-talk microphones</a>, <a href="/services/corporate-events">corporate meetings AV support</a>, <a href="/services/audio-mixers">Behringer X32 &amp; Allen &amp; Heath digital mixers</a>, <a href="/services/dj-equipment-rentals">Pioneer CDJ-3000s &amp; DJ packages</a>, <a href="/services/projector-rentals">HD laser projectors &amp; Fast-Fold screens</a>, <a href="/services/tv-rentals">65&Prime; &amp; 75&Prime; 4K TV displays</a>, <a href="/services/indoorledwall">indoor 2.67mm LED video walls</a>, <a href="/services/ledtrailers">outdoor LED trailers</a>, <a href="/services/outdoor-movies">inflatable movie screens with projector &amp; speakers</a>, <a href="/services/photo-booth">360 &amp; Magic Mirror photo booths</a>, <a href="/services/silent-disco">silent disco packs</a>, <a href="/services/event-lighting">wireless uplighting</a>, <a href="/services/cold-sparklers">indoor-safe cold sparklers</a>, <a href="/services/dry-ice-machine">dry ice cloud fog</a>, and <a href="/services/live-streaming">multi-camera live streaming kits</a>.</p>
-          <p>Every microphone, powered speaker, projector, LED cabinet, and cable undergoes bench inspection between events so cables tape flat and shows run on time. Need guidance sizing your venue or booking delivery? Call or text our Boston desk daily at <a href="tel:+19786015473">(978) 601-5473</a> or email <a href="mailto:info@beantownaudiorentals.com">info@beantownaudiorentals.com</a>.</p>
+          <p>Our full-service <a href="/services">audio-visual equipment rental</a> inventory covers complete <a href="/audio">audio equipment rentals, PA system rentals &amp; audio system rentals</a>, <a href="/services/speaker-rentals">powered speaker rentals &amp; sound equipment rental</a>, <a href="/services/subwoofer-rentals">18&Prime; subwoofers</a>, <a href="/microphone-rentals">Shure wireless, Countryman &amp; delegate push-to-talk microphones</a>, <a href="/services/wedding-av-rentals">renting sound equipment for a wedding</a>, <a href="/services/corporate-events">corporate meetings AV support &amp; conference room sound systems in MA</a>, <a href="/services/audio-mixers">Behringer X32 &amp; Allen &amp; Heath digital mixers</a>, <a href="/services/dj-equipment-rentals">Pioneer CDJ-3000s &amp; DJ equipment rentals in Boston</a>, <a href="/services/projector-rentals">HD laser projectors &amp; Fast-Fold screens</a>, <a href="/services/tv-rentals">65&Prime; &amp; 75&Prime; 4K TV displays</a>, <a href="/services/indoorledwall">indoor 2.67mm LED video walls</a>, <a href="/services/ledtrailers">outdoor LED trailers</a>, <a href="/services/outdoor-movies">inflatable movie screens with projector &amp; speakers</a>, <a href="/services/photo-booth">360 &amp; Magic Mirror photo booths</a>, <a href="/services/silent-disco">silent disco packs</a>, <a href="/services/event-lighting">wireless uplighting</a>, <a href="/services/cold-sparklers">indoor-safe cold sparklers</a>, <a href="/services/dry-ice-machine">dry ice cloud fog</a>, <a href="/services/live-streaming">multi-camera live streaming kits</a>, and <a href="/services/rhode-island-av-rentals">Rhode Island event AV rentals</a>.</p>
+          <p>Whether you are looking to <strong>rent AV equipment near me</strong> for self-pickup or need complete <strong>sound system services in MA</strong> with white-glove delivery and FOH engineers, every microphone, powered speaker, projector, LED cabinet, and cable undergoes bench inspection between events so cables tape flat and shows run on time. Call or text our Boston desk daily at <a href="tel:+19786015473">(978) 601-5473</a> or email <a href="mailto:info@beantownaudiorentals.com">info@beantownaudiorentals.com</a>.</p>
           <div class="seo-areas-pill-row">
             <span class="seo-area-pill">Boston Proper &amp; Seaport</span>
             <span class="seo-area-pill">Cambridge &amp; Somerville</span>
@@ -2087,6 +2182,25 @@ ${commonHeader({ active: "about" })}
             <span class="seo-area-pill">Worcester &amp; Cape Cod</span>
             <span class="seo-area-pill">Providence &amp; Newport, RI</span>
             <span class="seo-area-pill">Southern New Hampshire</span>
+          </div>
+        </section>
+
+        <section aria-labelledby="aboutFaqHeading">
+          <div class="seo-section-head">
+            <div>
+              <span class="eyebrow">COMMON QUESTIONS</span>
+              <h2 id="aboutFaqHeading">About Our Boston Audio-Visual Equipment Rental Service</h2>
+            </div>
+          </div>
+          <div class="seo-faq-list">
+            ${aboutFaqs
+              .map(
+                (f) => `<details class="seo-faq-item">
+              <summary>${escapeHtml(f.q)}</summary>
+              <p>${escapeHtml(f.a)}</p>
+            </details>`
+              )
+              .join("\n            ")}
           </div>
         </section>
 
@@ -2232,6 +2346,7 @@ ${mobileBottomNavHtml("contact")}
           if (status) { status.hidden = false; status.textContent = "Sending inquiry..."; }
           try {
             var data = Object.fromEntries(new FormData(form).entries());
+            if (data.email) data.replyto = data.email;
             var res = await fetch("https://api.web3forms.com/submit", {
               method: "POST",
               headers: { "Content-Type": "application/json", Accept: "application/json" },
@@ -2269,13 +2384,13 @@ function renderHomepage() {
       category: "Rentals & Inventory",
       question: "What equipment is available in your Boston rental inventory?",
       answer:
-        "Our Boston AV equipment rental inventory includes Small ($199+), Medium ($349+), and Large ($880+) PA sound system packages; powered speakers ($65) and 18-inch QSC & JBL subwoofers ($75–$150); Shure QLX-D wireless handheld & lavalier microphones ($65), Countryman earset headsets ($50), and push-to-talk (PTT) conference delegate mics ($35); Behringer X32 ($150), X32 Compact ($110), Allen & Heath SQ-7 ($295), and QSC TouchMix audio mixers; Pioneer CDJ-3000 ($125), DJM-900NXS ($95), Technics 1200 turntables, and complete DJ packages ($299+); 5,000+ lumen HD laser projectors ($175), 120-inch Fast-Fold screens ($150), Samsung 65-inch ($250) and 75-inch ($350) 4K TVs, indoor 2.67mm LED video walls ($1,150+), and outdoor mobile LED trailers ($2,600+); 12ft–40ft inflatable outdoor movie screens with projector and speakers ($549–$1,899); 360 and Magic Mirror photo booths ($799–$1,699+); 50–300 silent disco headphone packs ($500–$2,500); Chauvet wireless uplighting ($150/6), indoor-safe cold sparkler machines ($350+), Chauvet Nimbus dry ice cloud fog machines ($295+), and 4K live-streaming kits ($621+).",
+        "Our Boston audio-visual equipment rental, audio equipment rentals, and sound equipment rental inventory includes Small ($199+), Medium ($349+), and Large ($880+) PA system rentals and audio system rental packages; powered speaker rental units ($65) and 18-inch QSC & JBL subwoofers ($75–$150); Shure QLX-D wireless handheld & lavalier microphones ($65), Countryman earset headsets ($50), and push-to-talk (PTT) conference delegate mics ($35); Behringer X32 ($150), X32 Compact ($110), Allen & Heath SQ-7 ($295), and QSC TouchMix audio mixers; Pioneer CDJ-3000 ($125), DJM-900NXS ($95), Technics 1200 turntables, and complete DJ packages ($299+); 5,000+ lumen HD laser projectors ($175), 120-inch Fast-Fold screens ($150), Samsung 65-inch ($250) and 75-inch ($350) 4K TVs, indoor 2.67mm LED video walls ($1,150+), and outdoor mobile LED trailers ($2,600+); 12ft–40ft inflatable outdoor movie screens with projector and speakers ($549–$1,899); 360 and Magic Mirror photo booths ($799–$1,699+); 50–300 silent disco headphone packs ($500–$2,500); Chauvet wireless uplighting ($150/6), indoor-safe cold sparkler machines ($350+), Chauvet Nimbus dry ice cloud fog machines ($295+), and 4K live-streaming kits ($621+).",
     },
     {
       category: "Delivery & Setup",
       question: "Do you handle delivery, setup, soundcheck, and pickup?",
       answer:
-        "Yes, we provide full turnkey service throughout Greater Boston and all of New England. Our experienced technicians arrive well before your event begins, manage all load-in, run and tape clean cabling, tune the system for your room acoustics, and conduct a complete soundcheck and microphone walkthrough with you or your speaker. At the end of your event, we return for prompt, quiet teardown. For select compact equipment (such as small PA speakers or silent disco packs), convenient self-pickup and return is also available with straightforward setup guides and on-call telephone support.",
+        "Yes, we provide full turnkey sound system services in MA and audio-visual equipment rental support throughout Greater Boston and all of New England—whether you want to rent sound equipment for a wedding, stage a corporate conference, or rent AV equipment near me. Our experienced technicians arrive well before your event begins, manage all load-in, run and tape clean cabling, tune the system for your room acoustics, and conduct a complete soundcheck and microphone walkthrough with you or your speaker. At the end of your event, we return for prompt, quiet teardown. For select compact equipment (such as small PA speakers or silent disco packs), convenient self-pickup and return is also available with straightforward setup guides and on-call telephone support.",
     },
     {
       category: "Pricing & Quotes",
