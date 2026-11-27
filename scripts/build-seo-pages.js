@@ -110,7 +110,7 @@ const SERVICE_PAGES = [
     description:
       "Audio equipment rentals, PA system rentals & sound equipment rental in Boston ($65–$199+): speaker packages, subs & wireless mics delivered across MA & RI.",
     altNames: [
-      "Boston Audio Rentals",
+      "Audio Rentals Boston, MA",
       "Audio Equipment Rentals",
       "Audio Equipment Rental",
       "Audio System Rental",
@@ -1378,7 +1378,7 @@ function organizationSchemaNode() {
     "@type": ["LocalBusiness", "Organization"],
     "@id": `${DOMAIN}/#organization`,
     name: "Beantown Audio Rentals",
-    alternateName: ["Beantown Audio Visual", "Boston Audio Rentals"],
+    alternateName: "Beantown Audio Visual",
     description:
       "Boston & Massachusetts audio-visual equipment rental & sound system services in MA: audio equipment rentals, PA system rentals, powered speakers, DJ equipment, wireless & push-to-talk delegate microphones, corporate event AV, HD laser projectors, LED video walls, lighting, cold sparklers, dry ice machines, silent disco & photo booths.",
     url: `${DOMAIN}/`,
@@ -1412,7 +1412,7 @@ function organizationSchemaNode() {
       "Audio Visual Equipment Rental Service",
       "Rent AV Equipment Near Me",
       "AV Companies Near Me",
-      "Boston Audio Rentals",
+      "Audio Rentals in Boston, MA",
       "Audio Equipment Rentals",
       "Audio Equipment Rental",
       "Audio System Rental",
