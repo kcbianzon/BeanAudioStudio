@@ -110,6 +110,7 @@ const SERVICE_PAGES = [
     description:
       "Audio equipment rentals, PA system rentals & sound equipment rental in Boston ($65–$199+): speaker packages, subs & wireless mics delivered across MA & RI.",
     altNames: [
+      "Boston Audio Rentals",
       "Audio Equipment Rentals",
       "Audio Equipment Rental",
       "Audio System Rental",
@@ -122,7 +123,7 @@ const SERVICE_PAGES = [
       "Rent AV Equipment Near Me",
     ],
     h1: "Audio Equipment & Sound System Rentals for Events in Boston",
-    lead: "Turnkey audio equipment rentals, PA system rentals, and sound system rentals for events combining powered PA speakers, Shure wireless microphones, mixers, and cabling—engineered for weddings, corporate summits, parties, and outdoor venues across MA & RI.",
+    lead: "Turnkey Boston audio rentals, audio equipment rentals, PA system rentals, and sound system rentals for events combining powered PA speakers, Shure wireless microphones, mixers, and cabling—engineered for weddings, corporate summits, parties, and outdoor venues across MA & RI.",
     heroBullets: [
       "Small (up to 50), Medium (50–150) & Large (150+) complete event sound systems",
       "Shop-tested PA gear with stands, Bluetooth/AUX input & redundant XLR cables",
@@ -175,7 +176,7 @@ const SERVICE_PAGES = [
     categoryFilter: "DJ Equipment",
     guideHeading: "Rent a DJ Board, Turntables, or Full Club Rig in Boston",
     guideHtmlParagraphs: [
-      `Whether you need <strong>DJ equipment rental in Boston</strong> for a touring club artist with an exact Pioneer CDJ-3000 and DJM-900NXS technical rider, a vinyl set on Technics SL-1200MK2 direct-drive turntables, or a weekend <strong>DJ equipment rental</strong> with <a href="/services/speaker-rentals">powered party speakers</a> for a private celebration, every unit arrives firmware-updated, clean, and road-ready.`,
+      `Whether you need <strong>DJ equipment rental in Boston</strong> for a touring club artist with an exact Pioneer CDJ-3000 and DJM-900NXS technical rider, want to <strong>rent DJ equipment</strong> for a vinyl set on Technics SL-1200MK2 direct-drive turntables, or need a weekend <strong>DJ equipment rental</strong> with <a href="/services/speaker-rentals">powered party speakers</a> for a private celebration, every unit arrives firmware-updated, clean, and road-ready.`,
       `Need sound, lighting, and dance floor energy in one streamlined booking? Our Basic ($299+), Standard ($499+), and Pro ($699+) DJ Packages bundle controllers or CDJs, powered QSC PA tops, <a href="/services/subwoofer-rentals">18-inch subwoofers</a>, <a href="/microphone-rentals">wireless microphones</a>, and a sleek Scrim Werks facade—or pair with <a href="/services/event-lighting">event uplighting</a>, <a href="/services/cold-sparklers">cold sparklers</a>, and <a href="/services/silent-disco">silent disco headphones</a>.`,
       `We support clubs, weddings, hotel ballrooms, campus formals, and private events throughout Boston, Cambridge, Somerville, and <a href="/services/rhode-island-av-rentals">Providence &amp; Newport, Rhode Island</a>.`,
     ],
@@ -248,16 +249,16 @@ const SERVICE_PAGES = [
       "Venue-friendly across Greater Boston ballrooms, tents & historic halls",
     ],
     productIds: ["cold-spark-2", "cold-spark-4", "cold-spark-ultimate", "dry-ice-cloud"],
-    guideHeading: "Safe, High-Impact Cold Spark Machines for Boston Weddings & Galas",
+    guideHeading: "Safe, High-Impact Cold Spark Machine Rental & Cold Sparklers Rental in Boston",
     guideHtmlParagraphs: [
-      `Traditional pyrotechnics are banned inside virtually every Boston hotel, museum, and historic ballroom. Our ColorKey Dazzler FX cold sparkler machines heat special titanium/zirconium composite granules to create a brilliant, photography-ready gold spark fountain up to 15 feet high with zero open combustion and minimal lingering smoke.`,
-      `Every Boston <strong>cold spark machine rental</strong> package (Basic 2-unit $350+, Premium 4-unit $650+, Ultimate 6-unit $1,100+) includes sealed granule packets, wireless remote or DMX firing control, power/DMX cabling, and optional certified on-site technician cues—popular alongside our <a href="/services/dry-ice-machine">Dancing on a Cloud dry ice fog machine</a>, <a href="/services/event-lighting">wireless uplighting</a>, and <a href="/services/dj-equipment-rentals">DJ equipment packages</a> across Boston, MA, and <a href="/services/rhode-island-av-rentals">Rhode Island</a>.`,
+      `Traditional pyrotechnics are banned inside virtually every Boston hotel, museum, and historic ballroom. Our ColorKey Dazzler FX <strong>cold sparklers rental</strong> and <strong>cold spark rental</strong> systems heat special titanium/zirconium composite granules to create a brilliant, photography-ready gold spark fountain up to 15 feet high with zero open combustion and minimal lingering smoke.`,
+      `Every Boston <strong>cold spark machine rental</strong> package (Basic 2-unit $350+, Premium 4-unit $650+, Ultimate 6-unit $1,100+) includes sealed granule packets, wireless remote or DMX firing control, power/DMX cabling, and optional certified on-site technician cues—popular alongside our <a href="/services/dry-ice-machine">Dancing on a Cloud dry ice machine rental</a>, <a href="/services/wedding-av-rentals">wedding sound equipment rentals</a>, <a href="/services/event-lighting">wireless uplighting</a>, and <a href="/services/dj-equipment-rentals">DJ equipment packages</a> across Boston, MA, and <a href="/services/rhode-island-av-rentals">Rhode Island</a>.`,
     ],
-    related: ["dry-ice-machine", "event-lighting", "dj-equipment-rentals", "photo-booth", "rhode-island-av-rentals"],
+    related: ["wedding-av-rentals", "dry-ice-machine", "event-lighting", "dj-equipment-rentals", "photo-booth", "rhode-island-av-rentals"],
     faqs: [
       {
         q: "Are cold sparkler machines safe inside Boston hotels and wedding venues?",
-        a: "Yes. Cold spark fountains are non-pyrotechnic, cool to the touch moments after leaving the nozzle, produce zero open flame, and emit virtually no smoke—making them widely approved at Boston ballrooms and reception halls.",
+        a: "Yes. Every cold spark machine rental and cold sparklers rental uses non-pyrotechnic titanium/zirconium composite granules that stay cool to the touch moments after leaving the nozzle, produce zero open flame, and emit virtually no smoke—making our cold spark rental packages widely approved at Boston ballrooms and reception halls.",
       },
       {
         q: "How many cold spark machines do we need?",
@@ -287,12 +288,12 @@ const SERVICE_PAGES = [
       "Ideal for wedding first dances, gala entrances & theater in Boston & RI",
     ],
     productIds: ["dry-ice-cloud", "cold-spark-2", "wedding-lighting", "medium-audio"],
-    guideHeading: "Dancing on a Cloud Dry Ice Fog Without Venue Alarm Worry",
+    guideHeading: "Dancing on a Cloud Dry Ice Machine Rental Without Venue Alarm Worry",
     guideHtmlParagraphs: [
-      `Unlike glycol hazers or cheap Halloween foggers that fill ceilings and risk setting off venue smoke detectors, a real CO2 <strong>dry ice fog machine rental</strong> creates heavy chilled vapor that hugs the dance floor at ankle-to-knee level. It rolls cleanly out of our Chauvet Nimbus unit for romantic wedding first dances, sweet 16 entrances, and stage cues before dissipating cleanly.`,
-      `Pair your dry ice low-fog effect with <a href="/services/cold-sparklers">indoor-safe cold sparkler fountains</a>, <a href="/services/event-lighting">wireless amber/warm-white uplighting</a>, or <a href="/services/dj-equipment-rentals">complete DJ sound systems</a> across Greater Boston and <a href="/services/rhode-island-av-rentals">Rhode Island venues</a>.`,
+      `Unlike glycol hazers or cheap Halloween foggers that fill ceilings and risk setting off venue smoke detectors, a real CO2 <strong>dry ice machine rental</strong> and <strong>dry ice fog machine rental</strong> creates heavy chilled vapor that hugs the dance floor at ankle-to-knee level. It rolls cleanly out of our Chauvet Nimbus unit ($295+) for romantic wedding first dances, sweet 16 entrances, and stage cues before dissipating cleanly.`,
+      `Pair your <strong>dry ice machine rental</strong> and low-fog effect with <a href="/services/cold-sparklers">indoor-safe cold sparkler fountains</a>, <a href="/services/wedding-av-rentals">wedding ceremony &amp; reception sound equipment</a>, <a href="/services/event-lighting">wireless amber/warm-white uplighting</a>, or <a href="/services/dj-equipment-rentals">complete DJ sound systems</a> across Greater Boston and <a href="/services/rhode-island-av-rentals">Rhode Island venues</a>.`,
     ],
-    related: ["cold-sparklers", "event-lighting", "photo-booth", "dj-equipment-rentals", "rhode-island-av-rentals"],
+    related: ["wedding-av-rentals", "cold-sparklers", "event-lighting", "photo-booth", "dj-equipment-rentals", "rhode-island-av-rentals"],
     faqs: [
       {
         q: "Does the Chauvet Nimbus dry ice fog machine use solid CO2 dry ice?",
@@ -513,18 +514,19 @@ const SERVICE_PAGES = [
     hashCategory: "LED Video Walls",
     title: "Indoor LED Video Wall Rental Boston | 2.6mm | Beantown",
     description:
-      "Rent ultra-fine 2.67mm indoor LED video walls in Boston (12′×7′, 16′×9′ & custom configurations) with NovaStar VX1000 processing, PA audio, ground support & setup.",
-    h1: "Indoor LED Video Wall Rentals in Boston",
-    lead: "Seamless, cinema-bright 2.67mm fine-pitch modular LED video walls with NovaStar processing, ground-support framing, audio integration, and dedicated delivery & technician setup.",
+      "LED screen rental Boston & 2.67mm indoor LED video wall rentals (12′×7′, 16′×9′ & custom stages) with NovaStar VX1000 processing, PA audio, ground support & setup.",
+    altNames: ["LED Screen Rental Boston", "Indoor LED Video Wall Rental Boston", "LED Wall Rental Massachusetts", "Modular LED Stage Screen Boston"],
+    h1: "Indoor LED Video Wall & LED Screen Rentals in Boston",
+    lead: "Seamless, cinema-bright 2.67mm fine-pitch modular LED video walls and LED screen rentals in Boston—complete with NovaStar processing, ground-support framing, audio integration, and dedicated delivery & technician setup.",
     heroBullets: [
       "Turnkey 12′×7′ and 16′×9′ 2.67mm LED wall packages + custom stage builds",
       "Ultra-fine 2.67mm pitch stays crisp even for close-range ballroom viewing",
       "Includes NovaStar VX1000 processor, PA speakers, wireless mic & full crew setup",
     ],
     productIds: ["led-12", "led-16", "led-custom", "led-trailer"],
-    guideHeading: "Outshine Ambient Lights With Seamless Modular LED Walls",
+    guideHeading: "Outshine Ambient Lights With Seamless Modular LED Screen Rental in Boston",
     guideHtmlParagraphs: [
-      `Projectors struggle in glass-walled Boston venues, daytime hotel ballrooms, and high-output concert productions. Our <strong>2.67mm fine-pitch indoor LED video wall rentals</strong> ($1,150+ for 12&prime;&times;7&prime;, $1,450+ for 16&prime;&times;9&prime;, $1,850+ for custom builds) deliver deep blacks, vivid 4K-scaled motion graphics, and zero shadows when keynote presenters walk directly in front of the stage.`,
+      `Projectors struggle in glass-walled Boston venues, daytime hotel ballrooms, and high-output concert productions. Our <strong>LED screen rental Boston</strong> and <strong>2.67mm fine-pitch indoor LED video wall rentals</strong> ($1,150+ for 12&prime;&times;7&prime;, $1,450+ for 16&prime;&times;9&prime;, $1,850+ for custom builds) deliver deep blacks, vivid 4K-scaled motion graphics, and zero shadows when keynote presenters walk directly in front of the stage.`,
       `Every turnkey indoor LED wall package includes a NovaStar VX1000 all-in-one video processor and scaler, heavy-duty ground-support truss framing, 2 powered PA speakers on tripod stands, a <a href="/microphone-rentals">Shure wireless handheld microphone</a>, and full delivery, rigging, and calibration by our Boston LED technicians—ready to pair with <a href="/services/corporate-events">corporate general sessions</a>, <a href="/services/live-streaming">multi-camera IMAG live streaming</a>, and <a href="/services/event-lighting">stage wash lighting</a>.`,
     ],
     related: ["corporate-events", "ledtrailers", "video", "live-streaming", "event-lighting", "speaker-rentals"],
@@ -1376,7 +1378,7 @@ function organizationSchemaNode() {
     "@type": ["LocalBusiness", "Organization"],
     "@id": `${DOMAIN}/#organization`,
     name: "Beantown Audio Rentals",
-    alternateName: "Beantown Audio Visual",
+    alternateName: ["Beantown Audio Visual", "Boston Audio Rentals"],
     description:
       "Boston & Massachusetts audio-visual equipment rental & sound system services in MA: audio equipment rentals, PA system rentals, powered speakers, DJ equipment, wireless & push-to-talk delegate microphones, corporate event AV, HD laser projectors, LED video walls, lighting, cold sparklers, dry ice machines, silent disco & photo booths.",
     url: `${DOMAIN}/`,
@@ -1409,6 +1411,8 @@ function organizationSchemaNode() {
       "Audio-Visual Equipment Rental",
       "Audio Visual Equipment Rental Service",
       "Rent AV Equipment Near Me",
+      "AV Companies Near Me",
+      "Boston Audio Rentals",
       "Audio Equipment Rentals",
       "Audio Equipment Rental",
       "Audio System Rental",
@@ -1422,7 +1426,10 @@ function organizationSchemaNode() {
       "Delegate & Push-to-Talk Microphone Rental",
       "Speaker & PA System Rental",
       "DJ Equipment Rental",
+      "LED Screen Rental Boston",
       "LED Video Wall Rental",
+      "Cold Spark Machine Rental",
+      "Dry Ice Machine Rental",
       "Inflatable Outdoor Movie Screen Rental",
       "Hybrid Live Streaming Support",
     ],
@@ -1746,7 +1753,37 @@ function renderServicePage(spec) {
                       price: String(item.price),
                       priceValidUntil: "2027-12-31",
                       availability: "https://schema.org/InStock",
+                      itemCondition: "https://schema.org/NewCondition",
                       eligibleRegion: US_ELIGIBLE_REGION,
+                      seller: { "@id": `${DOMAIN}/#organization` },
+                      shippingDetails: {
+                        "@type": "OfferShippingDetails",
+                        shippingDestination: {
+                          "@type": "DefinedRegion",
+                          addressCountry: "US",
+                          addressRegion: ["MA", "RI", "NH"],
+                        },
+                        deliveryTime: {
+                          "@type": "ShippingDeliveryTime",
+                          handlingTime: {
+                            "@type": "QuantitativeValue",
+                            minValue: 0,
+                            maxValue: 1,
+                            unitCode: "DAY",
+                          },
+                          transitTime: {
+                            "@type": "QuantitativeValue",
+                            minValue: 0,
+                            maxValue: 1,
+                            unitCode: "DAY",
+                          },
+                        },
+                      },
+                      hasMerchantReturnPolicy: {
+                        "@type": "MerchantReturnPolicy",
+                        applicableCountry: "US",
+                        returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
+                      },
                     }
                   : undefined,
             },
@@ -2048,8 +2085,8 @@ ${cards}
 
         <section class="seo-guide-box" aria-labelledby="avDirectoryGuideHeading">
           <h2 id="avDirectoryGuideHeading">Full-Service Audio-Visual Equipment Rental &amp; Sound System Services in Boston, MA &amp; RI</h2>
-          <p>Looking to <strong>rent AV equipment near me</strong> or book a dependable <strong>audio-visual equipment rental</strong>, <strong>audio visual equipment rental service</strong>, or <strong>event equipment rentals in Boston, MA</strong>? Beantown Audio Rentals supplies bench-tested commercial <strong>audio equipment rentals</strong>, video displays, lighting, staging, and special effects hardware from a single itemized quote builder. Whether you need turnkey <strong>sound system services in MA</strong>, a complete <a href="/audio">PA system rental or audio system rental</a> ($199+), a standalone <a href="/services/speaker-rentals">speaker rental or sound equipment rental</a> ($65+), <a href="/microphone-rentals">Shure QLX-D wireless, Countryman &amp; push-to-talk delegate microphones</a> ($20–$65), or a <a href="/services/audio-mixers">Behringer X32 digital mixing console</a> ($150), every unit ships with stands, power drops, and redundant XLR/HDMI interconnects.</p>
-          <p>Planning to <a href="/services/wedding-av-rentals">rent sound equipment for a wedding</a> or stage a major corporate summit? Combine <a href="/services/projector-rentals">5,000+ lumen HD laser projectors &amp; Fast-Fold screens</a>, <a href="/services/tv-rentals">65&Prime; &amp; 75&Prime; 4K rolling TV monitors</a>, <a href="/services/indoorledwall">2.67mm fine-pitch indoor LED video walls</a>, <a href="/services/ledtrailers">daylight-visible mobile LED trailers</a>, <a href="/services/outdoor-movies">12ft–40ft inflatable outdoor movie screens with projector &amp; speakers</a>, <a href="/services/event-lighting">cord-free battery uplighting</a>, <a href="/services/cold-sparklers">indoor-safe cold sparkler fountains</a>, and <a href="/services/dry-ice-machine">Dancing on a Cloud dry ice low-fog machines</a>—backed by self-pickup or full delivery, setup, soundcheck, and on-site engineers across <a href="/services/corporate-events">Boston corporate meetings</a>, <a href="/services/wedding-av-rentals">New England weddings</a>, and <a href="/services/rhode-island-av-rentals">Rhode Island events</a>.</p>
+          <p>Looking to <strong>rent AV equipment near me</strong>, compare <strong>AV companies near me</strong>, or book a dependable <strong>audio-visual equipment rental</strong>, <strong>audio visual equipment rental service</strong>, or <strong>event equipment rentals in Boston, MA</strong>? Beantown Audio Rentals (your local <strong>Boston audio rentals</strong> partner) supplies bench-tested commercial <strong>audio equipment rentals</strong>, video displays, lighting, staging, and special effects hardware from a single itemized quote builder. Whether you need turnkey <strong>sound system services in MA</strong>, a complete <a href="/audio">PA system rental or audio system rental</a> ($199+), a standalone <a href="/services/speaker-rentals">speaker rental or sound equipment rental</a> ($65+), <a href="/microphone-rentals">Shure QLX-D wireless, Countryman &amp; push-to-talk delegate microphones</a> ($20–$65), or a <a href="/services/audio-mixers">Behringer X32 digital mixing console</a> ($150), every unit ships with stands, power drops, and redundant XLR/HDMI interconnects.</p>
+          <p>Planning to <a href="/services/wedding-av-rentals">rent sound equipment for a wedding</a> or stage a major corporate summit? Combine <a href="/services/projector-rentals">5,000+ lumen HD laser projectors &amp; Fast-Fold screens</a>, <a href="/services/tv-rentals">65&Prime; &amp; 75&Prime; 4K rolling TV monitors</a>, <a href="/services/indoorledwall">2.67mm fine-pitch indoor LED video walls &amp; LED screen rental in Boston</a>, <a href="/services/ledtrailers">daylight-visible mobile LED trailers</a>, <a href="/services/outdoor-movies">12ft–40ft inflatable outdoor movie screens with projector &amp; speakers</a>, <a href="/services/event-lighting">cord-free battery uplighting</a>, <a href="/services/cold-sparklers">indoor-safe cold spark machine rental &amp; cold sparklers</a>, and <a href="/services/dry-ice-machine">Dancing on a Cloud dry ice machine rental</a>—backed by self-pickup or full delivery, setup, soundcheck, and on-site engineers across <a href="/services/corporate-events">Boston corporate meetings</a>, <a href="/services/wedding-av-rentals">New England weddings</a>, and <a href="/services/rhode-island-av-rentals">Rhode Island events</a>.</p>
         </section>
 
         <section aria-labelledby="servicesFaqHeading">
